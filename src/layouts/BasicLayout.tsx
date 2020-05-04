@@ -1,24 +1,19 @@
-import ProLayout, {
-  MenuDataItem,
-  BasicLayoutProps as ProLayoutProps,
-  Settings,
-  PageHeaderWrapper,
-} from '@ant-design/pro-layout';
+import ProLayout, { MenuDataItem, PageHeaderWrapper } from '@ant-design/pro-layout';
 import { formatMessage } from 'umi-plugin-react/locale';
 import React, { useEffect, useState } from 'react';
 import { Link, router } from 'umi';
-import { Dispatch } from 'redux';
 import { connect } from 'dva';
-import { Tabs, Modal, ConfigProvider } from 'antd';
+import { Modal, ConfigProvider } from 'antd';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState } from '@/models/connect';
 import logo from '../assets/logo.jpg';
-import { keyBy, keys, get, map, isEmpty, reduce, concat } from 'lodash';
+import { keyBy, keys, get, map, isEmpty, reduce, concat, isNil, filter } from 'lodash';
 import store from 'store';
 import request, { TOKEN } from '@/utils/request';
-import styles from './Layout.less';
-import Welcome from '@/pages/Welcome';
+import styles from './less/Layout.less';
+import VisitedPanel from '@lianmed/pages/lib/Remote/VisitedPanel';
 import zhCN from 'antd/es/locale/zh_CN';
+import RouterTabs from './RouterTabs';
 
 const omitMenus = [
   {
@@ -41,29 +36,26 @@ const omitMenus = [
     id: 998,
     type: 'others',
     key: '/pregnancies/deliver-form',
-    name: '体格检查',
+    name: '分娩记录',
     parentid: 24,
     active: null,
   },
+  {
+    id: 996,
+    type: 'others',
+    key: '/form-test',
+    name: '表单测试',
+    parentid: 0,
+    active: null,
+    isMenu: true,
+  },
 ];
 
-export interface BasicLayoutProps extends ProLayoutProps {
-  breadcrumbNameMap: {
-    [path: string]: MenuDataItem;
-  };
-  route: ProLayoutProps['route'] & {
-    authority: string[];
-  };
-  settings: Settings;
-  dispatch: Dispatch;
-}
-export type BasicLayoutContext = { [K in 'location']: BasicLayoutProps[K] } & {
-  breadcrumbNameMap: {
-    [path: string]: MenuDataItem;
-  };
-};
-
-const BasicLayout: React.FC<BasicLayoutProps> = props => {
+const BasicLayout = (props: any) => {
+  const [panelHeight, setPanelHeight] = useState(document.documentElement.clientHeight - 135);
+  const [routerTabWidth, setRouterTabWidth] = useState(
+    document.documentElement.clientWidth - (props.collapsed ? 100 : 276),
+  );
   const { dispatch, children, settings } = props;
 
   const showOvertime = () => {
@@ -79,82 +71,116 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     });
   };
 
+  // 登录过期与退出登录
   useEffect(() => {
-    const { location, products, currentUser, allPermissions } = props;
+    const { currentUser, allPermissions } = props;
     const username = store.get('username');
     const token = store.get(TOKEN);
     const loginTime = store.get('loginTime');
     const expiredTime = store.get('expiredTime');
-    if (loginTime + expiredTime < new Date().getTime()) {
-      showOvertime();
-    }
+
     if (!username || !token) {
       dispatch({
         type: 'login/logout',
       });
+      dispatch({
+        type: 'user/saveCurrentUser',
+        payload: {},
+      });
+
+      dispatch({
+        type: 'user/saveAllPermissions',
+        payload: {},
+      });
       return;
     }
-    (async () => {
-      if (isEmpty(products)) {
-        await dispatch({
-          type: 'select/getProducts',
-          payload: {},
-        });
-      }
+    if (loginTime + expiredTime < new Date().getTime()) {
+      showOvertime();
+      return;
+    }
+    if (!isEmpty(currentUser) && !isNil(allPermissions)) {
+      dispatchTabs(currentUser, allPermissions);
+    } else {
+      initGetData();
+    }
+  }, [props.location.pathname, props.collapsed]);
 
-      if (isEmpty(currentUser)) {
-        await dispatch({
-          type: 'user/fetchCurrentUser',
+  // 监听 resize 和清除 resize
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', () => {});
+    };
+  }, []);
+
+  const initGetData = async () => {
+    const { products, currentUser, allPermissions } = props;
+    const username = store.get('username');
+    if (isEmpty(products)) {
+      await dispatch({
+        type: 'select/getProducts',
+        payload: {},
+      });
+    }
+
+    const newCurrentUser = isEmpty(currentUser) ? await request.get(`/users/${username}`) : currentUser;
+    const newAllPermissions = isEmpty(allPermissions)
+      ? await request.get('/permissions?type.equals=menu&size=200')
+      : allPermissions;
+
+    await dispatch({
+      type: 'user/saveCurrentUser',
+      payload: newCurrentUser,
+    });
+
+    await dispatch({
+      type: 'user/saveAllPermissions',
+      payload: newAllPermissions,
+    });
+
+    dispatchTabs(newCurrentUser, newAllPermissions);
+  };
+
+  const dispatchTabs = (currentUser: any, allPermissions: any) => {
+    const { location } = props;
+
+    const selfPermissions = reduce(
+      get(currentUser, 'groups'),
+      (sum, group) => concat(sum as [], get(group, 'permissions') as []),
+      [],
+    );
+    const permissionsMapping = keyBy(concat(selfPermissions, omitMenus), 'key');
+    if (location && location.pathname !== '/') {
+      const menuItemProps = get(permissionsMapping, get(location, 'pathname'));
+      if (menuItemProps) {
+        const data = {
+          title: get(menuItemProps, 'name'),
+          key: get(menuItemProps, 'key'),
+          path: get(menuItemProps, 'key'),
+          search: get(location, 'search'),
+          closable: true,
+        };
+        dispatch({
+          type: 'tab/changeTabs',
           payload: {
-            username,
+            type: 'addTab',
+            data,
           },
         });
-        // currentUser = await request.get(`/users/${username}`);
-      }
+      } else {
+        const allPermissionsMapping = keyBy(allPermissions, 'key');
 
-      if (isEmpty(allPermissions)) {
-        await dispatch({
-          type: 'user/fetchAllPermissions',
-          payload: {},
-        });
+        get(allPermissionsMapping, get(location, 'pathname'))
+          ? router.push('/exception/403')
+          : router.push('/exception/404');
       }
+    }
+  };
 
-      const newCurrentUser = isEmpty(currentUser) ? await request.get(`/users/${username}`) : currentUser;
-      const newAllPermissions = isEmpty(allPermissions)
-        ? await request.get('/permissions?type.equals=menu&size=200')
-        : allPermissions;
-
-      const selfPermissions = reduce(
-        get(newCurrentUser, 'groups'),
-        (sum, group) => concat(sum, get(group, 'permissions') || []),
-        [],
-      );
-      const permissionsMapping = keyBy(concat(selfPermissions, omitMenus), 'key');
-      if (location && location.pathname !== '/') {
-        const menuItemProps = get(permissionsMapping, get(location, 'pathname'));
-        if (menuItemProps) {
-          const data = {
-            title: get(menuItemProps, 'name'),
-            key: get(menuItemProps, 'key'),
-            path: get(menuItemProps, 'key'),
-            closable: true,
-          };
-          dispatch({
-            type: 'tab/changeTabs',
-            payload: {
-              type: 'addTab',
-              data,
-            },
-          });
-        } else {
-          const allPermissionsMapping = keyBy(newAllPermissions, 'key');
-          get(allPermissionsMapping, get(location, 'pathname'))
-            ? router.push('/exception/403')
-            : router.push('/exception/404');
-        }
-      }
-    })();
-  }, [props.location.pathname]);
+  const handleResize = () => {
+    setPanelHeight(document.documentElement.clientHeight - 135);
+    setRouterTabWidth(document.documentElement.clientWidth - (props.collapsed ? 276 : 100));
+  };
 
   const handleMenuCollapse = (payload: boolean): void => {
     if (dispatch) {
@@ -168,10 +194,11 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] => {
     const permissions = reduce(
       get(props, 'currentUser.groups'),
-      (sum, group) => concat(sum, get(group, 'permissions') || []),
+      (sum, group) => concat(sum as [], get(group, 'permissions') as []),
       [],
     );
-    const menusPermissions = keys(keyBy(permissions, 'key'));
+    const omitMenusPermission = filter(omitMenus, (omitMenu: any) => get(omitMenu, 'isMenu'));
+    const menusPermissions = keys(keyBy(concat(permissions, omitMenusPermission), 'key'));
     return menuList.map(item => {
       let localItem = {};
       if (menusPermissions.indexOf(item.path || '/') > -1) {
@@ -181,12 +208,13 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
     });
   };
 
-  const handleClickMenuItem = menuItemProps => () => {
-    const { dispatch, activeKey } = props;
+  const handleClickMenuItem = (menuItemProps: any) => () => {
+    const { activeKey } = props;
     const data = {
       title: get(menuItemProps, 'name'),
       key: get(menuItemProps, 'key'),
       path: get(menuItemProps, 'path'),
+      search: '',
       closable: true,
     };
     if (activeKey !== get(menuItemProps, 'key')) {
@@ -201,51 +229,12 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   };
 
   const handleClickHeader = () => {
-    const { dispatch } = props;
     dispatch({
       type: 'tab/changeActiveKey',
       payload: {
         data: { activeKey: '/' },
       },
     });
-  };
-
-  const handleTabChange = activeKey => {
-    const { dispatch, tabs } = props;
-    router.push(get(keyBy(tabs, 'key'), `${activeKey}.path`));
-    dispatch({
-      type: 'tab/changeActiveKey',
-      payload: {
-        data: { activeKey },
-      },
-    });
-  };
-
-  const handleEditTabs = (key, action) => {
-    const { dispatch } = props;
-
-    switch (action) {
-      case 'add':
-        break;
-      case 'remove':
-        dispatch({
-          type: 'tab/deleteTabs',
-          payload: {
-            data: { key },
-          },
-        });
-        break;
-      default:
-        break;
-    }
-  };
-
-  const renderHome = tab => {
-    return (
-      <Tabs.TabPane tab={get(tab, 'title')} key={get(tab, 'key')} closable={get(tab, 'closable')}>
-        <Welcome />
-      </Tabs.TabPane>
-    );
   };
 
   return (
@@ -290,11 +279,15 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
       >
         {!!store.get(TOKEN) && (
           <div className={styles.customPanel}>
-            <PageHeaderWrapper style={{ marginBottom: 8 }} />
-            {children}
+            <PageHeaderWrapper className={styles.customPageHeader} title={false} />
+            <RouterTabs style={{ width: routerTabWidth }} />
+            <div className={styles.customPanelChild} style={{ height: panelHeight }}>
+              {children}
+            </div>
           </div>
         )}
       </ProLayout>
+      {/* <VisitedPanel remote_url="http://transfer.lian-med.com" /> */}
     </ConfigProvider>
   );
 };
