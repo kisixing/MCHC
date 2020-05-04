@@ -1,0 +1,58 @@
+@import './index.less';
+@formItemLabelWidth: 120px;
+@formItemUnitWidth: 60px;
+
+.form-item{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  // 这个时常规Input的高度
+  line-height: @normalInputHeight;
+  
+  .formItem-label {
+    height: @normalInputHeight;
+    text-align: right;
+    // display: flex;
+    // flex-direction: row-reverse;
+    width: @formItemLabelWidth;
+    > label {
+      padding-right: @labelPaddingRight;
+      height: @normalInputHeight;
+      line-height: @normalInputHeight;
+      color: rgba(0,0,0,.85);
+      font-size: @normalFontSize;
+      text-align: right;
+    }
+  }
+
+  .formItem-main {
+    width: calc(100% - @formItemLabelWidth - @formItemUnitWidth);
+    // margin: 0 auto;
+    > span {
+      height: @normalInputHeight;
+      line-height: @normalInputHeight;
+    }
+    // TODO
+    // 考虑加入一个错误样式用于报渲染的错误
+  }
+  
+  .formItem-unit{
+    padding-left: 5px;
+    width: @formItemUnitWidth;
+    text-align: left;
+  }
+
+  
+}
+.formItem-error{
+
+  margin-left: @formItemLabelWidth;
+  // 减去label和unit的值
+  width: calc( 100% - @formItemLabelWidth);
+  text-align: left;
+  color: red;
+}
+
+.business-component{
+  width: 100%;
+}
