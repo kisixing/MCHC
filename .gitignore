@@ -39,3 +39,6 @@ screenshot
 .eslintcache
 
 build
+
+**/Thumbs.db
+**/Thumbs.db:encryptable

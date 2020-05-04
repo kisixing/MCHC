@@ -104,4 +104,6 @@ export default {
   'menu.follow-up.question.add': '问卷添加',
 
   'menu.follow-up.work-flow': '工作流管理',
+
+  'menu.form-test': '表单测试',
 };
