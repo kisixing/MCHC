@@ -12,15 +12,16 @@
 
 |name|description|format|ps|
 |-----|-----|-----|-----|
-|path|用于数据提取，以"."代表提取对象下一级，"\_"代表提取数组下元素|string||
+|key|用于数据提取，以"."代表提取对象下一级，"\_"代表提取数组下元素|string||
+|input_type|组件类型|string|详见components中index|
 |label|输入组件label|string||
 |unit|输入组件单位|string||
 |span|输入组件占位|number|antd栅格标准|
 |offset|输入组件间距|number|antd栅格标准|
-|componentOption|针对组件的option配置|ComponentOption|详见下方描述|
-|valid|验证规则|string或object|当配置为string是，可验证基本数据类型，请使用"\|"将需要验证的条件分离；当验证的数据类型为引用数据类型时，可以传入对象，定义对应的键名表明验证条件，见例1-1|
+|input_props|针对组件的option配置|ComponentOption|详见下方描述|
+|rules|验证规则|string或object|当配置为string是，可验证基本数据类型，请使用"\|"将需要验证的条件分离；当验证的数据类型为引用数据类型时，可以传入对象，定义对应的键名表明验证条件，见例1-1|
 
-- componentOption
+- input_props
 
 |name|description|format|ps|
 |-----|-----|-----|-----|
