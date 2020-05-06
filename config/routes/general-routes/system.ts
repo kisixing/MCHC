@@ -23,6 +23,25 @@ export default {
       component: './system/menus',
     },
     {
+      name: 'config-form',
+      icon: 'setting',
+      path: '/system/config-form',
+      routes: [
+        {
+          name: 'section',
+          icon: 'setting',
+          path: '/system/config-form/sections',
+          component: './system/config-form/sections',
+        },
+        {
+          name: 'form-description',
+          icon: 'setting',
+          path: '/system/config-form/descriptions',
+          component: './system/config-form/descriptions',
+        },
+      ],
+    },
+    {
       name: 'task',
       icon: 'code',
       path: '/system/task',
