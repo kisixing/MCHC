@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React, { Component } from "react";
-import { Table, Button, Input } from "antd";
+import { Table, Button } from "antd";
 import MyComponent from "./index";
 
 interface EditableCellProps {
@@ -14,7 +15,7 @@ class EditableCell extends Component<EditableCellProps> {
     value: "",
   };
 
-  mapPropsToState() {
+  mapPropsToState(): void {
     this.setState({value: this.props.value});
   }
 
@@ -24,12 +25,11 @@ class EditableCell extends Component<EditableCellProps> {
 
   componentDidUpdate(prevProps: EditableCellProps):void {
     if(JSON.stringify(prevProps) !== JSON.stringify(this.props)){
-      this.mapPropsToState()
+      this.mapPropsToState();
     }
   }
 
   handleChange = (val: any) => {
-    console.log("change");
     this.setState({ value: val });
   };
 
@@ -38,6 +38,7 @@ class EditableCell extends Component<EditableCellProps> {
       this.setState({ editing: true });
     }
   };
+
   handleBlur = () => {
     this.setState({ editing: false }, () => {
       this.props.onChange(this.state.value);
@@ -52,12 +53,11 @@ class EditableCell extends Component<EditableCellProps> {
     if (editor) {
       RenderComponent = MyComponent[editor.input_type];
     }
-
     return (
       <div
         onDoubleClick={this.handledbClick}
         onBlur={this.handleBlur}
-        style={{ width: "100%" }}
+        style={{ width: "100%", minHeight: "100%" }}
       >
         {editing ? (
           <RenderComponent
@@ -66,13 +66,15 @@ class EditableCell extends Component<EditableCellProps> {
             value={this.state.value}
           />
         ) : (
-          <span>{value}</span>
+          // 如value为空，渲染为"-"
+          <span>{value || "-"}</span>
         )}
       </div>
     );
   }
 }
 
+/* ============================================================================= */
 interface MyTableProps {
   onChange: Function;
   dispatch: Function;
@@ -80,51 +82,122 @@ interface MyTableProps {
   input_props: any;
 }
 
-export default class MyTable extends Component<MyTableProps> {
+interface MyTableState {
+  selectedRowKeys: Array<number|string>,
+  tableColumns: any,
+  dataSource: any
+}
+
+export default class MyTable extends Component<MyTableProps,MyTableState> {
   constructor(props: MyTableProps) {
     super(props);
     this.state = {
       tableColumns: [],
       dataSource: [],
+      selectedRowKeys: []
     };
   }
 
+  // 因为要维护tablerow的状态，所有需要保存在本地
   componentDidUpdate(prevProps: MyTableProps) {
     if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({
+        tableColumns: this.props.input_props.tableColumns,
+        // 处理dataSource，为了dataSource拥有_key值,用于rowSelection
+        dataSource: this.props.value.map((v:any, i:number) => ({...v, _key: i})),
+        selectedRowKeys: []
+      }) 
     }
   }
 
   handleEdit = (val: any, key: string, index: number) => {
     const { onChange } = this.props;
-    let { value } = this.props;
-    value[index][key] = val;
-    onChange(value);
+    const { dataSource } = this.state;
+    dataSource[index][key] = val;
+    // 提交出去前删除使用的_key
+    for(let i = 0; i < dataSource.length ; i++){
+      delete dataSource[i]._key;
+    }
+    onChange(dataSource);
   };
 
-  // 这里的修改应该需要改变
+  handleAdd = () => {
+    const { tableColumns } = this.props.input_props;
+    const { onChange, value } = this.props;
+    const newData = {};
+    tableColumns.forEach((ele: {key:string, title: string}) => {
+      newData[ele.key] = "";
+    });
+    const newValue = value.map((v:any) => v);
+    newValue.push(newData);
+    onChange(newValue);
+  }
+
+  handleDelete = () => {
+    const { selectedRowKeys, dataSource } = this.state;
+    selectedRowKeys.forEach((key: number|string) => {
+      for(let i = 0 ; i < dataSource.length ; i++){
+        if(key === dataSource[i]._key){
+          dataSource.splice(i,1);
+          break;
+        }
+      }
+    })
+    // 提交出去前删除使用的_key
+    for(let i = 0 ; i < dataSource.length ; i++){
+      delete dataSource[i]._key;
+    }
+    this.props.onChange(dataSource);
+  }
+  
+  handleRowSelectChange = (selectedRowKeys: Array<number|string>):void => {
+    this.setState({selectedRowKeys});
+  }
+
+
   render() {
-    const { input_props, value } = this.props;
-    let { tableColumns } = input_props;
-    tableColumns = tableColumns.map((v: any) => ({
+    const { input_props } = this.props;
+    let { tableColumns } = this.state;
+    const { dataSource } = this.state;
+    const { editable } = input_props;
+    // 单元格渲染
+    tableColumns = tableColumns.map((v: any, i: number) => ({
       ...v,
       dataIndex: v.key,
-      render: (text: string, record: any, index: number) => (
+      render: (text: string, record: any, index: number) => editable ? (
         <EditableCell
           value={text}
           onChange={(val: any) => this.handleEdit(val, v.key, index)}
           editor={v.editor}
         />
-      ),
+      ) : (
+        <span>{text || "-"}</span>
+      )
     }));
+    const rowSelection = {
+      selectedRowKeys: this.state.selectedRowKeys,
+      onChange: this.handleRowSelectChange
+    }
     return (
       <div>
-        <div>
-          <Button>新增</Button>
+        { editable && (
+          <div>
+          <Button
+            onClick={this.handleAdd}
+          >新增</Button>
+          <Button
+            onClick={this.handleDelete}
+          >删除
+          </Button>
         </div>
+        )}
         <Table
+          rowSelection={editable ? rowSelection : undefined}
           columns={tableColumns || []}
-          dataSource={value || []}
-          rowKey={(record) => record.id}
+          dataSource={dataSource || []}
+          rowKey={(record: any) => record._key}
+          pagination={false}
         />
       </div>
     );

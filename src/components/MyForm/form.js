@@ -15,14 +15,14 @@ export function createFormHandler(config){
    *   eventName:cb
    * }
    */
-  var eventCallBacks = {}
-  var formState = {
+  let eventCallBacks = {}
+  let formState = {
     validated: false,
   }
 
-  var initField = function(config) {
+  const initField = function(c) {
     let r = {};
-    config.forEach(v => {
+    c.forEach(v => {
       r = Object.assign(r, {
         [v.key]: {
           actions:{}, 
@@ -34,7 +34,7 @@ export function createFormHandler(config){
   }
   
 
-  var submit = function(){
+  const submit = function(){
     let r = {}
     let validCode = true;
     Object.keys(this).forEach(key => {
@@ -50,12 +50,12 @@ export function createFormHandler(config){
         }
       }
     })
-    return new Promise((resolve) => {
-      resolve({validCode: validCode,data: r})
+    return new Promise(resolve => {
+      resolve({validCode,data: r})
     })
   }
 
-  var subscribe = function(fieldName, eventName, cb){
+  const subscribe = function(fieldName, eventName, cb){
     if(fieldName in this){
       if(!eventCallBacks[fieldName]){
         eventCallBacks[fieldName] = {};
@@ -64,13 +64,12 @@ export function createFormHandler(config){
     }
   }
 
-  var dispatch = function(fieldName, eventName, args){
-    console.log(eventCallBacks);
+  const dispatch = function(fieldName, eventName, args){
     // TODO 判读有无没写
     return eventCallBacks[fieldName][eventName](args);
   }
 
-  var formHandler = {...initField(config)}
+  const formHandler = {...initField(config)}
   formHandler.submit = submit;
   formHandler.subscribe = subscribe;
   formHandler.dispatch = dispatch;

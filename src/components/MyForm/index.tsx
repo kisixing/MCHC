@@ -3,10 +3,7 @@ import {Row, Col} from 'antd';
 import {MyFormProp, MyFormState, FormConfig} from './interface';
 import { createFormHandler} from './form.js';
 import FormItem from './formItem';
-
 import styles from './index.less';
-
-import {validFun} from './utils/valid';
 
 const defaultGutterConfig = {
   gutter: [0,16], // px
@@ -20,10 +17,11 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
   let count = 0;    // 计算占比
   let prevOffset = 0; // 使用offset换行时，计算第i个元素用于上一行换行的offset数量
   let row = 0;
-  let formDom = [];
+  const formDom = [];
   let spanArr = [];
   for(let i = 0 ;i < config.length; i++){
     if(config[i].hidden){
+      // eslint-disable-next-line no-continue
       continue;
     }
     count += config[i].span + config[i].offset;
@@ -56,8 +54,8 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
           dispatch={formHandler.dispatch}
           defaultValue={config[i].value}
           type={config[i].input_type}
-          label={config[i].label}
-          unit={config[i].unit}
+          label={config[i].label || ""}
+          unit={config[i].unit || ""}
           input_props={config[i].input_props}
           validate={config[i].rules || ""}
         />
