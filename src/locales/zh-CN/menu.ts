@@ -109,4 +109,7 @@ export default {
   'menu.follow-up.work-flow': '工作流管理',
 
   'menu.form-test': '表单测试',
+
+  'menu.deliver-management': '分娩管理',
+  'menu.deliver-management.deliver-form': '分娩记录单',
 };
