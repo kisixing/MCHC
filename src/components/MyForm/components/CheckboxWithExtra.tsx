@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {Checkbox} from 'antd';
 
-import MyComponent from '../components/index';
+import MyComponent from './index';
 
 
 // 附带编辑器的checkbox
@@ -22,13 +22,15 @@ export default class CheckboxWithExtra extends Component<CheckboxWithExtraProps>
         editorsValue
       });
     } else if (name === "editorValue") {
-      let newEditorsValue = editorsValue ? Object.assign(JSON.parse(editorsValue) || {}, { [index]: value }) : { [index]: value}
+      const newEditorsValue = editorsValue ? Object.assign(JSON.parse(editorsValue) || {}, { [index]: value }) : { [index]: value}
       onChange({
         checkboxValue,
         editorsValue: JSON.stringify(newEditorsValue)
       })
     }
   }
+
+  // TODO span offset尚未完善
   // 当checkbox选中时，渲染额外的编辑器供其输入
   // 输出格式为 {"0":"", "1": ""}, 数字代表编辑器的顺序
   renderExtra = (editorValue: string) => {
@@ -39,7 +41,7 @@ export default class CheckboxWithExtra extends Component<CheckboxWithExtraProps>
       newEditorValue = JSON.parse(editorValue);
     }
     return editors.map((v: any, index: number) => {
-      const RenderComponent = MyComponent[v['input_type']];
+      const RenderComponent = MyComponent[v.input_type];
       return (
         <div key={index}>
           <label>{v.label}</label>
@@ -60,7 +62,7 @@ export default class CheckboxWithExtra extends Component<CheckboxWithExtraProps>
       <div>
         <Checkbox
           checked={checkboxValue}
-          onChange={(e) => this.handleChange(e.target.checked, "checkboxValue", -1)}
+          onChange={(e:any) => this.handleChange(e.target.checked, "checkboxValue", -1)}
         >{this.props.children}</Checkbox>
         {checkboxValue ? this.renderExtra(editorsValue) : null}
       </div>

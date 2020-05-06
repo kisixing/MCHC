@@ -1,3 +1,6 @@
+/* eslint-disable no-lonely-if */
+/* eslint-disable object-shorthand */
+/* eslint-disable func-names */
 import {FormConfig} from '../interface';
 
 const o:string = ".";
@@ -27,7 +30,7 @@ function isNumber(str:string):boolean{
 function handleGetData(obj:any, currentKey:string, nextPath:string, history:string){
   let r = {};
   if(isObj(obj)){
-    let keyArr = currentKey === ALL ? Object.keys(obj) : [currentKey];
+    const keyArr = currentKey === ALL ? Object.keys(obj) : [currentKey];
     keyArr.forEach(key => {
       r = Object.assign(r, getData(obj[key], nextPath, `${history}.${key}`));
     })
@@ -52,7 +55,7 @@ const rules = [
     action:function(oi:number, ai:number, path:string, obj:any, history:string){
       // 只提取基本数据类型
       // if(isBase(obj) === ONLYBASE) return {};
-      let r:{[key:string]:any} = {};
+      const r:{[key:string]:any} = {};
       if(path === ALL){
         if(isObj(obj)){
           Object.keys(obj).forEach((key) => {
@@ -99,7 +102,7 @@ const rules = [
     action:function(oi:number, ai:number, path:string, obj:any, history:string){
       const currentKey = path.substring(0, ai);
       const nextPath = path.substring(ai+1, path.length);
-      let r = handleGetData(obj, currentKey, nextPath, history);
+      const r = handleGetData(obj, currentKey, nextPath, history);
       return r;
     }
   },{
@@ -107,7 +110,7 @@ const rules = [
     action:function(oi:number, ai:number, path:string, obj:any, history:string){
       const currentKey = path.substring(0, ai);
       const nextPath = path.substring(ai+1, path.length);
-      let r = handleGetData(obj, currentKey, nextPath, history);
+      const r = handleGetData(obj, currentKey, nextPath, history);
       return r;
     }
   }
@@ -157,8 +160,8 @@ export function getRenderData(config:Array<FormConfig>, data:any): Array<FormCon
   if(!data){
     return config;
   }
-  let rConfig:Array<FormConfig> = config.map(v => v);
-  let cData:{[key:string]:any} = loopPath(data, config.map(v => v.key));
+  const rConfig:Array<FormConfig> = config.map(v => v);
+  const cData:{[key:string]:any} = loopPath(data, config.map(v => v.key));
   for(let i = 0 ; i < rConfig.length ; i++){
     rConfig[i].value = cData[rConfig[i].key];
   }
@@ -183,12 +186,12 @@ function newObj(parentKey:string, currentKey:string, data:any){
     }
   }else{
     if(isNumber(currentKey)){
-      let g:{[key:string]:any} = {};
+      const g:{[key:string]:any} = {};
       g[parentKey] = [];
       g[parentKey][Number(currentKey)] = data;
       r = _assign(r, toFormat(g));
     }else{
-      let g:{[key:string]:any} = {};
+      const g:{[key:string]:any} = {};
       g[parentKey] = {};
       g[parentKey][currentKey] = data;
       r = _assign(r, toFormat(g));
@@ -246,8 +249,8 @@ function _assign(mainData: any, newData: any ): any{
 export function toFormat(data:{[key:string]:any}):object{
   let r = {};
   Object.keys(data).forEach(key => {
-    let oi = key.lastIndexOf(o);
-    let ai = key.lastIndexOf(a);
+    const oi = key.lastIndexOf(o);
+    const ai = key.lastIndexOf(a);
     if(oi === ai){
       console.warn('isolated data');
       r = _assign(r, newObj("", key, data[key]));

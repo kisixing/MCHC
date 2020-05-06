@@ -1,11 +1,10 @@
 import React, { Component, ReactNode } from 'react';
-import { Checkbox, Col, Row } from 'antd';
+import { Checkbox} from 'antd';
 import CheckboxWithExtra from './CheckboxWithExtra';
-import MyComponent from '../components/index';
 
-// TODO 4/30 今天！！！ 要重构一下
+
 // TODO 这里的验证需要寻找其他办法
-// TODO 这里之后应该要改为有custom渲染完所有的，使用其他三个type时都经过custom的方法去完成
+
 interface MyCheckboxProps {
   onChange: Function,
   dispatch: Function,
@@ -18,7 +17,7 @@ interface MyCheckboxProps {
  *  default  接收一个boolean
  *  whether  接收一个对象 {a:boolean,aNote:string} 互斥 默认true是展开input
  *  multiple 多个输入 接收 {a:boolean,aNode:string,b:boolean,bNote:string} 需要额外设置是否互斥
- *  custom   自定义模式
+ *  自定义模式就是multiple
  */
 interface CheckboxComponentProps {
   type: string,
@@ -57,8 +56,8 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
     },
     "whether": function (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode {
       const { extraEditors } = input_props;
-      let checkboxValue = value[input_props.renderData[0].key];
-      let editorsValue = value[`${input_props.renderData[0].key}Note`];
+      const checkboxValue = value[input_props.renderData[0].key];
+      const editorsValue = value[`${input_props.renderData[0].key}Note`];
       // 转了格式，在这个位置转回来
       const handleChange = function (value: { checkboxValue: boolean, editorsValue: string }) {
         onChange({
@@ -80,10 +79,9 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
         label: v.label
       }));
       const handleChange = function (val: any, key: string) {
-        console.log(val);
-        let newObj = {
+        const newObj = {
           [key]: val.checkboxValue,
-          [key + 'Note']: val.editorsValue
+          [`${key}Note`]: val.editorsValue
         };
         onChange(Object.assign(value, newObj));
       }
@@ -131,6 +129,7 @@ class WhetherCheckbox extends Component<WhetherCheckboxProps>{
       onChange(e);
     }
   }
+
   render() {
     const { value, extraEditors } = this.props;
     return (
@@ -187,7 +186,7 @@ class MultipleCheckbox extends Component<MultipleCheckboxProps>{
 
   renderCheckbox = () => {
     const { value, extraEditors } = this.props;
-    let renderDOM: Array<ReactNode> = [];
+    const renderDOM: Array<ReactNode> = [];
     for (let i = 0; i < value.length; i++) {
       for (let j = 0; j < extraEditors.length; j++) {
         if (value[i].key === extraEditors[j].key) {

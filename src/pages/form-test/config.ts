@@ -180,7 +180,7 @@ const config: Array<FormConfig> = [
     }
   },
   {
-    key: ".familyHistory", label: "家族史", unit: "", input_type: "checkbox", span: 24, offset: 0, rules: "",
+    key: ".familyHistory", label: "家族史", input_type: "checkbox", span: 24, offset: 0,
     input_props: {
       type: "multiple",
       renderData: [
@@ -196,11 +196,9 @@ const config: Array<FormConfig> = [
           editors: [{
               key: "",
               label: "药物名称",
-              unit: "",
               input_type: "input",
               span: 0,
               offset: 0,
-              rules: "",
               input_props: {
                 type: "default",
               },
@@ -210,31 +208,47 @@ const config: Array<FormConfig> = [
     }
   },
   {
-    key: ".fetuses", label: "胎儿检查table", unit: "", input_type: "table", span: 24, offset: 0, rules: "",
+    key: ".ultrasounds", label: "超声检查",input_type: "table", span: 24, offset: 0,
     input_props: {
       type: "default",
-      editable: true,
+      editable: false,
       tableColumns: [
         {
-          key: "id",
-          title: "id",
+          key: "checkdate", title: "检查日期",
           editor: {
             key: "",
-            label: "",
-            unit: "",
-            input_type: "input",
             span: 0,
             offset: 0,
-            rules: "",
+            input_type: "input",
             input_props: {
-              type: "default",
-            },
+              type: "default"
+            }
           }
         },
-        {key: "fetalPosition", title: "胎儿位置"},
-        {key: "fetalHeartRate", title: "胎儿心率"},
-        {key: "fetalMovement", title: "胎动"},
-        {key: "weight", title: "胎儿重量"},
+        {key: "type", title: "类型"},
+        {
+          key: "clr", title: "clr",
+          editor: {
+            key: "",
+            span: 0,
+            offset: 0,
+            input_type: "input",
+            input_props: {
+              type: "default"
+            }
+          }
+        },
+        {key: "nt", title: "nt"},
+        {key: "menopause", title: "menopause"},
+        {key: "gestationalweek", title: "孕周"},
+        {key: "bpd", title: "bpd"},
+        {key: "hc", title: "hc"},
+        {key: "ac", title: "ac"},
+        {key: "fl", title: "fl"},
+        {key: "afv", title: "afv"},
+        {key: "umbilicalbloodflow", title: "脐带血"},
+        {key: "diagnosis", title: "诊断"},
+        {key: "note", title: "备注"},
       ]
     }
   }

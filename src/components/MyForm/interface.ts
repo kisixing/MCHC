@@ -30,14 +30,14 @@ export interface ComponentOption {
 
 export interface FormConfig {
   key: string,
-  label: string,
-  unit: string,
+  label?: string,
+  unit?: string,
   input_type: string,
   span: number,
   offset: number,
   hidden?: boolean,
   value?: any,
-  rules: string | object | RegExp | null,
+  rules?: string | object | RegExp | null,
   input_props: ComponentOption,
 }
 
