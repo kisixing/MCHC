@@ -211,7 +211,7 @@ const config: Array<FormConfig> = [
     key: ".ultrasounds", label: "超声检查",input_type: "table", span: 24, offset: 0,
     input_props: {
       type: "default",
-      editable: false,
+      editable: true,
       tableColumns: [
         {
           key: "checkdate", title: "检查日期",
@@ -238,8 +238,24 @@ const config: Array<FormConfig> = [
             }
           }
         },
-        {key: "nt", title: "nt"},
-        {key: "menopause", title: "menopause"},
+        {
+          title: "aaa",
+          children: [
+            {
+              key: "nt", title: "nt",
+              editor: {
+                key: "",
+                span: 0,
+                offset: 0,
+                input_type: "input",
+                input_props: {
+                  type: "default"
+                }
+              }
+            },
+            {key: "menopause", title: "menopause"},
+          ]
+        },
         {key: "gestationalweek", title: "孕周"},
         {key: "bpd", title: "bpd"},
         {key: "hc", title: "hc"},

@@ -155,26 +155,56 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
     this.setState({selectedRowKeys});
   }
 
+  // 对于二级表单的处理
+  handleTabColumnsFormat = (tableColumns: Array<any>):any => {
+    const { editable } = this.props.input_props;
+    return tableColumns.map((v: any, i:number) => {
+      if(v.key){
+        return {
+          ...v,
+          dataIndex: v.key,
+          render: (text: string, record: any, index: number) => editable ? (
+            <EditableCell
+              value={text}
+              onChange={(val: any) => this.handleEdit(val, v.key, index)}
+              editor={v.editor}
+            />
+          ) : (
+            <span>{text || "-"}</span>
+          )
+        }
+      }
+      if(v.children){
+        return {
+          title: v.title,
+          children: this.handleTabColumnsFormat(v.children) 
+        }
+      }
+      return {}
+    })
+  }
 
   render() {
     const { input_props } = this.props;
     let { tableColumns } = this.state;
     const { dataSource } = this.state;
     const { editable } = input_props;
-    // 单元格渲染
-    tableColumns = tableColumns.map((v: any, i: number) => ({
-      ...v,
-      dataIndex: v.key,
-      render: (text: string, record: any, index: number) => editable ? (
-        <EditableCell
-          value={text}
-          onChange={(val: any) => this.handleEdit(val, v.key, index)}
-          editor={v.editor}
-        />
-      ) : (
-        <span>{text || "-"}</span>
-      )
-    }));
+    // 单元格渲染 - 如果要做二级菜单，这里需要逻辑处理
+    // tableColumns = tableColumns.map((v: any, i: number) => ({
+    //   ...v,
+    //   dataIndex: v.key,
+    //   render: (text: string, record: any, index: number) => editable ? (
+    //     <EditableCell
+    //       value={text}
+    //       onChange={(val: any) => this.handleEdit(val, v.key, index)}
+    //       editor={v.editor}
+    //     />
+    //   ) : (
+    //     <span>{text || "-"}</span>
+    //   )
+    // }));
+    tableColumns = this.handleTabColumnsFormat(tableColumns);
+    console.log(tableColumns);
     const rowSelection = {
       selectedRowKeys: this.state.selectedRowKeys,
       onChange: this.handleRowSelectChange
