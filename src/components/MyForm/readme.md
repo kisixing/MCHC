@@ -14,29 +14,31 @@
 |-----|-----|-----|-----|
 |key|用于数据提取，以"."代表提取对象下一级，"\_"代表提取数组下元素|string||
 |input_type|组件类型|string|详见components中index|
-|label|输入组件label|string||
-|unit|输入组件单位|string||
+|label|输入组件label|string|默认为空|
+|unit|输入组件单位|string|默认为空|
 |span|输入组件占位|number|antd栅格标准|
 |offset|输入组件间距|number|antd栅格标准|
 |input_props|针对组件的option配置|ComponentOption|详见下方描述|
-|rules|验证规则|string或object|当配置为string是，可验证基本数据类型，请使用"\|"将需要验证的条件分离；当验证的数据类型为引用数据类型时，可以传入对象，定义对应的键名表明验证条件，见例1-1|
+|rules|验证规则|string或object|当配置为string是，可验证基本数据类型，请使用"\|"将需要验证的条件分离；当验证的数据类型为引用数据类型时，可以传入对象，定义对应的键名表明验证条件，见例1-1；默认为空|
 
 - input_props
 
 |name|description|format|ps|
 |-----|-----|-----|-----|
 |type|组件的子类型|string|由每个组件自己定义|
-|date|
+|`Date`|
 |format|date组件日期格式|string||
-|select|
+|`Select`|
 |selectOptions|选择器option配置|{value:string|number, label:stirng|numbmer|
-|checkbox|
+|`Checkbox`|
 |radio|checkbox是否为单选，在multiple下可设置为false|boolean|默认为true|
 |extraEditors|在选中某个选项后弹出的输入框|ExtraEditor extends FormConfig|仅添加了index字段，保存规则未写|
-|checkbox|
 |type|提供default,whether,multiple三个形式，multiple基本满足大部分业务场景|string||
 |renderData|除default外，组件会根据renderData的字段自动提取对象的值。例如：['a'],组件会自动取出对象下a与aNote的值|Array<string|{key:string,label:string}>||
 |extraEditors|额外渲染的输入器|Array<ExtraEditors>||
+|`Table`|
+|editable|是否可编辑table|boolean||
+|tableColumns|渲染tableColumns|{key:string, title: stirng, editor: FormConfig}|若editable为true且editor不为undefined，双击可修改表单值|
 |续待未完|
 
 - ExtraEditors

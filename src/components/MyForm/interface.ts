@@ -1,6 +1,16 @@
+// Checkbox
 interface ExtraEditors {
   key: any, // 此处key对应的是checkbox的value值
   editors: Array<FormConfig>
+}
+
+// Table
+interface TableColumns {
+  key?: string,
+  title: string,
+  children?: Array<TableColumns>
+  width?: number      // 样式写在这个位置会不会有点不好
+  editor?: FormConfig
 }
 
 export interface ComponentOption {
@@ -21,23 +31,19 @@ export interface ComponentOption {
   
   // table
   editable?: boolean, // 自动提供button和编辑功能
-  tableColumns?: Array<{
-    key: string,
-    title: string,
-    editor?: FormConfig      // 对自带的组件库索引
-  }> 
+  tableColumns?: Array<TableColumns>
 }
 
 export interface FormConfig {
   key: string,
-  label: string,
-  unit: string,
+  label?: string,
+  unit?: string,
   input_type: string,
   span: number,
   offset: number,
   hidden?: boolean,
   value?: any,
-  rules: string | object | RegExp | null,
+  rules?: string | object | RegExp | null,
   input_props: ComponentOption,
 }
 

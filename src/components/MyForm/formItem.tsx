@@ -1,5 +1,5 @@
 import React,{ Component, ReactNode} from 'react';
-import { Row, Col} from 'antd';
+// import { Row, Col} from 'antd';
 import MyComponents from './components/index';
 import { FormItemProp, FormItemState } from './interface';
 
@@ -19,17 +19,17 @@ export default class FormItem extends Component<FormItemProp,FormItemState>{
       error: "",
       validate: [],
     }
-    let self = this;
+    const self = this;
     if(props.actions){
-      props.actions.getValue = function(){
+      props.actions.getValue = function getValue(){
         return self.state.value;
       };
-      props.actions.setValue = function(val){
+      props.actions.setValue = function setValue(val){
         self.setState({value: val});
       }
-      props.actions.valid = function(){
+      props.actions.valid = function valid(){
         const error = validFun(self.state.value, props.validate || "");
-        self.setState({error: error});
+        self.setState({error});
         return error === "" || JSON.stringify(error) === "{}";
       }
     }
@@ -55,6 +55,7 @@ export default class FormItem extends Component<FormItemProp,FormItemState>{
         if(this.props.actions.valid){
           if(typeof val === "object"){
             console.warn('校验对象为引用类型,暂时不做onChange校验');
+            // this.props.actions.valid();
           }else{
             this.props.actions.valid();
           }
