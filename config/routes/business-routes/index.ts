@@ -23,7 +23,7 @@ export default [
   // birthDefect,
   // childDeathReport,
   // childExamination,
-  // deliveryManagement,
+  deliveryManagement,
   // hearingScreening,
   // highRiskChildren,
   // highRiskPregnantWomen,

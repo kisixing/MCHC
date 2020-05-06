@@ -14,42 +14,7 @@ import styles from './less/Layout.less';
 import VisitedPanel from '@lianmed/pages/lib/Remote/VisitedPanel';
 import zhCN from 'antd/es/locale/zh_CN';
 import RouterTabs from './RouterTabs';
-
-const omitMenus = [
-  {
-    id: 999,
-    type: 'others',
-    key: '/account/settings',
-    name: '个人设置',
-    parentid: 0,
-    active: null,
-  },
-  {
-    id: 998,
-    type: 'others',
-    key: '/pregnancies/physical-exam/edit',
-    name: '体格检查',
-    parentid: 24,
-    active: null,
-  },
-  {
-    id: 998,
-    type: 'others',
-    key: '/pregnancies/deliver-form',
-    name: '分娩记录',
-    parentid: 24,
-    active: null,
-  },
-  {
-    id: 996,
-    type: 'others',
-    key: '/form-test',
-    name: '表单测试',
-    parentid: 0,
-    active: null,
-    isMenu: true,
-  },
-];
+import { omitRoutes } from '../../config/routes/index';
 
 const BasicLayout = (props: any) => {
   const [panelHeight, setPanelHeight] = useState(document.documentElement.clientHeight - 135);
@@ -149,7 +114,7 @@ const BasicLayout = (props: any) => {
       (sum, group) => concat(sum as [], get(group, 'permissions') as []),
       [],
     );
-    const permissionsMapping = keyBy(concat(selfPermissions, omitMenus), 'key');
+    const permissionsMapping = keyBy(concat(selfPermissions, omitRoutes), 'key');
     if (location && location.pathname !== '/') {
       const menuItemProps = get(permissionsMapping, get(location, 'pathname'));
       if (menuItemProps) {
@@ -197,8 +162,8 @@ const BasicLayout = (props: any) => {
       (sum, group) => concat(sum as [], get(group, 'permissions') as []),
       [],
     );
-    const omitMenusPermission = filter(omitMenus, (omitMenu: any) => get(omitMenu, 'isMenu'));
-    const menusPermissions = keys(keyBy(concat(permissions, omitMenusPermission), 'key'));
+    const omitRoutesPermission = filter(omitRoutes, (omitMenu: any) => get(omitMenu, 'isMenu'));
+    const menusPermissions = keys(keyBy(concat(permissions, omitRoutesPermission), 'key'));
     return menuList.map(item => {
       let localItem = {};
       if (menusPermissions.indexOf(item.path || '/') > -1) {
