@@ -35,7 +35,6 @@ export function createFormHandler(config){
     return r;
   }
   
-
   const submit = function() {
     let r = {}
     let validCode = true;
@@ -58,7 +57,7 @@ export function createFormHandler(config){
   }
 
   const subscribe = function(fieldName, eventName, cb) {
-    if(fieldName in this){
+    if(fieldName in this || fieldName === "custom"){
       if(!eventCallBacks[fieldName]){
         eventCallBacks[fieldName] = {};
       }

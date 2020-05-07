@@ -14,7 +14,7 @@ interface TableColumns {
 }
 
 export interface ComponentOption {
-  type: string | null, // 单一组件多重展开
+  type?: string | null, // 单一组件多重展开
   
   // select
   selectOptions?: Array<{ value: string | number, label: string | number }> | null,
@@ -30,7 +30,10 @@ export interface ComponentOption {
   
   // table
   editable?: boolean, // 自动提供button和编辑功能
-  tableColumns?: Array<TableColumns>
+  tableColumns?: Array<TableColumns>,
+
+  // custom 自定义
+  config?: Array<FormConfig>
 }
 
 export interface FormConfig {
