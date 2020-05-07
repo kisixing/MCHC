@@ -24,7 +24,12 @@ export default class Home extends React.Component<{},HomeState>{
 
 
   componentDidUpdate(){
-    // if(this.state.formHandler.sub)
+    console.log(this.state.formHandler);
+    const { formHandler } = this.state;
+    formHandler.subscribe(".lmp", "change", (val: any) => {
+      console.log(val);
+      
+    })
   }
 
 

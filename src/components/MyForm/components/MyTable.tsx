@@ -76,10 +76,11 @@ class EditableCell extends Component<EditableCellProps> {
 
 /* ============================================================================= */
 interface MyTableProps {
-  onChange: Function;
-  dispatch: Function;
-  value: any;
-  input_props: any;
+  onChange: Function,
+  dispatch: Function,
+  value: any,
+  input_props: any,
+  path: string;
 }
 
 interface MyTableState {
@@ -98,7 +99,7 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
     };
   }
 
-  // 因为要维护tablerow的状态，所有需要保存在本地
+  // 因为要维护tableRow的状态，所有需要保存在本地
   componentDidUpdate(prevProps: MyTableProps) {
     if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
       // eslint-disable-next-line react/no-did-update-set-state
@@ -189,22 +190,7 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
     let { tableColumns } = this.state;
     const { dataSource } = this.state;
     const { editable } = input_props;
-    // 单元格渲染 - 如果要做二级菜单，这里需要逻辑处理
-    // tableColumns = tableColumns.map((v: any, i: number) => ({
-    //   ...v,
-    //   dataIndex: v.key,
-    //   render: (text: string, record: any, index: number) => editable ? (
-    //     <EditableCell
-    //       value={text}
-    //       onChange={(val: any) => this.handleEdit(val, v.key, index)}
-    //       editor={v.editor}
-    //     />
-    //   ) : (
-    //     <span>{text || "-"}</span>
-    //   )
-    // }));
     tableColumns = this.handleTabColumnsFormat(tableColumns);
-    console.log(tableColumns);
     const rowSelection = {
       selectedRowKeys: this.state.selectedRowKeys,
       onChange: this.handleRowSelectChange

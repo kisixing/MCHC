@@ -29,7 +29,8 @@
 |`Date`|
 |format|date组件日期格式|string||
 |`Select`|
-|selectOptions|选择器option配置|{value:string|number, label:stirng|numbmer|
+|selectOptions|option配置,当type为multiple时渲染对象下的属性|{value:string\|number, label:stirng\|numbmer}|
+|extraEditors|额外渲染的输入器,根据选中的value值渲染|Array<ExtraEditors>||
 |`Checkbox`|
 |radio|checkbox是否为单选，在multiple下可设置为false|boolean|默认为true|
 |extraEditors|在选中某个选项后弹出的输入框|ExtraEditor extends FormConfig|仅添加了index字段，保存规则未写|

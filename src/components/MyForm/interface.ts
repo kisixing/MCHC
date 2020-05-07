@@ -15,7 +15,6 @@ interface TableColumns {
 
 export interface ComponentOption {
   type: string | null, // 单一组件多重展开
-  // valid: string|object|RegExp|null,
   
   // select
   selectOptions?: Array<{ value: string | number, label: string | number }> | null,
@@ -64,13 +63,14 @@ export interface FormItemProp {
     getValue?: () => any,
     valid?: () => any
   },
-  dispatch?: () => void,
+  dispatch: (fieldName: string, eventName: string, args: any) => void,
   defaultValue?: any,
   type: string,
   label: string,
   unit: string,
   input_props: ComponentOption | null,
-  validate?: string | object | RegExp | null
+  validate?: string | object | RegExp | null,
+  path: string
 }
 
 export interface FormItemState {

@@ -58,6 +58,7 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
           unit={config[i].unit || ""}
           input_props={config[i].input_props}
           validate={config[i].rules || ""}
+          path={config[i].key || ""}
         />
       </Col>
     )
