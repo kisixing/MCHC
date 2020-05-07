@@ -3,8 +3,8 @@ import MyDateTime from './MyDateTime'
 import MySelect from './MySelect'
 import MyCheckbox from './MyCheckbox'
 import MyTable from './MyTable';
+import BusinessFetuses from './business/Fetuses';
 
-import BusinessFetuses from './business/fetuses';
 interface MyComponent{
   [key:string]: any
 }
