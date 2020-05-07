@@ -20,6 +20,8 @@ export function createFormHandler(config){
     validated: false,
   }
 
+
+  // c - config
   const initField = function(c) {
     let r = {};
     c.forEach(v => {
@@ -34,7 +36,7 @@ export function createFormHandler(config){
   }
   
 
-  const submit = function(){
+  const submit = function() {
     let r = {}
     let validCode = true;
     Object.keys(this).forEach(key => {
@@ -55,7 +57,7 @@ export function createFormHandler(config){
     })
   }
 
-  const subscribe = function(fieldName, eventName, cb){
+  const subscribe = function(fieldName, eventName, cb) {
     if(fieldName in this){
       if(!eventCallBacks[fieldName]){
         eventCallBacks[fieldName] = {};
@@ -64,9 +66,14 @@ export function createFormHandler(config){
     }
   }
 
-  const dispatch = function(fieldName, eventName, args){
+  const dispatch = function(fieldName, eventName, args) {
     // TODO 判读有无没写
-    return eventCallBacks[fieldName][eventName](args);
+    try{
+      return eventCallBacks[fieldName][eventName](args);
+    }catch(e){
+      // console.warn
+      // console.warn(e);
+    }
   }
 
   const formHandler = {...initField(config)}

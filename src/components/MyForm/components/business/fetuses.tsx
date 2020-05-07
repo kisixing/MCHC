@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Col, Row, Input, Button } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
-import styles from './fetuses.less';
+import styles from './Fetuses.less';
 
 interface BusinessFetusesPorps {
   onChange: Function,
@@ -84,7 +84,7 @@ export default class BusinessFetuses extends Component<BusinessFetusesPorps, Bus
         <Row>
           
           {fetusConfig.map((u: any, index: number) => {
-            if(u['key'] === "id"){
+            if(u.key === "id"){
               return <Col span={6}  key={index}>
                   <CloseOutlined 
                     onClick={() => this.handleClose(v.id)}
@@ -95,21 +95,21 @@ export default class BusinessFetuses extends Component<BusinessFetusesPorps, Bus
 
             return <Col span={6} className={styles['fetus-form-item']} key={index}>
               <div>
-                <div className={styles['label']}>
+                <div className={styles.label}>
                   <label>{u.label}:</label>
                 </div>
-                <div className={styles['main']}>
+                <div className={styles.main}>
                   <div>
                     <Input
-                      value={(v as any)[u['key']]}
-                      onChange={(e) => this.handleChange(v.id, u['key'], e.target.value)}
+                      value={(v as any)[u.key]}
+                      onChange={(e) => this.handleChange(v.id, u.key, e.target.value)}
                     />
                   </div>
                 </div>
               </div>
-              {error[u['key']] ? (
-                <div className={styles['error']}>
-                  {error[u['key']]}
+              {error[u.key] ? (
+                <div className={styles.error}>
+                  {error[u.key]}
                 </div>
               ) : null}
             </Col>
@@ -121,7 +121,7 @@ export default class BusinessFetuses extends Component<BusinessFetusesPorps, Bus
 
   handleAdd = () => {
     const { value } = this.state;
-    let newData = {
+    const newData = {
       "id": Math.random(),
       "fetalPosition": null,
       "fetalHeartRate": null,
@@ -139,7 +139,7 @@ export default class BusinessFetuses extends Component<BusinessFetusesPorps, Bus
 
   handleClose = (id:number|string):void => {
     const { value } = this.state; 
-    let i = value.findIndex((v:fetusData) => v.id === id);
+    const i = value.findIndex((v:fetusData) => v.id === id);
     value.splice(i,1);
     this.setState({value},() => {
       this.props.onChange(this.state.value);
@@ -149,11 +149,11 @@ export default class BusinessFetuses extends Component<BusinessFetusesPorps, Bus
   render() {
     const { value, error } = this.state;
     return (
-      <div className={styles['fetus']}>
-        <div className={styles['title']}>
+      <div className={styles.fetus}>
+        <div className={styles.title}>
           <span>胎儿检查</span>
         </div>
-        <div className={styles['handle']}>
+        <div className={styles.handle}>
           <Button type="primary" onClick={this.handleAdd}>添加胎儿</Button>
         </div>
         {value.length !== 0 && value.map((v: fetusData, index: number) => {

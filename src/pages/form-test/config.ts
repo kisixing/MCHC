@@ -12,27 +12,34 @@ const template = {
 
 const config: Array<FormConfig> = [
   {
-    key: '.chief complaint', label: "主诊", unit: "", input_type: "input", span: 7, offset: 1, rules: "required",
+    key: '.chief complaint', label: "主诊", input_type: "input", span: 7, offset: 1, rules: "required",
     input_props: {
       type: "textarea",
     }
   },
+  // {
+  //   key: '.diagnosis', label: "诊断", input_type: "b-template_input", span: 24, offset: 0,
+  //   rules: "required",
+  //   input_props: {
+  //     type: ""
+  //   }
+  // },
   {
-    key: '.lmp', label: "末次月经", unit: "", input_type: 'date', span: 7, offset: 17, rules: "required",
+    key: '.lmp', label: "末次月经", input_type: 'date', span: 7, offset: 17, rules: "required",
     input_props: {
       type: "date",
       format: "YYYY-MM-DD"
     }
   },
   {
-    key: '.edd', label: "预产期", unit: "", input_type: "date", span: 7, offset: 1, rules: "required",
+    key: '.edd', label: "预产期", input_type: "date", span: 7, offset: 1, rules: "required",
     input_props: {
       type: "date",
       format: "YYYY-MM-DD"
     }
   },
   {
-    key: '.gravidity', label: "G", unit: "", input_type: "select", span: 7, offset: 1, rules: "required|number",
+    key: '.gravidity', label: "G", input_type: "select", span: 7, offset: 1, rules: "required|number",
     input_props: {
       type: "default",
       selectOptions: [
@@ -49,7 +56,7 @@ const config: Array<FormConfig> = [
     }
   },
   {
-    key: '.parity', label: "P", unit: "", input_type: "select", span: 7, offset: 1, rules: "required|number",
+    key: '.parity', label: "P", input_type: "select", span: 7, offset: 1, rules: "required|number",
     input_props: {
       type: "default",
       selectOptions: [
@@ -66,7 +73,7 @@ const config: Array<FormConfig> = [
     }
   },
   {
-    key: '.physicalExam.id', label: "体检id", unit: "", input_type: 'text', span: 7, offset: 1, hidden: true, rules: "required|number",
+    key: '.physicalExam.id', label: "体检id", input_type: 'text', span: 7, offset: 1, hidden: true, rules: "required|number",
     input_props: {
       type: "default",
     }
@@ -183,6 +190,7 @@ const config: Array<FormConfig> = [
     key: ".familyHistory", label: "家族史", input_type: "checkbox", span: 24, offset: 0,
     input_props: {
       type: "multiple",
+      radio: true,
       renderData: [
         {
           key: "epilepsy", label:"癫痫"
