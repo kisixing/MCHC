@@ -33,12 +33,12 @@ export default class CheckboxWithExtra extends Component<CheckboxWithExtraProps>
   // TODO span offset尚未完善
   // 当checkbox选中时，渲染额外的编辑器供其输入
   // 输出格式为 {"0":"", "1": ""}, 数字代表编辑器的顺序
-  renderExtra = (editorValue: string) => {
+  renderExtra = (editorsValue: string) => {
     const { editors } = this.props;
     if (!editors || editors.length === 0) return null;
     let newEditorValue: any = {}
-    if (editorValue) {
-      newEditorValue = JSON.parse(editorValue);
+    if (editorsValue) {
+      newEditorValue = JSON.parse(editorsValue);
     }
     return editors.map((v: any, index: number) => {
       const RenderComponent = MyComponent[v.input_type];

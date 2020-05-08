@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React, { Component, ReactNode } from 'react';
 import { Checkbox} from 'antd';
 import CheckboxWithExtra from './CheckboxWithExtra';
@@ -40,12 +41,13 @@ interface CheckboxComponentProps {
 
 
 export default class MyCheckbox extends Component<MyCheckboxProps, any> {
-  constructor(props: MyCheckboxProps) {
-    super(props);
-    this.state = {
-      value: ""
-    };
-  }
+  
+  // constructor(props: MyCheckboxProps) {
+  //   super(props);
+  //   this.state = {
+  //     value: ""
+  //   };
+  // }
 
   checkbox: { [key: string]: Function } = {
     "default": function (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode {
@@ -72,12 +74,13 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
       />;
     },
     "multiple": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
-      const r = input_props.renderData.map((v: any) => ({
+      const r = input_props.renderData.map((v: { key: string, label: string }) => ({
         checkboxValue: value[v.key],
         editorsValue: value[`${v.key}Note`],
         key: v.key,
         label: v.label
       }));
+      // onChange只传出一个值
       const handleChange = (val: any, key: string) => {
         const newObj = {
           [key]: val.checkboxValue,
@@ -165,7 +168,6 @@ class MultipleCheckbox extends Component<MultipleCheckboxProps>{
   handleChange = (val: any, key: string) => {
     const { radio = true , value, onChange } = this.props;
     // 互斥逻辑
-    console.log(radio);
     if (radio) {
       value.forEach((v:any) => {
         if(v.key === key){

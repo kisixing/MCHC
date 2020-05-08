@@ -154,7 +154,36 @@ const config: Array<FormConfig> = [
     key: ".familyHistory", label: "家族史", input_type: "checkbox", span: 24, offset: 0,
     input_props: {
       type: "multiple",
-      radio: true,
+      radio: false,
+      renderData: [
+        {
+          key: "epilepsy", label: "癫痫"
+        }, {
+          key: "cardiacDisease", label: "心脏病"
+        }
+      ],
+      extraEditors: [
+        {
+          key: "epilepsy",
+          editors: [{
+            key: "",
+            label: "药物名称",
+            input_type: "input",
+            span: 0,
+            offset: 0,
+            input_props: {
+              type: "default",
+            },
+          }]
+        }
+      ]
+    }
+  },
+  {
+    key: ".familyHistory", label: "家族史", input_type: "select", span: 24, offset: 0,
+    input_props: {
+      type: "multiple",
+      radio: false,
       renderData: [
         {
           key: "epilepsy", label: "癫痫"
