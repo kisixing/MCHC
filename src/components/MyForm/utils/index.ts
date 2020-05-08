@@ -220,14 +220,10 @@ function _assign(mainData: any, newData: any ): any{
           flag = true;
           // 判别下一层是不是数组，做数组合并
           if(isArr(mainData[mk]) && isArr(newData[nk])){
-            // mainData[mk] = mainData[mk].filter((v:any) => !!v).concat(newData[nk].filter((v:any) => !!v));
-            // mainData[mk] = mainData[mk].map((_v: any,index: number) => 
-            //    _assign(mainData[mk][index], newData[nk][index])
-            // )
             for(let k = 0; k < mainData[mk].length ;k++){
               mainData[mk][k] = _assign(mainData[mk][k], newData[nk][k])
             }
-          }else{
+          }else if(isObj(mainData[mk]) && isObj(newData[mk])){
             // default object
             mainData[mk] = {
               ...mainData[mk],

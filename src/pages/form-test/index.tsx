@@ -26,14 +26,11 @@ export default class Home extends React.Component<{},HomeState>{
   componentDidUpdate(){
     const { formHandler } = this.state;
     formHandler.subscribe(".lmp", "change", (val: any) => {});
-    //
-    // console.log(formHandler);
   }
 
 
   handleSubmit = () => {
     this.state.formHandler.submit().then(({validCode, res}:any) => {
-      
       console.log(res);
       console.log(toFormat(res));
       // if(!validCode){
@@ -49,6 +46,7 @@ export default class Home extends React.Component<{},HomeState>{
         <MyForm
           config={myConfig}
           getFormHandler={(formHandler:any) => this.setState({formHandler})}
+          submitChange={false}
         />
         <button
           // onClick={() => this.state.formHandler.submit()}

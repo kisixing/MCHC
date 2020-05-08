@@ -75,17 +75,8 @@ export default class MyForm extends Component<MyFormProp, MyFormState>{
   constructor(props:MyFormProp){
     super(props);
     this.state = {
-      formHandler: createFormHandler(props.config)
+      formHandler: createFormHandler(props.config, props.submitChange)
     }
-    const self = this;
-    this.state.formHandler.subscribe("custom", "collect", (collectFn: any) => {
-      self.setState({
-        formHandler: {
-          ...collectFn,
-          ...self.state.formHandler
-        }
-      })
-    })
   }
 
   componentDidMount(){

@@ -25,7 +25,11 @@ function isVaildDate(date: Date):boolean{
 export default function MyDateTime(props: MyDatePickerProp){
   const handleChange = (value:any) => {
     const { format = defaultFormat} = props.input_props;
-    props.onChange(value.format(format));
+    if(value){
+      props.onChange(value.format(format));
+    }else{
+      props.onChange(value);
+    }
   }
 
   const renderDatePicker = () => {

@@ -1,15 +1,5 @@
 import { FormConfig } from '../../components/MyForm/interface';
 
-const template = {
-  key: '.lmp', label: "lmp", unit: "", input_type: "", span: 7, offset: 1,
-  input_props: {
-    input_type: "date",
-    rules: "required",
-    format: "YYYY-MM-DD"
-  }
-}
-// TODO 加入渲染标题
-
 const config: Array<FormConfig> = [
   {
     key: '.chief complaint', label: "主诊", input_type: "input", span: 22, offset: 1, rules: "required",
@@ -75,10 +65,18 @@ const config: Array<FormConfig> = [
     rules: {},
     input_props: {
       config: [
-        {key: ".checkdate", label: "检查日期", input_type: "date", span: 7, offset: 1 ,input_props:{}},
-        {key: ".trisomy21", label: "21三体风险", input_type: "date", span: 7, offset: 1 ,input_props:{}},
-        {key: ".trisomy18", label: "18三体风险", input_type: "date", span: 7, offset: 1 ,input_props:{}},
-        {key: ".trisomy13", label: "13三体风险", input_type: "date", span: 7, offset: 1 ,input_props:{}}
+        {key: ".checkdate", label: "检查日期", input_type: "date", span: 7, offset: 1 ,input_props:{}, rules: "required"},
+        {key: ".trisomy21", label: "21三体风险", input_type: "input", span: 7, offset: 1 ,input_props:{}},
+        {key: ".trisomy18", label: "18三体风险", input_type: "input", span: 7, offset: 1 ,input_props:{}},
+        {key: ".trisomy13", label: "13三体风险", input_type: "input", span: 7, offset: 1 ,input_props:{}},
+        {
+          key: ".note", label: "姓名", input_type: "b-custom", span: 24, offset: 0,
+          input_props: {
+            config: [
+              {key: ".name", label: "姓名", input_type: "input", span: 7, offset: 1, input_props: {}}
+            ]
+          }
+        }
       ]
     }
   },

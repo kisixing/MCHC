@@ -52,7 +52,8 @@ export interface FormConfig {
 export interface MyFormProp {
   config: Array<FormConfig>,
   // TODO func类型
-  getFormHandler?: (func: any) => void
+  getFormHandler?: (func: any) => void,
+  submitChange: boolean
 }
 
 export interface MyFormState {
