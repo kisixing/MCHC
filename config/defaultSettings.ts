@@ -55,7 +55,7 @@ export default {
   menu: {
     locale: true,
   },
-  title: '母婴云后台管理',
+  title: 'MCHC妇幼保健系统',
   pwa: true,
   iconfontUrl: '',
 } as DefaultSettings;
