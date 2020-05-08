@@ -52,7 +52,7 @@ export function createFormHandler(config){
       }
     })
     return new Promise(resolve => {
-      resolve({validCode,data: r})
+      resolve({validCode,res: r})
     })
   }
 

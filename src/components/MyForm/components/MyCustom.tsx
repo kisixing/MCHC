@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import MyForm from '@/components/MyForm/index';
 
-import { getRenderData, toFormat} from '@/components/MyForm/utils';
+import { getRenderData } from '@/components/MyForm/utils';
 
 interface MyCustomProps {
   onChange: Function,
@@ -32,20 +32,21 @@ export default class MyCustom extends Component<MyCustomProps,MyCustomState>{
     // 本地的formHandler
     const { formHandler } = this.state;
     // 上一层的formHandler的dispatch
-    const { dispatch } = this.props;
+    const { dispatch, path } = this.props;
     if(JSON.stringify(this.props) !== JSON.stringify(prevProps)){
-      // formHandler.subscribe("custom", "collect", (collectFn: any) => {
-      //   this.setState({
-      //     formHandler: {
-      //       ...collectFn,
-      //       ...formHandler
-      //     }
-      //   })
-      // })
+      // 监听下一层
+      formHandler.subscribe("custom", "collect", (collectFn: any) => {
+        this.setState({
+          formHandler: {
+            ...collectFn,
+            ...formHandler
+          }
+        })
+      })
       const collectFn = {};
       Object.keys(formHandler).forEach((key:string) => {
         if(key.indexOf(".") !== -1){
-          collectFn[key] = formHandler[key]
+          collectFn[`${path}${key}`] = formHandler[key]
         }
       });
       dispatch("custom", "collect", collectFn);
@@ -54,7 +55,7 @@ export default class MyCustom extends Component<MyCustomProps,MyCustomState>{
 
   render() {
     const { config = [], value } = this.props.input_props;
-    let myConfig = [];
+    let myConfig:Array<any> = [];
     if(config){
       myConfig = getRenderData(config, value);
     }
