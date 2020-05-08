@@ -42,6 +42,16 @@ export default class FormItem extends Component<FormItemProp,FormItemState>{
     });
   }
 
+  componentDidUpdate(prevProps: FormItemProp) {
+    if(JSON.stringify(this.props) !== JSON.stringify(prevProps)){
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({
+        value: this.props.defaultValue,
+        validate: this.props.validate || ""
+      });
+    }
+  }
+
   handleChange = (val:any) => {
     const { path, dispatch } = this.props;
     this.setState({value: val},() => {

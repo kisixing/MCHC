@@ -22,7 +22,7 @@ export default class MySelect extends Component<MySelectProps,{}>{
 
   renderSelect = () => {
     const { input_props, value } = this.props;
-    const { type } = input_props;
+    const { type = "default" } = input_props;
     const selectOptions = input_props.selectOptions.map((v:{label:string|number, value: string|number}) => (
       <Option
         value={v.value}
@@ -31,12 +31,13 @@ export default class MySelect extends Component<MySelectProps,{}>{
         {v.label}
       </Option>
     ));
-    if(type === "default" || !type){
+    if(type === "default"){
       
       return (
         <Select
           style={{width: '100%'}}
           onChange={this.handleChange}
+          showSearch
           value={value}
         >
           {selectOptions}

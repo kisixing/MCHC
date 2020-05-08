@@ -24,20 +24,15 @@ export default class Home extends React.Component<{},HomeState>{
 
 
   componentDidUpdate(){
-    console.log(this.state.formHandler);
     const { formHandler } = this.state;
-    formHandler.subscribe(".lmp", "change", (val: any) => {
-      console.log(val);
-      
-    })
+    formHandler.subscribe(".lmp", "change", (val: any) => {});
   }
 
 
   handleSubmit = () => {
-    this.state.formHandler.submit().then(({validCode, data}:any) => {
-      
-      console.log(data);
-      console.log(toFormat(data));
+    this.state.formHandler.submit().then(({validCode, res}:any) => {
+      console.log(res);
+      console.log(toFormat(res));
       // if(!validCode){
       // }
     });
@@ -50,7 +45,8 @@ export default class Home extends React.Component<{},HomeState>{
       <div>
         <MyForm
           config={myConfig}
-          getFormHandler={(formHandler) => this.setState({formHandler})}
+          getFormHandler={(formHandler:any) => this.setState({formHandler})}
+          submitChange={false}
         />
         <button
           // onClick={() => this.state.formHandler.submit()}

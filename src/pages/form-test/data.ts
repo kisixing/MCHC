@@ -182,7 +182,9 @@ const data = {
 		"trisomy21z": "",
 		"trisomy18z": "",
 		"trisomy13z": "12",
-		"note": ""
+		"note": {
+			"name": "zhangsan"
+		}
 	},
 	{
 		"checkdate": "2019-04-01",
