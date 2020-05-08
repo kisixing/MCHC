@@ -4,7 +4,7 @@ import { MinusCircleOutlined } from '@ant-design/icons';
 import { map, get, cloneDeep, set, filter, split, isFunction, isEmpty } from 'lodash';
 import { getFormDescriptionByModuleName } from '@/components/BaseModalForm/FormSection';
 import FoetalAppendageFormSection from './FoetalAppendageFormSection';
-import { DynamicForm } from '@lianmed/components';
+import DynamicForm from '@/components/BaseModalForm/DynamicForm';
 import { fromApi, toApi } from './config';
 import styles from './index.less';
 

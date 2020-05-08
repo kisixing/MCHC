@@ -1,6 +1,6 @@
 import React from 'react';
 import { resetFormDescriptions as formDescriptions } from '../config/form';
-import { DynamicForm } from '@lianmed/components';
+import DynamicForm from '@/components/BaseModalForm/DynamicForm';
 import request from '@/utils/request';
 import FormSection from '@/components/BaseModalForm/FormSection';
 import { Modal, Form, message } from 'antd';

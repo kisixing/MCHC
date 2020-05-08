@@ -2,7 +2,7 @@ import React from 'react';
 import { Tabs, Form, Input, Row, Col, Radio, InputNumber, Button, DatePicker, Divider, Select } from 'antd';
 import { map, get, set, keyBy, isEmpty, isNil, filter, isFunction, toArray, cloneDeep, isEqual } from 'lodash';
 import moment, { Moment } from 'moment';
-import { DynamicForm } from '@lianmed/components';
+import DynamicForm from '@/components/BaseModalForm/DynamicForm';
 import request from '@/utils/request';
 import { formDescriptionsFromApi, formDescriptionsWithoutSectionApi } from '@/utils/adapter';
 import PregnancyHistoryFormSection from './PregnancyHistoryFormSection';

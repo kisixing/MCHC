@@ -1,5 +1,5 @@
 import React from 'react';
-import { DynamicForm } from '@lianmed/components';
+import DynamicForm from '@/components/BaseModalForm/DynamicForm';
 import { Form, Divider, Button } from 'antd';
 import { get, map, isFunction, isEqual } from 'lodash';
 import FormSection from '@/components/BaseModalForm/FormSection';

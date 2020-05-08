@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Form } from 'antd';
-import { DynamicForm } from '@lianmed/components';
 import FormSection from './FormSection';
+import DynamicForm from '@/components/BaseModalForm/DynamicForm';
 
 export default class Base extends DynamicForm {
   static defaultProps = {
