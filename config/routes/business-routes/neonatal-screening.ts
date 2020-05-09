@@ -3,5 +3,5 @@ export default {
   name: 'neonatal-screening',
   icon: 'ordered-list',
   path: '/neonatal-screening',
-  component: './deliver-form/edit',
+  component: './Welcome',
 };

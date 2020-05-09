@@ -3,5 +3,5 @@ export default {
   name: 'premarital-care',
   icon: 'ordered-list',
   path: '/premarital-care',
-  component: './deliver-form/edit',
+  component: './Welcome',
 };

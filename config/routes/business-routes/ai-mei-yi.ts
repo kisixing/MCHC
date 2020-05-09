@@ -3,5 +3,5 @@ export default {
   name: 'ai-mei-yi',
   icon: 'ordered-list',
   path: '/ai-mei-yi',
-  component: './deliver-form/edit',
+  component: './Welcome',
 };

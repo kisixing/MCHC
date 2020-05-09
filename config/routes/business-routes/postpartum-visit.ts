@@ -3,5 +3,5 @@ export default {
   name: 'postpartum-visit',
   icon: 'ordered-list',
   path: '/postpartum-visit',
-  component: './deliver-form/edit',
+  component: './Welcome',
 };

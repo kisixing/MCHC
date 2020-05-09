@@ -3,5 +3,5 @@ export default {
   name: 'maternal-mortality-report',
   icon: 'ordered-list',
   path: '/maternal-mortality-report',
-  component: './deliver-form/edit',
+  component: './Welcome',
 };
