@@ -3,5 +3,5 @@ export default {
   name: 'statistical-query',
   icon: 'ordered-list',
   path: '/statistical-query',
-  component: './deliver-form/edit',
+  component: './Welcome',
 };

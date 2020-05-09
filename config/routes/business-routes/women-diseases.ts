@@ -3,5 +3,5 @@ export default {
   name: 'women-diseases',
   icon: 'ordered-list',
   path: '/women-diseases',
-  component: './deliver-form/edit',
+  component: './Welcome',
 };

@@ -3,5 +3,5 @@ export default {
   name: 'nutritional-diseases',
   icon: 'ordered-list',
   path: '/nutritional-diseases',
-  component: './deliver-form/edit',
+  component: './Welcome',
 };

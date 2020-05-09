@@ -19,9 +19,9 @@ export const routes: IRoute[] = [
             path: '/',
             component: './Welcome',
           },
+          ...businessRoutes,
           exception,
           system,
-          ...businessRoutes,
         ],
       },
     ],
@@ -76,6 +76,7 @@ export const omitRoutes = [
     id: 995,
     type: 'others',
     key: '/ai-mei-yi',
+    name: '艾梅乙专案上报管理',
     parentid: 0,
     active: null,
     isMenu: true,
@@ -84,6 +85,7 @@ export const omitRoutes = [
     id: 994,
     type: 'others',
     key: '/birth-defect',
+    name: '出生缺陷登记',
     parentid: 0,
     active: null,
     isMenu: true,
@@ -92,6 +94,7 @@ export const omitRoutes = [
     id: 993,
     type: 'others',
     key: '/child-death-report',
+    name: '儿童死亡报告管理',
     parentid: 0,
     active: null,
     isMenu: true,
@@ -99,6 +102,7 @@ export const omitRoutes = [
   {
     id: 992,
     type: 'others',
+    name: '儿童健康体检',
     key: '/child-examination',
     parentid: 0,
     active: null,
@@ -107,6 +111,7 @@ export const omitRoutes = [
   {
     id: 991,
     type: 'others',
+    name: '高危儿管理',
     key: '/high-risk-children',
     parentid: 0,
     active: null,
@@ -117,12 +122,14 @@ export const omitRoutes = [
     type: 'others',
     key: '/high-risk-pregnant-women',
     parentid: 0,
+    name: '高危孕产妇管理',
     active: null,
     isMenu: true,
   },
   {
     id: 989,
     type: 'others',
+    name: '儿童听力筛查',
     key: '/hearing-screening',
     parentid: 0,
     active: null,
@@ -131,6 +138,7 @@ export const omitRoutes = [
   {
     id: 988,
     type: 'others',
+    name: '高危儿管理',
     key: '/high-risk-children',
     parentid: 0,
     active: null,
@@ -139,6 +147,7 @@ export const omitRoutes = [
   {
     id: 987,
     type: 'others',
+    name: '孕产妇死亡报告',
     key: '/maternal-mortality-report',
     parentid: 0,
     active: null,
@@ -146,6 +155,7 @@ export const omitRoutes = [
   },
   {
     id: 986,
+    name: '新生儿疾病筛查',
     type: 'others',
     key: '/neonatal-screening',
     parentid: 0,
@@ -155,6 +165,7 @@ export const omitRoutes = [
   {
     id: 985,
     type: 'others',
+    name: '营养性疾病儿童管理',
     key: '/nutritional-diseases',
     parentid: 0,
     active: null,
@@ -163,6 +174,7 @@ export const omitRoutes = [
   {
     id: 984,
     type: 'others',
+    name: '产后42天访视',
     key: '/postpartum-visit',
     parentid: 0,
     active: null,
@@ -171,6 +183,7 @@ export const omitRoutes = [
   {
     id: 983,
     type: 'others',
+    name: '婚前保健',
     key: '/premarital-care',
     parentid: 0,
     active: null,
@@ -179,6 +192,7 @@ export const omitRoutes = [
   {
     id: 982,
     type: 'others',
+    name: '产前诊断',
     key: '/prenatal-diagnosis',
     parentid: 0,
     active: null,
@@ -187,6 +201,7 @@ export const omitRoutes = [
   {
     id: 981,
     type: 'others',
+    name: '产前检查',
     key: '/prenatal-examination',
     parentid: 0,
     active: null,
@@ -195,6 +210,7 @@ export const omitRoutes = [
   {
     id: 980,
     type: 'others',
+    name: '产前筛查',
     key: '/prenatal-screening',
     parentid: 0,
     active: null,
@@ -202,6 +218,7 @@ export const omitRoutes = [
   },
   {
     id: 979,
+    name: '统计查询',
     type: 'others',
     key: '/statistical-query',
     parentid: 0,
@@ -211,6 +228,7 @@ export const omitRoutes = [
   {
     id: 978,
     type: 'others',
+    name: '妇女病普查管理',
     key: '/women-diseases',
     parentid: 0,
     active: null,

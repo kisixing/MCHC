@@ -3,6 +3,6 @@ export default {
     name: 'high-risk-pregnant-women',
     icon: 'ordered-list',
     path: '/high-risk-pregnant-women',
-    component: './deliver-form/edit',
+    component: './Welcome',
   };
   

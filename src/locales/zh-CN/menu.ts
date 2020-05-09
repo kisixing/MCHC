@@ -112,7 +112,7 @@ export default {
 
   'menu.deliver-management': '分娩管理',
   'menu.deliver-management.deliver-form': '分娩记录单',
-  
+
   'menu.ai-mei-yi': '艾梅乙专案上报管理',
   'menu.birth-defect': '出生缺陷登记',
   'menu.child-death-report': '儿童死亡报告管理',
@@ -125,9 +125,9 @@ export default {
   'menu.nutritional-diseases': '营养性疾病儿童管理',
   'menu.postpartum-visit': '产后42天访视',
   'menu.premarital-care': '婚前保健',
-  'menu.prenatal-diagnosis': '高危孕产妇管理',
+  'menu.prenatal-diagnosis': '产前诊断',
   'menu.prenatal-examination': '产前检查',
-  'menu.prenatal-screening': '产前诊断',
+  'menu.prenatal-screening': '产前筛查',
   'menu.statistical-query': '统计查询',
   'menu.women-diseases': '妇女病普查管理',
 };

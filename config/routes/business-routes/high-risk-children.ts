@@ -3,6 +3,6 @@ export default {
     name: 'high-risk-children',
     icon: 'ordered-list',
     path: '/high-risk-children',
-    component: './deliver-form/edit',
+    component: './Welcome',
   };
   
