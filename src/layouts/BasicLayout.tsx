@@ -11,7 +11,6 @@ import { keyBy, keys, get, map, isEmpty, reduce, concat, isNil, filter } from 'l
 import store from 'store';
 import request, { TOKEN } from '@/utils/request';
 import styles from './less/Layout.less';
-import VisitedPanel from '@lianmed/pages/lib/Remote/VisitedPanel';
 import zhCN from 'antd/es/locale/zh_CN';
 import RouterTabs from './RouterTabs';
 import { omitRoutes } from '../../config/routes/index';
@@ -182,6 +181,7 @@ const BasicLayout = (props: any) => {
       search: '',
       closable: true,
     };
+
     if (activeKey !== get(menuItemProps, 'key')) {
       dispatch({
         type: 'tab/changeTabs',
@@ -191,6 +191,12 @@ const BasicLayout = (props: any) => {
         },
       });
     }
+
+    // 滚动 activeTab
+    setTimeout(() => {
+      const tabBtnRef = document.getElementById(get(menuItemProps, 'key')) as HTMLElement;
+      tabBtnRef.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+    }, 100);
   };
 
   const handleClickHeader = () => {
@@ -252,7 +258,6 @@ const BasicLayout = (props: any) => {
           </div>
         )}
       </ProLayout>
-      {/* <VisitedPanel remote_url="http://transfer.lian-med.com" /> */}
     </ConfigProvider>
   );
 };
