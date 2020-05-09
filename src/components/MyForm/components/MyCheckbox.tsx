@@ -20,7 +20,7 @@ interface MyCheckboxProps {
  *  自定义模式就是multiple
  */
 interface CheckboxComponentProps {
-  type: string,
+  type?: string,
   radio?: boolean
   extraEditors: any,
   renderData: Array<{ key: string, label: string }>
@@ -96,7 +96,7 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
 
   renderCheckbox = () => {
     const { input_props, value, onChange } = this.props;
-    const { type } = input_props;
+    const { type = "default" } = input_props;
     return this.checkbox[type || "default"](input_props, value, onChange);
   }
 

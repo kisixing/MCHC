@@ -1,2 +1,7 @@
 // 产前筛查路由
-export default {};
+export default {
+  name: 'prenatal-screening',
+  icon: 'ordered-list',
+  path: '/prenatal-screening',
+  component: './Welcome',
+};

@@ -4,6 +4,14 @@
     2.render 根据配置布局渲染formItem 
     3.formItem，用于渲染编辑器以及业务组件  
     
+## MyForm参数
+> 生成表单入参
+
+|name|description|format|ps|
+|-----|-----|-----|-----|
+|config|用于生成表单组件，赋值数据的配置|Array\<FormConfig>||
+|getFormHandler|暴露formHandler方法|(func: object) => void||
+|submitChange|表单下某项改变时是否进行提交的操作|boolean|默认的false|
 
 ## 配置文件格式
 > config配置会用于数据的提取
@@ -96,7 +104,7 @@ const valid = {
 |onChange|用于formItem中赋值的回调方法|||
 |dispatch|formHandler中的diapatch，用于提交一个事件|||
 |value|当前组件渲染的值|||
-componentOption|当前组件配置值|||
+|input_props|当前组件配置值|||
 
 
 

@@ -20,7 +20,7 @@ export default class MyInput extends React.Component<MyInputProps,{}>{
   }
 
   renderInput = () => {
-    const { input_props } = this.props;
+    const { input_props = "default" } = this.props;
     if(input_props){
       if(input_props.type === "textarea"){
         return <Input.TextArea value={this.props.value} onChange={this.handleChange}/>

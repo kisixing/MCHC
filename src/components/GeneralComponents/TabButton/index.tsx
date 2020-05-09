@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from './index.less';
+import { CloseCircleOutlined } from '@ant-design/icons';
 
 interface IProps {
   isActive?: boolean;
-  title: boolean;
-  tabKey: boolean;
+  title: string;
+  tabKey: string;
   closable?: boolean;
   onClick?: any;
   onClose?: any;
@@ -12,9 +13,11 @@ interface IProps {
 
 export default (props: IProps) => {
   const { isActive = false, closable = true, title, onClick, onClose, tabKey } = props;
+  let tabRef = useRef();
 
   const handleClickTab = () => {
     onClick && onClick(tabKey);
+    tabRef.scrollIntoView({ behavior: 'smooth', inline: 'center' });
   };
 
   const handleCloseTab = (e: any) => {
@@ -29,12 +32,19 @@ export default (props: IProps) => {
     : {};
 
   return (
-    <div className={styles.customTabsButton} onClick={handleClickTab}>
+    <div
+      id={tabKey}
+      ref={rcNode => {
+        tabRef = rcNode;
+      }}
+      className={styles.customTabsButton}
+      onClick={handleClickTab}
+    >
       <div className={styles.customTabsButtonIcon} style={iconStyle}></div>
       <div className={styles.customTabsButtonTitle}>{title}</div>
       {closable && (
         <div className={styles.customTabsButtonClose} onClick={handleCloseTab}>
-          x
+          <CloseCircleOutlined />
         </div>
       )}
     </div>

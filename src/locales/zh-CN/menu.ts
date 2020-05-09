@@ -113,11 +113,11 @@ export default {
   'menu.deliver-management': '分娩管理',
   'menu.deliver-management.deliver-form': '分娩记录单',
 
-  'menu.premarital-care':'婚前保健',
-'menu.premarital-care.wife':'女方档案',
-'menu.premarital-care.husband':'男方档案',
-'menu.premarital-care.visit-wife':'女方婚前检查',
-'menu.premarital-care.visit-husband':'男方婚前检查',
-'menu.premarital-care.certification':'婚前医学证明',
-'menu.premarital-care.statistics':'婚检统计',
-}
+  'menu.premarital-care': '婚前保健',
+  'menu.premarital-care.wife': '女方档案',
+  'menu.premarital-care.husband': '男方档案',
+  'menu.premarital-care.visit-wife': '女方婚前检查',
+  'menu.premarital-care.visit-husband': '男方婚前检查',
+  'menu.premarital-care.certification': '婚前医学证明',
+  'menu.premarital-care.statistics': '婚检统计',
+};

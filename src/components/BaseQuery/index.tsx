@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Button } from 'antd';
-import { DynamicForm } from '@lianmed/components';
+import DynamicForm from '@/components/BaseModalForm/DynamicForm';
 import styles from './index.less'
 export default class BaseQuery extends DynamicForm {
   formDescriptions = {};

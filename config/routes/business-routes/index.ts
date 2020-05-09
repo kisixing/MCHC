@@ -20,7 +20,6 @@ import formTest from './form-test';
 
 export default [
   //
-
   premaritalCare,
   gynecologicalDiseases,
   prenatalVisit,
@@ -32,7 +31,6 @@ export default [
   pmtct,
   maternalDeath,
   birthDefect,
-
   hearingScreening,
   childDeath,
   highRiskChildren,
