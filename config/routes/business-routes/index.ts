@@ -2,7 +2,7 @@ import labourDelivery from './delivery-management';
 import highRiskChildren from './high-risk-children';
 import maternalDeath from './maternal-death';
 import neonatalDiseases from './neonatal-diseases';
-import debilityChildren from './debilitychildren';
+import debilityChildren from './debility-children';
 import postpartumVisit from './postpartum-visit';
 import premaritalCare from './premarital-care';
 import highriskManagement from './high-risk-management';
@@ -24,10 +24,10 @@ export default [
   gynecologicalDiseases,
   prenatalVisit,
   highriskManagement,
-  labourDelivery,
-  postpartumVisit,
   prenatalScreening,
   prenatalDiagnosis,
+  labourDelivery,
+  postpartumVisit,
   pmtct,
   maternalDeath,
   birthDefect,

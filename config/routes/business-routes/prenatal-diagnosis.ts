@@ -1,2 +1,7 @@
 // 产前诊断路由
-export default {};
+export default {
+  name: 'prenatal-diagnosis',
+  icon: 'ordered-list',
+  path: '/prenatal-diagnosis',
+  component: './Welcome',
+};

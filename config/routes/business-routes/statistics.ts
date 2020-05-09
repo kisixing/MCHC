@@ -1,7 +1,7 @@
 // 统计查询路由
 export default {
-  name: 'statistical-query',
+  name: 'statistics',
   icon: 'ordered-list',
-  path: '/statistical-query',
+  path: '/statistics',
   component: './Welcome',
 };

@@ -110,9 +110,6 @@ export default {
 
   'menu.form-test': '表单测试',
 
-  'menu.deliver-management': '分娩管理',
-  'menu.deliver-management.deliver-form': '分娩记录单',
-
   'menu.premarital-care': '婚前保健',
   'menu.premarital-care.wife': '女方档案',
   'menu.premarital-care.husband': '男方档案',
@@ -120,4 +117,59 @@ export default {
   'menu.premarital-care.visit-husband': '男方婚前检查',
   'menu.premarital-care.certification': '婚前医学证明',
   'menu.premarital-care.statistics': '婚检统计',
+  
+  'menu.gynecological-diseases': '妇女病普查管理',
+  'menu.gynecological-diseases.women': '档案管理',
+  'menu.gynecological-diseases.examination': '普查管理',
+  'menu.gynecological-diseases.breast-cancer-screen': '乳腺癌筛查',
+  'menu.gynecological-diseases.cervical-cancer-screen': '宫颈癌筛查',
+
+  'menu.prenatal-visit': '产前检查',
+  'menu.prenatal-visit.pregnancy': '孕册管理',
+  'menu.prenatal-visit.initial': '首诊管理',
+  'menu.prenatal-visit.return': '复诊管理',
+  'menu.prenatal-visit.statistics': '统计报表',
+
+  'menu.high-risk-management': '高危孕产妇管理',
+  'menu.high-risk-management.highrisk': '高危登记',
+  'menu.high-risk-management.followup': '高危随访',
+  'menu.high-risk-management.statistics': '高危统计',
+  
+  'menu.prenatal-screening': '产前筛查',
+  'menu.prenatal-screening.prenatalpatient': '筛查登记',
+  'menu.prenatal-screening.prenatalscreen': '筛查记录',
+  'menu.prenatal-screening.positive-case': '阳性个案登记',
+  'menu.prenatal-screening.statistics': '统计报表',
+
+  'menu.prenatal-diagnosis': '产前诊断',
+  'menu.prenatal-diagnosis.prenatalpatient': '建档管理',
+  'menu.prenatal-diagnosis.prenataldiagnosis': '产前诊断病例',
+  'menu.prenatal-diagnosis.report': '诊断报告',
+  'menu.prenatal-diagnosis.statistics': '统计报表',
+
+  'menu.maternal-death': '孕产妇死亡报告',
+
+  'menu.pmtct': '艾梅乙专案上报管理',
+ 
+  'menu.deliver-management': '分娩管理',
+  'menu.deliver-management.admission': '入院登记',
+  'menu.deliver-management.labour-record': '分娩记录',
+  'menu.deliver-management.nursing-record': '护理记录',
+  'menu.deliver-management.predelivery': '待产记录',
+  'menu.deliver-management.caesarean-delivery': '剖宫产记录',
+  'menu.deliver-management.deliver-form': '分娩记录单',
+  'menu.deliver-management.neonate-record': '新生儿记录',
+  'menu.deliver-management.postpartum-visit': '产后访视',
+
+  'menu.birth-defect': '出生缺陷登记',
+  'menu.neonatal-screening': '新生儿疾病筛查',
+  'menu.postpartum-visit': '产后42天访视',
+
+  'menu.statistics': '统计查询',
+
+  'menu.child-death-report': '儿童死亡报告管理',
+  'menu.child-examination': '儿童健康体检',
+  'menu.high-risk-children': '高危儿管理',
+  'menu.hearing-screening': '儿童听力筛查',
+  'menu.debility-children': '营养性疾病儿童管理',
 };
