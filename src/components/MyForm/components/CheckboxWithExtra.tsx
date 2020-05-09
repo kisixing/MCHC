@@ -39,7 +39,7 @@ export default class CheckboxWithExtra extends Component<CheckboxWithExtraProps>
       const RenderComponent = MyComponent[editor.input_type];
       return (
         <div key={index}>
-          <label>{editor.label}</label>
+          <span>{editor.label}</span>
           <RenderComponent
             value={newEditorValue[index]}
             {...editor}
@@ -50,6 +50,15 @@ export default class CheckboxWithExtra extends Component<CheckboxWithExtraProps>
       )
     })
   }
+
+  // componentDidUpdate(prevProps:any){
+  //   console.log(prevProps);
+  //   console.log(this.props);
+  //   if(JSON.stringify(prevProps) !== JSON.stringify(this.props)){
+  //     this.forceUpdate();
+  //   }
+  // }
+
 
   render() {
     const { checkboxValue, editorsValue } = this.props;

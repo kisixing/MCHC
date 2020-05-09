@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { Component, ReactNode } from 'react';
-import { Checkbox} from 'antd';
+import { Checkbox } from 'antd';
 import CheckboxWithExtra from './CheckboxWithExtra';
 
 interface MyCheckboxProps {
@@ -25,25 +25,45 @@ interface CheckboxComponentProps {
  *  自定义模式就是multiple
  */
 export default class MyCheckbox extends Component<MyCheckboxProps, any> {
+
+  // shouldComponentUpdate(){
+  //   // const {value} = this.props;
+  //   // if(!value){
+  //   //   return false;
+  //   // }
+  //   return true;
+  // }
+
   
+
   checkbox: { [key: string]: Function } = {
-    "default": function (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode {
+    "default": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
       return <Checkbox
         checked={value}
-        onChange={(e) => onChange(e.target.checked)}
+        onChange={(e: any) => onChange(e.target.checked)}
       />
     },
-    "whether": function (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode {
+    "whether": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
       const { extraEditors } = input_props;
-      const checkboxValue = value[input_props.renderData[0].key];
-      const editorsValue = value[`${input_props.renderData[0].key}Note`];
+      let checkboxValue;
+      let editorsValue;
+      try{
+        checkboxValue = value[input_props.renderData[0].key];
+        editorsValue = value[`${input_props.renderData[0].key}Note`];
+      }catch(e){
+        checkboxValue = false;
+        editorsValue = "";
+        return <span>渲染BUG</span>
+      }
       // 转了格式，在这个位置转回来
-      const handleChange = function (val: { checkboxValue: boolean, editorsValue: string }) {
+      const handleChange = (val: { checkboxValue: boolean, editorsValue: string }) => {
         onChange({
           [input_props.renderData[0].key]: val.checkboxValue,
           [`${input_props.renderData[0].key}Note`]: val.editorsValue
         })
       }
+      // console.log(checkboxValue);
+      // console.log(editorsValue);
       return <WhetherCheckbox
         value={{ checkboxValue, editorsValue }}
         onChange={handleChange}
@@ -52,7 +72,7 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
     },
     "multiple": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
       const r = input_props.renderData.map((item: { key: string, label: string }) => {
-        if(value && item.key in value){
+        if (value && item.key in value) {
           return {
             checkboxValue: value[item.key],
             editorsValue: value[`${item.key}Note`],
@@ -60,10 +80,12 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
             label: item.label
           }
         }
-        console.error(`输入对象中找不到 ${item.key} || 输入对象值为空`);
+        // console.error(`输入对象中找不到 ${item.key} || 输入对象值为空`);
         return false;
-      }).filter((item:any) => !!item);
+      }).filter((item: any) => !!item);
       const handleChange = (val: any, key: string) => {
+        console.error('11');
+        console.log(val);
         const newObj = {
           [key]: val.checkboxValue,
           [`${key}Note`]: val.editorsValue
@@ -79,14 +101,26 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
     }
   }
 
+  componentDidUpdate(prevProps:any) {
+    if(JSON.stringify(prevProps) !== JSON.stringify(this.props)){
+      this.forceUpdate();
+    }
+  }
+
   renderCheckbox = () => {
     const { input_props, value, onChange } = this.props;
     const { type = "default" } = input_props;
     return this.checkbox[type || "default"](input_props, value, onChange);
   }
 
+  
+
   render() {
-    return this.renderCheckbox()
+    return (
+      <div>
+        {this.renderCheckbox()}
+      </div>
+    )
   }
 }
 
@@ -101,6 +135,12 @@ interface WhetherCheckboxProps {
 }
 
 class WhetherCheckbox extends Component<WhetherCheckboxProps>{
+  componentDidUpdate(prevProps:any) {
+    if(JSON.stringify(prevProps) !== JSON.stringify(this.props)){
+      this.forceUpdate();
+    }
+  }
+
   // type 0 - 无  1 - 有
   handleChange = (e: any, type: number) => {
     const { onChange } = this.props;
@@ -117,6 +157,7 @@ class WhetherCheckbox extends Component<WhetherCheckboxProps>{
 
   render() {
     const { value, extraEditors } = this.props;
+    // console.log(value);
     return (
       <div>
         <CheckboxWithExtra
@@ -127,7 +168,7 @@ class WhetherCheckbox extends Component<WhetherCheckboxProps>{
         >有</CheckboxWithExtra>
         <Checkbox
           checked={!value.checkboxValue}
-          onChange={(val:any) => this.handleChange(val, 0)}
+          onChange={(val: any) => this.handleChange(val, 0)}
         >
           无
         </Checkbox>
@@ -148,16 +189,16 @@ class MultipleCheckbox extends Component<MultipleCheckboxProps>{
 
 
   handleChange = (val: any, key: string) => {
-    const { radio = true , value, onChange } = this.props;
+    const { radio = true, value, onChange } = this.props;
     // 互斥逻辑
     if (radio) {
-      value.forEach((item:any) => {
-        if(item.key === key){
+      value.forEach((item: any) => {
+        if (item.key === key) {
           onChange({
             checkboxValue: val.checkboxValue,
             editorsValue: val.editorsValue,
           }, item.key)
-        }else{
+        } else {
           onChange({
             checkboxValue: false,
             editorsValue: "",

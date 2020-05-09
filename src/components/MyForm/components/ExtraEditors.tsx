@@ -19,7 +19,7 @@ export default class ExtraEditors extends Component<ExtraEditorsProps>{
       const RenderComponent = MyComponent[editor.input_type];
       return (
         <div key={index}>
-          <label>{editor.label}</label>
+          <span>{editor.label}</span>
           <RenderComponent
             value={newEditorValue[index]}
             {...editor}

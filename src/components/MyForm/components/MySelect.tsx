@@ -21,7 +21,7 @@ interface SelectComponentProps {
 
 export default class MySelect extends Component<MySelectProps, {}>{
   select: { [key: string]: Function } = {
-    "default": function (input_props: SelectComponentProps, value: any, onChange: Function) {
+    "default": (input_props: SelectComponentProps, value: any, onChange: Function) => {
       const { selectOptions = [] } = input_props;
       const options = selectOptions?.map((v: { label: string | number, value: string | number }) => (
         <Option
@@ -38,11 +38,11 @@ export default class MySelect extends Component<MySelectProps, {}>{
         >{options}</Select>
       )
     },
-    "multiple": function (input_props: SelectComponentProps, value: any, onChange: Function) {
+    "multiple": (input_props: SelectComponentProps, value: any, onChange: Function) => {
       const { renderData = [], extraEditors = [], radio = true } = input_props;
       // 将需要渲染的key转格式传入MultipleSelect
       const valueArr = renderData.map((item: { key: string, label: string }) => {
-        if(value && item.key in value){
+        if (value && item.key in value) {
           return {
             // selectValue是一个boolean值
             // value形如 {a:boolean,aNote:any}
@@ -52,9 +52,9 @@ export default class MySelect extends Component<MySelectProps, {}>{
             label: item.label
           }
         }
-        console.error(`输入对象中找不到 ${item.key} || 输入对象值为空`);
+        // console.error(`输入对象中找不到 ${item.key} || 输入对象值为空`);
         return false;
-      }).filter((item:any) => !!item);
+      }).filter((item: any) => !!item);
       // handleChange 这一步把格式转回来
       const handleChange = (val: any, key: string) => {
         const newObj = {
@@ -143,35 +143,35 @@ class MultipleSelect extends Component<MultipleSelectProps>{
     if (name === "selectValue") {
       if (radio) {
         // val's type is string
-        value.forEach((item:any) => {
-          if(val === item.key){
+        value.forEach((item: any) => {
+          if (val === item.key) {
             onChange({
               selectValue: true,
               editorsValue: item.editorsValue
             }, item.key)
-          }else{
+          } else {
             onChange({
               selectValue: false,
               editorsValue: ""
             }, item.key)
           }
-        })        
+        })
       } else {
         // val's type is Array<string>
-        value.forEach((item:any) => {
+        value.forEach((item: any) => {
           let flag = false;
-          for(let i = 0 ; i < val.length; i++){
-            if(item.key === val[i]){
+          for (let i = 0; i < val.length; i++) {
+            if (item.key === val[i]) {
               flag = true;
-              break; 
+              break;
             }
           }
-          if(flag){
+          if (flag) {
             onChange({
               selectValue: true,
               editorsValue: item.editorsValue
             }, item.key);
-          }else{
+          } else {
             onChange({
               selectValue: false,
               editorsValue: ""

@@ -4,6 +4,7 @@ import MyComponents from './components/index';
 import { FormItemProp, FormItemState } from './interface';
 import {validFun} from './utils/valid';
 import styles from './formItem.less';
+import { ConsoleSqlOutlined } from '@ant-design/icons';
 
 function isBase(val:any):boolean{
   return val && typeof val !== "object";
@@ -53,6 +54,8 @@ export default class FormItem extends Component<FormItemProp,FormItemState>{
   handleChange = (val:any) => {
     const { path, dispatch } = this.props;
     this.setState({value: val},() => {
+      console.error('22');
+      console.log(val);
       if(path){
         dispatch(path,"change",val);
       }
@@ -98,7 +101,7 @@ export default class FormItem extends Component<FormItemProp,FormItemState>{
             <div className={styles['formItem-label']}>
             <label>
               {this.renderAsterisk(validate)}
-              {label}:
+              {label}
             </label>
             </div>
           ) :null}

@@ -84,7 +84,7 @@ const data = {
 	"diseaseHistory": {
 		"id": 8,
 		"hypertension": true,
-		"hypertensionNote": "有高血压",
+		"hypertensionNote": "{\"0\":\"有高血压\"} ",
 		"nephropathy": null,
 		"nephropathyNote": null,
 		"respiratoryDisease": null,

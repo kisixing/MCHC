@@ -125,10 +125,11 @@ const rules = [
  */
 function getData(obj:any, path:string, history:string):object{
   if(!path){ console.warn('path is undefined'); return {}; }
-  if(path === ""){ 
-    console.warn('path is empty');
-    console.warn("不向下取值，返回原对象") 
-    return obj; 
+  if(path.indexOf("+") !== -1){ 
+    // console.warn('path is empty');
+    console.warn("不向下取值，返回原对象");
+    console.log(obj);
+    return {[`+${path}`]:obj}; 
   }
   if(isBase(obj)){ return {}; }
   let r = {};
@@ -155,6 +156,7 @@ export function loopPath(obj:any, pathArr:Array<string>):object{
       ...getData(obj,path,"")
     }
   });
+  console.log(r);
   return r;
 }
 
@@ -162,7 +164,6 @@ export function loopPath(obj:any, pathArr:Array<string>):object{
 
 /**
  * 获取render所需的data结构
- * config类型之后完善
  */
 export function getRenderData(config:Array<FormConfig>, data:any): Array<FormConfig> {
   if(!data){
