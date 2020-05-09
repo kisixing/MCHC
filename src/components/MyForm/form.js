@@ -1,4 +1,3 @@
-// TODO 用ts重写
 function isArr(v){
   return Object.prototype.toString.call(v) === '[object Array]';
 }
@@ -20,10 +19,6 @@ export function createFormHandler(config, submitChange){
   const formState = {
     validated: false,
   }
-
-  // if(submitChange){
-  //   eventCallBacks._global = {};
-  // }
 
   // c - config
   const initField = function(c) {
@@ -70,15 +65,13 @@ export function createFormHandler(config, submitChange){
   }
 
   const dispatch = function(fieldName, eventName, args) {
-    // TODO 判读有无没写
     try{
       if(fieldName !== "_global" && submitChange){
         dispatch("_global", "change");
       }
       return eventCallBacks[fieldName][eventName](args);
     }catch(e){
-      // console.warn
-      // console.warn(e);
+      console.warn(e);
     }
   }
 

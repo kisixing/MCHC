@@ -180,20 +180,20 @@ const config: Array<FormConfig> = [
     }
   },
   {
-    key: ".familyHistory", label: "家族史", input_type: "select", span: 24, offset: 0,
+    key: ".allergyHistory", label: "过敏史", input_type: "select", span: 24, offset: 0,
     input_props: {
       type: "multiple",
-      radio: false,
+      radio: true,
       renderData: [
         {
-          key: "epilepsy", label: "癫痫"
+          key: "penicillin", label: "青霉素"
         }, {
-          key: "cardiacDisease", label: "心脏病"
+          key: "cephalosporin", label: "头孢霉菌素"
         }
       ],
       extraEditors: [
         {
-          key: "epilepsy",
+          key: "penicillin",
           editors: [{
             key: "",
             label: "药物名称",

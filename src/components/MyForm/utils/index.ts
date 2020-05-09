@@ -48,6 +48,10 @@ function handleGetData(obj:any, currentKey:string, nextPath:string, history:stri
 
 /**
  * 责任链式判断 拆分if-else
+ * @param {number} oi - objectIndex
+ * @param {number} ai - arrayIndex
+ * 
+ * @return {object} r 返回的结果
  */
 const rules = [
   {
@@ -58,7 +62,7 @@ const rules = [
       const r:{[key:string]:any} = {};
       if(path === ALL){
         if(isObj(obj)){
-          Object.keys(obj).forEach((key) => {
+          Object.keys(obj).forEach((key:string) => {
             if(isBase(obj[key]) === ONLYBASE){
               r[`${history}.${key}`] = obj[key];
             }
@@ -121,7 +125,11 @@ const rules = [
  */
 function getData(obj:any, path:string, history:string):object{
   if(!path){ console.warn('path is undefined'); return {}; }
-  if(path === ""){ console.warn('path is empty'); return {}; }
+  if(path === ""){ 
+    console.warn('path is empty');
+    console.warn("不向下取值，返回原对象") 
+    return obj; 
+  }
   if(isBase(obj)){ return {}; }
   let r = {};
   const oi = path.indexOf(o);
@@ -247,7 +255,8 @@ function _assign(mainData: any, newData: any ): any{
 
 /**
  * Convert custom data to server format data
- *  
+ * oi - objectIndex
+ * ai - arrayIndex
  */
 export function toFormat(data:{[key:string]:any}):object{
   let r = {};

@@ -9,11 +9,6 @@ interface MyDatePickerProp{
   input_props: any
 }
 
-/**
- * 不接收对象/数组
- */
-
-
 const defaultType = "date";
 // format需要做限制
 const defaultFormat = "YYYY-MM-DD";

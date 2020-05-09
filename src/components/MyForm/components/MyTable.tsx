@@ -15,10 +15,6 @@ class EditableCell extends Component<EditableCellProps> {
     value: "",
   };
 
-  mapPropsToState(): void {
-    this.setState({value: this.props.value});
-  }
-
   componentDidMount() {
     this.mapPropsToState()
   }
@@ -44,6 +40,10 @@ class EditableCell extends Component<EditableCellProps> {
       this.props.onChange(this.state.value);
     });
   };
+
+  mapPropsToState(): void {
+    this.setState({value: this.props.value});
+  }
 
   render() {
     const { editing } = this.state;

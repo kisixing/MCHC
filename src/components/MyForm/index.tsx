@@ -10,6 +10,7 @@ const defaultGutterConfig = {
   justify: "left"
 }
 // TODO 后期应该考虑把这里的col和row换成自定义的样式实现
+// TODO 优化换行
 export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfig:any = defaultGutterConfig){
   if(!config) throw new Error('config is undefined');
   if(Object.prototype.toString.call(config) !== '[object Array]') throw new Error(`Expect array but ${typeof config}`);
@@ -25,7 +26,6 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
       continue;
     }
     count += config[i].span + config[i].offset;
-    // console.log(count);
     if(count > 24){
       formDom.push(
         <Row 
@@ -45,7 +45,6 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
     spanArr.push(
       <Col  
         span={config[i].span} 
-        // 同上一条注释
         offset={spanArr.length === 0 ? config[i].offset - prevOffset : config[i].offset} 
         key={`row-${row}|span-${count}`}
       >
@@ -68,8 +67,6 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
   }
   return formDom;
 }
-
-
 
 export default class MyForm extends Component<MyFormProp, MyFormState>{
   constructor(props:MyFormProp){

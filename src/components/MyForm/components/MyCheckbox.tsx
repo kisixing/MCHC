@@ -3,14 +3,18 @@ import React, { Component, ReactNode } from 'react';
 import { Checkbox} from 'antd';
 import CheckboxWithExtra from './CheckboxWithExtra';
 
-
-// TODO 这里的验证需要寻找其他办法
-
 interface MyCheckboxProps {
   onChange: Function,
   dispatch: Function,
   value: any,
   input_props: CheckboxComponentProps
+}
+
+interface CheckboxComponentProps {
+  type?: string,
+  radio?: boolean
+  extraEditors: any,
+  renderData: Array<{ key: string, label: string }>
 }
 
 /**
@@ -20,35 +24,8 @@ interface MyCheckboxProps {
  *  multiple 多个输入 接收 {a:boolean,aNode:string,b:boolean,bNote:string} 需要额外设置是否互斥
  *  自定义模式就是multiple
  */
-interface CheckboxComponentProps {
-  type?: string,
-  radio?: boolean
-  extraEditors: any,
-  renderData: Array<{ key: string, label: string }>
-}
-
-
-/**
- * 1.单个checkbox
- * 2.两个checkbox，是否选项（仅在是选项时需要输入文字）
- * 3.多个checkbox，存在互斥（不存在互斥），选择时需要输入文字。有隐藏的需求
- */
-
-/**
- * 关于额外弹出的输入框的数据保存形式
- * {"0":"","1":""} 方式保存
- */
-
-
 export default class MyCheckbox extends Component<MyCheckboxProps, any> {
   
-  // constructor(props: MyCheckboxProps) {
-  //   super(props);
-  //   this.state = {
-  //     value: ""
-  //   };
-  // }
-
   checkbox: { [key: string]: Function } = {
     "default": function (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode {
       return <Checkbox
@@ -61,10 +38,10 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
       const checkboxValue = value[input_props.renderData[0].key];
       const editorsValue = value[`${input_props.renderData[0].key}Note`];
       // 转了格式，在这个位置转回来
-      const handleChange = function (value: { checkboxValue: boolean, editorsValue: string }) {
+      const handleChange = function (val: { checkboxValue: boolean, editorsValue: string }) {
         onChange({
-          [input_props.renderData[0].key]: value.checkboxValue,
-          [`${input_props.renderData[0].key}Note`]: value.editorsValue
+          [input_props.renderData[0].key]: val.checkboxValue,
+          [`${input_props.renderData[0].key}Note`]: val.editorsValue
         })
       }
       return <WhetherCheckbox
@@ -74,13 +51,18 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
       />;
     },
     "multiple": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
-      const r = input_props.renderData.map((v: { key: string, label: string }) => ({
-        checkboxValue: value[v.key],
-        editorsValue: value[`${v.key}Note`],
-        key: v.key,
-        label: v.label
-      }));
-      // onChange只传出一个值
+      const r = input_props.renderData.map((item: { key: string, label: string }) => {
+        if(value && item.key in value){
+          return {
+            checkboxValue: value[item.key],
+            editorsValue: value[`${item.key}Note`],
+            key: item.key,
+            label: item.label
+          }
+        }
+        console.error(`输入对象中找不到 ${item.key} || 输入对象值为空`);
+        return false;
+      }).filter((item:any) => !!item);
       const handleChange = (val: any, key: string) => {
         const newObj = {
           [key]: val.checkboxValue,
@@ -119,7 +101,7 @@ interface WhetherCheckboxProps {
 }
 
 class WhetherCheckbox extends Component<WhetherCheckboxProps>{
-  // 0 - 无  1 - 有
+  // type 0 - 无  1 - 有
   handleChange = (e: any, type: number) => {
     const { onChange } = this.props;
     if (type === 0) {
@@ -145,7 +127,7 @@ class WhetherCheckbox extends Component<WhetherCheckboxProps>{
         >有</CheckboxWithExtra>
         <Checkbox
           checked={!value.checkboxValue}
-          onChange={(e) => this.handleChange(e, 0)}
+          onChange={(val:any) => this.handleChange(val, 0)}
         >
           无
         </Checkbox>
@@ -169,17 +151,17 @@ class MultipleCheckbox extends Component<MultipleCheckboxProps>{
     const { radio = true , value, onChange } = this.props;
     // 互斥逻辑
     if (radio) {
-      value.forEach((v:any) => {
-        if(v.key === key){
+      value.forEach((item:any) => {
+        if(item.key === key){
           onChange({
             checkboxValue: val.checkboxValue,
             editorsValue: val.editorsValue,
-          },key)
+          }, item.key)
         }else{
           onChange({
             checkboxValue: false,
             editorsValue: "",
-          },v.key)
+          }, item.key)
         }
       })
     } else {

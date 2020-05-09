@@ -1,10 +1,8 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React,{ Component, ReactNode} from 'react';
-// import { Row, Col} from 'antd';
 import MyComponents from './components/index';
 import { FormItemProp, FormItemState } from './interface';
-
 import {validFun} from './utils/valid';
-
 import styles from './formItem.less';
 
 function isBase(val:any):boolean{

@@ -2,10 +2,8 @@
 import React, { Component, ReactNode } from 'react';
 import { Select } from 'antd';
 import ExtraEditors from './ExtraEditors';
-import MyComponent from './index';
 
 const { Option } = Select;
-
 interface MySelectProps {
   onChange: Function,
   dispatch: Function,
@@ -22,13 +20,6 @@ interface SelectComponentProps {
 }
 
 export default class MySelect extends Component<MySelectProps, {}>{
-  // constructor(props: MySelectProps){
-  //   super(props);
-
-  // }
-
-
-
   select: { [key: string]: Function } = {
     "default": function (input_props: SelectComponentProps, value: any, onChange: Function) {
       const { selectOptions = [] } = input_props;
@@ -50,14 +41,20 @@ export default class MySelect extends Component<MySelectProps, {}>{
     "multiple": function (input_props: SelectComponentProps, value: any, onChange: Function) {
       const { renderData = [], extraEditors = [], radio = true } = input_props;
       // 将需要渲染的key转格式传入MultipleSelect
-      const r = renderData.map((v: { key: string, label: string }) => ({
-        // selectValue是一个boolean值
-        // value形如 {a:boolean,aNote:any}
-        selectValue: value[v.key] || false,
-        editorsValue: value[`${v.key}Note`] || "",
-        key: v.key,
-        label: v.label
-      }))
+      const valueArr = renderData.map((item: { key: string, label: string }) => {
+        if(value && item.key in value){
+          return {
+            // selectValue是一个boolean值
+            // value形如 {a:boolean,aNote:any}
+            selectValue: value[item.key] || false,
+            editorsValue: value[`${item.key}Note`] || "",
+            key: item.key,
+            label: item.label
+          }
+        }
+        console.error(`输入对象中找不到 ${item.key} || 输入对象值为空`);
+        return false;
+      }).filter((item:any) => !!item);
       // handleChange 这一步把格式转回来
       const handleChange = (val: any, key: string) => {
         const newObj = {
@@ -67,7 +64,7 @@ export default class MySelect extends Component<MySelectProps, {}>{
         onChange(Object.assign(value, newObj));
       }
       return <MultipleSelect
-        value={r}
+        value={valueArr}
         radio={radio}
         extraEditors={extraEditors}
         onChange={handleChange}
@@ -100,15 +97,6 @@ interface MultipleSelectProps {
 }
 
 class MultipleSelect extends Component<MultipleSelectProps>{
-  // TODO 暂时本地不保存 仅从父级取 之后再考虑
-  // constructor(props: MultipleSelectProps) {
-  //   super(props);
-  //   this.state = {
-
-  //   }
-  // }
-
-  // 通过组件渲染额外的输入框
   renderExtra = (value: Array<{ selectValue: boolean, editorsValue: string, key: string | number, label: string | number }>, extraEditors: Array<any>) => {
     const renderDom: Array<ReactNode> = [];
     for (let i = 0; i < value.length; i++) {
@@ -126,7 +114,6 @@ class MultipleSelect extends Component<MultipleSelectProps>{
     return renderDom;
   }
 
-  // 渲染select主体，在里面调用extraEditors的渲染
   renderSelect = () => {
     const { value, extraEditors = [], radio = true } = this.props;
     const options = value.map((v: { key: string | number, label: string | number }) => (
@@ -142,42 +129,58 @@ class MultipleSelect extends Component<MultipleSelectProps>{
           style={{ width: '100%' }}
           onChange={(val: any) => this.handleChange(val, "selectValue", "")}
           showSearch
-          value={value.filter((v: { selectValue: boolean }) => v.selectValue)
-            .map((u: { key: string | number }) => u.key)}
+          value={value.filter((item: { selectValue: boolean }) => item.selectValue)
+            .map((item: { key: string | number }) => item.key)}
         >{options}</Select>
         {this.renderExtra(value, extraEditors)}
       </div >
     )
   }
 
-  // 把选中值提交出外部，这里逻辑比较复杂 TODO 待优化
   // 参数中的key仅在editors使用
-
-  // TODO multiple时取消选中没有响应
   handleChange = (val: any, name: string, key: string | number) => {
     const { onChange, radio, value } = this.props;
     if (name === "selectValue") {
-      // select onChange
       if (radio) {
-        // val string
-        const i = value.findIndex((v: any) => v.key === val);
-        onChange({
-          selectValue: true,
-          editorsValue: value[i].editorsValue
-        }, val)
+        // val's type is string
+        value.forEach((item:any) => {
+          if(val === item.key){
+            onChange({
+              selectValue: true,
+              editorsValue: item.editorsValue
+            }, item.key)
+          }else{
+            onChange({
+              selectValue: false,
+              editorsValue: ""
+            }, item.key)
+          }
+        })        
       } else {
-        // val Array<string>
-        (val as Array<string>).forEach((k: string) => {
-          const i = value.findIndex((v: any) => v.key === k);
-          onChange({
-            selectValue: true,
-            editorsValue: value[i].editorsValue
-          }, k)
+        // val's type is Array<string>
+        value.forEach((item:any) => {
+          let flag = false;
+          for(let i = 0 ; i < val.length; i++){
+            if(item.key === val[i]){
+              flag = true;
+              break; 
+            }
+          }
+          if(flag){
+            onChange({
+              selectValue: true,
+              editorsValue: item.editorsValue
+            }, item.key);
+          }else{
+            onChange({
+              selectValue: false,
+              editorsValue: ""
+            }, item.key);
+          }
         })
       }
     } else if (name === "editorsValue") {
-      // extraEditors onChange
-      const i = value.findIndex((v: any) => v.key === key);
+      const i = value.findIndex((item: any) => item.key === key);
       onChange({
         selectValue: value[i].selectValue,
         editorsValue: val

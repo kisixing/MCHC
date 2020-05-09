@@ -1,6 +1,6 @@
 // Checkbox
 interface ExtraEditors {
-  key: any, // 此处key对应的是checkbox的value值
+  key: any, 
   editors: Array<FormConfig>
 }
 
@@ -8,31 +8,25 @@ interface ExtraEditors {
 interface TableColumns {
   key?: string,
   title: string,
-  children?: Array<TableColumns>
-  width?: number      // 样式写在这个位置会不会有点不好
+  children?: Array<TableColumns>,
+  width?: number,
   editor?: FormConfig
 }
 
 export interface ComponentOption {
-  type?: string | null, // 单一组件多重展开
-  
+  type?: string | null,
   // select
   selectOptions?: Array<{ value: string | number, label: string | number }> | null,
-  
   // date
   format?: string,
-  
   // checkbox
   radio?: boolean,
   extraEditors?: Array<ExtraEditors>,
-  // 这个属性有可能适用于其他组件
   renderData?: Array<string>|Array<{key:string,label: string}>
-  
   // table
-  editable?: boolean, // 自动提供button和编辑功能
+  editable?: boolean,
   tableColumns?: Array<TableColumns>,
-
-  // custom 自定义
+  // custom
   config?: Array<FormConfig>
 }
 
@@ -51,7 +45,6 @@ export interface FormConfig {
 
 export interface MyFormProp {
   config: Array<FormConfig>,
-  // TODO func类型
   getFormHandler?: (func: any) => void,
   submitChange: boolean
 }
@@ -59,7 +52,6 @@ export interface MyFormProp {
 export interface MyFormState {
   formHandler: any
 }
-
 
 export interface FormItemProp {
   actions?: {
@@ -76,7 +68,6 @@ export interface FormItemProp {
   validate?: string | object | RegExp | null,
   path: string
 }
-
 export interface FormItemState {
   value: any,
   error: any,
