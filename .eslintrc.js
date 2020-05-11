@@ -21,5 +21,6 @@ module.exports = {
     'no-use-before-define': 0,
     'no-plusplus': 0,
     'no-case-declarations': 0,
+    'react/jsx-boolean-value': 0,
   },
 };

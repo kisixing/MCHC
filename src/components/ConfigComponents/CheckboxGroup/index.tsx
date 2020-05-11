@@ -38,6 +38,7 @@ export default (props: any) => {
           withInputValues: null,
         };
       }
+      console.log(res)
       setData(res);
     }
   }, [props.value]);

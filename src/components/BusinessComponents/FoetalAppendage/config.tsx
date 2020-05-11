@@ -32,7 +32,7 @@ export const fromApi = (data: any[], nativeFormDescriptions: any) => {
     return result;
   });
 
-  console.log(resultArray);
+  // console.log(resultArray);
   return resultArray;
 };
 
@@ -64,6 +64,6 @@ export const toApi = (data: any[], nativeFormDescriptions: any) => {
     return result;
   });
 
-  console.log(resultArray);
+  // console.log(resultArray);
   return resultArray;
 };

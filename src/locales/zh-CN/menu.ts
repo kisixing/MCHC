@@ -167,7 +167,7 @@ export default {
 
   'menu.statistics': '统计查询',
 
-  'menu.child-death-report': '儿童死亡报告管理',
+  'menu.child-death': '儿童死亡报告管理',
   'menu.child-examination': '儿童健康体检',
   'menu.high-risk-children': '高危儿管理',
   'menu.hearing-screening': '儿童听力筛查',
