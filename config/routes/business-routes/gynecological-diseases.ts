@@ -8,25 +8,25 @@ export default {
       name: 'women',
       icon: 'ordered-list',
       path: '/gynecological-diseases/women',
-      component: './deliver-form/edit',
+      component: './gynecological-diseases/women',
     },
     {
       name: 'examination',
       icon: 'ordered-list',
       path: '/gynecological-diseases/examination',
-      component: './deliver-form/edit',
+      component: './gynecological-diseases/examination',
     },
     {
       name: 'breast-cancer-screen',
       icon: 'ordered-list',
       path: '/gynecological-diseases/breast-cancer-screen',
-      component: './deliver-form/edit',
+      component: './gynecological-diseases/breast',
     },
     {
       name: 'cervical-cancer-screen',
       icon: 'ordered-list',
       path: '/gynecological-diseases/cervical-cancer-screen',
-      component: './deliver-form/edit',
+      component: './gynecological-diseases/cervical',
     }
   ]
 };
