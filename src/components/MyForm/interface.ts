@@ -1,7 +1,18 @@
 // Checkbox
 interface ExtraEditors {
   key: any, 
-  editors: Array<FormConfig>
+  editors: Array<FormConfig>,
+}
+
+interface RenderData {
+  key: string,
+  label: string,
+  // 暂时仅用于custom
+  options?: Array<{
+    label:string|number|boolean,
+    value:string|number|boolean
+  }>,
+  extraEditors?: Array<ExtraEditors>
 }
 
 // Table
@@ -21,12 +32,13 @@ export interface ComponentOption {
   format?: string,
   // checkbox
   radio?: boolean,
-  extraEditors?: Array<ExtraEditors>,
-  renderData?: Array<string>|Array<{key:string,label: string}>
+  // extraEditors?: Array<ExtraEditors>,
+  
+  renderData?: Array<RenderData>,
   // table
   editable?: boolean,
   tableColumns?: Array<TableColumns>,
-  // custom
+  // SimpleObject
   config?: Array<FormConfig>
 }
 
@@ -69,7 +81,8 @@ export interface FormItemProp {
   unit: string,
   input_props: ComponentOption | null,
   validate?: string | object | RegExp | null,
-  path: string
+  path: string,
+  name: string
 }
 export interface FormItemState {
   value: any,

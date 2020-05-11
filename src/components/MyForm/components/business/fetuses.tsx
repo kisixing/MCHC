@@ -6,7 +6,7 @@ interface BusinessFetusesPorps {
   onChange: Function,
   dispatch: Function,
   value: Array<fetusData>,
-  componentOption: any,
+  input_props: any,
   error: any,
   path: string
 }

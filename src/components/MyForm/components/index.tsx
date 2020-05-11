@@ -4,6 +4,7 @@ import MySelect from './MySelect'
 import MyCheckbox from './MyCheckbox'
 import MyTable from './MyTable';
 // import MyCustom from './MyCustom';
+import SimpleObject from './SimpleObject';
 import Fetuses from './business/Fetuses';
 import DownScreen from './business/DownScreen';
 
@@ -18,6 +19,7 @@ const MyComponent:MyComponent = {
   "checkbox": MyCheckbox,
   "table": MyTable,
 
+  "simpleobject": SimpleObject,
   // "b-custom": MyCustom,
 
   "b-fetuses": Fetuses,

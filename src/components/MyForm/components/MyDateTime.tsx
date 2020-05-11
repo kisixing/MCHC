@@ -5,7 +5,7 @@ import { DatePicker, TimePicker} from 'antd';
 
 interface MyDatePickerProp{
   onChange: Function,
-  dispatch: Function,
+  dispatch?: Function,
   value: any,
   input_props: any
 }

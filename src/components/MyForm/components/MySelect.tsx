@@ -6,7 +6,7 @@ import ExtraEditors from './Base/ExtraEditors';
 const { Option } = Select;
 interface MySelectProps {
   onChange: Function,
-  dispatch: Function,
+  dispatch?: Function,
   value: any,
   input_props: SelectComponentProps
 }

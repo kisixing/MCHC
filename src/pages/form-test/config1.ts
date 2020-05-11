@@ -207,20 +207,20 @@ const config: Array<FormConfig> = [
         { key: "epilepsy", label: "癫痫" },
         { key: "cardiacDisease", label: "心脏疾病" },
       ],
-      extraEditors: [
-        {
-          key: "hepaticDisease",
-          editors: [
-            { name: "", key: "", label: "药物名称", input_type: "input", span: 0, offset: 0 }
-          ]
-        },
-        {
-          key: "hypertension",
-          editors: [
-            { name: "", key: "", label: "药物名称", unit: "", input_type: "input", span: 0, offset: 0 }
-          ]
-        }
-      ]
+      // extraEditors: [
+      //   {
+      //     key: "hepaticDisease",
+      //     editors: [
+      //       { name: "", key: "", label: "药物名称", input_type: "input", span: 0, offset: 0 }
+      //     ]
+      //   },
+      //   {
+      //     key: "hypertension",
+      //     editors: [
+      //       { name: "", key: "", label: "药物名称", unit: "", input_type: "input", span: 0, offset: 0 }
+      //     ]
+      //   }
+      // ]
     }
   },
   // {

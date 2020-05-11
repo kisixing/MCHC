@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { Table, Button } from "antd";
 import MyComponent from "./index";
+import { isArr } from '../utils/func';
 
 interface EditableCellProps {
   value: any;
@@ -76,7 +77,7 @@ class EditableCell extends Component<EditableCellProps> {
 /* ============================================================================= */
 interface MyTableProps {
   onChange: Function,
-  dispatch: Function,
+  dispatch?: Function,
   value: any,
   input_props: any,
   path: string;
@@ -100,12 +101,14 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
 
   // 因为要维护tableRow的状态，所有需要保存在本地
   componentDidUpdate(prevProps: MyTableProps) {
+    
     if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
+      const { value } = this.props;
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         tableColumns: this.props.input_props.tableColumns,
         // 处理dataSource，为了dataSource拥有_key值,用于rowSelection
-        dataSource: this.props.value.map((v:any, i:number) => ({...v, _key: i})),
+        dataSource: isArr(value) ? value.map((v:any, i:number) => ({...v, _key: i})) : [],
         selectedRowKeys: []
       }) 
     }
@@ -123,13 +126,13 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
   };
 
   handleAdd = () => {
-    const { tableColumns } = this.props.input_props;
-    const { onChange, value } = this.props;
+    const { tableColumns, dataSource } = this.state;
+    const { onChange } = this.props;
     const newData = {};
     tableColumns.forEach((ele: {key:string, title: string}) => {
       newData[ele.key] = "";
     });
-    const newValue = value.map((v:any) => v);
+    const newValue = dataSource.map((v:any) => v);
     newValue.push(newData);
     onChange(newValue);
   }

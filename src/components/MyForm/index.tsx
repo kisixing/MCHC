@@ -23,7 +23,7 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
   let spanArr = [];
   for(let i = 0 ;i < config.length; i++){
     const { span = 24, offset = 0 } = config[i];
-    const { label = "", unit = "", input_props = {}, rules = "" , key = "", is_new_ros = false} = config[i];
+    const { label = "", unit = "", input_props = {}, rules = "" , key = "", is_new_ros = false, name = ""} = config[i];
     if(config[i].hidden){
       // eslint-disable-next-line no-continue
       continue;
@@ -63,6 +63,7 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
           input_props={input_props}
           validate={rules}
           path={key}
+          name={name}
         />
       </Col>
     )

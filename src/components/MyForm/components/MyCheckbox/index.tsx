@@ -3,11 +3,12 @@ import React, { Component, ReactNode } from 'react';
 import { Checkbox } from 'antd';
 import WhetherCheckbox from './WhetherCheckbox';
 import MultipleCheckbox from './MultipleCheckbox';
+import CustomCheckbox from './CustomCheckbox';
 import { getObjectFormArray, convertExtraEditors } from '../../utils/func';
 
 interface MyCheckboxProps {
   onChange: Function,
-  dispatch: Function,
+  dispatch?: Function,
   value: any,
   input_props: CheckboxComponentProps
 }
@@ -15,8 +16,8 @@ interface MyCheckboxProps {
 interface CheckboxComponentProps {
   type?: string,
   radio?: boolean
-  extraEditors: any,
-  renderData: Array<{ key: string, label: string }>
+  // extraEditors: any,
+  renderData: Array<{ key: string, label: string, options?:Array<{label:string|number, value: string|number}> }>
 }
 
 // 目前抛出的格式统一为{"0":"","1":""}
@@ -29,52 +30,96 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
         onChange={(e: any) => onChange(e.target.checked)}
       />
     },
-    "whether": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
-      const { extraEditors } = input_props;
-      let checkboxValue;
-      let editorsValue:any;
-      try{
-        checkboxValue = value[input_props.renderData[0].key];
-        editorsValue = value[`${input_props.renderData[0].key}Note`];
-        editorsValue = convertExtraEditors(editorsValue);
-      }catch(e){
-        checkboxValue = false;
-        editorsValue = "";
-      }    
-      // 转了格式，在这个位置转回来
-      const handleChange = (val: { checkboxValue: boolean, editorsValue: Array<any> }) => {
-        onChange({
-          [input_props.renderData[0].key]: val.checkboxValue,
-          [`${input_props.renderData[0].key}Note`]: JSON.stringify(getObjectFormArray(val.editorsValue))
-        })
-      }
-      return <WhetherCheckbox
-        value={{ checkboxValue, editorsValue }}
-        onChange={handleChange}
-        extraEditors={extraEditors}
-      />;
-    },
-    "multiple": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
-      const r = input_props.renderData.map((item: { key: string, label: string }) => {
-        if (value && item.key in value) {
-          return {
-            checkboxValue: value[item.key],
-            editorsValue: convertExtraEditors(value[`${item.key}Note`]),
-            key: item.key,
-            label: item.label
-          }
+    // "whether": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
+    //   // const { extraEditors } = input_props;
+    //   let checkboxValue;
+    //   let editorsValue:any;
+    //   try{
+    //     checkboxValue = value[input_props.renderData[0].key];
+    //     editorsValue = value[`${input_props.renderData[0].key}Note`];
+    //     editorsValue = convertExtraEditors(editorsValue);
+    //   }catch(e){
+    //     checkboxValue = false;
+    //     editorsValue = "";
+    //   }    
+    //   // 转了格式，在这个位置转回来
+    //   const handleChange = (val: { checkboxValue: boolean, editorsValue: Array<any> }) => {
+    //     onChange({
+    //       [input_props.renderData[0].key]: val.checkboxValue,
+    //       [`${input_props.renderData[0].key}Note`]: JSON.stringify(getObjectFormArray(val.editorsValue))
+    //     })
+    //   }
+    //   return <WhetherCheckbox
+    //     value={{ checkboxValue, editorsValue }}
+    //     onChange={handleChange}
+    //     // extraEditors={extraEditors}
+    //   />;
+    // },
+    // "multiple": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
+    //   const r = input_props.renderData.map((item: { key: string, label: string }) => {
+    //     if (value && item.key in value) {
+    //       return {
+    //         checkboxValue: value[item.key],
+    //         editorsValue: convertExtraEditors(value[`${item.key}Note`]),
+    //         key: item.key,
+    //         label: item.label
+    //       }
+    //     }
+    //     // console.error(`输入对象中找不到 ${item.key} || 输入对象值为空`);
+    //     return false;
+    //   }).filter((item: any) => !!item);
+    //   const handleChange = (val: any, key: string) => {
+    //     console.log(val);
+    //     const newObj = {
+    //       [key]: val.checkboxValue,
+    //       [`${key}Note`]: JSON.stringify(getObjectFormArray(val.editorsValue))
+    //     };
+    //     onChange(Object.assign(value, newObj));
+    //   }
+    //   return <MultipleCheckbox
+    //     value={r}
+    //     onChange={handleChange}
+    //     radio={input_props.radio}
+    //     extraEditors={input_props.extraEditors}
+    //   />
+    // },
+    "custom": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
+      const { renderData } = input_props;
+      if(renderData.length !== 1) return <span>custom型checkbox中renderData长度为1</span>;
+      let r:any = {
+        checkboxValue:"",editorsValue:"",options:[]
+      };
+      if(value && renderData[0].key in value){
+        r = {
+          checkboxValue: value[renderData[0].key],
+          editorsValue: convertExtraEditors(value[`${renderData[0].key}Note`]),
+          options: renderData[0].options || [],
+          key: renderData[0].key
         }
-        // console.error(`输入对象中找不到 ${item.key} || 输入对象值为空`);
-        return false;
-      }).filter((item: any) => !!item);
+      }
+      console.log(r);
+      // const r = input_props.renderData.map((item: { key: string, label: string }) => {
+      //   if (value && item.key in value) {
+      //     return {
+      //       checkboxValue: value[item.key],
+      //       editorsValue: convertExtraEditors(value[`${item.key}Note`]),
+      //       key: item.key,
+      //       label: item.label
+      //     }
+      //   }
+      //   // console.error(`输入对象中找不到 ${item.key} || 输入对象值为空`);
+      //   return false;
+      // }).filter((item: any) => !!item);
       const handleChange = (val: any, key: string) => {
+        console.log(val);
+        console.log(key);
         const newObj = {
           [key]: val.checkboxValue,
           [`${key}Note`]: JSON.stringify(getObjectFormArray(val.editorsValue))
         };
         onChange(Object.assign(value, newObj));
       }
-      return <MultipleCheckbox
+      return <CustomCheckbox
         value={r}
         onChange={handleChange}
         radio={input_props.radio}

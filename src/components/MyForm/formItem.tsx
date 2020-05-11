@@ -58,10 +58,10 @@ export default class FormItem extends Component<FormItemProp,FormItemState>{
   }
 
   handleChange = (val:any) => {
-    const { path, dispatch } = this.props;
+    const { name , dispatch } = this.props;
     this.setState({value: val},() => {
-      if(path){
-        dispatch(path,"change",val);
+      if(name){
+        dispatch(name,"change",val);
       }
       if(this.props.actions){
         if(this.props.actions.setValue){

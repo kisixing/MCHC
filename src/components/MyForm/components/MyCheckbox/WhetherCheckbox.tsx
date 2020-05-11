@@ -13,11 +13,11 @@ interface WhetherCheckboxProps {
 }
 
 export default class WhetherCheckbox extends Component<WhetherCheckboxProps>{
-  componentDidUpdate(prevProps:any) {
-    if(JSON.stringify(prevProps) !== JSON.stringify(this.props)){
-      this.forceUpdate();
-    }
-  }
+  // componentDidUpdate(prevProps:any) {
+  //   if(JSON.stringify(prevProps) !== JSON.stringify(this.props)){
+  //     this.forceUpdate();
+  //   }
+  // }
 
   // type 0 - 无  1 - 有
   handleChange = (e: any, type: number) => {
@@ -46,6 +46,7 @@ export default class WhetherCheckbox extends Component<WhetherCheckboxProps>{
 
   render() {
     const { value } = this.props;
+    console.log(this.props);
     return (
       <div className={styles['whether-checkbox']}>
         <CheckboxWithExtra

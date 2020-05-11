@@ -79,7 +79,7 @@ const data = {
 		"diabetesNote": null
 	},
 	// 手术史
-	"procedureHistory": [],
+	"procedureHistory": null,
 	// 疾病史
 	"diseaseHistory": {
 		"id": 8,
@@ -182,9 +182,7 @@ const data = {
 		"trisomy21z": "",
 		"trisomy18z": "",
 		"trisomy13z": "12",
-		"note": {
-			"name": "zhangsan"
-		}
+		"note": ""
 	},
 	{
 		"checkdate": "2019-04-01",
