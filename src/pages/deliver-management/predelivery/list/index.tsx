@@ -9,7 +9,7 @@ import { router } from 'umi';
 export default class List extends BaseList {
   static defaultProps = {
     baseUrl: '/admissions',
-    baseTitle: '入院登记',
+    baseTitle: '待产记录',
     needPagination: false,
     showQuery: false,
     showAdd: true,
@@ -32,11 +32,11 @@ export default class List extends BaseList {
   };
 
   handleAdd = () => {
-    router.push('/deliver-management/admission/add');
+    router.push('/deliver-management/predelivery/add');
   };
 
   handleEdit = (rowData: any) => () => {
     const { id } = rowData;
-    router.push(`/deliver-management/admission/edit?id=${id}`);
+    router.push(`/deliver-management/predelivery/edit?id=${id}`);
   };
 }

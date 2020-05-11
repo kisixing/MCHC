@@ -165,10 +165,34 @@ export const omitRoutes = [
     active: null,
   },
   {
+    id: 602,
+    type: 'others',
+    key: '/deliver-management/labour-record/add',
+    active: null,
+  },
+  {
+    id: 603,
+    type: 'others',
+    key: '/deliver-management/labour-record/edit',
+    active: null,
+  },
+  {
     id: 294,
     type: 'others',
     key: '/deliver-management/nursing-record',
     isMenu: true,
+    active: null,
+  },
+  {
+    id: 604,
+    type: 'others',
+    key: '/deliver-management/nursing-record/add',
+    active: null,
+  },
+  {
+    id: 605,
+    type: 'others',
+    key: '/deliver-management/nursing-record/edit',
     active: null,
   },
   {
@@ -179,10 +203,34 @@ export const omitRoutes = [
     active: null,
   },
   {
+    id: 606,
+    type: 'others',
+    key: '/deliver-management/predelivery/add',
+    active: null,
+  },
+  {
+    id: 607,
+    type: 'others',
+    key: '/deliver-management/predelivery/edit',
+    active: null,
+  },
+  {
     id: 292,
     type: 'others',
     key: '/deliver-management/caesarean-delivery',
     isMenu: true,
+    active: null,
+  },
+  {
+    id: 608,
+    type: 'others',
+    key: '/deliver-management/caesarean-delivery/add',
+    active: null,
+  },
+  {
+    id: 609,
+    type: 'others',
+    key: '/deliver-management/caesarean-delivery/edit',
     active: null,
   },
   {
@@ -193,10 +241,34 @@ export const omitRoutes = [
     active: null,
   },
   {
+    id: 610,
+    type: 'others',
+    key: '/deliver-management/neonate-record/add',
+    active: null,
+  },
+  {
+    id: 611,
+    type: 'others',
+    key: '/deliver-management/neonate-record/edit',
+    active: null,
+  },
+  {
     id: 290,
     type: 'others',
     key: '/deliver-management/postpartum-visit',
     isMenu: true,
+    active: null,
+  },
+  {
+    id: 612,
+    type: 'others',
+    key: '/deliver-management/postpartum-visit/add',
+    active: null,
+  },
+  {
+    id: 613,
+    type: 'others',
+    key: '/deliver-management/postpartum-visit/edit',
     active: null,
   },
   {
