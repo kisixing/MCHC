@@ -2,27 +2,13 @@
 /* eslint-disable object-shorthand */
 /* eslint-disable func-names */
 import { FormConfig } from '../interface';
+import { isBase, isArr, isObj, isNumber} from './func';
 
 const o: string = ".";
 const a: string = "_";
 const ALL: string = "*";
 // 只提取基本数据类型
 const ONLYBASE: boolean = false;
-
-function isBase(data: any): boolean {
-  return typeof data !== "object";
-}
-
-function isArr(data: any): boolean {
-  return Object.prototype.toString.call(data) === "[object Array]";
-}
-
-function isObj(data: any): boolean {
-  return Object.prototype.toString.call(data) === '[object Object]';
-}
-function isNumber(str: string): boolean {
-  return /^[0-9]+$/.test(str);
-}
 
 /**
  * 对于还需取下一级的继续向下取 
@@ -156,7 +142,6 @@ export function loopPath(obj: any, pathArr: Array<string>): object {
       ...getData(obj, path, "")
     }
   });
-  console.log(r);
   return r;
 }
 

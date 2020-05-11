@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React, { Component, ReactNode } from 'react';
 import { Checkbox } from 'antd';
 import WhetherCheckbox from './WhetherCheckbox';
 import MultipleCheckbox from './MultipleCheckbox';
-// import CheckboxWithExtra from './CheckboxWithExtra';
+import { getObjectFormArray, convertExtraEditors } from '../../utils/func';
 
 interface MyCheckboxProps {
   onChange: Function,
@@ -18,18 +19,9 @@ interface CheckboxComponentProps {
   renderData: Array<{ key: string, label: string }>
 }
 
+// 目前抛出的格式统一为{"0":"","1":""}
+
 export default class MyCheckbox extends Component<MyCheckboxProps, any> {
-
-  // shouldComponentUpdate(){
-  //   // const {value} = this.props;
-  //   // if(!value){
-  //   //   return false;
-  //   // }
-  //   return true;
-  // }
-
-  
-
   checkbox: { [key: string]: Function } = {
     "default": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
       return <Checkbox
@@ -40,24 +32,22 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
     "whether": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
       const { extraEditors } = input_props;
       let checkboxValue;
-      let editorsValue;
+      let editorsValue:any;
       try{
         checkboxValue = value[input_props.renderData[0].key];
         editorsValue = value[`${input_props.renderData[0].key}Note`];
+        editorsValue = convertExtraEditors(editorsValue);
       }catch(e){
         checkboxValue = false;
         editorsValue = "";
-        return <span>渲染BUG</span>
-      }
+      }    
       // 转了格式，在这个位置转回来
-      const handleChange = (val: { checkboxValue: boolean, editorsValue: string }) => {
+      const handleChange = (val: { checkboxValue: boolean, editorsValue: Array<any> }) => {
         onChange({
           [input_props.renderData[0].key]: val.checkboxValue,
-          [`${input_props.renderData[0].key}Note`]: val.editorsValue
+          [`${input_props.renderData[0].key}Note`]: JSON.stringify(getObjectFormArray(val.editorsValue))
         })
       }
-      // console.log(checkboxValue);
-      // console.log(editorsValue);
       return <WhetherCheckbox
         value={{ checkboxValue, editorsValue }}
         onChange={handleChange}
@@ -69,7 +59,7 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
         if (value && item.key in value) {
           return {
             checkboxValue: value[item.key],
-            editorsValue: value[`${item.key}Note`],
+            editorsValue: convertExtraEditors(value[`${item.key}Note`]),
             key: item.key,
             label: item.label
           }
@@ -78,11 +68,9 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
         return false;
       }).filter((item: any) => !!item);
       const handleChange = (val: any, key: string) => {
-        console.error('11');
-        console.log(val);
         const newObj = {
           [key]: val.checkboxValue,
-          [`${key}Note`]: val.editorsValue
+          [`${key}Note`]: JSON.stringify(getObjectFormArray(val.editorsValue))
         };
         onChange(Object.assign(value, newObj));
       }
@@ -106,8 +94,6 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
     const { type = "default" } = input_props;
     return this.checkbox[type || "default"](input_props, value, onChange);
   }
-
-  
 
   render() {
     return (

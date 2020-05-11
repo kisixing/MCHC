@@ -49,7 +49,6 @@ class EditableCell extends Component<EditableCellProps> {
     const { editing } = this.state;
     const { editor, value } = this.props;
     let RenderComponent = null;
-
     if (editor) {
       RenderComponent = MyComponent[editor.input_type];
     }

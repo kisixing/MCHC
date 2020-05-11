@@ -2,11 +2,12 @@ import React,{Component} from 'react';
 import {Checkbox} from 'antd';
 import { FormConfig } from '../../interface';
 import MyComponent from '../index';
+import styles from './CheckboxWithExtra.less';
 
 interface CheckboxWithExtraProps {
   editors: Array<FormConfig>,
   checkboxValue: boolean,
-  editorsValue: string,  // 以 {"0":"", "1": ""} 输入输出
+  editorsValue: Array<any>,  // 以 {"0":"", "1": ""} 输入输出
   onChange: Function
 }
 
@@ -20,28 +21,25 @@ export default class CheckboxWithExtra extends Component<CheckboxWithExtraProps>
         editorsValue
       });
     } else if (name === "editorValue") {
-      const newEditorsValue = editorsValue ? Object.assign(JSON.parse(editorsValue) || {}, { [index]: value }) : { [index]: value}
+      const newEditorsValue = editorsValue.map((editorValue:any) => editorValue);
+      newEditorsValue[index] = value;
       onChange({
         checkboxValue,
-        editorsValue: JSON.stringify(newEditorsValue)
+        editorsValue: newEditorsValue
       })
     }
   }
 
-  renderExtra = (editorsValue: string) => {
+  renderExtra = (editorsValue: Array<any>) => {
     const { editors } = this.props;
     if (!editors || editors.length === 0) return null;
-    let newEditorValue: any = {}
-    if (editorsValue) {
-      newEditorValue = JSON.parse(editorsValue);
-    }
     return editors.map((editor: FormConfig, index: number) => {
       const RenderComponent = MyComponent[editor.input_type];
       return (
-        <div key={index}>
-          <span>{editor.label}</span>
+        <div key={index} className={styles['extra-editors']}>
+          <span className={styles['extra-editors-label']}>{editor.label}</span>
           <RenderComponent
-            value={newEditorValue[index]}
+            value={editorsValue === null ? null : editorsValue[index]}
             {...editor}
             onChange={(value: any) => this.handleChange(value, "editorValue", index)}
           />
@@ -51,20 +49,12 @@ export default class CheckboxWithExtra extends Component<CheckboxWithExtraProps>
     })
   }
 
-  // componentDidUpdate(prevProps:any){
-  //   console.log(prevProps);
-  //   console.log(this.props);
-  //   if(JSON.stringify(prevProps) !== JSON.stringify(this.props)){
-  //     this.forceUpdate();
-  //   }
-  // }
-
-
   render() {
     const { checkboxValue, editorsValue } = this.props;
     return (
-      <div>
+      <div className={styles['checkox-with-extra']}>
         <Checkbox
+          className={styles.checkbox}
           checked={checkboxValue}
           onChange={(e:any) => this.handleChange(e.target.checked, "checkboxValue", -1)}
         >{this.props.children}</Checkbox>

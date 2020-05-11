@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { FormConfig } from '../interface';
-import MyComponent from './index';
+import { FormConfig } from '../../interface';
+import MyComponent from '../index';
 
 interface ExtraEditorsProps {
   editorsValue: string,

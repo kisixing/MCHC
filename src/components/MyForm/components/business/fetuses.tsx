@@ -86,13 +86,13 @@ export default class BusinessFetuses extends Component<BusinessFetusesPorps, Bus
             return <Col span={6} className={styles['fetus-form-item']} key={index}>
               <div>
                 <div className={styles.label}>
-                  <label>{config.label}:</label>
+                  <span>{config.label}:</span>
                 </div>
                 <div className={styles.main}>
                   <div>
                     <Input
                       value={(fetus as any)[config.key]}
-                      onChange={(e) => this.handleChange(fetus.id, config.key, e.target.value)}
+                      onChange={(e: any) => this.handleChange(fetus.id, config.key, e.target.value)}
                     />
                   </div>
                 </div>

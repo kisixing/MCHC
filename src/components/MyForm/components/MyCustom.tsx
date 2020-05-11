@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MyForm from '@/components/MyForm/index';
 
-import { getRenderData, toFormat } from '@/components/MyForm/utils';
+import { getRenderData } from '@/components/MyForm/utils';
 
 interface MyCustomProps {
   onChange: Function,

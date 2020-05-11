@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { Component, ReactNode } from 'react';
 import { Select } from 'antd';
-import ExtraEditors from './ExtraEditors';
+import ExtraEditors from './Base/ExtraEditors';
 
 const { Option } = Select;
 interface MySelectProps {
@@ -73,7 +73,7 @@ export default class MySelect extends Component<MySelectProps, {}>{
   }
 
   renderSelect = () => {
-    const { input_props, value, onChange } = this.props;
+    const { input_props = {}, value, onChange } = this.props;
     const { type = "default" } = input_props;
     return this.select[type](input_props, value, onChange);
   }

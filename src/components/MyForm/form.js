@@ -71,7 +71,7 @@ export function createFormHandler(config, submitChange){
       }
       return eventCallBacks[fieldName][eventName](args);
     }catch(e){
-      console.warn(e);
+      // console.warn(e);
     }
   }
 

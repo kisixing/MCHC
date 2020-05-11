@@ -1,6 +1,6 @@
 import React, { Component, ReactNode } from 'react';
-import { Checkbox } from 'antd';
-import CheckboxWithExtra from './CheckboxWithExtra';
+import CheckboxWithExtra from '../Base/CheckboxWithExtra';
+import styles from './MultipleCheckbox.less';
 
 interface MultipleCheckboxProps {
   extraEditors: Array<any>,
@@ -52,13 +52,16 @@ export default class MultipleCheckbox extends Component<MultipleCheckboxProps>{
         }
         if (j === extraEditors.length - 1) {
           renderDOM.push(
-            <Checkbox
+            <CheckboxWithExtra
               key={`${i}-${j}`}
-              onChange={(e: any) => this.handleChange({ checkboxValue: e.target.checked }, value[i].key)}
-              checked={value[i].checkboxValue}
+              onChange={(val: any) => this.handleChange(val, value[i].key)}
+              checkboxValue={value[i].checkboxValue}
+              editorsValue={value[i].editorsValue}
+              editors={[]}
+              // checked={value[i].checkboxValue}
             >
               {value[i].label}
-            </Checkbox>
+            </CheckboxWithExtra>
           )
         }
       }
@@ -67,7 +70,7 @@ export default class MultipleCheckbox extends Component<MultipleCheckboxProps>{
   }
 
   render() {
-    return <div>
+    return <div className={styles['multiple-checkbox']}>
       {this.renderCheckbox()}
     </div>
   }

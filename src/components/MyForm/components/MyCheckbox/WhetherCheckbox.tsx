@@ -1,11 +1,12 @@
-import React, { Component, ReactNode } from 'react';
-import { Checkbox } from 'antd';
-import CheckboxWithExtra from './CheckboxWithExtra';
+import React, { Component } from 'react';
+import CheckboxWithExtra from '../Base/CheckboxWithExtra';
+import styles from './WhetherCheckbox.less';
+// TODO 开放 有/无 是/否 的字符串接口
 
 interface WhetherCheckboxProps {
   value: {
     checkboxValue: boolean,
-    editorsValue: string
+    editorsValue: Array<any>
   },
   onChange: Function,
   extraEditors: Array<any>
@@ -23,32 +24,42 @@ export default class WhetherCheckbox extends Component<WhetherCheckboxProps>{
     const { onChange } = this.props;
     if (type === 0) {
       onChange({
-        checkboxValue: !e.target.checked,
-        editorsValue: null
+        checkboxValue: false,
+        editorsValue: []
       });
     } else if (type === 1) {
-      // CheckboxWithExtra 这个组件传出的就是 {checkboxValue, editorsValue} 形式
-      onChange(e);
+      onChange({
+        checkboxValue: true,
+        editorsValue: e.editorsValue
+      })
     }
   }
 
+  getEditors = (bool: boolean): Array<any> => {
+    const { extraEditors } = this.props;
+    const targetEditors = extraEditors.find((extraEditor: {key: boolean}) => extraEditor.key === bool);
+    if(targetEditors){
+      return targetEditors.editors;
+    }
+    return [];
+  }
+
   render() {
-    const { value, extraEditors } = this.props;
-    // console.log(value);
+    const { value } = this.props;
     return (
-      <div>
+      <div className={styles['whether-checkbox']}>
         <CheckboxWithExtra
-          editors={extraEditors[0].editors}
+          editors={this.getEditors(true)}
           checkboxValue={value.checkboxValue}
           editorsValue={value.editorsValue}
           onChange={(val: any) => this.handleChange(val, 1)}
         >有</CheckboxWithExtra>
-        <Checkbox
-          checked={!value.checkboxValue}
+        <CheckboxWithExtra
+          editors={this.getEditors(false)}
+          checkboxValue={!value.checkboxValue}
+          editorsValue={value.editorsValue}
           onChange={(val: any) => this.handleChange(val, 0)}
-        >
-          无
-        </Checkbox>
+        >无</CheckboxWithExtra>
       </div>
     )
   }

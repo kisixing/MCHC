@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React,{Component} from 'react';
 import {Row, Col} from 'antd';
 import {MyFormProp, MyFormState, FormConfig} from './interface';
@@ -16,18 +17,19 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
   if(Object.prototype.toString.call(config) !== '[object Array]') throw new Error(`Expect array but ${typeof config}`);
   
   let count = 0;    // 计算占比
-  let prevOffset = 0; // 使用offset换行时，计算第i个元素用于上一行换行的offset数量
+  // let prevOffset = 0; 使用offset换行时，计算第i个元素用于上一行换行的offset数量
   let row = 0;
   const formDom = [];
   let spanArr = [];
   for(let i = 0 ;i < config.length; i++){
-    const { span = 7, offset = 1 } = config[i];
+    const { span = 24, offset = 0 } = config[i];
+    const { label = "", unit = "", input_props = {}, rules = "" , key = "", is_new_ros = false} = config[i];
     if(config[i].hidden){
       // eslint-disable-next-line no-continue
       continue;
     }
     count += span + offset;
-    if(count > 24){
+    if(count > 24 || is_new_ros){
       formDom.push(
         <Row 
         key={`row-${row}`} 
@@ -38,15 +40,17 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
       )
       spanArr = []; 
       // 计算上一行换行的offset数量
-      prevOffset = 24 - count + (span + offset);
+      // prevOffset = 24 - count + (span + offset);
       // 减去上一行换行所用offset
-      count = span + (offset - prevOffset);
+      count = span + offset;
+      // count = span + (offset - prevOffset);
       row += 1;
     }
     spanArr.push(
       <Col  
         span={span} 
-        offset={spanArr.length === 0 ? offset - prevOffset : offset} 
+        offset={offset} 
+        // offset={spanArr.length === 0 ? offset - prevOffset : offset} 
         key={`row-${row}|span-${count}`}
       >
         <FormItem 
@@ -54,11 +58,11 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
           dispatch={formHandler.dispatch}
           defaultValue={config[i].value}
           type={config[i].input_type}
-          label={config[i].label || ""}
-          unit={config[i].unit || ""}
-          input_props={config[i].input_props || {}}
-          validate={config[i].rules || ""}
-          path={config[i].key || ""}
+          label={label}
+          unit={unit}
+          input_props={input_props}
+          validate={rules}
+          path={key}
         />
       </Col>
     )

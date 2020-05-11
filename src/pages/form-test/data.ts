@@ -79,12 +79,12 @@ const data = {
 		"diabetesNote": null
 	},
 	// 手术史
-	"procedureHistory": null,
+	"procedureHistory": [],
 	// 疾病史
 	"diseaseHistory": {
 		"id": 8,
 		"hypertension": true,
-		"hypertensionNote": "{\"0\":\"有高血压\"} ",
+		"hypertensionNote": "有高血压",
 		"nephropathy": null,
 		"nephropathyNote": null,
 		"respiratoryDisease": null,
@@ -106,7 +106,7 @@ const data = {
 		"mentalDisease": null,
 		"mentalDiseaseNote": null,
 		"diabetes": true,
-		"diabetesNote": "{\"0\":\"有糖尿病\"}"
+		"diabetesNote": "有糖尿病"
 	},
 	// 过敏史
 	"allergyHistory": {

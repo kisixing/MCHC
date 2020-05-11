@@ -36,9 +36,11 @@ export interface FormConfig {
   label?: string,
   unit?: string,
   input_type: string,
+
   span?: number,
   offset?: number,
   hidden?: boolean,
+  is_new_ros?: boolean, 
   value?: any,
   rules?: string | object | RegExp | null,
   input_props?: ComponentOption,

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-state */
 /* eslint-disable @typescript-eslint/camelcase */
 import React,{ Component, ReactNode} from 'react';
 import MyComponents from './components/index';
@@ -99,15 +100,15 @@ export default class FormItem extends Component<FormItemProp,FormItemState>{
     return(
       <div>
         {/* 业务组件与通用组件样式区别 */}
-        <div className={type.indexOf('b-') === -1 ? styles['form-item'] : styles['business-component']}>
+        <div className={styles['form-item']}>
+          <div className={styles['formItem-label']}>
           { label !== "" ? (
-            <div className={styles['formItem-label']}>
             <label>
               {this.renderAsterisk(validate)}
-              {label}
+              {label}:
             </label>
-            </div>
           ) :null}
+          </div>
           <div className={styles['formItem-main']}>
             {MyComponent ? (
               <MyComponent
