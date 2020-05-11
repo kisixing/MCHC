@@ -1,21 +1,41 @@
 import React, { Fragment } from 'react';
-import Table from './components/table';
+import Table from './components/Table';
 import UsersModal from './components/UsersModal';
 import { tableColumns } from './config/table';
 import { processFromApi, toApi } from './config/adapter';
 import { Popconfirm, Switch, Button, message } from 'antd';
 import { get } from 'lodash';
-import BaseList from '@/components/BaseList';
+import BaseList, { IState as BaseListIState } from '@/components/BaseList';
 import request from '@/utils/request';
 import { EditOutlined, DeleteOutlined, RedoOutlined } from '@ant-design/icons';
 import commonStyles from '@/common.less';
 import CustomSpin from '@/components/GeneralComponents/CustomSpin';
 import ResetPasswordModal from './components/ResetPasswordModal';
+import WithDynamicExport from '@/components/WithDynamicExport';
 
-export default class Users extends BaseList {
+interface IProps {}
+
+interface IState extends BaseListIState {
+  paramryKey?: string;
+  resetVisible?: boolean;
+  resetEditable?: boolean;
+}
+
+@WithDynamicExport
+export default class List extends BaseList<IProps, IState> {
+  static defaultProps = {
+    baseUrl: '/users',
+    baseTitle: '用户',
+    needPagination: false,
+    showAdd: true,
+    showQuery: false,
+    rowKey: 'id',
+    tableColumns,
+    Table,
+  };
+
   state = {
     total: 0,
-    needPagination: false,
     defaultQuery: {
       page: 0,
       size: 20,
@@ -27,29 +47,25 @@ export default class Users extends BaseList {
     resetVisible: false,
     id: undefined,
     paramryKey: undefined,
-    showQuery: false,
-    loding: true,
-    baseUrl: '/users',
-    baseTitle: '用户',
+    loading: true,
     processFromApi,
   };
 
   columns = [
-    ...tableColumns,
+    ...(this.props.tableColumns as Array<any>),
     {
       title: '活跃状态',
       dataIndex: 'activated',
       key: 'activated',
       align: 'center',
-      // render: value => (!value ? '是' : '否'),
-      render: (value, rowData) => {
+      render: (value: any, rowData: any) => {
         return <Switch defaultChecked={value} onChange={this.handleDisableUser(rowData)} />;
       },
     },
     {
       title: '操作',
       align: 'center',
-      render: (value, rowData, index) => {
+      render: (value: any, rowData: any, index: any) => {
         return (
           <Fragment>
             <Button
@@ -69,7 +85,7 @@ export default class Users extends BaseList {
               <RedoOutlined />
             </Button>
             <Popconfirm
-              title={`确定要删除这个${get(this.state, 'baseTitle')}吗?`}
+              title={`确定要删除这个${get(this.props, 'baseTitle')}吗?`}
               onConfirm={this.handleDelete(rowData)}
               okText="确定"
               cancelText="取消"
@@ -84,7 +100,7 @@ export default class Users extends BaseList {
     },
   ];
 
-  handleEdit = rowData => () => {
+  handleEdit = (rowData: any) => () => {
     this.setState({
       visible: true,
       editable: true,
@@ -100,7 +116,7 @@ export default class Users extends BaseList {
     });
   };
 
-  handleResetEdit = rowData => () => {
+  handleResetEdit = (rowData: any) => () => {
     this.setState({
       resetVisible: true,
       resetEditable: true,
@@ -109,10 +125,10 @@ export default class Users extends BaseList {
     });
   };
 
-  handleDisableUser = rowData => async () => {
-    const { baseUrl } = this.state;
+  handleDisableUser = (rowData: any) => async () => {
+    const { baseUrl } = this.props;
     try {
-      await request.put(baseUrl, {
+      await request.put(baseUrl as string, {
         data: toApi({
           ...rowData,
           roles: get(rowData, 'roles'),
@@ -128,37 +144,39 @@ export default class Users extends BaseList {
   };
 
   render() {
+    const { baseTitle, rowKey, showAdd, needPagination } = this.props;
     const {
       dataSource,
       visible,
       editable,
       id,
-      baseTitle,
       total,
       defaultQuery,
-      loding,
+      loading,
       paramryKey,
       resetVisible,
-      resetEditable,
     } = this.state;
 
     return (
       <Fragment>
-        {loding ? (
+        {loading ? (
           <CustomSpin />
         ) : (
           <Table
-            // pagination={{
-            //   total,
-            //   showTotal: () => `一共${total}条记录`,
-            //   pageSize: defaultQuery.size,
-            //   defaultCurrent: 1,
-            //   onChange: this.handlePageChange,
-            // }}
+            pagination={
+              needPagination && {
+                total,
+                showTotal: () => `一共${total}条记录`,
+                pageSize: get(defaultQuery, 'size'),
+                defaultCurrent: 1,
+                onChange: this.handlePageChange,
+              }
+            }
             columns={this.columns}
             dataSource={dataSource}
-            onAdd={this.handleAdd}
+            onAdd={showAdd && this.handleAdd}
             baseTitle={baseTitle}
+            rowKey={rowKey}
           />
         )}
         {visible && (
@@ -174,7 +192,6 @@ export default class Users extends BaseList {
         {resetVisible && (
           <ResetPasswordModal
             visible={resetVisible}
-            editable={resetEditable}
             id={id}
             paramryKey={paramryKey}
             onCancel={this.handleResetCancel}

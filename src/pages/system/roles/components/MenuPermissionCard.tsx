@@ -4,7 +4,12 @@ import { get, isEmpty } from 'lodash';
 import PermissionSelect from '@/components/selects/PermissionSelect';
 import styles from './index.less';
 
-export default class MenuPermissionCard extends React.PureComponent {
+interface IProps {
+  onSaveMenuPermission?: (value: any[]) => void;
+  role?: any;
+}
+
+export default class MenuPermissionCard extends React.PureComponent<IProps> {
   state = {
     checkedData: [],
   };
@@ -15,7 +20,7 @@ export default class MenuPermissionCard extends React.PureComponent {
     onSaveMenuPermission && onSaveMenuPermission(checkedData);
   };
 
-  handleChange = checkedData => {
+  handleChange = (checkedData: any[]) => {
     this.setState({ checkedData });
   };
 
@@ -26,12 +31,7 @@ export default class MenuPermissionCard extends React.PureComponent {
       <div className={styles.menuPermissionCard}>
         <div className={styles.menuPermissionCardHeader}>
           <div>菜单/权限</div>
-          <Button
-            type="primary"
-            size="small"
-            onClick={this.handleSaveMenu}
-            disabled={isEmpty(role)}
-          >
+          <Button type="primary" size="small" onClick={this.handleSaveMenu} disabled={isEmpty(role)}>
             保存
           </Button>
         </div>

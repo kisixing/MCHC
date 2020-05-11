@@ -1,4 +1,4 @@
-import labourDelivery from './labour-delivery';
+import labourDelivery from './deliver-management';
 import highRiskChildren from './high-risk-children';
 import maternalDeath from './maternal-death';
 import neonatalDiseases from './neonatal-diseases';

@@ -15,7 +15,15 @@ const formItemLayout = {
   },
 };
 
-export default class BaseModalForm extends DynamicForm {
+interface IProps {
+  paramryKey?: string;
+  id?: string;
+  visible?: boolean;
+  onCancel: () => void;
+  onSearch: () => void;
+}
+
+export default class ResetPasswordModal extends DynamicForm<IProps> {
   state = {
     data: {},
   };
@@ -35,7 +43,7 @@ export default class BaseModalForm extends DynamicForm {
 
   handleSubmit = async () => {
     const { data } = this.state;
-    const { id, onCancel, onSearch } = this.props;
+    const { onCancel, onSearch } = this.props;
     await this.form.validateFields();
     await request.post('/account/reset-password', {
       data: {
@@ -53,7 +61,7 @@ export default class BaseModalForm extends DynamicForm {
   };
 
   render() {
-    const { visible, onCancel, id } = this.props;
+    const { visible, onCancel } = this.props;
     return (
       <Modal width={400} visible={visible} onCancel={onCancel} onOk={this.handleSubmit} title="重置密码">
         <Form ref={this.formRef} {...formItemLayout}>
