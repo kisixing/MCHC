@@ -25,7 +25,7 @@ export function createFormHandler(config, submitChange){
     let r = {};
     c.forEach(v => {
       r = Object.assign(r, {
-        [v.key]: {
+        [v.name]: {
           actions:{}, 
           effects:{}
         }

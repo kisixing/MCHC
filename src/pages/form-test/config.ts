@@ -1,12 +1,18 @@
 import { FormConfig } from '../../components/MyForm/interface';
 
 const config: Array<FormConfig> = [
-  // {
-  //   key: '.chief complaint', label: "主诊", input_type: "input", span: 22, offset: 1, rules: "required",
-  //   input_props: {
-  //     type: "textarea",
-  //   }
-  // },
+  {
+    name: "chiefComplaint",
+    key: '.chief complaint',
+    label: "主诊",
+    input_type: "input",
+    span: 24,
+    offset: 0,
+    rules: "required",
+    input_props: {
+      type: "textarea",
+    }
+  },
   // {
   //   key: '.lmp', label: "末次月经", input_type: 'date', span: 7, offset: 2, rules: "required",
   //   input_props: {
@@ -112,41 +118,40 @@ const config: Array<FormConfig> = [
   //     ]
   //   }
   // },
-  // 
-  {
-    key: ".diseaseHistory", label: "既往史/疾病史", input_type: "b-custom", span: 24, offset: 0,
-    input_props: {
-      config: [
-        {
-          // 这个key的名命待定
-          key: "++hypertension", label: "高血压", input_type: "checkbox", span: 24, offset: 0, input_props: {
-            type: "whether",
-            renderData:[{key: "hypertension", label: "高血压"}],
-            extraEditors:[
-              {key: "hypertension", editors:[
-                {key:"", input_type:"input",span:24,offset:0,input_props:{
-                  type: "default"
-                }}
-              ]}
-            ]
-          }
-        },
-        // {
-        //   key: "+diabetes", label: "糖尿病", input_type: "checkbox", span: 24, offset: 0, input_props: {
-        //     type: "whether",
-        //     renderData:[{key: "diabetes", label: "高血压"}],
-        //     extraEditors:[
-        //       {key: "diabetes", editors:[
-        //         {key:"", input_type:"input",span:24,offset:0,input_props:{
-        //           type: "default"
-        //         }}
-        //       ]}
-        //     ]
-        //   }
-        // }
-      ]
-    }
-  },
+  // {
+  //   key: ".diseaseHistory", label: "既往史/疾病史", input_type: "b-custom", span: 24, offset: 0,
+  //   input_props: {
+  //     config: [
+  //       {
+  //         // 这个key的名命待定
+  //         key: "++hypertension", label: "高血压", input_type: "checkbox", span: 24, offset: 0, input_props: {
+  //           type: "whether",
+  //           renderData:[{key: "hypertension", label: "高血压"}],
+  //           extraEditors:[
+  //             {key: "hypertension", editors:[
+  //               {key:"", input_type:"input",span:24,offset:0,input_props:{
+  //                 type: "default"
+  //               }}
+  //             ]}
+  //           ]
+  //         }
+  //       },
+  //       {
+  //         key: "++diabetes", label: "糖尿病", input_type: "checkbox", span: 24, offset: 0, input_props: {
+  //           type: "whether",
+  //           renderData:[{key: "diabetes", label: "糖尿病"}],
+  //           extraEditors:[
+  //             {key: "diabetes", editors:[
+  //               {key:"", input_type:"input",span:24,offset:0,input_props:{
+  //                 type: "default"
+  //               }}
+  //             ]}
+  //           ]
+  //         }
+  //       }
+  //     ]
+  //   }
+  // },
 
   // {
   //   key: ".downsscreen_0", label: "早期唐氏筛查", input_type: "b-custom", span: 24, offset: 8,
@@ -157,14 +162,14 @@ const config: Array<FormConfig> = [
   //       { key: ".trisomy21", label: "21三体风险", input_type: "input", span: 7, offset: 1, input_props: {} },
   //       { key: ".trisomy18", label: "18三体风险", input_type: "input", span: 7, offset: 1, input_props: {} },
   //       { key: ".trisomy13", label: "13三体风险", input_type: "input", span: 7, offset: 1, input_props: {} },
-  //       {
-  //         key: ".note", label: "姓名", input_type: "b-custom", span: 24, offset: 0,
-  //         input_props: {
-  //           config: [
-  //             { key: ".name", label: "姓名", input_type: "input", span: 7, offset: 1, input_props: {} }
-  //           ]
-  //         }
-  //       }
+  //       // {
+  //       //   key: ".note", label: "姓名", input_type: "b-custom", span: 24, offset: 0,
+  //       //   input_props: {
+  //       //     config: [
+  //       //       { key: ".name", label: "姓名", input_type: "input", span: 7, offset: 1, input_props: {} }
+  //       //     ]
+  //       //   }
+  //       // }
   //     ]
   //   }
   // },
@@ -182,89 +187,101 @@ const config: Array<FormConfig> = [
   //   input_props: {}
   // },
   // {
-  //   key: '.familyHistory.hypertension', label: "高血压", unit: "", input_type: "checkbox", span: 24, offset: 0, rules: "",
-  //   input_props: {}
+  //   key: '.familyHistory.hypertension', label: "高血压", unit: "", input_type: "input", span: 24, offset: 0, rules: "",
+  //   input_props: {
+  //     type: "text"
+  //   }
   // },
-  // // 关于路径相同问题，在config中是不会覆盖的，不用担心
+  // 关于路径相同问题，在config中是不会覆盖的，不用担心
   {
-    key: '.familyHistory', label: "1", unit: "", input_type: "checkbox", span: 24, offset: 0, rules: "",
+    name: "familyHistory",
+    key: '.familyHistory',
+    label: "家族史",
+    unit: "",
+    input_type: "checkbox",
+    span: 24,
+    offset: 0,
+    rules: "",
     input_props: {
       type: "multiple",
       radio: false,
       // 仅在multiple下有的radio
       renderData: [
-        { key: "hepaticDisease", label: "1" },
-        { key: "hypertension", label: "2" },
-        { key: "epilepsy", label: "3" },
-        { key: "cardiacDisease", label: "4" },
+        { key: "hypertension", label: "高血压" },
+        { key: "epilepsy", label: "癫痫" },
+        { key: "cardiacDisease", label: "心脏疾病" },
       ],
       extraEditors: [
         {
           key: "hepaticDisease",
           editors: [
-            {
-              key: "",
-              label: "药物名称",
-              unit: "",
-              input_type: "input",
-              span: 0,
-              offset: 0,
-              rules: "",
-              input_props: {
-                type: "password",
-              },
-            }
+            { name: "", key: "", label: "药物名称", input_type: "input", span: 0, offset: 0 }
           ]
         },
         {
           key: "hypertension",
           editors: [
-            {
-              key: "",
-              label: "药物名称",
-              unit: "",
-              input_type: "input",
-              span: 0,
-              offset: 0,
-              rules: "",
-              input_props: {
-                type: "default",
-              },
-            }
+            { name: "", key: "", label: "药物名称", unit: "", input_type: "input", span: 0, offset: 0 }
           ]
         }
       ]
     }
   },
-  // // {
-  // //   key: ".familyHistory", label: "家族史", input_type: "checkbox", span: 24, offset: 0,
-  // //   input_props: {
-  // //     type: "multiple",
-  // //     radio: false,
-  // //     renderData: [
-  // //       {
-  // //         key: "epilepsy", label: "癫痫"
-  // //       }, {
-  // //         key: "cardiacDisease", label: "心脏病"
-  // //       }
-  // //     ],
-  // //     extraEditors: [
-  // //       {
-  // //         key: "epilepsy",
-  // //         editors: [{
-  // //           key: "",
-  // //           label: "药物名称",
-  // //           input_type: "input",
-  // //           span: 0,
-  // //           offset: 0,
-  // //           input_props: {
-  // //             type: "default",
-  // //           },
-  // //         }]
-  // //       }
-  // //     ]
-  // //   }
-  // // },
+  {
+    name: "familyHistory2",
+    key: '.familyHistory', label: "家族史", unit: "", input_type: "checkbox", span: 24, offset: 0, rules: "",
+    input_props: {
+      type: "multiple",
+      radio: false,
+      // 仅在multiple下有的radio
+      renderData: [
+        { key: "hepaticDisease", label: "肝病" },
+      ],
+      extraEditors: [
+        {
+          key: "hepaticDisease",
+          editors: [
+            { name: "", key: "", label: "药物名称", input_type: "input", span: 0, offset: 0, }
+          ]
+        },
+        {
+          key: "hypertension",
+          editors: [
+            { name: "", key: "", label: "药物名称", unit: "", input_type: "input", span: 0, offset: 0, }
+          ]
+        }
+      ]
+    }
+  },
+  // {
+  //   key: ".familyHistory", label: "家族史", input_type: "checkbox", span: 24, offset: 0,
+  //   input_props: {
+  //     type: "multiple",
+  //     radio: false,
+  //     renderData: [
+  //       {
+  //         key: "epilepsy", label: "癫痫"
+  //       }, {
+  //         key: "cardiacDisease", label: "心脏病"
+  //       }
+  //     ],
+  //     extraEditors: [
+  //       {
+  //         key: "epilepsy",
+  //         editors: [{
+  //           key: "",
+  //           label: "药物名称",
+  //           input_type: "input",
+  //           span: 0,
+  //           offset: 0,
+  //           input_props: {
+  //             type: "default",
+  //           },
+  //         }]
+  //       }
+  //     ]
+  //   }
+  // },
   // {
   //   key: ".allergyHistory", label: "过敏史", input_type: "select", span: 24, offset: 0,
   //   input_props: {

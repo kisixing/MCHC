@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {Checkbox} from 'antd';
-import { FormConfig } from '../interface';
-import MyComponent from './index';
+import { FormConfig } from '../../interface';
+import MyComponent from '../index';
 
 interface CheckboxWithExtraProps {
   editors: Array<FormConfig>,

@@ -106,7 +106,7 @@ const data = {
 		"mentalDisease": null,
 		"mentalDiseaseNote": null,
 		"diabetes": true,
-		"diabetesNote": "有糖尿病"
+		"diabetesNote": "{\"0\":\"有糖尿病\"}"
 	},
 	// 过敏史
 	"allergyHistory": {

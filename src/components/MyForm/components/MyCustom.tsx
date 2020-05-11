@@ -33,7 +33,9 @@ export default class MyCustom extends Component<MyCustomProps, MyCustomState>{
     formHandler.subscribe("_global", "change", () => {
       formHandler.submit().then(({ validCode, res }: any) => {
         // TODO 是否加上validCode
-        onChange(toFormat(res));
+        console.log(res);
+        console.log(toFormat(res));
+        // onChange(toFormat(res));
       })
     })
   }
@@ -41,12 +43,13 @@ export default class MyCustom extends Component<MyCustomProps, MyCustomState>{
   render() {
     const { config = [] } = this.props.input_props;
     const { value } = this.props;
+    console.log(value);
     let myConfig: Array<any> = [];
     if (config) {
       myConfig = getRenderData(config, value);
     }
     return (
-      <div>
+      <div style={{marginTop: "16px"}}>
         <MyForm
           config={myConfig}
           getFormHandler={(formHandler: any) => this.setState({ formHandler })}

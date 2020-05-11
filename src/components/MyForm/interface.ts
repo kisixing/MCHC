@@ -31,16 +31,17 @@ export interface ComponentOption {
 }
 
 export interface FormConfig {
+  name: string,
   key: string,
   label?: string,
   unit?: string,
   input_type: string,
-  span: number,
-  offset: number,
+  span?: number,
+  offset?: number,
   hidden?: boolean,
   value?: any,
   rules?: string | object | RegExp | null,
-  input_props: ComponentOption,
+  input_props?: ComponentOption,
 }
 
 export interface MyFormProp {
@@ -71,5 +72,6 @@ export interface FormItemProp {
 export interface FormItemState {
   value: any,
   error: any,
+  path: string,
   validate: string | object | RegExp | null
 }

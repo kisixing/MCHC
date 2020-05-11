@@ -21,11 +21,12 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
   const formDom = [];
   let spanArr = [];
   for(let i = 0 ;i < config.length; i++){
+    const { span = 7, offset = 1 } = config[i];
     if(config[i].hidden){
       // eslint-disable-next-line no-continue
       continue;
     }
-    count += config[i].span + config[i].offset;
+    count += span + offset;
     if(count > 24){
       formDom.push(
         <Row 
@@ -37,25 +38,25 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
       )
       spanArr = []; 
       // 计算上一行换行的offset数量
-      prevOffset = 24 - count + (config[i].span + config[i].offset);
+      prevOffset = 24 - count + (span + offset);
       // 减去上一行换行所用offset
-      count = config[i].span + (config[i].offset - prevOffset);
+      count = span + (offset - prevOffset);
       row += 1;
     }
     spanArr.push(
       <Col  
-        span={config[i].span} 
-        offset={spanArr.length === 0 ? config[i].offset - prevOffset : config[i].offset} 
+        span={span} 
+        offset={spanArr.length === 0 ? offset - prevOffset : offset} 
         key={`row-${row}|span-${count}`}
       >
         <FormItem 
-          actions={formHandler[config[i].key].actions} 
+          actions={formHandler[config[i].name].actions} 
           dispatch={formHandler.dispatch}
           defaultValue={config[i].value}
           type={config[i].input_type}
           label={config[i].label || ""}
           unit={config[i].unit || ""}
-          input_props={config[i].input_props}
+          input_props={config[i].input_props || {}}
           validate={config[i].rules || ""}
           path={config[i].key || ""}
         />

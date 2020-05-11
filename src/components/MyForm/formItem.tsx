@@ -4,7 +4,6 @@ import MyComponents from './components/index';
 import { FormItemProp, FormItemState } from './interface';
 import {validFun} from './utils/valid';
 import styles from './formItem.less';
-import { ConsoleSqlOutlined } from '@ant-design/icons';
 
 function isBase(val:any):boolean{
   return val && typeof val !== "object";
@@ -16,12 +15,16 @@ export default class FormItem extends Component<FormItemProp,FormItemState>{
     this.state = {
       value: "",
       error: "",
+      path: "",
       validate: [],
     }
     const self = this;
     if(props.actions){
       props.actions.getValue = function getValue(){
-        return self.state.value;
+        return {
+          value: self.state.value,
+          path: self.state.path
+        }
       };
       props.actions.setValue = function setValue(val){
         self.setState({value: val});
@@ -37,7 +40,8 @@ export default class FormItem extends Component<FormItemProp,FormItemState>{
   componentDidMount(){
     this.setState({
       value: this.props.defaultValue,
-      validate: this.props.validate || ""
+      validate: this.props.validate || "",
+      path: this.props.path
     });
   }
 
@@ -46,7 +50,8 @@ export default class FormItem extends Component<FormItemProp,FormItemState>{
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         value: this.props.defaultValue,
-        validate: this.props.validate || ""
+        validate: this.props.validate || "",
+        path: this.props.path
       });
     }
   }
@@ -54,8 +59,6 @@ export default class FormItem extends Component<FormItemProp,FormItemState>{
   handleChange = (val:any) => {
     const { path, dispatch } = this.props;
     this.setState({value: val},() => {
-      console.error('22');
-      console.log(val);
       if(path){
         dispatch(path,"change",val);
       }
