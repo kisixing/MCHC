@@ -35,15 +35,17 @@ export const getFormDescriptionByModuleName = async (moduleName: string) => {
 };
 
 interface IProps {
-  renderEditItem: (key: any, reactNode: any, options?: any) => any;
-  formDescriptions: {};
+  renderEditItem: (key: string, ReactNode: React.ReactNode, others?: object) => React.ReactNode;
+  formDescriptions: any;
   id?: Number | String;
   data?: any;
   form?: any;
+  products?: any;
+  events?: any;
 }
 
 export class FormSection extends React.Component<IProps> {
-  renderRowAndCol = (formDescriptionArr = []) => {
+  renderRowAndCol = (formDescriptionArr: any[] = []) => {
     return (
       <Row>
         {map(formDescriptionArr, (formDescription, index) => {
@@ -402,9 +404,9 @@ export class FormSection extends React.Component<IProps> {
 
   renderContent = () => {
     const { formDescriptions = [] } = this.props;
-    let tempArr = [];
+    let tempArr: any[] = [];
     let tempSpan = 0;
-    let formArray = [];
+    const formArray: any[] = [];
     map(formDescriptions, (formDescription, index) => {
       if (!isNil(get(formDescription, 'span')) && !isNil(get(formDescription, 'offset'))) {
         if (get(formDescription, 'isNewRow')) {

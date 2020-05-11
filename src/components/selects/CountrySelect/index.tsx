@@ -1,6 +1,7 @@
 import React from 'react';
 import { Select } from 'antd';
 import { map } from 'lodash';
+import { SelectProps } from 'antd/es/select';
 
 export const countries = [
   {
@@ -965,7 +966,7 @@ export const countries = [
   },
 ];
 
-interface IProps {
+interface IProps extends SelectProps<any> {
   language: 'zh-CN' | 'EN';
 }
 

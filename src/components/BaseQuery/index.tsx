@@ -1,7 +1,8 @@
 import React from 'react';
 import { Form, Button } from 'antd';
 import DynamicForm from '@/components/BaseModalForm/DynamicForm';
-import styles from './index.less'
+import styles from './index.less';
+
 export default class BaseQuery extends DynamicForm {
   formDescriptions = {};
 
@@ -10,7 +11,7 @@ export default class BaseQuery extends DynamicForm {
     wrapperCol: {},
   };
 
-  renderEditItem = () => {};
+  renderEditItem = (key: string, ReactNode: React.ReactNode, others?: object) => {};
 
   renderContent = () => {};
 
@@ -26,7 +27,9 @@ export default class BaseQuery extends DynamicForm {
 
   renderResetBtn = () => (
     <Form.Item>
-      <Button size="small" onClick={this.handleReset}>重置</Button>
+      <Button size="small" onClick={this.handleReset}>
+        重置
+      </Button>
     </Form.Item>
   );
 

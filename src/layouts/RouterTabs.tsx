@@ -43,7 +43,7 @@ export class RouterTabs extends React.Component<IProps> {
     const { style, tabs, location } = this.props;
 
     return (
-      <div className={styles.customRouterTabs} style={style}>
+      <div className={styles.customRouterTabs} style={{ ...style, marginLeft: '-12px' }}>
         {map(tabs, (tab, index) => {
           return (
             <TabButton

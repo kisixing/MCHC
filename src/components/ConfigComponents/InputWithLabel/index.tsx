@@ -11,6 +11,7 @@ interface IProps {
   value?: any;
   style?: any;
   size?: any;
+  config?: any;
   onChange?: any;
   type?: 'string' | 'number';
 }

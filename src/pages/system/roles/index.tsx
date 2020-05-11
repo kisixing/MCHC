@@ -1,41 +1,56 @@
 import React, { Fragment } from 'react';
 import RoleTable from './components/RoleTable';
 import RolesModal from './components/RolesModal';
-import { tableColumns, menuColumns } from './config/table';
+import { tableColumns } from './config/table';
 import { Popconfirm, Button, Row, Col, message } from 'antd';
-import { get, map } from 'lodash';
+import { get } from 'lodash';
 import { processFromApi, toApi } from './config/adapter';
-import BaseList from '@/components/BaseList';
+import BaseList, { IState as BaseListIState } from '@/components/BaseList';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import commonStyles from '@/common.less';
 import CustomSpin from '@/components/GeneralComponents/CustomSpin';
 import request from '@/utils/request';
-import queryString from 'query-string';
-import { transferMenus } from '@/utils/format';
 import MenuPermissionCard from './components/MenuPermissionCard';
 import ApiPermissionCard from './components/ApiPermissionCard';
+import WithDynamicExport from '@/components/WithDynamicExport';
 
-export default class Roles extends BaseList {
+interface IProps {}
+
+interface IState extends BaseListIState {
+  menuDataSource?: any[];
+  defaultCheckedMenu?: any[];
+  activeRole?: object;
+}
+
+@WithDynamicExport
+export default class Roles extends BaseList<IProps, IState> {
+  static defaultProps = {
+    baseUrl: '/groups',
+    baseTitle: '角色',
+    needPagination: false,
+    showQuery: false,
+    tableColumns,
+    rowKey: 'id',
+    showAdd: false,
+  };
+
   state = {
     dataSource: [],
     menuDataSource: [],
     visible: false,
     editable: false,
     id: undefined,
-    showQuery: false,
-    loding: true,
-    baseUrl: '/groups',
-    baseTitle: '角色',
+    loading: true,
     defaultCheckedMenu: [],
     activeRole: {},
   };
 
   roleColumns = [
-    ...tableColumns,
+    ...(this.props.tableColumns as Array<any>),
     {
       title: '操作',
       align: 'center',
-      render: (value, rowData, index) => {
+      render: (value: any, rowData: any, index: number) => {
         return (
           <Fragment>
             <Button
@@ -63,28 +78,23 @@ export default class Roles extends BaseList {
   ];
 
   handleSearch = async () => {
-    const { baseUrl, needPagination, defaultQuery } = this.state;
-    const dataSource = processFromApi(
-      await request.get(`${baseUrl}?${queryString.stringify(defaultQuery)}`),
-    );
-    // console.log(dataSource);
-    // const menuDataSource = transferMenus(await request.get('/permissions?size=100'));
-    // console.log(menuDataSource);
+    const { baseUrl, needPagination } = this.props;
+    const dataSource = processFromApi(await request.get(baseUrl as string));
     let total = 0;
     if (needPagination) {
-      total = await request.get(`${baseUrl}/count?criteria`);
+      total = await request.get(`${baseUrl}/count`);
     }
-    this.setState({ dataSource, total, loding: false });
+    this.setState({ dataSource, total, loading: false });
   };
 
-  handleRowClick = rowData => e => {
+  handleRowClick = (rowData: any) => (e: any) => {
     this.setState({
       defaultCheckedMenu: get(rowData, 'permissions'),
       activeRole: rowData,
     });
   };
 
-  setRowClassName = rowData => {
+  setRowClassName = (rowData: any) => {
     const { activeRole } = this.state;
     if (get(rowData, 'id') === get(activeRole, 'id')) {
       return 'table-row-active';
@@ -92,10 +102,11 @@ export default class Roles extends BaseList {
     return '';
   };
 
-  handleSaveApiPermission = async checkedData => {
-    const { baseUrl, activeRole } = this.state;
+  handleSaveApiPermission = async (checkedData: any[]) => {
+    const { activeRole } = this.state;
+    const { baseUrl } = this.props;
     try {
-      await request.put(`${baseUrl}`, {
+      await request.put(baseUrl as string, {
         data: toApi({ ...activeRole, authorities: checkedData }),
       });
       message.success('保存 API 权限成功');
@@ -105,10 +116,11 @@ export default class Roles extends BaseList {
     }
   };
 
-  handleSaveMenuPermission = async checkedData => {
-    const { baseUrl, activeRole } = this.state;
+  handleSaveMenuPermission = async (checkedData: any[]) => {
+    const { activeRole } = this.state;
+    const { baseUrl } = this.props;
     try {
-      await request.put(`${baseUrl}`, {
+      await request.put(baseUrl as string, {
         data: toApi({ ...activeRole, permissions: checkedData }),
       });
       message.success('保存菜单/权限成功');
@@ -119,20 +131,12 @@ export default class Roles extends BaseList {
   };
 
   render() {
-    const {
-      dataSource,
-      visible,
-      editable,
-      id,
-      baseTitle,
-      loding,
-      defaultCheckedMenu,
-      activeRole,
-    } = this.state;
+    const { baseTitle } = this.props;
+    const { dataSource, visible, editable, id, loading, activeRole } = this.state;
 
     return (
       <Fragment>
-        {loding ? (
+        {loading ? (
           <CustomSpin />
         ) : (
           <Row>
@@ -143,7 +147,7 @@ export default class Roles extends BaseList {
                 onAdd={this.handleAdd}
                 pagination={false}
                 rowClassName={this.setRowClassName}
-                onRow={record => {
+                onRow={(record: any) => {
                   return {
                     onClick: this.handleRowClick(record),
                   };
