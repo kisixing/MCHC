@@ -1,7 +1,7 @@
 // 儿童死亡报告管理路由
 export default {
-  name: 'child-death-report',
+  name: 'child-death',
   icon: 'ordered-list',
-  path: '/child-death-report',
+  path: '/child-death',
   component: './Welcome',
 };
