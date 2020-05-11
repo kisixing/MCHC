@@ -1,9 +1,9 @@
 import React from 'react';
 import DynamicForm from '@/components/BaseModalForm/DynamicForm';
 import { Form, Divider, Button } from 'antd';
-import { get, map, isFunction, isEqual } from 'lodash';
+import { get, map } from 'lodash';
 import FormSection from '@/components/BaseModalForm/FormSection';
-import moment from 'moment';
+import { FormInstance } from 'antd/lib/form';
 
 const formItemLayout = {
   labelCol: {
@@ -14,33 +14,33 @@ const formItemLayout = {
   },
 };
 
-export default class PregnanciesForm extends DynamicForm {
-  state = {
-    formDescriptionsWithoutSection: [],
-    formDescriptions: [],
-    renderEditItem: undefined,
-    form: null,
-  };
+interface IProps {
+  data: any;
+  formDescriptionsWithoutSection: any;
+  formDescriptions: any;
+  onFinish: (data: any) => void;
+}
+
+interface IState {}
+
+export default class PregnanciesForm extends DynamicForm<IProps, IState> {
+  form: FormInstance | null = null;
+
+  renderEditItem: ((key: string, ReactNode: React.ReactNode, others: object) => React.ReactNode) | null = null;
 
   componentDidMount() {
-    const { data, formDescriptionsWithoutSection, formDescriptions } = this.props;
-    setTimeout(() => {
-      const form = this.formRef.current;
-      form && form.setFieldsValue(data);
-      const renderEditItem = this.generateRenderEditItem(formDescriptionsWithoutSection, {
-        formItemLayout,
-      });
-      this.setState({
-        form,
-        renderEditItem,
-        formDescriptions,
-        formDescriptionsWithoutSection,
-      });
-    }, 100);
+    const { data, formDescriptionsWithoutSection } = this.props;
+    this.form = this.formRef.current;
+    this.form && this.form.setFieldsValue(data);
+    this.renderEditItem = this.generateRenderEditItem(formDescriptionsWithoutSection, {
+      formItemLayout,
+    });
+    // 强制渲染获取 form
+    this.forceUpdate();
   }
 
   handleFinish = async () => {
-    const { form } = this.state;
+    const form = (this.form as unknown) as FormInstance;
     const { onFinish, data } = this.props;
     // form && (await form.validateFields());
     const params = {
@@ -51,33 +51,20 @@ export default class PregnanciesForm extends DynamicForm {
     onFinish && onFinish(params);
   };
 
-  handleIDNumberChange = e => {
-    const { form } = this.state;
-    const IDNumber = e.target.value as string;
-    if (IDNumber.length === 18) {
-      form &&
-        form.setFieldsValue({
-          dob: moment(`${IDNumber.substr(6, 4)}-${IDNumber.substr(10, 2)}-${IDNumber.substr(12, 2)}`),
-        });
-    }
-  };
-
-  renderSection = section => {
+  renderSection = (section: any) => {
     const { data } = this.props;
-    const { renderEditItem, form } = this.state;
     return (
       <>
         <Divider key={`${get(section, 'flag')}-divider`} orientation="left">
           {get(section, 'name')}
         </Divider>
-        {isFunction(renderEditItem) && (
+        {this.form && (
           <FormSection
             key={`${get(section, 'flag')}-section`}
             data={data}
             formDescriptions={get(section, 'fields')}
-            events={{ handleIDNumberChange: this.handleIDNumberChange }}
-            renderEditItem={renderEditItem}
-            form={form}
+            renderEditItem={this.renderEditItem as any}
+            form={this.form}
           />
         )}
       </>

@@ -30,7 +30,7 @@ export const nonLabelLayout = {
   },
 };
 
-export default class DynamicForm extends React.Component {
+export default class DynamicForm<IProps = {}, IState = {}> extends React.Component<IProps, IState> {
   formRef = React.createRef<FormInstance>();
 
   form: any;
