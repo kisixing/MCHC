@@ -1,7 +1,13 @@
-import moment, { Moment } from 'moment';
+import moment, { Moment, isMoment } from 'moment';
 import { map } from 'lodash';
 
-export const formatTimeToStandard = (date: any, format = 'YYYY-MM-DD HH:mm:ss') => moment(date).format(format);
+export const formatTimeToStandard = (date: any, format = 'YYYY-MM-DD HH:mm:ss') => {
+  const formatedDate = moment(date).format(format);
+  if (formatedDate !== 'Invalid date') {
+    return moment(date).format(format);
+  }
+  return '-';
+};
 
 export const formatTimeToUTC = (date: any) =>
   moment(date)

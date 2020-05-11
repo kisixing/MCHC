@@ -22,5 +22,6 @@ module.exports = {
     'no-plusplus': 0,
     'no-case-declarations': 0,
     'react/jsx-boolean-value': 0,
+    'react/no-unused-state': 0,
   },
 };

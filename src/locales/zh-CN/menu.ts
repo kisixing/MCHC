@@ -117,7 +117,7 @@ export default {
   'menu.premarital-care.visit-husband': '男方婚前检查',
   'menu.premarital-care.certification': '婚前医学证明',
   'menu.premarital-care.statistics': '婚检统计',
-  
+
   'menu.gynecological-diseases': '妇女病普查管理',
   'menu.gynecological-diseases.women': '档案管理',
   'menu.gynecological-diseases.examination': '普查管理',
@@ -134,7 +134,7 @@ export default {
   'menu.high-risk-management.highrisk': '高危登记',
   'menu.high-risk-management.followup': '高危随访',
   'menu.high-risk-management.statistics': '高危统计',
-  
+
   'menu.prenatal-screening': '产前筛查',
   'menu.prenatal-screening.prenatalpatient': '筛查登记',
   'menu.prenatal-screening.prenatalscreen': '筛查记录',
@@ -150,10 +150,14 @@ export default {
   'menu.maternal-death': '孕产妇死亡报告',
 
   'menu.pmtct': '艾梅乙专案上报管理',
- 
+
   'menu.deliver-management': '分娩管理',
   'menu.deliver-management.admission': '入院登记',
+  'menu.deliver-management.admission-add': '添加入院登记',
+  'menu.deliver-management.admission-edit': '修改入院登记',
   'menu.deliver-management.labour-record': '分娩记录',
+  'menu.deliver-management.labour-record-add': '添加分娩记录',
+  'menu.deliver-management.labour-record-edit': '修改分娩记录',
   'menu.deliver-management.nursing-record': '护理记录',
   'menu.deliver-management.predelivery': '待产记录',
   'menu.deliver-management.caesarean-delivery': '剖宫产记录',
