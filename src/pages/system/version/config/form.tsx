@@ -1,12 +1,4 @@
 export const modalFormDescriptions = {
-  // id: {
-  //   key: 'id',
-  //   label: '编号',
-  //   inputType: 'id',
-  //   inputProps: {
-  //     disabled: true,
-  //   },
-  // },
   name: {
     key: 'name',
     label: '版本号',
