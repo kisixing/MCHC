@@ -6,6 +6,7 @@ import queryString from 'query-string';
 import CustomSpin from '../GeneralComponents/CustomSpin';
 import commonStyles from '@/common.less';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import BaseTable from '@/components/BaseTable';
 
 export interface IProps {
   baseUrl: string;
@@ -134,7 +135,7 @@ export default class BaseList extends React.Component<IProps, IState> {
       needPagination,
       rowKey,
       Query,
-      Table,
+      Table = BaseTable,
       showQuery,
       showAdd,
       otherTableProps,
