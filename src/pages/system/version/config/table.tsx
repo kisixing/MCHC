@@ -2,12 +2,6 @@ import React from 'react';
 import { formatTimeToStandard } from '@/utils/format';
 
 export const tableColumns = [
-  // {
-  //   title: '编号',
-  //   dataIndex: 'id',
-  //   key: 'id',
-  //   align: 'center',
-  // },
   {
     title: '版本号',
     dataIndex: 'name',
@@ -24,8 +18,8 @@ export const tableColumns = [
     title: '地址',
     dataIndex: 'uri',
     key: 'uri',
-    render: value => (
-      <a href={value} target="_blank" rel="noopener noreferrer" >
+    render: (value: any) => (
+      <a href={value} target="_blank" rel="noopener noreferrer">
         {value}
       </a>
     ),
@@ -40,6 +34,6 @@ export const tableColumns = [
     dataIndex: 'modifiedDate',
     key: 'modifiedDate',
     align: 'center',
-    render: value => formatTimeToStandard(value),
+    render: (value: any) => formatTimeToStandard(value),
   },
 ];
