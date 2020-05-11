@@ -1,33 +1,80 @@
 .customTabsButton {
+  position: relative;
   padding: 4px 16px;
-  margin: 0 4px;
+  margin-left: -1px;
   background-color: white;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 4px;
   border-radius: 2px;
+
+  &:before {
+    content: '';
+    width: 1px;
+    height: 16px;
+    background-color: #f0f2f5;
+    position: absolute;
+    left: 0;
+  }
+
+  &:after {
+    content: '';
+    width: 1px;
+    height: 16px;
+    background-color: #f0f2f5;
+    position: absolute;
+    right: 0;
+  }
+
+  &:last-child:after {
+    display: none;
+  }
+
   &:hover {
     cursor: pointer;
+    color: #333;
+    background-color: #f0f2f5;
+
     .customTabsButtonClose {
       visibility: visible;
+      color: #666;
+    }
+
+    :before {
+      display: none;
+    }
+
+    :after {
+      display: none;
     }
   }
+}
+
+.isActive {
+  background-color: #f0f2f5;
+  color: #000;
 }
 
 .customTabsButtonIcon {
   width: 10px;
   height: 10px;
-  background-color: #cccccc;
+  background-color: #ccc;
   border-radius: 50%;
 }
 
 .customTabsButtonTitle {
+  max-width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
   margin: 0 8px;
 }
 
 .customTabsButtonClose {
+  position: absolute;
+  right: 5px;
   cursor: pointer;
-  color: #cccccc;
+  color: #ccc;
   visibility: hidden;
 }

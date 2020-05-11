@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
+import classnames from 'classnames';
+import { CloseOutlined } from '@ant-design/icons';
+
 import styles from './index.less';
-import { CloseCircleOutlined } from '@ant-design/icons';
 
 interface IProps {
   isActive?: boolean;
@@ -25,26 +27,23 @@ export default (props: IProps) => {
     onClose && onClose(tabKey);
   };
 
-  const iconStyle = isActive
-    ? {
-        backgroundColor: '#1890ff',
-      }
-    : {};
+  const iconStyle = isActive ? { backgroundColor: '#1890ff' } : {};
 
   return (
     <div
       id={tabKey}
-      ref={rcNode => {
-        tabRef = rcNode;
-      }}
-      className={styles.customTabsButton}
+      ref={rcNode => (tabRef = rcNode)}
+      className={classnames({
+        [styles.customTabsButton]: true,
+        [styles.isActive]: isActive,
+      })}
       onClick={handleClickTab}
     >
-      <div className={styles.customTabsButtonIcon} style={iconStyle}></div>
+      <div className={styles.customTabsButtonIcon} style={iconStyle} />
       <div className={styles.customTabsButtonTitle}>{title}</div>
       {closable && (
-        <div className={styles.customTabsButtonClose} onClick={handleCloseTab}>
-          <CloseCircleOutlined />
+        <div onClick={handleCloseTab} className={styles.customTabsButtonClose}>
+          <CloseOutlined />
         </div>
       )}
     </div>
