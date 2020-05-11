@@ -1,15 +1,16 @@
 import React,{Component, ReactNode} from 'react';
 import CheckboxWithExtra from '../Base/CheckboxWithExtra';
+import styles from './CustomCheckbox.less';
 
 interface CustomCheckboxProps{
   radio?: boolean,
   value: {
     checkboxValue: any,
     editorsValue: any,
-    options: Array<{label:string|number, value: string|number}>,
     key:string,
-    editors: Array<any>
   },
+  options: Array<{label:string|number, value: string|number|boolean}>,
+  editors: Array<any>,
   onChange: Function,
 }
 
@@ -19,29 +20,24 @@ export default class CustomCheckbox extends Component<CustomCheckboxProps>{
     // checkboxValue:""
   }
 
-  handleChange = (val: any, key: string|number) => {
-    const { onChange } = this.props;
-    // onChange({
-    //   checkboxValue: val.
-    // })
-    // console.log(val);
-    console.log(key);
+  handleChange = (val: any, key: string|number|boolean) => {
+    const { onChange, radio, options } = this.props;
     onChange({
       checkboxValue: key,
-      editorsValue: val.editorsValue[0]
+      editorsValue: val.editorsValue
     },this.props.value.key)
     // if (radio) {
-    //   value.forEach((item: any) => {
-    //     if (item.key === key) {
+    //   options.forEach((opt: any) => {
+    //     if (opt.value === key) {
     //       onChange({
     //         checkboxValue: val.checkboxValue,
     //         editorsValue: val.editorsValue,
-    //       }, item.key)
+    //       }, opt.key)
     //     } else {
     //       onChange({
     //         checkboxValue: false,
     //         editorsValue: "",
-    //       }, item.key)
+    //       }, opt.key)
     //     }
     //   })
     // } else {
@@ -50,59 +46,27 @@ export default class CustomCheckbox extends Component<CustomCheckboxProps>{
   }
 
   renderCheckbox = () => {
-    const { value } = this.props;
-    const { options = [] } = value;
+    const { value, options = [], editors = [] } = this.props;
     const renderDOM: Array<ReactNode> = [];
     for(let i = 0; i < options.length ; i++){
+      const index = editors.findIndex((editor:any) => editor.key === options[i].value);
       renderDOM.push(
         <CheckboxWithExtra
           key={i}
-          onChange={(val:any) => console.log(val)}
+          onChange={(val:any) => this.handleChange(val, options[i].value)}
           checkboxValue={value.checkboxValue === options[i].value}
           editorsValue={value.editorsValue}
-          editors={value.editors ? value.editors.find((v:any) => v.key === options[i].value) : []}
-        />
+          editors={index !== -1 ? editors[index].editors : []}
+        >
+          {options[i].label}
+        </CheckboxWithExtra>
       )
     }
-
-    // return null;
-    // for (let i = 0; i < options.length; i++) {
-    //   for (let j = 0; j < extraEditors.length; j++) {
-    //     if (options[i].value === extraEditors[j].key) {
-    //       renderDOM.push(
-    //         <CheckboxWithExtra
-    //           key={`${i}-${j}`}
-    //           onChange={(val: any) => this.handleChange(val, options[i].value)}
-    //           checkboxValue={value.checkboxValue === options[i].value}
-    //           editorsValue={value.editorsValue}
-    //           editors={extraEditors[j].editors}
-    //         >
-    //           {options[i].label}
-    //         </CheckboxWithExtra>
-    //       )
-    //       break;
-    //     }
-    //     if (j === extraEditors.length - 1) {
-    //       renderDOM.push(
-    //         <CheckboxWithExtra
-    //           key={`${i}-${j}`}
-    //           onChange={(val: any) => this.handleChange(val, options[i].value)}
-    //           checkboxValue={value.checkboxValue === options[i].value}
-    //           editorsValue={value.editorsValue}
-    //           editors={[]}
-    //           // checked={value[i].checkboxValue}
-    //         >
-    //           {options[i].label}
-    //         </CheckboxWithExtra>
-    //       )
-    //     }
-    //   }
-    // }
     return renderDOM;
   }
 
   render() {
-    return <div>
+    return <div className={styles['custom-checkbox']}>
       {this.renderCheckbox()}
     </div>
   }

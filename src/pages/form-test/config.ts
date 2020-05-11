@@ -16,49 +16,48 @@ const config: Array<FormConfig> = [
   { name: "sureEdd", key: ".sureEdd", label: "预产期-B超", span: 8, offset: 0, input_type: "date" },
   { name: "gravidity", key: ".gravidity", label: "G", span: 8, offset: 0, input_type: "select" },
   { name: "parity", key: ".parity", label: "P", span: 8, offset: 0, input_type: "select" },
-
-  // {
-  //   name: "diseaseHistory", key: '.diseaseHistory', label: "疾病史", input_type: "checkbox",
-  //   input_props: {
-  //     type: "a",
-  //     radio: false,
-  //     renderData: [
-  //       {
-  //         key: "hypertension",
-  //         label: "高血压",
-  //         extraEditors: [
-  //           {
-  //             key: "hypertension",
-  //             editors: [
-  //               { name: "", key: "", label: "药物名称", unit: "", input_type: "input", span: 0, offset: 0 }
-  //             ]
-  //           }
-  //         ]
-  //       },
-  //       { key: "nephropathy", label: "肾病" },
-  //       { key: "respiratoryDisease", label: "呼吸道疾病" },
-  //       { key: "gastroDisease", label: "胃病" },
-  //       {
-  //         key: "hepaticDisease", label: "肝病",
-  //         extraEditors: [
-  //           {
-  //             key: "hepaticDisease",
-  //             editors: [
-  //               { name: "", key: "", label: "药物名称", input_type: "input", span: 0, offset: 0 }
-  //             ]
-  //           },
-  //         ]
-  //       },
-  //       { key: "epilepsy", label: "癫痫" },
-  //       { key: "cardiacDisease", label: "心脏疾病" },
-  //       { key: "endocrineDisease", label: "内分泌疾病" },
-  //       { key: "thyroidDisease", label: "甲状腺疾病" },
-  //       { key: "hematopathy", label: "血液病" },
-  //       { key: "mentalDisease", label: "精神疾病" },
-  //       { key: "diabetes", label: "糖尿病" },
-  //     ],
-  //   }
-  // },
+  {
+    name: "diseaseHistory", key: '.diseaseHistory', label: "疾病史", input_type: "checkbox",
+    input_props: {
+      type: "multiple",
+      radio: false,
+      renderData: [
+        {
+          key: "hypertension",
+          label: "高血压",
+          extraEditors: [
+            {
+              key: "hypertension",
+              editors: [
+                { name: "", key: "", label: "药物名称", unit: "", input_type: "input", span: 0, offset: 0 }
+              ]
+            }
+          ]
+        },
+        { key: "nephropathy", label: "肾病" },
+        { key: "respiratoryDisease", label: "呼吸道疾病" },
+        { key: "gastroDisease", label: "胃病" },
+        {
+          key: "hepaticDisease", label: "肝病",
+          extraEditors: [
+            {
+              key: "hepaticDisease",
+              editors: [
+                { name: "", key: "", label: "药物名称", input_type: "input", span: 0, offset: 0 }
+              ]
+            },
+          ]
+        },
+        { key: "epilepsy", label: "癫痫" },
+        { key: "cardiacDisease", label: "心脏疾病" },
+        { key: "endocrineDisease", label: "内分泌疾病" },
+        { key: "thyroidDisease", label: "甲状腺疾病" },
+        { key: "hematopathy", label: "血液病" },
+        { key: "mentalDisease", label: "精神疾病" },
+        { key: "diabetes", label: "糖尿病" },
+      ],
+    }
+  },
   {
     name: "familyHistory-hypertension",
     key: '.familyHistory',
@@ -71,13 +70,13 @@ const config: Array<FormConfig> = [
           key: "hypertension",
           label: "高血压",
           options: [
-            {label: "有", value: true},
-            {label: "无", value: false},
+            {label: "有", value: 1},
+            {label: "无", value: 2},
           ],
           extraEditors: [
             {
               // 这个key对应的史当前这个checkboxValue的value
-              key: true,
+              key: 1,
               editors: [
                 { name: "", key: "", label: "药物名称", input_type: "input" }
               ]

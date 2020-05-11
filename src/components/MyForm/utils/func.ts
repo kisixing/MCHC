@@ -62,12 +62,12 @@ export function isStringObj(data: any): boolean {
  * 用于extraEditors的数据转换方法
  */
 export function convertExtraEditors(editorsValue: string): Array<any>|string{
-  let res:any;
+  let res:any = editorsValue;
   try{
     res = getArrayFormObject(JSON.parse(editorsValue));
     return res;
   }catch(e){
-
+    console.warn('不可转为JSON字符串');
   }
   return [res];
 }

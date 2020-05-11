@@ -5,7 +5,14 @@ import styles from './MultipleCheckbox.less';
 interface MultipleCheckboxProps {
   // extraEditors: Array<any>,
   radio?: boolean,
-  value: Array<any>
+  value: Array<{
+    checkboxValue: any,
+    editorsValue: any,
+    key:string,
+    label:string
+  }>,
+  // options: Array<{label:string|number, value: string|number|boolean}>,
+  editors: Array<any>,
   onChange: Function
 }
 
@@ -32,49 +39,21 @@ export default class MultipleCheckbox extends Component<MultipleCheckboxProps>{
   }
 
   renderCheckbox = () => {
-    const { value } = this.props;
+    const { value, editors = [] } = this.props;
     const renderDOM: Array<ReactNode> = [];
     for (let i = 0; i < value.length; i++) {
+      const index = editors.findIndex((editor: any) => editor.key === value[i].key);
       renderDOM.push(
-        null
-        // <CheckboxWithExtra
-        //   key={i}
-        //   onChange={(val: any) => console.log(val)}
-        //   checkboxValue={value[i].checkboxValue}
-        //   editorsValue={value[i].editorsValue}
-        //   editors={}
-        // />
+        <CheckboxWithExtra
+          key={i}
+          onChange={(val: any) => this.handleChange(val, value[i].key)}
+          checkboxValue={value[i].checkboxValue}
+          editorsValue={value[i].editorsValue}
+          editors={index !== -1 ? editors[index].editors : []}
+        >
+          {value[i].label}
+        </CheckboxWithExtra>
       )
-      // for (let j = 0; j < extraEditors.length; j++) {
-      //   if (value[i].key === extraEditors[j].key) {
-      //     renderDOM.push(
-      //       <CheckboxWithExtra
-      //         key={`${i}-${j}`}
-      //         onChange={(val: any) => this.handleChange(val, value[i].key)}
-      //         checkboxValue={value[i].checkboxValue}
-      //         editorsValue={value[i].editorsValue}
-      //         editors={extraEditors[j].editors}
-      //       >
-      //         {value[i].label}
-      //       </CheckboxWithExtra>
-      //     )
-      //     break;
-      //   }
-      //   if (j === extraEditors.length - 1) {
-      //     renderDOM.push(
-      //       <CheckboxWithExtra
-      //         key={`${i}-${j}`}
-      //         onChange={(val: any) => this.handleChange(val, value[i].key)}
-      //         checkboxValue={value[i].checkboxValue}
-      //         editorsValue={value[i].editorsValue}
-      //         editors={[]}
-      //         // checked={value[i].checkboxValue}
-      //       >
-      //         {value[i].label}
-      //       </CheckboxWithExtra>
-      //     )
-      //   }
-      // }
     }
     return renderDOM;
   }

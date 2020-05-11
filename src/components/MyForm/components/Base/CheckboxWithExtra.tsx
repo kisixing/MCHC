@@ -31,7 +31,7 @@ export default class CheckboxWithExtra extends Component<CheckboxWithExtraProps>
   }
 
   renderExtra = (editorsValue: Array<any>) => {
-    const { editors } = this.props;
+    const { editors = [] } = this.props;
     if (!editors || editors.length === 0) return null;
     return editors.map((editor: FormConfig, index: number) => {
       const RenderComponent = MyComponent[editor.input_type];
