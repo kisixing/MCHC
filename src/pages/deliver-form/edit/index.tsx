@@ -7,7 +7,11 @@ import { toApi, fromApi } from './config/adapter';
 import { formDescriptionsFromApi, formDescriptionsWithoutSectionApi } from '@/utils/adapter';
 import { message } from 'antd';
 
-export default class Pregnancies extends React.Component {
+interface IProps {
+  location: any;
+}
+
+export default class Pregnancies extends React.Component<IProps> {
   state = {
     data: {},
     formDescriptions: [],
@@ -23,7 +27,7 @@ export default class Pregnancies extends React.Component {
     this.setState({ formDescriptions, formDescriptionsWithoutSection, data });
   }
 
-  handleSubmit = async values => {
+  handleSubmit = async (values: any) => {
     const { data, formDescriptionsWithoutSection } = this.state;
     const params = toApi(
       {
@@ -33,13 +37,13 @@ export default class Pregnancies extends React.Component {
       formDescriptionsWithoutSection,
     );
     console.log(params);
-    if (get(values, 'id')) {
-      await request.put('/labour-records', { data: params });
-      message.success('修改分娩记录单成功');
-    } else {
-      await request.post('/labour-records', { data: params });
-      message.success('新增分娩记录单成功');
-    }
+    // if (get(values, 'id')) {
+    //   await request.put('/labour-records', { data: params });
+    //   message.success('修改分娩记录单成功');
+    // } else {
+    //   await request.post('/labour-records', { data: params });
+    //   message.success('新增分娩记录单成功');
+    // }
   };
 
   render() {
