@@ -8,7 +8,7 @@ import styles from './index.less';
 
 const defaultGutterConfig = {
   gutter: [0,16], // px
-  justify: "left"
+  justify: "start"
 }
 // TODO 后期应该考虑把这里的col和row换成自定义的样式实现
 // TODO 优化换行
@@ -32,8 +32,8 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
     if(count > 24 || is_new_ros){
       formDom.push(
         <Row 
-        key={`row-${row}`} 
-        {...gridConfig}
+          key={`row-${row}`} 
+          {...gridConfig}
         >
             {spanArr}
         </Row>

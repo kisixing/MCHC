@@ -86,57 +86,6 @@ const config: Array<FormConfig> = [
       ],
     }
   },
-  // {
-  //   name: "familyHistory-hepaticDisease",
-  //   key: '.familyHistory',
-  //   label: "肝疾病",
-  //   input_type: "checkbox",
-  //   input_props: {
-  //     type: "a",
-  //     renderData: [
-  //       {
-  //         key: "hepaticDisease",
-  //         label: "肝疾病",
-  //         extraEditors: [
-  //           {
-  //             key: true,
-  //             editors: [
-  //               { name: "", key: "", label: "药物名称", input_type: "input", }
-  //             ]
-  //           }
-  //         ]
-  //       },
-  //     ],
-  //   }
-  // },
-  // {
-  //   name: "familyHistory-hepaticDisease",
-  //   key: '.familyHistory',
-  //   label: "肝疾病",
-  //   input_type: "checkbox",
-  //   input_props: {
-  //     type: "a",
-  //     renderData: [
-  //       {
-  //         key: "hepaticDisease",
-  //         label: "肝疾病",
-  //         options: [
-  //           { label: "经常", value: 2 },
-  //           { label: "偶尔", value: 1 },
-  //           { label: "无", value: 0 }
-  //         ],
-  //         extraEditors: [
-  //           {
-  //             key: 0,
-  //             editors: [
-  //               { name: "", key: "", label: "无", input_type: "input", }
-  //             ]
-  //           },
-  //         ]
-  //       },
-  //     ],
-  //   }
-  // },
   {
     name: "procedureHistory",
     key: ".procedureHistory",
