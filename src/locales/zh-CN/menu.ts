@@ -119,8 +119,8 @@ export default {
   'menu.premarital-care.statistics': '婚检统计',
 
   'menu.gynecological-diseases': '妇女病普查管理',
-  'menu.gynecological-diseases.women': '档案管理',
-  'menu.gynecological-diseases.examination': '普查管理',
+  'menu.gynecological-diseases.women': '普查登记',
+  'menu.gynecological-diseases.examination': '妇女健康检查',
   'menu.gynecological-diseases.breast-cancer-screen': '乳腺癌筛查',
   'menu.gynecological-diseases.cervical-cancer-screen': '宫颈癌筛查',
 
