@@ -28,7 +28,7 @@ export default class List extends BaseList {
     visible: false,
     editable: false,
     id: undefined,
-    loding: true,
+    loading: true,
   };
 
   handleAdd = () => {

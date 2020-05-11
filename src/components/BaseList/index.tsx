@@ -7,37 +7,32 @@ import CustomSpin from '../GeneralComponents/CustomSpin';
 import commonStyles from '@/common.less';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
-interface IProps {
-  baseUrl?: string;
-  rowKey?: string;
-  baseTitle?: string;
+export interface IProps {
+  baseUrl: string;
+  rowKey: string;
+  baseTitle: string;
+  tableColumns: any[];
+  Table: any;
   needPagination?: boolean;
+  showAdd?: boolean;
   showQuery?: boolean;
-  tableColumns?: any[];
   processFromApi?: (data: object) => object;
-  Table?: any;
+  ModalForm?: any;
+  otherTableProps?: any;
   Query?: any;
 }
 
-interface IState {
-  total?: number;
-  needPagination?: boolean;
-  defaultQuery?: object;
-  dataSource?: any[];
-  visible?: boolean;
-  editable?: boolean;
-  id?: any;
-  showQuery?: boolean;
-  loding?: boolean;
-  baseUrl?: string;
-  baseTitle?: string;
-  processFromApi?: any;
+export interface IState {
+  total: number;
+  dataSource: any[];
+  defaultQuery: object;
+  visible: boolean;
+  editable: boolean;
+  loading: boolean;
+  id: any;
 }
 
-export default class BaseList<P extends IProps = {}, S extends IState = {}> extends React.Component<
-  IProps & P,
-  IState & S
-> {
+export default class BaseList extends React.Component<IProps, IState> {
   columns = [
     ...(this.props.tableColumns as Array<any>),
     {
@@ -114,9 +109,9 @@ export default class BaseList<P extends IProps = {}, S extends IState = {}> exte
       : await request.get(`${baseUrl}${defaultQuery ? `?${queryString.stringify(defaultQuery as object)}` : ''}`);
     let total = 0;
     if (needPagination) {
-      total = await request.get(`${baseUrl}/count?criteria`);
+      total = await request.get(`${baseUrl}/count`);
     }
-    this.setState({ dataSource, total, loding: false });
+    this.setState({ dataSource, total, loading: false });
   };
 
   handlePageChange = (page: number, pageSize: number) => {
@@ -134,16 +129,27 @@ export default class BaseList<P extends IProps = {}, S extends IState = {}> exte
   };
 
   render() {
-    const { baseTitle, needPagination, rowKey, Query, Table, showQuery } = this.props;
-    const { dataSource, total, defaultQuery, loding } = this.state;
+    const {
+      baseTitle,
+      needPagination,
+      rowKey,
+      Query,
+      Table,
+      showQuery,
+      showAdd,
+      otherTableProps,
+      ModalForm,
+    } = this.props;
+    const { dataSource, total, defaultQuery, loading, visible, editable, id } = this.state;
 
     return (
       <Fragment>
         {showQuery && <Query onSearch={this.handleSearch} />}
-        {loding ? (
+        {loading ? (
           <CustomSpin />
         ) : (
           <Table
+            {...otherTableProps}
             pagination={
               needPagination && {
                 total,
@@ -155,9 +161,18 @@ export default class BaseList<P extends IProps = {}, S extends IState = {}> exte
             }
             columns={this.columns}
             dataSource={dataSource}
-            onAdd={this.handleAdd}
+            onAdd={showAdd && this.handleAdd}
             baseTitle={baseTitle}
             rowKey={rowKey}
+          />
+        )}
+        {visible && (
+          <ModalForm
+            visible={visible}
+            editable={editable}
+            id={id}
+            onCancel={this.handleCancel}
+            onSearch={this.handleSearch}
           />
         )}
       </Fragment>

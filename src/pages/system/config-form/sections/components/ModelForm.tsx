@@ -4,7 +4,7 @@ import { get } from 'lodash';
 import request from '@/utils/request';
 import { message } from 'antd';
 
-export default class ConfigFormModel extends Extends {
+export default class ModelForm extends Extends {
   constructor(props: any) {
     super(props);
     this.state = {
