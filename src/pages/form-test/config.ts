@@ -1,40 +1,36 @@
 import { FormConfig } from '../../components/MyForm/interface';
 
-const template = {
-  key: '.lmp', label: "lmp", unit: "", input_type: "", span: 7, offset: 1,
-  input_props: {
-    input_type: "date",
-    rules: "required",
-    format: "YYYY-MM-DD"
-  }
-}
-// TODO 加入渲染标题
-
 const config: Array<FormConfig> = [
   {
-    key: '.chief complaint', label: "主诊", unit: "", input_type: "input", span: 7, offset: 1, rules: "required",
+    key: '.chief complaint', label: "主诊", input_type: "input", span: 22, offset: 1, rules: "required",
     input_props: {
       type: "textarea",
     }
   },
   {
-    key: '.lmp', label: "末次月经", unit: "", input_type: 'date', span: 7, offset: 17, rules: "required",
+    key: '.lmp', label: "末次月经", input_type: 'date', span: 7, offset: 2, rules: "required",
     input_props: {
       type: "date",
       format: "YYYY-MM-DD"
     }
   },
   {
-    key: '.edd', label: "预产期", unit: "", input_type: "date", span: 7, offset: 1, rules: "required",
+    key: '.edd', label: "预产期", input_type: "date", span: 7, offset: 1, rules: "required",
     input_props: {
       type: "date",
       format: "YYYY-MM-DD"
     }
   },
   {
-    key: '.gravidity', label: "G", unit: "", input_type: "select", span: 7, offset: 1, rules: "required|number",
+    key: '.sureEdd', label: "预产期-日期", input_type: "date", span: 7, offset: 1, rules: "required",
     input_props: {
-      type: "default",
+      type: "date",
+      format: "YYYY-MM-DD"
+    }
+  },
+  {
+    key: '.gravidity', label: "G", input_type: "select", span: 7, offset: 1, rules: "required|number",
+    input_props: {
       selectOptions: [
         { value: 1, label: 1 },
         { value: 2, label: 2 },
@@ -49,9 +45,8 @@ const config: Array<FormConfig> = [
     }
   },
   {
-    key: '.parity', label: "P", unit: "", input_type: "select", span: 7, offset: 1, rules: "required|number",
+    key: '.parity', label: "P", input_type: "select", span: 7, offset: 1, rules: "required|number",
     input_props: {
-      type: "default",
       selectOptions: [
         { value: 1, label: 1 },
         { value: 2, label: 2 },
@@ -66,49 +61,27 @@ const config: Array<FormConfig> = [
     }
   },
   {
-    key: '.physicalExam.id', label: "体检id", unit: "", input_type: 'text', span: 7, offset: 1, hidden: true, rules: "required|number",
+    key: ".downsscreen_0", label: "早期唐氏筛查", input_type: "b-custom", span: 24, offset: 8,
+    rules: {},
     input_props: {
-      type: "default",
+      config: [
+        {key: ".checkdate", label: "检查日期", input_type: "date", span: 7, offset: 1 ,input_props:{}, rules: "required"},
+        {key: ".trisomy21", label: "21三体风险", input_type: "input", span: 7, offset: 1 ,input_props:{}},
+        {key: ".trisomy18", label: "18三体风险", input_type: "input", span: 7, offset: 1 ,input_props:{}},
+        {key: ".trisomy13", label: "13三体风险", input_type: "input", span: 7, offset: 1 ,input_props:{}},
+        {
+          key: ".note", label: "姓名", input_type: "b-custom", span: 24, offset: 0,
+          input_props: {
+            config: [
+              {key: ".name", label: "姓名", input_type: "input", span: 7, offset: 1, input_props: {}}
+            ]
+          }
+        }
+      ]
     }
   },
   {
-    key: '.physicalExam.weight', label: "体重", unit: "kg", input_type: 'input', span: 7, offset: 1, rules: "required|number",
-    input_props: {
-      type: "default",
-    }
-  },
-  {
-    key: '.physicalExam.height', label: "身高", unit: "cm", input_type: 'input', span: 7, offset: 1, rules: "required|number",
-    input_props: {
-      type: "default",
-    }
-  },
-  {
-    key: '.physicalExam.systolic', label: "收缩压", unit: "mmHg", input_type: 'input', span: 7, offset: 1, rules: "required|number",
-    input_props: {
-      type: "default",
-    }
-  },
-  {
-    key: '.physicalExam.diastolic', label: "舒张压", unit: "mmHg", input_type: 'input', span: 7, offset: 1, rules: "required|number",
-    input_props: {
-      type: "default",
-    }
-  },
-  {
-    key: '.physicalExam.pulse', label: "脉率", unit: "次/min", input_type: 'input', span: 7, offset: 1, rules: "required|number",
-    input_props: {
-      type: "default",
-    }
-  },
-  {
-    key: '.physicalExam.temperature', label: "体温", unit: "°C", input_type: 'input', span: 7, offset: 1, rules: "required|number",
-    input_props: {
-      type: "default",
-    }
-  },
-  {
-    key: ".fetuses", label: "", unit: "", input_type: "b-fetuses", span: 24, offset: 16,
+    key: ".fetuses", label: "胎儿检查", input_type: "b-fetuses", span: 24, offset: 0,
     rules: {
       fetalPosition: "required",
       fetalHeartRate: "required",
@@ -118,15 +91,11 @@ const config: Array<FormConfig> = [
       avf: "required",
       umbilicalbloodflow: "required",
     },
-    input_props: {
-      type: null,
-    }
+    input_props: {}
   },
   {
     key: '.familyHistory.hypertension', label: "高血压", unit: "", input_type: "checkbox", span: 24, offset: 0, rules: "",
-    input_props: {
-      type: "default",
-    }
+    input_props: {}
   },
   // 关于路径相同问题，在config中是不会覆盖的，不用担心
   {
@@ -135,46 +104,48 @@ const config: Array<FormConfig> = [
       type: "whether",
       // 仅在multiple下有的radio
       radio: true,
-      renderData: [{
-        key: "hepaticDisease", label: "肝病"
-      }],
+      renderData: [
+        { key: "hepaticDisease", label: "肝病" }
+      ],
       extraEditors: [
         {
           key: true,
-          editors:[{
-            key: "",
-            label: "药物名称",
-            unit: "",
-            input_type: "input",
-            span: 0,
-            offset: 0,
-            rules: "",
-            input_props: {
-              type: "default",
-            },
-          },{
-            key: "",
-            label: "用药次数",
-            unit: "次",
-            input_type: "select",
-            span: 0,
-            offset: 0,
-            rules: "",
-            input_props: {
-              type: "default",
-              selectOptions: [
-                { value: 1, label: 1 },
-                { value: 2, label: 2 },
-                { value: 3, label: 3 },
-                { value: 4, label: 4 },
-                { value: 5, label: 5 },
-                { value: 6, label: 6 },
-                { value: 7, label: 7 },
-                { value: 8, label: 8 },
-                { value: 9, label: 9 },
-              ]
-            },
-          }]
+          editors: [
+            {
+              key: "",
+              label: "药物名称",
+              unit: "",
+              input_type: "input",
+              span: 0,
+              offset: 0,
+              rules: "",
+              input_props: {
+                type: "default",
+              },
+            }, {
+              key: "",
+              label: "用药次数",
+              unit: "次",
+              input_type: "select",
+              span: 0,
+              offset: 0,
+              rules: "",
+              input_props: {
+                type: "default",
+                selectOptions: [
+                  { value: 1, label: 1 },
+                  { value: 2, label: 2 },
+                  { value: 3, label: 3 },
+                  { value: 4, label: 4 },
+                  { value: 5, label: 5 },
+                  { value: 6, label: 6 },
+                  { value: 7, label: 7 },
+                  { value: 8, label: 8 },
+                  { value: 9, label: 9 },
+                ]
+              },
+            }
+          ]
         }
       ]
     }
@@ -183,32 +154,33 @@ const config: Array<FormConfig> = [
     key: ".familyHistory", label: "家族史", input_type: "checkbox", span: 24, offset: 0,
     input_props: {
       type: "multiple",
+      radio: true,
       renderData: [
         {
-          key: "epilepsy", label:"癫痫"
-        },{
-          key: "cardiacDisease", label:"心脏病"
+          key: "epilepsy", label: "癫痫"
+        }, {
+          key: "cardiacDisease", label: "心脏病"
         }
       ],
       extraEditors: [
         {
           key: "epilepsy",
           editors: [{
-              key: "",
-              label: "药物名称",
-              input_type: "input",
-              span: 0,
-              offset: 0,
-              input_props: {
-                type: "default",
-              },
+            key: "",
+            label: "药物名称",
+            input_type: "input",
+            span: 0,
+            offset: 0,
+            input_props: {
+              type: "default",
+            },
           }]
         }
       ]
     }
   },
   {
-    key: ".ultrasounds", label: "超声检查",input_type: "table", span: 24, offset: 0,
+    key: ".ultrasounds", label: "超声检查", input_type: "table", span: 24, offset: 0,
     input_props: {
       type: "default",
       editable: true,
@@ -225,7 +197,7 @@ const config: Array<FormConfig> = [
             }
           }
         },
-        {key: "type", title: "类型"},
+        { key: "type", title: "类型" },
         {
           key: "clr", title: "clr",
           editor: {
@@ -253,18 +225,18 @@ const config: Array<FormConfig> = [
                 }
               }
             },
-            {key: "menopause", title: "menopause"},
+            { key: "menopause", title: "menopause" },
           ]
         },
-        {key: "gestationalweek", title: "孕周"},
-        {key: "bpd", title: "bpd"},
-        {key: "hc", title: "hc"},
-        {key: "ac", title: "ac"},
-        {key: "fl", title: "fl"},
-        {key: "afv", title: "afv"},
-        {key: "umbilicalbloodflow", title: "脐带血"},
-        {key: "diagnosis", title: "诊断"},
-        {key: "note", title: "备注"},
+        { key: "gestationalweek", title: "孕周" },
+        { key: "bpd", title: "bpd" },
+        { key: "hc", title: "hc" },
+        { key: "ac", title: "ac" },
+        { key: "fl", title: "fl" },
+        { key: "afv", title: "afv" },
+        { key: "umbilicalbloodflow", title: "脐带血" },
+        { key: "diagnosis", title: "诊断" },
+        { key: "note", title: "备注" },
       ]
     }
   }

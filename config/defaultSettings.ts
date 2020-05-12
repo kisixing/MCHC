@@ -43,7 +43,7 @@ export interface DefaultSettings {
 }
 
 export default {
-  navTheme: 'dark',
+  navTheme: 'light',
   // 拂晓蓝
   primaryColor: 'daybreak',
   layout: 'sidemenu',
@@ -55,7 +55,7 @@ export default {
   menu: {
     locale: true,
   },
-  title: '母婴云后台管理',
+  title: 'MCHC妇幼保健系统',
   pwa: true,
   iconfontUrl: '',
 } as DefaultSettings;

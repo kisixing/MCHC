@@ -42,9 +42,22 @@ export default class FormItem extends Component<FormItemProp,FormItemState>{
     });
   }
 
+  componentDidUpdate(prevProps: FormItemProp) {
+    if(JSON.stringify(this.props) !== JSON.stringify(prevProps)){
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({
+        value: this.props.defaultValue,
+        validate: this.props.validate || ""
+      });
+    }
+  }
+
   handleChange = (val:any) => {
+    const { path, dispatch } = this.props;
     this.setState({value: val},() => {
-      console.log(val);
+      if(path){
+        dispatch(path,"change",val);
+      }
       if(this.props.actions){
         if(this.props.actions.setValue){
           this.props.actions.setValue(this.state.value);
@@ -76,46 +89,10 @@ export default class FormItem extends Component<FormItemProp,FormItemState>{
   }
 
   render(){
-    const { dispatch, type, label, input_props, unit } = this.props;
+    const { dispatch, type, label, input_props, unit, path } = this.props;
     const { value, error, validate } = this.state;
     const MyComponent = MyComponents[type];
     return(
-      // <Row className={styles['form-item']}>
-      //     {/* default 8:16 
-      //       * TODO 
-      //       * config by user
-      //       * make a function to calc it
-      //       * 现在为了布局的简便，先将label和unit固定下来
-      //       */}
-      //     <Col span={8} className={styles['formItem-label']}>
-      //       <label>
-      //         {this.renderAsterisk(validate)}
-      //         {label}:
-      //       </label>
-      //     </Col>
-      //     <Col span={14} className={styles['formItem-main']}>
-      //       {MyComponent ? (
-      //         <MyComponent
-      //           onChange={this.handleChange}
-      //           dispatch={dispatch}
-      //           value={value}
-      //           input_props={input_props}
-      //           error={error}
-      //         />
-      //         ) : (
-      //           <strong>
-      //             组件{type}不存在
-      //           </strong>
-      //         )}
-      //     </Col>
-      //     <Col span={2}>{unit}</Col>
-      //     {/* 基本的组件的error统一在这里做，复杂的放入业务组件中 */}
-      //     {isBase(error) ? (
-      //       <Col offset={8} span={16} className={styles['formItem-error']}>
-      //         {error}
-      //       </Col>
-      //     ) : null}
-      //   </Row>
       <div>
         {/* 业务组件与通用组件样式区别 */}
         <div className={type.indexOf('b-') === -1 ? styles['form-item'] : styles['business-component']}>
@@ -135,6 +112,7 @@ export default class FormItem extends Component<FormItemProp,FormItemState>{
                 value={value}
                 input_props={input_props}
                 error={error}
+                path={path}
               />
               ) : (
                 <strong>

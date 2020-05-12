@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Form, Modal, message } from 'antd';
 import { isFunction } from 'lodash';
-import { DynamicForm } from '@lianmed/components';
+import DynamicForm from '@/components/BaseModalForm/DynamicForm';
 import request from '@/utils/request';
 import FormSection from './FormSection';
 

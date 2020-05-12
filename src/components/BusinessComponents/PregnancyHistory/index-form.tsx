@@ -2,7 +2,7 @@ import React from 'react';
 import { Tabs, Input, Row, Col, Radio, InputNumber, Button, Divider, Select } from 'antd';
 import { map, get, set, isEmpty, isFunction, toArray, cloneDeep, isEqual } from 'lodash';
 import moment from 'moment';
-import { DynamicForm } from '@lianmed/components';
+import DynamicForm from '@/components/BaseModalForm/DynamicForm';
 import PregnancyHistoryFormSection from './PregnancyHistoryFormSection';
 import { getPregnancyHistoryFormDescriptions } from '.';
 import NormalSelect from '@/components/selects/NormalSelect';

@@ -43,7 +43,7 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
       row += 1;
     }
     spanArr.push(
-      <Col 
+      <Col  
         span={config[i].span} 
         // 同上一条注释
         offset={spanArr.length === 0 ? config[i].offset - prevOffset : config[i].offset} 
@@ -58,6 +58,7 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
           unit={config[i].unit || ""}
           input_props={config[i].input_props}
           validate={config[i].rules || ""}
+          path={config[i].key || ""}
         />
       </Col>
     )
@@ -74,7 +75,7 @@ export default class MyForm extends Component<MyFormProp, MyFormState>{
   constructor(props:MyFormProp){
     super(props);
     this.state = {
-      formHandler: createFormHandler(props.config)
+      formHandler: createFormHandler(props.config, props.submitChange)
     }
   }
 
@@ -82,6 +83,15 @@ export default class MyForm extends Component<MyFormProp, MyFormState>{
     const { getFormHandler } = this.props;
     if(getFormHandler){
       getFormHandler(this.state.formHandler);
+    }
+  }
+
+  componentDidUpdate(prevProps:any, prevState: any){
+    const { getFormHandler } = this.props;
+    if(JSON.stringify(prevState) !== JSON.stringify(this.state)){
+      if(getFormHandler){
+        getFormHandler(this.state.formHandler);
+      }
     }
   }
 

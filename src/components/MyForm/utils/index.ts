@@ -201,6 +201,7 @@ function newObj(parentKey:string, currentKey:string, data:any){
 }
 
 /**
+ * 2个参数必须为相同类型的参数
  * 因为转换出来的对象名称相同，直接使用Object.assign会导致覆盖
  * 所有需要此方法做合并处理（正常情况下是不会去重的，除非在转换的时候已经出现了重复）
  * 合并两个对象
@@ -217,10 +218,12 @@ function _assign(mainData: any, newData: any ): any{
         const nk = newKey[i];
         if(mk === nk){
           flag = true;
-          // 判别下一层是不是数组，数组需要特殊处理 - 这个方法应该不会常用
+          // 判别下一层是不是数组，做数组合并
           if(isArr(mainData[mk]) && isArr(newData[nk])){
-            mainData[mk] = mainData[mk].filter((v:any) => !!v).concat(newData[nk].filter((v:any) => !!v));
-          }else{
+            for(let k = 0; k < mainData[mk].length ;k++){
+              mainData[mk][k] = _assign(mainData[mk][k], newData[nk][k])
+            }
+          }else if(isObj(mainData[mk]) && isObj(newData[mk])){
             // default object
             mainData[mk] = {
               ...mainData[mk],
@@ -237,7 +240,7 @@ function _assign(mainData: any, newData: any ): any{
       }
     }
   }else{
-    console.error("其中一个参数不是对象");
+    console.error("其中一个参数不是对象||二者皆不为对象||两者数据类型不相同，不可以做合并操作");
   }
   return mainData;
 }

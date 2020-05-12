@@ -1,5 +1,12 @@
-import { PageLoading } from '@ant-design/pro-layout';
+import React from 'react';
+import { Spin } from 'antd';
 
-// loading components from code split
-// https://umijs.org/plugin/umi-plugin-react.html#dynamicimport
+const PageLoading: React.FC<{
+  tip?: string;
+}> = ({ tip }) => (
+  <div style={{ width: '100&', height: '100%',  display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <Spin size="large" tip={tip} />
+  </div>
+);
+
 export default PageLoading;

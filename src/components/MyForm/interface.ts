@@ -14,8 +14,7 @@ interface TableColumns {
 }
 
 export interface ComponentOption {
-  type: string | null, // 单一组件多重展开
-  // valid: string|object|RegExp|null,
+  type?: string | null, // 单一组件多重展开
   
   // select
   selectOptions?: Array<{ value: string | number, label: string | number }> | null,
@@ -31,7 +30,10 @@ export interface ComponentOption {
   
   // table
   editable?: boolean, // 自动提供button和编辑功能
-  tableColumns?: Array<TableColumns>
+  tableColumns?: Array<TableColumns>,
+
+  // custom 自定义
+  config?: Array<FormConfig>
 }
 
 export interface FormConfig {
@@ -50,7 +52,8 @@ export interface FormConfig {
 export interface MyFormProp {
   config: Array<FormConfig>,
   // TODO func类型
-  getFormHandler?: (func: any) => void
+  getFormHandler?: (func: any) => void,
+  submitChange: boolean
 }
 
 export interface MyFormState {
@@ -64,13 +67,14 @@ export interface FormItemProp {
     getValue?: () => any,
     valid?: () => any
   },
-  dispatch?: () => void,
+  dispatch: (fieldName: string, eventName: string, args: any) => void,
   defaultValue?: any,
   type: string,
   label: string,
   unit: string,
   input_props: ComponentOption | null,
-  validate?: string | object | RegExp | null
+  validate?: string | object | RegExp | null,
+  path: string
 }
 
 export interface FormItemState {

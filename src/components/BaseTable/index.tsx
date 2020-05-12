@@ -2,8 +2,16 @@ import React, { Component } from 'react';
 import { Button } from 'antd';
 import CustomTable from '@/layouts/CustomTable';
 import styles from './index.less';
+import { TableProps } from 'antd/lib/table';
 
-export default class BaseTable extends Component {
+interface IProps extends TableProps<any> {
+  onAdd?: () => void;
+  baseTitle?: string;
+}
+
+interface IState {}
+
+export default class BaseTable extends Component<IProps, IState> {
   renderTitle = () => {
     const { onAdd, baseTitle } = this.props;
     return (

@@ -20,7 +20,7 @@ interface MyCheckboxProps {
  *  自定义模式就是multiple
  */
 interface CheckboxComponentProps {
-  type: string,
+  type?: string,
   radio?: boolean
   extraEditors: any,
   renderData: Array<{ key: string, label: string }>
@@ -71,14 +71,14 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
         extraEditors={extraEditors}
       />;
     },
-    "multiple": function (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode {
+    "multiple": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
       const r = input_props.renderData.map((v: any) => ({
         checkboxValue: value[v.key],
         editorsValue: value[`${v.key}Note`],
         key: v.key,
         label: v.label
       }));
-      const handleChange = function (val: any, key: string) {
+      const handleChange = (val: any, key: string) => {
         const newObj = {
           [key]: val.checkboxValue,
           [`${key}Note`]: val.editorsValue
@@ -88,7 +88,7 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
       return <MultipleCheckbox
         value={r}
         onChange={handleChange}
-        radio={input_props.radio || true}
+        radio={input_props.radio}
         extraEditors={input_props.extraEditors}
       />
     }
@@ -96,7 +96,7 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
 
   renderCheckbox = () => {
     const { input_props, value, onChange } = this.props;
-    const { type } = input_props;
+    const { type = "default" } = input_props;
     return this.checkbox[type || "default"](input_props, value, onChange);
   }
 
@@ -154,7 +154,7 @@ class WhetherCheckbox extends Component<WhetherCheckboxProps>{
 
 interface MultipleCheckboxProps {
   extraEditors: Array<any>,
-  radio: boolean,
+  radio?: boolean,
   value: Array<any>
   onChange: Function
 }
@@ -163,8 +163,9 @@ class MultipleCheckbox extends Component<MultipleCheckboxProps>{
 
 
   handleChange = (val: any, key: string) => {
-    const { radio, value, onChange } = this.props;
+    const { radio = true , value, onChange } = this.props;
     // 互斥逻辑
+    console.log(radio);
     if (radio) {
       value.forEach((v:any) => {
         if(v.key === key){

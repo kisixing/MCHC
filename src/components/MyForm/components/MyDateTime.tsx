@@ -24,8 +24,12 @@ function isVaildDate(date: Date):boolean{
 
 export default function MyDateTime(props: MyDatePickerProp){
   const handleChange = (value:any) => {
-    // console.log(value);
-    props.onChange(value);
+    const { format = defaultFormat} = props.input_props;
+    if(value){
+      props.onChange(value.format(format));
+    }else{
+      props.onChange(value);
+    }
   }
 
   const renderDatePicker = () => {
@@ -33,9 +37,9 @@ export default function MyDateTime(props: MyDatePickerProp){
       const { type = defaultType, format = defaultFormat} = props.input_props;
       let val = props.value;
       if(props.value){
-        let date = new Date(props.value);
+        // TODO 输入的可能是一个字符串，直接new Date解析不精准
+        const date = new Date(props.value);
         if(!isVaildDate(date)){
-          // return <span>数据{props.value}，格式非法</span>;
           return <strong>日期/时间数据格式非法</strong>
         }
         val = moment(date);
@@ -46,6 +50,7 @@ export default function MyDateTime(props: MyDatePickerProp){
           format={format}
           onChange={handleChange}
         />
+      // eslint-disable-next-line no-else-return
       }else if(type === "time"){
         return <TimePicker
           value={val}
@@ -53,7 +58,6 @@ export default function MyDateTime(props: MyDatePickerProp){
           onChange={handleChange}
         />
       }
-      return 
     }
   }
 

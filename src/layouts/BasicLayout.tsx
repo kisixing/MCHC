@@ -11,15 +11,13 @@ import { keyBy, keys, get, map, isEmpty, reduce, concat, isNil, filter } from 'l
 import store from 'store';
 import request, { TOKEN } from '@/utils/request';
 import styles from './less/Layout.less';
-import VisitedPanel from '@lianmed/pages/lib/Remote/VisitedPanel';
 import zhCN from 'antd/es/locale/zh_CN';
 import RouterTabs from './RouterTabs';
 import { omitRoutes } from '../../config/routes/index';
 
 const BasicLayout = (props: any) => {
-  const [panelHeight, setPanelHeight] = useState(document.documentElement.clientHeight - 135);
   const [routerTabWidth, setRouterTabWidth] = useState(
-    document.documentElement.clientWidth - (props.collapsed ? 100 : 276),
+    document.documentElement.clientWidth - (props.collapsed ? 100 : 256),
   );
   const { dispatch, children, settings } = props;
 
@@ -143,7 +141,6 @@ const BasicLayout = (props: any) => {
   };
 
   const handleResize = () => {
-    setPanelHeight(document.documentElement.clientHeight - 135);
     setRouterTabWidth(document.documentElement.clientWidth - (props.collapsed ? 276 : 100));
   };
 
@@ -182,6 +179,7 @@ const BasicLayout = (props: any) => {
       search: '',
       closable: true,
     };
+
     if (activeKey !== get(menuItemProps, 'key')) {
       dispatch({
         type: 'tab/changeTabs',
@@ -191,6 +189,12 @@ const BasicLayout = (props: any) => {
         },
       });
     }
+
+    // 滚动 activeTab
+    setTimeout(() => {
+      const tabBtnRef = document.getElementById(get(menuItemProps, 'key')) as HTMLElement;
+      tabBtnRef.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+    }, 100);
   };
 
   const handleClickHeader = () => {
@@ -205,8 +209,7 @@ const BasicLayout = (props: any) => {
   return (
     <ConfigProvider locale={zhCN}>
       <ProLayout
-        className={styles.customProLayout}
-        style={{ height: 600, overflow: 'scroll' }}
+        className={styles.proLayout}
         logo={logo}
         formatMessage={formatMessage}
         menuHeaderRender={(logoDom, titleDom) => (
@@ -243,16 +246,16 @@ const BasicLayout = (props: any) => {
         {...settings}
       >
         {!!store.get(TOKEN) && (
-          <div className={styles.customPanel}>
-            <PageHeaderWrapper className={styles.customPageHeader} title={false} />
+          <div className={styles.panel}>
+            <PageHeaderWrapper className={styles.pageHeader} title={false} />
             <RouterTabs style={{ width: routerTabWidth }} />
-            <div className={styles.customPanelChild} style={{ height: panelHeight }}>
-              {children}
+            <div className={styles.panelChild}>
+              <div className={styles.content}>{children}</div>
+              <footer className={styles.footer}>Copyright © 莲孕医疗科技</footer>
             </div>
           </div>
         )}
       </ProLayout>
-      {/* <VisitedPanel remote_url="http://transfer.lian-med.com" /> */}
     </ConfigProvider>
   );
 };

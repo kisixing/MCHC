@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import classnames from 'classnames';
+import { CloseOutlined } from '@ant-design/icons';
+
 import styles from './index.less';
 
 interface IProps {
   isActive?: boolean;
-  title: boolean;
-  tabKey: boolean;
+  title: string;
+  tabKey: string;
   closable?: boolean;
   onClick?: any;
   onClose?: any;
@@ -12,9 +15,11 @@ interface IProps {
 
 export default (props: IProps) => {
   const { isActive = false, closable = true, title, onClick, onClose, tabKey } = props;
+  let tabRef = useRef();
 
   const handleClickTab = () => {
     onClick && onClick(tabKey);
+    tabRef.scrollIntoView({ behavior: 'smooth', inline: 'center' });
   };
 
   const handleCloseTab = (e: any) => {
@@ -22,19 +27,23 @@ export default (props: IProps) => {
     onClose && onClose(tabKey);
   };
 
-  const iconStyle = isActive
-    ? {
-        backgroundColor: '#1890ff',
-      }
-    : {};
+  const iconStyle = isActive ? { backgroundColor: '#1890ff' } : {};
 
   return (
-    <div className={styles.customTabsButton} onClick={handleClickTab}>
-      <div className={styles.customTabsButtonIcon} style={iconStyle}></div>
+    <div
+      id={tabKey}
+      ref={rcNode => (tabRef = rcNode)}
+      className={classnames({
+        [styles.customTabsButton]: true,
+        [styles.isActive]: isActive,
+      })}
+      onClick={handleClickTab}
+    >
+      <div className={styles.customTabsButtonIcon} style={iconStyle} />
       <div className={styles.customTabsButtonTitle}>{title}</div>
       {closable && (
-        <div className={styles.customTabsButtonClose} onClick={handleCloseTab}>
-          x
+        <div onClick={handleCloseTab} className={styles.customTabsButtonClose}>
+          <CloseOutlined />
         </div>
       )}
     </div>
