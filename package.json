@@ -4,7 +4,7 @@
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
-    "postinstall": "npm link @lianmed/components",
+    "postinstall": "npm link @lianmed/components @lianmed/request",
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
     "deploy": "npm run site && npm run gh-pages",
@@ -86,6 +86,7 @@
     "react-crons": "^2.2.0",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
+    "react-pdf": "^4.1.0",
     "react-router": "^4.3.1",
     "redux": "^4.0.1",
     "reselect": "^4.0.0",

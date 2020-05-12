@@ -3,5 +3,5 @@ export default {
   name: 'child-examination',
   icon: 'ordered-list',
   path: '/child-examination',
-  component: './Welcome',
+  component: './child-management/child-examination',
 };

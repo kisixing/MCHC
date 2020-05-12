@@ -11,7 +11,8 @@ declare module '*.gif';
 declare module '*.bmp';
 declare module '*.tiff';
 declare module 'omit.js';
-declare let g_app: { _store: any }
+declare let g_app: { _store: any };
+declare module 'react-pdf';
 // google analytics interface
 interface GAFieldsObject {
   eventCategory: string;

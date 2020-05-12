@@ -78,7 +78,7 @@ export const omitRoutes = [
   {
     id: 379,
     type: 'others',
-    key: '/child-death-report',
+    key: '/child-death',
     isMenu: true,
     active: null,
   },
