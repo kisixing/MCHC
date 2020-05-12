@@ -1,17 +1,21 @@
 import React from 'react';
 import { get } from 'lodash';
-import { Input, DatePicker, Checkbox, InputNumber } from 'antd';
+import { Input, DatePicker, Checkbox, InputNumber, TimePicker } from 'antd';
 import SelectWithOptions from '@/components/selects/SelectWithOptions';
 import NormalSelect from '@/components/selects/NormalSelect';
 
 export default (props: any) => {
   const render = () => {
-    const inputType = get(props, 'config.inputType');
+    const inputType = get(props, 'inputType') || get(props, 'config.inputType');
     switch (inputType) {
       case 'input':
         return <Input size="small" {...props} />;
       case 'month_picker':
         return <DatePicker.MonthPicker size="small" {...props} />;
+      case 'single_date_picker':
+        return <DatePicker size="small" {...props} />;
+      case 'single_time_picker':
+        return <TimePicker size="small" {...props} />;
       case 'checkbox':
         return <Checkbox size="small" {...props} />;
       case 'select_with_options':

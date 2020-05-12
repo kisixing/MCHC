@@ -77,15 +77,8 @@ const BasicLayout = (props: any) => {
   }, []);
 
   const initGetData = async () => {
-    const { products, currentUser, allPermissions } = props;
+    const { currentUser, allPermissions } = props;
     const username = store.get('username');
-    if (isEmpty(products)) {
-      await dispatch({
-        type: 'select/getProducts',
-        payload: {},
-      });
-    }
-
     const newCurrentUser = isEmpty(currentUser) ? await request.get(`/users/${username}`) : currentUser;
     const newAllPermissions = isEmpty(allPermissions)
       ? await request.get('/permissions?type.equals=menu&size=200')
@@ -260,11 +253,10 @@ const BasicLayout = (props: any) => {
   );
 };
 
-export default connect(({ global, settings, tab, user, select }: ConnectState) => ({
+export default connect(({ global, settings, tab, user }: ConnectState) => ({
   collapsed: global.collapsed,
   settings,
   tabs: tab.tabs,
-  products: select.products,
   activeKey: tab.activeKey,
   currentUser: get(user, 'currentUser'),
   allPermissions: get(user, 'allPermissions'),
