@@ -2,7 +2,7 @@ import React from 'react';
 import { Select } from 'antd';
 import { map, get } from 'lodash';
 
-const statusMapping = {
+export const statusMapping = {
   orderStatusMapping: [
     {
       value: 0,
@@ -597,6 +597,16 @@ const statusMapping = {
       title: '右骶后（LSP）',
     },
   ],
+  hasOrNoMapping: [
+    {
+      value: 0,
+      title: '无',
+    },
+    {
+      value: 1,
+      title: '有',
+    },
+  ],
 };
 
 interface IProps {
@@ -608,7 +618,8 @@ interface IProps {
     | 'maritalMapping'
     | 'provinceMapping'
     | 'genderMapping'
-    | 'fetalpositionMapping';
+    | 'fetalpositionMapping'
+    | 'hasOrNoMapping';
 
   showSearch: true | false;
   placeholder?: string;

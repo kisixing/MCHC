@@ -12,7 +12,7 @@ export default class List extends BaseList {
     baseTitle: '分娩记录',
     needPagination: false,
     showQuery: false,
-    showAdd: true,
+    showAdd: false,
     processFromApi: undefined,
     tableColumns,
     rowKey: 'id',

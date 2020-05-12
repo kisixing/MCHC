@@ -158,6 +158,13 @@ export const omitRoutes = [
     active: null,
   },
   {
+    id: 620,
+    type: 'others',
+    key: '/deliver-management/admission/deliver-edit',
+    name: '查看病例',
+    active: null,
+  },
+  {
     id: 295,
     type: 'others',
     key: '/deliver-management/labour-record',

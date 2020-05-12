@@ -155,6 +155,7 @@ export default {
   'menu.deliver-management.admission': '入院登记',
   'menu.deliver-management.admission-add': '添加入院登记',
   'menu.deliver-management.admission-edit': '修改入院登记',
+  'menu.deliver-management.deliver-edit': '查看病例',
   'menu.deliver-management.labour-record': '分娩记录',
   'menu.deliver-management.labour-record-add': '添加分娩记录',
   'menu.deliver-management.labour-record-edit': '修改分娩记录',
