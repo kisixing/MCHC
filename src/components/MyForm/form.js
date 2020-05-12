@@ -50,6 +50,7 @@ export function createFormHandler(config, submitChange){
         }
       }
     })
+    console.log(r);
     return new Promise(resolve => {
       resolve({validCode,res: r})
     })
