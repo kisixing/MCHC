@@ -1,83 +1,13 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { Component } from "react";
 import { Table, Button } from "antd";
-import MyComponent from "./index";
-
-interface EditableCellProps {
-  value: any;
-  onChange: Function;
-  editor: any;
-}
-
-class EditableCell extends Component<EditableCellProps> {
-  state = {
-    editing: false,
-    value: "",
-  };
-
-  mapPropsToState(): void {
-    this.setState({value: this.props.value});
-  }
-
-  componentDidMount() {
-    this.mapPropsToState()
-  }
-
-  componentDidUpdate(prevProps: EditableCellProps):void {
-    if(JSON.stringify(prevProps) !== JSON.stringify(this.props)){
-      this.mapPropsToState();
-    }
-  }
-
-  handleChange = (val: any) => {
-    this.setState({ value: val });
-  };
-
-  handledbClick = (e: any) => {
-    if (this.props.editor) {
-      this.setState({ editing: true });
-    }
-  };
-
-  handleBlur = () => {
-    this.setState({ editing: false }, () => {
-      this.props.onChange(this.state.value);
-    });
-  };
-
-  render() {
-    const { editing } = this.state;
-    const { editor, value } = this.props;
-    let RenderComponent = null;
-
-    if (editor) {
-      RenderComponent = MyComponent[editor.input_type];
-    }
-    return (
-      <div
-        onDoubleClick={this.handledbClick}
-        onBlur={this.handleBlur}
-        style={{ width: "100%", minHeight: "100%" }}
-      >
-        {editing ? (
-          <RenderComponent
-            {...editor}
-            onChange={(val: any) => this.handleChange(val)}
-            value={this.state.value}
-          />
-        ) : (
-          // 如value为空，渲染为"-"
-          <span>{value || "-"}</span>
-        )}
-      </div>
-    );
-  }
-}
+import EditableCell from './TableEditableCell';
+import { isArr } from '../../utils/func';
 
 /* ============================================================================= */
 interface MyTableProps {
   onChange: Function,
-  dispatch: Function,
+  dispatch?: Function,
   value: any,
   input_props: any,
   path: string;
@@ -101,12 +31,14 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
 
   // 因为要维护tableRow的状态，所有需要保存在本地
   componentDidUpdate(prevProps: MyTableProps) {
+    
     if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
+      const { value } = this.props;
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         tableColumns: this.props.input_props.tableColumns,
         // 处理dataSource，为了dataSource拥有_key值,用于rowSelection
-        dataSource: this.props.value.map((v:any, i:number) => ({...v, _key: i})),
+        dataSource: isArr(value) ? value.map((v:any, i:number) => ({...v, _key: i})) : [],
         selectedRowKeys: []
       }) 
     }
@@ -116,21 +48,27 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
     const { onChange } = this.props;
     const { dataSource } = this.state;
     dataSource[index][key] = val;
+    
+    /** 
+     * TODO
+     *  如果在这里删除了_key，会导致选中一项变为全选中
+     * */ 
+
     // 提交出去前删除使用的_key
-    for(let i = 0; i < dataSource.length ; i++){
-      delete dataSource[i]._key;
-    }
+    // for(let i = 0; i < dataSource.length ; i++){
+    //   delete dataSource[i]._key;
+    // }
     onChange(dataSource);
   };
 
   handleAdd = () => {
-    const { tableColumns } = this.props.input_props;
-    const { onChange, value } = this.props;
+    const { tableColumns, dataSource } = this.state;
+    const { onChange } = this.props;
     const newData = {};
     tableColumns.forEach((ele: {key:string, title: string}) => {
       newData[ele.key] = "";
     });
-    const newValue = value.map((v:any) => v);
+    const newValue = dataSource.map((v:any) => v);
     newValue.push(newData);
     onChange(newValue);
   }
@@ -146,9 +84,9 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
       }
     })
     // 提交出去前删除使用的_key
-    for(let i = 0 ; i < dataSource.length ; i++){
-      delete dataSource[i]._key;
-    }
+    // for(let i = 0 ; i < dataSource.length ; i++){
+    //   delete dataSource[i]._key;
+    // }
     this.props.onChange(dataSource);
   }
   

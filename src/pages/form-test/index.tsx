@@ -2,8 +2,9 @@ import * as React from 'react';
 import MyForm from '@/components/MyForm/index';
 import config from './config';
 import data from './data';
+import styles from './index.less';
 
-import { getRenderData, toFormat} from '@/components/MyForm/utils';
+import { getRenderData, getFormData} from '@/components/MyForm/utils';
 
 interface HomeState{
   formHandler:{
@@ -25,14 +26,17 @@ export default class Home extends React.Component<{},HomeState>{
 
   componentDidUpdate(){
     const { formHandler } = this.state;
-    formHandler.subscribe(".lmp", "change", (val: any) => {});
+    formHandler.subscribe("lmp", "change", (val: any) => {
+      formHandler['sureEdd'].actions.setValue("2020-01-01");
+    });
+    console.log(formHandler);
   }
 
 
   handleSubmit = () => {
     this.state.formHandler.submit().then(({validCode, res}:any) => {
       console.log(res);
-      console.log(toFormat(res));
+      console.log(getFormData(res));
       // if(!validCode){
       // }
     });
@@ -42,7 +46,7 @@ export default class Home extends React.Component<{},HomeState>{
     const myConfig = getRenderData(config, data);
     // 不要再页面render中尝试取formHandler的值，因为这个时候formItem初始化还没有完成
     return(
-      <div>
+      <div className={styles.container}>
         <MyForm
           config={myConfig}
           getFormHandler={(formHandler:any) => this.setState({formHandler})}

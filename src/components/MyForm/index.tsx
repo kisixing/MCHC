@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React,{Component} from 'react';
 import {Row, Col} from 'antd';
 import {MyFormProp, MyFormState, FormConfig} from './interface';
@@ -7,58 +8,62 @@ import styles from './index.less';
 
 const defaultGutterConfig = {
   gutter: [0,16], // px
-  justify: "left"
+  justify: "start"
 }
 // TODO 后期应该考虑把这里的col和row换成自定义的样式实现
+// TODO 优化换行
 export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfig:any = defaultGutterConfig){
   if(!config) throw new Error('config is undefined');
   if(Object.prototype.toString.call(config) !== '[object Array]') throw new Error(`Expect array but ${typeof config}`);
   
   let count = 0;    // 计算占比
-  let prevOffset = 0; // 使用offset换行时，计算第i个元素用于上一行换行的offset数量
+  // let prevOffset = 0; 使用offset换行时，计算第i个元素用于上一行换行的offset数量
   let row = 0;
   const formDom = [];
   let spanArr = [];
   for(let i = 0 ;i < config.length; i++){
+    const { span = 24, offset = 0 } = config[i];
+    const { label = "", unit = "", input_props = {}, rules = "" , key = "", is_new_ros = false, name = ""} = config[i];
     if(config[i].hidden){
       // eslint-disable-next-line no-continue
       continue;
     }
-    count += config[i].span + config[i].offset;
-    // console.log(count);
-    if(count > 24){
+    count += span + offset;
+    if(count > 24 || is_new_ros){
       formDom.push(
         <Row 
-        key={`row-${row}`} 
-        {...gridConfig}
+          key={`row-${row}`} 
+          {...gridConfig}
         >
             {spanArr}
         </Row>
       )
       spanArr = []; 
       // 计算上一行换行的offset数量
-      prevOffset = 24 - count + (config[i].span + config[i].offset);
+      // prevOffset = 24 - count + (span + offset);
       // 减去上一行换行所用offset
-      count = config[i].span + (config[i].offset - prevOffset);
+      count = span + offset;
+      // count = span + (offset - prevOffset);
       row += 1;
     }
     spanArr.push(
       <Col  
-        span={config[i].span} 
-        // 同上一条注释
-        offset={spanArr.length === 0 ? config[i].offset - prevOffset : config[i].offset} 
+        span={span} 
+        offset={offset} 
+        // offset={spanArr.length === 0 ? offset - prevOffset : offset} 
         key={`row-${row}|span-${count}`}
       >
         <FormItem 
-          actions={formHandler[config[i].key].actions} 
+          actions={formHandler[config[i].name].actions} 
           dispatch={formHandler.dispatch}
           defaultValue={config[i].value}
           type={config[i].input_type}
-          label={config[i].label || ""}
-          unit={config[i].unit || ""}
-          input_props={config[i].input_props}
-          validate={config[i].rules || ""}
-          path={config[i].key || ""}
+          label={label}
+          unit={unit}
+          input_props={input_props}
+          validate={rules}
+          path={key}
+          name={name}
         />
       </Col>
     )
@@ -68,8 +73,6 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
   }
   return formDom;
 }
-
-
 
 export default class MyForm extends Component<MyFormProp, MyFormState>{
   constructor(props:MyFormProp){
