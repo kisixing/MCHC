@@ -1,78 +1,8 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { Component } from "react";
 import { Table, Button } from "antd";
-import MyComponent from "./index";
-import { isArr } from '../utils/func';
-
-interface EditableCellProps {
-  value: any;
-  onChange: Function;
-  editor: any;
-}
-
-class EditableCell extends Component<EditableCellProps> {
-  state = {
-    editing: false,
-    value: "",
-  };
-
-  componentDidMount() {
-    this.mapPropsToState()
-  }
-
-  componentDidUpdate(prevProps: EditableCellProps):void {
-    if(JSON.stringify(prevProps) !== JSON.stringify(this.props)){
-      this.mapPropsToState();
-    }
-  }
-
-  handleChange = (val: any) => {
-    this.setState({ value: val });
-  };
-
-  handledbClick = (e: any) => {
-    if (this.props.editor) {
-      this.setState({ editing: true });
-    }
-  };
-
-  handleBlur = () => {
-    this.setState({ editing: false }, () => {
-      this.props.onChange(this.state.value);
-    });
-  };
-
-  mapPropsToState(): void {
-    this.setState({value: this.props.value});
-  }
-
-  render() {
-    const { editing } = this.state;
-    const { editor, value } = this.props;
-    let RenderComponent = null;
-    if (editor) {
-      RenderComponent = MyComponent[editor.input_type];
-    }
-    return (
-      <div
-        onDoubleClick={this.handledbClick}
-        onBlur={this.handleBlur}
-        style={{ width: "100%", minHeight: "100%" }}
-      >
-        {editing ? (
-          <RenderComponent
-            {...editor}
-            onChange={(val: any) => this.handleChange(val)}
-            value={this.state.value}
-          />
-        ) : (
-          // 如value为空，渲染为"-"
-          <span>{value || "-"}</span>
-        )}
-      </div>
-    );
-  }
-}
+import EditableCell from './TableEditableCell';
+import { isArr } from '../../utils/func';
 
 /* ============================================================================= */
 interface MyTableProps {
@@ -118,10 +48,16 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
     const { onChange } = this.props;
     const { dataSource } = this.state;
     dataSource[index][key] = val;
+    
+    /** 
+     * TODO
+     *  如果在这里删除了_key，会导致选中一项变为全选中
+     * */ 
+
     // 提交出去前删除使用的_key
-    for(let i = 0; i < dataSource.length ; i++){
-      delete dataSource[i]._key;
-    }
+    // for(let i = 0; i < dataSource.length ; i++){
+    //   delete dataSource[i]._key;
+    // }
     onChange(dataSource);
   };
 
@@ -148,9 +84,9 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
       }
     })
     // 提交出去前删除使用的_key
-    for(let i = 0 ; i < dataSource.length ; i++){
-      delete dataSource[i]._key;
-    }
+    // for(let i = 0 ; i < dataSource.length ; i++){
+    //   delete dataSource[i]._key;
+    // }
     this.props.onChange(dataSource);
   }
   

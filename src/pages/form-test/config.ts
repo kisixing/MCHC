@@ -14,8 +14,28 @@ const config: Array<FormConfig> = [
   { name: "lmp", key: ".lmp", label: "末次月经", span: 8, offset: 0, input_type: "date" },
   { name: "edd", key: ".edd", label: "预产期-日期", span: 8, offset: 0, input_type: "date" },
   { name: "sureEdd", key: ".sureEdd", label: "预产期-B超", span: 8, offset: 0, input_type: "date" },
-  { name: "gravidity", key: ".gravidity", label: "G", span: 8, offset: 0, input_type: "select" },
-  { name: "parity", key: ".parity", label: "P", span: 8, offset: 0, input_type: "select" },
+  {
+    name: "gravidity", key: ".gravidity", label: "G", span: 8, offset: 0, input_type: "select",
+    input_props: {
+      options: [
+        { label: "1", value: 1 },
+        { label: "2", value: 2 },
+        { label: "3", value: 3 }
+      ],
+      radio: false
+    }
+  },
+  {
+    name: "parity", key: ".parity", label: "P", span: 8, offset: 0, input_type: "select",
+    input_props: {
+      options: [
+        { label: "1", value: 1 },
+        { label: "2", value: 2 },
+        { label: "3", value: 3 }
+      ],
+      radio: true
+    }
+  },
   {
     name: "diseaseHistory", key: '.diseaseHistory', label: "疾病史", input_type: "checkbox",
     input_props: {
@@ -70,8 +90,8 @@ const config: Array<FormConfig> = [
           key: "hypertension",
           label: "高血压",
           options: [
-            {label: "有", value: 1},
-            {label: "无", value: 2},
+            { label: "有", value: 1 },
+            { label: "无", value: 2 },
           ],
           extraEditors: [
             {
@@ -182,14 +202,123 @@ const config: Array<FormConfig> = [
         // { name: "", key: "trisomy18z", label: "血型", input_type: "input" },
         {
           name: "",
-          key: "rh", 
-          label: "RH血型", 
-          input_type: "select", 
-          input_props: {} 
+          key: "rh",
+          label: "RH血型",
+          input_type: "select",
+          input_props: {
+            type: "default",
+            options: [
+              { label: "RH(+)", value: "RH(+)" },
+              { label: "RH(-)", value: "RH(-)" },
+            ]
+          }
+        },
+        {
+          name: "", key: "genotype", label: "地贫基因型", input_type: "select",
+          input_props: {
+            type: "default",
+            radio: false,
+            options: [
+              { label: "β地中海贫血基因CD14-15突变", value: "β地中海贫血基因CD14-15突变" },
+              { label: "β地中海贫血基因CD17突变", value: "β地中海贫血基因CD17突变" }
+            ]
+          }
         },
         { name: "", key: "note", label: "其他异常", input_type: "input" },
       ]
     }
   },
+  {
+    name: "female-thalassemia",
+    key: ".thalassemia_1",
+    label: "女方地贫检查",
+    input_type: "simpleobject",
+    input_props: {
+      config: [
+        { name: "", key: "Hb", label: "Hb", unit: "g/L", input_type: "input" },
+        { name: "", key: "MCV", label: "MCV", unit: "fL", input_type: "input" },
+        { name: "", key: "MCH", label: "MCH", input_type: "input" },
+        { name: "", key: "HbA2", label: "HbA2", input_type: "input" },
+        // { name: "", key: "trisomy18z", label: "血型", input_type: "input" },
+        {
+          name: "",
+          key: "rh",
+          label: "RH血型",
+          input_type: "select",
+          input_props: {
+            options: [
+              { label: "RH(+)", value: "RH(+)" },
+              { label: "RH(-)", value: "RH(-)" },
+            ]
+          }
+        },
+        {
+          name: "", key: "genotype", label: "地贫基因型", input_type: "select",
+          input_props: {
+            type: "default",
+            radio: false,
+            options: [
+              { label: "β地中海贫血基因CD14-15突变", value: "β地中海贫血基因CD14-15突变" },
+              { label: "β地中海贫血基因CD17突变", value: "β地中海贫血基因CD17突变" }
+            ]
+          }
+        },
+        { name: "", key: "note", label: "其他异常", input_type: "input" },
+      ]
+    }
+  },
+  {
+    name: "diseaseHistory-h",
+    key: ".diseaseHistory",
+    label: "单选带input",
+    input_type: "select",
+    input_props: {
+      type: "multiple",
+      options: [
+        { label: "高血压", value: "hypertension" },
+        { label: "肾病", value: "nephropathy" },
+        { label: "呼吸道疾病", value: "respiratoryDisease" },
+      ],
+      extraEditors: [
+        {
+          key: "hypertension",
+          editors: [
+            { name: "", key: "", input_type: "input" }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    name: "diseaseHistory-h1",
+    key: ".diseaseHistory",
+    label: "多选带input",
+    input_type: "select",
+    input_props: {
+      type: "multiple",
+      radio: false,
+      options: [
+        { label: "高血压", value: "hypertension" },
+        { label: "肾病", value: "nephropathy" },
+        { label: "胃病", value: "gastroDisease" },
+        { label: "呼吸道疾病", value: "respiratoryDisease" },
+        { label: "癫痫", value: "epilepsy" },
+        { label: "心脏疾病", value: "cardiacDisease" },
+        { label: "内分泌疾病", value: "endocrineDisease" },
+        { label: "甲状腺疾病", value: "thyroidDisease" },
+        { label: "血液病", value: "hematopathy" },
+        { label: "精神疾病", value: "mentalDisease" },
+        { label: "糖尿病", value: "diabetes" },
+      ],
+      extraEditors: [
+        {
+          key: "hypertension",
+          editors: [
+            { name: "", key: "", input_type: "input" }
+          ]
+        }
+      ]
+    }
+  }
 ]
 export default config;

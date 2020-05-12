@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { Component, ReactNode } from 'react';
 import { Checkbox } from 'antd';
-import WhetherCheckbox from './WhetherCheckbox';
 import MultipleCheckbox from './MultipleCheckbox';
 import CustomCheckbox from './CustomCheckbox';
 import { getObjectFormArray, convertExtraEditors } from '../../utils/func';
@@ -34,7 +33,7 @@ interface CheckboxComponentProps {
 
 export default class MyCheckbox extends Component<MyCheckboxProps, any> {
   checkbox: { [key: string]: Function } = {
-    default: (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
+    "default": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
       return <Checkbox checked={value} onChange={(e: any) => onChange(e.target.checked)} />;
     },
     "multiple": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
@@ -55,9 +54,7 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
         // console.error(`输入对象中找不到 ${item.key} || 输入对象值为空`);
         return false;
       }).filter((item: any) => !!item);
-      console.log(editors);
       const handleChange = (val: any, key: string) => {
-        console.log(val);
         const newObj = {
           [key]: val.checkboxValue,
           [`${key}Note`]: JSON.stringify(getObjectFormArray(val.editorsValue))
@@ -71,7 +68,7 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
         editors={editors}
       />
     },
-    custom: (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
+    "custom": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
       const { renderData, radio = true } = input_props;
       if (renderData.length !== 1) return <span>custom型checkbox中renderData长度为1</span>;
       let r: any = {

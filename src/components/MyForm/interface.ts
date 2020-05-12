@@ -27,13 +27,16 @@ interface TableColumns {
 export interface ComponentOption {
   type?: string | null,
   // select
-  selectOptions?: Array<{ value: string | number, label: string | number }> | null,
+  options?: Array<{ 
+    value: string | number,
+    label: string | number
+  }>,
+
   // date
   format?: string,
-  // checkbox
+  // checkbox | select 公用
   radio?: boolean,
-  // extraEditors?: Array<ExtraEditors>,
-  
+  extraEditors?: Array<ExtraEditors>,
   renderData?: Array<RenderData>,
   // table
   editable?: boolean,
