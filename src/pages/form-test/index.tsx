@@ -3,7 +3,7 @@ import MyForm from '@/components/MyForm/index';
 import config from './config';
 import data from './data';
 
-import { getRenderData, toFormat} from '@/components/MyForm/utils';
+import { getRenderData, getFormData} from '@/components/MyForm/utils';
 
 interface HomeState{
   formHandler:{
@@ -25,14 +25,14 @@ export default class Home extends React.Component<{},HomeState>{
 
   componentDidUpdate(){
     const { formHandler } = this.state;
-    formHandler.subscribe(".lmp", "change", (val: any) => {});
+    formHandler.subscribe("lmp", "change", (val: any) => {});
   }
 
 
   handleSubmit = () => {
     this.state.formHandler.submit().then(({validCode, res}:any) => {
       console.log(res);
-      console.log(toFormat(res));
+      console.log(getFormData(res));
       // if(!validCode){
       // }
     });

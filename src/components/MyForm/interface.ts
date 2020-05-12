@@ -1,57 +1,65 @@
 // Checkbox
 interface ExtraEditors {
-  key: any, // 此处key对应的是checkbox的value值
-  editors: Array<FormConfig>
+  key: any, 
+  editors: Array<FormConfig>,
+}
+
+interface RenderData {
+  key: string,
+  label: string,
+  // 暂时仅用于custom
+  options?: Array<{
+    label:string|number|boolean,
+    value:string|number|boolean
+  }>,
+  extraEditors?: Array<ExtraEditors>
 }
 
 // Table
 interface TableColumns {
   key?: string,
   title: string,
-  children?: Array<TableColumns>
-  width?: number      // 样式写在这个位置会不会有点不好
+  children?: Array<TableColumns>,
+  width?: number,
   editor?: FormConfig
 }
 
 export interface ComponentOption {
-  type?: string | null, // 单一组件多重展开
-  
+  type?: string | null,
   // select
   selectOptions?: Array<{ value: string | number, label: string | number }> | null,
-  
   // date
   format?: string,
-  
   // checkbox
   radio?: boolean,
-  extraEditors?: Array<ExtraEditors>,
-  // 这个属性有可能适用于其他组件
-  renderData?: Array<string>|Array<{key:string,label: string}>
+  // extraEditors?: Array<ExtraEditors>,
   
+  renderData?: Array<RenderData>,
   // table
-  editable?: boolean, // 自动提供button和编辑功能
+  editable?: boolean,
   tableColumns?: Array<TableColumns>,
-
-  // custom 自定义
+  // SimpleObject
   config?: Array<FormConfig>
 }
 
 export interface FormConfig {
+  name: string,
   key: string,
   label?: string,
   unit?: string,
   input_type: string,
-  span: number,
-  offset: number,
+
+  span?: number,
+  offset?: number,
   hidden?: boolean,
+  is_new_ros?: boolean, 
   value?: any,
   rules?: string | object | RegExp | null,
-  input_props: ComponentOption,
+  input_props?: ComponentOption,
 }
 
 export interface MyFormProp {
   config: Array<FormConfig>,
-  // TODO func类型
   getFormHandler?: (func: any) => void,
   submitChange: boolean
 }
@@ -59,7 +67,6 @@ export interface MyFormProp {
 export interface MyFormState {
   formHandler: any
 }
-
 
 export interface FormItemProp {
   actions?: {
@@ -74,11 +81,12 @@ export interface FormItemProp {
   unit: string,
   input_props: ComponentOption | null,
   validate?: string | object | RegExp | null,
-  path: string
+  path: string,
+  name: string
 }
-
 export interface FormItemState {
   value: any,
   error: any,
+  path: string,
   validate: string | object | RegExp | null
 }
