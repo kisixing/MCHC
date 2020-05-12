@@ -4,5 +4,5 @@ import { dynamic } from 'umi';
 export default (WrappedComponent: any) => {
   return dynamic({
     loader: async () => WrappedComponent,
-  });
+  }) as any;
 };

@@ -1,10 +1,9 @@
+/* eslint-disable react/no-unused-state */
+/* eslint-disable @typescript-eslint/camelcase */
 import React,{ Component, ReactNode} from 'react';
-// import { Row, Col} from 'antd';
 import MyComponents from './components/index';
 import { FormItemProp, FormItemState } from './interface';
-
 import {validFun} from './utils/valid';
-
 import styles from './formItem.less';
 
 function isBase(val:any):boolean{
@@ -17,12 +16,16 @@ export default class FormItem extends Component<FormItemProp,FormItemState>{
     this.state = {
       value: "",
       error: "",
+      path: "",
       validate: [],
     }
     const self = this;
     if(props.actions){
       props.actions.getValue = function getValue(){
-        return self.state.value;
+        return {
+          value: self.state.value,
+          path: self.state.path
+        }
       };
       props.actions.setValue = function setValue(val){
         self.setState({value: val});
@@ -38,7 +41,8 @@ export default class FormItem extends Component<FormItemProp,FormItemState>{
   componentDidMount(){
     this.setState({
       value: this.props.defaultValue,
-      validate: this.props.validate || ""
+      validate: this.props.validate || "",
+      path: this.props.path
     });
   }
 
@@ -47,16 +51,17 @@ export default class FormItem extends Component<FormItemProp,FormItemState>{
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
         value: this.props.defaultValue,
-        validate: this.props.validate || ""
+        validate: this.props.validate || "",
+        path: this.props.path
       });
     }
   }
 
   handleChange = (val:any) => {
-    const { path, dispatch } = this.props;
+    const { name , dispatch } = this.props;
     this.setState({value: val},() => {
-      if(path){
-        dispatch(path,"change",val);
+      if(name){
+        dispatch(name,"change",val);
       }
       if(this.props.actions){
         if(this.props.actions.setValue){
@@ -95,15 +100,15 @@ export default class FormItem extends Component<FormItemProp,FormItemState>{
     return(
       <div>
         {/* 业务组件与通用组件样式区别 */}
-        <div className={type.indexOf('b-') === -1 ? styles['form-item'] : styles['business-component']}>
+        <div className={styles['form-item']}>
+          <div className={styles['formItem-label']}>
           { label !== "" ? (
-            <div className={styles['formItem-label']}>
             <label>
               {this.renderAsterisk(validate)}
               {label}:
             </label>
-            </div>
           ) :null}
+          </div>
           <div className={styles['formItem-main']}>
             {MyComponent ? (
               <MyComponent

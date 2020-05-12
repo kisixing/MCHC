@@ -4,7 +4,7 @@ interface DownScreenProps {
   onChange: Function,
   dispatch: Function,
   value: any,
-  componentOption: any,
+  input_props: any,
   error: any,
   path: string
 }

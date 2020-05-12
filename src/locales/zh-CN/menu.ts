@@ -117,10 +117,10 @@ export default {
   'menu.premarital-care.visit-husband': '男方婚前检查',
   'menu.premarital-care.certification': '婚前医学证明',
   'menu.premarital-care.statistics': '婚检统计',
-  
+
   'menu.gynecological-diseases': '妇女病普查管理',
-  'menu.gynecological-diseases.women': '档案管理',
-  'menu.gynecological-diseases.examination': '普查管理',
+  'menu.gynecological-diseases.women': '普查登记',
+  'menu.gynecological-diseases.examination': '妇女健康检查',
   'menu.gynecological-diseases.breast-cancer-screen': '乳腺癌筛查',
   'menu.gynecological-diseases.cervical-cancer-screen': '宫颈癌筛查',
 
@@ -134,7 +134,7 @@ export default {
   'menu.high-risk-management.highrisk': '高危登记',
   'menu.high-risk-management.followup': '高危随访',
   'menu.high-risk-management.statistics': '高危统计',
-  
+
   'menu.prenatal-screening': '产前筛查',
   'menu.prenatal-screening.prenatalpatient': '筛查登记',
   'menu.prenatal-screening.prenatalscreen': '筛查记录',
@@ -150,16 +150,31 @@ export default {
   'menu.maternal-death': '孕产妇死亡报告',
 
   'menu.pmtct': '艾梅乙专案上报管理',
- 
+
   'menu.deliver-management': '分娩管理',
   'menu.deliver-management.admission': '入院登记',
+  'menu.deliver-management.admission-add': '添加入院登记',
+  'menu.deliver-management.admission-edit': '修改入院登记',
+  'menu.deliver-management.deliver-edit': '查看病例',
   'menu.deliver-management.labour-record': '分娩记录',
+  'menu.deliver-management.labour-record-add': '添加分娩记录',
+  'menu.deliver-management.labour-record-edit': '修改分娩记录',
   'menu.deliver-management.nursing-record': '护理记录',
+  'menu.deliver-management.nursing-record-add': '添加护理记录',
+  'menu.deliver-management.nursing-record-edit': '修改护理记录',
   'menu.deliver-management.predelivery': '待产记录',
+  'menu.deliver-management.predelivery-add': '添加待产记录',
+  'menu.deliver-management.predelivery-edit': '修改待产记录',
   'menu.deliver-management.caesarean-delivery': '剖宫产记录',
+  'menu.deliver-management.caesarean-delivery-add': '添加剖宫产记录',
+  'menu.deliver-management.caesarean-delivery-edit': '修改剖宫产记录',
   'menu.deliver-management.deliver-form': '分娩记录单',
   'menu.deliver-management.neonate-record': '新生儿记录',
+  'menu.deliver-management.neonate-record-add': '添加新生儿记录',
+  'menu.deliver-management.neonate-record-edit': '修改新生儿记录',
   'menu.deliver-management.postpartum-visit': '产后访视',
+  'menu.deliver-management.postpartum-visit-add': '添加产后访视',
+  'menu.deliver-management.postpartum-visit-edit': '修改产后访视',
 
   'menu.birth-defect': '出生缺陷登记',
   'menu.neonatal-screening': '新生儿疾病筛查',

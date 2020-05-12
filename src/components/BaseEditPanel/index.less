@@ -1,0 +1,35 @@
+.baseEditPanel {
+  display: flex;
+  justify-content: center;
+  background: #ffffff;
+  :global {
+    .ant-form-item {
+      margin-bottom: 12px;
+    }
+  }
+}
+
+.panelWithChild {
+  .panelWithChildHeader {
+    display: flex;
+    justify-content: center;
+
+    .panelWithChildHeaderItem {
+      margin: 0 24px;
+      font-size: 16px;
+      .panelWithChildHeaderItemLabel {
+        font-size: 14px;
+        display: inline-block;
+        margin-right: 8px;
+      }
+      .panelWithChildHeaderItemValue {
+        display: inline-block;
+        font-weight: bold;
+      }
+    }
+  }
+  .panelWithChildHeaderDivider {
+    height: 2px;
+    background: #ffffff;
+  }
+}
