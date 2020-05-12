@@ -32,7 +32,8 @@ export default (props: IProps) => {
   return (
     <div
       id={tabKey}
-      ref={rcNode => (tabRef = rcNode)}
+      // eslint-disable-next-line no-return-assign
+      ref={(rcNode: any) => tabRef = rcNode}
       className={classnames({
         [styles.customTabsButton]: true,
         [styles.isActive]: isActive,
