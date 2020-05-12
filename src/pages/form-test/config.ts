@@ -124,86 +124,14 @@ const config: Array<FormConfig> = [
     input_type: "simpleobject",
     input_props: {
       config: [
-        { name: "", key: "trisomy21", label: "21三体风险", input_type: "input" },
-        { name: "", key: "trisomy18", label: "18三体风险", input_type: "input" },
-        { name: "", key: "trisomy13", label: "13三体风险", input_type: "input" },
-        { name: "", key: "HCG", label: "β-HCG", unit: "mom", input_type: "input" },
-        { name: "", key: "PAPPA", label: "PAPP-A", unit: "mom", input_type: "input" },
-        { name: "", key: "note", label: "其他异常", input_type: "input" },
+        { name: "", key: "checkdate", label: "检查日期", unit: "", input_type: "date" },
+        { name: "", key: "trisomy21", label: "21三体风险", unit: "天", input_type: "input" },
+        { name: "", key: "trisomy18", label: "18三体风险", unit: "天", input_type: "input" },
+        { name: "", key: "trisomy13", label: "13三体风险", unit: "天", input_type: "input" },
+        { name: "", key: "checkdate", label: "检查日期", unit: "天", input_type: "date" },
+        { name: "", key: "checkdate", label: "检查日期", unit: "天", input_type: "date" },
       ]
     }
-  },
-  {
-    name: "middle-downsscreen",
-    key: ".downsscreen_1",
-    label: "中期唐氏筛查",
-    input_type: "simpleobject",
-    input_props: {
-      config: [
-        { name: "", key: "trisomy21", label: "21三体风险", input_type: "input" },
-        { name: "", key: "trisomy18", label: "18三体风险", input_type: "input" },
-        { name: "", key: "trisomy13", label: "13三体风险", input_type: "input" },
-        { name: "", key: "NTD", label: "NTD风险", input_type: "input" },
-        { name: "", key: "HCG", label: "β-HCG", unit: "mom", input_type: "input" },
-        { name: "", key: "AFP", label: "AFP", unit: "mom", input_type: "input" },
-        { name: "", key: "E3", label: "E3", unit: "mom", input_type: "input" },
-        { name: "", key: "note", label: "其他异常", input_type: "input" },
-      ]
-    }
-  },
-  {
-    name: "nipt-downsscreen",
-    key: ".downsscreen_2",
-    label: "NIPT唐氏筛查",
-    input_type: "simpleobject",
-    input_props: {
-      config: [
-        { name: "", key: "trisomy21", label: "21三体风险", input_type: "input" },
-        { name: "", key: "trisomy18", label: "18三体风险", input_type: "input" },
-        { name: "", key: "trisomy13", label: "13三体风险", input_type: "input" },
-        { name: "", key: "trisomy21z", label: "21三体风险Z值", input_type: "input" },
-        { name: "", key: "trisomy18z", label: "18三体风险Z值", input_type: "input" },
-        { name: "", key: "trisomy13z", label: "13三体风险Z值", input_type: "input" },
-        { name: "", key: "note", label: "其他异常", input_type: "input" },
-      ]
-    }
-  },
-  // {
-  //   name: "male-thalassemia",
-  //   key: ".thalassemia_0",
-  //   label: "男方地贫检查",
-  //   input_type: "simpleobject",
-  //   input_props: {
-  //     config: [
-  //       { name: "", key: "Hb", label: "Hb", unit: "g/L", input_type: "input" },
-  //       { name: "", key: "MCV", label: "MCV", unit: "fL", input_type: "input" },
-  //       { name: "", key: "MCH", label: "MCH", input_type: "input" },
-  //       { name: "", key: "HbA2", label: "HbA2", input_type: "input" },
-  //       // { name: "", key: "trisomy18z", label: "血型", input_type: "input" },
-  //       {
-  //         name: "",
-  //         key: "rh", 
-  //         label: "RH血型", 
-  //         input_type: "select", 
-  //         input_props: {} 
-  //       },
-  //       { name: "", key: "note", label: "其他异常", input_type: "input" },
-  //     ]
-  //   }
-  // },
-  // {
-  //   name: "test",
-  //   key: ".test",
-  //   input_type: "select",
-  //   label: "测试",
-  //   span: 8,
-  //   input_props: {
-  //     selectOptions: [
-  //       {label: 1, value: 1},
-  //       {label: 2, value: 2},
-  //       {label: 3, value: 3},
-  //     ]
-  //   }
-  // }
+  }
 ]
 export default config;

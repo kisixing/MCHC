@@ -200,8 +200,7 @@ function newObj(parentKey: string, currentKey: string, data: any) {
  * 所有需要此方法做合并处理（正常情况下是不会去重的，除非在转换的时候已经出现了重复）
  * 合并两个对象
  */
-function _assign(mainData: any = {}, newData: any = {}): any {
-  
+function _assign(mainData: any, newData: any): any {
   if (isObj(mainData) && isObj(newData)) {
     const mainKey = Object.keys(mainData);
     const newKey = Object.keys(newData);
@@ -214,9 +213,7 @@ function _assign(mainData: any = {}, newData: any = {}): any {
           flag = true;
           // 判别下一层是不是数组，做数组合并
           if (isArr(mainData[mk]) && isArr(newData[nk])) {
-            // 去长度较大者
-            const len = mainData[mk].length > newData[nk].length ? mainData[mk].length : newData[nk].length 
-            for (let k = 0; k < len; k++) {
+            for (let k = 0; k < mainData[mk].length; k++) {
               mainData[mk][k] = _assign(mainData[mk][k], newData[nk][k])
             }
           } else if (isObj(mainData[mk]) && isObj(newData[mk])) {
@@ -237,8 +234,6 @@ function _assign(mainData: any = {}, newData: any = {}): any {
     }
   } else {
     console.error("其中一个参数不是对象||二者皆不为对象||两者数据类型不相同，不可以做合并操作");
-    console.log(mainData);
-    console.log(newData);
   }
   return mainData;
 }
@@ -250,7 +245,6 @@ function _assign(mainData: any = {}, newData: any = {}): any {
  */
 function toFormat(data: { [key: string]: any }): object {
   let r = {};
-
   Object.keys(data).forEach(key => {
     const oi = key.lastIndexOf(o);
     const ai = key.lastIndexOf(a);
@@ -281,23 +275,10 @@ function toFormat(data: { [key: string]: any }): object {
 
 export function getFormData(data: Array<{ value: any, path: string }>): object {
   let r = {};
-  const arr:Array<any> = [];
   Object.keys(data).forEach((key: string) => {
-    // console.log(toFormat({
-    //   [data[key].path]: data[key].value
-    // }));
-    arr.push(toFormat({
+    r = _assign(r, toFormat({
       [data[key].path]: data[key].value
     }))
-    // r = _assign(r, toFormat({
-    //   [data[key].path]: data[key].value
-    // }))
   })
-  r = _assign(r,arr[0]);
-  console.log(r);
-  r = _assign(r,arr[1]);
-  console.log(r);
-  r = _assign(r,arr[2]);
-  console.log(r);
   return r;
 }
