@@ -16,6 +16,9 @@ export interface CurrentUser {
   }[];
   userid?: string;
   unreadCount?: number;
+  firstName?: string;
+  imageUrl?: string;
+  id?: string
 }
 
 export interface UserModelState {
