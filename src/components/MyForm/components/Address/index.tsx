@@ -4,15 +4,10 @@ interface AddressCascaderProps {
 
 }
 
-export default class AddressCascader extends Component<AddressCascaderProps> {
-  
-  componentDidMount(){
-    fetch('http://api02.aliyun.venuscn.com/area/all').then()
-  }
-  
+export default class AddressCascader extends Component<AddressCascaderProps> {  
   render() {
     return(
-      <div>aaa</div>
+      <div>AddressCascader</div>
     )
   }
 }

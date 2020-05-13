@@ -334,6 +334,24 @@ const config: Array<FormConfig> = [
     input_props: {
 
     }
+  },
+  {
+    name: "fetuses",
+    key: ".fetuses",
+    label: "胎儿信息",
+    header_label: true,
+    input_type: "array-custom",
+    input_props: {
+      config: [
+        { name: "id", key: ".id", label: "id", input_type: "input", span: 8, offset: 0 },
+        { name: "fetalPosition", key: ".fetalPosition", label: "胎儿位置", input_type: "input", span: 8, offset: 0 },
+        { name: "fetalHeartRate", key: ".fetalHeartRate", label: "胎心率", input_type: "input", span: 8, offset: 0 },
+        { name: "fetalMovement", key: ".fetalMovement", label: "胎动", input_type: "input", span: 8, offset: 0 },
+        { name: "presentation", key: ".presentation", label: "先露", input_type: "input", span: 8, offset: 0 },
+        { name: "weight", key: ".weight", label: "胎重", input_type: "input", span: 8, offset: 0 },
+        { name: "avf", key: ".avf", label: "avf", input_type: "input", span: 8, offset: 0 },
+      ]
+    }
   }
 ]
 export default config;

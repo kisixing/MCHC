@@ -99,11 +99,11 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
     const MyComponent = MyComponents[type];
     return (
       <div>
-        <div className={styles['formItem-header-label']}>
-          {label !== "" && header_label ? (
+        {label !== "" && header_label ? (
+          <div className={styles['formItem-header-label']}>
             <h1>{this.renderAsterisk(validate)}{label}</h1>
-          ) : null}
-        </div>
+          </div>
+        ) : null}
         <div className={styles['form-item']}>
           <div className={styles['formItem-inline-label']}>
             {label !== "" && !header_label ? (
