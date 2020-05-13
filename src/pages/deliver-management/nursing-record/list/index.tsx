@@ -17,4 +17,19 @@ export default class List extends BaseList {
     rowKey: 'id',
     Table,
   };
+
+  state = {
+    total: 0,
+    defaultQuery: {
+      // 一般护理记录
+      'type.equals': 1,
+      page: 0,
+      size: 20,
+    },
+    dataSource: [],
+    visible: false,
+    editable: false,
+    id: undefined,
+    loading: true,
+  };
 }

@@ -6,6 +6,7 @@ import FormSection from '@/components/BaseModalForm/FormSection';
 import { FormInstance } from 'antd/lib/form';
 
 const formItemLayout = {
+  layout: 'horizontal',
   labelCol: {
     span: 10,
   },
