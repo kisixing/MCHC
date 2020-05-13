@@ -1,18 +1,14 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import React,{Component} from 'react';
 import moment from 'moment';
 import { DatePicker, TimePicker} from 'antd';
 
 interface MyDatePickerProp{
   onChange: Function,
-  dispatch: Function,
+  dispatch?: Function,
   value: any,
   input_props: any
 }
-
-/**
- * 不接收对象/数组
- */
-
 
 const defaultType = "date";
 // format需要做限制
@@ -24,7 +20,8 @@ function isVaildDate(date: Date):boolean{
 
 export default function MyDateTime(props: MyDatePickerProp){
   const handleChange = (value:any) => {
-    const { format = defaultFormat} = props.input_props;
+    const { input_props = {} } = props;
+    const { format = defaultFormat} = input_props;
     if(value){
       props.onChange(value.format(format));
     }else{
@@ -33,8 +30,9 @@ export default function MyDateTime(props: MyDatePickerProp){
   }
 
   const renderDatePicker = () => {
-    if(props.input_props){
-      const { type = defaultType, format = defaultFormat} = props.input_props;
+    const { input_props = {} } = props;
+    if(input_props){
+      const { type = defaultType, format = defaultFormat} = input_props;
       let val = props.value;
       if(props.value){
         // TODO 输入的可能是一个字符串，直接new Date解析不精准
@@ -59,6 +57,7 @@ export default function MyDateTime(props: MyDatePickerProp){
         />
       }
     }
+    return <strong>无input_props</strong>
   }
 
   return (

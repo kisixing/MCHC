@@ -6,7 +6,7 @@ interface BusinessFetusesPorps {
   onChange: Function,
   dispatch: Function,
   value: Array<fetusData>,
-  componentOption: any,
+  input_props: any,
   error: any,
   path: string
 }
@@ -38,9 +38,6 @@ const fetusConfig = [
   { label: "脐带流血", key: "umbilicalbloodflow" },
 ]
 
-/**
- * 暂时使用antd 新增那个组件
- */
 
 export default class BusinessFetuses extends Component<BusinessFetusesPorps, BusinessFetusesState>{
   constructor(props: BusinessFetusesPorps) {
@@ -49,11 +46,6 @@ export default class BusinessFetuses extends Component<BusinessFetusesPorps, Bus
       value: [],
       error: []
     }
-  }
-
-  mapPropsToState = (): void => {
-    const { value, error } = this.props;
-    this.setState({ value, error });
   }
 
   componentDidMount() {
@@ -68,7 +60,7 @@ export default class BusinessFetuses extends Component<BusinessFetusesPorps, Bus
 
   handleChange = (id: string | number, key: string, value: any): void => {
     const newValue = this.state.value;
-    const i = newValue.findIndex((v: fetusData) => v.id === id);
+    const i = newValue.findIndex((fetus: fetusData) => fetus.id === id);
     if (i !== -1) {
       (newValue[i] as any)[key] = value;
       this.setState({ value: newValue }, () => {
@@ -78,39 +70,36 @@ export default class BusinessFetuses extends Component<BusinessFetusesPorps, Bus
     }
   }
 
-  renderFetusForm = (v: fetusData, error = "", i:number):React.ReactNode => {
+  renderFetusForm = (fetus: fetusData, error = "", i:number):React.ReactNode => {
     return (
       <div key={i} className={styles['fetus-form']}>
         <div className={styles['fetus-title']}>
           <span>胎儿{i+1}</span>
           <Button
-            onClick={() => this.handleClose(v.id)}  
+            onClick={() => this.handleClose(fetus.id)}  
           >删除
           </Button>
         </div>
         <Row>
-          {fetusConfig.map((u: any, index: number) => {
-            if(u.key === "id"){
-              return null
-            }
-
+          {fetusConfig.map((config: any, index: number) => {
+            if(config.key === "id"){return null;}
             return <Col span={6} className={styles['fetus-form-item']} key={index}>
               <div>
                 <div className={styles.label}>
-                  <label>{u.label}:</label>
+                  <span>{config.label}:</span>
                 </div>
                 <div className={styles.main}>
                   <div>
                     <Input
-                      value={(v as any)[u.key]}
-                      onChange={(e) => this.handleChange(v.id, u.key, e.target.value)}
+                      value={(fetus as any)[config.key]}
+                      onChange={(e: any) => this.handleChange(fetus.id, config.key, e.target.value)}
                     />
                   </div>
                 </div>
               </div>
-              {error[u.key] ? (
+              {error[config.key] ? (
                 <div className={styles.error}>
-                  {error[u.key]}
+                  {error[config.key]}
                 </div>
               ) : null}
             </Col>
@@ -140,20 +129,23 @@ export default class BusinessFetuses extends Component<BusinessFetusesPorps, Bus
 
   handleClose = (id:number|string):void => {
     const { value } = this.state; 
-    const i = value.findIndex((v:fetusData) => v.id === id);
+    const i = value.findIndex((fetus:fetusData) => fetus.id === id);
     value.splice(i,1);
     this.setState({value},() => {
       this.props.onChange(this.state.value);
     })
   }
 
+  
+  mapPropsToState = (): void => {
+    const { value, error } = this.props;
+    this.setState({ value, error });
+  }
+
   render() {
     const { value, error } = this.state;
     return (
       <div className={styles.fetus}>
-        {/* <div className={styles.title}>
-          <span>胎儿检查</span>
-        </div> */}
         <div className={styles.handle}>
           <Button type="primary" onClick={this.handleAdd}>添加胎儿</Button>
         </div>
