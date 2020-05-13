@@ -1,7 +1,9 @@
 import * as React from 'react';
-import MyForm from '@/components/MyForm/index';
-import config from './config';
-import data from './data';
+
+import YCS from './YunChanShi';
+import YCXX from './YunChanXinXi';
+import YFXX from './YunFuXinxi';
+import ZfXX from './ZhangFuXinXi';
 
 import { getRenderData, toFormat} from '@/components/MyForm/utils';
 
@@ -17,7 +19,7 @@ export default class Home extends React.Component<{},HomeState>{
     super(props);
     this.state = {
       formHandler: {
-        
+
       }
     }
   }
@@ -39,20 +41,12 @@ export default class Home extends React.Component<{},HomeState>{
   }
 
   render(){
-    const myConfig = getRenderData(config, data);
-    // 不要再页面render中尝试取formHandler的值，因为这个时候formItem初始化还没有完成
     return(
       <div>
-        <MyForm
-          config={myConfig}
-          getFormHandler={(formHandler:any) => this.setState({formHandler})}
-          submitChange={false}
-        />
-        <button
-          // onClick={() => this.state.formHandler.submit()}
-          type="button"
-          onClick={this.handleSubmit}
-        >提交</button>
+        <YFXX />
+        <ZfXX />
+        <YCXX />
+        <YCS />
       </div>
     )
   }

@@ -13,7 +13,7 @@ interface HomeState{
 
 
 export default class Home extends React.Component<{},HomeState>{
-  static Title = '预产期';
+  static Title = '孕产史';
 
   constructor(props:any){
     super(props);
@@ -55,11 +55,6 @@ export default class Home extends React.Component<{},HomeState>{
           submitChange={false}
 
         />
-        <button
-          // onClick={() => this.state.formHandler.submit()}
-          type="button"
-          onClick={this.handleSubmit}
-        >提交</button>
       </div>
     )
   }

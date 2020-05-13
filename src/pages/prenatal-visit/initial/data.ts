@@ -60,7 +60,8 @@ const data = {
   "ckzweek": "12+3",
   "ckzcrl": "19",
   "ckzbpd": "123",
-  "add_FIELD_shouyun": "[{\"label\":\"IVF\",\"value\":\"\"}]",
+  "add_FIELD_shouyun": "",
+  "add_FIELD_shouyunNote": "",
   "add_FIELD_gesmoc_unknown": "[]",
   "add_FIELD_ckyibzhzh_ty_desc": "",
   "add_FIELD_ckyibzhzh_tt_desc": "",
@@ -118,7 +119,7 @@ const data = {
   "add_FIELD_hobtabp_bdb_resource": "",
   "add_FIELD_hobtabp_oth": "",
   "add_FIELD_mb_sxs": "",
-  "add_FIELD_symptom": "{\"label\":\"无不适，胎动好\",\"value\":\"无不适，胎动好\"}",
+  "add_FIELD_symptom": "贝阿恩和团结",
   "add_FIELD_has_operation_history": "[{\"label\":\"有\",\"value\":\"1\"}]",
   "add_FIELD_xinzangbing": "[{\"label\":\"有\",\"value\":\"1\"}]",
   "add_FIELD_gaoxueya": "[{\"label\":\"有\",\"value\":\"1\"}]",
@@ -986,3 +987,5 @@ const data = {
   "threeId": null
   }
 }
+
+export default data;
