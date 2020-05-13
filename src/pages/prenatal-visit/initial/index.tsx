@@ -7,7 +7,7 @@ import QTBS from './QiTaBingshi';
 import YCS from './YunChanShi';
 import TGJC from './TiGeJianCha';
 import ZKJC from './ZhuanKeJianCha';
-import JYJC from './JianYanJiancha';
+import JYJC from './JianYanJianCha';
 import ZDCL from './ZhenDuanChuLi';
 
 import { getRenderData, toFormat} from '@/components/MyForm/utils';
