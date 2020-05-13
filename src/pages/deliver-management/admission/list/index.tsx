@@ -40,6 +40,9 @@ export default class List extends BaseList {
     {
       title: '操作',
       align: 'center',
+      hiddenSorter: true,
+      hiddenFilter: true,
+      fixed: 'right',
       render: (value: any, rowData: any, index: number) => {
         return (
           <>

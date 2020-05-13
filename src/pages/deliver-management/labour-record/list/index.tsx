@@ -3,6 +3,7 @@ import Table from './components/Table';
 import { tableColumns } from './config/table';
 import BaseList from '@/components/BaseList';
 import { router } from 'umi';
+import { processFromApi } from './config/adpater';
 import WithDynamicExport from '@/components/WithDynamicExport';
 
 @WithDynamicExport
@@ -13,7 +14,7 @@ export default class List extends BaseList {
     needPagination: false,
     showQuery: false,
     showAdd: false,
-    processFromApi: undefined,
+    processFromApi,
     tableColumns,
     rowKey: 'id',
     Table,
