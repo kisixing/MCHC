@@ -24,6 +24,7 @@
 |key|用于数据提取，以"."代表提取对象下一级，"\_"代表提取数组下元素|string|`必填`|
 |input_type|组件类型|string|`必填`,详见components中index|
 |label|输入组件label|string|默认为空|
+|header_label|label是否在输入器上方，custom的嵌套类组件使用|boolean|默认为false|
 |unit|输入组件单位|string|默认为空|
 |span|输入组件占位|number|antd栅格标准|
 |offset|输入组件间距|number|antd栅格标准|
@@ -49,6 +50,8 @@
 |`Table`|
 |editable|是否可编辑table|boolean||
 |tableColumns|渲染tableColumns|{key:string, title: stirng, editor: FormConfig}|若editable为true且editor不为undefined，双击可修改表单值|
+|`Custom`|
+|config|下一级表单配置|Array\<FormConfig\>|嵌套表单|
 |续待未完|
 
 - RenderData

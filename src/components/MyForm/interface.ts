@@ -55,6 +55,7 @@ export interface FormConfig {
   span?: number,
   offset?: number,
   hidden?: boolean,
+  header_label?: boolean,
   is_new_ros?: boolean, 
   value?: any,
   rules?: string | object | RegExp | null,
@@ -81,6 +82,7 @@ export interface FormItemProp {
   defaultValue?: any,
   type: string,
   label: string,
+  header_label: boolean
   unit: string,
   input_props: ComponentOption | null,
   validate?: string | object | RegExp | null,

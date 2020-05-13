@@ -244,7 +244,6 @@ function _assign(mainData: any = {}, newData: any = {}): any {
  */
 function toFormat(data: { [key: string]: any }): object {
   let r = {};
-  console.log(data);
   Object.keys(data).forEach(key => {
     const oi = key.lastIndexOf(o);
     const ai = key.lastIndexOf(a);

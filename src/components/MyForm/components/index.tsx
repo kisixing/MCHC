@@ -3,8 +3,12 @@ import MyDateTime from './MyDateTime'
 import MySelect from './MySelect'
 import MyCheckbox from './MyCheckbox'
 import MyTable from './MyTable';
+import Address from './Address';
+
 import SimpleObject from './SimpleObject';
 import Fetuses from './business/Fetuses';
+
+import MyCustom from './MyCustom';
 
 interface MyComponent{
   [key:string]: any
@@ -16,10 +20,12 @@ const MyComponent:MyComponent = {
   "select": MySelect,
   "checkbox": MyCheckbox,
   "table": MyTable,
+  "address": Address,
 
   "simpleobject": SimpleObject,
+  "b-fetuses": Fetuses,
 
-  "b-fetuses": Fetuses
+  "custom": MyCustom
 }
 
 export default MyComponent

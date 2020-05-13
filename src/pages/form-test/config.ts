@@ -141,15 +141,16 @@ const config: Array<FormConfig> = [
     name: "early-downsscreen",
     key: ".downsscreen_0",
     label: "早期唐氏筛查",
-    input_type: "simpleobject",
+    header_label: true,
+    input_type: "custom",
     input_props: {
       config: [
-        { name: "", key: "checkdate", label: "检查日期", unit: "", input_type: "date" },
-        { name: "", key: "trisomy21", label: "21三体风险", unit: "天", input_type: "input" },
-        { name: "", key: "trisomy18", label: "18三体风险", unit: "天", input_type: "input" },
-        { name: "", key: "trisomy13", label: "13三体风险", unit: "天", input_type: "input" },
-        { name: "", key: "checkdate", label: "检查日期", unit: "天", input_type: "date" },
-        { name: "", key: "checkdate", label: "检查日期", unit: "天", input_type: "date" },
+        { name: "checkdate", key: ".checkdate", label: "检查日期", unit: "", input_type: "date", span: 8, offset: 0 },
+        { name: "trisomy21", key: ".trisomy21", label: "21三体风险", unit: "天", input_type: "input", span: 8, offset: 0 },
+        { name: "trisomy18", key: ".trisomy18", label: "18三体风险", unit: "天", input_type: "input", span: 8, offset: 0 },
+        { name: "trisomy13", key: ".trisomy13", label: "13三体风险", unit: "天", input_type: "input", span: 8, offset: 0 },
+        { name: "checkdate", key: ".checkdate", label: "检查日期", unit: "天", input_type: "date", span: 8, offset: 0 },
+        { name: "checkdate", key: ".checkdate", label: "检查日期", unit: "天", input_type: "date", span: 8, offset: 0 },
       ]
     }
   },
@@ -157,17 +158,18 @@ const config: Array<FormConfig> = [
     name: "middle-downsscreen",
     key: ".downsscreen_1",
     label: "中期唐氏筛查",
-    input_type: "simpleobject",
+    header_label: true,
+    input_type: "custom",
     input_props: {
       config: [
-        { name: "", key: "trisomy21", label: "21三体风险", input_type: "input" },
-        { name: "", key: "trisomy18", label: "18三体风险", input_type: "input" },
-        { name: "", key: "trisomy13", label: "13三体风险", input_type: "input" },
-        { name: "", key: "NTD", label: "NTD风险", input_type: "input" },
-        { name: "", key: "HCG", label: "β-HCG", unit: "mom", input_type: "input" },
-        { name: "", key: "AFP", label: "AFP", unit: "mom", input_type: "input" },
-        { name: "", key: "E3", label: "E3", unit: "mom", input_type: "input" },
-        { name: "", key: "note", label: "其他异常", input_type: "input" },
+        { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 8, offset: 0 },
+        { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 8, offset: 0 },
+        { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 8, offset: 0 },
+        { name: "NTD", key: ".NTD", label: "NTD风险", input_type: "input", span: 8, offset: 0 },
+        { name: "HCG", key: ".HCG", label: "β-HCG", unit: "mom", input_type: "input", span: 8, offset: 0 },
+        { name: "AFP", key: ".AFP", label: "AFP", unit: "mom", input_type: "input", span: 8, offset: 0 },
+        { name: "E3", key: ".E3", label: "E3", unit: "mom", input_type: "input", span: 8, offset: 0 },
+        { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 8, offset: 0 },
       ]
     }
   },
@@ -175,16 +177,17 @@ const config: Array<FormConfig> = [
     name: "nipt-downsscreen",
     key: ".downsscreen_2",
     label: "NIPT唐氏筛查",
-    input_type: "simpleobject",
+    header_label: true,
+    input_type: "custom",
     input_props: {
       config: [
-        { name: "", key: "trisomy21", label: "21三体风险", input_type: "input" },
-        { name: "", key: "trisomy18", label: "18三体风险", input_type: "input" },
-        { name: "", key: "trisomy13", label: "13三体风险", input_type: "input" },
-        { name: "", key: "trisomy21z", label: "21三体风险Z值", input_type: "input" },
-        { name: "", key: "trisomy18z", label: "18三体风险Z值", input_type: "input" },
-        { name: "", key: "trisomy13z", label: "13三体风险Z值", input_type: "input" },
-        { name: "", key: "note", label: "其他异常", input_type: "input" },
+        { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 8, offset: 0 },
+        { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 8, offset: 0 },
+        { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 8, offset: 0 },
+        { name: "trisomy21z", key: ".trisomy21z", label: "21三体风险Z值", input_type: "input", span: 8, offset: 0 },
+        { name: "trisomy18z", key: ".trisomy18z", label: "18三体风险Z值", input_type: "input", span: 8, offset: 0 },
+        { name: "trisomy13z", key: ".trisomy13z", label: "13三体风险Z值", input_type: "input", span: 8, offset: 0 },
+        { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 8, offset: 0 },
       ]
     }
   },
@@ -192,19 +195,21 @@ const config: Array<FormConfig> = [
     name: "male-thalassemia",
     key: ".thalassemia_0",
     label: "男方地贫检查",
-    input_type: "simpleobject",
+    header_label: true,
+    input_type: "custom",
     input_props: {
       config: [
-        { name: "", key: "Hb", label: "Hb", unit: "g/L", input_type: "input" },
-        { name: "", key: "MCV", label: "MCV", unit: "fL", input_type: "input" },
-        { name: "", key: "MCH", label: "MCH", input_type: "input" },
-        { name: "", key: "HbA2", label: "HbA2", input_type: "input" },
+        { name: "Hb", key: ".Hb", label: "Hb", unit: "g/L", input_type: "input", span: 8, offset: 0 },
+        { name: "MCV", key: ".MCV", label: "MCV", unit: "fL", input_type: "input", span: 8, offset: 0 },
+        { name: "MCH", key: ".MCH", label: "MCH", input_type: "input", span: 8, offset: 0 },
+        { name: "HbA2", key: ".HbA2", label: "HbA2", input_type: "input", span: 8, offset: 0 },
         // { name: "", key: "trisomy18z", label: "血型", input_type: "input" },
         {
-          name: "",
-          key: "rh",
+          name: "rh",
+          key: ".rh",
           label: "RH血型",
           input_type: "select",
+          span: 8, offset: 0,
           input_props: {
             type: "default",
             options: [
@@ -214,7 +219,7 @@ const config: Array<FormConfig> = [
           }
         },
         {
-          name: "", key: "genotype", label: "地贫基因型", input_type: "select",
+          name: "genotype", key: ".genotype", label: "地贫基因型", input_type: "select",span: 8, offset: 0,
           input_props: {
             type: "default",
             radio: false,
@@ -224,7 +229,7 @@ const config: Array<FormConfig> = [
             ]
           }
         },
-        { name: "", key: "note", label: "其他异常", input_type: "input" },
+        { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 8, offset: 0, },
       ]
     }
   },
@@ -232,19 +237,20 @@ const config: Array<FormConfig> = [
     name: "female-thalassemia",
     key: ".thalassemia_1",
     label: "女方地贫检查",
-    input_type: "simpleobject",
+    header_label: true,
+    input_type: "custom",
     input_props: {
       config: [
-        { name: "", key: "Hb", label: "Hb", unit: "g/L", input_type: "input" },
-        { name: "", key: "MCV", label: "MCV", unit: "fL", input_type: "input" },
-        { name: "", key: "MCH", label: "MCH", input_type: "input" },
-        { name: "", key: "HbA2", label: "HbA2", input_type: "input" },
+        { name: "Hb", key: ".Hb", label: "Hb", unit: "g/L", input_type: "input", span: 8, offset: 0, rules: "required" },
+        { name: "MCV", key: ".MCV", label: "MCV", unit: "fL", input_type: "input", span: 8, offset: 0 },
+        { name: "MCH", key: ".MCH", label: "MCH", input_type: "input", span: 8, offset: 0 },
+        { name: "HBA2", key: ".HbA2", label: "HbA2", input_type: "input", span: 8, offset: 0 },
         // { name: "", key: "trisomy18z", label: "血型", input_type: "input" },
         {
-          name: "",
-          key: "rh",
+          name: "rh",
+          key: ".rh",
           label: "RH血型",
-          input_type: "select",
+          input_type: "select",span: 8, offset: 0,
           input_props: {
             options: [
               { label: "RH(+)", value: "RH(+)" },
@@ -253,7 +259,7 @@ const config: Array<FormConfig> = [
           }
         },
         {
-          name: "", key: "genotype", label: "地贫基因型", input_type: "select",
+          name: "genotype", key: ".genotype", label: "地贫基因型", input_type: "select",span: 8, offset: 0,
           input_props: {
             type: "default",
             radio: false,
@@ -263,7 +269,7 @@ const config: Array<FormConfig> = [
             ]
           }
         },
-        { name: "", key: "note", label: "其他异常", input_type: "input" },
+        { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 8, offset: 0, },
       ]
     }
   },
@@ -318,6 +324,15 @@ const config: Array<FormConfig> = [
           ]
         }
       ]
+    }
+  },
+  {
+    name: "address-test",
+    key: ".address-test",
+    input_type: "address",
+    label: "地址选择器",
+    input_props: {
+
     }
   }
 ]

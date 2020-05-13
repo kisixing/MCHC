@@ -2,6 +2,7 @@
 import React, { Component, ReactNode } from 'react';
 import { Row, Col } from 'antd';
 import MyComponent from '../index';
+import FormItem from '../../formItem';
 import { isArr } from '../../utils/func';
 import styles from './index.less';
 
