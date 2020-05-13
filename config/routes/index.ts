@@ -527,4 +527,11 @@ export const omitRoutes = [
     active: null,
     isMenu: true,
   },
+  {
+    id: 98,
+    type: 'others',
+    key: '/prenatal-diagnosis/medical-record',
+    active: null,
+    isMenu: true
+  }
 ];

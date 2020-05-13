@@ -142,6 +142,8 @@ export default {
   'menu.prenatal-screening.statistics': '统计报表',
 
   'menu.prenatal-diagnosis': '产前诊断',
+  'menu.prenatal-diagnosis.medical-record': '专科病历',
+
   'menu.prenatal-diagnosis.prenatalpatient': '建档管理',
   'menu.prenatal-diagnosis.prenataldiagnosis': '产前诊断病例',
   'menu.prenatal-diagnosis.report': '诊断报告',
