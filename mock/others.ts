@@ -1,22 +1,40 @@
 import { Request, Response } from 'express';
 
-const getQuestions = (req: Request, res: Response) => {
+const list = (req: Request, res: Response) => {
   res.json([
     {
       id: 1,
-      title: '测试问卷1',
-      category: '测试问卷1',
-      createTime: '2019-01-01',
-    },
-    {
-      id: 2,
-      title: '测试问卷1',
-      category: '测试问卷1',
-      createTime: '2019-01-01',
+      areaNO: '111',
+      roomNO: '222',
+      bedNO: '333',
+      name: '333',
+      age: '333',
+      gender: '333',
+      dob: '2019-01-01',
+      idType: '333',
+      idNO: '333',
+      adminDate: '2019-01-01',
     },
   ]);
 };
 
+const show = (req: Request, res: Response) => {
+  res.json({
+    id: 1,
+    areaNO: '111',
+    roomNO: '222',
+    bedNO: '333',
+    name: '333',
+    age: '333',
+    gender: '333',
+    dob: '2019-01-01',
+    idType: '333',
+    idNO: '333',
+    adminDate: '2019-01-01',
+  });
+};
+
 export default {
-  'GET /api/test': getQuestions,
+  // 'GET /api/admissions': list,
+  // 'GET /api/admissions/1': show,
 };

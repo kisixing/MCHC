@@ -42,7 +42,11 @@ export default class SimpleObject extends Component<SimpleObjectProps> {
         <Col span={span} offset={offset} className={styles['simple-object-item']}>
           <div className={styles.label}>{conf.label}</div>
           <div className={styles.editor}>
-            <RenderComponent onChange={(val: any) => this.handleChange(val, conf.key)} value={value[conf.key]} />
+            <RenderComponent 
+              onChange={(val: any) => this.handleChange(val, conf.key)} 
+              value={value[conf.key]}
+              {...conf}
+            />
           </div>
           <div className={styles.unit}>{conf.unit}</div>
         </Col>  

@@ -23,6 +23,12 @@ export default {
       component: './deliver-management/admission/edit',
     },
     {
+      name: 'deliver-edit',
+      icon: 'ordered-list',
+      path: '/deliver-management/admission/deliver-edit',
+      component: './deliver-management/admission/deliver-edit',
+    },
+    {
       name: 'labour-record',
       icon: 'ordered-list',
       path: '/deliver-management/labour-record',

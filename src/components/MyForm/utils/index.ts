@@ -200,7 +200,7 @@ function newObj(parentKey: string, currentKey: string, data: any) {
  * 所有需要此方法做合并处理（正常情况下是不会去重的，除非在转换的时候已经出现了重复）
  * 合并两个对象
  */
-function _assign(mainData: any, newData: any): any {
+function _assign(mainData: any = {}, newData: any = {}): any {
   if (isObj(mainData) && isObj(newData)) {
     const mainKey = Object.keys(mainData);
     const newKey = Object.keys(newData);
@@ -213,7 +213,8 @@ function _assign(mainData: any, newData: any): any {
           flag = true;
           // 判别下一层是不是数组，做数组合并
           if (isArr(mainData[mk]) && isArr(newData[nk])) {
-            for (let k = 0; k < mainData[mk].length; k++) {
+            const len = mainData[mk].length > newData[nk].length ?  mainData[mk].length : newData[nk].length;
+            for (let k = 0; k < len; k++) {
               mainData[mk][k] = _assign(mainData[mk][k], newData[nk][k])
             }
           } else if (isObj(mainData[mk]) && isObj(newData[mk])) {
