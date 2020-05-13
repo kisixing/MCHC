@@ -49,6 +49,7 @@ export default class MultipleSelect extends Component<MultipleSelectProps>{
   renderOptions = (options: Array<{ label: string | number, value: string | number }>): ReactNode => {
     return options.map((opt: { label: string | number, value: string | number }) => (
       <Option
+        key={opt.value}
         value={opt.value}
       >{opt.label}</Option>
     ))
@@ -65,6 +66,7 @@ export default class MultipleSelect extends Component<MultipleSelectProps>{
           const RenderComponent = MyComponent[input_type];
           extraEditorsDOM.push(
             <RenderComponent
+              key={`r-${i}`}
               value={editorsValue}
               onChange={(value:any) => this.handleExtraChange(value, "")}
               {...input_props}
@@ -82,6 +84,7 @@ export default class MultipleSelect extends Component<MultipleSelectProps>{
             const RenderComponent = MyComponent[input_type];
             extraEditorsDOM.push(
               <RenderComponent
+                key={`m-${i}`}
                 value={editorsValue[valueIndex].value}
                 // 传出修改键名
                 onChange={(value:any) => this.handleExtraChange(value, extraEditors[index].key)}

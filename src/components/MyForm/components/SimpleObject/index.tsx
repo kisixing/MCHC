@@ -35,11 +35,11 @@ export default class SimpleObject extends Component<SimpleObjectProps> {
     if (config.length === 0) {
       return <span>input_props.config.length 为 0</span>;
     }
-    return config.map((conf: any) => {
+    return config.map((conf: any, index: number) => {
       const { span = 8, offset = 0 } = conf;
       const RenderComponent = MyComponent[conf.input_type];
       return (
-        <Col span={span} offset={offset} className={styles['simple-object-item']}>
+        <Col span={span} offset={offset} className={styles['simple-object-item']} key={`so-${index}`}>
           <div className={styles.label}>{conf.label}</div>
           <div className={styles.editor}>
             <RenderComponent 
