@@ -2,23 +2,6 @@ import { formatTimeToStandard } from '@/utils/format';
 
 export const tableColumns = [
   {
-    title: '病区号',
-    dataIndex: 'areaNO',
-    key: 'areaNO',
-    align: 'center',
-  },
-  {
-    title: '房号',
-    dataIndex: 'roomNO',
-    key: 'roomNO',
-    align: 'center',
-  },
-  {
-    title: '床号',
-    dataIndex: 'bedNO',
-    key: 'bedNO',
-  },
-  {
     title: '孕妇姓名',
     dataIndex: 'name',
     key: 'name',
@@ -31,33 +14,75 @@ export const tableColumns = [
     align: 'center',
   },
   {
-    title: '性别',
+    title: '婴儿性别',
     dataIndex: 'gender',
     key: 'gender',
     align: 'center',
   },
   {
-    title: '出生日期',
+    title: '婴儿体重',
+    dataIndex: 'gender',
+    key: 'gender',
+    align: 'center',
+  },
+  {
+    title: '婴儿身长',
+    dataIndex: 'gender',
+    key: 'gender',
+    align: 'center',
+  },
+  {
+    title: '阿氏评分1',
+    dataIndex: 'gender',
+    key: 'gender',
+    align: 'center',
+  },
+  {
+    title: '阿氏评分2',
+    dataIndex: 'gender',
+    key: 'gender',
+    align: 'center',
+  },
+  {
+    title: '阿氏评分3',
+    dataIndex: 'gender',
+    key: 'gender',
+    align: 'center',
+  },
+  {
+    title: '早接触',
+    dataIndex: 'gender',
+    key: 'gender',
+    align: 'center',
+  },
+  {
+    title: '早吸允',
+    dataIndex: 'gender',
+    key: 'gender',
+    align: 'center',
+  },
+  {
+    title: '出生缺陷',
+    dataIndex: 'gender',
+    key: 'gender',
+    align: 'center',
+  },
+  {
+    title: '分娩方式',
     dataIndex: 'dob',
     key: 'dob',
     align: 'center',
   },
   {
-    title: '证件类型',
+    title: '羊水情况',
     dataIndex: 'idType',
     key: 'idType',
     align: 'center',
   },
   {
-    title: '证件号码',
+    title: '脐带缠绕情况',
     dataIndex: 'idNO',
     key: 'idNO',
-    align: 'center',
-  },
-  {
-    title: '住院日期',
-    dataIndex: 'adminDate',
-    key: 'adminDate',
     align: 'center',
   },
 ];

@@ -5,5 +5,5 @@ const list = (req: Request, res: Response) => {
 };
 
 export default {
-  'GET /api/permissions?type.equals=menu&size=200': list,
+  'GET /api/permissions': list,
 };

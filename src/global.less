@@ -31,6 +31,12 @@ ol {
   list-style: none;
 }
 
+.page {
+  min-height: calc(100vh - 131px);
+  padding: 12px;
+  background-color: #fff;
+}
+
 @media (max-width: @screen-xs) {
   .ant-table {
     width: 100%;
@@ -59,9 +65,17 @@ ol {
   width: 100% !important;
 }
 
-::-webkit-scrollbar {/*滚动条整体样式*/
-    width: 6px;     /*高宽分别对应横竖滚动条的尺寸*/
-    height: 4px;
+.ant-table-cell {
+  padding: 4px !important;
+  &:empty:after {
+    content: '--';
+  }
+}
+
+::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 6px; /*高宽分别对应横竖滚动条的尺寸*/
+  height: 4px;
 }
 ::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
     border-radius: 6px;

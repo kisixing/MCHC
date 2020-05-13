@@ -1,4 +1,3 @@
-import React from 'react';
 import Table from './components/Table';
 import { tableColumns } from './config/table';
 import BaseList from '@/components/BaseList';
@@ -8,11 +7,11 @@ import { router } from 'umi';
 @WithDynamicExport
 export default class List extends BaseList {
   static defaultProps = {
-    baseUrl: '/noenate-records',
-    baseTitle: '新生儿记录',
-    needPagination: false,
+    baseUrl: '/admissions',
+    baseTitle: '儿童健康体检',
+    needPagination: true,
     showQuery: false,
-    showAdd: false,
+    showAdd: true,
     tableColumns,
     rowKey: 'id',
     Table,
@@ -31,8 +30,12 @@ export default class List extends BaseList {
     loading: true,
   };
 
+  handleAdd = () => {
+    router.push('/child-examination/examination-edit');
+  };
+
   handleEdit = (rowData: any) => () => {
     const { id } = rowData;
-    router.push(`/deliver-management/neonate-record/edit?id=${id}`);
+    router.push(`/child-examination/examination-edit?id=${id}`);
   };
 }
