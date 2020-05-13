@@ -13,6 +13,8 @@ interface HomeState{
 
 
 export default class Home extends React.Component<{},HomeState>{
+  static Title = '孕产史';
+
   constructor(props:any){
     super(props);
     this.state = {
@@ -30,12 +32,16 @@ export default class Home extends React.Component<{},HomeState>{
 
 
   handleSubmit = () => {
+    const { getData } = this.props;
+    console.log(this.state.formHandler, '11')
     this.state.formHandler.submit().then(({validCode, res}:any) => {
-      console.log(res);
-      console.log(toFormat(res));
+      // console.log(res, '1');
+      // console.log(toFormat(res), '2');
       // if(!validCode){
       // }
     });
+
+    return getData(this.state.formHandler);
   }
 
   render(){
@@ -47,12 +53,8 @@ export default class Home extends React.Component<{},HomeState>{
           config={myConfig}
           getFormHandler={(formHandler:any) => this.setState({formHandler})}
           submitChange={false}
+
         />
-        {/* <button
-          // onClick={() => this.state.formHandler.submit()}
-          type="button"
-          onClick={this.handleSubmit}
-        >提交</button> */}
       </div>
     )
   }

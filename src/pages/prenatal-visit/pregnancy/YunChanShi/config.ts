@@ -2,6 +2,13 @@ import { FormConfig } from '@/components/MyForm/interface';
 
 const config: Array<FormConfig> = [
 
+  {
+    name: "yunfuxinxi",
+    key: ".yunfuxinxi",
+    label: "孕妇基本信息",
+    input_type: "simpleobject",
+    input_props: {
+      config: [
   { name: 'datagridYearMonth', key: '.datagridYearMonth', label: "妊娠终止", input_type: "date", span: 7, rules: "required", input_props:{} },
   { name: 'bingfzh', key: '.bingfzh', label: "并发症", input_type: "input", span: 7, rules: "required", input_props:{} },
   { name: 'sffm', key: '.yunchanshi', label: "是否分娩", input_type: "checkbox", span: 7, rules: "required",
@@ -53,6 +60,11 @@ const config: Array<FormConfig> = [
         }
       ],
     } },
+      ]
+    }
+  }
+
+
 
   // {
   //   key: ".fetuses", label: "孕产史", input_type: "b-fetuses", span: 24, offset: 0,

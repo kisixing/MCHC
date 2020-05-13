@@ -20,7 +20,7 @@ export default {
       name: 'return',
       icon: 'ordered-list',
       path: '/prenatal-visit/return',
-      component: './deliver-form/edit',
+      component: './prenatal-visit/return',
     },
     {
       name: 'statistics',

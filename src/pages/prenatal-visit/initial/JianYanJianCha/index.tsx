@@ -1,5 +1,5 @@
-import * as React from 'react';
-import MyForm from '@/components/MyForm/index';
+import * as React from '@/pages/prenatal-visit/initial/jianyanjiancha/node_modules/react';
+import MyForm from '@/components/MyForm';
 import config from './config';
 import data from '../data';
 

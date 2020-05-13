@@ -48,11 +48,11 @@ export default class Home extends React.Component<{},HomeState>{
           getFormHandler={(formHandler:any) => this.setState({formHandler})}
           submitChange={false}
         />
-        <button
+        {/* <button
           // onClick={() => this.state.formHandler.submit()}
           type="button"
           onClick={this.handleSubmit}
-        >提交</button>
+        >提交</button> */}
       </div>
     )
   }

@@ -2,7 +2,14 @@ import { FormConfig } from '@/components/MyForm/interface';
 
 const config: Array<FormConfig> = [
 
-  { name: 'usercuzh', key: '.usercuzh', label: "建档日期", input_type: "date", span: 7, rules: "required" },
+  {
+    name: "yunchanxinxi",
+    key: ".yunchanxinxi",
+    label: "本次孕产信息",
+    input_type: "simpleobject",
+    input_props: {
+      config: [
+          { name: 'usercuzh', key: '.usercuzh', label: "建档日期", input_type: "date", span: 7, rules: "required" },
   { name: 'add_FIELD_createNO', key: '.add_FIELD_createNO', label: "建档号", input_type: "input", span: 7 },
   { name: 'gesmoc', key: '.gesmoc', label: "末次月经", input_type: "date", span: 7, rules: "required" },
   { name: 'gesexpect', key: '.gesexpect', label: "预产期-日期", input_type: "date", span: 7, rules: "required" },
@@ -15,9 +22,9 @@ const config: Array<FormConfig> = [
   { name: 'add_FIELD_pulse', key: '.add_FIELD_pulse', label: "脉搏", input_type: "input", span: 7, rules: "required" },
   { name: 'yjcuch', key: '.yjcuch', label: "初潮", input_type: "input", span: 7, rules: "required" },
   { name: 'yjzhouq', key: '.yjzhouq', label: "月经周期", input_type: "input", span: 7, rules: "required" },
-  { name: 'yjchix', key: '.yunchanxinxi.yjchix', label: "持续天数", input_type: "input", span: 7, rules: "required" },
+  { name: 'yjchix', key: '.yjchix', label: "持续天数", input_type: "input", span: 7, rules: "required" },
 
-  { name: 'yjtongj', key: '.yunchanxinxi', label: "痛经", input_type: "checkbox", span: 7, rules: "required",
+  { name: 'yjtongj', key: '.yjtongj', label: "痛经", input_type: "checkbox", span: 7, rules: "required",
     input_props:{
       type: "custom",
       renderData: [
@@ -158,6 +165,10 @@ const config: Array<FormConfig> = [
   { name: 'add_FIELD_mb_sss_sss', key: '.add_FIELD_mb_sss_sss', label: "手术史", input_type: "input", span: 7, rules: "required" },
   { name: 'bsguomin', key: '.bsguomin', label: "过敏史", input_type: "input", span: 7, rules: "required" },
   { name: 'mzxuan', key: '.mzxuan', label: "家族史", input_type: "input", span: 7, rules: "required" },
+
+      ]
+    }
+  }
 
 ]
 export default config;
