@@ -56,7 +56,7 @@ export interface FormConfig {
   offset?: number,
   hidden?: boolean,
   header_label?: boolean,
-  is_new_ros?: boolean, 
+  is_new_row?: boolean, 
   value?: any,
   rules?: string | object | RegExp | null,
   input_props?: ComponentOption,

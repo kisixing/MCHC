@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Button } from 'antd';
 import MyForm from '@/components/MyForm/index';
 import config from './config';
