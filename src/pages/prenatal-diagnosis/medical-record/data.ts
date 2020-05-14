@@ -57,7 +57,7 @@ const data = {
 		"avf": null,
 		"umbilicalbloodflow": null
 	}],
-	// 家族史,
+	// 家族史 done
 	"familyHistory": {
 		"id": 7,
 		"hypertension": true,
@@ -109,7 +109,7 @@ const data = {
 		"diabetes": true,
 		"diabetesNote": "有糖尿病"
 	},
-	// 过敏史
+	// 过敏史 done
 	"allergyHistory": {
 		"penicillin": null,
 		"penicillinNote": null,
@@ -128,7 +128,7 @@ const data = {
 		"other": null,
 		"otherNote": null
 	},
-	// 输血史
+	// 输血史 done
 	"transfusionHistory": {
 		"id": 1,
 		"name": "test",

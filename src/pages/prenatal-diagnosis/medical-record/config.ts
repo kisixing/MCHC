@@ -174,7 +174,7 @@ const config: Array<FormConfig> = [
     }
   },
   {
-    name: "diseaseHistory", key: '.diseaseHistory', label: "疾病史", input_type: "checkbox", rules: "required",
+    name: "diseaseHistory", key: '.diseaseHistory', label: "疾病史", input_type: "checkbox",
     input_props: {
       type: "multiple",
       radio: false,
@@ -284,7 +284,7 @@ const config: Array<FormConfig> = [
       renderData: [
         {
           key: "epilepsy",
-          label: "高血压",
+          label: "癫痫",
           options: [
             { label: "有", value: true },
             { label: "无", value: false }
@@ -330,16 +330,129 @@ const config: Array<FormConfig> = [
     }
   },
 
-
-
-
-
-
-
-
-
-
-
+  {
+    name: "allergyHistory",
+    key: '.allergyHistory',
+    label: "过敏史",
+    input_type: "checkbox",
+    input_props: {
+      type: "multiple",
+      renderData: [
+        {
+          key: "penicillin",
+          label: "青霉素",
+          extraEditors: [
+            { 
+              key: "penicillin",
+              editors: [
+                { name: "", key: "", label: "药物名称", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "cephalosporin",
+          label: "头孢菌素",
+          extraEditors: [
+            {
+              key: "cephalosporin",
+              editors: [
+                { name: "", key: "", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "sulfa",
+          label: "磺胺类",
+          extraEditors: [
+            {
+              key: "sulfa",
+              editors: [
+                { name: "", key: "", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "drug",
+          label: "药物",
+          extraEditors: [
+            {
+              key: "drug",
+              editors: [
+                { name: "", key: "", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "alcohol",
+          label: "酒精",
+          extraEditors: [
+            {
+              key: "alcohol",
+              editors: [
+                { name: "", key: "", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "food",
+          label: "食物",
+          extraEditors: [
+            {
+              key: "food",
+              editors: [
+                { name: "", key: "", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "other",
+          label: "其他",
+          extraEditors: [
+            {
+              key: "other",
+              editors: [
+                { name: "", key: "",  input_type: "input" }
+              ]
+            }
+          ]
+        },
+      ],
+    }
+  },
+  {
+    name: "transfusionHistory",
+    key: ".transfusionHistory",
+    label: "输血史",
+    input_type: "checkbox",
+    input_props: {
+      type: "custom",
+      renderData: [
+        {
+          key: "type",
+          label: "输血史",
+          options: [
+            {label: "有", value: true},
+            {label: "无", value: false},
+          ],
+          extraEditors: [
+            {
+              key: true,
+              editors: [
+                { key:"" , name: "", input_type: "input", label: "时间"},
+                { key:"" , name: "", input_type: "input", label: "原因"}
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
 
   {
     name: "procedureHistory",
@@ -425,23 +538,62 @@ const config: Array<FormConfig> = [
   //     ]
   //   }
   // },
-  // {
-  //   name: "fetuses",
-  //   key: ".fetuses",
-  //   label: "胎儿信息",
-  //   header_label: true,
-  //   input_type: "array-custom",
-  //   input_props: {
-  //     config: [
-  //       { name: "id", key: ".id", label: "id", input_type: "input", span: 8, offset: 0 },
-  //       { name: "fetalPosition", key: ".fetalPosition", label: "胎儿位置", input_type: "input", span: 8, offset: 0 },
-  //       { name: "fetalHeartRate", key: ".fetalHeartRate", label: "胎心率", input_type: "input", span: 8, offset: 0 },
-  //       { name: "fetalMovement", key: ".fetalMovement", label: "胎动", input_type: "input", span: 8, offset: 0 },
-  //       { name: "presentation", key: ".presentation", label: "先露", input_type: "input", span: 8, offset: 0 },
-  //       { name: "weight", key: ".weight", label: "胎重", input_type: "input", span: 8, offset: 0 },
-  //       { name: "avf", key: ".avf", label: "avf", input_type: "input", span: 8, offset: 0 },
-  //     ]
-  //   }
-  // }
+  {
+    name: "fetuses",
+    key: ".fetuses",
+    label: "胎儿检查",
+    header_label: true,
+    input_type: "array-custom",
+    input_props: {
+      config: [
+        { name: "id", key: ".id", label: "id", input_type: "input", span: 8, offset: 0 },
+        { name: "fetalPosition", key: ".fetalPosition", label: "胎儿位置", input_type: "input", span: 8, offset: 0 },
+        { name: "fetalHeartRate", key: ".fetalHeartRate", label: "胎心率", input_type: "input", span: 8, offset: 0 },
+        { name: "fetalMovement", key: ".fetalMovement", label: "胎动", input_type: "input", span: 8, offset: 0 },
+        { name: "presentation", key: ".presentation", label: "先露", input_type: "input", span: 8, offset: 0 },
+        { name: "weight", key: ".weight", label: "胎重", input_type: "input", span: 8, offset: 0 },
+        { name: "avf", key: ".avf", label: "avf", input_type: "input", span: 8, offset: 0 },
+      ]
+    }
+  },
+  {
+    name: "physicalExam",
+    key: ".physicalExam",
+    label: "体格检查",
+    header_label: true,
+    input_type: "custom",
+    input_props: {
+      config: [
+        { name: "id", key: ".id", label: "id", input_type: "input", span: 8, offset: 0 },
+        { name: "height", key: ".height", label: "身高", input_type: "input", span: 8, offset: 0 },
+        { name: "weight", key: ".weight", label: "体重", input_type: "input", span: 8, offset: 0 },
+        { name: "systolic", key: ".systolic", label: "收缩压", input_type: "input", span: 8, offset: 0 },
+        { name: "diastolic", key: ".diastolic", label: "舒张压", input_type: "input", span: 8, offset: 0 },
+        { name: "pulse", key: ".pulse", label: "脉率", input_type: "input", span: 8, offset: 0 },
+        { name: "temperature", key: ".temperature", label: "体温", input_type: "input", span: 8, offset: 0 },
+      ]
+    }
+  },
+  {
+    name: "gynecologicalExam",
+    key: ".gynecologicalExam",
+    label: "妇科检查",
+    header_label: true,
+    input_type: "custom",
+    input_props: {
+      config: [
+        { name: "id", key: ".id", label: "id", input_type: "input", span: 8, offset: 0 },
+        { name: "fundalHeight", key: ".fundalHeight", label: "基高", input_type: "input", span: 8, offset: 0 },
+        { name: "fetalPosition", key: ".fetalPosition", label: "胎位", input_type: "input", span: 8, offset: 0 },
+        { name: "fetalHeart", key: ".fetalHeart", label: "胎心", input_type: "input", span: 8, offset: 0 },
+        { name: "presentation", key: ".presentation", label: "先露", input_type: "input", span: 8, offset: 0 },
+        { name: "engagement", key: ".engagement", label: "engagement", input_type: "input", span: 8, offset: 0 },
+        { name: "vagina", key: ".vagina", label: "vagina", input_type: "input", span: 8, offset: 0 },
+        { name: "cervix", key: ".cervix", label: "cervix", input_type: "input", span: 8, offset: 0 },
+        { name: "adnexa", key: ".adnexa", label: "adnexa", input_type: "input", span: 8, offset: 0 },
+        { name: "note", key: ".note", label: "note", input_type: "input", span: 8, offset: 0 },
+      ]
+    }
+  }
 ]
 export default config;
