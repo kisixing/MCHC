@@ -8,11 +8,11 @@ import { router } from 'umi';
 @WithDynamicExport
 export default class List extends BaseList {
   static defaultProps = {
-    baseUrl: '/admissions',
+    baseUrl: '/noenate-records',
     baseTitle: '新生儿记录',
     needPagination: false,
     showQuery: false,
-    showAdd: true,
+    showAdd: false,
     tableColumns,
     rowKey: 'id',
     Table,
@@ -29,10 +29,6 @@ export default class List extends BaseList {
     editable: false,
     id: undefined,
     loading: true,
-  };
-
-  handleAdd = () => {
-    router.push('/deliver-management/neonate-record/add');
   };
 
   handleEdit = (rowData: any) => () => {

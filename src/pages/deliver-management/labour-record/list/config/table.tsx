@@ -3,31 +3,73 @@ import { get } from 'lodash';
 
 export const tableColumns = [
   {
-    title: '胎膜破裂时间',
-    dataIndex: 'membranesrupturedtime',
-    align: 'center',
-    render: (value: any) => formatTimeToStandard(value),
-  },
-  {
-    title: '破膜方式',
-    dataIndex: 'membranesrupturedtype',
+    title: '产妇姓名',
+    dataIndex: 'name',
     align: 'center',
   },
   {
-    title: '宫口开全时间',
-    dataIndex: 'cervixdopenedtime',
-    render: (value: any) => formatTimeToStandard(value),
-  },
-  {
-    title: '总产程时间',
-    dataIndex: 'totalTime',
+    title: '住院号',
+    dataIndex: 'areaNO',
     align: 'center',
-    render: (value: any, rowData: any, index: any) =>
-      `${Number(get(rowData, 'totalstageh'))}时${Number(get(rowData, 'totalstagem'))}分`,
   },
   {
-    title: '胎数',
-    dataIndex: 'fetalcount',
+    title: '证件号码',
+    dataIndex: 'idNO',
+    align: 'center',
+  },
+  {
+    title: '分娩日期',
+    dataIndex: 'idNO',
+    align: 'center',
+  },
+  {
+    title: '分娩孕周',
+    dataIndex: 'idNO',
+    align: 'center',
+  },
+  {
+    title: '第一产程',
+    dataIndex: 'firststage',
+    align: 'center',
+  },
+  {
+    title: '第二产程',
+    dataIndex: 'secondstage',
+    align: 'center',
+  },
+  {
+    title: '第三产程',
+    dataIndex: 'thirdstage',
+    align: 'center',
+  },
+  {
+    title: '胎方位',
+    dataIndex: 'idNO',
+    align: 'center',
+  },
+  {
+    title: '分娩方式',
+    dataIndex: 'idNO',
+    align: 'center',
+  },
+  {
+    title: '脐带长度',
+    dataIndex: 'idNO',
+    align: 'center',
+  },
+  {
+    title: '产后2小时出血',
+    dataIndex: 'idNO',
+    align: 'center',
+  },
+  {
+    title: '记录者',
+    dataIndex: 'idNO',
+    align: 'center',
+  },
+  {
+    title: '接生者',
+    dataIndex: 'idNO',
     align: 'center',
   },
 ];

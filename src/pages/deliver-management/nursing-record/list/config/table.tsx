@@ -11,6 +11,8 @@ export const tableColumns = [
     inputType: 'single_date_picker',
     width: 200,
     render: (value: any) => formatTimeToStandard(value, 'YYYY-MM-DD'),
+    sortType: 'date',
+    filterType: 'date',
   },
   {
     title: '护理时间',
@@ -20,12 +22,16 @@ export const tableColumns = [
     editable: true,
     render: (value: any) => formatTimeToStandard(value, 'HH:mm'),
     align: 'center',
+    sortType: 'date',
+    filterType: 'date',
   },
   {
     title: '护理类型',
     dataIndex: 'type',
     editable: true,
     align: 'center',
+    sortType: 'number',
+    filterType: 'number',
   },
   {
     title: '体温',

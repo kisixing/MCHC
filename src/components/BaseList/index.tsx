@@ -34,7 +34,8 @@ export interface IProps {
   // 传入的 ID
   id?: boolean;
   // 从接口获取数据，过滤函数
-  processFromApi?: (data: object) => object;
+  processFromApi?: (data: object[]) => object[];
+  toApi?: (data: object) => object;
   // 其它表格属性
   otherTableProps?: any;
   // 弹窗表单
@@ -73,6 +74,9 @@ export default class BaseList extends React.Component<IProps, IState> {
       title: '操作',
       align: 'center',
       dataIndex: 'operation',
+      fixed: 'right',
+      hiddenSorter: true,
+      hiddenFilter: true,
       render: (value: any, rowData: any, index: number) => {
         const { needEditInTable } = this.props;
         const editable = this.isEditing(rowData);
@@ -131,7 +135,7 @@ export default class BaseList extends React.Component<IProps, IState> {
   };
 
   handleItemSave = (rowData: any) => async () => {
-    const { baseUrl, baseTitle } = this.props;
+    const { baseUrl, baseTitle, toApi } = this.props;
     const form = this.form as FormInstance;
     const formData = form.getFieldsValue();
     map(formData, (data, key) => {
@@ -140,10 +144,15 @@ export default class BaseList extends React.Component<IProps, IState> {
       }
     });
     await request.put(baseUrl, {
-      data: {
-        ...rowData,
-        ...formData,
-      },
+      data: isFunction(toApi)
+        ? toApi({
+            ...rowData,
+            ...formData,
+          })
+        : {
+            ...rowData,
+            ...formData,
+          },
     });
     this.setState({
       id: undefined,
