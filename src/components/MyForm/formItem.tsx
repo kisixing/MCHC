@@ -4,6 +4,7 @@ import React, { Component, ReactNode } from 'react';
 import MyComponents from './components/index';
 import { FormItemProp, FormItemState } from './interface';
 import { validFun } from './utils/valid';
+import { isEmpty } from './utils/func';
 import styles from './formItem.less';
 
 function isBase(val: any): boolean {
@@ -33,7 +34,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
       props.actions.valid = function valid() {
         const error = validFun(self.state.value, props.validate || "");
         self.setState({ error });
-        return error === "" || JSON.stringify(error) === "{}";
+        return isEmpty(error);
       }
     }
   }
@@ -71,12 +72,12 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
         }
         // TODO 这个位置先将object/array的valid不在handlechange时触发，以后可以加入trigger去做响应
         if (this.props.actions.valid) {
-          if (typeof val === "object") {
-            console.warn('校验对象为引用类型,暂时不做onChange校验');
-            // this.props.actions.valid();
-          } else {
+          // if (typeof val === "object") {
+          //   console.warn('校验对象为引用类型,暂时不做onChange校验');
+          //   // this.props.actions.valid();
+          // } else {
             this.props.actions.valid();
-          }
+          // }
         } else {
           console.error('缺失valid Function || ');
         }
@@ -94,7 +95,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
   }
 
   render() {
-    const { dispatch, type, label, input_props, unit, path, header_label } = this.props;
+    const { dispatch, subscribe, type, label, input_props, unit, path, header_label } = this.props;
     const { value, error, validate } = this.state;
     const MyComponent = MyComponents[type];
     return (
@@ -115,6 +116,8 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
               <MyComponent
                 onChange={this.handleChange}
                 dispatch={dispatch}
+                // subscribe仅在一些 业务组件/内嵌表单组件 中使用
+                subscribe={subscribe}
                 value={value}
                 input_props={input_props}
                 error={error}

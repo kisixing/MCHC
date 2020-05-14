@@ -56,6 +56,7 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
         <FormItem 
           actions={formHandler[config[i].name].actions} 
           dispatch={formHandler.dispatch}
+          subscribe={formHandler.subscribe}
           defaultValue={config[i].value}
           type={config[i].input_type}
           label={label}

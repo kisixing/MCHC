@@ -79,6 +79,7 @@ export interface FormItemProp {
     valid?: () => any
   },
   dispatch: (fieldName: string, eventName: string, args: any) => void,
+  subscribe: (fieldName: string, eventName: string, cb: Function) => void
   defaultValue?: any,
   type: string,
   label: string,

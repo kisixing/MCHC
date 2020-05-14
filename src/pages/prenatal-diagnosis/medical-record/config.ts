@@ -11,11 +11,11 @@ const config: Array<FormConfig> = [
       type: "textarea",
     }
   },
-  { name: "lmp", key: ".lmp", label: "末次月经", span: 8, offset: 0, input_type: "date" },
-  { name: "edd", key: ".edd", label: "预产期-日期", span: 8, offset: 0, input_type: "date" },
-  { name: "sureEdd", key: ".sureEdd", label: "预产期-B超", span: 8, offset: 0, input_type: "date" },
+  { name: "lmp", key: ".lmp", label: "末次月经", span: 8, offset: 0, input_type: "date", rules: "required", },
+  { name: "edd", key: ".edd", label: "预产期-日期", span: 8, offset: 0, input_type: "date", rules: "required", },
+  { name: "sureEdd", key: ".sureEdd", label: "预产期-B超", span: 8, offset: 0, input_type: "date", rules: "required", },
   {
-    name: "gravidity", key: ".gravidity", label: "G", span: 8, offset: 0, input_type: "select",
+    name: "gravidity", key: ".gravidity", label: "G", span: 8, offset: 0, input_type: "select", rules: "required",
     input_props: {
       options: [
         { label: "1", value: 1 },
@@ -26,7 +26,7 @@ const config: Array<FormConfig> = [
     }
   },
   {
-    name: "parity", key: ".parity", label: "P", span: 8, offset: 0, input_type: "select",
+    name: "parity", key: ".parity", label: "P", span: 8, offset: 0, input_type: "select", rules: "required",
     input_props: {
       options: [
         { label: "1", value: 1 },
@@ -37,7 +37,7 @@ const config: Array<FormConfig> = [
     }
   },
   {
-    name: "diseaseHistory", key: '.diseaseHistory', label: "疾病史", input_type: "checkbox",
+    name: "diseaseHistory", key: '.diseaseHistory', label: "疾病史", input_type: "checkbox", rules: "required",
     input_props: {
       type: "multiple",
       radio: false,
@@ -145,7 +145,7 @@ const config: Array<FormConfig> = [
     input_type: "custom",
     input_props: {
       config: [
-        { name: "checkdate", key: ".checkdate", label: "检查日期", unit: "", input_type: "date", span: 8, offset: 0 },
+        { name: "checkdate", key: ".checkdate", label: "检查日期", unit: "", input_type: "date", span: 8, offset: 0, rules: "required" },
         { name: "trisomy21", key: ".trisomy21", label: "21三体风险", unit: "天", input_type: "input", span: 8, offset: 0 },
         { name: "trisomy18", key: ".trisomy18", label: "18三体风险", unit: "天", input_type: "input", span: 8, offset: 0 },
         { name: "trisomy13", key: ".trisomy13", label: "13三体风险", unit: "天", input_type: "input", span: 8, offset: 0 },
@@ -162,7 +162,7 @@ const config: Array<FormConfig> = [
     input_type: "custom",
     input_props: {
       config: [
-        { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 8, offset: 0 },
+        { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 8, offset: 0, rules: "required" },
         { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 8, offset: 0 },
         { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 8, offset: 0 },
         { name: "NTD", key: ".NTD", label: "NTD风险", input_type: "input", span: 8, offset: 0 },
@@ -238,6 +238,9 @@ const config: Array<FormConfig> = [
     key: ".thalassemia_1",
     label: "女方地贫检查",
     header_label: true,
+    rules: {
+      Hb: "required"
+    },
     input_type: "custom",
     input_props: {
       config: [

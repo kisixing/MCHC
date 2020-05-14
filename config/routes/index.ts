@@ -46,15 +46,6 @@ export const omitRoutes = [
     active: null,
   },
   {
-    id: 996,
-    type: 'others',
-    key: '/form-test',
-    name: '表单测试',
-    parentid: 0,
-    active: null,
-    isMenu: true,
-  },
-  {
     id: 599,
     type: 'others',
     key: '/statistics',
@@ -531,6 +522,13 @@ export const omitRoutes = [
     id: 98,
     type: 'others',
     key: '/prenatal-diagnosis/medical-record',
+    active: null,
+    isMenu: true
+  },
+  {
+    id: 97,
+    type: 'others',
+    key: '/prenatal-diagnosis/operation-record',
     active: null,
     isMenu: true
   }

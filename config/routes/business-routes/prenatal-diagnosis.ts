@@ -8,7 +8,13 @@ export default {
       name: 'medical-record',
       icon: 'ordered-list',
       path: '/prenatal-diagnosis/medical-record',
-      component: './Welcome'
-    }
+      component: './prenatal-diagnosis/medical-record'
+    },
+    {
+      name: 'operation-record',
+      icon: 'ordered-list',
+      path: '/prenatal-diagnosis/operation-record',
+      component: './prenatal-diagnosis/operation-record'
+    },
   ]
 };

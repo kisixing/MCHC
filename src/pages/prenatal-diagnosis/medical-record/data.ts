@@ -8,7 +8,7 @@ const data = {
 	"parity": 1,
 	"gestationalWeek": "9",
 	"modifyDate": null,
-	"chief complaint": "小腹胀痛",
+	"chief complaint": "",
 	"doctor": null,
 	"diagnosis": "",
 	"diagnosiscode": "",
