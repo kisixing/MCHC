@@ -8,19 +8,19 @@ export default {
       name: 'pregnancy',
       icon: 'ordered-list',
       path: '/prenatal-visit/pregnancy',
-      component: './deliver-form/edit',
+      component: './prenatal-visit/pregnancy',
     },
     {
       name: 'initial',
       icon: 'ordered-list',
       path: '/prenatal-visit/initial',
-      component: './deliver-form/edit',
+      component: './prenatal-visit/initial',
     },
     {
       name: 'return',
       icon: 'ordered-list',
       path: '/prenatal-visit/return',
-      component: './deliver-form/edit',
+      component: './prenatal-visit/return',
     },
     {
       name: 'statistics',

@@ -3,5 +3,5 @@ export default {
   name: 'debility-children',
   icon: 'ordered-list',
   path: '/debility-children',
-  component: './Welcome',
+  component: './child-management/debility-children',
 };

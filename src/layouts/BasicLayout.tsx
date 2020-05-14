@@ -14,6 +14,7 @@ import styles from './less/Layout.less';
 import zhCN from 'antd/es/locale/zh_CN';
 import RouterTabs from './RouterTabs';
 import { omitRoutes } from '../../config/routes/index';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 const BasicLayout = (props: any) => {
   const [routerTabWidth, setRouterTabWidth] = useState(
@@ -243,7 +244,9 @@ const BasicLayout = (props: any) => {
             <PageHeaderWrapper className={styles.pageHeader} title={false} />
             <RouterTabs style={{ width: routerTabWidth }} />
             <div className={styles.panelChild}>
-              <div className={styles.content}>{children}</div>
+              <div className={styles.content}>
+                <ErrorBoundary>{children}</ErrorBoundary>
+              </div>
               <footer className={styles.footer}>Copyright © 莲孕医疗科技</footer>
             </div>
           </div>

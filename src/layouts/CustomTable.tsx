@@ -1,19 +1,14 @@
 import React from 'react';
 import { Table } from 'antd';
 import stylesCustomTable from './less/Table.less';
+import { TableProps } from 'antd/lib/table';
 
-export default class CustomTable extends React.PureComponent {
-  // state = {
-  //   clientHeight: 600,
-  // };
+interface IProps extends TableProps<any> {
+  columns?: any;
+}
 
-  // componentDidMount() {
-  //   this.setState({
-  //     clientHeight: document.body.clientHeight,
-  //   });
-  // }
-
+export default class CustomTable extends React.PureComponent<IProps> {
   render() {
-    return <Table className={stylesCustomTable.table} size="small" {...this.props} bordered={false} />;
+    return <Table className={stylesCustomTable.table} size="small" {...this.props} />;
   }
 }
