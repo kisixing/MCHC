@@ -80,7 +80,7 @@ export default class MyForm extends Component<MyFormProp, MyFormState>{
   constructor(props:MyFormProp){
     super(props);
     this.state = {
-      formHandler: createFormHandler(props.config, props.submitChange)
+      formHandler: createFormHandler(props.config, {submitChange: props.submitChange})
     }
   }
 

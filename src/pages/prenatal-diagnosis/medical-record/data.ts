@@ -79,9 +79,9 @@ const data = {
 		"diabetes": null,
 		"diabetesNote": null
 	},
-	// 手术史
+	// 手术史 done 
 	"procedureHistory": null,
-	// 疾病史
+	// 疾病史 done
 	"diseaseHistory": {
 		"id": 8,
 		"hypertension": true,
@@ -168,7 +168,7 @@ const data = {
 		"diagnosis": "",
 		"note": ""
 	}],
-	// 唐筛
+	// 唐筛 done
 	"downsscreen": [{
 		"checkdate": "2019-04-01",
 		"type": "1",
@@ -218,7 +218,7 @@ const data = {
 		"note": ""
 	}
 	],
-	// 地贫
+	// 地贫 done
 	"thalassemia": [{
 		"checkdate": "2019-04-01",
 		"type": "1",
