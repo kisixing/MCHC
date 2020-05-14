@@ -55,10 +55,20 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
         return false;
       }).filter((item: any) => !!item);
       const handleChange = (val: any, key: string) => {
-        const newObj = {
-          [key]: val.checkboxValue,
-          [`${key}Note`]: JSON.stringify(getObjectFormArray(val.editorsValue))
-        };
+        // debugger;
+        // 判断editors的数量决定保存为object还是string
+        const index = input_props.renderData.findIndex((item: any) => item.key === key);
+        let newObj:any = {};
+        if(!val.checkboxValue){
+          newObj = {[key]: false, [`${key}Note`]: ""}
+        }else{
+          newObj = {
+            [key]: val.checkboxValue,
+            [`${key}Note`]: input_props.renderData[index].extraEditors && input_props.renderData[index].extraEditors.length !== 1 
+              ? val.editorsValue 
+              : JSON.stringify(getObjectFormArray(val.editorsValue))
+          };
+        }
         onChange(Object.assign(value, newObj));
       }
       return <MultipleCheckbox
@@ -84,10 +94,17 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
         };
       }
       const handleChange = (val: any, key: string) => {
-        const newObj = {
-          [key]: val.checkboxValue,
-          [`${key}Note`]: JSON.stringify(getObjectFormArray(val.editorsValue)),
-        };
+        console.log(val);
+        const index = input_props.renderData.findIndex((item: any) => item.key === key);
+        let newObj:any = {};
+        if(!val.checkboxValue){
+          newObj = {[key]: false, [`${key}Note`]: ""}
+        }else{
+          newObj = {
+            [key]: val.checkboxValue,
+            [`${key}Note`]: input_props.renderData[index].extraEditors.length !== 1 ? val.editorsValue : JSON.stringify(getObjectFormArray(val.editorsValue))
+          };
+        }
         onChange(Object.assign(value, newObj));
       };
       return (

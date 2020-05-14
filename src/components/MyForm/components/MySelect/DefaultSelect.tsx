@@ -29,13 +29,15 @@ export default class DefaultSelect extends Component<DefaultSelectProps>{
   renderOptions = (options: Array<{label:string|number,value:string|number}>) => {
     return  options.map((opt: {label: string|number,value: string|number}) => (
       <Option
+        key={opt.value}
         value={opt.value}
       >{opt.label}</Option>
     ))
   }
   
   render(){
-    const { options = [], value = null, multiple } = this.props;
+    const { options = [], multiple } = this.props;
+    const { value = (multiple? [] : "") } = this.props;
     return (
       <Select 
         style={{width: "100%"}}

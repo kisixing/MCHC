@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Button } from 'antd';
 import MyForm from '@/components/MyForm/index';
 import config from './config';
 import data from './data';
@@ -27,17 +28,19 @@ export default class Home extends React.Component<{},HomeState>{
   componentDidUpdate(){
     const { formHandler } = this.state;
     formHandler.subscribe("lmp", "change", (val: any) => {
-      formHandler['sureEdd'].actions.setValue("2020-01-01");
+      formHandler.sureEdd.actions.setValue("2020-01-01");
     });
     console.log(formHandler);
   }
 
 
   handleSubmit = () => {
+    this.state.formHandler.dispatch("_global","submit",{});
     this.state.formHandler.submit().then(({validCode, res}:any) => {
-      console.log(res);
-      console.log(getFormData(res));
+      console.log(validCode);
       // if(!validCode){
+      //   console.log(res);
+        console.log(getFormData(res));
       // }
     });
   }
@@ -52,11 +55,10 @@ export default class Home extends React.Component<{},HomeState>{
           getFormHandler={(formHandler:any) => this.setState({formHandler})}
           submitChange={false}
         />
-        <button
-          // onClick={() => this.state.formHandler.submit()}
-          type="button"
-          onClick={this.handleSubmit}
-        >提交</button>
+        <div className={styles['btn-group']}>
+          <Button onClick={this.handleSubmit}>重置</Button>
+          <Button type="primary" onClick={this.handleSubmit}>提交</Button>
+        </div>
       </div>
     )
   }

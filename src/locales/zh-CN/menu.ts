@@ -108,7 +108,6 @@ export default {
 
   'menu.follow-up.work-flow': '工作流管理',
 
-  'menu.form-test': '表单测试',
 
   'menu.premarital-care': '婚前保健',
   'menu.premarital-care.wife': '女方档案',
@@ -142,6 +141,9 @@ export default {
   'menu.prenatal-screening.statistics': '统计报表',
 
   'menu.prenatal-diagnosis': '产前诊断',
+  'menu.prenatal-diagnosis.medical-record': '专科病历',
+  'menu.prenatal-diagnosis.operation-record': '手术病历',
+
   'menu.prenatal-diagnosis.prenatalpatient': '建档管理',
   'menu.prenatal-diagnosis.prenataldiagnosis': '产前诊断病例',
   'menu.prenatal-diagnosis.report': '诊断报告',

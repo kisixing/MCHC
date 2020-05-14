@@ -56,7 +56,9 @@ export function createFormHandler(config, submitChange){
   }
 
   const subscribe = function(fieldName, eventName, cb) {
-    if(fieldName in this || fieldName === "_global"){
+    // if(fieldName in this || fieldName === "_global"){
+    // 这里使用this会导致subscribe传给组件后this丢失
+    if(fieldName in formHandler || fieldName === "_global"){
       if(!eventCallBacks[fieldName]){
         eventCallBacks[fieldName] = {};
       }

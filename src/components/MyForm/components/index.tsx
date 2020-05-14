@@ -1,11 +1,15 @@
 import MyInput from './MyInput';
 import MyDateTime from './MyDateTime'
-import MySelect from './MySelect/index'
+import MySelect from './MySelect'
 import MyCheckbox from './MyCheckbox'
 import MyTable from './MyTable';
+import Address from './Address';
+
 import SimpleObject from './SimpleObject';
 import Fetuses from './business/Fetuses';
-import DownScreen from './business/DownScreen';
+
+import MyCustom from './MyCustom';
+import ArrayCustom from './MyCustom/ArrayCustom'
 
 interface MyComponent{
   [key:string]: any
@@ -17,11 +21,13 @@ const MyComponent:MyComponent = {
   "select": MySelect,
   "checkbox": MyCheckbox,
   "table": MyTable,
+  "address": Address,
 
   "simpleobject": SimpleObject,
-
   "b-fetuses": Fetuses,
-  "b-downscreen": DownScreen
+
+  "custom": MyCustom,
+  "array-custom": ArrayCustom
 }
 
 export default MyComponent

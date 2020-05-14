@@ -1,4 +1,5 @@
 const data = {
+	"address-test": "",
 	"id": 12,
 	"lmp": "2020-02-01",
 	"edd": "2020-11-17",
@@ -7,7 +8,7 @@ const data = {
 	"parity": 1,
 	"gestationalWeek": "9",
 	"modifyDate": null,
-	"chief complaint": "小腹胀痛",
+	"chief complaint": "",
 	"doctor": null,
 	"diagnosis": "",
 	"diagnosiscode": "",
