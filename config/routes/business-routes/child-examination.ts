@@ -22,5 +22,11 @@ export default {
       path: '/child-examination/examination-edit',
       component: './child-management/child-examination/deliver-edit',
     },
+    {
+      name: 'birth-information',
+      icon: 'edit',
+      path: '/child-examination/birth-information',
+      component: './child-management/child-examination/birth-information',
+    },
   ],
 };
