@@ -186,6 +186,7 @@ export default {
   'menu.child-examination.archive': '儿童档案',
   'menu.child-examination.examination-record': '儿童健康体检记录',
   'menu.child-examination.examination-edit': '儿童健康体检登记',
+  'menu.child-examination.birth-information': '出生信息登记',
   'menu.child-death': '儿童死亡报告管理',
   'menu.high-risk-children': '高危儿管理',
   'menu.hearing-screening': '儿童听力筛查',

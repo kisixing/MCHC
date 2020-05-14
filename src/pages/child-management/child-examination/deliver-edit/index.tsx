@@ -1,5 +1,7 @@
 import React from 'react';
 import PanelWithChild from '@/components/BaseEditPanel/PanelWithChild';
+import BirthInformation from '../birth-information';
+
 import { Tabs } from 'antd';
 import { get } from 'lodash';
 import request from '@/utils/request';
@@ -26,8 +28,8 @@ export default class panel extends PanelWithChild {
         <Tabs.TabPane tab="病史询问" key="Admission">
 
         </Tabs.TabPane>
-        <Tabs.TabPane tab="出生信息登记" key="LabourRecord">
-
+        <Tabs.TabPane tab="出生信息登记" key="birth-information">
+          <BirthInformation id={id} />
         </Tabs.TabPane>
         <Tabs.TabPane tab="体格检查" key="NursingRecord">
 
