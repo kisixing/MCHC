@@ -35,10 +35,11 @@ export default class MyCustom extends Component<MyCustomProps, MyCustomState>{
     if (subscribe) {
       // 父页面 submit 时的动作
       subscribe("_global", "submit", () => {
+        // console.warn("底层form start submit");
         formHandler.submit().then(({ validCode, res }: any) => {
-          // if(validCode){
-          //   onChange(getFormData(res));
-          // }
+          if(validCode){
+            onChange(getFormData(res));
+          }
         })
       })
     }

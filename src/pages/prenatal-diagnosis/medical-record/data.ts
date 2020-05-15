@@ -57,7 +57,7 @@ const data = {
 		"avf": null,
 		"umbilicalbloodflow": null
 	}],
-	// 家族史,
+	// 家族史 done
 	"familyHistory": {
 		"id": 7,
 		"hypertension": true,
@@ -79,9 +79,9 @@ const data = {
 		"diabetes": null,
 		"diabetesNote": null
 	},
-	// 手术史
+	// 手术史 done 
 	"procedureHistory": null,
-	// 疾病史
+	// 疾病史 done
 	"diseaseHistory": {
 		"id": 8,
 		"hypertension": true,
@@ -109,7 +109,7 @@ const data = {
 		"diabetes": true,
 		"diabetesNote": "有糖尿病"
 	},
-	// 过敏史
+	// 过敏史 done
 	"allergyHistory": {
 		"penicillin": null,
 		"penicillinNote": null,
@@ -128,7 +128,7 @@ const data = {
 		"other": null,
 		"otherNote": null
 	},
-	// 输血史
+	// 输血史 done
 	"transfusionHistory": {
 		"id": 1,
 		"name": "test",
@@ -168,7 +168,7 @@ const data = {
 		"diagnosis": "",
 		"note": ""
 	}],
-	// 唐筛
+	// 唐筛 done
 	"downsscreen": [{
 		"checkdate": "2019-04-01",
 		"type": "1",
@@ -218,7 +218,7 @@ const data = {
 		"note": ""
 	}
 	],
-	// 地贫
+	// 地贫 done
 	"thalassemia": [{
 		"checkdate": "2019-04-01",
 		"type": "1",

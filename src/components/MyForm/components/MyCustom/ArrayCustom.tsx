@@ -69,6 +69,7 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
           path={path}
           error={null}
           value={val}
+          subscribe={() => {}}
         />
       </div>
     ))
