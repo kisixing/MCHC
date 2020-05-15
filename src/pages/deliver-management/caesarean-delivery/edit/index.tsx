@@ -8,7 +8,7 @@ import WithDynamicExport from '@/components/WithDynamicExport';
 export default class AdmissionPanel extends BaseEditPanel {
   static defaultProps = {
     baseUrl: 'admissions',
-    moduleName: 'admission',
+    moduleName: 'caesareanDelivery',
     title: '剖宫产记录',
     toApi,
     fromApi,
