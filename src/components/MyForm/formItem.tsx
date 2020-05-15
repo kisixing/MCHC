@@ -21,6 +21,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
       error: "",
       path: "",
       validate: [],
+      
     }
     const self = this;
     if (props.actions) {
@@ -35,12 +36,20 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
       }
       props.actions.valid = function valid() {
         const error = validFun(self.state.value, props.validate || "");
+        // childrenError boolean
+        let childrenError: any;
+        if(props.type.indexOf("custom") !== -1){
+          childrenError = self.childrenValid();
+        }
         self.setState({ error });
-        return isEmpty(error);
+        return isEmpty(error) && childrenError;
       }
     }
   }
 
+  childrenValid = () => {
+    return true;
+  }
 
   componentDidMount() {
     this.setState({
@@ -51,6 +60,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
   }
 
   componentDidUpdate(prevProps: FormItemProp) {
+    const self = this;
     if (JSON.stringify(this.props) !== JSON.stringify(prevProps)) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
@@ -123,6 +133,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
                 input_props={input_props}
                 error={error}
                 path={path}
+                getValidFun={(validFunc: any) => {this.childrenValid = validFunc}}
               />
             ) : (
                 <strong>

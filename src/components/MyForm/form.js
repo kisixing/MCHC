@@ -38,7 +38,6 @@ export function createFormHandler(config, {submitChange}){
   }
   
   const submit = function() {
-
     let r = {}
     let validCode = true;
     Object.keys(this).forEach(key => {
@@ -58,6 +57,22 @@ export function createFormHandler(config, {submitChange}){
       resolve({validCode,res: r})
     })
   }
+
+  // this指向被改变了
+  const valid = function() {
+    let validCode = true;
+    const keyArr = Object.keys(formHandler);
+    for(let i = 0 ; i < keyArr.length ; i++){
+      if(formHandler[keyArr[i]].actions && typeof formHandler[keyArr[i]].actions.valid === "function"){
+        if(formHandler[keyArr[i]].actions.valid() !== ""){
+          validCode = false;
+          break;
+        }
+      } 
+    }
+    return validCode;
+  }
+
 
   const subscribe = function(fieldName, eventName, cb) {
     // if(fieldName in this || fieldName === "_global"){
@@ -107,6 +122,7 @@ export function createFormHandler(config, {submitChange}){
 
   const formHandler = {...initField(config)}
   formHandler.submit = submit;
+  formHandler.valid = valid;
   formHandler.subscribe = subscribe;
   formHandler.dispatch = dispatch;
   formHandler.formState = formState;

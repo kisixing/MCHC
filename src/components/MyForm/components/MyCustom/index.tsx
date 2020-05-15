@@ -13,7 +13,7 @@ interface MyCustomProps {
   path: string,
   value: any,
 
-  getError: Function
+  getValidFun: any
 }
 
 interface MyCustomState {
@@ -58,6 +58,11 @@ export default class MyCustom extends Component<MyCustomProps, MyCustomState>{
         this.setState({isSubscribe: true});
       }
     }
+    // if(JSON.stringify(this.props) !== JSON.stringify(prevProps)){
+    if(this.props.getValidFun){
+      this.props.getValidFun(formHandler.valid);
+    }  
+    // }
   }
 
   render() {

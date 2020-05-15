@@ -27,15 +27,15 @@ export default class Home extends React.Component<{},HomeState>{
   }
 
   componentDidMount() {
-    request("/prenatal-diagnoses",{
-      method: "GET"
-    }).then((res: any) => console.log(res));
-    request("/prenatal-patients",{
-      method: "GET"
-    }).then((res: any) => console.log(res));
-    request("/pregnancies",{
-      method: "GET"
-    }).then((res: any) => console.log(res));
+    // request("/prenatal-diagnoses",{
+    //   method: "GET"
+    // }).then((res: any) => console.log(res));
+    // request("/prenatal-patients",{
+    //   method: "GET"
+    // }).then((res: any) => console.log(res));
+    // request("/pregnancies",{
+    //   method: "GET"
+    // }).then((res: any) => console.log(res));
   }
 
   componentDidUpdate(){
