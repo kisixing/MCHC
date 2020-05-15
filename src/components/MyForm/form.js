@@ -15,9 +15,11 @@ export function createFormHandler(config, {submitChange}){
    * }
    */
 
-  const eventCallBacks = {}
+  const eventCallBacks = {
+
+  }
   const formState = {
-    validated: false,
+    validateCode: false,
     submitChange
   }
 
@@ -36,6 +38,7 @@ export function createFormHandler(config, {submitChange}){
   }
   
   const submit = function() {
+
     let r = {}
     let validCode = true;
     Object.keys(this).forEach(key => {
@@ -66,14 +69,24 @@ export function createFormHandler(config, {submitChange}){
       if(!eventCallBacks[fieldName][eventName]){
         eventCallBacks[fieldName][eventName] = [];
       }
-      eventCallBacks[fieldName][eventName].push(cb);
+      let flag = true;
+      for(let i = 0 ; i < eventCallBacks[fieldName][eventName].length ;i++){
+        if(cb === eventCallBacks[fieldName][eventName][i]){
+          flag = false;
+          break;
+        }
+      }
+      if(flag){
+        eventCallBacks[fieldName][eventName].push(cb);
+      }
+
     }
   }
 
   const dispatch = function(fieldName, eventName, args) {
     if(fieldName !== "_global" && submitChange){
       dispatch("_global", "change");
-      return;
+      // return;
     }
 
     if(!Object.prototype.hasOwnProperty.call(eventCallBacks, fieldName)) {
@@ -86,7 +99,7 @@ export function createFormHandler(config, {submitChange}){
     if(!eventQueue || eventQueue.length === 0){
       console.warn(`fieldName ${eventName} not found in ${fieldName} Event Object || eventQueue's length is 0`);
       return;
-    }
+    }    
     eventQueue.forEach(func => {
       func(args);
     })

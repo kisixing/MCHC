@@ -51,7 +51,7 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
       return null;
     }
     return value.map((val: any, index: number) => (
-      <div className={styles['array-form']}>
+      <div className={styles['array-form']} key={`array-custom-${index}`}>
         <h2 className={styles.title}>
           <div>
             信息{index+1}

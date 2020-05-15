@@ -8,11 +8,50 @@ const data = {
         "temperature": "",
         "systolic": "",
         "diastolic": "",
-        "pdPreMeasurement": [],
+        "pdPreMeasurement": [
+            {
+                "leftPleuralEffusion": "",
+                "rightPleuralEffusion": "",
+                "ascites": "",
+                "hygromata": "",
+                "lungCompression": "",
+                "mediastinum": "",
+                "note": ""
+            }
+        ],
         "ultrasound": [],
-        "pdPreBloodFlow": [],
-        "pdPreHemogram": [],
-        "pdAnaesthetic": {}
+        "pdPreBloodFlow": [
+            {
+                "uaEdf": "",
+                "uaPi": "",
+                "uaRi": "",
+                "uaSdratio": "",
+                "mcaPsv": "",
+                "mcaPi": "",
+                "mcaRi": "",
+                "mcaSdratio": "",
+                "dv": "",
+                "note": ""
+            }
+        ],
+        "pdPreHemogram": [
+            {
+                "hbc": "红细胞",
+                "hgb": "血红蛋白",
+                "wbc": "白细胞",
+                "hct": "红细胞压积",
+                "plt": "血小板",
+                "nrbc": "有核红细胞",
+                "ret": "网织红细胞",
+                "coombs": "抗球蛋白试验",
+            }
+
+        ],
+        "pdAnaesthetic": {
+            "type": 1,
+            "doctor": "麻醉医生",
+        }
+        
     },
     "pdProcedure": [{
         "startTime": "",

@@ -1,5 +1,4 @@
 const data = {
-	"address-test": "",
 	"id": 12,
 	"lmp": "2020-02-01",
 	"edd": "2020-11-17",
@@ -223,7 +222,7 @@ const data = {
 		"checkdate": "2019-04-01",
 		"type": "1",
 		"result": "",
-		"genotype": "",
+		"genotype": [],
 		"note": "",
 		"Hb": "",
 		"MCV": "",
@@ -236,7 +235,7 @@ const data = {
 		"checkdate": "2019-04-01",
 		"type": "2",
 		"result": "",
-		"genotype": "",
+		"genotype": [],
 		"note": "",
 		"Hb": "",
 		"MCV": "",

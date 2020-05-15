@@ -29,7 +29,6 @@ export default class Home extends React.Component<{},HomeState>{
     formHandler.subscribe("lmp", "change", (val: any) => {
       formHandler.sureEdd.actions.setValue("2020-01-01");
     });
-    console.log(formHandler);
   }
 
   handleSubmit = () => {

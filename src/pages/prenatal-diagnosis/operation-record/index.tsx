@@ -30,6 +30,8 @@ export default class Home extends React.Component<{},HomeState>{
   handleSubmit = () => {
     this.state.formHandler.dispatch("_global","submit",{});
     this.state.formHandler.submit().then(({validCode, res}:any) => {
+      console.log(validCode);
+      console.log(getFormData(res));
     });
   }
 
