@@ -117,16 +117,14 @@ interface IProps {
 }
 
 export default class BaseTree extends React.Component<IProps> {
-  handleCheck = (checkedKeys, { halfCheckedKeys }) => {
+  handleCheck = (checkedKeys: any, others: any) => {
     const { onChange } = this.props;
+    const { halfCheckedKeys } = others;
     onChange({ checkedKeys, halfCheckedKeys });
   };
 
   render() {
     const { treeData, value, ...others } = this.props;
-
-    return (
-      <Tree defaultExpandAll treeData={treeData} checkable onCheck={this.handleCheck} {...others} />
-    );
+    return <Tree defaultExpandAll treeData={treeData} checkable onCheck={this.handleCheck} {...others} />;
   }
 }
