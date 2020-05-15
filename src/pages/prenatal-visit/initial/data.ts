@@ -683,7 +683,7 @@ const data = {
   "add_FIELD_cardiac_bq": "",
   "add_FIELD_murmurs_y": "",
   "add_FIELD_ckjizh_jx": "",
-  "add_FIELD_checkup_other": "",
+  "add_FIELD_checkup_other": "3635636",
   "add_FIELD_headFeatures": "[{\"label\":\"其他\",\"value\":\"\"}]"
   },
   "specialityCheckUp": {

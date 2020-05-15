@@ -156,7 +156,7 @@ const config: Array<FormConfig> = [
         },
       ],
     } },
-  { name: 'hisInfo-add_FIELD_symptom', key: '.hisInfo', label: "其他", input_type: "input", span: 24 },
+  { name: 'add_FIELD_symptom', key: '.hisInfo.add_FIELD_symptom', label: "其他", input_type: "input", span: 24 },
 
 ]
 export default config;
