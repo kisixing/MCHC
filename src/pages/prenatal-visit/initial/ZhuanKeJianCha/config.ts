@@ -2,8 +2,32 @@ import { FormConfig } from '@/components/MyForm/interface';
 
 const config: Array<FormConfig> = [
 
-  { name:'ckgongg', key: '.specialityCheckUp.ckgongg', label: "宫高", input_type: "input", span: 7, rules: "required" },
-  { name:'add_FIELD_ckjc', key: '.specialityCheckUp.add_FIELD_ckjc', label: "胎心率&先露", input_type: "input", span: 24, rules: "required" },
+  {
+    name: "specialityCheckUp",
+    key: ".specialityCheckUp",
+    label: "专科检查",
+    header_label: true,
+    input_type: "custom",
+    input_props: {
+      config: [
+        { name:'ckgongg', key: '.ckgongg', label: "宫高", input_type: "input", span: 7, rules: "required" },
+        {
+          name: "add_FIELD_ckjc",
+          key: ".add_FIELD_ckjc",
+          label: "",
+          header_label: true,
+          input_type: "array-custom",
+          input_props: {
+            config: [
+              { name: "fetalHeartRate", key: ".fetalHeartRate", label: "胎心率", input_type: "input", span: 8, offset: 0 },
+              { name: "presentation", key: ".presentation", label: "先露", input_type: "input", span: 8, offset: 0 },
+            ]
+          }
+        },
+      ]
+    }
+  },
+
   { name:'add_FIELD_gynecological_examination', key: '.specialityCheckUp.add_FIELD_gynecological_examination', label: "妇科检查", input_type: "checkbox", span: 24, rules: "required",
     input_props: {
       type: "custom",

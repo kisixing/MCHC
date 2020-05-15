@@ -3,9 +3,9 @@ import { FormConfig } from '@/components/MyForm/interface';
 const config: Array<FormConfig> = [
 
   {
-    name: "yunfuxinxi",
-    key: ".yunfuxinxi",
-    label: "孕妇基本信息",
+    name: "yunchanshi",
+    key: ".yunchanshi",
+    label: "孕产史",
     header_label: true,
     input_type: "custom",
     input_props: {
