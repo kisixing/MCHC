@@ -23,7 +23,7 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
   let spanArr = [];
   for(let i = 0 ;i < config.length; i++){
     const { span = 24, offset = 0 } = config[i];
-    const { label = "", unit = "", input_props = {}, rules = "" , key = "", is_new_ros = false, name = ""} = config[i];
+    const { label = "", unit = "", input_props = {}, rules = "" , key = "", is_new_ros = false, name = "", header_label = false} = config[i];
     if(config[i].hidden){
       // eslint-disable-next-line no-continue
       continue;
@@ -56,9 +56,11 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
         <FormItem 
           actions={formHandler[config[i].name].actions} 
           dispatch={formHandler.dispatch}
+          subscribe={formHandler.subscribe}
           defaultValue={config[i].value}
           type={config[i].input_type}
           label={label}
+          header_label={header_label}
           unit={unit}
           input_props={input_props}
           validate={rules}

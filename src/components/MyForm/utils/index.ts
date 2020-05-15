@@ -111,12 +111,10 @@ const rules = [
  */
 function getData(obj: any, path: string, history: string): object {
   if (!path) { console.warn('path is undefined'); return {}; }
-  if (path.indexOf("+") !== -1) {
-    // console.warn('path is empty');
-    console.warn("不向下取值，返回原对象");
-    console.log(obj);
-    return { [`+${path}`]: obj };
-  }
+  // if (path === ALL) {
+  //   console.log(obj);
+  //   return { [`.${path}`]: obj };
+  // }
   if (isBase(obj)) { return {}; }
   let r = {};
   const oi = path.indexOf(o);
