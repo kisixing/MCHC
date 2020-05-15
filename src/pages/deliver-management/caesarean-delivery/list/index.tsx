@@ -8,7 +8,7 @@ import { router } from 'umi';
 @WithDynamicExport
 export default class List extends BaseList {
   static defaultProps = {
-    baseUrl: '/admissions',
+    baseUrl: '/caesarean-deliveries',
     baseTitle: '剖宫产记录',
     needPagination: false,
     showQuery: false,
