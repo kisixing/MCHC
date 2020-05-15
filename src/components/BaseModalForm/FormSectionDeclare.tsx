@@ -77,6 +77,7 @@ export interface IRule {
 
 // 组件类型
 export type InputType =
+  // 以下是通用配置
   | 'input'                       // 普通输入框
   | 'single_date_picker'          // 单个日期选择框
   | 'checkbox_group'              // 多个 checkbox
@@ -92,16 +93,14 @@ export type InputType =
   | 'input_with_label'            // 输入框带前置或后置 label
   | 'radio_with_input_number'     // 单选带输入数字
   | 'disease_select'              // 疾病选择
-  // 以下是特殊情况，一般无需配置
+  // 以下是特殊情况，根据自己的实际情况配置
   | 'pregnancy_history'           // 孕产史
   | 'address'                     // 地址选择
   | 'apgar_score_input'           // 胎儿评分
   | 'fetus_appendages'            // 胎盘附属物
-  | 'fetal_count'                 // 胎数
   | 'id_number_input'             // 身份证号码输入
   | 'country_select'              // 国家选择
   | 'pregnant_radio'              // 单选，TODO: 待优化
-  | 'has_pregnancy';              // 是否怀孕
 
 export interface IInputProps extends React.AllHTMLAttributes<HTMLFormControlsCollection> {}
 
