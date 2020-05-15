@@ -3,14 +3,15 @@ import { Button } from 'antd';
 import MyForm from '@/components/MyForm/index';
 import config from './config';
 import data from './data';
-import styles from './index.less';
-
+import request from '@/utils/request';
 import { getRenderData, getFormData} from '@/components/MyForm/utils';
+import styles from './index.less';
 
 interface HomeState{
   formHandler:{
     [key:string]: any
-  }
+  },
+  data: any
 }
 
 
@@ -20,8 +21,21 @@ export default class Home extends React.Component<{},HomeState>{
     this.state = {
       formHandler: {
         
-      }
+      },
+      data: {}
     }
+  }
+
+  componentDidMount() {
+    request("/prenatal-diagnoses",{
+      method: "GET"
+    }).then((res: any) => console.log(res));
+    request("/prenatal-patients",{
+      method: "GET"
+    }).then((res: any) => console.log(res));
+    request("/pregnancies",{
+      method: "GET"
+    }).then((res: any) => console.log(res));
   }
 
   componentDidUpdate(){
@@ -39,6 +53,10 @@ export default class Home extends React.Component<{},HomeState>{
       //   console.log(res);
       console.log(getFormData(res));
       // }
+      request("/prenatal-diagnoses",{
+        method: "PUT",
+        data: {...getFormData(res), id: 12}
+      }).then((result: any) => console.log(result))
     });
   }
 

@@ -4,6 +4,7 @@ const data = {
     "operationName": "羊膜腔穿刺",
     "serialNo": "0001",
     "grade": 1,
+    // done
     "pdPreOperation": {
         "temperature": "",
         "systolic": "",
@@ -51,14 +52,30 @@ const data = {
             "type": 1,
             "doctor": "麻醉医生",
         }
-        
     },
     "pdProcedure": [{
-        "startTime": "",
+        "startTime": "2020-01-01",
+        "endTime": "2020-01-01",
+        "duration": "2",
+        "punctureTart": 1,
+        "punctureAmount": 1,
+        "placentaEntry": 1,
+        "placentaHemorrha": 1,
+        "placentaHemorrhaNote": "",
+        "sampleSite": "",
+        "sampleInspection": "",
+        "processEvaluation": 1,
+        "processEvaluationNote": "",
+        "diagnosis": "",
+        "exception": "",
+        "instrument": 1,
+
         "pdMedication": [],
         "invasiveNote": {}
     }],
     "pdPostOperation": {}
 }
+
+
 
 export default data;

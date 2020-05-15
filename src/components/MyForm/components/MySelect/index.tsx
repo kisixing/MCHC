@@ -27,7 +27,8 @@ export default function MySelect(props: MySelectProps) {
     },
     "multiple": (input_props: any, value: any, onChange: Function): ReactNode => {
       // 这一类的组件目前只支持单选
-      const { options = [], extraEditors = [], radio = true } = input_props;
+      console.log(value);
+      const { options = [], extraEditors = [], radio = true, renderData = [] } = input_props;
       // 构建value
       const val: any = {
         selectValue: [],
@@ -37,6 +38,7 @@ export default function MySelect(props: MySelectProps) {
       if (radio) {
         // 单选
         for (let i = 0; i < keys.length; i++) {
+          console.log(keys[i]);
           if (value[keys[i]] === true) {
             val.selectValue = keys[i];
             val.editorsValue = value[`${keys[i]}Note`];
@@ -90,6 +92,7 @@ export default function MySelect(props: MySelectProps) {
         multiple={!radio}
         extraEditors={extraEditors}
       />)
+      // select这里需要加多一个custom类型
     },
   }
 
