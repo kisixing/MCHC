@@ -15,7 +15,7 @@ const defaultGutterConfig = {
 export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfig:any = defaultGutterConfig){
   if(!config) throw new Error('config is undefined');
   if(Object.prototype.toString.call(config) !== '[object Array]') throw new Error(`Expect array but ${typeof config}`);
-  
+
   let count = 0;    // 计算占比
   // let prevOffset = 0; 使用offset换行时，计算第i个元素用于上一行换行的offset数量
   let row = 0;
@@ -33,14 +33,14 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
     }
     if(count > 24 || is_new_row){
       formDom.push(
-        <Row 
-          key={`row-${row}`} 
+        <Row
+          key={`row-${row}`}
           {...gridConfig}
         >
             {spanArr}
         </Row>
       )
-      spanArr = []; 
+      spanArr = [];
       // 计算上一行换行的offset数量
       // prevOffset = 24 - count + (span + offset);
       // 减去上一行换行所用offset
