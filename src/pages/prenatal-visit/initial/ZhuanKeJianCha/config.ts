@@ -1,7 +1,6 @@
 import { FormConfig } from '@/components/MyForm/interface';
 
 const config: Array<FormConfig> = [
-
   // {
   //   name: "specialityCheckUp",
   //   key: ".specialityCheckUp",
@@ -49,7 +48,6 @@ const config: Array<FormConfig> = [
   { name:'cervix', key: '.gynecologicalExam.cervix', label: "宫颈", input_type: "input", span: 6, rules: "required" },
   { name:'uterus', key: '.gynecologicalExam.uterus', label: "子宫", input_type: "input", span: 6, rules: "required" },
   { name:'adnexa', key: '.gynecologicalExam.adnexa', label: "附件", input_type: "input", span: 6 },
-
 ]
 export default config;
 

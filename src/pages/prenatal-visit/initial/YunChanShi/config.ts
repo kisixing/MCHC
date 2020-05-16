@@ -22,7 +22,6 @@ const config: Array<FormConfig> = [
         // { key: "shouShuChanType", title: "手术产式", editor: { name: "", key: "", input_type: "input" } },
         { key: "hemorrhage", title: "出血", editor: { name: "", key: "", input_type: "checkbox", input_props: {type: 'default'} } },
         { key: "puerperalFever", title: "产褥热", editor: { name: "", key: "", input_type: "checkbox", input_props: {type: 'default'} } },
-
         // { key: "fetalcount", title: "胎数	", editor: { name: "", key: "", input_type: "input" } },
         // { key: "xingb", title: "性别", editor: { name: "", key: "", input_type: "input" } },
         // { key: "child", title: "生存", editor: { name: "", key: "", input_type: "input" } },

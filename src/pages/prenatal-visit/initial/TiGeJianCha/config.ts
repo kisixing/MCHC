@@ -348,7 +348,9 @@ const config: Array<FormConfig> = [
   //   ],
   // }},
 
+
   // { name: 'add_FIELD_generalExam_other', key: '.generalExam.add_FIELD_generalExam_other', label: "其他", input_type: "input", span: 24 },
+
 ];
 
 export default config;

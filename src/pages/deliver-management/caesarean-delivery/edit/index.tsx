@@ -10,8 +10,8 @@ import { message } from 'antd';
 @WithDynamicExport
 export default class AdmissionPanel extends BaseEditPanel {
   static defaultProps = {
-    baseUrl: 'caesarean-deliveries',
-    moduleName: 'caesareanDeliveryPage',
+    baseUrl: 'admissions',
+    moduleName: 'admission',
     title: '剖宫产记录',
     toApi,
     fromApi,

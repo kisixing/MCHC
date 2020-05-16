@@ -2,6 +2,7 @@ import { FormConfig } from '../../../../components/MyForm/interface';
 
 const config: Array<FormConfig> = [
 
+
   { name: 'menarche', key: '.pregnancy.menstrualHistory.menarche', label: "初潮", input_type: "input", span: 6, rules: "required" },
   { name: 'menstrualCycle', key: '.pregnancy.menstrualHistory.menstrualCycle', label: "周期", input_type: "input", span: 6, rules: "required" },
   { name: 'menstrualPeriod', key: '.pregnancy.menstrualHistory.menstrualPeriod', label: "持续天数", input_type: "input", span: 6, rules: "required" },

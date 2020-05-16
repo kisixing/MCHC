@@ -47,19 +47,21 @@ const rules = [
       // if(isBase(obj) === ONLYBASE) return {};
       const r: { [key: string]: any } = {};
       if (path === ALL) {
-        if (isObj(obj)) {
-          Object.keys(obj).forEach((key: string) => {
-            if (isBase(obj[key]) === ONLYBASE) {
-              r[`${history}.${key}`] = obj[key];
-            }
-          })
-        } else if (isArr(obj)) {
-          obj.forEach((v: any, index: number) => {
-            if (isBase(v) === ONLYBASE) {
-              r[`${history}_${index}`] = v;
-            }
-          })
-        }
+        // 取全部值暂时不处理 
+
+        // if (isObj(obj)) {
+        //   Object.keys(obj).forEach((key: string) => {
+        //     if (isBase(obj[key]) === ONLYBASE) {
+        //       r[`${history}.${key}`] = obj[key];
+        //     }
+        //   })
+        // } else if (isArr(obj)) {
+        //   obj.forEach((v: any, index: number) => {
+        //     if (isBase(v) === ONLYBASE) {
+        //       r[`${history}_${index}`] = v;
+        //     }
+        //   })
+        // }
       } else {
         if (isObj(obj)) {
           r[`${history}.${path}`] = obj[path];
@@ -111,10 +113,9 @@ const rules = [
  */
 function getData(obj: any, path: string, history: string): object {
   if (!path) { console.warn('path is undefined'); return {}; }
-  // if (path === ALL) {
-  //   console.log(obj);
-  //   return { [`.${path}`]: obj };
-  // }
+  if (path === ALL) {
+    return { [`.${path}`]: obj };
+  }
   if (isBase(obj)) { return {}; }
   let r = {};
   const oi = path.indexOf(o);
@@ -245,6 +246,11 @@ function _assign(mainData: any = {}, newData: any = {}): any {
 function toFormat(data: { [key: string]: any }): object {
   let r = {};
   Object.keys(data).forEach(key => {
+    // 合并 * 
+    if(key === `.${ALL}`){
+      r = _assign(r, data[key]);
+      return;
+    }
     const oi = key.lastIndexOf(o);
     const ai = key.lastIndexOf(a);
     if (oi === ai) {
