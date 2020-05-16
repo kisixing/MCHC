@@ -20,7 +20,6 @@ export default class DefaultSelect extends Component<DefaultSelectProps>{
   handleChange = (val:any) => {
     const {onChange} = this.props;
     // if(isArr(val)){
-      console.log('a');
       onChange(val);
     // }else{
     //   onChange(val);

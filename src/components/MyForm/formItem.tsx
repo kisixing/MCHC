@@ -37,7 +37,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
       props.actions.valid = function valid() {
         const error = validFun(self.state.value, props.validate || "");
         // childrenError boolean
-        let childrenError: any;
+        let childrenError: any = true;
         if(props.type.indexOf("custom") !== -1){
           childrenError = self.childrenValid();
         }

@@ -3,7 +3,6 @@ import { Button } from 'antd';
 import MyForm from '@/components/MyForm/index';
 import config from './config';
 import data from './data';
-import request from '@/utils/request';
 import { getRenderData, getFormData} from '@/components/MyForm/utils';
 import styles from './index.less';
 
@@ -40,9 +39,6 @@ export default class Home extends React.Component<{},HomeState>{
 
   componentDidUpdate(){
     const { formHandler } = this.state;
-    formHandler.subscribe("lmp", "change", (val: any) => {
-      formHandler.sureEdd.actions.setValue("2020-01-01");
-    });
   }
 
   handleSubmit = () => {
@@ -53,10 +49,10 @@ export default class Home extends React.Component<{},HomeState>{
       //   console.log(res);
       console.log(getFormData(res));
       // }
-      request("/prenatal-diagnoses",{
-        method: "PUT",
-        data: {...getFormData(res), id: 12}
-      }).then((result: any) => console.log(result))
+      // request("/prenatal-diagnoses",{
+      //   method: "PUT",
+      //   data: {...getFormData(res), id: 12}
+      // }).then((result: any) => console.log(result))
     });
   }
 
@@ -71,7 +67,7 @@ export default class Home extends React.Component<{},HomeState>{
           submitChange={false}
         />
         <div className={styles['btn-group']}>
-          <Button onClick={this.handleSubmit}>重置</Button>
+          <Button>重置</Button>
           <Button type="primary" onClick={this.handleSubmit}>提交</Button>
         </div>
       </div>

@@ -642,5 +642,26 @@ export const omitRoutes = [
     key: '/prenatal-diagnosis/operation-record',
     active: null,
     isMenu: true
+  },
+  {
+    id: 96,
+    type: 'others',
+    key: '/prenatal-diagnosis/admission',
+    active: null,
+    isMenu: true
+  },
+  {
+    id: 95,
+    type: 'others',
+    key: '/prenatal-diagnosis/main',
+    active: null,
+    isMenu: true
+  },
+  {
+    id: 94,
+    type: 'others',
+    key: '/prenatal-diagnosis/new-patient',
+    active: null,
+    isMenu: true
   }
 ];

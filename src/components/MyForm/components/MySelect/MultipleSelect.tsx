@@ -57,7 +57,6 @@ export default class MultipleSelect extends Component<MultipleSelectProps>{
 
   renderExtra = (selectValue: any, editorsValue: any, extraEditors:Array<any>, multiple: boolean): Array<ReactNode> => {
     const extraEditorsDOM:Array<ReactNode> = [];
-    console.log(selectValue);
     if(!multiple){
       // 单选
       const index = extraEditors.findIndex((extraEditor: any ) => extraEditor.key === selectValue);
