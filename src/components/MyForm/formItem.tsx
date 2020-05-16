@@ -33,6 +33,8 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
       }
       props.actions.valid = function valid() {
         const error = validFun(self.state.value, props.validate || "");
+        // console.log(props.name);
+        // console.log(error);
         self.setState({ error });
         return isEmpty(error);
       }
@@ -55,6 +57,10 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
         validate: this.props.validate || "",
         path: this.props.path
       });
+      // if(this.props.name === "trisomy21"){
+      //   console.log(this.state.value);
+      //   console.log(this.props.validate);
+      // }
     }
   }
 
@@ -106,12 +112,12 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
           </div>
         ) : null}
         <div className={styles['form-item']}>
-          <div className={styles['formItem-inline-label']}>
             {label !== "" && !header_label ? (
-              <label>{this.renderAsterisk(validate)}{label}:</label>
+              <div className={styles['formItem-inline-label']}>
+                  <label>{this.renderAsterisk(validate)}{label}:</label>
+              </div>
             ) : null}
-          </div>
-          <div className={styles['formItem-main']}>
+          <div className={header_label ? styles['formItem-full-main'] : styles['formItem-main']}>
             {MyComponent ? (
               <MyComponent
                 onChange={this.handleChange}

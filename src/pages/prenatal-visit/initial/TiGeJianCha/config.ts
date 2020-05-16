@@ -1,13 +1,13 @@
 import { FormConfig } from '../../../../components/MyForm/interface';
 
 const config: Array<FormConfig> = [
-  { name: 'ckpressure', key: '.checkUp', label: "血压", input_type: "input", span: 8, rules: "required", },
-  { name: 'add_FIELD_pulse', key: '.checkUp', label: "脉搏", input_type: "input", span: 8, rules: "required", },
-  { name: 'cksheng', key: '.checkUp', label: "身高", input_type: "input", span: 8, rules: "required", },
-  { name: 'cktizh', key: '.checkUp', label: "孕前体重", input_type: "input", span: 8, rules: "required", },
-  { name: 'ckcurtizh', key: '.checkUp', label: "现体重", input_type: "input", span: 8, rules: "required", },
-  { name: 'ckbmi', key: '.checkUp', label: "孕前BMI", input_type: "input", span: 8, rules: "required", },
-  { name: 'cardiac', key: '.checkUp', label: "心率", input_type: "input", span: 24, rules: "required", },
+  { name: 'ckpressure', key: '.checkUp.ckpressure', label: "血压", input_type: "input", span: 8, rules: "required", },
+  { name: 'add_FIELD_pulse', key: '.checkUp.add_FIELD_pulse', label: "脉搏", input_type: "input", span: 8, rules: "required", },
+  { name: 'cksheng', key: '.checkUp.cksheng', label: "身高", input_type: "input", span: 8, rules: "required", },
+  { name: 'cktizh', key: '.checkUp.cktizh', label: "孕前体重", input_type: "input", span: 8, rules: "required", },
+  { name: 'ckcurtizh', key: '.checkUp.ckcurtizh', label: "现体重", input_type: "input", span: 8, rules: "required", },
+  { name: 'ckbmi', key: '.checkUp.ckbmi', label: "孕前BMI", input_type: "input", span: 8, rules: "required", },
+  { name: 'cardiac', key: '.checkUp.cardiac', label: "心率", input_type: "input", span: 24, rules: "required", },
 
 
   { name: 'add_FIELD_headFeatures', key: '.checkUp', label: "头颅五官", input_type: "checkbox", span: 8, rules: "required",
@@ -344,7 +344,7 @@ const config: Array<FormConfig> = [
     ],
   }},
 
-  { name: 'add_FIELD_checkup_other', key: '.checkUp', label: "其他", input_type: "input", span: 24 },
+  { name: 'add_FIELD_checkup_other', key: '.checkUp.add_FIELD_checkup_other', label: "其他", input_type: "input", span: 24 },
 ];
 
 export default config;

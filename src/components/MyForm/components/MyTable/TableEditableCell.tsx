@@ -56,7 +56,7 @@ export default class EditableCell extends Component<EditableCellProps> {
         onBlur={this.handleBlur}
         style={{ width: "100%", minHeight: "100%" }}
       >
-        {editing ? (
+        {editing || editor.input_type === 'checkbox' ? (
           <RenderComponent
             {...editor}
             onChange={(val: any) => this.handleChange(val)}

@@ -2,16 +2,16 @@ import { FormConfig } from '../../../../components/MyForm/interface';
 
 const config: Array<FormConfig> = [
 
-  { name: 'yjcuch', key: '.menstruationMarriage', label: "初潮", input_type: "input", span: 6, rules: "required" },
-  { name: 'yjzhouq', key: '.menstruationMarriage', label: "周期", input_type: "input", span: 6, rules: "required" },
-  { name: 'yjchix', key: '.menstruationMarriage', label: "持续天数", input_type: "input", span: 6, rules: "required" },
+  { name: 'yjcuch', key: '.menstruationMarriage.yjcuch', label: "初潮", input_type: "input", span: 6, rules: "required" },
+  { name: 'yjzhouq', key: '.menstruationMarriage.yjzhouq', label: "周期", input_type: "input", span: 6, rules: "required" },
+  { name: 'yjchix', key: '.menstruationMarriage.yjchix', label: "持续天数", input_type: "input", span: 6, rules: "required" },
   { name: 'yjtongj', key: '.menstruationMarriage', label: "痛经", input_type: "checkbox", span: 6, rules: "required",
     input_props:{
       type: "custom",
       renderData: [
         {
           key: "yjtongj",
-          label: "吸烟",
+          label: "痛经",
           options: [
             { label: "无", value: '1' },
             { label: "有", value: '2'  },
@@ -38,7 +38,7 @@ const config: Array<FormConfig> = [
       }
     ],
    } },
-  { name: 'userjiehn', key: '.menstruationMarriage', label: "本次结婚年龄", input_type: "input", span: 7, rules: "required" },
+  { name: 'userjiehn', key: '.menstruationMarriage.userjiehn', label: "本次结婚年龄", input_type: "input", span: 7, rules: "required" },
   { name: 'userjinqjh', key: '.menstruationMarriage', label: "近亲结婚", input_type: "checkbox", span: 7, rules: "required",
   input_props:{
     type: "custom",

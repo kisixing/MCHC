@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Button } from 'antd';
 import MyForm from '@/components/MyForm/index';
 import config from './config';
@@ -24,7 +24,6 @@ export default class Home extends React.Component<{},HomeState>{
     }
   }
 
-
   componentDidUpdate(){
     const { formHandler } = this.state;
     formHandler.subscribe("lmp", "change", (val: any) => {
@@ -33,14 +32,13 @@ export default class Home extends React.Component<{},HomeState>{
     console.log(formHandler);
   }
 
-
   handleSubmit = () => {
     this.state.formHandler.dispatch("_global","submit",{});
     this.state.formHandler.submit().then(({validCode, res}:any) => {
       console.log(validCode);
       // if(!validCode){
       //   console.log(res);
-        console.log(getFormData(res));
+      console.log(getFormData(res));
       // }
     });
   }

@@ -11,6 +11,7 @@ import JYJC from './JianYanJianCha';
 import ZDCL from './ZhenDuanChuLi';
 
 import { getRenderData, toFormat} from '@/components/MyForm/utils';
+import style from './index.less'
 
 
 interface HomeState{
@@ -55,7 +56,7 @@ export default class Home extends React.Component<{},HomeState>{
   render(){
     const { tabs, step } = this.state;
     return(
-      <div>
+      <div className="prenatal-visit-initial">
         <Tabs type="card" activeKey={step} onChange={key => this.handleSave(key) }>
           {tabs.map(({ key, title, Content }) => (
             <Tabs.TabPane key={key}
@@ -68,8 +69,8 @@ export default class Home extends React.Component<{},HomeState>{
         </Tabs>
         {
           step !== tabs[tabs.length - 1].key
-          ? <Button onClick={() => this.handleSave()}>下一页</Button>
-          : <Button onClick={() => this.handleSave(step)}>保存</Button>
+          ? <Button className={style.bottomBtn} type="primary" onClick={() => this.handleSave()}>下一页</Button>
+          : <Button className={style.bottomBtn} type="primary" onClick={() => this.handleSave(step)}>保存</Button>
         }
       </div>
     )

@@ -3,10 +3,11 @@ import { FormConfig } from '@/components/MyForm/interface';
 const config: Array<FormConfig> = [
 
   {
-    name: "yunfuxinxi",
-    key: ".yunfuxinxi",
-    label: "孕妇基本信息",
-    input_type: "simpleobject",
+    name: "yunchanshi",
+    key: ".yunchanshi",
+    label: "孕产史",
+    header_label: true,
+    input_type: "custom",
     input_props: {
       config: [
   { name: 'datagridYearMonth', key: '.datagridYearMonth', label: "妊娠终止", input_type: "date", span: 7, rules: "required", input_props:{} },

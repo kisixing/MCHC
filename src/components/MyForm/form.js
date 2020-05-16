@@ -2,7 +2,7 @@ function isArr(v){
   return Object.prototype.toString.call(v) === '[object Array]';
 }
 
-export function createFormHandler(config, submitChange){
+export function createFormHandler(config, {submitChange}){
   if(!isArr(config)){
     throw new Error(`expect array but${typeof config}`);
   }
@@ -18,6 +18,7 @@ export function createFormHandler(config, submitChange){
   const eventCallBacks = {}
   const formState = {
     validated: false,
+    submitChange
   }
 
   // c - config
@@ -62,19 +63,33 @@ export function createFormHandler(config, submitChange){
       if(!eventCallBacks[fieldName]){
         eventCallBacks[fieldName] = {};
       }
-      eventCallBacks[fieldName][eventName] = cb;
+      if(!eventCallBacks[fieldName][eventName]){
+        eventCallBacks[fieldName][eventName] = [];
+      }
+      eventCallBacks[fieldName][eventName].push(cb);
     }
   }
 
   const dispatch = function(fieldName, eventName, args) {
-    try{
-      if(fieldName !== "_global" && submitChange){
-        dispatch("_global", "change");
-      }
-      return eventCallBacks[fieldName][eventName](args);
-    }catch(e){
-      // console.warn(e);
+    if(fieldName !== "_global" && submitChange){
+      dispatch("_global", "change");
+      return;
     }
+
+    if(!Object.prototype.hasOwnProperty.call(eventCallBacks, fieldName)) {
+      console.warn(`fieldName ${fieldName} not found in eventCallBacks Object`);
+      return;
+    }
+    const eventObject = eventCallBacks[fieldName];
+
+    const eventQueue = eventObject[eventName];
+    if(!eventQueue || eventQueue.length === 0){
+      console.warn(`fieldName ${eventName} not found in ${fieldName} Event Object || eventQueue's length is 0`);
+      return;
+    }
+    eventQueue.forEach(func => {
+      func(args);
+    })
   }
 
   const formHandler = {...initField(config)}

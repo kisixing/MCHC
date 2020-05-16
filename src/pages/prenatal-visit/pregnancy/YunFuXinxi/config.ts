@@ -1,18 +1,18 @@
 import { FormConfig } from '@/components/MyForm/interface';
 
 const config: Array<FormConfig> = [
-
   {
     name: "yunfuxinxi",
     key: ".yunfuxinxi",
     label: "孕妇基本信息",
-    input_type: "simpleobject",
+    header_label: true,
+    input_type: "custom",
     input_props: {
       config: [
           { name: 'usermcno', key: '.usermcno', label: "就诊卡号", input_type: "input", span: 7, rules: "required" },
           { name: 'username', key: '.username', label: "姓名", input_type: "input", span: 7, rules: "required" },
           { name: 'usermobile', key: '.usermobile', label: "手机号码", input_type: "input", span: 7, rules: "required" },
-          { name: 'phone', key: '.phone', label: "固定电话", input_type: "input", span: 7, rules: "required" },
+          { name: 'phone', key: '.phone', label: "固定电话", input_type: "input", span: 7 },
           { name: 'useridtype', key: '.useridtype', label: "证件类型", input_type: "select", span: 7, rules: "required", input_props:{options: [{ value: 1, label: 1 }]} },
           { name: 'useridno', key: '.useridno', label: "证件号码", input_type: "input", span: 7, rules: "required" },
           // { name: 'add_FIELD_sh', key: '.add_FIELD_sh', label: "已审核", input_type: "checkbox", span: 7, offset: 1 },
@@ -31,9 +31,6 @@ const config: Array<FormConfig> = [
       ]
     }
   }
-
-
-
 ]
 export default config;
 

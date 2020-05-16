@@ -22,7 +22,7 @@ interface CheckboxComponentProps {
       label: string | number;
       value: string | number | boolean;
     }>;
-    extraEditors: Array<{
+    extraEditors?: Array<{
       key: string | number | string;
       editors: Array<any>;
     }>;
@@ -64,8 +64,8 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
         }else{
           newObj = {
             [key]: val.checkboxValue,
-            [`${key}Note`]: input_props.renderData[index].extraEditors && input_props.renderData[index].extraEditors.length !== 1 
-              ? val.editorsValue 
+            [`${key}Note`]: input_props.renderData[index].extraEditors && input_props.renderData[index].extraEditors.length !== 1
+              ? val.editorsValue
               : JSON.stringify(getObjectFormArray(val.editorsValue))
           };
         }
