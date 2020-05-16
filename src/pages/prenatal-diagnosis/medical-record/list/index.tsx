@@ -85,7 +85,7 @@ export default class List extends BaseList {
 
   handleAdd = () => {
     const urlParams = getPageQuery();
-    router.push(`/prenatal-diagnosis/medical-record-form?id=${urlParams.id || ""}`);
+    router.push(`/prenatal-diagnosis/medical-record-form?prenatalPatientId=${urlParams.id || ""}`);
   };
 
   handleView = (rowData: any) => () => {

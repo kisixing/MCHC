@@ -42,6 +42,7 @@ export default class MyCustom extends Component<MyCustomProps, MyCustomState>{
         // 父页面 submit 时的动作
         subscribe("_global", "submit", () => {
           formHandler.submit().then(({ validCode, res }: any) => {
+            console.log(res);
             if (validCode) {
               onChange(getFormData(res));
             }

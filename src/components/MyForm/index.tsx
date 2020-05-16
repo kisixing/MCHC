@@ -23,13 +23,15 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
   let spanArr = [];
   for(let i = 0 ;i < config.length; i++){
     const { span = 24, offset = 0 } = config[i];
-    const { label = "", unit = "", input_props = {}, rules = "" , key = "", is_new_ros = false, name = "", header_label = false} = config[i];
-    if(config[i].hidden){
-      // eslint-disable-next-line no-continue
-      continue;
+    const { label = "", unit = "", input_props = {}, rules = "" , key = "", is_new_row = false, name = "", header_label = false} = config[i];
+    // if(config[i].hidden){
+    //   // eslint-disable-next-line no-continue
+    //   continue;
+    // }
+    if(!config[i].hidden){
+      count += span + offset;
     }
-    count += span + offset;
-    if(count > 24 || is_new_ros){
+    if(count > 24 || is_new_row){
       formDom.push(
         <Row 
           key={`row-${row}`} 
@@ -48,12 +50,12 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
     }
     spanArr.push(
       <Col  
-        span={span} 
+        span={config[i].hidden ? 0 : span} 
         offset={offset} 
         // offset={spanArr.length === 0 ? offset - prevOffset : offset} 
         key={`row-${row}|span-${count}`}
       >
-        <FormItem 
+        <FormItem
           actions={formHandler[config[i].name].actions} 
           dispatch={formHandler.dispatch}
           subscribe={formHandler.subscribe}

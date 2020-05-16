@@ -94,7 +94,7 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
       if (value && renderData[0].key in value) {
         r = {
           checkboxValue: value[renderData[0].key],
-          editorsValue: renderData[0].extraEditors && renderData[0].extraEditors[0].editors.length > 1 ? convertExtraEditors(value[`${renderData[0].key}Note`]) : [value[`${renderData[0].key}Note`]],
+          editorsValue: renderData[0].extraEditors && renderData[0].extraEditors[0] && renderData[0].extraEditors[0].editors.length > 1 ? convertExtraEditors(value[`${renderData[0].key}Note`]) : [value[`${renderData[0].key}Note`]],
           key: renderData[0].key,
         };
       }

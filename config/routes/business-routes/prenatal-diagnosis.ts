@@ -33,12 +33,12 @@ export default {
       icon: 'ordered-list',
       path: '/prenatal-diagnosis/medical-record-form',
       component: './prenatal-diagnosis/medical-record/form'
-    }
-    // {
-    //   name: 'operation-record',
-    //   icon: 'ordered-list',
-    //   path: '/prenatal-diagnosis/operation-record',
-    //   component: './prenatal-diagnosis/operation-record'
-    // },
+    },
+    {
+      name: 'operation-record',
+      icon: 'ordered-list',
+      path: '/prenatal-diagnosis/operation-record',
+      component: './prenatal-diagnosis/operation-record'
+    },
   ]
 };

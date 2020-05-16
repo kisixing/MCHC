@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import MyForm from '@/components/MyForm';
 import { getRenderData, getFormData} from '@/components/MyForm/utils';
 import request from '@/utils/request';
@@ -53,11 +53,16 @@ export default class NewPatient extends Component<{}, NewPatientState>{
       if(validCode){
         // 通过id判断 为新建还是修改
         const method = id ? "PUT" : "POST";
+        const info = id ? "成功修改病人信息" : "新增病人信息成功";
         const resData = getFormData(res)
         request("/prenatal-patients",{
           method,
           data: {...resData, id}
-        }).then((r:any) => console.log(r))
+        }).then((r:any) => {
+          if(r){
+            message.success(info)
+          }
+        })
       }
     })
   }
