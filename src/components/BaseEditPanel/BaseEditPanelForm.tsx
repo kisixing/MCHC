@@ -53,7 +53,6 @@ export default class BaseEditPanelForm extends DynamicForm<IProps, IState> {
       ...form.getFieldsValue(),
       id: get(data, 'id'),
     };
-    console.log(params);
     onFinish && onFinish(params);
   };
 

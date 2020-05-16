@@ -2,6 +2,7 @@ import { FormConfig } from '@/components/MyForm/interface';
 
 const config: Array<FormConfig> = [
 
+
   { name:'ckgongg', key: '.specialityCheckUp', label: "宫高", input_type: "input", span: 7, rules: "required" },
   { name:'add_FIELD_ckjc', key: '.specialityCheckUp', label: "胎心率&先露", input_type: "input", span: 24, rules: "required" },
   { name:'add_FIELD_gynecological_examination', key: '.specialityCheckUp', label: "妇科检查", input_type: "checkbox", span: 24, rules: "required",

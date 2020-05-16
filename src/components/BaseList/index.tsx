@@ -29,6 +29,8 @@ export interface IProps {
   needEditInTable?: boolean;
   // 展示添加按钮
   showAdd?: boolean;
+  // 当 BaseList 作为子组件的时候，可能需要使用，参考 nursing-record
+  asChildComponentQueryLabel?: string;
   // 展示搜索功能
   showQuery?: boolean;
   // 传入的 ID
@@ -52,6 +54,7 @@ export interface IState {
   editable: boolean;
   loading: boolean;
   id: any;
+  editKey: any;
 }
 
 export default class BaseList extends React.Component<IProps, IState> {
@@ -65,6 +68,7 @@ export default class BaseList extends React.Component<IProps, IState> {
     visible: false,
     editable: false,
     id: undefined,
+    editKey: undefined,
     loading: true,
   };
 
@@ -125,7 +129,7 @@ export default class BaseList extends React.Component<IProps, IState> {
     this.handleSearch();
   }
 
-  isEditing = (rowData: any) => get(rowData, 'id') === this.state.id;
+  isEditing = (rowData: any) => (get(rowData, 'editKey') || get(rowData, 'id')) === this.state.editKey;
 
   handleDelete = (rowData: any) => async () => {
     const { baseUrl, baseTitle } = this.props;
@@ -135,7 +139,8 @@ export default class BaseList extends React.Component<IProps, IState> {
   };
 
   handleItemSave = (rowData: any) => async () => {
-    const { baseUrl, baseTitle, toApi } = this.props;
+    const { baseUrl, baseTitle, toApi, needEditInTable, showAdd } = this.props;
+    const { id } = this.state;
     const form = this.form as FormInstance;
     const formData = form.getFieldsValue();
     map(formData, (data, key) => {
@@ -143,7 +148,13 @@ export default class BaseList extends React.Component<IProps, IState> {
         formData[key] = formatTimeToUTC(data);
       }
     });
-    await request.put(baseUrl, {
+    let method = 'put';
+    let title = `编辑${baseTitle}成功`;
+    if (!id && showAdd && needEditInTable) {
+      method = 'post';
+      title = `新增${baseTitle}成功`;
+    }
+    await request[method](baseUrl, {
       data: isFunction(toApi)
         ? toApi({
             ...rowData,
@@ -154,10 +165,12 @@ export default class BaseList extends React.Component<IProps, IState> {
             ...formData,
           },
     });
+    form.resetFields();
     this.setState({
       id: undefined,
+      editKey: undefined,
     });
-    message.success(`编辑${baseTitle}成功`);
+    message.success(title);
     await this.handleSearch();
   };
 
@@ -181,6 +194,7 @@ export default class BaseList extends React.Component<IProps, IState> {
       form.setFieldsValue(rowData);
       this.setState({
         id: get(rowData, 'id'),
+        editKey: get(rowData, 'editKey') || get(rowData, 'id'),
       });
     } else {
       this.setState({
@@ -207,12 +221,13 @@ export default class BaseList extends React.Component<IProps, IState> {
   };
 
   handleSearch = async () => {
-    const { baseUrl, needPagination, processFromApi, id } = this.props;
+    const { baseUrl, needPagination, processFromApi, asChildComponentQueryLabel = '', id: propsId } = this.props;
     const { defaultQuery } = this.state;
-    // TODO: 有可能作为页面的子组件，会有问题，要不要 defaultQuery ？
-    const query = id
+    // TODO: 有可能作为页面的子组件， propsId 是 BaseList 作为子组件从 props 传入的
+    const query = propsId
       ? {
-          id,
+          ...defaultQuery,
+          [asChildComponentQueryLabel]: propsId,
         }
       : defaultQuery;
     const dataSource = isFunction(processFromApi)
@@ -307,6 +322,7 @@ export default class BaseList extends React.Component<IProps, IState> {
       needEditInTable,
     } = this.props;
     const { dataSource, total, defaultQuery, loading, visible, editable, id } = this.state;
+    console.log(dataSource);
     const mergedColumns = this.getColumns();
     return (
       <>
