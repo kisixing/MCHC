@@ -132,7 +132,7 @@ export default {
       // pathRewrite: { '^/server': '' },
     },
     '/api/': {
-      target: process.env.hostUrl || 'http://transfer.lian-med.com:9988/',
+      target: process.env.hostUrl || 'http://localhost:9988/',
       changeOrigin: true,
       // pathRewrite: { '^/server': '' },
     },
