@@ -28,6 +28,7 @@ export default class CustomCheckbox extends Component<CustomCheckboxProps>{
   handleChange = (val: any, key: string | number | boolean) => {
     const { onChange } = this.props;
     // 反选问题
+    console.log(this.props);
     if(!val.checkboxValue){
       onChange({
         checkboxValue: null,

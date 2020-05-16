@@ -1,35 +1,22 @@
 import React, { Component, ReactNode } from 'react';
 import { Button } from 'antd';
 import request from '@/utils/request'
-import MedicalRecord from '../medical-record/index';
-import OperationRecord from '../operation-record/index';
+import MedicalRecordList from '../medical-record/list';
+// import OperationRecord from '../operation-record/index';
+import { getPageQuery } from '@/utils/utils';
 import styles from './index.less';
 
 const componentList = {
-  "medical-record": MedicalRecord,
-  "operation-record": OperationRecord
+  "medical-record": MedicalRecordList,
+  // "operation-record": OperationRecord
 }
 
 const buttnGroup = [
   { key: "medical-record", title: "专科病历" },
-  { key: "operation-record", title: "手术记录" },
+  // { key: "operation-record", title: "手术记录" },
 ]
 
-const getWindowLocationParams = (url: string) => {
-  const r = {};
-  const paramString = url.split("?")[1];
-  if (paramString) {
-    const paramArr = paramString.split("&");
-    paramArr.forEach((str: string) => {
-      const strArr = str.split("=");
-      r[strArr[0]] = strArr[1];
-    })
-  }
-  return r;
-}
-
 interface PrenatalDiagnosisState {
-  id: string,
   currentPageKey: string,
   patients: any
 }
@@ -39,7 +26,6 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
   constructor(props: any) {
     super(props);
     this.state = {
-      id: "-1",
       currentPageKey: "",
       patients: {
 
@@ -48,26 +34,36 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
   }
 
   componentDidMount() {
-    this.getIdFormURL();
-    // this.getPatients();
-
-  }
-
-  componentDidUpdate() {
-    // this.getPatients();
-  }
-
-  getIdFormURL = () => {
-    const { href } = window.location;
-    const urlParams = getWindowLocationParams(href);
+    const urlParams = getPageQuery();
     if ("id" in urlParams) {
-      this.setState({ id: urlParams.id })
+      this.getPatientData(urlParams.id);
     }
   }
 
-  renderInfo = (userData: any):ReactNode => {
-    if(userData){
-      return 
+  componentDidUpdate(_prevProps: {}, prevState: PrenatalDiagnosisState) {
+    const { id = ""} = this.state.patients; 
+    const prevId = prevState.patients.id; 
+    if(prevId !== id){
+      this.getPatientData(id);
+    }
+  }
+
+  renderInfo = (patients: any):ReactNode => {
+    if(patients){
+      return <div className={styles['user-info']}>
+        <div>
+          <span>病人姓名:</span><strong>{patients.name}</strong>
+        </div>
+        <div>
+          <span>末次月经:</span><strong>{patients.lmp}</strong>
+        </div>
+        <div>
+          <span>病人姓名:</span><strong>{patients.name}</strong>
+        </div>
+        <div>
+          <span>病人姓名:</span><strong>{patients.name}</strong>
+        </div>
+      </div>
     }
     return <span>无用户信息</span>;
   }
@@ -95,27 +91,25 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
     return null;
   }
 
-
-  getPatients = () => {
-    request("/prenatal-patients?outpatientNO=1",{
+  // 获取病人信息
+  getPatientData = (id: string|number = "") => {
+    request(`/prenatal-patients?id.equals=${id}`,{
       method: "GET"
-    }).then((res:any) => console.log(res))
+    }).then(res => {
+      if(res.length !== 0){
+        this.setState({patients: res[0]})
+      }
+    })
   }
 
-  // newPatients = () => {
-  //   request("/prenatal-patients",{
-  //     method: "POST"
-  //   }).then((res:any) => console.log(res))
-  // }
-
-
   render() {
-    const { id, currentPageKey } = this.state;
+    const { currentPageKey, patients = {} } = this.state;
     return (
       <div className={styles.container}>
         <div className={styles['user-info']}>
-          {this.renderInfo(undefined)}
+          {this.renderInfo(patients)}
         </div>
+        <hr/>
         <div className={styles['button-group']}>
           {this.renderButton(buttnGroup)}
         </div>

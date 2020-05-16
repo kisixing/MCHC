@@ -26,13 +26,19 @@ export default {
       name: 'medical-record',
       icon: 'ordered-list',
       path: '/prenatal-diagnosis/medical-record',
-      component: './prenatal-diagnosis/medical-record'
+      component: './prenatal-diagnosis/medical-record/list'
     },
     {
-      name: 'operation-record',
+      name: 'medical-record-form',
       icon: 'ordered-list',
-      path: '/prenatal-diagnosis/operation-record',
-      component: './prenatal-diagnosis/operation-record'
-    },
+      path: '/prenatal-diagnosis/medical-record-form',
+      component: './prenatal-diagnosis/medical-record/form'
+    }
+    // {
+    //   name: 'operation-record',
+    //   icon: 'ordered-list',
+    //   path: '/prenatal-diagnosis/operation-record',
+    //   component: './prenatal-diagnosis/operation-record'
+    // },
   ]
 };

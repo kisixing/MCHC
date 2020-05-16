@@ -4,26 +4,14 @@ import MyForm from '@/components/MyForm';
 import { getRenderData, getFormData} from '@/components/MyForm/utils';
 import request from '@/utils/request';
 import config from './config';
+import { getPageQuery } from '@/utils/utils';
 import styles from './index.less';
 
 interface NewPatientState{
   formHandler:{
     [key:string]: any
   },
-  data: any
-}
-
-const getWindowLocationParams = (url: string = "") => {
-  const r = {};
-  const paramString = url.split("?")[1];
-  if (paramString) {
-    const paramArr = paramString.split("&");
-    paramArr.forEach((str: string) => {
-      const strArr = str.split("=");
-      r[strArr[0]] = strArr[1];
-    })
-  }
-  return r;
+  patients: any
 }
 
 export default class NewPatient extends Component<{}, NewPatientState>{
@@ -33,7 +21,7 @@ export default class NewPatient extends Component<{}, NewPatientState>{
       formHandler: {
 
       },
-      data: {
+      patients: {
         // name: "张三",
         // lmp: "2020-02-02",
         // edd: "2020-12-04",
@@ -47,22 +35,20 @@ export default class NewPatient extends Component<{}, NewPatientState>{
   }
   
   componentDidMount () {
-    const { href = "" } = window.location;
-    const urlParam = getWindowLocationParams(href);
+    const urlParam = getPageQuery();
     if("id" in urlParam){
-      // 这里的equal不起作用
-      request(`/prenatal-patients?id.equal=1`,{
+      request(`/prenatal-patients?id.equals=${urlParam.id}`,{
         method: "GET"
       }).then(res => {
         if(res.length !== 0){
-          this.setState({data: res[0]})
+          this.setState({patients: res[0]})
         }
       });
     }
   }
   
   handleSubmit = () => {
-    const { id = ""} = this.state.data;
+    const { id = ""} = this.state.patients;
     this.state.formHandler.submit().then(({validCode, res}:any) => {
       if(validCode){
         // 通过id判断 为新建还是修改
@@ -77,8 +63,8 @@ export default class NewPatient extends Component<{}, NewPatientState>{
   }
 
   render() {
-    const { data } = this.state;
-    const myConfig = getRenderData(config, data);
+    const { patients } = this.state;
+    const myConfig = getRenderData(config, patients);
     return (
       <div className={styles.container}>
         <MyForm

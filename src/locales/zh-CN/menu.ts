@@ -145,6 +145,7 @@ export default {
   'menu.prenatal-diagnosis.main': '病历管理',
   'menu.prenatal-diagnosis.new-patient': '新建病历',
   'menu.prenatal-diagnosis.medical-record': '专科病历',
+  'menu.prenatal-diagnosis.medical-record-form': '专科病历表单',
   'menu.prenatal-diagnosis.operation-record': '手术病历',
 
   'menu.prenatal-diagnosis.prenatalpatient': '建档管理',

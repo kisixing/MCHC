@@ -1,3 +1,5 @@
+import { isEmpty } from './utils/func';
+
 function isArr(v){
   return Object.prototype.toString.call(v) === '[object Array]';
 }
@@ -59,12 +61,13 @@ export function createFormHandler(config, {submitChange}){
   }
 
   // this指向被改变了
+  // TODO 所有的valid方法需要整改
   const valid = function() {
     let validCode = true;
     const keyArr = Object.keys(formHandler);
     for(let i = 0 ; i < keyArr.length ; i++){
       if(formHandler[keyArr[i]].actions && typeof formHandler[keyArr[i]].actions.valid === "function"){
-        if(formHandler[keyArr[i]].actions.valid() !== ""){
+        if(!formHandler[keyArr[i]].actions.valid()){
           validCode = false;
           break;
         }

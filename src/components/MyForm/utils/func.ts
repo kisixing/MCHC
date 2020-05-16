@@ -63,11 +63,14 @@ export function isStringObj(data: any): boolean {
  */
 export function convertExtraEditors(editorsValue: string): Array<any> | string {
   let res: any = editorsValue;
+  if(!res){
+    return [""];
+  }
   try {
     res = getArrayFormObject(JSON.parse(editorsValue));
     return res;
   } catch (e) {
-    // console.warn('不可转为JSON字符串');
+    console.warn('不可转为JSON字符串');
   }
   return [res];
 }
