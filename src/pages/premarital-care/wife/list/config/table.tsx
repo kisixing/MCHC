@@ -2,30 +2,25 @@ import { formatTimeToStandard } from '@/utils/format';
 
 export const tableColumns = [
   {
-    title: '病区号',
-    dataIndex: 'areaNO',
-    key: 'areaNO',
+    title: '门诊号',
+    dataIndex: 'outpatientNO',
+    key: 'outpatientNO',
     align: 'center',
   },
   {
-    title: '房号',
-    dataIndex: 'roomNO',
-    key: 'roomNO',
+    title: '检查编号',
+    dataIndex: 'checkupNO',
+    key: 'checkupNO',
     align: 'center',
   },
   {
-    title: '床号',
-    dataIndex: 'bedNO',
-    key: 'bedNO',
-  },
-  {
-    title: '孕妇姓名',
+    title: '姓名',
     dataIndex: 'name',
     key: 'name',
     align: 'center',
   },
   {
-    title: '孕妇年龄',
+    title: '年龄',
     dataIndex: 'age',
     key: 'age',
     align: 'center',
@@ -55,9 +50,8 @@ export const tableColumns = [
     align: 'center',
   },
   {
-    title: '住院日期',
-    dataIndex: 'adminDate',
-    key: 'adminDate',
-    align: 'center',
+    title: '联系电话',
+    dataIndex: 'telephone',
+    key: 'telephone',
   },
 ];

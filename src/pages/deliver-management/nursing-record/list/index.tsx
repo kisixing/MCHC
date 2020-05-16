@@ -1,9 +1,11 @@
 import React from 'react';
 import Table from './components/Table';
-import { pick } from 'lodash';
+import { pick, isNil } from 'lodash';
 import { tableColumns } from './config/table';
 import BaseList from '@/components/BaseList';
 import WithDynamicExport from '@/components/WithDynamicExport';
+import { message } from 'antd';
+import { FormInstance } from 'antd/lib/form';
 
 @WithDynamicExport
 export default class List extends BaseList {
@@ -32,19 +34,26 @@ export default class List extends BaseList {
     visible: false,
     editable: false,
     id: undefined,
+    editKey: undefined,
     loading: true,
   };
 
   handleAdd = () => {
     const { needEditInTable, showAdd, admissionData } = this.props;
-    const { dataSource } = this.state;
-    console.log(admissionData);
+    const { dataSource, editKey } = this.state;
+    if (!isNil(editKey)) {
+      message.error('请先保存上一条记录');
+      return;
+    }
     if (needEditInTable && showAdd) {
+      const mockKey = new Date().toString();
       this.setState({
+        editKey: mockKey,
         dataSource: [
           ...dataSource,
           {
             type: 1,
+            editKey: mockKey,
             admission: {
               ...pick(admissionData, ['name', 'gestationalWeek', 'edd', 'id']),
             },
@@ -52,5 +61,16 @@ export default class List extends BaseList {
         ],
       });
     }
+  };
+
+  handleItemCancel = (rowData: any) => () => {
+    const { dataSource, editKey } = this.state;
+    const form = this.form as FormInstance;
+    form.resetFields();
+    this.setState({
+      id: undefined,
+      editKey: undefined,
+      dataSource: typeof editKey === 'string' ? dataSource.slice(0, dataSource.length - 1) : dataSource,
+    });
   };
 }
