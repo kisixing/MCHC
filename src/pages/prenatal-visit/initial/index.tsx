@@ -45,7 +45,9 @@ export default class Home extends React.Component<{},HomeState>{
   }
 
   componentDidMount() {
-    request.get(`/prenatal-visits?visitType=0`).then(res => {
+    request(`/prenatal-visits?visitType.equals=100`, {
+      method: 'GET'
+    }).then(res => {
       this.setState({
         formData: res[0]
       })

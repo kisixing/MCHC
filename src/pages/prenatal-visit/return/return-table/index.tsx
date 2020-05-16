@@ -2,8 +2,9 @@ import * as React from 'react';
 import MyForm from '@/components/MyForm/index';
 import config from './config';
 import data from './data';
+import request from '@/utils/request';
 
-import { getRenderData, toFormat} from '@/components/MyForm/utils';
+import { getRenderData, getFormData} from '@/components/MyForm/utils';
 
 interface HomeState{
   formHandler:{
@@ -20,15 +21,26 @@ export default class Home extends React.Component<{},HomeState>{
     this.state = {
       formHandler: {
 
-      }
+      },
+      tableData: null
     }
   }
 
 
-  componentDidUpdate(){
-    const { formHandler } = this.state;
-    formHandler.subscribe(".lmp", "change", (val: any) => {});
+  componentDidMount() {
+    request(`/prenatal-visits?visitType.equals=100`, {
+      method: 'GET'
+    }).then(res => {
+      this.setState({
+        tableData: res
+      })
+    });
   }
+
+  // componentDidUpdate(){
+  //   const { formHandler } = this.state;
+  //   formHandler.subscribe(".lmp", "change", (val: any) => {});
+  // }
 
 
   handleSubmit = () => {
@@ -45,7 +57,8 @@ export default class Home extends React.Component<{},HomeState>{
   }
 
   render(){
-    const myConfig = getRenderData(config, data);
+    const { tableData } = this.state;
+    const myConfig = getRenderData(config, tableData);
     // 不要再页面render中尝试取formHandler的值，因为这个时候formItem初始化还没有完成
     return(
       <div>

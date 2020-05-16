@@ -1,6 +1,7 @@
 import { FormConfig } from '@/components/MyForm/interface';
 
 const config: Array<FormConfig> = [
+  { name: 'id', key: '.pregnancy.id', label: "rwg", input_type: "input", span: 0, hidden: true},
   { name: 'lmp', key: '.pregnancy.lmp', label: "末次月经", input_type: "date", span: 7, rules: "required"},
   // { name: 'add_FIELD_gesmoc_unknown', key: 'add_FIELD_gesmoc_unknown', label: "已审核", input_type: "checkbox", span: 7},
   { name: 'edd', key: '.pregnancy.edd', label: "预产期-日期", input_type: "date", span: 7},

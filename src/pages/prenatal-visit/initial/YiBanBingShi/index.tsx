@@ -4,6 +4,7 @@ import MyForm from '@/components/MyForm/index';
 import config from './config';
 import data from '../data';
 import styles from '../index.less';
+import request from '@/utils/request';
 
 import { getRenderData, getFormData} from '@/components/MyForm/utils';
 
@@ -34,18 +35,29 @@ export default class Home extends React.Component<{},HomeState>{
 
 
   handleSubmit = () => {
+    const { formData } = this.props;
     this.state.formHandler.dispatch("_global","submit",{});
     this.state.formHandler.submit().then(({validCode, res}:any) => {
       console.log(validCode);
       // if(!validCode){
       //   console.log(res);
-      console.log(getFormData(res));
-      // }
+      console.log(getFormData(res), 3536);
+      let newData = Object.assign(formData, getFormData(res));
+      // console.log(newData, '666')
+
+      request('/pregnancies', {
+        method: 'PUT',
+        data: getFormData(res)['pregnancy']
+      }).then(r => {
+
+      });
+
     });
   }
 
   render(){
-    const myConfig = getRenderData(config, data);
+    const { formData } = this.props;
+    const myConfig = getRenderData(config, formData);
     // 不要再页面render中尝试取formHandler的值，因为这个时候formItem初始化还没有完成
     return(
       <div>
