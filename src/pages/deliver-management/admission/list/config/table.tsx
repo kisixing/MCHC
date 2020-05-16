@@ -43,6 +43,11 @@ export const tableColumns = [
     align: 'center',
   },
   {
+    title: '孕产期',
+    dataIndex: 'edd',
+    align: 'center',
+  },
+  {
     title: '证件类型',
     dataIndex: 'idType',
     key: 'idType',

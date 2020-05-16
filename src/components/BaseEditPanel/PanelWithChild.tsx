@@ -1,31 +1,33 @@
 import React from 'react';
 import styles from './index.less';
 import { Divider } from 'antd';
+import { get } from 'lodash';
 
 export default class PanelWithChild extends React.Component {
   renderHeader = () => {
+    const { data } = this.state;
     return (
       <>
         <div className={styles.panelWithChildHeader}>
           <div className={styles.panelWithChildHeaderItem}>
-            <span className={styles.panelWithChildHeaderItemLabel}>就诊卡号:</span>
-            <span className={styles.panelWithChildHeaderItemValue}>56215487</span>
+            <span className={styles.panelWithChildHeaderItemLabel}>证件号码:</span>
+            <span className={styles.panelWithChildHeaderItemValue}>{get(data, 'idNO')}</span>
           </div>
           <div className={styles.panelWithChildHeaderItem}>
             <span className={styles.panelWithChildHeaderItemLabel}>姓名:</span>
-            <span className={styles.panelWithChildHeaderItemValue}>东方不败</span>
+            <span className={styles.panelWithChildHeaderItemValue}>{get(data, 'name')}</span>
           </div>
           <div className={styles.panelWithChildHeaderItem}>
             <span className={styles.panelWithChildHeaderItemLabel}>年龄:</span>
-            <span className={styles.panelWithChildHeaderItemValue}>29</span>
+            <span className={styles.panelWithChildHeaderItemValue}>{get(data, 'age')}</span>
           </div>
           <div className={styles.panelWithChildHeaderItem}>
             <span className={styles.panelWithChildHeaderItemLabel}>孕周:</span>
-            <span className={styles.panelWithChildHeaderItemValue}>30</span>
+            <span className={styles.panelWithChildHeaderItemValue}>{get(data, 'gestationalWeek')}</span>
           </div>
           <div className={styles.panelWithChildHeaderItem}>
             <span className={styles.panelWithChildHeaderItemLabel}>孕产期</span>
-            <span className={styles.panelWithChildHeaderItemValue}>2020-09-09</span>
+            <span className={styles.panelWithChildHeaderItemValue}>{get(data, 'edd')}</span>
           </div>
         </div>
         <Divider className={styles.panelWithChildHeaderDivider}></Divider>

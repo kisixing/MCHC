@@ -28,5 +28,11 @@ export default {
       path: '/child-examination/birth-information',
       component: './child-management/child-examination/birth-information',
     },
+    {
+      name: 'birth-charts',
+      icon: 'edit',
+      path: '/child-examination/birth-charts',
+      component: './child-management/child-examination/birth-charts',
+    },
   ],
 };

@@ -4,6 +4,30 @@ import { keyBy, get } from 'lodash';
 
 export const tableColumns = [
   {
+    title: '姓名',
+    dataIndex: 'admissionName',
+    align: 'center',
+    fixed: true,
+    width: 100,
+    render: (value: any, rowData: any) => get(rowData, 'admission.name'),
+  },
+  {
+    title: '孕周',
+    dataIndex: 'gestationalWeek',
+    align: 'center',
+    fixed: true,
+    width: 100,
+    render: (value: any, rowData: any) => get(rowData, 'admission.gestationalWeek'),
+  },
+  {
+    title: '孕产期',
+    dataIndex: 'edd',
+    align: 'center',
+    width: 120,
+    fixed: true,
+    render: (value: any, rowData: any) => get(rowData, 'admission.edd'),
+  },
+  {
     title: '护理日期',
     dataIndex: 'nursedate',
     align: 'center',
@@ -24,14 +48,6 @@ export const tableColumns = [
     align: 'center',
     sortType: 'date',
     filterType: 'date',
-  },
-  {
-    title: '护理类型',
-    dataIndex: 'type',
-    editable: true,
-    align: 'center',
-    sortType: 'number',
-    filterType: 'number',
   },
   {
     title: '体温',

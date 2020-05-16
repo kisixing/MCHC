@@ -49,7 +49,7 @@ const Login: React.FC<LoginProps> = props => {
 
   return (
     <div className={styles.main}>
-      <h1 className={styles.title}>登 陆</h1>
+      <h1 className={styles.title}>系 统 登 录</h1>
       <LoginFrom activeKey={type} onTabChange={setType} onSubmit={handleSubmit}>
         {status === 'error' && !submitting && <LoginMessage content="账户或密码错误" />}
         <UserName
