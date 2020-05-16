@@ -4,6 +4,9 @@ import { tableColumns } from './config/table';
 import { processFromApi, toApi } from './config/adapter';
 import BaseList from '@/components/BaseList';
 import WithDynamicExport from '@/components/WithDynamicExport';
+import { pick, isNil } from 'lodash';
+import { message } from 'antd';
+import { FormInstance } from 'antd/lib/form';
 
 @WithDynamicExport
 export default class List extends BaseList {
@@ -34,22 +37,43 @@ export default class List extends BaseList {
     visible: false,
     editable: false,
     id: undefined,
+    editKey: undefined,
     loading: true,
   };
 
   handleAdd = () => {
     const { needEditInTable, showAdd, admissionData } = this.props;
-    const { dataSource } = this.state;
+    const { dataSource, editKey } = this.state;
+    if (!isNil(editKey)) {
+      message.error('请先保存上一条记录');
+      return;
+    }
     if (needEditInTable && showAdd) {
+      const mockKey = new Date().toString();
       this.setState({
+        editKey: mockKey,
         dataSource: [
           ...dataSource,
           {
-            admission: admissionData,
             type: 3,
+            editKey: mockKey,
+            admission: {
+              ...pick(admissionData, ['name', 'gestationalWeek', 'edd', 'id']),
+            },
           },
         ],
       });
     }
+  };
+
+  handleItemCancel = (rowData: any) => () => {
+    const { dataSource, editKey } = this.state;
+    const form = this.form as FormInstance;
+    form.resetFields();
+    this.setState({
+      id: undefined,
+      editKey: undefined,
+      dataSource: typeof editKey === 'string' ? dataSource.slice(0, dataSource.length - 1) : dataSource,
+    });
   };
 }
