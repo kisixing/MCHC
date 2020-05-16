@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { Button } from 'antd';
 import MyForm from '@/components/MyForm/index';
 import config from './config';
 import data from '../data';
+import styles from '../index.less';
 
-import { getRenderData, toFormat} from '@/components/MyForm/utils';
+import { getRenderData, getFormData} from '@/components/MyForm/utils';
 
 interface HomeState{
   formHandler:{
@@ -32,10 +34,12 @@ export default class Home extends React.Component<{},HomeState>{
 
 
   handleSubmit = () => {
+    this.state.formHandler.dispatch("_global","submit",{});
     this.state.formHandler.submit().then(({validCode, res}:any) => {
-      console.log(res);
-      console.log(toFormat(res));
+      console.log(validCode);
       // if(!validCode){
+      //   console.log(res);
+      console.log(getFormData(res));
       // }
     });
   }
@@ -50,6 +54,10 @@ export default class Home extends React.Component<{},HomeState>{
           getFormHandler={(formHandler:any) => this.setState({formHandler})}
           submitChange={false}
         />
+                <div className={styles['btn-group']}>
+          <Button onClick={this.handleSubmit}>重置</Button>
+          <Button type="primary" onClick={this.handleSubmit}>提交</Button>
+        </div>
       </div>
     )
   }

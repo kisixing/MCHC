@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Tabs, Button } from 'antd';
+import request from '@/utils/request';
 
 import YCQ from './YuChanQi';
 import YBBS from './YiBanBingShi';
@@ -18,6 +19,9 @@ interface HomeState{
   formHandler:{
     [key:string]: any
   }
+  formData:{
+    any: any
+  }
 }
 const tabConetnts = [YCQ, YBBS, QTBS, YCS, TGJC, ZKJC, JYJC, ZDCL];
 
@@ -35,8 +39,21 @@ export default class Home extends React.Component<{},HomeState>{
       step: tabs[0].key,
       formHandler: {
 
-      }
+      },
+      formData: {}
     }
+  }
+
+  componentDidMount() {
+    request.get(`/prenatal-visits?visitType=0`).then(res => {
+      this.setState({
+        formData: res[0]
+      })
+    });
+  }
+
+  getData(data) {
+    console.log(data, 666)
   }
 
   handleSave(key) {
@@ -48,13 +65,10 @@ export default class Home extends React.Component<{},HomeState>{
     })
   }
 
-  getData(data) {
-    console.log(data, 666)
-  }
 
 
   render(){
-    const { tabs, step } = this.state;
+    const { tabs, step, formData } = this.state;
     return(
       <div className="prenatal-visit-initial">
         <Tabs type="card" activeKey={step} onChange={key => this.handleSave(key) }>
@@ -62,17 +76,47 @@ export default class Home extends React.Component<{},HomeState>{
             <Tabs.TabPane key={key}
               tab={ <span> {title} </span> }>
               <div>
-                {step === key ? (<Content getData={this.getData.bind(this)} />) : null}
+                {step === key ? (<Content getData={this.getData.bind(this)} formData={formData}/>) : null}
               </div>
             </Tabs.TabPane>
           ))}
         </Tabs>
-        {
+        {/* {
           step !== tabs[tabs.length - 1].key
           ? <Button className={style.bottomBtn} type="primary" onClick={() => this.handleSave()}>下一页</Button>
           : <Button className={style.bottomBtn} type="primary" onClick={() => this.handleSave(step)}>保存</Button>
-        }
+        } */}
       </div>
+
+
+      // <div>
+      //   <Tabs defaultActiveKey="1" type="card" size="small">
+      //     <Tabs.TabPane tab="预产期" key="Admission">
+      //       <YCQ />
+      //     </Tabs.TabPane>
+      //     <Tabs.TabPane tab="一般病史" key="birth-information">
+      //       <YBBS />
+      //     </Tabs.TabPane>
+      //     <Tabs.TabPane tab="其他病史" key="NursingRecord">
+      //       <QTBS />
+      //     </Tabs.TabPane>
+      //     <Tabs.TabPane tab="孕产史" key="predelivery">
+      //       <YCS />
+      //     </Tabs.TabPane>
+      //     <Tabs.TabPane tab="体格检查" key="CaesareanDelivery">
+      //       <TGJC />
+      //     </Tabs.TabPane>
+      //     <Tabs.TabPane tab="专科检查" key="NeonateRecord">
+      //       <ZKJC />
+      //     </Tabs.TabPane>
+      //     <Tabs.TabPane tab="检验检查" key="PostpartumVisit">
+      //       <JYJC />
+      //     </Tabs.TabPane>
+      //     <Tabs.TabPane tab="诊断处理" key="PostpartumVisit">
+      //       <ZDCL />
+      //     </Tabs.TabPane>
+      //   </Tabs>
+      // </div>
     )
   }
 }
