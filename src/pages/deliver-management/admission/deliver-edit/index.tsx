@@ -29,9 +29,13 @@ export default class panel extends PanelWithChild {
     });
   }
 
-  handleChangeTab = (activeKey: string) => {
+  handleChangeTab = async (activeKey: string) => {
+    const id = get(this.props, 'location.query.id');
+    const data = await request.get(`/admissions/${id}`);
+
     this.setState({
       activeKey,
+      data,
     });
   };
 
