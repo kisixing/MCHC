@@ -8,6 +8,7 @@ import React from 'react';
 import { Row, Col } from 'antd';
 
 import { Bar } from '@/components/Charts';
+import { ModalView, ModalIframeView } from '@/components/PDFPreview';
 
 import styles from './index.less';
 
@@ -70,10 +71,27 @@ function Bizcharts() {
           <div className={styles.item}>col-6</div>
         </Col>
         <Col className="gutter-row" span={6}>
-          <div className={styles.item}>col-678</div>
+          <div className={styles.item}>
+            <ModalIframeView file="https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf">
+              iframe view
+            </ModalIframeView>
+            <ModalView file="https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf">
+              nomal view
+            </ModalView>
+          </div>
         </Col>
         <Col className="gutter-row" span={6}>
-          <div className={styles.item}>col-6789</div>
+          <div className={styles.item}>
+            <a
+              href={
+                '/pdfjs-dist/web/viewer.html?file=https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf'
+              }
+              target="view_window"
+            >
+              {' '}
+              在线预览{' '}
+            </a>
+          </div>
         </Col>
       </Row>
     </div>
