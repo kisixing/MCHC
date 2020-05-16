@@ -1,10 +1,6 @@
 import React from 'react';
 import PanelWithChild from '@/components/BaseEditPanel/PanelWithChild';
 import BirthInformation from '../birth-information';
-import InfectedHistory from '../infected-history';
-import AuxiliaryExamination from '../auxiliary-examination';
-import PhysicalExamination from '../physical-examination';
-import GeneralExamination from '../general-examination';
 
 import { Tabs } from 'antd';
 import { get } from 'lodash';
@@ -17,7 +13,7 @@ export default class panel extends PanelWithChild {
 
   async componentDidMount() {
     const id = get(this.props, 'location.query.id');
-    const data = request.get(`/child-exam-visits/${id}`);
+    const data = request.get(`/admissions/${id}`);
     this.setState({
       data,
     });
@@ -30,19 +26,15 @@ export default class panel extends PanelWithChild {
     return (
       <Tabs defaultActiveKey="1" type="card" size="small">
         <Tabs.TabPane tab="出生信息登记" key="birth-information">
-          <BirthInformation />
+          <BirthInformation id={id} />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="传染病史" key="infected-history">
-          <InfectedHistory />
+        <Tabs.TabPane tab="传染病史" key="infectious">
         </Tabs.TabPane>
-        <Tabs.TabPane tab="体格检查" key="physical-examination">
-          <PhysicalExamination />
+        <Tabs.TabPane tab="体格检查" key="NursingRecord">
+
         </Tabs.TabPane>
-        <Tabs.TabPane tab="内科检查" key="general-examination">
-          <GeneralExamination />
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="辅助检查" key="auxiliary-examination">
-          <AuxiliaryExamination />
+        <Tabs.TabPane tab="辅助检查" key="predelivery">
+
         </Tabs.TabPane>
         <Tabs.TabPane tab="高危儿登记" key="CaesareanDelivery">
 

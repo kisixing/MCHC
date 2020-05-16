@@ -1,18 +1,6 @@
 export const tableColumns = [
   {
-    title: '体检类型',
-    dataIndex: 'visitType',
-    key: 'visitType',
-    align: 'center',
-  },
-  {
-    title: '体检时间',
-    dataIndex: 'visitDate',
-    key: 'visitDate',
-    align: 'center',
-  },
-  {
-    title: '儿童姓名',
+    title: '姓名',
     dataIndex: 'name',
     key: 'name',
     align: 'center',
@@ -41,21 +29,9 @@ export const tableColumns = [
     align: 'center',
   },
   {
-    title: '户籍类别',
-    dataIndex: 'registrationType',
-    key: 'registrationType',
-    align: 'center',
-  },
-  {
     title: '常住地址',
-    dataIndex: 'address',
-    key: 'address',
+    dataIndex: 'residenceAddress',
+    key: 'residenceAddress',
     align: 'center',
-  },
-  {
-    title: '联系电话',
-    dataIndex: 'tel',
-    key: 'tel',
-    align: 'center',
-  },
+  }
 ];
