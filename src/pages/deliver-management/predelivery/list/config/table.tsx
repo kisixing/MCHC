@@ -1,8 +1,33 @@
 import { formatTimeToStandard } from '@/utils/format';
+import { get } from 'lodash';
 
 export const tableColumns = [
   {
-    title: '日期',
+    title: '姓名',
+    dataIndex: 'admissionName',
+    align: 'center',
+    fixed: true,
+    width: 100,
+    render: (value: any, rowData: any) => get(rowData, 'admission.name'),
+  },
+  {
+    title: '孕周',
+    dataIndex: 'gestationalWeek',
+    align: 'center',
+    fixed: true,
+    width: 100,
+    render: (value: any, rowData: any) => get(rowData, 'admission.gestationalWeek'),
+  },
+  {
+    title: '孕产期',
+    dataIndex: 'edd',
+    align: 'center',
+    width: 120,
+    fixed: true,
+    render: (value: any, rowData: any) => get(rowData, 'admission.edd'),
+  },
+  {
+    title: '护理日期',
     dataIndex: 'nursedate',
     align: 'center',
     editable: true,
@@ -11,7 +36,7 @@ export const tableColumns = [
     render: (value: any) => formatTimeToStandard(value, 'YYYY-MM-DD'),
   },
   {
-    title: '时间',
+    title: '护理时间',
     dataIndex: 'nursetime',
     align: 'center',
     inputType: 'single_time_picker',

@@ -6,4 +6,5 @@ const list = (req: Request, res: Response) => {
 
 export default {
   'GET /api/permissions': list,
+  'GET /api/user/admin': list,
 };

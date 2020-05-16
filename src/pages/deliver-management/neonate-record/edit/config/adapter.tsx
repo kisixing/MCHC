@@ -80,11 +80,6 @@ export const toApi = (data: any, nativeFormDescriptions: any) => {
   const result = {};
   const dataKeys: any[] = [...isObjectKeyArray, ...isNotObjectKeyArray];
 
-  // TODO: 特殊情况，是否能自动化？
-  // TODO: 修改的时候，没有携带 noenateRecords ID
-  set(result, 'noenateRecords', get(data, 'fetusAppendages'));
-
-  // 如果是对象的情况下
   map(dataKeys, key => {
     const item = get(data, key);
     const tranferRules = get(nativeFormDescriptions, `${key}.tranfer_rules`);
