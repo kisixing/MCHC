@@ -10,7 +10,7 @@ export default class List extends BaseList {
   static defaultProps = {
     baseUrl: '/noenate-records',
     baseTitle: '新生儿记录',
-    needPagination: false,
+    needPagination: true,
     showQuery: false,
     showAdd: false,
     tableColumns,

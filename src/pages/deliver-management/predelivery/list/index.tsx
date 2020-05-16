@@ -9,8 +9,9 @@ import WithDynamicExport from '@/components/WithDynamicExport';
 export default class List extends BaseList {
   static defaultProps = {
     baseUrl: '/nurse-records',
+    asChildComponentQueryLabel: 'admissionId.equals',
     baseTitle: '待产记录',
-    needPagination: false,
+    needPagination: true,
     needEditInTable: true,
     showQuery: false,
     showAdd: false,
@@ -34,5 +35,21 @@ export default class List extends BaseList {
     editable: false,
     id: undefined,
     loading: true,
+  };
+
+  handleAdd = () => {
+    const { needEditInTable, showAdd, admissionData } = this.props;
+    const { dataSource } = this.state;
+    if (needEditInTable && showAdd) {
+      this.setState({
+        dataSource: [
+          ...dataSource,
+          {
+            admission: admissionData,
+            type: 3,
+          },
+        ],
+      });
+    }
   };
 }

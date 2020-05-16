@@ -1,8 +1,11 @@
 import React from 'react';
 import Form from './components/Form';
+import { get } from 'lodash';
 import { toApi, fromApi } from './config/adapter';
 import BaseEditPanel from '@/components/BaseEditPanel';
 import WithDynamicExport from '@/components/WithDynamicExport';
+import request from '@/utils/request';
+import { message } from 'antd';
 
 export class Panel extends BaseEditPanel {
   static defaultProps = {
@@ -12,6 +15,29 @@ export class Panel extends BaseEditPanel {
     toApi,
     fromApi,
     Form,
+  };
+
+  handleSubmit = async (values: any) => {
+    const { data, formDescriptionsWithoutSection } = this.state;
+    const { toApi, baseUrl, title, admissionId } = this.props;
+    const params = toApi(
+      {
+        ...data,
+        ...values,
+        admission: {
+          id: Number(admissionId) || Number(get(data, 'admission.id')),
+          ...get(data, 'admission'),
+        },
+      },
+      formDescriptionsWithoutSection,
+    );
+    if (get(values, 'id')) {
+      await request.put(`/${baseUrl}`, { data: params });
+      message.success(`修改${title}成功`);
+    } else {
+      await request.post(`/${baseUrl}`, { data: params });
+      message.success(`新增${title}成功`);
+    }
   };
 }
 

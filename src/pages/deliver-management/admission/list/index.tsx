@@ -14,7 +14,7 @@ export default class List extends BaseList {
   static defaultProps = {
     baseUrl: '/admissions',
     baseTitle: '入院登记',
-    needPagination: false,
+    needPagination: true,
     showQuery: false,
     showAdd: true,
     tableColumns,

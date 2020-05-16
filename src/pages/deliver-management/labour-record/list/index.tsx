@@ -11,7 +11,7 @@ export default class List extends BaseList {
   static defaultProps = {
     baseUrl: '/labour-records',
     baseTitle: '分娩记录',
-    needPagination: false,
+    needPagination: true,
     showQuery: false,
     showAdd: false,
     processFromApi,

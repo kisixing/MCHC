@@ -22,6 +22,7 @@ import CheckboxWithInput from '@/components/ConfigComponents/CheckboxWithInput';
 import ApgarScoreInput from '@/components/selects/ApgarScoreInput';
 import MultipleInputWithLabel from '@/components/ConfigComponents/MultipleInputWithLabel';
 import FoetalAppendage from '@/components/BusinessComponents/FoetalAppendage';
+import NoenateRecord from '@/components/BusinessComponents/NoenateRecord';
 import { formDescriptionsFromApi, formDescriptionsWithoutSectionApi } from '@/utils/adapter';
 import request from '@/utils/request';
 import CheckboxGroup from '@/components/ConfigComponents/CheckboxGroup';
@@ -194,6 +195,20 @@ export class FormSection extends React.Component<IProps> {
         return renderEditItem(
           get(formDescription, 'key'),
           <FoetalAppendage
+            size="small"
+            {...get(formDescription, 'inputProps')}
+            renderEditItem={renderEditItem}
+            form={form}
+          />,
+          {
+            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
+            styles: get(formDescription, 'styles'),
+          },
+        );
+      case 'noenate_record':
+        return renderEditItem(
+          get(formDescription, 'key'),
+          <NoenateRecord
             size="small"
             {...get(formDescription, 'inputProps')}
             renderEditItem={renderEditItem}
