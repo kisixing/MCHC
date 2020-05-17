@@ -4,11 +4,11 @@ import BaseEditPanel from '@/components/BaseEditPanel';
 import WithDynamicExport from '@/components/WithDynamicExport';
 
 @WithDynamicExport
-export default class AuxiliaryExaminationPanel extends BaseEditPanel {
+export default class PhysicalExaminationPanel extends BaseEditPanel {
   static defaultProps = {
-    baseUrl: '',
-    moduleName: 'auxiliaryExamination',
-    title: '辅助检查',
+    baseUrl: '/child-exam-visits',
+    moduleName: 'physicalExamination',
+    title: '体格检查',
     toApi,
     fromApi,
     Form,
