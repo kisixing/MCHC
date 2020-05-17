@@ -218,10 +218,7 @@ function _assign(mainData: any = {}, newData: any = {}): any {
             }
           } else if (isObj(mainData[mk]) && isObj(newData[mk])) {
             // default object
-            mainData[mk] = {
-              ...mainData[mk],
-              ...newData[nk]
-            }
+            mainData[mk] = _assign(mainData[mk], newData[nk]);
           }
         }
       }
