@@ -43,20 +43,20 @@ const config: Array<FormConfig> = [
         //     extraEditors: []
         //   }
         // },
-        { name: 'edemaNote', key: '.generalExam.edemaNote', label: "下肢水肿", input_type: "select", span: 8, rules: "required",
-          input_props: {
-            type: "default",
-            radio: true,
-            options: [
-              { label: "-", value: "-" },
-              { label: "+", value: "+" },
-              { label: "++", value: "++" },
-              { label: "+++", value: "+++" },
-              { label: "++++", value: "++++" },
-            ],
-            extraEditors: []
-          }
-        },
+        // { name: 'edemaNote', key: '.generalExam.edemaNote', label: "下肢水肿", input_type: "select", span: 8, rules: "required", is_new_row: true,
+        //   input_props: {
+        //     type: "default",
+        //     radio: true,
+        //     options: [
+        //       { label: "-", value: "-" },
+        //       { label: "+", value: "+" },
+        //       { label: "++", value: "++" },
+        //       { label: "+++", value: "+++" },
+        //       { label: "++++", value: "++++" },
+        //     ],
+        //     extraEditors: []
+        //   }
+        // },
 
         // { name: 'fetalCondition', key: '.list.fetalCondition', label: "位置", input_type: "input", span: 8, rules: "required", input_props:{} },
         // { name: 'fetalCondition', key: '.list.fetalCondition', label: "胎心率", input_type: "input", span: 8, rules: "required", input_props:{} },

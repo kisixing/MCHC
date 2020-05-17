@@ -5,7 +5,7 @@ const config: Array<FormConfig> = [
   {
     name: "yunfuxinxi",
     key: ".yunfuxinxi",
-    label: "孕妇基本信息",
+    label: "孕产史",
     input_type: "simpleobject",
     input_props: {
       config: [

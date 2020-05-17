@@ -72,7 +72,7 @@ export default class Home extends React.Component<{},HomeState>{
   render(){
     const { tabs, step, formData } = this.state;
     return(
-      <div className="prenatal-visit-initial">
+      <div className={style.initiaWrapper}>
         <Tabs type="card" activeKey={step} onChange={key => this.handleSave(key) }>
           {tabs.map(({ key, title, Content }) => (
             <Tabs.TabPane key={key}

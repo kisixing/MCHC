@@ -108,13 +108,13 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
           return;
         }
         let newObj:any = {};
-      
+
         if(!val.checkboxValue){
           newObj = {[key]: false, [`${key}Note`]: ""}
         }else{
           newObj = {[key]: val.checkboxValue,[`${key}Note`]: ""};
           if(isArr(input_props.renderData[index].extraEditors)){
-            if(input_props.renderData[index].extraEditors[0].editors.length <= 1){
+            if(input_props.renderData[index].extraEditors[0] && input_props.renderData[index].extraEditors[0].editors.length <= 1){
               newObj[`${key}Note`] = val.editorsValue ? val.editorsValue[0] || "" : "";
             }else{
               newObj[`${key}Note`] = JSON.stringify(getObjectFormArray(val.editorsValue));

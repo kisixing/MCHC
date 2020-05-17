@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import MyForm from '@/components/MyForm/index';
 import config from './config';
 import data from '../data';
-import styles from '../index.less';
+import style from '../index.less';
 import request from '@/utils/request';
 
 import { getRenderData, getFormData} from '@/components/MyForm/utils';
@@ -62,14 +62,14 @@ export default class Home extends React.Component<{},HomeState>{
     const myConfig = getRenderData(config, formData);
     // 不要再页面render中尝试取formHandler的值，因为这个时候formItem初始化还没有完成
     return(
-      <div>
+      <div className={style.initialContent}>
         <MyForm
           config={myConfig}
           getFormHandler={(formHandler:any) => this.setState({formHandler})}
           submitChange={false}
         />
-        <div className={styles['btn-group']}>
-          <Button onClick={this.handleSubmit}>重置</Button>
+        <div className={style.bottomBtn}>
+          {/* <Button onClick={this.handleSubmit}>重置</Button> */}
           <Button type="primary" onClick={this.handleSubmit}>提交</Button>
         </div>
       </div>
