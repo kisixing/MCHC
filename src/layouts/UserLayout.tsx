@@ -4,7 +4,7 @@ import React from 'react';
 import { formatMessage } from 'umi-plugin-react/locale';
 import { connect } from 'dva';
 import { ConnectProps, ConnectState } from '@/models/connect';
-import logo from '../assets/logo.jpg';
+import logo from '../assets/logo.png';
 import styles from './UserLayout.less';
 
 export interface UserLayoutProps extends ConnectProps {

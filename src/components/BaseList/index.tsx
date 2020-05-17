@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import request from '@/utils/request';
-import { get, isFunction, map, keyBy, set } from 'lodash';
+import { get, isFunction, map, keyBy, set, isNil, isEmpty } from 'lodash';
 import { message, Popconfirm, Button, Form, Input } from 'antd';
 import queryString from 'query-string';
 import CustomSpin from '../GeneralComponents/CustomSpin';
@@ -220,7 +220,22 @@ export default class BaseList extends React.Component<IProps, IState> {
     });
   };
 
-  handleSearch = async () => {
+  // 查询组件，点击查询，由于 api 采用接口 Criteria 风格，子组件可能需要重写 handleQuerySearch
+  handleQuerySearch = (data: object) => {
+    let queryData = {};
+    map(data, (value: any, key: any) => {
+      if (!isNil(value) && !isEmpty(value)) {
+        queryData = {
+          ...queryData,
+          [`${key}.equals`]: value,
+        };
+      }
+    });
+    console.log(queryData);
+    this.handleSearch(queryData);
+  };
+
+  handleSearch = async (queryParams: any = {}) => {
     const { baseUrl, needPagination, processFromApi, asChildComponentQueryLabel = '', id: propsId } = this.props;
     const { defaultQuery } = this.state;
     // TODO: 有可能作为页面的子组件， propsId 是 BaseList 作为子组件从 props 传入的
@@ -228,8 +243,12 @@ export default class BaseList extends React.Component<IProps, IState> {
       ? {
           ...defaultQuery,
           [asChildComponentQueryLabel]: propsId,
+          ...queryParams,
         }
-      : defaultQuery;
+      : {
+          ...defaultQuery,
+          ...queryParams,
+        };
     const dataSource = isFunction(processFromApi)
       ? processFromApi(await request.get(`${baseUrl}${query ? `?${queryString.stringify(query as object)}` : ''}`))
       : await request.get(`${baseUrl}${query ? `?${queryString.stringify(query as object)}` : ''}`);
@@ -326,7 +345,7 @@ export default class BaseList extends React.Component<IProps, IState> {
     const mergedColumns = this.getColumns();
     return (
       <>
-        {showQuery && <Query onSearch={this.handleSearch} />}
+        {showQuery && <Query onSearch={this.handleQuerySearch} />}
         {loading ? (
           <CustomSpin />
         ) : (

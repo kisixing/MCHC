@@ -18,13 +18,8 @@ export const tableColumns = [
     align: 'center',
   },
   {
-    title: '分娩日期',
-    dataIndex: 'idNO',
-    align: 'center',
-  },
-  {
     title: '分娩孕周',
-    dataIndex: 'idNO',
+    dataIndex: 'gestationalWeek',
     align: 'center',
   },
   {
@@ -42,34 +37,34 @@ export const tableColumns = [
     dataIndex: 'thirdstage',
     align: 'center',
   },
-  {
-    title: '胎方位',
-    dataIndex: 'idNO',
-    align: 'center',
-  },
-  {
-    title: '分娩方式',
-    dataIndex: 'idNO',
-    align: 'center',
-  },
-  {
-    title: '脐带长度',
-    dataIndex: 'idNO',
-    align: 'center',
-  },
-  {
-    title: '产后2小时出血',
-    dataIndex: 'idNO',
-    align: 'center',
-  },
-  {
-    title: '记录者',
-    dataIndex: 'idNO',
-    align: 'center',
-  },
-  {
-    title: '接生者',
-    dataIndex: 'idNO',
-    align: 'center',
-  },
+  // {
+  //   title: '胎方位',
+  //   dataIndex: 'idNO',
+  //   align: 'center',
+  // },
+  // {
+  //   title: '分娩方式',
+  //   dataIndex: 'idNO',
+  //   align: 'center',
+  // },
+  // {
+  //   title: '脐带长度',
+  //   dataIndex: 'idNO',
+  //   align: 'center',
+  // },
+  // {
+  //   title: '产后2小时出血',
+  //   dataIndex: 'idNO',
+  //   align: 'center',
+  // },
+  // {
+  //   title: '记录者',
+  //   dataIndex: 'idNO',
+  //   align: 'center',
+  // },
+  // {
+  //   title: '接生者',
+  //   dataIndex: 'idNO',
+  //   align: 'center',
+  // },
 ];
