@@ -6,43 +6,86 @@ import AuxiliaryExamination from '../auxiliary-examination';
 import PhysicalExamination from '../physical-examination';
 import GeneralExamination from '../general-examination';
 
-import { Tabs } from 'antd';
+import { Tabs, Divider } from 'antd';
 import { get } from 'lodash';
 import request from '@/utils/request';
 
+import headerStyles from '@/components/BaseEditPanel/index.less';
+
 export default class panel extends PanelWithChild {
   state = {
+    headerData: {},
     data: {},
   };
 
   async componentDidMount() {
-    const id = get(this.props, 'location.query.id');
-    const data = request.get(`/child-exam-visits/${id}`);
+    const {id, childId} = get(this.props, 'location.query');
+    let data = {};
+    if (id) {
+      data = request.get(`/child-exam-visits/${id}`);
+    }
+    if (childId) {
+      data = request.get(`/child-archives/${childId}`);
+    }
     this.setState({
       data,
     });
   }
 
-  renderContent = () => {
+  renderHeader = () => {
     const id = get(this.props, 'location.query.id');
     const { data } = this.state;
+    // console.log('555555555555555', data);
+
+    return (
+      <>
+        <div className={headerStyles.panelWithChildHeader}>
+          <div className={headerStyles.panelWithChildHeaderItem}>
+            <span className={headerStyles.panelWithChildHeaderItemLabel}>姓名:</span>
+            <span className={headerStyles.panelWithChildHeaderItemValue}>
+              {get(data, 'name') || get(data, 'childArchives.name')}
+            </span>
+          </div>
+          <div className={headerStyles.panelWithChildHeaderItem}>
+            <span className={headerStyles.panelWithChildHeaderItemLabel}>年龄:</span>
+            <span className={headerStyles.panelWithChildHeaderItemValue}>
+              {get(data, 'age') || get(data, 'childArchives.age')}
+            </span>
+          </div>
+          <div className={headerStyles.panelWithChildHeaderItem}>
+            <span className={headerStyles.panelWithChildHeaderItemLabel}>孕周:</span>
+            <span className={headerStyles.panelWithChildHeaderItemValue}>{get(data, 'gestationalWeek')}</span>
+          </div>
+          <div className={headerStyles.panelWithChildHeaderItem}>
+            <span className={headerStyles.panelWithChildHeaderItemLabel}>孕产期</span>
+            <span className={headerStyles.panelWithChildHeaderItemValue}>{get(data, 'edd')}</span>
+          </div>
+        </div>
+        <Divider className={headerStyles.panelWithChildHeaderDivider}></Divider>
+      </>
+    );
+  }
+
+  renderContent = () => {
+    const id = get(this.props, 'location.query.id');
+    const { data, activeKey } = this.state;
 
     return (
       <Tabs defaultActiveKey="1" type="card" size="small">
         <Tabs.TabPane tab="出生信息登记" key="birth-information">
-          <BirthInformation />
+          <BirthInformation id={id} />
         </Tabs.TabPane>
         <Tabs.TabPane tab="传染病史" key="infected-history">
-          <InfectedHistory />
+          <InfectedHistory id={id} />
         </Tabs.TabPane>
         <Tabs.TabPane tab="体格检查" key="physical-examination">
-          <PhysicalExamination />
+          <PhysicalExamination id={id} />
         </Tabs.TabPane>
         <Tabs.TabPane tab="内科检查" key="general-examination">
-          <GeneralExamination />
+          <GeneralExamination id={id}/>
         </Tabs.TabPane>
         <Tabs.TabPane tab="辅助检查" key="auxiliary-examination">
-          <AuxiliaryExamination />
+          <AuxiliaryExamination id={id} />
         </Tabs.TabPane>
         <Tabs.TabPane tab="高危儿登记" key="CaesareanDelivery">
 

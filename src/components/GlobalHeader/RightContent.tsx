@@ -4,7 +4,7 @@ import { connect } from 'dva';
 // import { QuestionCircleOutlined } from '@ant-design/icons';
 // import { Tooltip } from 'antd';
 import { ConnectProps, ConnectState } from '@/models/connect';
-import FullScreenSwitch from './FullScreenSwitch';
+// import FullScreenSwitch from './FullScreenSwitch';
 import Avatar from './AvatarDropdown';
 // import HeaderSearch from '../HeaderSearch';
 // import SelectLang from '../SelectLang';

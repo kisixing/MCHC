@@ -5,6 +5,7 @@ import Form from './components/Form';
 import { toApi, fromApi } from './config/adapter';
 import BaseEditPanel from '@/components/BaseEditPanel';
 import WithDynamicExport from '@/components/WithDynamicExport';
+import { processFromApi } from './config/adapter';
 import request from '@/utils/request';
 
 @WithDynamicExport
@@ -15,6 +16,7 @@ export default class ChildArchivePanel extends BaseEditPanel {
     title: '儿童档案',
     toApi,
     fromApi,
+    processFromApi,
     Form,
   };
 

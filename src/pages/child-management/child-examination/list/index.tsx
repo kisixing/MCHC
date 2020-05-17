@@ -29,6 +29,7 @@ export default class List extends BaseList {
   state = {
     total: 0,
     defaultQuery: {
+      'childArchivesId.equals': get(this.props, 'location.query.childId') ? get(this.props, 'location.query.childId') : undefined,
       page: 0,
       size: 20,
     },
@@ -54,6 +55,7 @@ export default class List extends BaseList {
               className={commonStyles.tableActionBtn}
               type="primary"
               size="small"
+              title="查看"
               onClick={this.handleView(rowData)}
             >
               <EyeOutlined title="查看" />
@@ -66,7 +68,7 @@ export default class List extends BaseList {
               onClick={this.handleEdit(rowData)}
             >
               <EditOutlined />
-            </Button>
+            </Button> */}
             <Popconfirm
               title={`确定要删除这个${get(this.props, 'baseTitle')}吗?`}
               onConfirm={this.handleDelete(rowData)}
@@ -76,7 +78,7 @@ export default class List extends BaseList {
               <Button title="删除" className={commonStyles.tableActionBtn} type="danger" size="small">
                 <DeleteOutlined />
               </Button>
-            </Popconfirm> */}
+            </Popconfirm>
           </>
         );
       },

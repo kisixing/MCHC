@@ -7,6 +7,7 @@ export const processFromApi = (data: any[]) => {
       name: get(item, 'admission.name'),
       areaNO: get(item, 'admission.areaNO'),
       idNO: get(item, 'admission.idNO'),
+      gestationalWeek: get(item, 'admission.gestationalWeek'),
       firststage: `${Number(get(item, 'firststageh'))} 时 ${get(item, 'firststagem')}分`,
       secondstage: `${Number(get(item, 'secondstageh'))} 时 ${get(item, 'secondstagem')}分`,
       thirdstage: `${Number(get(item, 'thirdstageh'))} 时 ${get(item, 'thirdstagem')}分`,

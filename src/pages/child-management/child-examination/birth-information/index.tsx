@@ -6,7 +6,7 @@ import WithDynamicExport from '@/components/WithDynamicExport';
 @WithDynamicExport
 export default class BirthInformationPanel extends BaseEditPanel {
   static defaultProps = {
-    baseUrl: '',
+    baseUrl: '/child-exam-visits',
     moduleName: 'birthInformation',
     title: false,
     toApi,

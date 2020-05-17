@@ -1,16 +1,21 @@
 import { formatTimeToStandard } from '@/utils/format';
+import { IDCardMappingByValue, genderMappingByValue } from '@/components/selects/NormalSelect';
+import { get } from 'lodash';
 
 export const tableColumns = [
   {
+    title: '住院号',
+    dataIndex: 'inpatientNO',
+    align: 'center',
+  },
+  {
     title: '病区号',
     dataIndex: 'areaNO',
-    key: 'areaNO',
     align: 'center',
   },
   {
     title: '房号',
     dataIndex: 'roomNO',
-    key: 'roomNO',
     align: 'center',
   },
   {
@@ -21,25 +26,22 @@ export const tableColumns = [
   {
     title: '孕妇姓名',
     dataIndex: 'name',
-    key: 'name',
     align: 'center',
   },
   {
     title: '孕妇年龄',
     dataIndex: 'age',
-    key: 'age',
     align: 'center',
   },
   {
     title: '性别',
     dataIndex: 'gender',
-    key: 'gender',
     align: 'center',
+    render: (value: string) => get(genderMappingByValue, `${value}.title`),
   },
   {
     title: '出生日期',
     dataIndex: 'dob',
-    key: 'dob',
     align: 'center',
   },
   {
@@ -52,6 +54,7 @@ export const tableColumns = [
     dataIndex: 'idType',
     key: 'idType',
     align: 'center',
+    render: (value: string) => get(IDCardMappingByValue, `${value}.title`),
   },
   {
     title: '证件号码',
@@ -62,7 +65,7 @@ export const tableColumns = [
   {
     title: '住院日期',
     dataIndex: 'adminDate',
-    key: 'adminDate',
     align: 'center',
+    render: (value: string) => formatTimeToStandard(value),
   },
 ];
