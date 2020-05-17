@@ -11,7 +11,7 @@ import queryString from 'query-string';
 @WithDynamicExport
 export default class List extends BaseList {
   static defaultProps = {
-    baseUrl: '/caesarean-deliveries',
+    baseUrl: '/admissions',
     baseTitle: '剖宫产记录',
     needPagination: true,
     showQuery: false,

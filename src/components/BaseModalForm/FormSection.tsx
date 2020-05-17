@@ -28,10 +28,6 @@ import request from '@/utils/request';
 import CheckboxGroup from '@/components/ConfigComponents/CheckboxGroup';
 import InputWithLabel from '../ConfigComponents/InputWithLabel';
 import NormalCheckboxWithInput from '../ConfigComponents/NormalCheckboxWithInput';
-import PureCheckbox from '../ConfigComponents/PureCheckbox';
-import CheckboxWithSingleInput from '../ConfigComponents/CheckboxWithSingleInput';
-import NormalSelectWithInput from '../ConfigComponents/NormalSelectWithInput';
-import SelectWithOptions from '../selects/SelectWithOptions';
 
 export const getFormDescriptionByModuleName = async (moduleName: string) => {
   return formDescriptionsWithoutSectionApi(
@@ -152,14 +148,6 @@ export class FormSection extends React.Component<IProps> {
         });
       case 'normal_checkbox_with_input':
         return renderEditItem(get(formDescription, 'key'), <NormalCheckboxWithInput config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-        });
-      case 'checkbox_with_single_input':
-        return renderEditItem(get(formDescription, 'key'), <CheckboxWithSingleInput config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-        });
-      case 'pure_checkbox':
-        return renderEditItem(get(formDescription, 'key'), <PureCheckbox config={formDescription} />, {
           customFormItemLayout: get(formDescription, 'formItemLayout') || {},
         });
       case 'checkbox_group':
@@ -415,16 +403,6 @@ export class FormSection extends React.Component<IProps> {
             styles: get(formDescription, 'styles'),
           },
         );
-      case 'select_with_input':
-        return renderEditItem(get(formDescription, 'key'), <NormalSelectWithInput config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-          styles: get(formDescription, 'styles'),
-        });
-      case 'select_with_options':
-        return renderEditItem(get(formDescription, 'key'), <SelectWithOptions config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-          styles: get(formDescription, 'styles'),
-        });
       case 'view_only':
         return renderEditItem(get(formDescription, 'key'), <span>{get(data, get(formDescription, 'path'))}</span>);
       default:

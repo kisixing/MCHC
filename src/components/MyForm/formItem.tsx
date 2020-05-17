@@ -7,6 +7,8 @@ import { validFun } from './utils/valid';
 import { isEmpty } from './utils/func';
 import styles from './formItem.less';
 
+// TODO 校验这个问题以后再处理 5/15
+
 function isBase(val: any): boolean {
   return val && typeof val !== "object";
 }
@@ -19,6 +21,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
       error: "",
       path: "",
       validate: [],
+      
     }
     const self = this;
     if (props.actions) {
@@ -33,10 +36,19 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
       }
       props.actions.valid = function valid() {
         const error = validFun(self.state.value, props.validate || "");
+        // childrenError boolean
+        let childrenError: any = true;
+        if(props.type.indexOf("custom") !== -1){
+          childrenError = self.childrenValid();
+        }
         self.setState({ error });
-        return isEmpty(error);
+        return isEmpty(error) && childrenError;
       }
     }
+  }
+
+  childrenValid = () => {
+    return true;
   }
 
   componentDidMount() {
@@ -48,6 +60,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
   }
 
   componentDidUpdate(prevProps: FormItemProp) {
+    const self = this;
     if (JSON.stringify(this.props) !== JSON.stringify(prevProps)) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
@@ -58,7 +71,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
     }
   }
 
-  handleChange = (val: any) => {
+  handleChange = (val: any, error: any = "") => {
     const { name, dispatch } = this.props;
     this.setState({ value: val }, () => {
       if (name) {
@@ -72,12 +85,10 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
         }
         // TODO 这个位置先将object/array的valid不在handlechange时触发，以后可以加入trigger去做响应
         if (this.props.actions.valid) {
-          // if (typeof val === "object") {
-          //   console.warn('校验对象为引用类型,暂时不做onChange校验');
-          //   // this.props.actions.valid();
-          // } else {
-            this.props.actions.valid();
-          // }
+          this.props.actions.valid();
+          if(error){
+            this.setState({error});
+          }
         } else {
           console.error('缺失valid Function || ');
         }
@@ -106,12 +117,12 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
           </div>
         ) : null}
         <div className={styles['form-item']}>
-          <div className={styles['formItem-inline-label']}>
-            {label !== "" && !header_label ? (
+          {label !== "" && !header_label ? (
+            <div className={styles['formItem-inline-label']}>
               <label>{this.renderAsterisk(validate)}{label}:</label>
-            ) : null}
-          </div>
-          <div className={styles['formItem-main']}>
+            </div>
+          ) : null}
+          <div className={header_label ? styles['formItem-full-main'] : styles['formItem-main']}>
             {MyComponent ? (
               <MyComponent
                 onChange={this.handleChange}
@@ -122,6 +133,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
                 input_props={input_props}
                 error={error}
                 path={path}
+                getValidFun={(validFunc: any) => {this.childrenValid = validFunc}}
               />
             ) : (
                 <strong>

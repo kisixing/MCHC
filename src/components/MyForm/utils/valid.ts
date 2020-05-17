@@ -28,7 +28,7 @@ const errorText: { [key: string]: string } = {
 
 const validateRules: ValidateRule = {
   "required": function (val: any): boolean {
-    return !!val;
+    return val !== undefined && val !== "" && val !== null;
   },
   "number": function (val: any): boolean {
     return /^[0-9]+$/.test(val);

@@ -167,6 +167,7 @@ export const omitRoutes = [
     id: 35,
     type: 'others',
     key: '/child-examination',
+    name: '儿童健康体检管理',
     isMenu: true,
     active: null,
   },
@@ -174,6 +175,7 @@ export const omitRoutes = [
     id: 351,
     type: 'others',
     key: '/child-examination/archive',
+    name: '创建儿童档案',
     isMenu: true,
     active: null,
   },
@@ -181,6 +183,7 @@ export const omitRoutes = [
     id: 352,
     type: 'others',
     key: '/child-examination/examination-record',
+    name: '健康体检记录',
     isMenu: true,
     active: null,
   },
@@ -188,9 +191,75 @@ export const omitRoutes = [
     id: 353,
     type: 'others',
     key: '/child-examination/examination-edit',
+    name: '健康体检登记',
     isMenu: true,
     active: null,
   },
+  {
+    id: 353,
+    type: 'others',
+    key: '/child-examination/birth-charts',
+    name: 'chart图表',
+    isMenu: true,
+    active: null,
+  },
+
+  {
+    id: 34,
+    type: 'others',
+    key: '/child-management',
+    name: '儿童管理',
+    isMenu: true,
+  },
+  {
+    id: 341,
+    type: 'others',
+    key: '/child-management/child-archive',
+    name: '儿童档案记录',
+    isMenu: true,
+    active: null,
+  },
+  {
+    id: 342,
+    type: 'others',
+    key: '/child-management/child-archive/add',
+    name: '创建儿童档案',
+    isMenu: true,
+    active: null,
+  },
+  {
+    id: 343,
+    type: 'others',
+    key: '/child-management/child-archive/edit',
+    name: '修改儿童档案',
+    isMenu: false,
+    active: null,
+  },
+  {
+    id: 344,
+    type: 'others',
+    key: '/child-management/child-archive/deliver-edit',
+    name: '查看儿童档案',
+    isMenu: false,
+    active: null,
+  },
+  {
+    id: 345,
+    type: 'others',
+    key: '/child-management/child-examination',
+    name: '健康体检记录',
+    isMenu: true,
+    active: null,
+  },
+  {
+    id: 345,
+    type: 'others',
+    key: '/child-management/child-examination/deliver-edit',
+    name: '查看健康体检记录',
+    isMenu: false,
+    active: null,
+  },
+
   {
     id: 339,
     type: 'others',
@@ -490,6 +559,48 @@ export const omitRoutes = [
     isMenu: true,
   },
   {
+    id: 193,
+    type: 'others',
+    key: '/premarital-care/wife/add',
+    name: '添加女方档案',
+    active: null,
+  },
+  {
+    id: 192,
+    type: 'others',
+    key: '/premarital-care/wife/edit',
+    name: '修改女方档案',
+    active: null,
+  },
+  {
+    id: 191,
+    type: 'others',
+    key: '/premarital-care/wife/wife-exam',
+    name: '婚前检查',
+    active: null,
+  },
+  {
+    id: 190,
+    type: 'others',
+    key: '/premarital-care/husband/add',
+    name: '添加男方档案',
+    active: null,
+  },
+  {
+    id: 189,
+    type: 'others',
+    key: '/premarital-care/husband/edit',
+    name: '修改男方档案',
+    active: null,
+  },
+  {
+    id: 188,
+    type: 'others',
+    key: '/premarital-care/husband/husband-exam',
+    name: '婚前检查',
+    active: null,
+  },
+  {
     id: 179,
     type: 'others',
     key: '/gynecological-diseases',
@@ -634,7 +745,7 @@ export const omitRoutes = [
     type: 'others',
     key: '/prenatal-diagnosis/medical-record',
     active: null,
-    isMenu: true
+    isMenu: false
   },
   {
     id: 97,
@@ -642,5 +753,33 @@ export const omitRoutes = [
     key: '/prenatal-diagnosis/operation-record',
     active: null,
     isMenu: true
+  },
+  {
+    id: 96,
+    type: 'others',
+    key: '/prenatal-diagnosis/admission',
+    active: null,
+    isMenu: true
+  },
+  {
+    id: 95,
+    type: 'others',
+    key: '/prenatal-diagnosis/main',
+    active: null,
+    isMenu: false
+  },
+  {
+    id: 94,
+    type: 'others',
+    key: '/prenatal-diagnosis/new-patient',
+    active: null,
+    isMenu: true
+  },
+  {
+    id: 93,
+    type: 'others',
+    key: '/prenatal-diagnosis/medical-record-form',
+    active: null,
+    isMenu: false
   }
 ];

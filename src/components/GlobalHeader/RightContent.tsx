@@ -29,7 +29,7 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = props => {
 
   return (
     <div className={className}>
-      <FullScreenSwitch />
+      {/* <FullScreenSwitch /> */}
       <Avatar menu />
       {/* <SelectLang className={styles.action} /> */}
     </div>
