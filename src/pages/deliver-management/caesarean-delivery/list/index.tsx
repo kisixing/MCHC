@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from './components/Table';
 import { tableColumns } from './config/table';
+import { processFromApi } from './config/adapter';
 import BaseList from '@/components/BaseList';
 import WithDynamicExport from '@/components/WithDynamicExport';
 import { router } from 'umi';
@@ -16,6 +17,7 @@ export default class List extends BaseList {
     needPagination: true,
     showQuery: false,
     showAdd: false,
+    processFromApi,
     tableColumns,
     rowKey: 'id',
     Table,

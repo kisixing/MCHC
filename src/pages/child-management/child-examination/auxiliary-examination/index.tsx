@@ -6,7 +6,7 @@ import WithDynamicExport from '@/components/WithDynamicExport';
 @WithDynamicExport
 export default class AuxiliaryExaminationPanel extends BaseEditPanel {
   static defaultProps = {
-    baseUrl: '',
+    baseUrl: '/child-exam-visits',
     moduleName: 'auxiliaryExamination',
     title: '辅助检查',
     toApi,
