@@ -45,7 +45,7 @@ export default class Home extends React.Component<{},HomeState>{
   }
 
   componentDidMount() {
-    request(`/prenatal-visits?visitType.equals=100`, {
+    request(`/prenatal-visits?visitType.equals=0`, {
       method: 'GET'
     }).then(res => {
       this.setState({

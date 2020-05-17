@@ -1,9 +1,12 @@
 import * as React from 'react';
+import { Button } from 'antd';
 import MyForm from '@/components/MyForm/index';
 import config from './config';
+import request from '@/utils/request';
+import styles from './index.less';
 import data from './data';
 
-import { getRenderData, toFormat} from '@/components/MyForm/utils';
+import { getRenderData, getFormData} from '@/components/MyForm/utils';
 
 interface HomeState{
   formHandler:{
@@ -32,16 +35,22 @@ export default class Home extends React.Component<{},HomeState>{
 
 
   handleSubmit = () => {
-    const { getData } = this.props;
     console.log(this.state.formHandler, '11')
     this.state.formHandler.submit().then(({validCode, res}:any) => {
-      // console.log(res, '1');
-      // console.log(toFormat(res), '2');
+      console.log(res, '1');
+      console.log(getFormData(res), '2');
       // if(!validCode){
       // }
-    });
+      const param = {visitType: 1};
+      const newData = {...getFormData(res), ...param }
+      console.log(newData, '366')
+      request('/prenatal-visits', {
+        method: 'post',
+        data: newData
+      }).then(r => {
 
-    return getData(this.state.formHandler);
+      });
+    });
   }
 
   render(){
@@ -53,8 +62,12 @@ export default class Home extends React.Component<{},HomeState>{
           config={myConfig}
           getFormHandler={(formHandler:any) => this.setState({formHandler})}
           submitChange={false}
-
         />
+
+        <div className={styles['btn-group']}>
+          {/* <Button onClick={this.handleSubmit}>重置</Button> */}
+          <Button type="primary" onClick={this.handleSubmit}>提交</Button>
+        </div>
       </div>
     )
   }
