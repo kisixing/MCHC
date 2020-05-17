@@ -559,6 +559,48 @@ export const omitRoutes = [
     isMenu: true,
   },
   {
+    id: 193,
+    type: 'others',
+    key: '/premarital-care/wife/add',
+    name: '添加女方档案',
+    active: null,
+  },
+  {
+    id: 192,
+    type: 'others',
+    key: '/premarital-care/wife/edit',
+    name: '修改女方档案',
+    active: null,
+  },
+  {
+    id: 191,
+    type: 'others',
+    key: '/premarital-care/wife/wife-exam',
+    name: '婚前检查',
+    active: null,
+  },
+  {
+    id: 190,
+    type: 'others',
+    key: '/premarital-care/husband/add',
+    name: '添加男方档案',
+    active: null,
+  },
+  {
+    id: 189,
+    type: 'others',
+    key: '/premarital-care/husband/edit',
+    name: '修改男方档案',
+    active: null,
+  },
+  {
+    id: 188,
+    type: 'others',
+    key: '/premarital-care/husband/husband-exam',
+    name: '婚前检查',
+    active: null,
+  },
+  {
     id: 179,
     type: 'others',
     key: '/gynecological-diseases',
@@ -703,7 +745,7 @@ export const omitRoutes = [
     type: 'others',
     key: '/prenatal-diagnosis/medical-record',
     active: null,
-    isMenu: true
+    isMenu: false
   },
   {
     id: 97,
@@ -711,5 +753,33 @@ export const omitRoutes = [
     key: '/prenatal-diagnosis/operation-record',
     active: null,
     isMenu: true
+  },
+  {
+    id: 96,
+    type: 'others',
+    key: '/prenatal-diagnosis/admission',
+    active: null,
+    isMenu: true
+  },
+  {
+    id: 95,
+    type: 'others',
+    key: '/prenatal-diagnosis/main',
+    active: null,
+    isMenu: false
+  },
+  {
+    id: 94,
+    type: 'others',
+    key: '/prenatal-diagnosis/new-patient',
+    active: null,
+    isMenu: true
+  },
+  {
+    id: 93,
+    type: 'others',
+    key: '/prenatal-diagnosis/medical-record-form',
+    active: null,
+    isMenu: false
   }
 ];

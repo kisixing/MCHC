@@ -40,6 +40,7 @@ export default class Home extends React.Component<{},HomeState>{
 
   render(){
     const myConfig = getRenderData(config, data);
+    console.log(myConfig);
     // 不要再页面render中尝试取formHandler的值，因为这个时候formItem初始化还没有完成
     return(
       <div>

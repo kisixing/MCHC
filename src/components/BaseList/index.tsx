@@ -54,6 +54,7 @@ export interface IState {
   editable: boolean;
   loading: boolean;
   id: any;
+  editKey: any;
 }
 
 export default class BaseList extends React.Component<IProps, IState> {
@@ -67,6 +68,7 @@ export default class BaseList extends React.Component<IProps, IState> {
     visible: false,
     editable: false,
     id: undefined,
+    editKey: undefined,
     loading: true,
   };
 
@@ -127,7 +129,7 @@ export default class BaseList extends React.Component<IProps, IState> {
     this.handleSearch();
   }
 
-  isEditing = (rowData: any) => get(rowData, 'id') === this.state.id;
+  isEditing = (rowData: any) => (get(rowData, 'editKey') || get(rowData, 'id')) === this.state.editKey;
 
   handleDelete = (rowData: any) => async () => {
     const { baseUrl, baseTitle } = this.props;
@@ -163,8 +165,10 @@ export default class BaseList extends React.Component<IProps, IState> {
             ...formData,
           },
     });
+    form.resetFields();
     this.setState({
       id: undefined,
+      editKey: undefined,
     });
     message.success(title);
     await this.handleSearch();
@@ -190,6 +194,7 @@ export default class BaseList extends React.Component<IProps, IState> {
       form.setFieldsValue(rowData);
       this.setState({
         id: get(rowData, 'id'),
+        editKey: get(rowData, 'editKey') || get(rowData, 'id'),
       });
     } else {
       this.setState({
@@ -317,6 +322,7 @@ export default class BaseList extends React.Component<IProps, IState> {
       needEditInTable,
     } = this.props;
     const { dataSource, total, defaultQuery, loading, visible, editable, id } = this.state;
+    console.log(dataSource);
     const mergedColumns = this.getColumns();
     return (
       <>

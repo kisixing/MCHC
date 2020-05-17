@@ -296,7 +296,5 @@ const show = (req: Request, res: Response) => {
 
 export default {
   // 'GET /api/admissions': list,
-  // 'GET /api/nurse-records': list,
-  // 'GET /api/caesarean-deliveries': list,
   // 'GET /api/admissions/1': show,
 };

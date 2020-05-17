@@ -26,7 +26,7 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
   //     error: []
   //   }
   // }
-  
+
   componentDidMount() {
     this.mapPropsToState();
   }
@@ -50,11 +50,12 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
     if(!value || config.length === 0 || value.length === 0 ){
       return null;
     }
+    console.log(value, '43536')
     return value.map((val: any, index: number) => (
-      <div className={styles['array-form']}>
+      <div className={styles['array-form']} key={`array-custom-${index}`}>
         <h2 className={styles.title}>
           <div>
-            信息{index+1}
+            记录{index+1}
           </div>
           <div>
             <Button
@@ -78,7 +79,7 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
   handleAdd = () => {
     const { value = [] , input_props = {}, onChange } = this.props;
     const { config = [] } = input_props;
-    /** 
+    /**
      *  这里config取item中的key，去第一个点后的第一个字段
      *  有可能存在复合的字段
      */
@@ -113,7 +114,7 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
     return (
       <div className={styles['array-custom']}>
         <div className={styles['button-add']}>
-          <Button 
+          <Button
             type="primary"
             onClick={this.handleAdd}
           >添加</Button>

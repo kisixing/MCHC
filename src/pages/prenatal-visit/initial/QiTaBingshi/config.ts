@@ -2,15 +2,16 @@ import { FormConfig } from '../../../../components/MyForm/interface';
 
 const config: Array<FormConfig> = [
 
-  { name: 'yjcuch', key: '.menstruationMarriage.yjcuch', label: "初潮", input_type: "input", span: 6, rules: "required" },
-  { name: 'yjzhouq', key: '.menstruationMarriage.yjzhouq', label: "周期", input_type: "input", span: 6, rules: "required" },
-  { name: 'yjchix', key: '.menstruationMarriage.yjchix', label: "持续天数", input_type: "input", span: 6, rules: "required" },
-  { name: 'yjtongj', key: '.menstruationMarriage', label: "痛经", input_type: "checkbox", span: 6, rules: "required",
+
+  { name: 'menarche', key: '.pregnancy.menstrualHistory.menarche', label: "初潮", input_type: "input", span: 6, rules: "required" },
+  { name: 'menstrualCycle', key: '.pregnancy.menstrualHistory.menstrualCycle', label: "周期", input_type: "input", span: 6, rules: "required" },
+  { name: 'menstrualPeriod', key: '.pregnancy.menstrualHistory.menstrualPeriod', label: "持续天数", input_type: "input", span: 6, rules: "required" },
+  { name: 'dysmenorrhea', key: '.pregnancy.menstrualHistory', label: "痛经", input_type: "checkbox", span: 6, rules: "required",
     input_props:{
       type: "custom",
       renderData: [
         {
-          key: "yjtongj",
+          key: "dysmenorrhea",
           label: "痛经",
           options: [
             { label: "无", value: '1' },
@@ -20,12 +21,12 @@ const config: Array<FormConfig> = [
         }
       ],
     } },
-  { name: 'maritalHistory', key: '.menstruationMarriage', label: "婚姻史", input_type: "checkbox", span: 10, rules: "required",
+  { name: 'maritalStatus', key: '.pregnancy', label: "婚姻史", input_type: "checkbox", span: 10, rules: "required",
   input_props:{
     type: "custom",
     renderData: [
       {
-        key: "maritalHistory",
+        key: "maritalStatus",
         label: "婚姻史",
         options: [
           { label: "已婚", value: '1' },
@@ -38,13 +39,13 @@ const config: Array<FormConfig> = [
       }
     ],
    } },
-  { name: 'userjiehn', key: '.menstruationMarriage.userjiehn', label: "本次结婚年龄", input_type: "input", span: 7, rules: "required" },
-  { name: 'userjinqjh', key: '.menstruationMarriage', label: "近亲结婚", input_type: "checkbox", span: 7, rules: "required",
+  { name: 'maritalYears', key: '.pregnancy.maritalYears', label: "本次结婚年龄", input_type: "input", span: 7, rules: "required" },
+  { name: 'nearRelation', key: '.pregnancy', label: "近亲结婚", input_type: "checkbox", span: 7, rules: "required",
   input_props:{
     type: "custom",
     renderData: [
       {
-        key: "userjinqjh",
+        key: "nearRelation",
         label: "近亲结婚",
         options: [
           { label: "否", value: '1' },
@@ -55,12 +56,12 @@ const config: Array<FormConfig> = [
     ],
   } },
 
-  { name: 'add_FIELD_grxiyan', key: '.biography', label: "吸烟", input_type: "checkbox", span: 24, rules: "required",
+  { name: 'smoke', key: '.pregnancy.partnerProfile', label: "吸烟", input_type: "checkbox", span: 24, rules: "required",
   input_props:{
     type: "custom",
     renderData: [
       {
-        key: "add_FIELD_grxiyan",
+        key: "smoke",
         label: "吸烟",
         options: [
           { label: "无", value: 1  },
@@ -75,12 +76,12 @@ const config: Array<FormConfig> = [
       }
     ],
   } },
-{ name: 'add_FIELD_gryinjiu', key: '.biography', label: "饮酒", input_type: "checkbox", span: 24, rules: "required",
+{ name: 'alcohol', key: '.pregnancy.partnerProfile', label: "饮酒", input_type: "checkbox", span: 24, rules: "required",
   input_props:{
     type: "custom",
     renderData: [
       {
-        key: "add_FIELD_gryinjiu",
+        key: "alcohol",
         label: "饮酒",
         options: [
           { label: "无", value: 1  },
@@ -95,12 +96,12 @@ const config: Array<FormConfig> = [
       }
     ],
   } },
-{ name: 'add_FIELD_gryouhai', key: '.biography', label: "接触有害物质", input_type: "checkbox", span: 24, rules: "required",
+{ name: 'hazardoussubstances', key: '.pregnancy.personalProfile', label: "接触有害物质", input_type: "checkbox", span: 24, rules: "required",
   input_props:{
     type: "custom",
     renderData: [
       {
-        key: "add_FIELD_gryouhai",
+        key: "hazardoussubstances",
         label: "接触有害物质",
         options: [
           { label: "无", value: 1  },
@@ -115,12 +116,12 @@ const config: Array<FormConfig> = [
       }
     ],
   } },
-{ name: 'add_FIELD_grfangshe', key: '.biography', label: "接触放射线", input_type: "checkbox", span: 24, rules: "required",
+{ name: 'radioactivity', key: '.pregnancy.personalProfile', label: "接触放射线", input_type: "checkbox", span: 24, rules: "required",
   input_props:{
     type: "custom",
     renderData: [
       {
-        key: "yjtongj",
+        key: "radioactivity",
         label: "接触放射线",
         options: [
           { label: "无", value: 1  },
@@ -135,12 +136,12 @@ const config: Array<FormConfig> = [
       }
     ],
   } },
-  { name: 'add_FIELD_grqita', key: '.biography', label: "其他", input_type: "checkbox", span: 24,
+  { name: 'other', key: '.pregnancy.personalProfile', label: "其他", input_type: "checkbox", span: 24,
   input_props:{
     type: "custom",
     renderData: [
       {
-        key: "add_FIELD_grqita",
+        key: "other",
         label: "高血压",
         options: [
           { label: "无", value: 1  },
@@ -155,12 +156,12 @@ const config: Array<FormConfig> = [
       }
     ],
   } },
-{ name: 'add_FIELD_jzgaoxueya', key: '.biography', label: "高血压", input_type: "checkbox", span: 24, rules: "required",
+{ name: 'hypertension', key: '.pregnancy.familyHistory', label: "高血压", input_type: "checkbox", span: 24, rules: "required",
   input_props:{
     type: "custom",
     renderData: [
       {
-        key: "add_FIELD_jzgaoxueya",
+        key: "hypertension",
         label: "高血压",
         options: [
           { label: "无", value: 1  },
@@ -176,12 +177,12 @@ const config: Array<FormConfig> = [
     ],
   } },
 
-{ name: 'add_FIELD_jztangniaobing', key: '.biography', label: "糖尿病", input_type: "checkbox", span: 24, rules: "required",
+{ name: 'diabetes', key: '.pregnancy.familyHistory', label: "糖尿病", input_type: "checkbox", span: 24, rules: "required",
   input_props:{
     type: "custom",
     renderData: [
       {
-        key: "add_FIELD_jztangniaobing",
+        key: "diabetes",
         label: "糖尿病",
         options: [
           { label: "无", value: 1  },
@@ -196,12 +197,12 @@ const config: Array<FormConfig> = [
       }
     ],
   } },
-{ name: 'add_FIELD_jzjixing', key: '.biography', label: "先天畸形", input_type: "checkbox", span: 24, rules: "required",
+{ name: 'birthdefects', key: '.pregnancy.familyHistory', label: "先天畸形", input_type: "checkbox", span: 24, rules: "required",
   input_props:{
     type: "custom",
     renderData: [
       {
-        key: "add_FIELD_jzyichuanbing",
+        key: "birthdefects",
         label: "心脏病",
         options: [
           { label: "无", value: 1  },
@@ -216,32 +217,32 @@ const config: Array<FormConfig> = [
       }
     ],
   } },
-{ name: 'add_FIELD_jzyichuanbing', key: '.biography', label: "遗传病", input_type: "checkbox", span: 24, rules: "required",
+// { name: 'add_FIELD_jzyichuanbing', key: '..pregnancy.familyHistory', label: "遗传病", input_type: "checkbox", span: 24, rules: "required",
+// input_props:{
+//   type: "custom",
+//   renderData: [
+//     {
+//       key: "add_FIELD_jzyichuanbing",
+//       label: "心脏病",
+//       options: [
+//         { label: "无", value: 1  },
+//         { label: "有", value: 2 },
+//       ],
+//       extraEditors: [            {
+//         key: 2,
+//         editors: [
+//           { name: "", key: "", label: "", input_type: "input" }
+//         ]
+//       }]
+//     }
+//   ],
+// } },
+{ name: 'other', key: '.pregnancy.familyHistory', label: "其他", input_type: "checkbox", span: 24,
 input_props:{
   type: "custom",
   renderData: [
     {
-      key: "add_FIELD_jzyichuanbing",
-      label: "心脏病",
-      options: [
-        { label: "无", value: 1  },
-        { label: "有", value: 2 },
-      ],
-      extraEditors: [            {
-        key: 2,
-        editors: [
-          { name: "", key: "", label: "", input_type: "input" }
-        ]
-      }]
-    }
-  ],
-} },
-{ name: 'add_FIELD_jzqita', key: '.bsguomin', label: "其他", input_type: "checkbox", span: 24,
-input_props:{
-  type: "custom",
-  renderData: [
-    {
-      key: "add_FIELD_jzqita",
+      key: "other",
       label: "心脏病",
       options: [
         { label: "无", value: 1  },

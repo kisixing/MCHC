@@ -3,6 +3,7 @@ import { Tabs, Button, Col } from 'antd';
 
 import ReturnForm from './return-form';
 import ReturnTable from './return-table';
+import style from './index.less';
 
 import { getRenderData, toFormat} from '@/components/MyForm/utils';
 
@@ -41,7 +42,7 @@ export default class Home extends React.Component<{},HomeState>{
   render(){
     const { tabs, step } = this.state;
     return(
-      <div>
+      <div className={style.returnWrapper}>
         <Col span={19}>
           <ReturnTable />
           <ReturnForm />
