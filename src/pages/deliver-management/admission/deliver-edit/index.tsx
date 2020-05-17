@@ -3,7 +3,7 @@ import PanelWithChild from '@/components/BaseEditPanel/PanelWithChild';
 import LabourRecord from '@/pages/deliver-management/labour-record/edit';
 import Admission from '@/pages/deliver-management/admission/edit';
 import CaesareanDelivery from '@/pages/deliver-management/caesarean-delivery/edit';
-import NeonateRecord from '@/pages/deliver-management/neonate-record/edit';
+import NeonateRecord from '@/pages/deliver-management/neonate-record/edit-all';
 import NursingRecord from '@/pages/deliver-management/nursing-record/list';
 import PostpartumVisit from '@/pages/deliver-management/postpartum-visit/edit';
 import Predelivery from '@/pages/deliver-management/predelivery/list';
