@@ -1,5 +1,6 @@
 import React from 'react';
 import Table from './components/Table';
+import Query from './components/Query';
 import { tableColumns } from './config/table';
 import BaseList from '@/components/BaseList';
 import WithDynamicExport from '@/components/WithDynamicExport';
@@ -15,11 +16,12 @@ export default class List extends BaseList {
     baseUrl: '/admissions',
     baseTitle: '入院登记',
     needPagination: true,
-    showQuery: false,
+    showQuery: true,
     showAdd: true,
     tableColumns,
     rowKey: 'id',
     Table,
+    Query,
   };
 
   state = {

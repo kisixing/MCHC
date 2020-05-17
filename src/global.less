@@ -69,6 +69,8 @@ ol {
   padding: 4px !important;
   &:empty:after {
     content: '--';
+    position: inherit;
+    box-shadow: none !important;
   }
 }
 
@@ -77,13 +79,15 @@ ol {
   width: 6px; /*高宽分别对应横竖滚动条的尺寸*/
   height: 4px;
 }
-::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
-    border-radius: 6px;
-    -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
-    background: rgba(0, 0, 0, 0.1);
+::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 6px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1);
 }
-::-webkit-scrollbar-track {/*滚动条里面轨道*/
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-    border-radius: 0;
-    background: rgba(0, 0, 0, 0.1);
+::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+  background: rgba(0, 0, 0, 0.1);
 }
