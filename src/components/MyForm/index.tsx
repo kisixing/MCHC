@@ -7,11 +7,10 @@ import FormItem from './formItem';
 import styles from './index.less';
 
 const defaultGutterConfig = {
-  gutter: [0,16], // px
+  gutter: [0,8], // px
   justify: "start"
 }
 // TODO 后期应该考虑把这里的col和row换成自定义的样式实现
-// TODO 优化换行
 export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfig:any = defaultGutterConfig){
   if(!config) throw new Error('config is undefined');
   if(Object.prototype.toString.call(config) !== '[object Array]') throw new Error(`Expect array but ${typeof config}`);

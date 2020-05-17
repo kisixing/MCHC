@@ -6,7 +6,6 @@ import MyTable from './MyTable';
 import Address from './Address';
 
 import SimpleObject from './SimpleObject';
-import Fetuses from './business/Fetuses';
 
 import MyCustom from './MyCustom';
 import ArrayCustom from './MyCustom/ArrayCustom'
@@ -24,7 +23,6 @@ const MyComponent:MyComponent = {
   "address": Address,
 
   "simpleobject": SimpleObject,
-  "b-fetuses": Fetuses,
 
   "custom": MyCustom,
   "array-custom": ArrayCustom
