@@ -32,7 +32,6 @@ export const fromApi = (data: any, nativeFormDescriptions: any) => {
       type = get(tranferRulesJson, 'type') ? get(tranferRulesJson, 'type') : 'default';
       path = get(tranferRulesJson, 'path') ? get(tranferRulesJson, 'path') : key;
     }
-
     switch (type) {
       case 'key_and_keyNote':
         set(result, `${key}.key`, get(data, path));
@@ -58,9 +57,35 @@ export const fromApi = (data: any, nativeFormDescriptions: any) => {
         break;
     }
   });
-  console.log(result);
+
+  const r = {};
+  if (result.mother) {
+    const object = result.mother;
+    // eslint-disable-next-line no-restricted-syntax
+    for (const key in object) {
+      if (object.hasOwnProperty(key)) {
+        const element = object[key];
+        const newKey = `mother.${key}`
+        r[newKey] = element
+      }
+    }
+  }
+  if (result.father) {
+    const object = result.father;
+    // eslint-disable-next-line no-restricted-syntax
+    for (const key in object) {
+      if (object.hasOwnProperty(key)) {
+        const element = object[key];
+        const newKey = `father.${key}`
+        r[newKey] = element
+      }
+    }
+  }
+
+  console.log(r, result);
   return {
     ...result,
+    ...r,
     id: get(data, 'id'),
   };
 };
@@ -125,4 +150,20 @@ export const toApi = (data: any, nativeFormDescriptions: any) => {
   });
 
   return result;
+};
+
+export const processFromApi = (data: any[]) => {
+  return map(data, (item: object) => {
+    console.log('8888888888888', data);
+    return {
+      ...item,
+      name: get(item, 'name'),
+      dob: get(item, 'dob'),
+      age: get(item, 'age'),
+      // eslint-disable-next-line no-nested-ternary
+      gender: get(item, 'gender') === 0 ? '男' : get(item, 'gender') === 1 ? '女' : '',
+      'mother.name': get(item, 'mother.name'),
+      'father.name': get(item, 'father.name'),
+    };
+  });
 };

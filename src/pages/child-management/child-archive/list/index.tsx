@@ -39,61 +39,87 @@ export default class List extends BaseList {
     loading: true,
   };
 
-  // columns = [
-  //   ...(this.props.tableColumns as Array<any>),
-  //   {
-  //     title: '操作',
-  //     align: 'center',
-  //     hiddenSorter: true,
-  //     hiddenFilter: true,
-  //     fixed: 'right',
-  //     render: (value: any, rowData: any, index: number) => {
-  //       return (
-  //         <>
-  //           <Button
-  //             className={commonStyles.tableActionBtn}
-  //             type="primary"
-  //             size="small"
-  //             onClick={this.handleView(rowData)}
-  //           >
-  //             <EyeOutlined title="查看" />
-  //           </Button>
-  //           <Button
-  //             title="编辑"
-  //             className={commonStyles.tableActionBtn}
-  //             type="primary"
-  //             size="small"
-  //             onClick={this.handleEdit(rowData)}
-  //           >
-  //             <EditOutlined />
-  //           </Button>
-  //           <Popconfirm
-  //             title={`确定要删除这个${get(this.props, 'baseTitle')}吗?`}
-  //             onConfirm={this.handleDelete(rowData)}
-  //             okText="确定"
-  //             cancelText="取消"
-  //           >
-  //             <Button title="删除" className={commonStyles.tableActionBtn} type="danger" size="small">
-  //               <DeleteOutlined />
-  //             </Button>
-  //           </Popconfirm>
-  //         </>
-  //       );
-  //     },
-  //   },
-  // ];
+  columns = [
+    ...(this.props.tableColumns as Array<any>),
+    {
+      title: '操作',
+      align: 'center',
+      hiddenSorter: true,
+      hiddenFilter: true,
+      fixed: 'right',
+      width: '250px',
+      render: (value: any, rowData: any, index: number) => {
+        return (
+          <>
+            <Button
+              className={commonStyles.tableActionBtn}
+              type="primary"
+              size="small"
+              title="新建体检记录"
+              onClick={this.handleAddVisit(rowData)}
+            >
+              <EditOutlined />
+              新建体检记录
+            </Button>
+            {rowData.childExamVisits && rowData.childExamVisits.length ? (
+              <Button
+                className={commonStyles.tableActionBtn}
+                type="primary"
+                size="small"
+                title="查看体检记录"
+                onClick={this.handleView(rowData)}
+              >
+                <EyeOutlined title="查看" />
+                查看
+              </Button>
+            ) : null}
+            <Button
+              title="编辑儿童档案"
+              className={commonStyles.tableActionBtn}
+              type="primary"
+              size="small"
+              onClick={this.handleEdit(rowData)}
+            >
+              <EditOutlined />
+            </Button>
+            <Popconfirm
+              title={`确定要删除这个${get(this.props, 'baseTitle')}吗?`}
+              onConfirm={this.handleDelete(rowData)}
+              okText="确定"
+              cancelText="取消"
+            >
+              <Button title="删除" className={commonStyles.tableActionBtn} type="danger" size="small">
+                <DeleteOutlined />
+              </Button>
+            </Popconfirm>
+          </>
+        );
+      },
+    },
+  ];
 
   handleAdd = () => {
     router.push('/child-management/child-archive/add');
-  };
-
-  handleView = (rowData: any) => () => {
-    const { id } = rowData;
-    router.push(`/child-management/child-archive/deliver-edit?id=${id}`);
   };
 
   handleEdit = (rowData: any) => () => {
     const { id } = rowData;
     router.push(`/child-management/child-archive/edit?id=${id}`);
   };
+
+  handleView = (rowData: any) => () => {
+    const { id, childExamVisits } = rowData;
+    if (!childExamVisits || (childExamVisits && !childExamVisits.length)) {
+      // 新建体检档案
+      return router.push(`/child-management/child-examination/deliver-edit`);
+    }
+    // 查看体检档案列表
+    router.push(`/child-management/child-examination?childId=${id}`);
+  };
+
+  // 创建体检记录
+  handleAddVisit = (rowData: any) => () => {
+    const { id } = rowData;
+    router.push(`/child-management/child-examination/deliver-edit?childId=${id}`);
+  }
 }

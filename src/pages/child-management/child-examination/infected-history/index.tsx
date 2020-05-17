@@ -6,7 +6,7 @@ import WithDynamicExport from '@/components/WithDynamicExport';
 @WithDynamicExport
 export default class InfectedHistoryPanel extends BaseEditPanel {
   static defaultProps = {
-    baseUrl: '',
+    baseUrl: '/child-exam-visits',
     moduleName: 'infectedHistory',
     title: '',
     toApi,
