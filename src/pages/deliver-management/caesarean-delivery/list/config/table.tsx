@@ -1,34 +1,30 @@
 import { formatTimeToStandard } from '@/utils/format';
+import { get } from 'lodash';
 
 export const tableColumns = [
   {
-    title: '病区号',
-    dataIndex: 'areaNO',
-    key: 'areaNO',
+    title: '姓名',
+    dataIndex: 'admissionName',
     align: 'center',
+    fixed: true,
+    width: 100,
+    render: (value: any, rowData: any) => get(rowData, 'admission.name'),
   },
   {
-    title: '房号',
-    dataIndex: 'roomNO',
-    key: 'roomNO',
+    title: '孕周',
+    dataIndex: 'gestationalWeek',
     align: 'center',
+    fixed: true,
+    width: 100,
+    render: (value: any, rowData: any) => get(rowData, 'admission.gestationalWeek'),
   },
   {
-    title: '床号',
-    dataIndex: 'bedNO',
-    key: 'bedNO',
-  },
-  {
-    title: '孕妇姓名',
-    dataIndex: 'name',
-    key: 'name',
+    title: '孕产期',
+    dataIndex: 'edd',
     align: 'center',
-  },
-  {
-    title: '孕妇年龄',
-    dataIndex: 'age',
-    key: 'age',
-    align: 'center',
+    width: 120,
+    fixed: true,
+    render: (value: any, rowData: any) => get(rowData, 'admission.edd'),
   },
   {
     title: '性别',
