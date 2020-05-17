@@ -1,6 +1,7 @@
 import { FormConfig } from '@/components/MyForm/interface';
 
 const config: Array<FormConfig> = [
+  { name: 'id1', key: '.pregnancy.id', label: "id1", input_type: "input", span: 0, hidden: true},
   { name: 'aBO', key: '.pregnancy.partnerProfile.aBO', label: "男方血型", input_type: "select", span: 5,
     input_props:{
       options: [

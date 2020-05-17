@@ -41,7 +41,7 @@ export default class Home extends React.Component<{},HomeState>{
       console.log(validCode);
       // if(!validCode){
       //   console.log(res);
-      console.log(getFormData(res));
+      console.log(getFormData(res)['pregnancy']);
       // console.log(data, '111');
       // console.log({...data, ...res}, '222')
       // // }
@@ -50,7 +50,7 @@ export default class Home extends React.Component<{},HomeState>{
 
       request('/prenatal-visits', {
         method: 'PUT',
-        data: newData
+        data: getFormData(res)['pregnancy']
       }).then(r => {
 
       });

@@ -1,6 +1,7 @@
 import { FormConfig } from '@/components/MyForm/interface';
 
 const config: Array<FormConfig> = [
+  { name: 'id', key: '.pregnancy.id', label: "rwg", input_type: "input", span: 0, hidden: true},
   {
     name: "pregnancyHistories",
     key: ".pregnancy.pregnancyHistories",
