@@ -43,7 +43,7 @@ const request = extend({
               message: '页面不存在',
               description: '你访问的页面不存在',
             });
-            window.location.href = '/#/exception/404';
+            // window.location.href = '/#/exception/404';
             break;
           case 400:
             notification.error({

@@ -1,50 +1,32 @@
 import React, { Component } from 'react';
-import { Button, Input, Space, InputNumber, DatePicker, TimePicker, Popover } from 'antd';
-import { map, get, set, isEmpty, isEqual, keyBy, keys, filter } from 'lodash';
+import { Button, Input, Space, InputNumber, DatePicker, TimePicker } from 'antd';
+import { map, get, set } from 'lodash';
 import CustomTable from '@/layouts/CustomTable';
 import styles from './index.less';
 import { TableProps } from 'antd/lib/table';
 import { SearchOutlined } from '@ant-design/icons';
 import moment, { Moment } from 'moment';
 import { FilterDropdownProps } from 'antd/lib/table/interface';
-import CustomCols from './CustomCols';
 
 const TABLE_CELL_WIDTH = 200;
 
 interface IProps extends TableProps<any> {
   onAdd?: () => void;
-  showColConfig?: boolean;
   baseTitle?: string;
 }
 
 interface IState {
   searchText?: string;
   searchedColumn?: string;
-  columnsConfigVisible?: boolean;
-  columns?: any[];
-  checkedColumns?: any[];
 }
 
 export default class BaseTable extends Component<IProps, IState> {
   state = {
     searchText: '',
     searchedColumn: '',
-    columns: [],
-    checkedColumns: [],
-    columnsConfigVisible: false,
   };
 
   searchInput: any;
-
-  componentDidMount() {
-    const { columns } = this.props;
-    const newColumns = this.mergedColumns(columns);
-
-    this.setState({
-      columns: newColumns,
-      checkedColumns: newColumns,
-    });
-  }
 
   handleSearch = (selectedKeys: any, confirm: any, dataIndex: any) => {
     confirm();
@@ -131,12 +113,7 @@ export default class BaseTable extends Component<IProps, IState> {
 
   mergedColumns = (columns: any) => {
     return map(columns, (column, index) => {
-      const { width, hiddenSorter, hiddenFilter, align = 'center' } = column;
-      if (!isEmpty(get(column, 'children'))) {
-        const children = this.mergedColumns(get(column, 'children'));
-        set(column, 'children', children);
-      }
-
+      const { width, hiddenSorter, hiddenFilter } = column;
       const cellHeaderAction = {};
       if (!hiddenSorter) {
         set(cellHeaderAction, 'sorter', this.handleSorter(column));
@@ -148,74 +125,31 @@ export default class BaseTable extends Component<IProps, IState> {
       return {
         ...column,
         ...cellHeaderAction,
-        align,
-        key: get(column, 'dataIndex') || Math.random(),
         width: width || TABLE_CELL_WIDTH,
       };
     });
   };
 
-  handleColumnsChange = (checkedColumns: any[]) => {
-    this.setState({
-      checkedColumns,
-    });
-  };
-
-  handleColumnsConfigVisibleChange = (columnsConfigVisible: boolean) => {
-    this.setState({
-      columnsConfigVisible,
-    });
-  };
-
-  renderColConfig = () => {
-    const { columns, checkedColumns } = this.state;
-    return (
-      <CustomCols
-        columns={columns}
-        checkedColumns={checkedColumns}
-        onColumnsChange={this.handleColumnsChange}
-        onCancel={this.handleColumnsConfigVisibleChange}
-      />
-    );
-  };
-
   renderTitle = () => {
-    const { columnsConfigVisible } = this.state;
-    const { onAdd, baseTitle, showColConfig = true } = this.props;
+    const { onAdd, baseTitle } = this.props;
     return (
       <div className={styles.title}>
         <span className={styles.titleName}>{baseTitle}列表</span>
-        <div className={styles.titleRight}>
-          {onAdd && (
-            <Button size="small" type="primary" className={styles.titleBtn} onClick={onAdd}>
-              添加{baseTitle}
-            </Button>
-          )}
-          {showColConfig && (
-            <Popover
-              content={this.renderColConfig}
-              title="自定义列"
-              trigger="click"
-              visible={columnsConfigVisible}
-              onVisibleChange={this.handleColumnsConfigVisibleChange}
-              overlayClassName="customColsPopover"
-              placement="bottomRight"
-            >
-              <Button size="small" type="default" className={styles.titleBtn}>
-                自定义列
-              </Button>
-            </Popover>
-          )}
-        </div>
+        {onAdd && (
+          <Button size="small" type="primary" className={styles.titleAddBtn} onClick={onAdd}>
+            添加{baseTitle}
+          </Button>
+        )}
       </div>
     );
   };
 
   render() {
-    const { checkedColumns } = this.state;
+    const { columns } = this.props;
+    const mergedColumns = this.mergedColumns(columns);
 
     return (
-      <CustomTable {...this.props} title={this.renderTitle} bordered columns={checkedColumns} scroll={{ x: '100vw' }} />
+      <CustomTable {...this.props} title={this.renderTitle} bordered columns={mergedColumns} scroll={{ x: '100vw' }} />
     );
   }
 }

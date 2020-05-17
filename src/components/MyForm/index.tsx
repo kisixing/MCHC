@@ -23,13 +23,15 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
   let spanArr = [];
   for(let i = 0 ;i < config.length; i++){
     const { span = 24, offset = 0 } = config[i];
-    const { label = "", unit = "", input_props = {}, rules = "" , key = "", is_new_ros = false, name = "", header_label = false} = config[i];
+    const { label = "", unit = "", input_props = {}, rules = "" , key = "", is_new_row = false, name = "", header_label = false} = config[i];
     // if(config[i].hidden){
     //   // eslint-disable-next-line no-continue
     //   continue;
     // }
-    count += span + offset;
-    if(count > 24 || is_new_ros){
+    if(!config[i].hidden){
+      count += span + offset;
+    }
+    if(count > 24 || is_new_row){
       formDom.push(
         <Row
           key={`row-${row}`}
@@ -47,14 +49,14 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
       row += 1;
     }
     spanArr.push(
-      <Col
-        span={span}
-        offset={offset}
-        // offset={spanArr.length === 0 ? offset - prevOffset : offset}
+      <Col  
+        span={config[i].hidden ? 0 : span} 
+        offset={offset} 
+        // offset={spanArr.length === 0 ? offset - prevOffset : offset} 
         key={`row-${row}|span-${count}`}
       >
         <FormItem
-          actions={formHandler[config[i].name].actions}
+          actions={formHandler[config[i].name].actions} 
           dispatch={formHandler.dispatch}
           subscribe={formHandler.subscribe}
           defaultValue={config[i].value}

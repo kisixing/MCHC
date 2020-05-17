@@ -8,7 +8,7 @@ export default class BirthInformationPanel extends BaseEditPanel {
   static defaultProps = {
     baseUrl: '',
     moduleName: 'birthInformation',
-    title: '',
+    title: false,
     toApi,
     fromApi,
     Form,

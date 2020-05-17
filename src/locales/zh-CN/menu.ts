@@ -141,7 +141,11 @@ export default {
   'menu.prenatal-screening.statistics': '统计报表',
 
   'menu.prenatal-diagnosis': '产前诊断',
+  'menu.prenatal-diagnosis.admission': '病历列表',
+  'menu.prenatal-diagnosis.main': '病历管理',
+  'menu.prenatal-diagnosis.new-patient': '新建病历',
   'menu.prenatal-diagnosis.medical-record': '专科病历',
+  'menu.prenatal-diagnosis.medical-record-form': '专科病历表单',
   'menu.prenatal-diagnosis.operation-record': '手术病历',
 
   'menu.prenatal-diagnosis.prenatalpatient': '建档管理',
@@ -184,8 +188,16 @@ export default {
 
   'menu.statistics': '统计查询',
 
+  'menu.child-management': '儿童管理',
+  'menu.child-management.child-archive': '儿童档案记录',
+  'menu.child-management.child-archive-add': '创建儿童档案',
+  'menu.child-management.child-archive-edit': '修改儿童档案',
+  'menu.child-management.child-archive-deliver-edit': '查看儿童档案',
+  'menu.child-management.child-examination': '儿童健康体检记录',
+  'menu.child-management.child-examination-deliver-edit': '查看儿童健康体检档案',
+
   'menu.child-examination': '儿童健康体检管理',
-  'menu.child-examination.archive': '儿童档案',
+  'menu.child-examination.archive': '创建儿童档案',
   'menu.child-examination.examination-record': '儿童健康体检记录',
   'menu.child-examination.examination-edit': '儿童健康体检登记',
   'menu.child-examination.birth-information': '出生信息登记',
