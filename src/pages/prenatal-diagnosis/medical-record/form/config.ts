@@ -79,106 +79,106 @@ const config: Array<FormConfig> = [
       ]
     }
   },
-  {
-    name: "female-thalassemia",
-    key: ".thalassemia_1",
-    label: "女方地贫检查",
-    header_label: true,
-    input_type: "custom",
-    input_props: {
-      config: [
-        { name: "type", key: ".type", label: "类型", unit: "g/L", input_type: "input", span: 8, offset: 0, hidden: true },
-        { name: "Hb", key: ".Hb", label: "Hb", unit: "g/L", input_type: "input", span: 8, offset: 0 },
-        { name: "MCV", key: ".MCV", label: "MCV", unit: "fL", input_type: "input", span: 8, offset: 0 },
-        { name: "MCH", key: ".MCH", label: "MCH", input_type: "input", span: 8, offset: 0 },
-        { name: "HBA2", key: ".HbA2", label: "HbA2", input_type: "input", span: 8, offset: 0 },
-        // { name: "", key: "trisomy18z", label: "血型", input_type: "input" },
-        {
-          name: "rh",
-          key: ".rh",
-          label: "RH血型",
-          input_type: "select", span: 8, offset: 0,
-          input_props: {
-            options: [
-              { label: "RH(+)", value: "RH(+)" },
-              { label: "RH(-)", value: "RH(-)" },
-            ]
-          }
-        },
-        {
-          name: "genotype", key: ".genotype", label: "地贫基因型", input_type: "select", span: 8, offset: 0,
-          input_props: {
-            type: "default",
-            radio: false,
-            options: [
-              { label: "β地中海贫血基因CD14-15突变", value: "β地中海贫血基因CD14-15突变" },
-              { label: "β地中海贫血基因CD17突变", value: "β地中海贫血基因CD17突变" }
-            ]
-          }
-        },
-        { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 8, offset: 0, },
-      ]
-    }
-  },
-  {
-    name: "early-downsScreens",
-    key: ".downsScreens_0",
-    label: "早期唐氏筛查",
-    header_label: true,
-    input_type: "custom",
-    input_props: {
-      config: [
-        { name: "type", key: ".type", label: "类型", input_type: "input", span: 8, offset: 0, rules: "required", hidden: true },
-        { name: "id", key: ".id", input_type: "input", span: 8, offset: 0, rules: "required", hidden: true },
-        { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 8, offset: 0 },
-        { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 8, offset: 0 },
-        { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 8, offset: 0 },
-        { name: "hCG", key: ".hCG", label: "β-HCG", input_type: "input", span: 8, offset: 0 },
-        { name: "pAPPA", key: ".pAPPA", label: "PAPP-A", input_type: "input", span: 8, offset: 0 },
-      ]
-    }
-  },
-  {
-    name: "middle-downsscreen",
-    key: ".downsScreens_1",
-    label: "中期唐氏筛查",
-    header_label: true,
-    input_type: "custom",
-    input_props: {
-      config: [
-        { name: "type", key: ".type", label: "类型", input_type: "input", span: 8, offset: 0, rules: "required", hidden: true },
-        { name: "id", key: ".id", input_type: "input", span: 8, offset: 0, rules: "required", hidden: true },
-        { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 8, offset: 0 },
-        { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 8, offset: 0 },
-        { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 8, offset: 0 },
-        { name: "NTD", key: ".nTD", label: "NTD风险", input_type: "input", span: 8, offset: 0 },
-        { name: "HCG", key: ".hCG", label: "β-HCG", unit: "mom", input_type: "input", span: 8, offset: 0 },
-        { name: "AFP", key: ".aFP", label: "AFP", unit: "mom", input_type: "input", span: 8, offset: 0 },
-        { name: "E3", key: ".e3", label: "E3", unit: "mom", input_type: "input", span: 8, offset: 0 },
-        { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 8, offset: 0 },
-      ]
-    }
-  },
-  {
-    name: "nipt-downsscreen",
-    key: ".downsScreens_2",
-    label: "NIPT唐氏筛查",
-    header_label: true,
-    input_type: "custom",
-    input_props: {
-      config: [
-        { name: "type", key: ".type", label: "类型", input_type: "input", span: 8, offset: 0, rules: "required", hidden: true },
-        { name: "id", key: ".id", input_type: "input", span: 8, offset: 0, rules: "required", hidden: true },
-        { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 8, offset: 0 },
-        { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 8, offset: 0 },
-        { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 8, offset: 0 },
-        { name: "trisomy21z", key: ".trisomy21z", label: "21三体风险Z值", input_type: "input", span: 8, offset: 0 },
-        { name: "trisomy18z", key: ".trisomy18z", label: "18三体风险Z值", input_type: "input", span: 8, offset: 0 },
-        { name: "trisomy13z", key: ".trisomy13z", label: "13三体风险Z值", input_type: "input", span: 8, offset: 0 },
-        { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 8, offset: 0 },
-      ]
-    }
-  },
+  // {
+  //   name: "female-thalassemia",
+  //   key: ".thalassemia_1",
+  //   label: "女方地贫检查",
+  //   header_label: true,
+  //   input_type: "custom",
+  //   input_props: {
+  //     config: [
+  //       { name: "type", key: ".type", label: "类型", unit: "g/L", input_type: "input", span: 8, offset: 0, hidden: true },
+  //       { name: "Hb", key: ".Hb", label: "Hb", unit: "g/L", input_type: "input", span: 8, offset: 0 },
+  //       { name: "MCV", key: ".MCV", label: "MCV", unit: "fL", input_type: "input", span: 8, offset: 0 },
+  //       { name: "MCH", key: ".MCH", label: "MCH", input_type: "input", span: 8, offset: 0 },
+  //       { name: "HBA2", key: ".HbA2", label: "HbA2", input_type: "input", span: 8, offset: 0 },
+  //       // { name: "", key: "trisomy18z", label: "血型", input_type: "input" },
+  //       {
+  //         name: "rh",
+  //         key: ".rh",
+  //         label: "RH血型",
+  //         input_type: "select", span: 8, offset: 0,
+  //         input_props: {
+  //           options: [
+  //             { label: "RH(+)", value: "RH(+)" },
+  //             { label: "RH(-)", value: "RH(-)" },
+  //           ]
+  //         }
+  //       },
+  //       {
+  //         name: "genotype", key: ".genotype", label: "地贫基因型", input_type: "select", span: 8, offset: 0,
+  //         input_props: {
+  //           type: "default",
+  //           radio: false,
+  //           options: [
+  //             { label: "β地中海贫血基因CD14-15突变", value: "β地中海贫血基因CD14-15突变" },
+  //             { label: "β地中海贫血基因CD17突变", value: "β地中海贫血基因CD17突变" }
+  //           ]
+  //         }
+  //       },
+  //       { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 8, offset: 0, },
+  //     ]
+  //   }
+  // },
+  // {
+  //   name: "early-downsScreens",
+  //   key: ".downsScreens_0",
+  //   label: "早期唐氏筛查",
+  //   header_label: true,
+  //   input_type: "custom",
+  //   input_props: {
+  //     config: [
+  //       { name: "type", key: ".type", label: "类型", input_type: "input", span: 8, offset: 0, rules: "required", hidden: true },
+  //       { name: "id", key: ".id", input_type: "input", span: 8, offset: 0, rules: "required", hidden: true },
+  //       { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 8, offset: 0 },
+  //       { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 8, offset: 0 },
+  //       { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 8, offset: 0 },
+  //       { name: "hCG", key: ".hCG", label: "β-HCG", input_type: "input", span: 8, offset: 0 },
+  //       { name: "pAPPA", key: ".pAPPA", label: "PAPP-A", input_type: "input", span: 8, offset: 0 },
+  //     ]
+  //   }
+  // },
+  // {
+  //   name: "middle-downsscreen",
+  //   key: ".downsScreens_1",
+  //   label: "中期唐氏筛查",
+  //   header_label: true,
+  //   input_type: "custom",
+  //   input_props: {
+  //     config: [
+  //       { name: "type", key: ".type", label: "类型", input_type: "input", span: 8, offset: 0, rules: "required", hidden: true },
+  //       { name: "id", key: ".id", input_type: "input", span: 8, offset: 0, rules: "required", hidden: true },
+  //       { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 8, offset: 0 },
+  //       { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 8, offset: 0 },
+  //       { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 8, offset: 0 },
+  //       { name: "NTD", key: ".nTD", label: "NTD风险", input_type: "input", span: 8, offset: 0 },
+  //       { name: "HCG", key: ".hCG", label: "β-HCG", unit: "mom", input_type: "input", span: 8, offset: 0 },
+  //       { name: "AFP", key: ".aFP", label: "AFP", unit: "mom", input_type: "input", span: 8, offset: 0 },
+  //       { name: "E3", key: ".e3", label: "E3", unit: "mom", input_type: "input", span: 8, offset: 0 },
+  //       { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 8, offset: 0 },
+  //     ]
+  //   }
+  // },
+  // {
+  //   name: "nipt-downsscreen",
+  //   key: ".downsScreens_2",
+  //   label: "NIPT唐氏筛查",
+  //   header_label: true,
+  //   input_type: "custom",
+  //   input_props: {
+  //     config: [
+  //       { name: "type", key: ".type", label: "类型", input_type: "input", span: 8, offset: 0, rules: "required", hidden: true },
+  //       { name: "id", key: ".id", input_type: "input", span: 8, offset: 0, rules: "required", hidden: true },
+  //       { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 8, offset: 0 },
+  //       { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 8, offset: 0 },
+  //       { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 8, offset: 0 },
+  //       { name: "trisomy21z", key: ".trisomy21z", label: "21三体风险Z值", input_type: "input", span: 8, offset: 0 },
+  //       { name: "trisomy18z", key: ".trisomy18z", label: "18三体风险Z值", input_type: "input", span: 8, offset: 0 },
+  //       { name: "trisomy13z", key: ".trisomy13z", label: "13三体风险Z值", input_type: "input", span: 8, offset: 0 },
+  //       { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 8, offset: 0 },
+  //     ]
+  //   }
+  // },
   {
     name: "diseaseHistory", key: '.diseaseHistory', label: "疾病史", input_type: "checkbox",
     input_props: {
@@ -221,120 +221,120 @@ const config: Array<FormConfig> = [
       ],
     }
   },
-  {
-    name: "familyHistory-hypertension",
-    key: '.familyHistory',
-    label: "高血压",
-    input_type: "checkbox",
-    input_props: {
-      type: "custom",
-      renderData: [
-        {
-          key: "hypertension",
-          label: "高血压",
-          options: [
-            { label: "有", value: true },
-            { label: "无", value: false },
-          ],
-          extraEditors: [
-            {
-              // 这个key对应的史当前这个checkboxValue的value
-              key: true,
-              editors: [
-                { name: "", key: "", input_type: "input" }
-              ]
-            }
-          ]
-        },
-      ],
-    }
-  },
-  {
-    name: "familyHistory-hepaticDisease",
-    key: '.familyHistory',
-    label: "肝病",
-    input_type: "checkbox",
-    input_props: {
-      type: "custom",
-      renderData: [
-        {
-          key: "hepaticDisease",
-          label: "高血压",
-          options: [
-            { label: "有", value: true },
-            { label: "无", value: false },
-          ],
-          extraEditors: [
-            {
-              key: true,
-              editors: [
-                { name: "", key: "", input_type: "input" }
-              ]
-            }
-          ]
-        },
-      ],
-    }
-  },
-  {
-    name: "familyHistory-epilepsy",
-    key: '.familyHistory',
-    label: "癫痫",
-    input_type: "checkbox",
-    // rules: {
-    //   epilepsy: "required",
-    //   epilepsyNote: "required"
-    // },
-    input_props: {
-      type: "custom",
-      renderData: [
-        {
-          key: "epilepsy",
-          label: "癫痫",
-          options: [
-            { label: "有", value: true },
-            { label: "无", value: false }
-          ],
-          extraEditors: [
-            {
-              key: true,
-              editors: [
-                { name: "", key: "", input_type: "input" }
-              ]
-            }
-          ]
-        },
-      ],
-    }
-  },
-  {
-    name: "familyHistory-hypertension",
-    key: '.familyHistory',
-    label: "心脏病",
-    input_type: "checkbox",
-    input_props: {
-      type: "custom",
-      renderData: [
-        {
-          key: "cardiacDisease",
-          label: "心脏病",
-          options: [
-            { label: "有", value: true },
-            { label: "无", value: false }
-          ],
-          extraEditors: [
-            {
-              // 这个key对应的史当前这个checkboxValue的value
-              key: 1,
-              editors: [
-                { name: "", key: "", label: "药物名称", input_type: "input" }
-              ]
-            }
-          ]
-        },
-      ],
-    }
-  },
+  // {
+  //   name: "familyHistory-hypertension",
+  //   key: '.familyHistory',
+  //   label: "高血压",
+  //   input_type: "checkbox",
+  //   input_props: {
+  //     type: "custom",
+  //     renderData: [
+  //       {
+  //         key: "hypertension",
+  //         label: "高血压",
+  //         options: [
+  //           { label: "有", value: true },
+  //           { label: "无", value: false },
+  //         ],
+  //         extraEditors: [
+  //           {
+  //             // 这个key对应的史当前这个checkboxValue的value
+  //             key: true,
+  //             editors: [
+  //               { name: "", key: "", input_type: "input" }
+  //             ]
+  //           }
+  //         ]
+  //       },
+  //     ],
+  //   }
+  // },
+  // {
+  //   name: "familyHistory-hepaticDisease",
+  //   key: '.familyHistory',
+  //   label: "肝病",
+  //   input_type: "checkbox",
+  //   input_props: {
+  //     type: "custom",
+  //     renderData: [
+  //       {
+  //         key: "hepaticDisease",
+  //         label: "高血压",
+  //         options: [
+  //           { label: "有", value: true },
+  //           { label: "无", value: false },
+  //         ],
+  //         extraEditors: [
+  //           {
+  //             key: true,
+  //             editors: [
+  //               { name: "", key: "", input_type: "input" }
+  //             ]
+  //           }
+  //         ]
+  //       },
+  //     ],
+  //   }
+  // },
+  // {
+  //   name: "familyHistory-epilepsy",
+  //   key: '.familyHistory',
+  //   label: "癫痫",
+  //   input_type: "checkbox",
+  //   // rules: {
+  //   //   epilepsy: "required",
+  //   //   epilepsyNote: "required"
+  //   // },
+  //   input_props: {
+  //     type: "custom",
+  //     renderData: [
+  //       {
+  //         key: "epilepsy",
+  //         label: "癫痫",
+  //         options: [
+  //           { label: "有", value: true },
+  //           { label: "无", value: false }
+  //         ],
+  //         extraEditors: [
+  //           {
+  //             key: true,
+  //             editors: [
+  //               { name: "", key: "", input_type: "input" }
+  //             ]
+  //           }
+  //         ]
+  //       },
+  //     ],
+  //   }
+  // },
+  // {
+  //   name: "familyHistory-hypertension",
+  //   key: '.familyHistory',
+  //   label: "心脏病",
+  //   input_type: "checkbox",
+  //   input_props: {
+  //     type: "custom",
+  //     renderData: [
+  //       {
+  //         key: "cardiacDisease",
+  //         label: "心脏病",
+  //         options: [
+  //           { label: "有", value: true },
+  //           { label: "无", value: false }
+  //         ],
+  //         extraEditors: [
+  //           {
+  //             // 这个key对应的史当前这个checkboxValue的value
+  //             key: 1,
+  //             editors: [
+  //               { name: "", key: "", label: "药物名称", input_type: "input" }
+  //             ]
+  //           }
+  //         ]
+  //       },
+  //     ],
+  //   }
+  // },
 
   {
     name: "allergyHistory",
@@ -490,90 +490,90 @@ const config: Array<FormConfig> = [
       ],
     }
   },
-  {
-    name: "procedureHistory",
-    key: ".procedureHistory",
-    label: "卵巢手术",
-    input_type: "checkbox",
-    input_props: {
-      type: "custom",
-      renderData: [
-        {
-          key: "ovaries",
-          label: "卵巢手术",
-          options: [
-            { label: "有", value: true },
-            { label: "无", value: false },
-          ],
-          extraEditors: [
-            {
-              // 这个key对应的史当前这个checkboxValue的value
-              key: true,
-              editors: [
-                { name: "", key: "", input_type: "input" }
-              ]
-            }
-          ]
-        },
-      ]
-    }
-  },
-  {
-    name: "procedureHistory",
-    key: ".procedureHistory",
-    label: "甲状腺手术",
-    input_type: "checkbox",
-    input_props: {
-      type: "custom",
-      renderData: [
-        {
-          key: "thyroid",
-          label: "甲状腺手术",
-          options: [
-            { label: "有", value: true },
-            { label: "无", value: false },
-          ],
-          extraEditors: [
-            {
-              // 这个key对应的史当前这个checkboxValue的value
-              key: true,
-              editors: [
-                { name: "", key: "", input_type: "input" }
-              ]
-            }
-          ]
-        },
-      ]
-    }
-  },
-  {
-    name: "procedureHistory",
-    key: ".procedureHistory",
-    label: "其他",
-    input_type: "checkbox",
-    input_props: {
-      type: "custom",
-      renderData: [
-        {
-          key: "other",
-          label: "其他",
-          options: [
-            { label: "有", value: true },
-            { label: "无", value: false },
-          ],
-          extraEditors: [
-            {
-              // 这个key对应的史当前这个checkboxValue的value
-              key: true,
-              editors: [
-                { name: "", key: "", input_type: "input" }
-              ]
-            }
-          ]
-        },
-      ]
-    }
-  },
+  // {
+  //   name: "procedureHistory",
+  //   key: ".procedureHistory",
+  //   label: "卵巢手术",
+  //   input_type: "checkbox",
+  //   input_props: {
+  //     type: "custom",
+  //     renderData: [
+  //       {
+  //         key: "ovaries",
+  //         label: "卵巢手术",
+  //         options: [
+  //           { label: "有", value: true },
+  //           { label: "无", value: false },
+  //         ],
+  //         extraEditors: [
+  //           {
+  //             // 这个key对应的史当前这个checkboxValue的value
+  //             key: true,
+  //             editors: [
+  //               { name: "", key: "", input_type: "input" }
+  //             ]
+  //           }
+  //         ]
+  //       },
+  //     ]
+  //   }
+  // },
+  // {
+  //   name: "procedureHistory",
+  //   key: ".procedureHistory",
+  //   label: "甲状腺手术",
+  //   input_type: "checkbox",
+  //   input_props: {
+  //     type: "custom",
+  //     renderData: [
+  //       {
+  //         key: "thyroid",
+  //         label: "甲状腺手术",
+  //         options: [
+  //           { label: "有", value: true },
+  //           { label: "无", value: false },
+  //         ],
+  //         extraEditors: [
+  //           {
+  //             // 这个key对应的史当前这个checkboxValue的value
+  //             key: true,
+  //             editors: [
+  //               { name: "", key: "", input_type: "input" }
+  //             ]
+  //           }
+  //         ]
+  //       },
+  //     ]
+  //   }
+  // },
+  // {
+  //   name: "procedureHistory",
+  //   key: ".procedureHistory",
+  //   label: "其他",
+  //   input_type: "checkbox",
+  //   input_props: {
+  //     type: "custom",
+  //     renderData: [
+  //       {
+  //         key: "other",
+  //         label: "其他",
+  //         options: [
+  //           { label: "有", value: true },
+  //           { label: "无", value: false },
+  //         ],
+  //         extraEditors: [
+  //           {
+  //             // 这个key对应的史当前这个checkboxValue的value
+  //             key: true,
+  //             editors: [
+  //               { name: "", key: "", input_type: "input" }
+  //             ]
+  //           }
+  //         ]
+  //       },
+  //     ]
+  //   }
+  // },
   // {
   //   name: "diseaseHistory-h",
   //   key: ".diseaseHistory",

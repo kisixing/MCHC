@@ -49,11 +49,11 @@ export function renderForm(config:Array<FormConfig> , formHandler:any, gridConfi
       row += 1;
     }
     spanArr.push(
-      <Col  
+      <Col
         span={config[i].hidden ? 0 : span} 
         offset={offset} 
         // offset={spanArr.length === 0 ? offset - prevOffset : offset} 
-        key={`row-${row}|span-${count}`}
+        key={`${config[i].name}|row-${row}|span-${count}`}
       >
         <FormItem
           actions={formHandler[config[i].name].actions} 

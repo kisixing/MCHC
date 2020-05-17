@@ -67,7 +67,6 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
       formatData.downsScreens[0].type = 0;
       formatData.downsScreens[1].type = 1;
       formatData.downsScreens[2].type = 2;
-      console.log(formatData);
       // return ;
       if (validCode) {
         if(id === -1){
@@ -107,7 +106,6 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
   render() {
     const { data } = this.state;
     const myConfig = getRenderData(config, data);
-    console.log(myConfig);
     return (
       <div className={styles.container}>
         <MyForm

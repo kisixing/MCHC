@@ -37,7 +37,10 @@ export default class DefaultSelect extends Component<DefaultSelectProps>{
   
   render(){
     const { options = [], multiple } = this.props;
-    const { value = (multiple? [] : "") } = this.props;
+    let { value = (multiple? [] : "") } = this.props;
+    if(multiple && value === ""){
+      value = [];
+    }
     return (
       <Select 
         style={{width: "100%"}}

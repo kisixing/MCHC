@@ -50,7 +50,6 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
     if(!value || config.length === 0 || value.length === 0 ){
       return null;
     }
-    console.log(value, '43536')
     return value.map((val: any, index: number) => (
       <div className={styles['array-form']} key={`array-custom-${index}`}>
         <h2 className={styles.title}>
@@ -70,6 +69,7 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
           path={path}
           error={null}
           value={val}
+          getValidFun={() => {}}
           subscribe={() => {}}
         />
       </div>
