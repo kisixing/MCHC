@@ -1,7 +1,7 @@
 import { FormConfig } from '../../../../components/MyForm/interface';
 
 const config: Array<FormConfig> = [
-
+  { name: 'id', key: '.pregnancy.id', label: "rwg", input_type: "input", span: 0, hidden: true},
 
   { name: 'menarche', key: '.pregnancy.menstrualHistory.menarche', label: "初潮", input_type: "input", span: 6, rules: "required" },
   { name: 'menstrualCycle', key: '.pregnancy.menstrualHistory.menstrualCycle', label: "周期", input_type: "input", span: 6, rules: "required" },
@@ -14,8 +14,8 @@ const config: Array<FormConfig> = [
           key: "dysmenorrhea",
           label: "痛经",
           options: [
-            { label: "无", value: '1' },
-            { label: "有", value: '2'  },
+            { label: "无", value: false },
+            { label: "有", value: true  },
           ],
           extraEditors: []
         }
@@ -29,11 +29,11 @@ const config: Array<FormConfig> = [
         key: "maritalStatus",
         label: "婚姻史",
         options: [
-          { label: "已婚", value: '1' },
-          { label: "未婚", value: '2' },
-          { label: "离异", value: '3' },
-          { label: "再婚", value: '4' },
-          { label: "丧偶", value: '5' },
+          { label: "已婚", value: "已婚" },
+          { label: "未婚", value: "未婚" },
+          { label: "离异", value: "离异" },
+          { label: "再婚", value: "再婚" },
+          { label: "丧偶", value: "丧偶" },
         ],
         extraEditors: []
       }
@@ -48,8 +48,8 @@ const config: Array<FormConfig> = [
         key: "nearRelation",
         label: "近亲结婚",
         options: [
-          { label: "否", value: '1' },
-          { label: "是", value: '2'  },
+          { label: "否", value: false },
+          { label: "是", value: true  },
         ],
         extraEditors: []
       }
@@ -64,11 +64,11 @@ const config: Array<FormConfig> = [
         key: "smoke",
         label: "吸烟",
         options: [
-          { label: "无", value: 1  },
-          { label: "有", value: 2 },
+          { label: "无", value: false  },
+          { label: "有", value: true },
         ],
         extraEditors: [            {
-          key: 2,
+          key: true,
           editors: [
             { name: "", key: "", label: "", input_type: "input" }
           ]
@@ -84,11 +84,11 @@ const config: Array<FormConfig> = [
         key: "alcohol",
         label: "饮酒",
         options: [
-          { label: "无", value: 1  },
-          { label: "有", value: 2 },
+          { label: "无", value: false  },
+          { label: "有", value: true },
         ],
         extraEditors: [            {
-          key: 2,
+          key: true,
           editors: [
             { name: "", key: "", label: "", input_type: "input" }
           ]
@@ -104,11 +104,11 @@ const config: Array<FormConfig> = [
         key: "hazardoussubstances",
         label: "接触有害物质",
         options: [
-          { label: "无", value: 1  },
-          { label: "有", value: 2 },
+          { label: "无", value: false  },
+          { label: "有", value: true },
         ],
         extraEditors: [            {
-          key: 2,
+          key: true,
           editors: [
             { name: "", key: "", label: "", input_type: "input" }
           ]
@@ -124,11 +124,11 @@ const config: Array<FormConfig> = [
         key: "radioactivity",
         label: "接触放射线",
         options: [
-          { label: "无", value: 1  },
-          { label: "有", value: 2 },
+          { label: "无", value: false  },
+          { label: "有", value: true },
         ],
         extraEditors: [            {
-          key: 2,
+          key: true,
           editors: [
             { name: "", key: "", label: "", input_type: "input" }
           ]
@@ -144,11 +144,11 @@ const config: Array<FormConfig> = [
         key: "other",
         label: "高血压",
         options: [
-          { label: "无", value: 1  },
-          { label: "有", value: 2 },
+          { label: "无", value: false  },
+          { label: "有", value: true },
         ],
         extraEditors: [            {
-          key: 2,
+          key: true,
           editors: [
             { name: "", key: "", label: "", input_type: "input" }
           ]
@@ -164,11 +164,11 @@ const config: Array<FormConfig> = [
         key: "hypertension",
         label: "高血压",
         options: [
-          { label: "无", value: 1  },
-          { label: "有", value: 2 },
+          { label: "无", value: false  },
+          { label: "有", value: true },
         ],
         extraEditors: [            {
-          key: 2,
+          key: true,
           editors: [
             { name: "", key: "", label: "", input_type: "input" }
           ]
@@ -185,11 +185,11 @@ const config: Array<FormConfig> = [
         key: "diabetes",
         label: "糖尿病",
         options: [
-          { label: "无", value: 1  },
-          { label: "有", value: 2 },
+          { label: "无", value: false  },
+          { label: "有", value: true },
         ],
         extraEditors: [            {
-          key: 2,
+          key: true,
           editors: [
             { name: "", key: "", label: "", input_type: "input" }
           ]
@@ -205,11 +205,11 @@ const config: Array<FormConfig> = [
         key: "birthdefects",
         label: "心脏病",
         options: [
-          { label: "无", value: 1  },
-          { label: "有", value: 2 },
+          { label: "无", value: false  },
+          { label: "有", value: true },
         ],
         extraEditors: [            {
-          key: 2,
+          key: true,
           editors: [
             { name: "", key: "", label: "", input_type: "input" }
           ]
@@ -225,11 +225,11 @@ const config: Array<FormConfig> = [
 //       key: "add_FIELD_jzyichuanbing",
 //       label: "心脏病",
 //       options: [
-//         { label: "无", value: 1  },
-//         { label: "有", value: 2 },
+//         { label: "无", value: false  },
+//         { label: "有", value: true },
 //       ],
 //       extraEditors: [            {
-//         key: 2,
+//         key: true,
 //         editors: [
 //           { name: "", key: "", label: "", input_type: "input" }
 //         ]
@@ -245,11 +245,11 @@ input_props:{
       key: "other",
       label: "心脏病",
       options: [
-        { label: "无", value: 1  },
-        { label: "有", value: 2 },
+        { label: "无", value: false  },
+        { label: "有", value: true },
       ],
       extraEditors: [            {
-        key: 2,
+        key: true,
         editors: [
           { name: "", key: "", label: "", input_type: "input" }
         ]

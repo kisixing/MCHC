@@ -1,6 +1,7 @@
 import { FormConfig } from '@/components/MyForm/interface';
 
 const config: Array<FormConfig> = [
+  { name: 'id0', key: '.id', label: "id0", input_type: "input", span: 0, hidden: true},
   // {
   //   name: "specialityCheckUp",
   //   key: ".specialityCheckUp",
