@@ -17,7 +17,7 @@ interface IProps extends BaseEditPanelIProps {
 export default class GynecologicalExam extends BaseEditPanel<IProps> {
   static defaultProps = {
     baseUrl: 'premarital-visits',
-    moduleName: 'GynecologicalExam',
+    moduleName: 'premaritalCareGynecologicalExam',
     title: '妇科检查',
     // toApi,
     // fromApi,
