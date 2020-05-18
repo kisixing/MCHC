@@ -4,6 +4,7 @@ import MyForm from '@/components/MyForm/index';
 import config from './config';
 import data from './data';
 import styles from './index.less';
+import { isNotEmpty } from '@/utils/utils';
 import { getRenderData, getFormData} from '@/components/MyForm/utils';
 
 interface HomeState{
@@ -19,12 +20,18 @@ export default class Home extends React.Component<{},HomeState>{
     this.state = {
       formHandler: {
         
-      }
+      },
+      data: {}
     }
   }
 
   componentDidUpdate(){
     const { formHandler } = this.state;
+    if(isNotEmpty(formHandler)){
+      formHandler.subscribe("pdProcedure","change",(val:any) => {
+        console.log(val);
+      })
+    }
   }
 
   handleSubmit = () => {

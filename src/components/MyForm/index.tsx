@@ -7,7 +7,7 @@ import FormItem from './formItem';
 import styles from './index.less';
 
 const defaultGutterConfig = {
-  gutter: [0,8], // px
+  gutter: [0,10], // px
   justify: "start"
 }
 // TODO 后期应该考虑把这里的col和row换成自定义的样式实现

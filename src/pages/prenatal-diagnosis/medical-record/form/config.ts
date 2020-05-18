@@ -572,59 +572,59 @@ const config: Array<FormConfig> = [
       ]
     }
   },
-  {
-    name: "diseaseHistory-h",
-    key: ".diseaseHistory",
-    label: "单选带input",
-    input_type: "select",
-    input_props: {
-      type: "multiple",
-      options: [
-        { label: "高血压", value: "hypertension" },
-        { label: "肾病", value: "nephropathy" },
-        { label: "呼吸道疾病", value: "respiratoryDisease" },
-      ],
-      extraEditors: [
-        {
-          key: "hypertension",
-          editors: [
-            { name: "", key: "", input_type: "input" }
-          ]
-        }
-      ]
-    }
-  },
-  {
-    name: "diseaseHistory-h1",
-    key: ".diseaseHistory",
-    label: "多选带input",
-    input_type: "select",
-    input_props: {
-      type: "multiple",
-      radio: false,
-      options: [
-        { label: "高血压", value: "hypertension" },
-        { label: "肾病", value: "nephropathy" },
-        { label: "胃病", value: "gastroDisease" },
-        { label: "呼吸道疾病", value: "respiratoryDisease" },
-        { label: "癫痫", value: "epilepsy" },
-        { label: "心脏疾病", value: "cardiacDisease" },
-        { label: "内分泌疾病", value: "endocrineDisease" },
-        { label: "甲状腺疾病", value: "thyroidDisease" },
-        { label: "血液病", value: "hematopathy" },
-        { label: "精神疾病", value: "mentalDisease" },
-        { label: "糖尿病", value: "diabetes" },
-      ],
-      extraEditors: [
-        {
-          key: "hypertension",
-          editors: [
-            { name: "", key: "", input_type: "input" }
-          ]
-        }
-      ]
-    }
-  },
+  // {
+  //   name: "diseaseHistory-h",
+  //   key: ".diseaseHistory",
+  //   label: "单选带input",
+  //   input_type: "select",
+  //   input_props: {
+  //     type: "multiple",
+  //     options: [
+  //       { label: "高血压", value: "hypertension" },
+  //       { label: "肾病", value: "nephropathy" },
+  //       { label: "呼吸道疾病", value: "respiratoryDisease" },
+  //     ],
+  //     extraEditors: [
+  //       {
+  //         key: "hypertension",
+  //         editors: [
+  //           { name: "", key: "", input_type: "input" }
+  //         ]
+  //       }
+  //     ]
+  //   }
+  // },
+  // {
+  //   name: "diseaseHistory-h1",
+  //   key: ".diseaseHistory",
+  //   label: "多选带input",
+  //   input_type: "select",
+  //   input_props: {
+  //     type: "multiple",
+  //     radio: false,
+  //     options: [
+  //       { label: "高血压", value: "hypertension" },
+  //       { label: "肾病", value: "nephropathy" },
+  //       { label: "胃病", value: "gastroDisease" },
+  //       { label: "呼吸道疾病", value: "respiratoryDisease" },
+  //       { label: "癫痫", value: "epilepsy" },
+  //       { label: "心脏疾病", value: "cardiacDisease" },
+  //       { label: "内分泌疾病", value: "endocrineDisease" },
+  //       { label: "甲状腺疾病", value: "thyroidDisease" },
+  //       { label: "血液病", value: "hematopathy" },
+  //       { label: "精神疾病", value: "mentalDisease" },
+  //       { label: "糖尿病", value: "diabetes" },
+  //     ],
+  //     extraEditors: [
+  //       {
+  //         key: "hypertension",
+  //         editors: [
+  //           { name: "", key: "", input_type: "input" }
+  //         ]
+  //       }
+  //     ]
+  //   }
+  // },
   {
     name: "fetuses",
     key: ".fetuses",

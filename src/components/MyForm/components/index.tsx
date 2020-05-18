@@ -10,6 +10,8 @@ import SimpleObject from './SimpleObject';
 import MyCustom from './MyCustom';
 import ArrayCustom from './MyCustom/ArrayCustom'
 
+import AddressCascader from './business/AddressCascader';
+
 interface MyComponent{
   [key:string]: any
 }
@@ -23,9 +25,12 @@ const MyComponent:MyComponent = {
   "address": Address,
 
   "simpleobject": SimpleObject,
-
+  
   "custom": MyCustom,
-  "array-custom": ArrayCustom
+  "array-custom": ArrayCustom,
+  // 业务类组件
+  "b-address": AddressCascader
+
 }
 
 export default MyComponent

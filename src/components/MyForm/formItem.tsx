@@ -41,6 +41,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
         if(props.type.indexOf("custom") !== -1){
           childrenError = self.childrenValid();
         }
+        console.log(error);
         self.setState({ error });
         return isEmpty(error) && childrenError;
       }
@@ -73,6 +74,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
 
   handleChange = (val: any, error: any = "") => {
     const { name, dispatch } = this.props;
+    // debugger;
     this.setState({ value: val }, () => {
       if (name) {
         dispatch(name, "change", val);
@@ -112,17 +114,25 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
     return (
       <div>
         {label !== "" && header_label ? (
-          <div className={styles['formItem-header-label']}>
-            <h1>{this.renderAsterisk(validate)}{label}</h1>
+          <div className={styles['form-item-header-label']}>
+            <h1>
+              <span>
+                {this.renderAsterisk(validate)}{label}
+              </span>
+            </h1>
           </div>
         ) : null}
         <div className={styles['form-item']}>
           {label !== "" && !header_label ? (
-            <div className={styles['formItem-inline-label']}>
+            <div className={styles['form-item-inline-label']}>
               <label>{this.renderAsterisk(validate)}{label}:</label>
-            </div>
+            </div>  
           ) : null}
-          <div className={header_label ? styles['formItem-full-main'] : styles['formItem-main']}>
+          {/* 
+            * full-main 代表label为header形式出现
+            * main      label在同一行
+            */}
+          <div className={header_label ? styles['form-item-full-main'] : styles['form-item-main']}>
             {MyComponent ? (
               <MyComponent
                 onChange={this.handleChange}
@@ -142,14 +152,14 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
               )}
           </div>
           {unit !== "" ? (
-            <div className={styles['formItem-unit']}>
+            <div className={styles['form-item-unit']}>
               {unit}
             </div>
           ) : null}
         </div>
         {/* 基本的组件的error统一在这里做，复杂的放入业务组件中 */}
         {isBase(error) ? (
-          <div className={styles['formItem-error']}>
+          <div className={styles['form-item-error']}>
             {error}
           </div>
         ) : null}
