@@ -3,16 +3,18 @@ import Table from './components/Table';
 import { tableColumns } from './config/table';
 import BaseList from '@/components/BaseList';
 import WithDynamicExport from '@/components/WithDynamicExport';
+import { processFromApi } from './config/adpater';
 import { router } from 'umi';
 
 @WithDynamicExport
 export default class List extends BaseList {
   static defaultProps = {
-    baseUrl: '/admissions',
-    baseTitle: '普查登记',
+    baseUrl: '/premarital-visits',
+    baseTitle: '男性婚检记录',
     needPagination: false,
     showQuery: false,
-    showAdd: true,
+    showAdd: false,
+    processFromApi,
     tableColumns,
     rowKey: 'id',
     Table,
@@ -37,6 +39,6 @@ export default class List extends BaseList {
 
   handleEdit = (rowData: any) => () => {
     const { id } = rowData;
-    router.push(`/deliver-management/admission/edit?id=${id}`);
+    router.push(`/premarital-care/husband/husband-exam?id=${id}`);
   };
 }

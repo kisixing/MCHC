@@ -3,5 +3,5 @@ export default {
   name: 'child-death',
   icon: 'ordered-list',
   path: '/child-death',
-  component: './child-management/child-death',
+  component: './case-management/child-death/list',
 };

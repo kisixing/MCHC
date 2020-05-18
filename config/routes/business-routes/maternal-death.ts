@@ -3,6 +3,6 @@ export default {
     name: 'maternal-death',
     icon: 'ordered-list',
     path: '/maternal-death',
-    component: './Welcome',
+    component: './case-management/maternal-death/list',
   };
   

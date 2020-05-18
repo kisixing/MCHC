@@ -3,5 +3,5 @@ export default {
   name: 'birth-defect',
   icon: 'ordered-list',
   path: '/birth-defect',
-  component: './Welcome',
+  component: './case-management/birth-defect/list',
 };
