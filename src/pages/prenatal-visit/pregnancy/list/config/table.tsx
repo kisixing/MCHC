@@ -17,7 +17,6 @@ export const tableColumns = [
     title: '末次月经',
     dataIndex: 'lmp',
     key: 'bedNO',
-    align: 'center'
   },
   {
     title: '预产期-日期',
