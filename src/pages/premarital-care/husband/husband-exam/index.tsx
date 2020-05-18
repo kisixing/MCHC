@@ -1,15 +1,13 @@
 import React from 'react';
 import PanelWithChild from '@/components/BaseEditPanel/PanelWithChild';
-import LabourRecord from '@/pages/deliver-management/labour-record/edit';
-import Admission from '@/pages/deliver-management/admission/edit';
-import CaesareanDelivery from '@/pages/deliver-management/caesarean-delivery/edit';
-import NeonateRecord from '@/pages/deliver-management/neonate-record/edit';
-import NursingRecord from '@/pages/deliver-management/nursing-record/list';
-import PostpartumVisit from '@/pages/deliver-management/postpartum-visit/edit';
-import Predelivery from '@/pages/deliver-management/predelivery/list';
-import { Tabs } from 'antd';
+import PhysicalExam from '@/pages/premarital-care/public-exam/PhysicalExam';
+import AndrologyExam from '@/pages/premarital-care/public-exam/AndrologyExam';
+import PremaritalExam from '@/pages/premarital-care/public-exam/PremaritalExam';
+import PremaritalGuidance from '@/pages/premarital-care/public-exam/PremaritalGuidance';
+import { Tabs, Divider } from 'antd';
 import { get } from 'lodash';
 import request from '@/utils/request';
+import styles from '@/components/BaseEditPanel/index.less';
 
 export default class panel extends PanelWithChild {
   constructor(props: any) {
@@ -23,16 +21,46 @@ export default class panel extends PanelWithChild {
 
   async componentDidMount() {
     const id = get(this.props, 'location.query.id');
-    const data = await request.get(`/admissions/${id}`);
+    const data = await request.get(`/husbands/${id}`);
     this.setState({
       data,
     });
   }
 
-  handleChangeTab = (activeKey: string) => {
+  handleChangeTab = async (activeKey: string) => {
+    const id = get(this.props, 'location.query.id');
+    const data = await request.get(`/husbands/${id}`);
     this.setState({
       activeKey,
+      data,
     });
+  };
+
+  renderHeader = () => {
+    const { data } = this.state;
+    return (
+      <>
+        <div className={styles.panelWithChildHeader}>
+          <div className={styles.panelWithChildHeaderItem}>
+            <span className={styles.panelWithChildHeaderItemLabel}>门诊号:</span>
+            <span className={styles.panelWithChildHeaderItemValue}>{get(data, 'outpatientNO')}</span>
+          </div>
+          <div className={styles.panelWithChildHeaderItem}>
+            <span className={styles.panelWithChildHeaderItemLabel}>证件号码:</span>
+            <span className={styles.panelWithChildHeaderItemValue}>{get(data, 'idNO')}</span>
+          </div>
+          <div className={styles.panelWithChildHeaderItem}>
+            <span className={styles.panelWithChildHeaderItemLabel}>姓名:</span>
+            <span className={styles.panelWithChildHeaderItemValue}>{get(data, 'name')}</span>
+          </div>
+          <div className={styles.panelWithChildHeaderItem}>
+            <span className={styles.panelWithChildHeaderItemLabel}>年龄:</span>
+            <span className={styles.panelWithChildHeaderItemValue}>{get(data, 'age')}</span>
+          </div>
+        </div>
+        <Divider className={styles.panelWithChildHeaderDivider}></Divider>
+      </>
+    );
   };
 
   renderContent = () => {
@@ -40,32 +68,21 @@ export default class panel extends PanelWithChild {
     const { data, activeKey } = this.state;
     return (
       <Tabs activeKey={activeKey} type="card" size="small" onChange={this.handleChangeTab}>
-        <Tabs.TabPane tab="基本信息" key="Admission">
-          {activeKey === 'Admission' && <Admission id={id} />}
+        <Tabs.TabPane tab="病史信息" key="Admission">
+          {activeKey === 'Admission' && <div>暂无内容</div>}
         </Tabs.TabPane>
-        <Tabs.TabPane tab="分娩记录" key="LabourRecord">
-          {activeKey === 'LabourRecord' && <LabourRecord id={get(data, 'labourRecord.id')} admissionId={id} />}{' '}
+        <Tabs.TabPane tab="体格检查" key="PhysicalExam">
+          {activeKey === 'PhysicalExam' && <PhysicalExam type="husband" data={data} />}
         </Tabs.TabPane>
-        <Tabs.TabPane tab="护理记录" key="NursingRecord">
-          {activeKey === 'NursingRecord' && <NursingRecord id={id} showAdd={true} admissionData={data} />}{' '}
+        <Tabs.TabPane tab="实验室检查" key="PremaritalExam">
+          {activeKey === 'PremaritalExam' && <PremaritalExam type="husband" data={data} />}
         </Tabs.TabPane>
-        <Tabs.TabPane tab="待产记录" key="predelivery">
-          {activeKey === 'predelivery' && <Predelivery id={id} showAdd={true} admissionData={data} />}{' '}
+        <Tabs.TabPane tab="婚前指导" key="PremaritalGuidance">
+          {activeKey === 'PremaritalGuidance' && <PremaritalGuidance type="husband" data={data} />}
         </Tabs.TabPane>
-        <Tabs.TabPane tab="剖宫产记录" key="CaesareanDelivery">
-          {activeKey === 'CaesareanDelivery' && (
-            <CaesareanDelivery
-              id={get(data, 'labourRecord.caesareanDelivery.id')}
-              labourRecordId={get(data, 'labourRecord.id')}
-            />
-          )}
+        <Tabs.TabPane tab="生殖器官与第二性征检查" key="AndrologyExam">
+          {activeKey === 'AndrologyExam' && <AndrologyExam type="wife" data={data} />}
         </Tabs.TabPane>
-        <Tabs.TabPane tab="新生儿记录" key="NeonateRecord">
-          {activeKey === 'NeonateRecord' && <NeonateRecord labourRecordId={get(data, 'labourRecord.id')} />}{' '}
-        </Tabs.TabPane>
-        {/* <Tabs.TabPane tab="产后访视" key="PostpartumVisit">
-          <PostpartumVisit id={id} />
-        </Tabs.TabPane> */}
       </Tabs>
     );
   };

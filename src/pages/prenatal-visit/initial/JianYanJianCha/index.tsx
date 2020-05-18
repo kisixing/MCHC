@@ -49,7 +49,7 @@ export default class Home extends React.Component<{},HomeState>{
 
       request('/prenatal-visits', {
         method: 'PUT',
-        data: newData
+        data: getFormData(res)['pregnancy']
       }).then(r => {
 
       });

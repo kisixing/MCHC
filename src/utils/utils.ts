@@ -78,3 +78,23 @@ export function getQueryValue(queryName: string) {
   }
   return null;
 }
+
+
+/**
+ * 判断输入是否为空
+ * 识别基本类型 空字符串、undefined、null
+ * 引用数据类型 空数组，空对象
+ */
+export function isNotEmpty(data: any): boolean {
+  if (typeof data === "object") {
+    if (Object.prototype.toString.call(data) === "[object Object]") {
+      return Object.keys(data).length !== 0;
+    }
+    if (Object.prototype.toString.call(data) === "[object Array]") {
+      return data.length !== 0;
+    }
+    return false; 
+  }
+  // 基本数据类型
+  return data !== "" && data !== null && data !== undefined
+}

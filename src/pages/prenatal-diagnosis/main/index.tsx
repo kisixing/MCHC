@@ -58,10 +58,10 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
           <span>末次月经:</span><strong>{patients.lmp}</strong>
         </div>
         <div>
-          <span>病人姓名:</span><strong>{patients.name}</strong>
+          <span>预产期-日期:</span><strong>{patients.edd}</strong>
         </div>
         <div>
-          <span>病人姓名:</span><strong>{patients.name}</strong>
+          <span>预产期-B超:</span><strong>{patients.sureEdd}</strong>
         </div>
       </div>
     }
@@ -71,9 +71,8 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
   renderButton = (buttonGroup: Array<{ key: string, title: string }>): ReactNode => {
     const { currentPageKey } = this.state;
     return buttnGroup.map((v: { key: string, title: string }) => {
-      return <div>
+      return <div key={v.key}>
         <Button
-          key={v.key}
           onClick={() => this.setState({currentPageKey: v.key})}
           type={currentPageKey === v.key ? "primary" : "default"}
         >

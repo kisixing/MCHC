@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import request from '@/utils/request';
-import { get, isFunction, map, keyBy, set } from 'lodash';
+import { get, isFunction, map, keyBy, set, isNil, isEmpty } from 'lodash';
 import { message, Popconfirm, Button, Form, Input } from 'antd';
 import queryString from 'query-string';
 import CustomSpin from '../GeneralComponents/CustomSpin';
@@ -31,7 +31,7 @@ export interface IProps {
   showAdd?: boolean;
   // 当 BaseList 作为子组件的时候，可能需要使用，参考 nursing-record
   asChildComponentQueryLabel?: string;
-  // 展示搜索功能
+  // 展示搜索功能，如果为 true，则必须传 Query 组件
   showQuery?: boolean;
   // 传入的 ID
   id?: boolean;
@@ -76,7 +76,6 @@ export default class BaseList extends React.Component<IProps, IState> {
     ...(this.props.tableColumns as Array<any>),
     {
       title: '操作',
-      align: 'center',
       dataIndex: 'operation',
       fixed: 'right',
       hiddenSorter: true,
@@ -106,6 +105,7 @@ export default class BaseList extends React.Component<IProps, IState> {
               onClick={this.handleEdit(rowData)}
             >
               <EditOutlined />
+              编辑
             </Button>
             <Popconfirm
               title={`确定要删除这个${get(this.props, 'baseTitle')}吗?`}
@@ -115,6 +115,7 @@ export default class BaseList extends React.Component<IProps, IState> {
             >
               <Button className={commonStyles.tableActionBtn} type="danger" size="small">
                 <DeleteOutlined />
+                删除
               </Button>
             </Popconfirm>
           </>
@@ -220,7 +221,21 @@ export default class BaseList extends React.Component<IProps, IState> {
     });
   };
 
-  handleSearch = async () => {
+  // 查询组件，点击查询，由于 api 采用接口 Criteria 风格，子组件可能需要重写 handleQuerySearch
+  handleQuerySearch = (data: object) => {
+    let queryData = {};
+    map(data, (value: any, key: any) => {
+      if (!isNil(value) && !isEmpty(value)) {
+        queryData = {
+          ...queryData,
+          [`${key}.equals`]: value,
+        };
+      }
+    });
+    this.handleSearch(queryData);
+  };
+
+  handleSearch = async (queryParams: any = {}) => {
     const { baseUrl, needPagination, processFromApi, asChildComponentQueryLabel = '', id: propsId } = this.props;
     const { defaultQuery } = this.state;
     // TODO: 有可能作为页面的子组件， propsId 是 BaseList 作为子组件从 props 传入的
@@ -228,8 +243,12 @@ export default class BaseList extends React.Component<IProps, IState> {
       ? {
           ...defaultQuery,
           [asChildComponentQueryLabel]: propsId,
+          ...queryParams,
         }
-      : defaultQuery;
+      : {
+          ...defaultQuery,
+          ...queryParams,
+        };
     const dataSource = isFunction(processFromApi)
       ? processFromApi(await request.get(`${baseUrl}${query ? `?${queryString.stringify(query as object)}` : ''}`))
       : await request.get(`${baseUrl}${query ? `?${queryString.stringify(query as object)}` : ''}`);
@@ -322,11 +341,10 @@ export default class BaseList extends React.Component<IProps, IState> {
       needEditInTable,
     } = this.props;
     const { dataSource, total, defaultQuery, loading, visible, editable, id } = this.state;
-    console.log(dataSource);
     const mergedColumns = this.getColumns();
     return (
       <>
-        {showQuery && <Query onSearch={this.handleSearch} />}
+        {showQuery && <Query onSearch={this.handleQuerySearch} />}
         {loading ? (
           <CustomSpin />
         ) : (

@@ -6,7 +6,7 @@ import { connect } from 'dva';
 import { Modal, ConfigProvider } from 'antd';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState } from '@/models/connect';
-import logo from '../assets/logo.jpg';
+import logo from '../assets/logo.png';
 import { keyBy, keys, get, map, isEmpty, reduce, concat, isNil, filter } from 'lodash';
 import store from 'store';
 import request, { TOKEN } from '@/utils/request';
