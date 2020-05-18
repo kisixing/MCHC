@@ -1,6 +1,7 @@
 import React from 'react';
 import PanelWithChild from '@/components/BaseEditPanel/PanelWithChild';
 import PhysicalExam from '@/pages/premarital-care/public-exam/PhysicalExam';
+import DiseaseHistory from '@/pages/premarital-care/public-exam/DiseaseHistory';
 import GynecologicalExam from '@/pages/premarital-care/public-exam/GynecologicalExam';
 import PremaritalExam from '@/pages/premarital-care/public-exam/PremaritalExam';
 import PremaritalGuidance from '@/pages/premarital-care/public-exam/PremaritalGuidance';
@@ -12,18 +13,19 @@ import styles from '@/components/BaseEditPanel/index.less';
 export default class panel extends PanelWithChild {
   constructor(props: any) {
     super(props);
-    const activeKey = get(props, 'location.query.activeKey') || 'Admission';
     this.state = {
       data: {},
-      activeKey,
+      activeKey: '',
     };
   }
 
   async componentDidMount() {
     const id = get(this.props, 'location.query.id');
     const data = await request.get(`/wives/${id}`);
+    const activeKey = get(this.props, 'location.query.activeKey') || 'DiseaseHistory';
     this.setState({
       data,
+      activeKey,
     });
   }
 
@@ -68,8 +70,8 @@ export default class panel extends PanelWithChild {
     const { data, activeKey } = this.state;
     return (
       <Tabs activeKey={activeKey} type="card" size="small" onChange={this.handleChangeTab}>
-        <Tabs.TabPane tab="病史信息" key="Admission">
-          {activeKey === 'Admission' && <div>暂无内容</div>}
+        <Tabs.TabPane tab="病史信息" key="DiseaseHistory">
+          {activeKey === 'DiseaseHistory' && <DiseaseHistory baseUrl="wives" data={data} />}
         </Tabs.TabPane>
         <Tabs.TabPane tab="体格检查" key="PhysicalExam">
           {activeKey === 'PhysicalExam' && <PhysicalExam type="wife" data={data} />}
