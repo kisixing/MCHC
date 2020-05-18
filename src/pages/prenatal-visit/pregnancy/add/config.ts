@@ -315,7 +315,7 @@ const config: Array<FormConfig> = [
     input_props: {
       config: [
         { name: 'year', key: '.year', label: "妊娠终止", input_type: "date", span: 7, rules: "required", input_props:{} },
-        { name: 'complication', key: '.*', label: "并发症", input_type: "checkbox", span: 7, rules: "required",
+        { name: 'complication', key: '.*', label: "并发症", input_type: "checkbox", span: 10, rules: "required",
           input_props: {
             type: "custom",
             renderData: [

@@ -57,10 +57,10 @@ export default class Home extends React.Component<{},HomeState>{
         const method = isPost ? "POST" : "PUT";
         let resData = getFormData(res);
         if (isPost) {
-          resData['pregnancy']['id'] = urlParam.id;
+          // resData['pregnancy']['id'] = urlParam.id;
         } else {
           resData['id'] = formData.id;
-          resData['pregnancy']['id'] = urlParam.id;
+          // resData['pregnancy']['id'] = urlParam.id;
         }
 
         request('/prenatal-visits', {

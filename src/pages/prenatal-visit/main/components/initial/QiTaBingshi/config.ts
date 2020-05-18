@@ -139,7 +139,7 @@ const config: Array<FormConfig> = [
       ],
     }
   },
-  { name: 'other', key: '.personalProfile', label: "其他", input_type: "checkbox", span: 24,
+  { name: 'other1', key: '.personalProfile', label: "其他", input_type: "checkbox", span: 24,
     input_props:{
       type: "custom",
       renderData: [
@@ -244,7 +244,7 @@ const config: Array<FormConfig> = [
 //     }
 //   ],
 // } },
-  { name: 'other', key: '.familyHistory', label: "其他", input_type: "checkbox", span: 24,
+  { name: 'other2', key: '.familyHistory', label: "其他", input_type: "checkbox", span: 24,
     input_props:{
       type: "custom",
       renderData: [
