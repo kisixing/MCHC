@@ -247,7 +247,7 @@ const BasicLayout = (props: any) => {
               <div className={styles.content}>
                 <ErrorBoundary>{children}</ErrorBoundary>
               </div>
-              <footer className={styles.footer}>Copyright © 莲孕医疗科技</footer>
+              <footer className={styles.footer}>Copyright © 莲印医疗科技</footer>
             </div>
           </div>
         )}
