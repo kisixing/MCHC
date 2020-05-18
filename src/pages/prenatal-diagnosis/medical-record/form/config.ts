@@ -335,7 +335,6 @@ const config: Array<FormConfig> = [
       ],
     }
   },
-
   {
     name: "allergyHistory",
     key: '.allergyHistory',
@@ -461,7 +460,6 @@ const config: Array<FormConfig> = [
   //     ]
   //   }
   // },
-
   {
     name: "procedureHistory",
     key: ".procedureHistory",
