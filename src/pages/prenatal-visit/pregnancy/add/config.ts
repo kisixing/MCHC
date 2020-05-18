@@ -1,4 +1,5 @@
 import { FormConfig } from '@/components/MyForm/interface';
+import * as Options from '@/pages/prenatal-visit/options';
 
 const config: Array<FormConfig> = [
 
@@ -14,16 +15,16 @@ const config: Array<FormConfig> = [
           { name: 'name', key: '.name', label: "姓名", input_type: "input", span: 7, rules: "required" },
           { name: 'telephone', key: '.telephone', label: "手机号码", input_type: "input", span: 7, rules: "required" },
           { name: 'workPhone', key: '.workPhone', label: "固定电话", input_type: "input", span: 7, rules: "required" },
-          { name: 'idType', key: '.idType', label: "证件类型", input_type: "select", span: 7, rules: "required", input_props:{options: [{ value: 1, label: 1 }]} },
+          { name: 'idType', key: '.idType', label: "证件类型", input_type: "select", span: 7, rules: "required", input_props:{options: Options.idTypeOptions} },
           { name: 'idNO', key: '.idNO', label: "证件号码", input_type: "input", span: 7, rules: "required" },
           // { name: 'add_FIELD_sh', key: '.add_FIELD_sh', label: "已审核", input_type: "checkbox", span: 7, offset: 1 },
           { name: 'dob', key: '.dob', label: "出生日期", input_type: "date", span: 7, rules: "required" },
           { name: 'nationality', key: '.nationality', label: "国籍", input_type: "input", span: 7, rules: "required" },
-          { name: 'nativeplace', key: '.nativeplace', label: "籍贯", input_type: "input", span: 7, rules: "required" },
+          { name: 'nativeplace', key: '.nativeplace', label: "籍贯", input_type: "select", span: 7, rules: "required", input_props:{options: Options.nativeplaceOptions} },
           { name: 'age', key: '.age', label: "年龄", input_type: "input", span: 7, rules: "required" },
-          { name: 'ethnic', key: '.ethnic', label: "民族", input_type: "select", span: 7, rules: "required", input_props:{options: [{ value: 1, label: 1 }]} },
-          { name: 'occupation', key: '.occupation', label: "职业", input_type: "select", span: 7, rules: "required", input_props:{options: [{ value: 1, label: 1 }]} },
-          { name: 'maritalStatus', key: '.maritalStatus', label: "婚姻状态", input_type: "select", span: 7, rules: "required", input_props:{options: [{ value: 1, label: 1 }]} },
+          { name: 'ethnic', key: '.ethnic', label: "民族", input_type: "select", span: 7, rules: "required", input_props:{options: Options.ethnicOptions} },
+          { name: 'occupation', key: '.occupation', label: "职业", input_type: "select", span: 7, rules: "required", input_props:{options: Options.occupationOptions} },
+          { name: 'maritalStatus', key: '.maritalStatus', label: "婚姻状态", input_type: "select", span: 7, rules: "required", input_props:{options: Options.maritalStatusOptions} },
           // { name: 'add_FIELD_zhunsz', key: '.add_FIELD_zhunsz', label: "准生证号", input_type: "input", span: 7, rules: "required" },
           // { name: 'add_FIELD_ADD_zhunsz_sh', key: '.add_FIELD_ADD_zhunsz_sh', label: "已审核", input_type: "checkbox", span: 7, offset: 1 },
           { name: 'permanentResidenceAddress', key: '.permanentResidenceAddress', label: "户口地址", input_type: "input", span: 7, rules: "required" },
@@ -44,16 +45,70 @@ const config: Array<FormConfig> = [
         { name: 'partnerName', key: '.partnerName', label: "姓名", input_type: "input", span: 7 },
         { name: 'partnerTelephone', key: '.partnerTelephone', label: "手机号码", input_type: "input", span: 7 },
         // { name: 'userhmcno', key: '.userhmcno', label: "配偶门诊号", input_type: "input", span: 7 },
-        { name: 'partnerIdType', key: '.partnerIdType', label: "证件类型", input_type: "select", span: 7, input_props:{options: [{ value: 1, label: 1 }]} },
+        { name: 'partnerIdType', key: '.partnerIdType', label: "证件类型", input_type: "select", span: 7, input_props:{options: Options.idTypeOptions} },
         { name: 'partnerIdNO', key: '.partnerIdNO', label: "证件号码", input_type: "input", span: 7 },
         // { name: 'userhage', key: '.userhage', label: "年龄", input_type: "input", span: 7 },
         { name: 'partnerNationality', key: '.partnerNationality', label: "国籍", input_type: "input", span: 7 },
-        { name: 'partnerNativeplace', key: '.partnerNativeplace', label: "籍贯", input_type: "input", span: 7 },
-        { name: 'partnerEthnic', key: '.partnerEthnic', label: "民族", input_type: "input", span: 7 },
-        { name: 'partnerOccupation', key: '.partnerOccupation', label: "职业", input_type: "select", span: 7, input_props:{options: [{ value: 1, label: 1 }]} },
-        { name: 'smokeNote', key: '.partnerProfile.smokeNote', label: "烟(支)", input_type: "input", span: 7, rules: "required" },
-        { name: 'alcoholNote', key: '.partnerProfile.alcoholNote', label: "酒(ml)", input_type: "input", span: 7, rules: "required", input_props:{} },
-        { name: 'disease', key: '.partnerProfile.disease', label: "是否患有疾病", input_type: "input", span: 7, rules: "required" },
+        { name: 'partnerNativeplace', key: '.partnerNativeplace', label: "籍贯", input_type: "select", span: 7, input_props:{options: Options.nativeplaceOptions} },
+        { name: 'partnerEthnic', key: '.partnerEthnic', label: "民族", input_type: "select", span: 7, input_props:{options: Options.ethnicOptions} },
+        { name: 'partnerOccupation', key: '.partnerOccupation', label: "职业", input_type: "select", span: 7, input_props:{options: Options.occupationOptions} },
+        // { name: 'smokeNote', key: '.partnerProfile.smokeNote', label: "烟(支)", input_type: "input", span: 7, rules: "required" },
+        // { name: 'alcoholNote', key: '.partnerProfile.alcoholNote', label: "酒(ml)", input_type: "input", span: 7, rules: "required", input_props:{} },
+        {
+          name: 'smoke', key: '.partnerProfile', label: "烟(支)", input_type: "checkbox", span: 10, rules: "required",
+          input_props: {
+            type: "custom",
+            renderData: [
+              {
+                key: "smoke",
+                label: "烟(支)",
+                options: [
+                  { label: "有", value: true },
+                  { label: "无", value: false },
+                ],
+                extraEditors: [
+                  {
+                    key: true,
+                    editors: [
+                      { name: "", key: "", label: "", input_type: "input" }
+                    ]
+                  }
+                ]
+              }
+            ],
+          }
+        },
+        {
+          name: 'alcohol', key: '.partnerProfile', label: "酒(ml)", input_type: "checkbox", span: 10, rules: "required",
+          input_props: {
+            type: "custom",
+            renderData: [
+              {
+                key: "alcohol",
+                label: "酒(ml)",
+                options: [
+                  { label: "有", value: true },
+                  { label: "无", value: false },
+                ],
+                extraEditors: [
+                  {
+                    key: true,
+                    editors: [
+                      { name: "", key: "", label: "", input_type: "input" }
+                    ]
+                  }
+                ]
+              }
+            ],
+          }
+        },
+
+        { name: 'disease', key: '.partnerProfile.disease', label: "是否患有疾病", input_type: "select", span: 7, rules: "required",
+          input_props:{
+            radio: false,
+            options: Options.diseaseOptions
+          }
+        },
       ]
     }
   },
@@ -77,7 +132,7 @@ const config: Array<FormConfig> = [
         // { name: 'systolic', key: '.physicalExam.systolic', label: "收缩压", input_type: "input", span: 7, rules: "required" },
         // { name: 'diastolic', key: '.physicalExam.diastolic', label: "舒张压", input_type: "input", span: 7, rules: "required" },
         // { name: 'pulse', key: '.physicalExam.pulse', label: "脉搏", input_type: "input", span: 7, rules: "required" },
-        { name: 'menarche', key: '.menstrualHistory.menarche', label: "初潮", input_type: "input", span: 7, rules: "required" },
+        { name: 'menarche', key: '.menstrualHistory.menarche', label: "初潮", input_type: "select", span: 7, rules: "required", input_props:{options: Options.menarcheOptions} },
         { name: 'menstrualCycle', key: '.menstrualHistory.menstrualCycle', label: "月经周期", input_type: "input", span: 7, rules: "required" },
         { name: 'menstrualPeriod', key: '.menstrualHistory.menstrualPeriod', label: "持续天数", input_type: "input", span: 7, rules: "required" },
 
@@ -115,7 +170,7 @@ const config: Array<FormConfig> = [
         },
         { name: 'maritalYears', key: '.maritalYears', label: "结婚年龄", input_type: "input", span: 7, rules: "required" },
         {
-          name: 'smoke', key: '.personalProfile', label: "吸烟", input_type: "checkbox", span: 7, rules: "required",
+          name: 'smoke', key: '.personalProfile', label: "吸烟", input_type: "checkbox", span: 10, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -125,13 +180,21 @@ const config: Array<FormConfig> = [
                 options: [
                   { label: "有", value: true },
                   { label: "无", value: false },
+                ],
+                extraEditors: [
+                  {
+                    key: true,
+                    editors: [
+                      { name: "", key: "", label: "", input_type: "input" }
+                    ]
+                  }
                 ]
               }
             ],
           }
         },
         {
-          name: 'alcohol', key: '.personalProfile', label: "饮酒", input_type: "checkbox", span: 7, rules: "required",
+          name: 'alcohol', key: '.personalProfile', label: "饮酒", input_type: "checkbox", span: 10, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -141,6 +204,14 @@ const config: Array<FormConfig> = [
                 options: [
                   { label: "有", value: true },
                   { label: "无", value: false },
+                ],
+                extraEditors: [
+                  {
+                    key: true,
+                    editors: [
+                      { name: "", key: "", label: "", input_type: "input" }
+                    ]
+                  }
                 ]
               }
             ],
@@ -234,8 +305,6 @@ const config: Array<FormConfig> = [
       ]
     }
   },
-
-
   {
     name: "pregnancyHistories",
     key: ".pregnancyHistories",
@@ -246,7 +315,29 @@ const config: Array<FormConfig> = [
     input_props: {
       config: [
         { name: 'year', key: '.year', label: "妊娠终止", input_type: "date", span: 7, rules: "required", input_props:{} },
-        { name: 'complicationNote', key: '.complicationNote', label: "并发症", input_type: "input", span: 7, rules: "required", input_props:{} },
+        { name: 'complication', key: '.*', label: "并发症", input_type: "checkbox", span: 7, rules: "required",
+          input_props: {
+            type: "custom",
+            renderData: [
+              {
+                key: "complication",
+                label: "并发症",
+                options: [
+                  { label: "是", value: true },
+                  { label: "否", value: false },
+                ],
+                extraEditors: [
+                  {
+                    key: true,
+                    editors: [
+                      { name: "", key: "", label: "", input_type: "input" }
+                    ]
+                  }
+                ]
+              }
+            ],
+          }
+        },
         // { name: 'sffm', key: '', label: "是否分娩", input_type: "checkbox", span: 7, rules: "required",
         //   input_props:{
         //     type: "custom",

@@ -688,7 +688,7 @@ export const omitRoutes = [
     name: '首诊/复诊管理',
     parentid: 0,
     active: null,
-    isMenu: true,
+    isMenu: false,
   },
   // {
   //   id: 156,
