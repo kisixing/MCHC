@@ -608,11 +608,11 @@ export const fetalpositionMapping = [
 
 export const hasOrNoMapping = [
   {
-    value: 0,
+    value: false,
     title: '无',
   },
   {
-    value: 1,
+    value: true,
     title: '有',
   },
 ];

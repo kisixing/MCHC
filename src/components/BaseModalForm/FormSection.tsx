@@ -28,6 +28,7 @@ import request from '@/utils/request';
 import CheckboxGroup from '@/components/ConfigComponents/CheckboxGroup';
 import InputWithLabel from '../ConfigComponents/InputWithLabel';
 import NormalCheckboxWithInput from '../ConfigComponents/NormalCheckboxWithInput';
+import SelectWithOptions from '../selects/SelectWithOptions';
 
 export const getFormDescriptionByModuleName = async (moduleName: string) => {
   return formDescriptionsWithoutSectionApi(
@@ -157,6 +158,11 @@ export class FormSection extends React.Component<IProps> {
         });
       case 'disease_select':
         return renderEditItem(get(formDescription, 'key'), <DiseaseSelect config={formDescription} />, {
+          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
+          styles: get(formDescription, 'styles'),
+        });
+      case 'select_with_options':
+        return renderEditItem(get(formDescription, 'key'), <SelectWithOptions config={formDescription} />, {
           customFormItemLayout: get(formDescription, 'formItemLayout') || {},
           styles: get(formDescription, 'styles'),
         });
