@@ -125,8 +125,8 @@ export default {
 
   'menu.prenatal-visit': '产前检查',
   'menu.prenatal-visit.pregnancy': '孕册管理',
-  'menu.prenatal-visit.initial': '首诊管理',
-  'menu.prenatal-visit.return': '复诊管理',
+  'menu.prenatal-visit.main': '首诊/复诊管理',
+  // 'menu.prenatal-visit.return': '复诊管理',
   'menu.prenatal-visit.statistics': '统计报表',
 
   'menu.high-risk-management': '高危孕产妇管理',
