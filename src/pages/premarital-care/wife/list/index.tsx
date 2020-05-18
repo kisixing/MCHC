@@ -39,7 +39,6 @@ export default class List extends BaseList {
     ...(this.props.tableColumns as Array<any>),
     {
       title: '操作',
-      align: 'center',
       hiddenSorter: true,
       hiddenFilter: true,
       fixed: 'right',
@@ -53,6 +52,7 @@ export default class List extends BaseList {
               onClick={this.handleView(rowData)}
             >
               <EyeOutlined title="查看" />
+              查看
             </Button>
             <Button
               title="编辑"
@@ -62,6 +62,7 @@ export default class List extends BaseList {
               onClick={this.handleEdit(rowData)}
             >
               <EditOutlined />
+              编辑
             </Button>
             <Popconfirm
               title={`确定要删除这个${get(this.props, 'baseTitle')}吗?`}
@@ -71,6 +72,7 @@ export default class List extends BaseList {
             >
               <Button title="删除" className={commonStyles.tableActionBtn} type="danger" size="small">
                 <DeleteOutlined />
+                删除
               </Button>
             </Popconfirm>
           </>
