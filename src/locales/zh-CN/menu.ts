@@ -108,10 +108,15 @@ export default {
 
   'menu.follow-up.work-flow': '工作流管理',
 
-
   'menu.premarital-care': '婚前保健',
   'menu.premarital-care.wife': '女方档案',
+  'menu.premarital-care.wife-add': '女方档案添加',
+  'menu.premarital-care.wife-edit': '女方档案修改',
+  'menu.premarital-care.wife-exam': '女方婚前检查',
   'menu.premarital-care.husband': '男方档案',
+  'menu.premarital-care.husband-add': '男方档案添加',
+  'menu.premarital-care.husband-edit': '男方档案修改',
+  'menu.premarital-care.husband-exam': '男方婚前检查',
   'menu.premarital-care.visit-wife': '女方婚前检查',
   'menu.premarital-care.visit-husband': '男方婚前检查',
   'menu.premarital-care.certification': '婚前医学证明',
