@@ -31,7 +31,7 @@ export interface IProps {
   showAdd?: boolean;
   // 当 BaseList 作为子组件的时候，可能需要使用，参考 nursing-record
   asChildComponentQueryLabel?: string;
-  // 展示搜索功能
+  // 展示搜索功能，如果为 true，则必须传 Query 组件
   showQuery?: boolean;
   // 传入的 ID
   id?: boolean;
@@ -76,7 +76,6 @@ export default class BaseList extends React.Component<IProps, IState> {
     ...(this.props.tableColumns as Array<any>),
     {
       title: '操作',
-      align: 'center',
       dataIndex: 'operation',
       fixed: 'right',
       hiddenSorter: true,
@@ -106,6 +105,7 @@ export default class BaseList extends React.Component<IProps, IState> {
               onClick={this.handleEdit(rowData)}
             >
               <EditOutlined />
+              编辑
             </Button>
             <Popconfirm
               title={`确定要删除这个${get(this.props, 'baseTitle')}吗?`}
@@ -115,6 +115,7 @@ export default class BaseList extends React.Component<IProps, IState> {
             >
               <Button className={commonStyles.tableActionBtn} type="danger" size="small">
                 <DeleteOutlined />
+                删除
               </Button>
             </Popconfirm>
           </>
@@ -231,7 +232,6 @@ export default class BaseList extends React.Component<IProps, IState> {
         };
       }
     });
-    console.log(queryData);
     this.handleSearch(queryData);
   };
 
@@ -341,7 +341,6 @@ export default class BaseList extends React.Component<IProps, IState> {
       needEditInTable,
     } = this.props;
     const { dataSource, total, defaultQuery, loading, visible, editable, id } = this.state;
-    console.log(dataSource);
     const mergedColumns = this.getColumns();
     return (
       <>

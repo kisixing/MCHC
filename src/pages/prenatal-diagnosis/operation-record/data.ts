@@ -54,8 +54,8 @@ const data = {
         }
     },
     "pdProcedure": [{
-        "startTime": "2020-01-01",
-        "endTime": "2020-01-01",
+        "startTime": "08:00:00",
+        "endTime": "10:00:00",
         "duration": "2",
         "punctureTart": 1,
         "punctureAmount": 1,

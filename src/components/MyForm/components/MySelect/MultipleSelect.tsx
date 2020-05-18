@@ -100,13 +100,16 @@ export default class MultipleSelect extends Component<MultipleSelectProps>{
 
   render() {
     const { options = [], value, multiple = false, extraEditors = [] } = this.props;
-    const {
+    let {
       selectValue = (multiple ? [] : ""),
       editorsValue = (multiple ? [] : "")
     } = value;
+    if(selectValue === "" && multiple){ selectValue = [] };
+    if(editorsValue === "" && multiple){ editorsValue = [] };
     return (
       <div>
         <Select
+          size="small"
           style={{ width: "100%" }}
           value={selectValue}
           allowClear

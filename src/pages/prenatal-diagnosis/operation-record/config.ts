@@ -270,14 +270,14 @@ const config: Array<FormConfig> = [
                     name: "startTime", key: ".startTime", input_type: "date", label: "开始时间", span: 8, offset: 0,
                     input_props: {
                         type: "time",
-                        format: "hh:ss"
+                        format: "HH:mm:ss"
                     }
                 },
                 {
                     name: "endTime", key: ".endTime", input_type: "date", label: "结束时间", span: 8, offset: 0,
                     input_props: {
                         type: "time",
-                        format: "hh:ss"
+                        format: "HH:mm:ss"
                     }
                 },
                 { name: "duration", key: ".duration", input_type: "input", label: "持续时间", span: 8, offset: 0 },
