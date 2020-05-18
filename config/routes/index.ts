@@ -259,6 +259,14 @@ export const omitRoutes = [
     isMenu: false,
     active: null,
   },
+  {
+    id: 346,
+    type: 'others',
+    key: '/child-management/child-examination/add',
+    name: '创建健康体检记录',
+    isMenu: false,
+    active: null,
+  },
 
   {
     id: 339,

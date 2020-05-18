@@ -120,6 +120,6 @@ export default class List extends BaseList {
   // 创建体检记录
   handleAddVisit = (rowData: any) => () => {
     const { id } = rowData;
-    router.push(`/child-management/child-examination/deliver-edit?childId=${id}`);
+    router.push(`/child-management/child-examination/add?childId=${id}`);
   }
 }
