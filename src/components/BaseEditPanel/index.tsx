@@ -5,7 +5,7 @@ import { formDescriptionsFromApi, formDescriptionsWithoutSectionApi } from '@/ut
 import { message } from 'antd';
 import styles from './index.less';
 
-interface IProps {
+export interface IProps {
   location?: any;
   moduleName?: string;
   title?: string;
@@ -15,7 +15,7 @@ interface IProps {
   Form?: any;
 }
 
-export default class BaseEditPanel extends React.Component<IProps> {
+export default class BaseEditPanel<P extends IProps = {}> extends React.Component<IProps & P> {
   state = {
     data: {},
     formDescriptionsWithoutSection: [],
