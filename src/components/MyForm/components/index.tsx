@@ -3,14 +3,13 @@ import MyDateTime from './MyDateTime'
 import MySelect from './MySelect'
 import MyCheckbox from './MyCheckbox'
 import MyTable from './MyTable';
-import Address from './Address';
 
 import SimpleObject from './SimpleObject';
 
 import MyCustom from './MyCustom';
 import ArrayCustom from './MyCustom/ArrayCustom'
 
-import AddressCascader from './business/AddressCascader';
+import AddressCascader from './business/Address/AddressCascader';
 
 interface MyComponent{
   [key:string]: any
@@ -22,7 +21,6 @@ const MyComponent:MyComponent = {
   "select": MySelect,
   "checkbox": MyCheckbox,
   "table": MyTable,
-  "address": Address,
 
   "simpleobject": SimpleObject,
   

@@ -133,6 +133,9 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
         />
       );
     },
+    "group": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
+      return null;
+    }
   };
 
   renderCheckbox = () => {

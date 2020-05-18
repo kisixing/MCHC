@@ -5,12 +5,16 @@ import config from './config';
 import data from './data';
 import styles from './index.less';
 import { isNotEmpty } from '@/utils/utils';
+
+import FloatCard from '@/components/FloatCard';
+
 import { getRenderData, getFormData} from '@/components/MyForm/utils';
 
 interface HomeState{
   formHandler:{
     [key:string]: any
-  }
+  },
+  data: any
 }
 
 
@@ -47,6 +51,9 @@ export default class Home extends React.Component<{},HomeState>{
     // 不要再页面render中尝试取formHandler的值，因为这个时候formItem初始化还没有完成
     return(
       <div className={styles.container}>
+        <FloatCard>
+          这个是内容aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        </FloatCard>
         <MyForm
           config={myConfig}
           getFormHandler={(formHandler:any) => this.setState({formHandler})}

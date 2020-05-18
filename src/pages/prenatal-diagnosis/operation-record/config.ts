@@ -2,6 +2,12 @@ import { FormConfig } from '@/components/MyForm/interface';
 
 const config: Array<FormConfig> = [
     {
+        name: "test-address",
+        key: ".test-address",
+        label: "地址选择器",
+        input_type: "b-address"
+    },
+    {
         name: "operationType",
         key: ".operationType",
         input_type: "select",
