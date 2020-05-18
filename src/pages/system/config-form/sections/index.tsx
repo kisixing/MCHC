@@ -13,7 +13,7 @@ export default class List extends BaseList {
   static defaultProps = {
     baseUrl: '/form-descriptions/sections',
     baseTitle: '模块配置',
-    needPagination: false,
+    needPagination: true,
     showQuery: false,
     tableColumns,
     rowKey: 'id',
@@ -35,10 +35,15 @@ export default class List extends BaseList {
     loading: true,
   };
 
-  handleSearch = async (value = {}) => {
+  handleSearch = async (query = {}) => {
     const { baseUrl } = this.props;
+    const { defaultQuery } = this.state;
+    const params = {
+      ...defaultQuery,
+      ...query,
+    };
     const result = await request.get(
-      isEmpty(value) ? (baseUrl as string) : `${baseUrl}?${queryString.stringify(value)}`,
+      isEmpty(params) ? (baseUrl as string) : `${baseUrl}?${queryString.stringify(params)}`,
     );
     const dataSource = get(result, 'data.data');
     const total = get(result, 'data.total');
