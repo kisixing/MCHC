@@ -15,8 +15,8 @@ export const tableColumns = [
   },
   {
     title: '女方姓名',
-    dataIndex: 'husbandname',
-    key: 'husbandname',
+    dataIndex: 'wifename',
+    key: 'wifename',
     align: 'center',
   },
   {

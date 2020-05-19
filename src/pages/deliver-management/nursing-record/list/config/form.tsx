@@ -1,8 +1,4 @@
 export const queryFormDescriptions = {
-  outpatientNO: {
-    key: 'outpatientNO',
-    label: '门诊号',
-  },
   name: {
     key: 'name',
     label: '姓名',

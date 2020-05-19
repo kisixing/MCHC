@@ -1,13 +1,14 @@
 import React from 'react';
 import Table from './components/Table';
+import Query from './components/Query';
 import { tableColumns } from './config/table';
 import { processFromApi } from './config/adapter';
 import BaseList from '@/components/BaseList';
 import WithDynamicExport from '@/components/WithDynamicExport';
 import { router } from 'umi';
-import { isFunction, get } from 'lodash';
 import request from '@/utils/request';
 import queryString from 'query-string';
+import { map, isNil, isEmpty, isFunction, get } from 'lodash';
 
 @WithDynamicExport
 export default class List extends BaseList {
@@ -15,12 +16,13 @@ export default class List extends BaseList {
     baseUrl: '/admissions',
     baseTitle: '剖宫产记录',
     needPagination: true,
-    showQuery: false,
+    showQuery: true,
     showAdd: false,
     processFromApi,
     tableColumns,
     rowKey: 'id',
     Table,
+    Query,
   };
 
   state = {
@@ -66,5 +68,23 @@ export default class List extends BaseList {
   handleEdit = (rowData: any) => () => {
     const id = get(rowData, 'caesareanDelivery.id');
     router.push(`/deliver-management/caesarean-delivery/edit?id=${id}`);
+  };
+
+  handleQuerySearch = (data: any) => {
+    const { name, idNO } = data;
+    const queryData = {
+      'admissionName.equals': name,
+      'admissionIdNO.equals': idNO,
+    };
+    let newQueryData = {};
+    map(queryData, (value, key) => {
+      if (!isNil(value) && !isEmpty(value)) {
+        newQueryData = {
+          ...newQueryData,
+          [key]: value,
+        };
+      }
+    });
+    this.handleSearch(newQueryData);
   };
 }

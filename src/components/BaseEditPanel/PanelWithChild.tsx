@@ -30,7 +30,7 @@ export default class PanelWithChild extends React.Component {
             <span className={styles.panelWithChildHeaderItemValue}>{get(data, 'edd')}</span>
           </div>
         </div>
-        <Divider className={styles.panelWithChildHeaderDivider}></Divider>
+        {/* <Divider className={styles.panelWithChildHeaderDivider}></Divider> */}
       </>
     );
   };
