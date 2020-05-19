@@ -2,14 +2,14 @@ import { FormConfig } from '@/components/MyForm/interface';
 
 const config: Array<FormConfig> = [
 
-  // {
-  //   name: "",
-  //   key: "",
-  //   label: "本次产检记录",
-  //   header_label: true,
-  //   input_type: "custom",
-  //   input_props: {
-  //     config: [
+  {
+    name: "record",
+    key: ".*",
+    label: "本次产检记录",
+    header_label: true,
+    input_type: "custom",
+    input_props: {
+      config: [
         { name: 'id', key: '.pregnancy.id', label: "id", input_type: "input", span: 0, rules: "required", hidden: true, input_props:{} },
         { name: 'visitDate', key: '.visitDate', label: "日期", input_type: "date", span: 8, rules: "required", input_props:{} },
         { name: 'gestationalWeek', key: '.gestationalWeek', label: "孕周", input_type: "input", span: 8, rules: "required", input_props:{} },
@@ -123,9 +123,10 @@ const config: Array<FormConfig> = [
             extraEditors: []
           }
         },
-  //     ]
-  //   }
-  // }
+
+      ]
+    }
+  }
 
 ]
 export default config;
