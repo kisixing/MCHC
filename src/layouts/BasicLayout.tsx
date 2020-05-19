@@ -82,7 +82,7 @@ const BasicLayout = (props: any) => {
     const username = store.get('username');
     const newCurrentUser = isEmpty(currentUser) ? await request.get(`/users/${username}`) : currentUser;
     const newAllPermissions = isEmpty(allPermissions)
-      ? await request.get('/permissions?type.equals=menu&size=200')
+      ? await request.get('/permissions?type.in=menu,route&size=500')
       : allPermissions;
 
     await dispatch({
@@ -100,7 +100,6 @@ const BasicLayout = (props: any) => {
 
   const dispatchTabs = (currentUser: any, allPermissions: any) => {
     const { location } = props;
-
     const selfPermissions = reduce(
       get(currentUser, 'groups'),
       (sum, group) => concat(sum as [], get(group, 'permissions') as []),
@@ -126,7 +125,6 @@ const BasicLayout = (props: any) => {
         });
       } else {
         const allPermissionsMapping = keyBy(allPermissions, 'key');
-
         get(allPermissionsMapping, get(location, 'pathname'))
           ? router.push('/exception/403')
           : router.push('/exception/404');
@@ -148,10 +146,9 @@ const BasicLayout = (props: any) => {
   };
 
   const menuDataRender = (menuList: MenuDataItem[]): MenuDataItem[] => {
-    const permissions = reduce(
-      get(props, 'currentUser.groups'),
-      (sum, group) => concat(sum as [], get(group, 'permissions') as []),
-      [],
+    const permissions = filter(
+      reduce(get(props, 'currentUser.groups'), (sum, group) => concat(sum as [], get(group, 'permissions') as []), []),
+      item => get(item, 'type') === 'menu',
     );
     const omitRoutesPermission = filter(omitRoutes, (omitMenu: any) => get(omitMenu, 'isMenu'));
     const menusPermissions = keys(keyBy(concat(permissions, omitRoutesPermission), 'key'));
