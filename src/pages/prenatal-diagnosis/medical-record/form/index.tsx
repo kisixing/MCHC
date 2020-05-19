@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, message } from 'antd';
+import { Button, message, Tree } from 'antd';
 import MyForm from '@/components/MyForm/index';
 
 import config from './config';
@@ -19,9 +19,8 @@ interface MedicalRecordState {
   prenatalPatientId: number
 }
 
-interface MedicalRecordProps {
-  data: any
-}
+
+
 
 export default class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordState>{
   constructor(props: any) {
@@ -68,10 +67,12 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
     this.state.formHandler.dispatch("_global", "submit", {});
     this.state.formHandler.submit().then(({ validCode, res }: any) => {
       const formatData = getFormData(res);
+      console.log(res);
       // type需要固定 之后再改这个位置
       formatData.downsScreens[0].type = 0;
       formatData.downsScreens[1].type = 1;
       formatData.downsScreens[2].type = 2;
+      // console.log(formatData);
       // return ;
       if (validCode) {
         if (id === -1) {
@@ -113,7 +114,6 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
     if(formHandler){
       formHandler.dispatch("_global", "reset", {})
       formHandler.reset();
-      
     }
   }
 

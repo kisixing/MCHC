@@ -1,7 +1,7 @@
 import { FormConfig } from '@/components/MyForm/interface';
 
 const config: Array<FormConfig> = [
-  { name: "visitDate", key: ".visitDate", label: "检查时间", span: 8, offset: 0, input_type: "date", rules: "required", },
+  { name: "visitDate", key: ".visitDate", label: "检查时间", span: 6, offset: 0, input_type: "date", rules: "required", },
   {
     name: "chiefComplaint",
     key: '.chiefcomplaint',
@@ -13,11 +13,11 @@ const config: Array<FormConfig> = [
     }
   },
 
-  // { name: "lmp", key: ".lmp", label: "末次月经", span: 8, offset: 0, input_type: "date", rules: "required", },
-  // { name: "edd", key: ".edd", label: "预产期-日期", span: 8, offset: 0, input_type: "date", rules: "required", },
-  // { name: "sureEdd", key: ".sureEdd", label: "预产期-B超", span: 8, offset: 0, input_type: "date", rules: "required", },
+  // { name: "lmp", key: ".lmp", label: "末次月经", span: 6, offset: 0, input_type: "date", rules: "required", },
+  // { name: "edd", key: ".edd", label: "预产期-日期", span: 6, offset: 0, input_type: "date", rules: "required", },
+  // { name: "sureEdd", key: ".sureEdd", label: "预产期-B超", span: 6, offset: 0, input_type: "date", rules: "required", },
   // {
-  //   name: "gravidity", key: ".gravidity", label: "G", span: 8, offset: 0, input_type: "select", rules: "required",
+  //   name: "gravidity", key: ".gravidity", label: "G", span: 6, offset: 0, input_type: "select", rules: "required",
   //   input_props: {
   //     options: [
   //       { label: "1", value: 1 },
@@ -27,7 +27,7 @@ const config: Array<FormConfig> = [
   //   }
   // },
   // {
-  //   name: "parity", key: ".parity", label: "P", span: 8, offset: 0, input_type: "select", rules: "required",
+  //   name: "parity", key: ".parity", label: "P", span: 6, offset: 0, input_type: "select", rules: "required",
   //   input_props: {
   //     options: [
   //       { label: "1", value: 1 },
@@ -44,18 +44,18 @@ const config: Array<FormConfig> = [
     input_type: "custom",
     input_props: {
       config: [
-        { name: "type", key: ".type", label: "类型", unit: "g/L", input_type: "input", span: 8, offset: 0, hidden: true },
-        { name: "Hb", key: ".Hb", label: "Hb", unit: "g/L", input_type: "input", span: 8, offset: 0 },
-        { name: "MCV", key: ".MCV", label: "MCV", unit: "fL", input_type: "input", span: 8, offset: 0 },
-        { name: "MCH", key: ".MCH", label: "MCH", input_type: "input", span: 8, offset: 0 },
-        { name: "HbA2", key: ".HbA2", label: "HbA2", input_type: "input", span: 8, offset: 0 },
+        { name: "type", key: ".type", label: "类型", unit: "g/L", input_type: "input", span: 6, offset: 0, hidden: true },
+        { name: "Hb", key: ".Hb", label: "Hb", unit: "g/L", input_type: "input", span: 6, offset: 0 },
+        { name: "MCV", key: ".MCV", label: "MCV", unit: "fL", input_type: "input", span: 6, offset: 0 },
+        { name: "MCH", key: ".MCH", label: "MCH", input_type: "input", span: 6, offset: 0 },
+        { name: "HbA2", key: ".HbA2", label: "HbA2", input_type: "input", span: 6, offset: 0 },
         // { name: "", key: "trisomy18z", label: "血型", input_type: "input" },
         {
           name: "rh",
           key: ".rh",
           label: "RH血型",
           input_type: "select",
-          span: 8, offset: 0,
+          span: 6, offset: 0,
           input_props: {
             type: "default",
             options: [
@@ -65,7 +65,7 @@ const config: Array<FormConfig> = [
           }
         },
         {
-          name: "genotype", key: ".genotype", label: "地贫基因型", input_type: "select", span: 8, offset: 0,
+          name: "genotype", key: ".genotype", label: "地贫基因型", input_type: "select", span: 6, offset: 0,
           input_props: {
             type: "default",
             radio: false,
@@ -75,7 +75,7 @@ const config: Array<FormConfig> = [
             ]
           }
         },
-        { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 8, offset: 0, },
+        { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 6, offset: 0, },
       ]
     }
   },
@@ -87,17 +87,17 @@ const config: Array<FormConfig> = [
     input_type: "custom",
     input_props: {
       config: [
-        { name: "type", key: ".type", label: "类型", unit: "g/L", input_type: "input", span: 8, offset: 0, hidden: true },
-        { name: "Hb", key: ".Hb", label: "Hb", unit: "g/L", input_type: "input", span: 8, offset: 0 },
-        { name: "MCV", key: ".MCV", label: "MCV", unit: "fL", input_type: "input", span: 8, offset: 0 },
-        { name: "MCH", key: ".MCH", label: "MCH", input_type: "input", span: 8, offset: 0 },
-        { name: "HBA2", key: ".HbA2", label: "HbA2", input_type: "input", span: 8, offset: 0 },
+        { name: "type", key: ".type", label: "类型", unit: "g/L", input_type: "input", span: 6, offset: 0, hidden: true },
+        { name: "Hb", key: ".Hb", label: "Hb", unit: "g/L", input_type: "input", span: 6, offset: 0 },
+        { name: "MCV", key: ".MCV", label: "MCV", unit: "fL", input_type: "input", span: 6, offset: 0 },
+        { name: "MCH", key: ".MCH", label: "MCH", input_type: "input", span: 6, offset: 0 },
+        { name: "HBA2", key: ".HbA2", label: "HbA2", input_type: "input", span: 6, offset: 0 },
         // { name: "", key: "trisomy18z", label: "血型", input_type: "input" },
         {
           name: "rh",
           key: ".rh",
           label: "RH血型",
-          input_type: "select", span: 8, offset: 0,
+          input_type: "select", span: 6, offset: 0,
           input_props: {
             options: [
               { label: "RH(+)", value: "RH(+)" },
@@ -106,7 +106,7 @@ const config: Array<FormConfig> = [
           }
         },
         {
-          name: "genotype", key: ".genotype", label: "地贫基因型", input_type: "select", span: 8, offset: 0,
+          name: "genotype", key: ".genotype", label: "地贫基因型", input_type: "select", span: 6, offset: 0,
           input_props: {
             type: "default",
             radio: false,
@@ -116,7 +116,7 @@ const config: Array<FormConfig> = [
             ]
           }
         },
-        { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 8, offset: 0, },
+        { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 6, offset: 0, },
       ]
     }
   },
@@ -128,13 +128,13 @@ const config: Array<FormConfig> = [
     input_type: "custom",
     input_props: {
       config: [
-        { name: "type", key: ".type", label: "类型", input_type: "input", span: 8, offset: 0,  hidden: true },
-        { name: "id", key: ".id", input_type: "input", span: 8, offset: 0, hidden: true },
-        { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 8, offset: 0 },
-        { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 8, offset: 0 },
-        { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 8, offset: 0 },
-        { name: "hCG", key: ".hCG", label: "β-HCG", input_type: "input", span: 8, offset: 0 },
-        { name: "pAPPA", key: ".pAPPA", label: "PAPP-A", input_type: "input", span: 8, offset: 0 },
+        { name: "type", key: ".type", label: "类型", input_type: "input", span: 6, offset: 0,  hidden: true },
+        { name: "id", key: ".id", input_type: "input", span: 6, offset: 0, hidden: true },
+        { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 6, offset: 0 },
+        { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 6, offset: 0 },
+        { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 6, offset: 0 },
+        { name: "hCG", key: ".hCG", label: "β-HCG", input_type: "input", span: 6, offset: 0 },
+        { name: "pAPPA", key: ".pAPPA", label: "PAPP-A", input_type: "input", span: 6, offset: 0 },
       ]
     }
   },
@@ -146,16 +146,16 @@ const config: Array<FormConfig> = [
     input_type: "custom",
     input_props: {
       config: [
-        { name: "type", key: ".type", label: "类型", input_type: "input", span: 8, offset: 0,  hidden: true },
-        { name: "id", key: ".id", input_type: "input", span: 8, offset: 0, hidden: true },
-        { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 8, offset: 0 },
-        { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 8, offset: 0 },
-        { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 8, offset: 0 },
-        { name: "NTD", key: ".nTD", label: "NTD风险", input_type: "input", span: 8, offset: 0 },
-        { name: "HCG", key: ".hCG", label: "β-HCG", unit: "mom", input_type: "input", span: 8, offset: 0 },
-        { name: "AFP", key: ".aFP", label: "AFP", unit: "mom", input_type: "input", span: 8, offset: 0 },
-        { name: "E3", key: ".e3", label: "E3", unit: "mom", input_type: "input", span: 8, offset: 0 },
-        { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 8, offset: 0 },
+        { name: "type", key: ".type", label: "类型", input_type: "input", span: 6, offset: 0,  hidden: true },
+        { name: "id", key: ".id", input_type: "input", span: 6, offset: 0, hidden: true },
+        { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 6, offset: 0 },
+        { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 6, offset: 0 },
+        { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 6, offset: 0 },
+        { name: "NTD", key: ".nTD", label: "NTD风险", input_type: "input", span: 6, offset: 0 },
+        { name: "HCG", key: ".hCG", label: "β-HCG", unit: "mom", input_type: "input", span: 6, offset: 0 },
+        { name: "AFP", key: ".aFP", label: "AFP", unit: "mom", input_type: "input", span: 6, offset: 0 },
+        { name: "E3", key: ".e3", label: "E3", unit: "mom", input_type: "input", span: 6, offset: 0 },
+        { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 6, offset: 0 },
       ]
     }
   },
@@ -167,15 +167,15 @@ const config: Array<FormConfig> = [
     input_type: "custom",
     input_props: {
       config: [
-        { name: "type", key: ".type", label: "类型", input_type: "input", span: 8, offset: 0,  hidden: true },
-        { name: "id", key: ".id", input_type: "input", span: 8, offset: 0, hidden: true },
-        { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 8, offset: 0 },
-        { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 8, offset: 0 },
-        { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 8, offset: 0 },
-        { name: "trisomy21z", key: ".trisomy21z", label: "21三体风险Z值", input_type: "input", span: 8, offset: 0 },
-        { name: "trisomy18z", key: ".trisomy18z", label: "18三体风险Z值", input_type: "input", span: 8, offset: 0 },
-        { name: "trisomy13z", key: ".trisomy13z", label: "13三体风险Z值", input_type: "input", span: 8, offset: 0 },
-        { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 8, offset: 0 },
+        { name: "type", key: ".type", label: "类型", input_type: "input", span: 6, offset: 0,  hidden: true },
+        { name: "id", key: ".id", input_type: "input", span: 6, offset: 0, hidden: true },
+        { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 6, offset: 0 },
+        { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 6, offset: 0 },
+        { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 6, offset: 0 },
+        { name: "trisomy21z", key: ".trisomy21z", label: "21三体风险Z值", input_type: "input", span: 6, offset: 0 },
+        { name: "trisomy18z", key: ".trisomy18z", label: "18三体风险Z值", input_type: "input", span: 6, offset: 0 },
+        { name: "trisomy13z", key: ".trisomy13z", label: "13三体风险Z值", input_type: "input", span: 6, offset: 0 },
+        { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 6, offset: 0 },
       ]
     }
   },
@@ -461,7 +461,7 @@ const config: Array<FormConfig> = [
   //   }
   // },
   {
-    name: "procedureHistory",
+    name: "procedureHistory-uterus",
     key: ".procedureHistory",
     label: "子宫手术",
     input_type: "checkbox",
@@ -489,7 +489,7 @@ const config: Array<FormConfig> = [
     }
   },
   {
-    name: "procedureHistory",
+    name: "procedureHistory-ovaries",
     key: ".procedureHistory",
     label: "卵巢手术",
     input_type: "checkbox",
@@ -517,7 +517,7 @@ const config: Array<FormConfig> = [
     }
   },
   {
-    name: "procedureHistory",
+    name: "procedureHistory-thyroid",
     key: ".procedureHistory",
     label: "甲状腺手术",
     input_type: "checkbox",
@@ -545,7 +545,7 @@ const config: Array<FormConfig> = [
     }
   },
   {
-    name: "procedureHistory",
+    name: "procedureHistory-other",
     key: ".procedureHistory",
     label: "其他",
     input_type: "checkbox",
@@ -572,6 +572,8 @@ const config: Array<FormConfig> = [
       ]
     }
   },
+
+  
   // {
   //   name: "diseaseHistory-h",
   //   key: ".diseaseHistory",
@@ -625,6 +627,7 @@ const config: Array<FormConfig> = [
   //     ]
   //   }
   // },
+ 
   {
     name: "fetuses",
     key: ".fetuses",
@@ -633,13 +636,13 @@ const config: Array<FormConfig> = [
     input_type: "array-custom",
     input_props: {
       config: [
-        { name: "id", key: ".id", label: "id", input_type: "input", span: 8, offset: 0, hidden: true },
-        { name: "fetalPosition", key: ".fetalPosition", label: "胎儿位置", input_type: "input", span: 8, offset: 0 },
-        { name: "fetalHeartRate", key: ".fetalHeartRate", label: "胎心率", input_type: "input", span: 8, offset: 0 },
-        { name: "fetalMovement", key: ".fetalMovement", label: "胎动", input_type: "input", span: 8, offset: 0 },
-        { name: "presentation", key: ".presentation", label: "先露", input_type: "input", span: 8, offset: 0 },
-        { name: "weight", key: ".weight", label: "胎重", input_type: "input", span: 8, offset: 0 },
-        { name: "avf", key: ".avf", label: "avf", input_type: "input", span: 8, offset: 0 },
+        { name: "id", key: ".id", label: "id", input_type: "input", span: 6, offset: 0, hidden: true },
+        { name: "fetalPosition", key: ".fetalPosition", label: "胎儿位置", input_type: "input", span: 6, offset: 0 },
+        { name: "fetalHeartRate", key: ".fetalHeartRate", label: "胎心率", input_type: "input", span: 6, offset: 0 },
+        { name: "fetalMovement", key: ".fetalMovement", label: "胎动", input_type: "input", span: 6, offset: 0 },
+        { name: "presentation", key: ".presentation", label: "先露", input_type: "input", span: 6, offset: 0 },
+        { name: "weight", key: ".weight", label: "胎重", input_type: "input", span: 6, offset: 0 },
+        { name: "avf", key: ".avf", label: "avf", input_type: "input", span: 6, offset: 0 },
       ]
     }
   },
@@ -651,13 +654,13 @@ const config: Array<FormConfig> = [
     input_type: "custom",
     input_props: {
       config: [
-        { name: "id", key: ".id", label: "id", input_type: "input", span: 8, offset: 0, hidden: true },
-        { name: "height", key: ".height", label: "身高", input_type: "input", span: 8, offset: 0 },
-        { name: "weight", key: ".weight", label: "体重", input_type: "input", span: 8, offset: 0 },
-        { name: "systolic", key: ".systolic", label: "收缩压", input_type: "input", span: 8, offset: 0 },
-        { name: "diastolic", key: ".diastolic", label: "舒张压", input_type: "input", span: 8, offset: 0 },
-        { name: "pulse", key: ".pulse", label: "脉率", input_type: "input", span: 8, offset: 0 },
-        { name: "temperature", key: ".temperature", label: "体温", input_type: "input", span: 8, offset: 0 },
+        { name: "id", key: ".id", label: "id", input_type: "input", span: 6, offset: 0, hidden: true },
+        { name: "height", key: ".height", label: "身高", input_type: "input", span: 6, offset: 0 },
+        { name: "weight", key: ".weight", label: "体重", input_type: "input", span: 6, offset: 0 },
+        { name: "systolic", key: ".systolic", label: "收缩压", input_type: "input", span: 6, offset: 0 },
+        { name: "diastolic", key: ".diastolic", label: "舒张压", input_type: "input", span: 6, offset: 0 },
+        { name: "pulse", key: ".pulse", label: "脉率", input_type: "input", span: 6, offset: 0 },
+        { name: "temperature", key: ".temperature", label: "体温", input_type: "input", span: 6, offset: 0 },
       ]
     }
   },
@@ -669,10 +672,10 @@ const config: Array<FormConfig> = [
     input_type: "custom",
     input_props: {
       config: [
-        { name: "id", key: ".id", label: "id", input_type: "input", span: 8, offset: 0, hidden: true },
-        { name: "fundalHeight", key: ".fundalHeight", label: "宫高", input_type: "input", span: 8, offset: 0 },
-        { name: "waistHip", key: ".waistHip", label: "腹围", input_type: "input", span: 8, offset: 0 },
-        { name: "engagement", key: ".engagement", label: "衔接", input_type: "input", span: 8, offset: 0} 
+        { name: "id", key: ".id", label: "id", input_type: "input", span: 6, offset: 0, hidden: true },
+        { name: "fundalHeight", key: ".fundalHeight", label: "宫高", input_type: "input", span: 6, offset: 0 },
+        { name: "waistHip", key: ".waistHip", label: "腹围", input_type: "input", span: 6, offset: 0 },
+        { name: "engagement", key: ".engagement", label: "衔接", input_type: "input", span: 6, offset: 0} 
       ]
     }
   }

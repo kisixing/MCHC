@@ -66,7 +66,6 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
   }
 
   componentDidUpdate(prevProps: FormItemProp) {
-    const self = this;
     if (JSON.stringify(this.props) !== JSON.stringify(prevProps)) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
@@ -79,27 +78,10 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
 
   handleChange = (val: any, error: any = "") => {
     const { name, dispatch } = this.props;
-    // debugger;
     this.setState({ value: val }, () => {
-      if (name) {
-        dispatch(name, "change", val);
-      }
-      if (this.props.actions) {
-        if (this.props.actions.setValue) {
-          this.props.actions.setValue(this.state.value);
-        } else {
-          console.error('缺失setValue Function');
-        }
-        // TODO 这个位置先将object/array的valid不在handlechange时触发，以后可以加入trigger去做响应
-        if (this.props.actions.valid) {
-          this.props.actions.valid();
-          if(error){
-            this.setState({error});
-          }
-        } else {
-          console.error('缺失valid Function || ');
-        }
-      }
+      if (name) { dispatch(name, "change", val); }
+      const err = validFun(this.state.value, this.props.validate || "");
+      this.setState({error: err || error});
     });
   }
 
@@ -113,6 +95,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
   }
 
   render() {
+    // console.log(this.state);
     const { dispatch, subscribe, type, label, input_props, unit, path, header_label } = this.props;
     const { value, error, validate } = this.state;
     const MyComponent = MyComponents[type];
