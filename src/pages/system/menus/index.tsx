@@ -14,7 +14,7 @@ import commonStyles from '@/common.less';
 export default class List extends BaseList {
   static defaultProps = {
     baseUrl: '/permissions',
-    baseTitle: '菜单/权限',
+    baseTitle: '菜单/页面/权限',
     needPagination: false,
     showQuery: false,
     tableColumns,

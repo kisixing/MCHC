@@ -28,9 +28,9 @@ export const routes: IRoute[] = [
   },
 ];
 
-// export const omitRoutes = [];
+export const omitRoutes = [];
 
-export const omitRoutes = [
+export const omitRoutesBackup = [
   {
     id: 1001,
     type: 'others',
