@@ -44,7 +44,7 @@ const config: Array<FormConfig> = [
       config: [
         { name: 'partnerName', key: '.partnerName', label: "姓名", input_type: "input", span: 7 },
         { name: 'partnerTelephone', key: '.partnerTelephone', label: "手机号码", input_type: "input", span: 7 },
-        // { name: 'userhmcno', key: '.userhmcno', label: "配偶门诊号", input_type: "input", span: 7 },
+        { name: 'userhmcno', key: '.partnerProfile.outpatientNO', label: "门诊号", input_type: "input", span: 7 },
         { name: 'partnerIdType', key: '.partnerIdType', label: "证件类型", input_type: "select", span: 7, input_props:{options: Options.idTypeOptions} },
         { name: 'partnerIdNO', key: '.partnerIdNO', label: "证件号码", input_type: "input", span: 7 },
         // { name: 'userhage', key: '.userhage', label: "年龄", input_type: "input", span: 7 },

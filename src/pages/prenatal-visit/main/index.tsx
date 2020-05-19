@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { Tabs } from 'antd';
-import Initial from './components/initial';
-import Return from './components/return';
 import request from '@/utils/request';
 import { getPageQuery } from '@/utils/utils';
+
+import Initial from './components/initial';
+import Return from './components/return';
+import Base from './components/base';
+import BloodSugar from './components/blood-sugar';
+import Curve from './components/curve';
+import ImageReport from './components/image-report';
+import SurveyReport from './components/survey-report';
 import styles from './index.less';
 
 interface PrenatalDiagnosisState {
@@ -66,11 +72,26 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
       <div className={styles.container}>
         { this.renderInfo() }
         <Tabs defaultActiveKey="1" type="card" size="small">
-          <Tabs.TabPane tab="首诊" key="Initial">
+          <Tabs.TabPane tab="首检信息" key="Initial">
             <Initial />
           </Tabs.TabPane>
-          <Tabs.TabPane tab="复诊" key="Return">
+          <Tabs.TabPane tab="复诊记录" key="Return">
             <Return />
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="孕期曲线" key="Curve">
+            <Curve />
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="血糖记录" key="BloodSugar">
+            <BloodSugar />
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="影像报告" key="ImageReport">
+            <ImageReport />
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="检验报告" key="SurveyReport">
+            <SurveyReport />
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="基本信息" key="Base">
+            <Base />
           </Tabs.TabPane>
         </Tabs>
       </div>

@@ -14,9 +14,16 @@ export const tableColumns = [
     align: 'center',
   },
   {
-    title: '末次月经',
-    dataIndex: 'lmp',
-    key: 'bedNO',
+    title: '年龄',
+    dataIndex: 'age',
+    key: 'age',
+    align: 'center',
+  },
+  {
+    title: '孕周',
+    dataIndex: 'gestationalWeek',
+    key: 'gestationalWeek',
+    align: 'center',
   },
   {
     title: '预产期-日期',
@@ -43,15 +50,15 @@ export const tableColumns = [
     align: 'center',
   },
   {
-    title: 'A',
-    dataIndex: 'abortion',
-    key: 'abortion',
+    title: '门诊号',
+    dataIndex: 'outpatientNO',
+    key: 'outpatientNO',
     align: 'center',
   },
   {
-    title: 'E',
-    dataIndex: 'exfetation',
-    key: 'exfetation',
+    title: '产检编号',
+    dataIndex: 'checkupNO',
+    key: 'checkupNO',
     align: 'center',
   },
 ];
