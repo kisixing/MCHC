@@ -17,6 +17,7 @@ import hearingScreening from './hearing-screening';
 import childDeath from './child-death';
 import childExamination from './child-examination';
 import childManagement from './child-management';
+import others from './others';
 
 export default [
   //
@@ -39,4 +40,5 @@ export default [
   neonatalDiseases,
   debilityChildren,
   statistics,
+  ...others,
 ];

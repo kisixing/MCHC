@@ -50,6 +50,7 @@ export default class PremaritalExam extends BaseEditPanel<IProps> {
       ...get(personData, 'premaritalVisit'),
       premaritalExam,
       [type]: { id: get(personData, 'id') },
+      visitType: type === 'wife' ? 1 : 2,
     };
     if (type === 'wife' || type === 'husband') {
       if (get(params, 'id')) {
