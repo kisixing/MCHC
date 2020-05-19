@@ -15,8 +15,8 @@ import { getPageQuery } from '@/utils/utils';
 export default class List extends BaseList {
   
   static defaultProps = {
-    baseUrl: "/prenatal-diagnoses",
-    baseTitle: '专科病历',
+    baseUrl: "/pd-operations",
+    baseTitle: '手术病历',
     needPagination: false,
     showQuery: false,
     showAdd: true,

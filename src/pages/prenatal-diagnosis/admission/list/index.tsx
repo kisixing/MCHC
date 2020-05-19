@@ -18,6 +18,7 @@ export default class List extends BaseList {
     showQuery: false,
     showAdd: true,
     tableColumns,
+    needPagination: true,
     rowKey: 'id',
     Table,
   };
@@ -85,11 +86,11 @@ export default class List extends BaseList {
 
   handleView = (rowData: any) => () => {
     const { id } = rowData;
-    router.push(`/prenatal-diagnosis/main?id=${id}`);
+    router.push(`/prenatal-diagnosis/main?prenatalPatientId=${id}`);
   };
 
   handleEdit = (rowData: any) => () => {
     const { id } = rowData;
-    router.push(`/prenatal-diagnosis/new-patient?id=${id}`);
+    router.push(`/prenatal-diagnosis/new-patient?prenatalPatientId=${id}`);
   };
 }

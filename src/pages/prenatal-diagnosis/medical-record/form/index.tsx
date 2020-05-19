@@ -58,7 +58,6 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
           this.setState({ data: res[0] })
         }
       });
-
     }
   }
 

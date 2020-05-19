@@ -2,18 +2,19 @@ import React, { Component, ReactNode } from 'react';
 import { Button } from 'antd';
 import request from '@/utils/request'
 import MedicalRecordList from '../medical-record/list';
-import OperationRecord from '../operation-record/index';
+import OperationRecordList from '../operation-record/list';
+// import OperationRecord from '../operation-record/form/index';
 import { getPageQuery } from '@/utils/utils';
 import styles from './index.less';
 
 const componentList = {
   "medical-record": MedicalRecordList,
-  "operation-record": OperationRecord
+  "operation-record": OperationRecordList
 }
 
 const buttnGroup = [
   { key: "medical-record", title: "专科病历" },
-  { key: "operation-record", title: "手术记录表单" },
+  { key: "operation-record", title: "手术病历" },
 ]
 
 interface PrenatalDiagnosisState {
