@@ -62,7 +62,7 @@ export default class Addpanel extends PanelWithChild {
             </span>
           </div>
         </div>
-        <Divider className={headerStyles.panelWithChildHeaderDivider}></Divider>
+        {/* <Divider className={headerStyles.panelWithChildHeaderDivider}></Divider> */}
       </>
     );
   }

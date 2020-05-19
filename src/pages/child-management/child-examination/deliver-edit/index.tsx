@@ -53,7 +53,7 @@ export default class panel extends PanelWithChild {
             </span>
           </div>
         </div>
-        <Divider className={headerStyles.panelWithChildHeaderDivider}></Divider>
+        {/* <Divider className={headerStyles.panelWithChildHeaderDivider}></Divider> */}
       </>
     );
   }
