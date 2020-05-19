@@ -20,7 +20,6 @@ export default class BirthInformationPanel extends BaseEditPanel {
 
   async componentDidMount() {
     const { location, moduleName, baseUrl, fromApi, data } = this.props;
-    console.log('7777777777', data)
 
     const formDescriptions = formDescriptionsFromApi(await request.get(`/form-descriptions?moduleName=${moduleName}`));
     const formDescriptionsWithoutSection = formDescriptionsWithoutSectionApi(formDescriptions);

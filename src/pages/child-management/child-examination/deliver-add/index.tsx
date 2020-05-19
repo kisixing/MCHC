@@ -14,20 +14,39 @@ import headerStyles from '@/components/BaseEditPanel/index.less';
 
 export default class Addpanel extends PanelWithChild {
   state = {
-    headerData: {},
+    activeKey: get(this.props, 'location.query.activeKey') || 'PhysicalExamination',
+    childArchives: {},
     data: {},
+    id: null
   };
 
   async componentDidMount() {
     const childId = get(this.props, 'location.query.childId');
-    const data = await request.get(`/child-archives/${childId}`);;
+    const data = await request.get(`/child-archives/${childId}`);
+    console.log('8888888888888888', data)
     this.setState({
-      data,
+      childArchives: data,
     });
   }
 
+  handleChangeTab = async (activeKey: string) => {
+    const { id } = this.state;
+    let data = {};
+    if (id) {
+      data = await request.get(`/child-exam-visits/${id}`);
+    }
+    this.setState({
+      data,
+      activeKey,
+    });
+  };
+
+  setID = (id: string) => {
+    this.setState({ id })
+  }
+
   renderHeader = () => {
-    const { data } = this.state;
+    const data = this.state.childArchives;
     return (
       <>
         <div className={headerStyles.panelWithChildHeader}>
@@ -51,24 +70,23 @@ export default class Addpanel extends PanelWithChild {
 
   renderContent = () => {
     const id = get(this.props, 'location.query.id');
-    const { data, activeKey } = this.state;
-
+    const { data, activeKey, childArchives } = this.state;
     return (
-      <Tabs defaultActiveKey="1" type="card" size="small">
-        <Tabs.TabPane tab="出生信息登记" key="birth-information">
-          <BirthInformation id={id} />
+      <Tabs defaultActiveKey={activeKey} type="card" size="small" onChange={this.handleChangeTab}>
+        {/* <Tabs.TabPane tab="出生信息登记" key="BirthInformation">
+          {activeKey === 'BirthInformation' && <BirthInformation data={data} />}
+        </Tabs.TabPane> */}
+        <Tabs.TabPane tab="体格检查" key="PhysicalExamination">
+          {activeKey === 'PhysicalExamination' && <PhysicalExamination id={id} setID={this.setID} data={data} childArchivesData={childArchives} />}
         </Tabs.TabPane>
-        <Tabs.TabPane tab="传染病史" key="infected-history">
-          <InfectedHistory id={id} />
+        <Tabs.TabPane tab="内科检查" key="GeneralExamination">
+          {activeKey === 'GeneralExamination' && <GeneralExamination id={id} setID={this.setID} data={data} childArchivesData={childArchives} />}
         </Tabs.TabPane>
-        <Tabs.TabPane tab="体格检查" key="physical-examination">
-          <PhysicalExamination id={id} />
+        <Tabs.TabPane tab="辅助检查" key="AuxiliaryExamination">
+          {activeKey === 'AuxiliaryExamination' && <AuxiliaryExamination id={id} setID={this.setID} data={data} childArchivesData={childArchives}  />}
         </Tabs.TabPane>
-        <Tabs.TabPane tab="内科检查" key="general-examination">
-          <GeneralExamination id={id}/>
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="辅助检查" key="auxiliary-examination">
-          <AuxiliaryExamination id={id} />
+        <Tabs.TabPane tab="传染病史" key="InfectedHistory">
+          {activeKey === 'InfectedHistory' && <InfectedHistory id={id} setID={this.setID} data={data} childArchivesData={childArchives} />}
         </Tabs.TabPane>
         <Tabs.TabPane tab="高危儿登记" key="CaesareanDelivery">
 

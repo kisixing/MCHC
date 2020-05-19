@@ -14,7 +14,7 @@ import headerStyles from '@/components/BaseEditPanel/index.less';
 
 export default class panel extends PanelWithChild {
   state = {
-    activeKey: get(this.props, 'location.query.activeKey') || 'BirthInformation',
+    activeKey: get(this.props, 'location.query.activeKey') || 'PhysicalExamination',
     data: {},
   };
 
@@ -25,7 +25,10 @@ export default class panel extends PanelWithChild {
   }
 
   handleChangeTab = async (activeKey: string) => {
+    const { id } = get(this.props, 'location.query');
+    const data = await request.get(`/child-exam-visits/${id}`);
     this.setState({
+      data,
       activeKey,
     });
   };
@@ -59,21 +62,22 @@ export default class panel extends PanelWithChild {
     const id = get(this.props, 'location.query.id');
     const { data, activeKey } = this.state;
     return (
-      <Tabs defaultActiveKey="1" type="card" size="small" onChange={this.handleChangeTab}>
-        <Tabs.TabPane tab="出生信息登记" key="BirthInformation">
+      <Tabs defaultActiveKey={activeKey} type="card" size="small" onChange={this.handleChangeTab}>
+        {/* <Tabs.TabPane tab="出生信息登记" key="BirthInformation">
           {activeKey === 'BirthInformation' && <BirthInformation data={data} />}
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="传染病史" key="InfectedHistory">
-          {activeKey === 'InfectedHistory' && <InfectedHistory id={id} />}
-        </Tabs.TabPane>
+        </Tabs.TabPane> */}
+        
         <Tabs.TabPane tab="体格检查" key="PhysicalExamination">
-          {activeKey === 'PhysicalExamination' && <PhysicalExamination id={id} />}
+          {activeKey === 'PhysicalExamination' && <PhysicalExamination id={id} data={data} />}
         </Tabs.TabPane>
         <Tabs.TabPane tab="内科检查" key="GeneralExamination">
-          {activeKey === 'GeneralExamination' && <GeneralExamination id={id}/>}
+          {activeKey === 'GeneralExamination' && <GeneralExamination id={id} data={data}/>}
         </Tabs.TabPane>
         <Tabs.TabPane tab="辅助检查" key="AuxiliaryExamination">
-          {activeKey === 'AuxiliaryExamination' && <AuxiliaryExamination id={id} />}
+          {activeKey === 'AuxiliaryExamination' && <AuxiliaryExamination id={id} data={data} />}
+        </Tabs.TabPane>
+        <Tabs.TabPane tab="传染病史" key="InfectedHistory">
+          {activeKey === 'InfectedHistory' && <InfectedHistory id={id} data={data} />}
         </Tabs.TabPane>
         <Tabs.TabPane tab="高危儿登记" key="CaesareanDelivery">
 

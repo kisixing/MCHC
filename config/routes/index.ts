@@ -262,8 +262,8 @@ export const omitRoutes = [
   {
     id: 346,
     type: 'others',
-    key: '/child-management/child-examination/add',
-    name: '创建健康体检记录',
+    key: '/child-management/child-examination/deliver-add',
+    name: '创建健康体检',
     isMenu: false,
     active: null,
   },

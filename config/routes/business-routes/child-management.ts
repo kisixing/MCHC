@@ -47,9 +47,9 @@ export default {
     },
     {
       name: 'child-examination-add',
-      icon: 'edit',
-      path: '/child-management/child-examination/edit',
-      component: './child-management/child-examination/add',
+      icon: 'plus',
+      path: '/child-management/child-examination/deliver-add',
+      component: './child-management/child-examination/deliver-add',
     },
     {
       name: 'child-examination-edit',
