@@ -24,7 +24,11 @@ export default {
       const key = get(_, 'payload.data.key');
       tabs = filter(tabs, tab => tab.key !== key);
       const activeKey = get(last(tabs), 'key');
-      router.push(get(keyBy(tabs, 'key'), `${activeKey}.path`));
+      const activeTab = get(keyBy(tabs, 'key'), activeKey);
+      router.push({
+        pathname: get(activeTab, 'path'),
+        search: get(activeTab, 'search'),
+      });
       yield put({
         type: 'tab/changeTabs',
         payload: {
