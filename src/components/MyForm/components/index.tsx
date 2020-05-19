@@ -9,7 +9,7 @@ import SimpleObject from './SimpleObject';
 import MyCustom from './MyCustom';
 import ArrayCustom from './MyCustom/ArrayCustom'
 
-import AddressCascader from './business/Address/AddressCascader';
+import AddressCascader from './business/CascaderAddress';
 
 interface MyComponent{
   [key:string]: any
@@ -23,11 +23,11 @@ const MyComponent:MyComponent = {
   "table": MyTable,
 
   "simpleobject": SimpleObject,
-  
+
   "custom": MyCustom,
   "array-custom": ArrayCustom,
   // 业务类组件
-  "b-address": AddressCascader
+  "addressCascader": AddressCascader
 
 }
 
