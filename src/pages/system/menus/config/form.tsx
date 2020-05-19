@@ -43,13 +43,10 @@ export const modalFormDescriptions = {
       placeholder: '请输入模块名',
     },
   },
-  // code: {
-  //   key: 'code',
-  //   label: '属性代号',
-  //   inputType: 'input',
-  //   inputProps: {
-  //     placeholder: '请输入属性代号',
-  //   },
+  // active: {
+  //   key: 'active',
+  //   label: '是否启用',
+  //   inputType: 'pregnant_radio',
   // },
   // test: {
   //   key: 'test',

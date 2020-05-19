@@ -28,6 +28,8 @@ export const routes: IRoute[] = [
   },
 ];
 
+// export const omitRoutes = [];
+
 export const omitRoutes = [
   {
     id: 1001,
@@ -745,41 +747,41 @@ export const omitRoutes = [
     type: 'others',
     key: '/prenatal-diagnosis/medical-record',
     active: null,
-    isMenu: false
+    isMenu: false,
   },
   {
     id: 97,
     type: 'others',
     key: '/prenatal-diagnosis/operation-record',
     active: null,
-    isMenu: true
+    isMenu: true,
   },
   {
     id: 96,
     type: 'others',
     key: '/prenatal-diagnosis/admission',
     active: null,
-    isMenu: true
+    isMenu: true,
   },
   {
     id: 95,
     type: 'others',
     key: '/prenatal-diagnosis/main',
     active: null,
-    isMenu: false
+    isMenu: false,
   },
   {
     id: 94,
     type: 'others',
     key: '/prenatal-diagnosis/new-patient',
     active: null,
-    isMenu: true
+    isMenu: true,
   },
   {
     id: 93,
     type: 'others',
     key: '/prenatal-diagnosis/medical-record-form',
     active: null,
-    isMenu: false
-  }
+    isMenu: false,
+  },
 ];

@@ -13,16 +13,16 @@ import CustomSpin from '@/components/GeneralComponents/CustomSpin';
 import ResetPasswordModal from './components/ResetPasswordModal';
 import WithDynamicExport from '@/components/WithDynamicExport';
 
-interface IProps {}
+// interface IProps {}
 
-interface IState extends BaseListIState {
-  paramryKey?: string;
-  resetVisible?: boolean;
-  resetEditable?: boolean;
-}
+// interface IState extends BaseListIState {
+//   paramryKey?: string;
+//   resetVisible?: boolean;
+//   resetEditable?: boolean;
+// }
 
 @WithDynamicExport
-export default class List extends BaseList<IProps, IState> {
+export default class List extends BaseList {
   static defaultProps = {
     baseUrl: '/users',
     baseTitle: '用户',
@@ -65,6 +65,7 @@ export default class List extends BaseList<IProps, IState> {
     {
       title: '操作',
       align: 'center',
+      fixed: 'right',
       render: (value: any, rowData: any, index: any) => {
         return (
           <Fragment>
@@ -145,17 +146,7 @@ export default class List extends BaseList<IProps, IState> {
 
   render() {
     const { baseTitle, rowKey, showAdd, needPagination } = this.props;
-    const {
-      dataSource,
-      visible,
-      editable,
-      id,
-      total,
-      defaultQuery,
-      loading,
-      paramryKey,
-      resetVisible,
-    } = this.state;
+    const { dataSource, visible, editable, id, total, defaultQuery, loading, paramryKey, resetVisible } = this.state;
 
     return (
       <Fragment>
