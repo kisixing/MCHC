@@ -1,12 +1,12 @@
 import { FormConfig } from '@/components/MyForm/interface';
 
 const config: Array<FormConfig> = [
-    {
-        name: "test-address",
-        key: ".test-address",
-        label: "地址选择器",
-        input_type: "b-address"
-    },
+    // {
+    //     name: "test-address",
+    //     key: ".test-address",
+    //     label: "地址选择器",
+    //     input_type: "b-address"
+    // },
     {
         name: "operationType",
         key: ".operationType",
@@ -31,7 +31,7 @@ const config: Array<FormConfig> = [
         }
     },
     {
-        name: "operationName",
+        name: "grade",
         key: ".grade",
         input_type: "select",
         label: "手术级别",

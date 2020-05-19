@@ -6,11 +6,25 @@ const data = {
     "operationName": "羊膜腔穿刺",
     "serialNo": "0001",
     "grade": 1,
-    // done
+    "operationDate": "",
+    "incisionType" : null,
+    "rePuncture" : null,
+    "operator" : null,
+    "assistant" : null,
+    "assistant2" : null,
+    "nurse" : null,
+    "circuiting" : null,
+    // 术前
     "pdPreOperation": {
         "temperature": "",
         "systolic": "",
         "diastolic": "",
+        "pluse": "",
+        "heartrate": "",
+        "respiratory": "",
+        "bloodCollectionDate": "",
+        "bloodType": "",
+        "diagnosis": "",
         "pdPreMeasurement": [
             {
                 "leftPleuralEffusion": "",
@@ -22,7 +36,16 @@ const data = {
                 "note": ""
             }
         ],
-        "ultrasound": [],
+        "ultrasound": [
+            {
+                "checkdate": "",
+                "type": "",
+                "clr": "",
+                "nt": "",
+                "menopause": "",
+                "gestationalWeek": ""
+            }
+        ],
         "pdPreBloodFlow": [
             {
                 "uaEdf": "",
@@ -55,6 +78,7 @@ const data = {
             "doctor": "麻醉医生",
         }
     },
+    // 手术过程
     "pdProcedure": [{
         "startTime": "08:00:00",
         "endTime": "10:00:00",
@@ -75,6 +99,11 @@ const data = {
         "pdMedication": [],
         "invasiveNote": {}
     }],
+    "pdMedications" : [ ],
+    "prenatalPatient" : {
+        "id": 1
+    },
+    "pdPreBloodFlows": [],
     "pdPostOperation": {}
 }
 

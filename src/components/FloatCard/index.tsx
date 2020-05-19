@@ -3,42 +3,67 @@ import { Button } from 'antd';
 
 import styles from './index.less';
 
-export default class FloatCard extends Component {
+// TODO 待完善
 
-  offsetTop = 0;
+export default class FloatCard extends Component<any, any> {
 
-  offsetLeft = 0;
-  // constructor(props: any){
-  //   super(props);
-  //   this.state = {
-  //     float_dom: ""
-  //   }
-  // }
+  static menuWidth = 350;
 
-  componentDidMount() {
-    const parentNode = this.refs.float.parentNode;
-    this.offsetLeft = parentNode.offsetLeft;
-    this.offsetTop = parentNode.offsetTop;
+  constructor(props: any){
+    super(props);
+    this.state = {
+      offsetTop: 0,
+      offsetLeft: 0,
+      isShow: false
+    }
   }
 
+  componentDidMount() {
+    const parentNode = this.refs.card.parentNode;
+    this.setState({
+      offsetLeft: parentNode.offsetLeft - FloatCard.menuWidth,
+      offsetTop: parentNode.offsetTop
+    });
+  }
+
+  hanldeClick = () => {
+    const { isShow, offsetLeft } = this.state;
+    if(isShow){
+      this.setState({
+        offsetLeft: offsetLeft - FloatCard.menuWidth
+      });
+    }else{
+      this.setState({
+        offsetLeft: offsetLeft + FloatCard.menuWidth
+      });
+    }
+    this.setState({isShow: !isShow})
+  }
+
+
   render() {
-    return <div
-      className={styles.outter}
-      style={{
-        top: this.offsetTop,
-        left: this.offsetLeft
-      }}
-      ref="float"
-    >
+    // 暂时定死menu 350px trigger是50px
+    const { offsetTop, offsetLeft, isShow } = this.state;
+    return (
       <div 
-        className={styles.content}
-        ref="content"  
+        className={styles.card} 
+        ref="card"
+        style={{
+          top: offsetTop,
+          left: offsetLeft
+        }}
       >
+      <div className={styles.menu}>
         {this.props.children}
       </div>
-      <div className={styles['trigger-btn']}>
-        <Button>这是一个浮动button</Button>
+      <div className={styles.trigger} >
+        <Button
+          onClick={this.hanldeClick}
+        >
+          {isShow ? <span>收起</span> : <span>展开</span>}
+        </Button>
       </div>
     </div>
+    )
   }
 }
