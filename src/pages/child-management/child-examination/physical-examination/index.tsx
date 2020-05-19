@@ -38,8 +38,8 @@ export default class PhysicalExaminationPanel extends BaseEditPanel {
   }
 
   handleSubmit = async (values: any) => {
-    const { childArchives, id, setID } = this.props;
-    const { data, formDescriptionsWithoutSection } = this.state;
+    const { id, setID } = this.props;
+    const { data, childArchives, formDescriptionsWithoutSection } = this.state;
     const { title, baseUrl } = this.props;
     const childPhysicalExam = toApi(
       values,

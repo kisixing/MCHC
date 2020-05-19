@@ -23,7 +23,6 @@ export default class Addpanel extends PanelWithChild {
   async componentDidMount() {
     const childId = get(this.props, 'location.query.childId');
     const data = await request.get(`/child-archives/${childId}`);
-    console.log('8888888888888888', data)
     this.setState({
       childArchives: data,
     });
@@ -69,15 +68,15 @@ export default class Addpanel extends PanelWithChild {
   }
 
   renderContent = () => {
-    const id = get(this.props, 'location.query.id');
-    const { data, activeKey, childArchives } = this.state;
+    const { id, data, activeKey, childArchives } = this.state;
+
     return (
       <Tabs defaultActiveKey={activeKey} type="card" size="small" onChange={this.handleChangeTab}>
         {/* <Tabs.TabPane tab="出生信息登记" key="BirthInformation">
           {activeKey === 'BirthInformation' && <BirthInformation data={data} />}
         </Tabs.TabPane> */}
         <Tabs.TabPane tab="体格检查" key="PhysicalExamination">
-          {activeKey === 'PhysicalExamination' && <PhysicalExamination id={id} setID={this.setID} data={data} childArchivesData={childArchives} />}
+          {activeKey === 'PhysicalExamination' && childArchives.id && <PhysicalExamination id={id} setID={this.setID} data={data} childArchivesData={childArchives} />}
         </Tabs.TabPane>
         <Tabs.TabPane tab="内科检查" key="GeneralExamination">
           {activeKey === 'GeneralExamination' && <GeneralExamination id={id} setID={this.setID} data={data} childArchivesData={childArchives} />}
