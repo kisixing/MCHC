@@ -159,6 +159,10 @@ export default {
   'menu.prenatal-diagnosis.statistics': '统计报表',
 
   'menu.maternal-death': '孕产妇死亡报告',
+  'menu.maternal-death-edit': '孕产妇死亡报告编辑',
+  'menu.maternal-death-add': '孕产妇死亡报告添加',
+  'menu.maternal-death.maternal-death-edit': '孕产妇死亡报告添加',
+  'menu.maternal-death.maternal-death-add': '孕产妇死亡报告添加',
 
   'menu.pmtct': '艾梅乙专案上报管理',
 
@@ -188,6 +192,8 @@ export default {
   'menu.deliver-management.postpartum-visit-edit': '修改产后访视',
 
   'menu.birth-defect': '出生缺陷登记',
+  'menu.birth-defect.birth-defect-add': '添加出生缺陷登记',
+  'menu.birth-defect.birth-defect-edit': '编辑出生缺陷登记',
   'menu.neonatal-screening': '新生儿疾病筛查',
   'menu.postpartum-visit': '产后42天访视',
 
@@ -208,6 +214,9 @@ export default {
   'menu.child-examination.examination-edit': '儿童健康体检登记',
   'menu.child-examination.birth-information': '出生信息登记',
   'menu.child-death': '儿童死亡报告管理',
+  'menu.child-death.child-death': '儿童死亡报告管理',
+  'menu.child-death.child-death-add': '儿童死亡报告添加',
+  'menu.child-death.child-death-edit': '儿童死亡报告编辑',
   'menu.high-risk-children': '高危儿管理',
   'menu.hearing-screening': '儿童听力筛查',
   'menu.debility-children': '营养性疾病儿童管理',

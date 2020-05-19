@@ -8,7 +8,7 @@ export default {
       name: 'highrisk',
       icon: 'ordered-list',
       path: '/high-risk-management/highrisk',
-      component: './deliver-form/edit',
+      component: './highrisk-management/riskrecord/list',
     },
     {
       name: 'followup',

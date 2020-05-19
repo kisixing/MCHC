@@ -1,27 +1,23 @@
 import React from 'react';
+import Table from './components/Table';
+import { tableColumns } from './config/table';
+import BaseList from '@/components/BaseList';
+import WithDynamicExport from '@/components/WithDynamicExport';
 import { router } from 'umi';
 import { get } from 'lodash';
 import { Button, Popconfirm } from 'antd';
 import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
-
-import Table from './components/Table';
-import { tableColumns } from './config/table';
-import { processFromApi } from './config/adpater';
-import BaseList from '@/components/BaseList';
-import WithDynamicExport from '@/components/WithDynamicExport';
-
 import commonStyles from '@/common.less';
 
 @WithDynamicExport
 export default class List extends BaseList {
   static defaultProps = {
-    baseUrl: '/child-exam-visits',
-    baseTitle: '儿童健康体检',
-    needPagination: true,
+    baseUrl: '/pregnancies',
+    baseTitle: '高危记录',
+    needPagination: false,
     showQuery: false,
-    showAdd: false,
+    showAdd: true,
     tableColumns,
-    processFromApi,
     rowKey: 'id',
     Table,
   };
@@ -29,9 +25,9 @@ export default class List extends BaseList {
   state = {
     total: 0,
     defaultQuery: {
-      'childArchivesId.equals': get(this.props, 'location.query.childId') ? get(this.props, 'location.query.childId') : undefined,
       page: 0,
       size: 20,
+      'riskRecordId.specified':true
     },
     dataSource: [],
     visible: false,
@@ -44,7 +40,6 @@ export default class List extends BaseList {
     ...(this.props.tableColumns as Array<any>),
     {
       title: '操作',
-      align: 'center',
       hiddenSorter: true,
       hiddenFilter: true,
       fixed: 'right',
@@ -52,23 +47,15 @@ export default class List extends BaseList {
         return (
           <>
             <Button
-              className={commonStyles.tableActionBtn}
-              type="primary"
-              size="small"
-              title="查看"
-              onClick={this.handleView(rowData)}
-            >
-              <EyeOutlined title="查看" />
-            </Button>
-            {/* <Button
-              title="编辑"
+              title="详情"
               className={commonStyles.tableActionBtn}
               type="primary"
               size="small"
               onClick={this.handleEdit(rowData)}
             >
               <EditOutlined />
-            </Button> */}
+              详情
+            </Button>
             <Popconfirm
               title={`确定要删除这个${get(this.props, 'baseTitle')}吗?`}
               onConfirm={this.handleDelete(rowData)}
@@ -77,6 +64,7 @@ export default class List extends BaseList {
             >
               <Button title="删除" className={commonStyles.tableActionBtn} type="danger" size="small">
                 <DeleteOutlined />
+                删除
               </Button>
             </Popconfirm>
           </>
@@ -85,17 +73,8 @@ export default class List extends BaseList {
     },
   ];
 
-  handleAdd = () => {
-    // router.push('/child-examination/archive');
-  };
-
-  handleView = (rowData: any) => () => {
+  handleEdit = (rowData: any) => () => {
     const { id } = rowData;
-    router.push(`/child-management/child-examination/deliver-edit?id=${id}`);
+    router.push(`/prenatal-visit/pregnancy/edit?id=${id}`);
   };
-
-  // handleEdit = (rowData: any) => () => {
-  //   const { id } = rowData;
-  //   router.push(`/child-examination/examination-edit?id=${id}`);
-  // };
 }
