@@ -73,16 +73,11 @@ export default class List extends BaseList {
   ];
 
   handleAdd = () => {
-    router.push('/premarital-care/wife/add');
-  };
-
-  handleView = (rowData: any) => () => {
-    const { id } = rowData;
-    router.push(`/premarital-care/wife/wife-exam?id=${id}`);
+    router.push('/birth-defect/add');
   };
 
   handleEdit = (rowData: any) => () => {
     const { id } = rowData;
-    router.push(`/premarital-care/wife/edit?id=${id}`);
+    router.push(`/birth-defect/edit?id=${id}`);
   };
 }
