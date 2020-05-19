@@ -5,6 +5,7 @@ import BaseList from '@/components/BaseList';
 import WithDynamicExport from '@/components/WithDynamicExport';
 import { processFromApi } from './config/adpater';
 import { router } from 'umi';
+import { get } from 'lodash';
 
 @WithDynamicExport
 export default class List extends BaseList {
@@ -25,6 +26,7 @@ export default class List extends BaseList {
     defaultQuery: {
       page: 0,
       size: 20,
+      'visitType.equals': 2,
     },
     dataSource: [],
     visible: false,
@@ -33,12 +35,8 @@ export default class List extends BaseList {
     loading: true,
   };
 
-  handleAdd = () => {
-    router.push('/deliver-management/admission/add');
-  };
-
   handleEdit = (rowData: any) => () => {
-    const { id } = rowData;
+    const id = get(rowData, 'husband.id');
     router.push(`/premarital-care/husband/husband-exam?id=${id}`);
   };
 }
