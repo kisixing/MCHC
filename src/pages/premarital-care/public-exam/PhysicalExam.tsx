@@ -50,6 +50,7 @@ export default class PhysicalExam extends BaseEditPanel<IProps> {
       ...get(personData, 'premaritalVisit'),
       physicalExam,
       [type]: { id: get(personData, 'id') },
+      visitType: type === 'wife' ? 1 : 2,
     };
     if (type === 'wife' || type === 'husband') {
       if (get(params, 'id')) {

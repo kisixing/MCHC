@@ -49,7 +49,11 @@ const Model: LoginModelType = {
         // 以毫秒为单位，暂定为1小时过期。
         store.set('loginTime', new Date().getTime());
         store.set('expiredTime', 36000000);
-        
+        yield put({
+          type: 'user/saveCurrentUser',
+          payload: {},
+        });
+
         let { redirect } = params as { redirect: string };
         if (redirect) {
           const redirectUrlParams = new URL(redirect);

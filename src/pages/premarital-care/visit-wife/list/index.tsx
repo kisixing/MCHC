@@ -26,7 +26,7 @@ export default class List extends BaseList {
     defaultQuery: {
       page: 0,
       size: 20,
-      'visitType.equals':1
+      'visitType.equals': 1,
     },
     dataSource: [],
     visible: false,
@@ -35,11 +35,8 @@ export default class List extends BaseList {
     loading: true,
   };
 
-  handleAdd = () => {
-  };
-
   handleEdit = (rowData: any) => () => {
-    const id = get(rowData, 'wife.id')
+    const id = get(rowData, 'wife.id');
     router.push(`/premarital-care/wife/wife-exam?id=${id}`);
   };
 }
