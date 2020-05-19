@@ -2,7 +2,7 @@ import { formatTimeToStandard } from '@/utils/format';
 
 export const tableColumns = [
   {
-    title: '女方姓名',
+    title: '孕妇姓名',
     dataIndex: 'name',
     key: 'name',
     align: 'center',
@@ -14,27 +14,27 @@ export const tableColumns = [
     align: 'center',
   },
   {
-    title: '男方姓名',
-    dataIndex: 'husbandname',
-    key: 'husbandname',
+    title: '编号',
+    dataIndex: 'caseNO',
+    key: 'caseNO',
     align: 'center',
   },
   {
-    title: '检查日期',
-    dataIndex: 'visitDate',
-    key: 'visitDate',
+    title: '性别',
+    dataIndex: 'gender',
+    key: 'gender',
     align: 'center',
   },
   {
-    title: '检查结果',
-    dataIndex: 'result',
-    key: 'result',
+    title: '出生日期',
+    dataIndex: 'birthDate',
+    key: 'birthDate',
     align: 'center',
   },
   {
-    title: '风险评估',
-    dataIndex: 'highrisk',
-    key: 'highrisk',
+    title: '出生孕周',
+    dataIndex: 'birthWeek',
+    key: 'birthWeek',
     align: 'center',
-  },
+  }
 ];

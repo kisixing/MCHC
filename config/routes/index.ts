@@ -163,6 +163,21 @@ export const omitRoutes = [
     isMenu: true,
     active: null,
   },
+  
+  {
+    id: 378,
+    type: 'others',
+    key: '/child-death/add',
+    active: null,
+    isMenu: false,
+  },
+  {
+    id: 377,
+    type: 'others',
+    key: '/child-death/edit',
+    active: null,
+    isMenu: false,
+  },
   {
     id: 35,
     type: 'others',
@@ -482,6 +497,20 @@ export const omitRoutes = [
     isMenu: true,
   },
   {
+    id: 258,
+    type: 'others',
+    key: '/maternal-death/add',
+    active: null,
+    isMenu: false,
+  },
+  {
+    id: 257,
+    type: 'others',
+    key: '/maternal-death/edit',
+    active: null,
+    isMenu: false,
+  },
+  {
     id: 239,
     type: 'others',
     key: '/pmtct',
@@ -494,6 +523,20 @@ export const omitRoutes = [
     key: '/birth-defect',
     active: null,
     isMenu: true,
+  },
+  {
+    id: 218,
+    type: 'others',
+    key: '/birth-defect/add',
+    active: null,
+    isMenu: false,
+  },
+  {
+    id: 217,
+    type: 'others',
+    key: '/birth-defect/edit',
+    active: null,
+    isMenu: false,
   },
   {
     id: 199,
