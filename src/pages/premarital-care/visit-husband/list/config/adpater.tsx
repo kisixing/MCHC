@@ -4,9 +4,9 @@ export const processFromApi = (data: any[]) => {
   return map(data, (item: object) => {
     return {
       ...item,
-      name: get(item, 'wife.name'),
-      age: get(item, 'wife.age'),
-      husbandname: get(item, 'husband.name')
+      name: get(item, 'husband.name'),
+      age: get(item, 'husband.age'),
+      wifename: get(item, 'wife.name')
     };
   });
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import Table from './components/Table';
+import Query from './components/Query';
 import { tableColumns } from './config/table';
 import BaseList from '@/components/BaseList';
 import WithDynamicExport from '@/components/WithDynamicExport';
@@ -14,12 +15,13 @@ export default class List extends BaseList {
   static defaultProps = {
     baseUrl: '/wives',
     baseTitle: '女方档案',
-    needPagination: false,
-    showQuery: false,
+    needPagination: true,
+    showQuery: true,
     showAdd: true,
     tableColumns,
     rowKey: 'id',
     Table,
+    Query,
   };
 
   state = {
