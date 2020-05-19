@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import React, { Component } from 'react';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { DatePicker, TimePicker } from 'antd';
 
 interface MyDatePickerProp {
@@ -34,9 +34,10 @@ export default function MyDateTime(props: MyDatePickerProp) {
 
   const renderDatePicker = () => {
     if (!value || moment(value, format).isValid()) {
-      const val = value ? moment(value, format) : "";
+      const val:any = value ? moment(value, format) : "";
       if (type === dateTypeString) {
         return <DatePicker
+          size="small"
           value={val}
           format={format}
           onChange={handleChange}
@@ -44,13 +45,14 @@ export default function MyDateTime(props: MyDatePickerProp) {
       }
       if (type === timeTypeString) {
         return <TimePicker
+          size="small"
           value={val}
           format={format}
           onChange={handleChange}
         />
       }
       return <strong>组件类型非法</strong>;
-    } 
+    }
     return <strong>值类型格式非法</strong>;
   }
 

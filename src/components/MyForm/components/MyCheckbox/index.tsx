@@ -132,7 +132,15 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
           editors={renderData[0].extraEditors}
         />
       );
-    },
+    }
+    // "group": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
+    //   return (
+    //     <GroupCheckbox
+    //       onChange={(val:any) => onChange(val)}
+    //       options={input_props.renderData}
+    //     />
+    //   )
+    // }
   };
 
   renderCheckbox = () => {
