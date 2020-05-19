@@ -42,13 +42,13 @@ export function createFormHandler(config, {submitChange}){
   const submit = function() {
     let r = {}
     let validCode = true;
-    Object.keys(this).forEach(key => {
-      if(this[key].actions){
-        if(typeof this[key].actions.getValue === "function"){
-          r = Object.assign(r, {[key]: this[key].actions.getValue()});
+    Object.keys(formHandler).forEach(key => {
+      if(formHandler[key].actions){
+        if(typeof formHandler[key].actions.getValue === "function"){
+          r = Object.assign(r, {[key]: formHandler[key].actions.getValue()});
         }
-        if(typeof this[key].actions.valid === "function"){
-          const result = this[key].actions.valid();
+        if(typeof formHandler[key].actions.valid === "function"){
+          const result = formHandler[key].actions.valid();
           if(!result && validCode){
             validCode = false;
           }
@@ -60,7 +60,16 @@ export function createFormHandler(config, {submitChange}){
     })
   }
 
-  // this指向被改变了
+  const reset = function() {
+    Object.keys(formHandler).forEach(key => {
+      if(formHandler[key].actions){
+        if(formHandler[key].actions.reset){
+          formHandler[key].actions.reset();
+        }
+      }
+    })
+  }
+
   // TODO 所有的valid方法需要整改
   const valid = function() {
     let validCode = true;
@@ -126,6 +135,7 @@ export function createFormHandler(config, {submitChange}){
   const formHandler = {...initField(config)}
   formHandler.submit = submit;
   formHandler.valid = valid;
+  formHandler.reset = reset;
   formHandler.subscribe = subscribe;
   formHandler.dispatch = dispatch;
   formHandler.formState = formState;

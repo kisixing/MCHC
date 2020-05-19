@@ -76,7 +76,8 @@ export interface FormItemProp {
   actions?: {
     setValue?: (val: any) => void
     getValue?: () => any,
-    valid?: () => any
+    valid?: () => any,
+    reset?: () => void
   },
   dispatch: (fieldName: string, eventName: string, args: any) => void,
   subscribe: (fieldName: string, eventName: string, cb: Function) => void

@@ -4,10 +4,8 @@ import React, { Component, ReactNode } from 'react';
 import MyComponents from './components/index';
 import { FormItemProp, FormItemState } from './interface';
 import { validFun } from './utils/valid';
-import { isEmpty } from './utils/func';
+import { isEmpty, isObj, isArr } from './utils/func';
 import styles from './formItem.less';
-
-// TODO 校验这个问题以后再处理 5/15
 
 function isBase(val: any): boolean {
   return val && typeof val !== "object";
@@ -21,7 +19,6 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
       error: "",
       path: "",
       validate: [],
-      
     }
     const self = this;
     if (props.actions) {
@@ -34,6 +31,15 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
       props.actions.setValue = function setValue(val) {
         self.setState({ value: val });
       }
+      props.actions.reset = function reset() {
+        if(isObj(self.state.value)){
+          self.setState({ value: {} });
+        }else if(isArr(self.state.value)){
+          self.setState({ value: [] });
+        }else{
+          self.setState({ value: null });
+        }
+      }
       props.actions.valid = function valid() {
         const error = validFun(self.state.value, props.validate || "");
         // childrenError boolean
@@ -41,7 +47,6 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
         if(props.type.indexOf("custom") !== -1){
           childrenError = self.childrenValid();
         }
-        console.log(error);
         self.setState({ error });
         return isEmpty(error) && childrenError;
       }

@@ -128,8 +128,8 @@ const config: Array<FormConfig> = [
     input_type: "custom",
     input_props: {
       config: [
-        { name: "type", key: ".type", label: "类型", input_type: "input", span: 8, offset: 0, rules: "required", hidden: true },
-        { name: "id", key: ".id", input_type: "input", span: 8, offset: 0, rules: "required", hidden: true },
+        { name: "type", key: ".type", label: "类型", input_type: "input", span: 8, offset: 0,  hidden: true },
+        { name: "id", key: ".id", input_type: "input", span: 8, offset: 0, hidden: true },
         { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 8, offset: 0 },
         { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 8, offset: 0 },
         { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 8, offset: 0 },
@@ -146,8 +146,8 @@ const config: Array<FormConfig> = [
     input_type: "custom",
     input_props: {
       config: [
-        { name: "type", key: ".type", label: "类型", input_type: "input", span: 8, offset: 0, rules: "required", hidden: true },
-        { name: "id", key: ".id", input_type: "input", span: 8, offset: 0, rules: "required", hidden: true },
+        { name: "type", key: ".type", label: "类型", input_type: "input", span: 8, offset: 0,  hidden: true },
+        { name: "id", key: ".id", input_type: "input", span: 8, offset: 0, hidden: true },
         { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 8, offset: 0 },
         { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 8, offset: 0 },
         { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 8, offset: 0 },
@@ -167,8 +167,8 @@ const config: Array<FormConfig> = [
     input_type: "custom",
     input_props: {
       config: [
-        { name: "type", key: ".type", label: "类型", input_type: "input", span: 8, offset: 0, rules: "required", hidden: true },
-        { name: "id", key: ".id", input_type: "input", span: 8, offset: 0, rules: "required", hidden: true },
+        { name: "type", key: ".type", label: "类型", input_type: "input", span: 8, offset: 0,  hidden: true },
+        { name: "id", key: ".id", input_type: "input", span: 8, offset: 0, hidden: true },
         { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 8, offset: 0 },
         { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 8, offset: 0 },
         { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 8, offset: 0 },
