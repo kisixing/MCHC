@@ -6,7 +6,6 @@ import options, { getStreets } from './cascader-address-options';
 export default (props: any) => {
   const [streets, setStreets] = useState([]);
   const [address, setAddress] = useState({});
-
   useEffect(() => {
     if (!isEmpty(get(props, 'value'))) {
       const addressArray = split(get(props, 'value'), ',');
@@ -17,7 +16,6 @@ export default (props: any) => {
         street: get(addressArray, 3),
         detail: get(addressArray, 4),
       };
-      console.log(value, '53636')
       try {
         setAddress(value);
         setStreets(getStreets(get(value, 'province'), get(value, 'city'), get(value, 'area')) || []);

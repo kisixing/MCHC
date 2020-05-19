@@ -27,9 +27,9 @@ const config: Array<FormConfig> = [
           { name: 'maritalStatus', key: '.maritalStatus', label: "婚姻状态", input_type: "select", span: 7, rules: "required", input_props:{options: Options.maritalStatusOptions} },
           // { name: 'add_FIELD_zhunsz', key: '.add_FIELD_zhunsz', label: "准生证号", input_type: "input", span: 7, rules: "required" },
           // { name: 'add_FIELD_ADD_zhunsz_sh', key: '.add_FIELD_ADD_zhunsz_sh', label: "已审核", input_type: "checkbox", span: 7, offset: 1 },
-          { name: 'permanentResidenceAddress', key: '.permanentResidenceAddress', label: "户口地址", input_type: "addressCascader", span: 12, rules: "required" },
-          { name: 'residenceAddress', key: '.residenceAddress', label: "居住地地址", input_type: "addressCascader", span: 12, rules: "required" },
-          { name: 'postpartumAddress', key: '.postpartumAddress', label: "产休地址", input_type: "addressCascader", span: 12, rules: "required" },
+          { name: 'permanentResidenceAddress', key: '.permanentResidenceAddress', label: "户口地址", input_type: "addressCascader", span: 18, rules: "required" },
+          { name: 'residenceAddress', key: '.residenceAddress', label: "居住地地址", input_type: "addressCascader", span: 18, rules: "required" },
+          { name: 'postpartumAddress', key: '.postpartumAddress', label: "产休地址", input_type: "addressCascader", span: 18, rules: "required" },
       ]
     }
   },
