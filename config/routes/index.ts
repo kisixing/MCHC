@@ -276,6 +276,14 @@ export const omitRoutesBackup = [
     isMenu: false,
     active: null,
   },
+  {
+    id: 346,
+    type: 'others',
+    key: '/child-management/child-examination/deliver-add',
+    name: '创建健康体检',
+    isMenu: false,
+    active: null,
+  },
 
   {
     id: 339,

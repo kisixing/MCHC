@@ -199,7 +199,8 @@ export default {
   'menu.child-management.child-archive-edit': '修改儿童档案',
   'menu.child-management.child-archive-deliver-edit': '查看儿童档案',
   'menu.child-management.child-examination': '儿童健康体检记录',
-  'menu.child-management.child-examination-deliver-edit': '查看儿童健康体检档案',
+  'menu.child-management.child-examination-add': '创建儿童健康体检档案',
+  'menu.child-management.child-examination-edit': '查看儿童健康体检档案',
 
   'menu.child-examination': '儿童健康体检管理',
   'menu.child-examination.archive': '创建儿童档案',
