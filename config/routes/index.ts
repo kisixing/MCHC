@@ -28,7 +28,9 @@ export const routes: IRoute[] = [
   },
 ];
 
-export const omitRoutes = [
+export const omitRoutes = [];
+
+export const omitRoutesBackup = [
   {
     id: 1001,
     type: 'others',
@@ -162,6 +164,21 @@ export const omitRoutes = [
     key: '/child-death',
     isMenu: true,
     active: null,
+  },
+  
+  {
+    id: 378,
+    type: 'others',
+    key: '/child-death/add',
+    active: null,
+    isMenu: false,
+  },
+  {
+    id: 377,
+    type: 'others',
+    key: '/child-death/edit',
+    active: null,
+    isMenu: false,
   },
   {
     id: 35,
@@ -482,6 +499,20 @@ export const omitRoutes = [
     isMenu: true,
   },
   {
+    id: 258,
+    type: 'others',
+    key: '/maternal-death/add',
+    active: null,
+    isMenu: false,
+  },
+  {
+    id: 257,
+    type: 'others',
+    key: '/maternal-death/edit',
+    active: null,
+    isMenu: false,
+  },
+  {
     id: 239,
     type: 'others',
     key: '/pmtct',
@@ -494,6 +525,20 @@ export const omitRoutes = [
     key: '/birth-defect',
     active: null,
     isMenu: true,
+  },
+  {
+    id: 218,
+    type: 'others',
+    key: '/birth-defect/add',
+    active: null,
+    isMenu: false,
+  },
+  {
+    id: 217,
+    type: 'others',
+    key: '/birth-defect/edit',
+    active: null,
+    isMenu: false,
   },
   {
     id: 199,
@@ -657,30 +702,48 @@ export const omitRoutes = [
   {
     id: 158,
     type: 'others',
-    key: '/prenatal-visit/pregnancy',
+    key: '/prenatal-visit/pregnancy/list',
     name: '孕册管理',
     parentid: 0,
     active: null,
     isMenu: true,
   },
   {
-    id: 157,
+    id: 159,
     type: 'others',
-    key: '/prenatal-visit/initial',
-    name: '首诊管理',
+    key: '/prenatal-visit/pregnancy/add',
+    name: '添加孕册',
     parentid: 0,
     active: null,
-    isMenu: true,
+    isMenu: false,
   },
   {
-    id: 156,
+    id: 160,
     type: 'others',
-    key: '/prenatal-visit/return',
-    name: '复诊管理',
+    key: '/prenatal-visit/pregnancy/edit',
+    name: '编辑孕册',
     parentid: 0,
     active: null,
-    isMenu: true,
+    isMenu: false,
   },
+  {
+    id: 157,
+    type: 'others',
+    key: '/prenatal-visit/main',
+    name: '首诊/复诊管理',
+    parentid: 0,
+    active: null,
+    isMenu: false,
+  },
+  // {
+  //   id: 156,
+  //   type: 'others',
+  //   key: '/prenatal-visit/return',
+  //   name: '复诊管理',
+  //   parentid: 0,
+  //   active: null,
+  //   isMenu: true,
+  // },
   {
     id: 155,
     type: 'others',
@@ -745,41 +808,41 @@ export const omitRoutes = [
     type: 'others',
     key: '/prenatal-diagnosis/medical-record',
     active: null,
-    isMenu: false
+    isMenu: false,
   },
   {
     id: 97,
     type: 'others',
     key: '/prenatal-diagnosis/operation-record',
     active: null,
-    isMenu: true
+    isMenu: true,
   },
   {
     id: 96,
     type: 'others',
     key: '/prenatal-diagnosis/admission',
     active: null,
-    isMenu: true
+    isMenu: true,
   },
   {
     id: 95,
     type: 'others',
     key: '/prenatal-diagnosis/main',
     active: null,
-    isMenu: false
+    isMenu: false,
   },
   {
     id: 94,
     type: 'others',
     key: '/prenatal-diagnosis/new-patient',
     active: null,
-    isMenu: true
+    isMenu: true,
   },
   {
     id: 93,
     type: 'others',
     key: '/prenatal-diagnosis/medical-record-form',
     active: null,
-    isMenu: false
-  }
+    isMenu: false,
+  },
 ];

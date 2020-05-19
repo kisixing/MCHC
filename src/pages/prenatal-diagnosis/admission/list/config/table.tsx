@@ -26,7 +26,7 @@ export const tableColumns = [
     align: 'center',
   },
   {
-    title: '预产期-B炒',
+    title: '预产期-B超',
     dataIndex: 'sureEdd',
     key: 'sureEdd',
     align: 'center',

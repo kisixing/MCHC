@@ -88,7 +88,7 @@ export const tableColumns = [
     inputType: 'normal_select',
     inputProps: { type: 'hasOrNoMapping' },
     align: 'center',
-    render: (value: any) => get(keyBy(statusMapping.hasOrNoMapping, 'value'), `${value}.title`),
+    render: (value: any) => get(keyBy(statusMapping.hasOrNoMapping, 'value'), `${Boolean(value)}.title`),
   },
   {
     title: '血氧',
