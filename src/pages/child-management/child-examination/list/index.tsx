@@ -94,8 +94,8 @@ export default class List extends BaseList {
     router.push(`/child-management/child-examination/deliver-edit?id=${id}`);
   };
 
-  handleEdit = (rowData: any) => () => {
-    // const { id } = rowData;
-    // router.push(`/child-examination/examination-edit?id=${id}`);
-  };
+  // handleEdit = (rowData: any) => () => {
+  //   const { id } = rowData;
+  //   router.push(`/child-examination/examination-edit?id=${id}`);
+  // };
 }

@@ -68,7 +68,7 @@ export default class panel extends PanelWithChild {
         </Tabs.TabPane> */}
         
         <Tabs.TabPane tab="体格检查" key="PhysicalExamination">
-          {activeKey === 'PhysicalExamination' && <PhysicalExamination id={id} data={data} />}
+          {activeKey === 'PhysicalExamination' && data.id && <PhysicalExamination id={id} data={data} />}
         </Tabs.TabPane>
         <Tabs.TabPane tab="内科检查" key="GeneralExamination">
           {activeKey === 'GeneralExamination' && <GeneralExamination id={id} data={data}/>}
