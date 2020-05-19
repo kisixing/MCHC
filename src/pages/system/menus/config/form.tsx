@@ -18,11 +18,11 @@ export const modalFormDescriptions = {
   },
   name: {
     key: 'name',
-    label: '菜单名称',
-    rules: [{ required: true, message: '菜单名称是必填项' }],
+    label: '名称',
+    rules: [{ required: true, message: '名称是必填项' }],
     inputType: 'input',
     inputProps: {
-      placeholder: '请输入菜单名称',
+      placeholder: '请输入名称',
     },
   },
   type: {
@@ -31,7 +31,7 @@ export const modalFormDescriptions = {
     rules: [{ required: true, message: '类型是必填项' }],
     inputType: 'permission_type',
     inputProps: {
-      placeholder: '请输入类型',
+      placeholder: '请选择类型',
     },
   },
   key: {
@@ -43,13 +43,10 @@ export const modalFormDescriptions = {
       placeholder: '请输入模块名',
     },
   },
-  // code: {
-  //   key: 'code',
-  //   label: '属性代号',
-  //   inputType: 'input',
-  //   inputProps: {
-  //     placeholder: '请输入属性代号',
-  //   },
+  // active: {
+  //   key: 'active',
+  //   label: '是否启用',
+  //   inputType: 'pregnant_radio',
   // },
   // test: {
   //   key: 'test',

@@ -13,7 +13,7 @@ const config: Array<FormConfig> = [
         { key: "year", title: "年", editor: { name: "", key: "", input_type: "date" } },
         { key: "naturalAbortion", title: "自然流产", editor: { name: "", key: "", input_type: "checkbox", input_props: {type: 'default'} } },
         { key: "currettage", title: "清宫	", editor: { name: "", key: "", input_type: "checkbox", input_props: {type: 'default'} } },
-        { key: "naturalAbortion", title: "手术流产", editor: { name: "", key: "", input_type: "checkbox", input_props: {type: 'default'} } },
+        { key: "surgicalAbortion", title: "手术流产", editor: { name: "", key: "", input_type: "checkbox", input_props: {type: 'default'} } },
         { key: "inducedLabor", title: "引产", editor: { name: "", key: "", input_type: "checkbox", input_props: {type: 'default'} } },
         { key: "fetusdeath", title: "死胎	", editor: { name: "", key: "", input_type: "checkbox", input_props: {type: 'default'} } },
         // { key: "zaoch", title: "早产", editor: { name: "", key: "", input_type: "checkbox", input_props: {type: 'default'} } },

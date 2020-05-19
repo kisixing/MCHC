@@ -19,7 +19,7 @@ const config: Array<FormConfig> = [
         // { key: "taix", title: "胎心率	", editor: { name: "", key: "", input_type: "input" } },
         // { key: "xianl", title: "先露", editor: { name: "", key: "", input_type: "input" } },
         { key: "generalExam.edemaNote", title: "下肢水肿", editor: { name: "", key: "", input_type: "input" } },
-        { key: "examination", title: "检验检查", editor: { name: "", key: "", input_type: "input" } },
+        // { key: "examination", title: "检验检查", editor: { name: "", key: "", input_type: "input" } },
         // { key: "treatment", title: "处理措施", editor: { name: "", key: "", input_type: "input" } },
         { key: "appointmentDate", title: "下次复诊", editor: { name: "", key: "", input_type: "date" } },
         { key: "doctor", title: "医生", editor: { name: "", key: "", input_type: "input" } },

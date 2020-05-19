@@ -2,7 +2,7 @@ import React from 'react';
 import { router } from 'umi';
 import { get } from 'lodash';
 import { Button, Popconfirm } from 'antd';
-import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, EyeOutlined, PlusOutlined } from '@ant-design/icons';
 
 import BaseList from '@/components/BaseList';
 import WithDynamicExport from '@/components/WithDynamicExport';
@@ -47,7 +47,7 @@ export default class List extends BaseList {
       hiddenSorter: true,
       hiddenFilter: true,
       fixed: 'right',
-      width: '250px',
+      width: '150px',
       render: (value: any, rowData: any, index: number) => {
         return (
           <>
@@ -58,8 +58,8 @@ export default class List extends BaseList {
               title="新建体检记录"
               onClick={this.handleAddVisit(rowData)}
             >
-              <EditOutlined />
-              新建体检记录
+              <PlusOutlined />
+              新建体检
             </Button>
             {rowData.childExamVisits && rowData.childExamVisits.length ? (
               <Button
@@ -70,7 +70,7 @@ export default class List extends BaseList {
                 onClick={this.handleView(rowData)}
               >
                 <EyeOutlined title="查看" />
-                查看
+                体检记录
               </Button>
             ) : null}
             <Button
@@ -111,7 +111,7 @@ export default class List extends BaseList {
     const { id, childExamVisits } = rowData;
     if (!childExamVisits || (childExamVisits && !childExamVisits.length)) {
       // 新建体检档案
-      return router.push(`/child-management/child-examination/deliver-edit`);
+      return router.push(`/child-management/child-examination/deliver-add`);
     }
     // 查看体检档案列表
     router.push(`/child-management/child-examination?childId=${id}`);
@@ -120,6 +120,6 @@ export default class List extends BaseList {
   // 创建体检记录
   handleAddVisit = (rowData: any) => () => {
     const { id } = rowData;
-    router.push(`/child-management/child-examination/deliver-edit?childId=${id}`);
+    router.push(`/child-management/child-examination/deliver-add?childId=${id}`);
   }
 }

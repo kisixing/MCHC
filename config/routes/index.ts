@@ -28,7 +28,9 @@ export const routes: IRoute[] = [
   },
 ];
 
-export const omitRoutes = [
+export const omitRoutes = [];
+
+export const omitRoutesBackup = [
   {
     id: 1001,
     type: 'others',
@@ -271,6 +273,14 @@ export const omitRoutes = [
     type: 'others',
     key: '/child-management/child-examination/deliver-edit',
     name: '查看健康体检记录',
+    isMenu: false,
+    active: null,
+  },
+  {
+    id: 346,
+    type: 'others',
+    key: '/child-management/child-examination/deliver-add',
+    name: '创建健康体检',
     isMenu: false,
     active: null,
   },
@@ -806,41 +816,41 @@ export const omitRoutes = [
     type: 'others',
     key: '/prenatal-diagnosis/medical-record',
     active: null,
-    isMenu: false
+    isMenu: false,
   },
   {
     id: 97,
     type: 'others',
     key: '/prenatal-diagnosis/operation-record',
     active: null,
-    isMenu: true
+    isMenu: true,
   },
   {
     id: 96,
     type: 'others',
     key: '/prenatal-diagnosis/admission',
     active: null,
-    isMenu: true
+    isMenu: true,
   },
   {
     id: 95,
     type: 'others',
     key: '/prenatal-diagnosis/main',
     active: null,
-    isMenu: false
+    isMenu: false,
   },
   {
     id: 94,
     type: 'others',
     key: '/prenatal-diagnosis/new-patient',
     active: null,
-    isMenu: true
+    isMenu: true,
   },
   {
     id: 93,
     type: 'others',
     key: '/prenatal-diagnosis/medical-record-form',
     active: null,
-    isMenu: false
-  }
+    isMenu: false,
+  },
 ];

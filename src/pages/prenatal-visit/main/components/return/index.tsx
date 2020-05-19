@@ -43,7 +43,7 @@ export default class Home extends React.Component<{},HomeState>{
     const { tabs, step } = this.state;
     return(
       <div className={style.returnWrapper}>
-        <Col span={19}>
+        <Col span={24}>
           <ReturnTable />
           <ReturnForm />
         </Col>

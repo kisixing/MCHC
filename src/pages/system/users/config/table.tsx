@@ -37,17 +37,17 @@ export const tableColumns = [
     dataIndex: 'role',
     key: 'role',
     align: 'center',
-    // render: (value, rowData) => {
-    //   const { groups } = rowData;
-    //   const res = reduce(
-    //     groups,
-    //     (sum, group) => {
-    //       return `${isEmpty(sum) ? '' : sum + '、'}${get(group, 'nickname')}`;
-    //     },
-    //     '',
-    //   );
-    //   return <span>{res}</span>;
-    // },
+    render: (value: string, rowData: any) => {
+      const { groups } = rowData;
+      const res = reduce(
+        groups,
+        (sum, group) => {
+          return `${isEmpty(sum) ? '' : `${sum}、`}${get(group, 'nickname')}`;
+        },
+        '',
+      );
+      return <span>{res}</span>;
+    },
   },
   {
     title: '创建时间',

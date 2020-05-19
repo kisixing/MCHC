@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Table, Button } from "antd";
 import EditableCell from './TableEditableCell';
 import { isArr } from '../../utils/func';
+import styles from './index.less';
 
 /* ============================================================================= */
 interface MyTableProps {
@@ -31,7 +32,7 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
 
   // 因为要维护tableRow的状态，所有需要保存在本地
   componentDidUpdate(prevProps: MyTableProps) {
-    
+
     if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
       const { value } = this.props;
       // eslint-disable-next-line react/no-did-update-set-state
@@ -40,7 +41,7 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
         // 处理dataSource，为了dataSource拥有_key值,用于rowSelection
         dataSource: isArr(value) ? value.map((v:any, i:number) => ({...v, _key: i})) : [],
         selectedRowKeys: []
-      }) 
+      })
     }
   }
 
@@ -48,11 +49,11 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
     const { onChange } = this.props;
     const { dataSource } = this.state;
     dataSource[index][key] = val;
-    
-    /** 
+
+    /**
      * TODO
      *  如果在这里删除了_key，会导致选中一项变为全选中
-     * */ 
+     * */
 
     // 提交出去前删除使用的_key
     // for(let i = 0; i < dataSource.length ; i++){
@@ -89,7 +90,7 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
     // }
     this.props.onChange(dataSource);
   }
-  
+
   handleRowSelectChange = (selectedRowKeys: Array<number|string>):void => {
     this.setState({selectedRowKeys});
   }
@@ -116,7 +117,7 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
       if(v.children){
         return {
           title: v.title,
-          children: this.handleTabColumnsFormat(v.children) 
+          children: this.handleTabColumnsFormat(v.children)
         }
       }
       return {}
@@ -147,6 +148,7 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
         </div>
         )}
         <Table
+          className={styles['my-table']}
           rowSelection={editable ? rowSelection : undefined}
           columns={tableColumns || []}
           dataSource={dataSource || []}
