@@ -3,6 +3,7 @@ import React, { Component, ReactNode } from 'react';
 import { Checkbox } from 'antd';
 import MultipleCheckbox from './MultipleCheckbox';
 import CustomCheckbox from './CustomCheckbox';
+// import GroupCheckbox from './GroupCheckbox';
 import { getObjectFormArray, convertExtraEditors, isObj, isArr } from '../../utils/func';
 
 interface MyCheckboxProps {
@@ -27,6 +28,11 @@ interface CheckboxComponentProps {
       editors: Array<any>;
     }>;
   }>;
+  // 用于单选的单字段checkbox
+  options: Array<{
+    label: string | number;
+    value: string | number | boolean;
+  }>
 }
 
 // TODO 这个的结构以及判断过于复杂，需要修改config重构
@@ -108,8 +114,8 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
           return;
         }
         let newObj:any = {};
-
-        if(!val.checkboxValue){
+        // 这里要靠一个0的情况
+        if(val.checkboxValue === false){
           newObj = {[key]: false, [`${key}Note`]: ""}
         }else{
           newObj = {[key]: val.checkboxValue,[`${key}Note`]: ""};
@@ -132,12 +138,15 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
           editors={renderData[0].extraEditors}
         />
       );
-    }
+    },
     // "group": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
+    //   const { options = [] } = input_props;
     //   return (
     //     <GroupCheckbox
+    //       value={value}
     //       onChange={(val:any) => onChange(val)}
-    //       options={input_props.renderData}
+    //       options={options}
+    //       editors={[]}
     //     />
     //   )
     // }

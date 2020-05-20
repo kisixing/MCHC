@@ -19,6 +19,7 @@ export default class GroupCheckbox extends Component<GroupCheckboxProps>{
   render() {
     return (
       <Checkbox.Group
+          
         options={this.props.options || []}
         onChange={this.handleChange}
       />

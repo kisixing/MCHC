@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, message, Tree } from 'antd';
+import { Button, message } from 'antd';
 import MyForm from '@/components/MyForm/index';
 
 import config from './config';
@@ -46,6 +46,7 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
     const urlParams = getPageQuery();
     if (!urlParams.prenatalPatientId) {
       message.error('无用户id,请从专科病历列表进入');
+      return;
     }
     this.setState({ prenatalPatientId: urlParams.prenatalPatientId, id: urlParams.id || -1 })
     // 修改

@@ -28,8 +28,8 @@ export interface ComponentOption {
   type?: string | null,
   // select
   options?: Array<{ 
-    value: string | number,
-    label: string | number
+    value: string | number | boolean,
+    label: string | number | boolean
   }>,
 
   // date

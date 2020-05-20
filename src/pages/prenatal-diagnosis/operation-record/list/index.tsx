@@ -85,17 +85,17 @@ export default class List extends BaseList {
 
   handleAdd = () => {
     const urlParams = getPageQuery();
-    router.push(`/prenatal-diagnosis/medical-record-form?prenatalPatientId=${urlParams.prenatalPatientId || ""}`);
+    router.push(`/prenatal-diagnosis/operation-record-form?prenatalPatientId=${urlParams.prenatalPatientId || ""}`);
   };
 
-  handleView = (rowData: any) => () => {
-    const { id } = rowData;
-    router.push(`/prenatal-diagnosis/main?id=${id}`);
-  };
+  // handleView = (rowData: any) => () => {
+  //   const { id } = rowData;
+  //   router.push(`/prenatal-diagnosis/main?id=${id}`);
+  // };
 
   handleEdit = (rowData: any) => () => {
     const { id } = rowData;
     const urlParams = getPageQuery();
-    router.push(`/prenatal-diagnosis/medical-record-form?prenatalPatientId=${urlParams.prenatalPatientId || ""}&id=${id}`);
+    router.push(`/prenatal-diagnosis/operation-record-form?prenatalPatientId=${urlParams.prenatalPatientId || ""}&id=${id}`);
   };
 }
