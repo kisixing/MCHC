@@ -21,8 +21,8 @@ const config: Array<FormConfig> = [
   //       key: "face",
   //       label: "",
   //       options: [
-  //         {label: "正常", value: 0},
-  //         {label: "其他", value: 1},
+  //         {label: "正常", value: 1},
+  //         {label: "其他", value: 2},
   //       ],
   //       extraEditors: [
   //         {
@@ -43,8 +43,8 @@ const config: Array<FormConfig> = [
           key: "skin",
           label: "",
           options: [
-            {label: "正常", value: 0},
-            {label: "其他", value: 1},
+            {label: "正常", value: 1},
+            {label: "其他", value: 2},
           ],
           extraEditors: [
             {
@@ -66,8 +66,8 @@ const config: Array<FormConfig> = [
           key: "thyroid",
           label: "",
           options: [
-            {label: "正常", value: 0},
-            {label: "其他", value: 1},
+            {label: "正常", value: 1},
+            {label: "其他", value: 2},
           ],
           extraEditors: [
             {
@@ -89,8 +89,8 @@ const config: Array<FormConfig> = [
           key: "nipple",
           label: "",
           options: [
-            {label: "正常", value: 0},
-            {label: "其他", value: 1},
+            {label: "正常", value: 1},
+            {label: "其他", value: 2},
           ],
           extraEditors: [
             {
@@ -112,8 +112,8 @@ const config: Array<FormConfig> = [
           key: "respiratory",
           label: "",
           options: [
-            {label: "清", value: 0},
-            {label: "其他", value: 1},
+            {label: "清", value: 1},
+            {label: "其他", value: 2},
           ],
           extraEditors: [
             {
@@ -135,8 +135,8 @@ const config: Array<FormConfig> = [
           key: "rales",
           label: "",
           options: [
-            {label: "无", value: 0},
-            {label: "有", value: 1},
+            {label: "无", value: 1},
+            {label: "有", value: 2},
           ],
           extraEditors: [
             {
@@ -158,8 +158,8 @@ const config: Array<FormConfig> = [
           key: "heartrhythm",
           label: "",
           options: [
-            {label: "齐", value: 0},
-            {label: "不齐", value: 1},
+            {label: "齐", value: 1},
+            {label: "不齐", value: 2},
           ],
           extraEditors: [
             {
@@ -181,8 +181,8 @@ const config: Array<FormConfig> = [
           key: "murmurs",
           label: "",
           options: [
-            {label: "无", value: 0},
-            {label: "有", value: 1},
+            {label: "无", value: 1},
+            {label: "有", value: 2},
           ],
           extraEditors: [
             {
@@ -204,8 +204,8 @@ const config: Array<FormConfig> = [
           key: "liver",
           label: "",
           options: [
-            {label: "未触及", value: 0},
-            {label: "可触及", value: 1},
+            {label: "未触及", value: 1},
+            {label: "可触及", value: 2},
           ],
           extraEditors: [
             {
@@ -227,8 +227,8 @@ const config: Array<FormConfig> = [
           key: "spleen",
           label: "",
           options: [
-            {label: "未触及", value: 0},
-            {label: "可触及", value: 1},
+            {label: "未触及", value: 1},
+            {label: "可触及", value: 2},
           ],
           extraEditors: [
             {
@@ -250,8 +250,8 @@ const config: Array<FormConfig> = [
           key: "ckshenz",
           label: "",
           options: [
-            {label: "无", value: 0},
-            {label: "有", value: 1},
+            {label: "无", value: 1},
+            {label: "有", value: 2},
           ],
           extraEditors: [
             {
@@ -273,8 +273,8 @@ const config: Array<FormConfig> = [
           key: "spine",
           label: "",
           options: [
-            {label: "正常", value: 0},
-            {label: "其他", value: 1},
+            {label: "正常", value: 1},
+            {label: "其他", value: 2},
           ],
           extraEditors: [
             {
@@ -296,8 +296,8 @@ const config: Array<FormConfig> = [
           key: "physiologicalreflection",
           label: "",
           options: [
-            {label: "存在", value: 0},
-            {label: "其他", value: 1},
+            {label: "存在", value: 1},
+            {label: "其他", value: 2},
           ],
           extraEditors: [
             {
@@ -319,8 +319,8 @@ const config: Array<FormConfig> = [
           key: "pathologicalreflection",
           label: "",
           options: [
-            {label: "无", value: 0},
-            {label: "有", value: 1},
+            {label: "无", value: 1},
+            {label: "有", value: 2},
           ],
           extraEditors: [
             {
@@ -342,8 +342,8 @@ const config: Array<FormConfig> = [
           key: "edema",
           label: "",
           options: [
-            {label: "-", value: 0},
-            {label: "+", value: 1},
+            {label: "-", value: 1},
+            {label: "+", value: 2},
             {label: "+-", value: 2},
             {label: "++", value: 3},
             {label: "+++", value: 4},
