@@ -79,8 +79,8 @@ export const queryFormDescriptions = {
     key: 'login',
     label: '账号',
   },
-  name: {
-    key: 'name',
+  firstName: {
+    key: 'firstName',
     label: '姓名',
   },
 };
