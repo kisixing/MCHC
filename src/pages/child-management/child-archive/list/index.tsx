@@ -7,6 +7,7 @@ import { EditOutlined, DeleteOutlined, EyeOutlined, PlusOutlined } from '@ant-de
 import BaseList from '@/components/BaseList';
 import WithDynamicExport from '@/components/WithDynamicExport';
 import Table from './components/Table';
+import Query from './components/Query';
 import { tableColumns } from './config/table';
 import { processFromApi } from './config/adpater';
 
@@ -18,12 +19,13 @@ export default class List extends BaseList {
     baseUrl: '/child-archives',
     baseTitle: '儿童档案',
     needPagination: true,
-    showQuery: false,
+    showQuery: true,
     showAdd: true,
     tableColumns,
     processFromApi,
     rowKey: 'id',
     Table,
+    Query
   };
 
   state = {

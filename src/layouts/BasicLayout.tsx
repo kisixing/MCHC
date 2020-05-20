@@ -35,6 +35,14 @@ const BasicLayout = (props: any) => {
     });
   };
 
+  // 获取初始化数据
+  useEffect(() => {
+    dispatch({
+      type: 'select/getDictionaries',
+      payload: {},
+    });
+  }, []);
+
   // 登录过期与退出登录
   useEffect(() => {
     const { currentUser, allPermissions } = props;

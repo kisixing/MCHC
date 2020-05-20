@@ -38,7 +38,7 @@ export default class List extends BaseList {
     loading: true,
   };
 
-  handleSearch = async () => {
+  handleSearch = async (queryParams: any = {}) => {
     const { baseUrl, needPagination, processFromApi, asChildComponentQueryLabel = '', id: propsId } = this.props;
     const labourRecordsUrl = '/labour-records';
     const { defaultQuery } = this.state;
@@ -48,10 +48,12 @@ export default class List extends BaseList {
           ...defaultQuery,
           'caesareanDeliveryId.specified': true,
           [asChildComponentQueryLabel]: propsId,
+          ...queryParams,
         }
       : {
           ...defaultQuery,
           'caesareanDeliveryId.specified': true,
+          ...queryParams,
         };
     const dataSource = isFunction(processFromApi)
       ? processFromApi(
@@ -73,8 +75,8 @@ export default class List extends BaseList {
   handleQuerySearch = (data: any) => {
     const { name, idNO } = data;
     const queryData = {
-      'admissionName.equals': name,
-      'admissionIdNO.equals': idNO,
+      'admissionCriteria.name.contains': name,
+      'admissionCriteria.idNO.contains': idNO,
     };
     let newQueryData = {};
     map(queryData, (value, key) => {
