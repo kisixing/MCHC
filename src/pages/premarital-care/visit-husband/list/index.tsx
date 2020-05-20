@@ -1,24 +1,26 @@
 import React from 'react';
 import Table from './components/Table';
+import Query from './components/Query';
 import { tableColumns } from './config/table';
 import BaseList from '@/components/BaseList';
 import WithDynamicExport from '@/components/WithDynamicExport';
 import { processFromApi } from './config/adpater';
 import { router } from 'umi';
-import { get } from 'lodash';
+import { get, map, filter, isNil, set, isEmpty, pick } from 'lodash';
 
 @WithDynamicExport
 export default class List extends BaseList {
   static defaultProps = {
     baseUrl: '/premarital-visits',
     baseTitle: '男性婚检记录',
-    needPagination: false,
-    showQuery: false,
+    needPagination: true,
+    showQuery: true,
     showAdd: false,
     processFromApi,
     tableColumns,
     rowKey: 'id',
     Table,
+    Query,
   };
 
   state = {
@@ -38,5 +40,24 @@ export default class List extends BaseList {
   handleEdit = (rowData: any) => () => {
     const id = get(rowData, 'husband.id');
     router.push(`/premarital-care/husband/husband-exam?id=${id}`);
+  };
+
+  handleQuerySearch = (data: any) => {
+    const { outpatientNO, name, idNO } = data;
+    const queryData = {
+      'husbandCriteria.outpatientNO.contains': outpatientNO,
+      'husbandCriteria.name.contains': name,
+      'husbandCriteria.idNO.contains': idNO,
+    };
+    let newQueryData = {};
+    map(queryData, (value, key) => {
+      if (!isNil(value) && !isEmpty(value)) {
+        newQueryData = {
+          ...newQueryData,
+          [key]: value,
+        };
+      }
+    });
+    this.handleSearch(newQueryData);
   };
 }

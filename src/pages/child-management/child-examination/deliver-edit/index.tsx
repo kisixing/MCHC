@@ -50,7 +50,7 @@ export default class panel extends PanelWithChild {
             <span className={headerStyles.panelWithChildHeaderItemValue}>{get(data, 'childArchives.age')}</span>
           </div>
         </div>
-        <Divider className={headerStyles.panelWithChildHeaderDivider}></Divider>
+        {/* <Divider className={headerStyles.panelWithChildHeaderDivider}></Divider> */}
       </>
     );
   };

@@ -228,7 +228,7 @@ export default class BaseList extends React.Component<IProps, IState> {
       if (!isNil(value) && !isEmpty(value)) {
         queryData = {
           ...queryData,
-          [`${key}.equals`]: value,
+          [`${key}.contains`]: value,
         };
       }
     });

@@ -29,6 +29,7 @@ import CheckboxGroup from '@/components/ConfigComponents/CheckboxGroup';
 import InputWithLabel from '../ConfigComponents/InputWithLabel';
 import NormalCheckboxWithInput from '../ConfigComponents/NormalCheckboxWithInput';
 import SelectWithOptions from '../selects/SelectWithOptions';
+import DictionarySelect from '@/components/ConfigComponents/DictionarySelect';
 
 export const getFormDescriptionByModuleName = async (moduleName: string) => {
   return formDescriptionsWithoutSectionApi(
@@ -104,6 +105,11 @@ export class FormSection extends React.Component<IProps> {
             styles: get(formDescription, 'styles'),
           },
         );
+      case 'dictionary_select':
+        return renderEditItem(get(formDescription, 'key'), <DictionarySelect config={formDescription} />, {
+          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
+          styles: get(formDescription, 'styles'),
+        });
       case 'country_select':
         return renderEditItem(
           get(formDescription, 'key'),

@@ -1,56 +1,6 @@
 import React, { Component } from 'react';
-import { Cascader, Input } from 'antd';
-
-const options = [
-  {
-    value: "北京",
-    label: "北京",
-    children: [
-      {
-        value: "北京",
-        label: "北京",
-        children: [
-          {
-            value: "北京",
-            label: "北京",
-          }
-        ]
-      }
-    ]
-  },
-  {
-    value: "广东省",
-    label: "广东省",
-    children: [
-      {
-        value: "广州市",
-        label: "广州市",
-        children: [
-          {
-            value: "天河区",
-            label: "天河区",
-          },
-          {
-            value: "越秀区",
-            label: "越秀区",
-          },
-          {
-            value: "番禺区",
-            label: "番禺区",
-          },
-          {
-            value: "白云区",
-            label: "白云区",
-          },
-          {
-            value: "黄浦区",
-            label: "黄浦区",
-          },
-        ]
-      }
-    ]
-  }
-]
+import { Cascader, Select, Input, Row, Col } from 'antd';
+import options, { getStreets } from './cascader-address-options';
 
 interface AddressCascaderProps {
   onChange: Function;
@@ -73,24 +23,34 @@ export default class AddressCascader extends Component<AddressCascaderProps> {
   handleChange = (val: any, key: number): void => {
     const { value = "" , onChange} = this.props;
     if(key === 0){
-      onChange(`${val.join(",")}${SPLIT_KEY}${this.getDataFormProp(value).inputData}`);
-    }else if(key === 1){
-      onChange(`${this.getDataFormProp(value).cascaderData.join(",")}${SPLIT_KEY}${val}`);
+      onChange(`${val.join(",")}${SPLIT_KEY}${this.getDataFormProp(value).streetData}${SPLIT_KEY}${this.getDataFormProp(value).inputData}`);
+    } else if (key === 1) {
+      onChange(`${this.getDataFormProp(value).cascaderData.join(",")}${SPLIT_KEY}${val.value}${SPLIT_KEY}${this.getDataFormProp(value).inputData}`);
+    } else if(key === 2){
+      onChange(`${this.getDataFormProp(value).cascaderData.join(",")}${SPLIT_KEY}${this.getDataFormProp(value).streetData}${SPLIT_KEY}${val}`);
     }
   }
 
   getDataFormProp = (value:string = "") => {
     const targetData:any = {
       cascaderData: [],
-      inputData: ""
+      streetData: [],
+      streetOptions: '',
+      inputData: ''
     }
     if (value) {
       const valueArr = value.split(SPLIT_KEY);
+      if (valueArr.length > 2) {
+        targetData.streetOptions = getStreets(valueArr[0],valueArr[1],valueArr[2]);
+      }
       for (let i = 0; i < valueArr.length; i++) {
         if (i <= 2) {
           targetData.cascaderData.push(valueArr[i]);
         }
         if(i === 3){
+          targetData.streetData = valueArr[i];
+        }
+        if(i === 4){
           targetData.inputData = valueArr[i];
           break;
         }
@@ -102,18 +62,35 @@ export default class AddressCascader extends Component<AddressCascaderProps> {
   render() {
     const {value = ""} = this.props;
     const data = this.getDataFormProp(value);
+
     return (
       <div>
         <div style={{display: "flex", flexDirection: "row"}}>
-          <Cascader
-            options={options}
-            onChange={(val: Array<string>) => this.handleChange(val, 0)}
-            value={data.cascaderData}
-          />
-          <Input
-            value={data.inputData}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e.target.value, 1)}
-          />
+        <Row>
+          <Col span={6}>
+            <Cascader
+              options={options}
+              onChange={(val: Array<string>) => this.handleChange(val, 0)}
+              value={data.cascaderData}
+            />
+          </Col>
+          <Col span={6}>
+            <Select
+              style={{width: '100%'}}
+              options={data.streetOptions}
+              onChange={(val: Array<string>, option) => this.handleChange(option, 1)}
+              value={data.streetData}
+              disabled={!data.cascaderData}
+            />
+          </Col>
+          <Col span={12}>
+            <Input
+              value={data.inputData}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => this.handleChange(e.target.value, 2)}
+              disabled={!data.streetData}
+            />
+          </Col>
+        </Row>
         </div>
       </div>
     )

@@ -59,7 +59,7 @@ export default class Addpanel extends PanelWithChild {
             <span className={headerStyles.panelWithChildHeaderItemValue}>{get(data, 'age')}</span>
           </div>
         </div>
-        <Divider className={headerStyles.panelWithChildHeaderDivider}></Divider>
+        {/* <Divider className={headerStyles.panelWithChildHeaderDivider}></Divider> */}
       </>
     );
   };

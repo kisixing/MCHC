@@ -12,6 +12,14 @@ export const tableColumns = [
     render: (value: any, rowData: any) => get(rowData, 'admission.name'),
   },
   {
+    title: '身份证号',
+    dataIndex: 'idNO',
+    align: 'center',
+    fixed: true,
+    width: 100,
+    render: (value: any, rowData: any) => get(rowData, 'admission.idNO'),
+  },
+  {
     title: '孕周',
     dataIndex: 'gestationalWeek',
     align: 'center',

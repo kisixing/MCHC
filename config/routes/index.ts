@@ -165,7 +165,7 @@ export const omitRoutesBackup = [
     isMenu: true,
     active: null,
   },
-  
+
   {
     id: 378,
     type: 'others',
@@ -754,7 +754,7 @@ export const omitRoutesBackup = [
     id: 157,
     type: 'others',
     key: '/prenatal-visit/main',
-    name: '首诊/复诊管理',
+    name: '医生工作台',
     parentid: 0,
     active: null,
     isMenu: false,
