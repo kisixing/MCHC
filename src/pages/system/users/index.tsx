@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import Table from './components/Table';
+import Query from './components/Query';
 import UsersModal from './components/UsersModal';
 import { tableColumns } from './config/table';
 import { processFromApi, toApi } from './config/adapter';
@@ -26,12 +27,13 @@ export default class List extends BaseList {
   static defaultProps = {
     baseUrl: '/users',
     baseTitle: '用户',
-    needPagination: false,
+    needPagination: true,
     showAdd: true,
-    showQuery: false,
+    showQuery: true,
     rowKey: 'id',
     tableColumns,
     Table,
+    Query,
   };
 
   state = {
@@ -145,11 +147,12 @@ export default class List extends BaseList {
   };
 
   render() {
-    const { baseTitle, rowKey, showAdd, needPagination } = this.props;
+    const { baseTitle, rowKey, showAdd, needPagination, showQuery, Query } = this.props;
     const { dataSource, visible, editable, id, total, defaultQuery, loading, paramryKey, resetVisible } = this.state;
 
     return (
       <Fragment>
+        {showQuery && <Query onSearch={this.handleQuerySearch} />}
         {loading ? (
           <CustomSpin />
         ) : (
