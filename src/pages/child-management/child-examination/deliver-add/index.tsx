@@ -5,6 +5,7 @@ import InfectedHistory from '../infected-history';
 import AuxiliaryExamination from '../auxiliary-examination';
 import PhysicalExamination from '../physical-examination';
 import GeneralExamination from '../general-examination';
+import HighRiskInfant from '../high-risk-infant';
 
 import { Tabs, Divider } from 'antd';
 import { get } from 'lodash';
@@ -17,7 +18,7 @@ export default class Addpanel extends PanelWithChild {
     activeKey: get(this.props, 'location.query.activeKey') || 'PhysicalExamination',
     childArchives: {},
     data: {},
-    id: null
+    id: null,
   };
 
   async componentDidMount() {
@@ -41,8 +42,8 @@ export default class Addpanel extends PanelWithChild {
   };
 
   setID = (id: string) => {
-    this.setState({ id })
-  }
+    this.setState({ id });
+  };
 
   renderHeader = () => {
     const data = this.state.childArchives;
@@ -51,21 +52,17 @@ export default class Addpanel extends PanelWithChild {
         <div className={headerStyles.panelWithChildHeader}>
           <div className={headerStyles.panelWithChildHeaderItem}>
             <span className={headerStyles.panelWithChildHeaderItemLabel}>姓名:</span>
-            <span className={headerStyles.panelWithChildHeaderItemValue}>
-              {get(data, 'name')}
-            </span>
+            <span className={headerStyles.panelWithChildHeaderItemValue}>{get(data, 'name')}</span>
           </div>
           <div className={headerStyles.panelWithChildHeaderItem}>
             <span className={headerStyles.panelWithChildHeaderItemLabel}>年龄:</span>
-            <span className={headerStyles.panelWithChildHeaderItemValue}>
-              {get(data, 'age')}
-            </span>
+            <span className={headerStyles.panelWithChildHeaderItemValue}>{get(data, 'age')}</span>
           </div>
         </div>
         <Divider className={headerStyles.panelWithChildHeaderDivider}></Divider>
       </>
     );
-  }
+  };
 
   renderContent = () => {
     const { id, data, activeKey, childArchives } = this.state;
@@ -76,26 +73,32 @@ export default class Addpanel extends PanelWithChild {
           {activeKey === 'BirthInformation' && <BirthInformation data={data} />}
         </Tabs.TabPane> */}
         <Tabs.TabPane tab="体格检查" key="PhysicalExamination">
-          {activeKey === 'PhysicalExamination' && childArchives.id && <PhysicalExamination id={id} setID={this.setID} data={data} childArchivesData={childArchives} />}
+          {activeKey === 'PhysicalExamination' && childArchives.id && (
+            <PhysicalExamination id={id} setID={this.setID} data={data} childArchivesData={childArchives} />
+          )}
         </Tabs.TabPane>
         <Tabs.TabPane tab="内科检查" key="GeneralExamination">
-          {activeKey === 'GeneralExamination' && <GeneralExamination id={id} setID={this.setID} data={data} childArchivesData={childArchives} />}
+          {activeKey === 'GeneralExamination' && (
+            <GeneralExamination id={id} setID={this.setID} data={data} childArchivesData={childArchives} />
+          )}
         </Tabs.TabPane>
         <Tabs.TabPane tab="辅助检查" key="AuxiliaryExamination">
-          {activeKey === 'AuxiliaryExamination' && <AuxiliaryExamination id={id} setID={this.setID} data={data} childArchivesData={childArchives}  />}
+          {activeKey === 'AuxiliaryExamination' && (
+            <AuxiliaryExamination id={id} setID={this.setID} data={data} childArchivesData={childArchives} />
+          )}
         </Tabs.TabPane>
         <Tabs.TabPane tab="传染病史" key="InfectedHistory">
-          {activeKey === 'InfectedHistory' && <InfectedHistory id={id} setID={this.setID} data={data} childArchivesData={childArchives} />}
+          {activeKey === 'InfectedHistory' && (
+            <InfectedHistory id={id} setID={this.setID} data={data} childArchivesData={childArchives} />
+          )}
         </Tabs.TabPane>
-        <Tabs.TabPane tab="高危儿登记" key="CaesareanDelivery">
-
+        <Tabs.TabPane tab="高危儿登记" key="HighRiskInfant">
+          {activeKey === 'HighRiskInfant' && (
+            <HighRiskInfant id={id} data={data} setID={this.setID} childArchivesData={childArchives} />
+          )}
         </Tabs.TabPane>
-        <Tabs.TabPane tab="转诊登记" key="NeonateRecord">
-
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="下次体检预约" key="PostpartumVisit">
-
-        </Tabs.TabPane>
+        <Tabs.TabPane tab="转诊登记" key="NeonateRecord"></Tabs.TabPane>
+        <Tabs.TabPane tab="下次体检预约" key="PostpartumVisit"></Tabs.TabPane>
       </Tabs>
     );
   };

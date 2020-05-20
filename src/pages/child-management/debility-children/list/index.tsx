@@ -2,7 +2,7 @@ import React from 'react';
 import { router } from 'umi';
 import { get } from 'lodash';
 import { Button, Popconfirm } from 'antd';
-import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 import Table from './components/Table';
 import Query from './components/Query';
@@ -17,11 +17,11 @@ import commonStyles from '@/common.less';
 export default class List extends BaseList {
   static defaultProps = {
     rowKey: 'id',
-    baseUrl: '/child-exam-visits',
-    baseTitle: '儿童健康体检',
+    baseUrl: '',
+    baseTitle: '营养性疾病儿童',
     needPagination: true,
     showQuery: true,
-    showAdd: false,
+    showAdd: true,
     tableColumns,
     processFromApi,
     Table,
@@ -56,15 +56,6 @@ export default class List extends BaseList {
         return (
           <>
             <Button
-              className={commonStyles.tableActionBtn}
-              type="primary"
-              size="small"
-              title="查看"
-              onClick={this.handleView(rowData)}
-            >
-              <EyeOutlined title="查看" />
-            </Button>
-            {/* <Button
               title="编辑"
               className={commonStyles.tableActionBtn}
               type="primary"
@@ -72,7 +63,8 @@ export default class List extends BaseList {
               onClick={this.handleEdit(rowData)}
             >
               <EditOutlined />
-            </Button> */}
+              编辑
+            </Button>
             <Popconfirm
               title={`确定要删除这个${get(this.props, 'baseTitle')}吗?`}
               onConfirm={this.handleDelete(rowData)}

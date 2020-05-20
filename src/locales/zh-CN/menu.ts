@@ -207,6 +207,8 @@ export default {
   'menu.child-management.child-examination': '儿童健康体检记录',
   'menu.child-management.child-examination-add': '创建儿童健康体检档案',
   'menu.child-management.child-examination-edit': '查看儿童健康体检档案',
+  'menu.child-management.hearing-screening': '儿童听力筛查',
+  'menu.child-management.nutritive-disease': '营养性疾病儿童',
 
   'menu.child-examination': '儿童健康体检管理',
   'menu.child-examination.archive': '创建儿童档案',
