@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tree } from 'antd';
-import { map, isEqual, get, isEmpty } from 'lodash';
+import { map, isEmpty, get, concat, filter, compact, keys, keyBy, cloneDeep, indexOf } from 'lodash';
 import request from '@/utils/request';
 
 export default class PermissionSelect extends React.Component {
@@ -11,33 +11,18 @@ export default class PermissionSelect extends React.Component {
   };
 
   async componentDidMount() {
-    const treeData = this.transferMenus(await request.get('/permissions?size=100'));
-    this.setState({ treeData });
+    const { value } = this.props;
+    const nativePermissions = await request.get('/permissions?size=1000');
+    const treeData = this.transferMenus(cloneDeep(nativePermissions));
+    const baseOmitKeys: any[] = this.getIsNotSelectedParentKeys(nativePermissions, value);
+    const omitKeys = this.omitKeysByBaseKeys(baseOmitKeys, nativePermissions);
+    this.setState({ treeData, checkedData: filter(value, key => omitKeys.indexOf(key) === -1) });
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    const { checkedData, isUpdated } = prevState;
-    const { value } = nextProps;
-    if (
-      !isEqual(
-        map(value, item => item.name),
-        checkedData,
-      ) &&
-      value &&
-      !isUpdated
-    ) {
-      return {
-        checkedData: value,
-      };
-    }
-
-    return null;
-  }
-
-  handleChange = ({ checked }) => {
+  handleChange = (checked: any[], e: any) => {
     const { onChange } = this.props;
-    this.setState({ checkedData: checked, isUpdated: true });
-    onChange && onChange(checked);
+    const halfChecked = get(e, 'halfCheckedKeys');
+    onChange && onChange(concat(halfChecked, checked));
   };
 
   transferMenus = (menus: any, parentid = 0) => {
@@ -47,10 +32,56 @@ export default class PermissionSelect extends React.Component {
         item.title = item.name;
         item.key = item.id;
         item.children = this.transferMenus(menus, item.id);
+        if (isEmpty(item.children)) {
+          item.isLeaf = true;
+        } else {
+          item.isLeaf = false;
+        }
         temp.push(item);
       }
     });
     return temp;
+  };
+
+  // TODO: 目前仅过滤两层，是否可以递归？
+  omitKeysByBaseKeys = (baseKeys: any[], nativePermissions: any) => {
+    const nativePermissionsMapping = keyBy(nativePermissions, 'id');
+    map(baseKeys, key => {
+      if (get(nativePermissionsMapping, `${key}.parentid`) !== 0) {
+        baseKeys.push(get(nativePermissionsMapping, `${key}.parentid`));
+      }
+    });
+    return baseKeys;
+  };
+
+  getIsNotSelectedParentKeys = (nativePermissions: any[], selectedKeys: any) => {
+    const omitParentKeys: any = [];
+    const parentKeys = compact(
+      Array.from(
+        new Set(
+          map(nativePermissions, permission => {
+            if (get(permission, 'parentid') !== 0) {
+              return get(permission, 'parentid');
+            }
+          }),
+        ),
+      ),
+    );
+    map(parentKeys, parentKey => {
+      if (indexOf(selectedKeys, parentKey) > -1) {
+        const childrens = filter(nativePermissions, permission => get(permission, 'parentid') === parentKey);
+        const childrenKeys = keys(keyBy(childrens, 'id'));
+        for (let index = 0; index < childrenKeys.length; index++) {
+          const key = Number(childrenKeys[index]);
+          if (indexOf(selectedKeys, key) === -1) {
+            omitParentKeys.push(parentKey);
+            break;
+          }
+        }
+      }
+    });
+
+    return omitParentKeys;
   };
 
   render() {
@@ -59,9 +90,8 @@ export default class PermissionSelect extends React.Component {
     if (treeData.length > 0) {
       return (
         <Tree
-          checkStrictly
           treeData={treeData}
-          checkedKeys={checkedData}
+          defaultCheckedKeys={checkedData}
           defaultExpandAll
           checkable
           disabled={disabled}
