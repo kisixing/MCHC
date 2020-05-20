@@ -284,6 +284,22 @@ export const omitRoutesBackup = [
     isMenu: false,
     active: null,
   },
+  {
+    id: 347,
+    type: 'others',
+    key: '/child-management/hearing-screening',
+    name: '儿童听力筛查记录',
+    isMenu: true,
+    active: null,
+  },
+  {
+    id: 3410,
+    type: 'others',
+    key: '/child-management/nutritive-disease',
+    name: '营养性疾病儿童',
+    isMenu: true,
+    active: null,
+  },
 
   {
     id: 339,

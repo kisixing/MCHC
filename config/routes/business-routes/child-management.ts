@@ -57,5 +57,17 @@ export default {
       path: '/child-management/child-examination/deliver-edit',
       component: './child-management/child-examination/deliver-edit',
     },
+    {
+      name: 'hearing-screening',
+      icon: 'ordered-list',
+      path: '/child-management/hearing-screening',
+      component: './child-management/hearing-screening/list',
+    },
+    {
+      name: 'nutritive-disease',
+      icon: 'ordered-list',
+      path: '/child-management/nutritive-disease',
+      component: './child-management/debility-children/list',
+    },
   ],
 };

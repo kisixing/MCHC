@@ -5,6 +5,7 @@ import InfectedHistory from '../infected-history';
 import AuxiliaryExamination from '../auxiliary-examination';
 import PhysicalExamination from '../physical-examination';
 import GeneralExamination from '../general-examination';
+import HighRiskInfant from '../high-risk-infant';
 
 import { Tabs, Divider } from 'antd';
 import { get } from 'lodash';
@@ -42,21 +43,17 @@ export default class panel extends PanelWithChild {
         <div className={headerStyles.panelWithChildHeader}>
           <div className={headerStyles.panelWithChildHeaderItem}>
             <span className={headerStyles.panelWithChildHeaderItemLabel}>姓名:</span>
-            <span className={headerStyles.panelWithChildHeaderItemValue}>
-              {get(data, 'childArchives.name')}
-            </span>
+            <span className={headerStyles.panelWithChildHeaderItemValue}>{get(data, 'childArchives.name')}</span>
           </div>
           <div className={headerStyles.panelWithChildHeaderItem}>
             <span className={headerStyles.panelWithChildHeaderItemLabel}>年龄:</span>
-            <span className={headerStyles.panelWithChildHeaderItemValue}>
-              {get(data, 'childArchives.age')}
-            </span>
+            <span className={headerStyles.panelWithChildHeaderItemValue}>{get(data, 'childArchives.age')}</span>
           </div>
         </div>
         {/* <Divider className={headerStyles.panelWithChildHeaderDivider}></Divider> */}
       </>
     );
-  }
+  };
 
   renderContent = () => {
     const id = get(this.props, 'location.query.id');
@@ -66,12 +63,12 @@ export default class panel extends PanelWithChild {
         {/* <Tabs.TabPane tab="出生信息登记" key="BirthInformation">
           {activeKey === 'BirthInformation' && <BirthInformation data={data} />}
         </Tabs.TabPane> */}
-        
+
         <Tabs.TabPane tab="体格检查" key="PhysicalExamination">
-          {activeKey === 'PhysicalExamination' && data.id && <PhysicalExamination id={id} data={data} />}
+          {activeKey === 'PhysicalExamination' && data && data.id && <PhysicalExamination id={id} data={data} />}
         </Tabs.TabPane>
         <Tabs.TabPane tab="内科检查" key="GeneralExamination">
-          {activeKey === 'GeneralExamination' && <GeneralExamination id={id} data={data}/>}
+          {activeKey === 'GeneralExamination' && <GeneralExamination id={id} data={data} />}
         </Tabs.TabPane>
         <Tabs.TabPane tab="辅助检查" key="AuxiliaryExamination">
           {activeKey === 'AuxiliaryExamination' && <AuxiliaryExamination id={id} data={data} />}
@@ -79,15 +76,11 @@ export default class panel extends PanelWithChild {
         <Tabs.TabPane tab="传染病史" key="InfectedHistory">
           {activeKey === 'InfectedHistory' && <InfectedHistory id={id} data={data} />}
         </Tabs.TabPane>
-        <Tabs.TabPane tab="高危儿登记" key="CaesareanDelivery">
-
+        <Tabs.TabPane tab="高危儿登记" key="HighRiskInfant">
+          {activeKey === 'HighRiskInfant' && <HighRiskInfant id={id} data={data} />}
         </Tabs.TabPane>
-        <Tabs.TabPane tab="转诊登记" key="NeonateRecord">
-
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="下次体检预约" key="PostpartumVisit">
-
-        </Tabs.TabPane>
+        <Tabs.TabPane tab="转诊登记" key="NeonateRecord"></Tabs.TabPane>
+        <Tabs.TabPane tab="下次体检预约" key="PostpartumVisit"></Tabs.TabPane>
       </Tabs>
     );
   };
