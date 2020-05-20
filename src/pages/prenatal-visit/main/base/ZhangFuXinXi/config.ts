@@ -4,8 +4,8 @@ import * as Options from '@/pages/prenatal-visit/options';
 const config: Array<FormConfig> = [
 
   { name: 'partnerName', key: '.partnerName', label: "姓名", input_type: "input", span: 7 },
-  { name: 'userhmcno', key: '.partnerProfile.outpatientNOp', label: "配偶门诊号", input_type: "input", span: 7 },
-  { name: 'userhage', key: '.userhage', label: "年龄", input_type: "input", span: 7 },
+  { name: 'outpatientNO', key: '.outpatientNO', label: "门诊号", input_type: "input", span: 7 },
+  { name: 'partnerAge', key: '.partnerAge', label: "年龄", input_type: "input", span: 7 },
   { name: 'partnerNationality', key: '.partnerNationality', label: "国籍", input_type: "input", span: 7 },
   { name: 'partnerNativeplace', key: '.partnerNativeplace', label: "籍贯", input_type: "select", span: 7, input_props:{options: Options.nativeplaceOptions} },
   { name: 'partnerEthnic', key: '.partnerEthnic', label: "民族", input_type: "select", span: 7, input_props:{options: Options.ethnicOptions} },

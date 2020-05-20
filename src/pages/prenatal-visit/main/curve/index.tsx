@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Button, Table, Modal } from "antd";
-import "./index.less"
+import styles from "./index.less"
 
 export default class Index extends Component {
   constructor(props) {
@@ -476,13 +476,13 @@ export default class Index extends Component {
 
   render() {
     return (
-      <div className="yunqi">
+      <div className={styles.yunqi}>
         {/* <Button type="ghost" className="btn-tz" onClick={() => this.printCanvas('bmiCanvas')}>打印体重曲线</Button>
         <Button type="ghost" className="btn-sz" onClick={() => this.printCanvas('fetusCanvas')}>打印生长曲线</Button> */}
-        <canvas id="fetusCanvas" className='fetusCanvas'>
+        <canvas id="fetusCanvas" className={styles.fetusCanvas}>
           您的浏览器不支持canvas，请更换浏览器.
         </canvas>
-        <canvas id="bmiCanvas" className='bmiCanvas'>
+        <canvas id="bmiCanvas" className={styles.bmiCanvas}>
           您的浏览器不支持canvas，请更换浏览器.
         </canvas>
       </div>

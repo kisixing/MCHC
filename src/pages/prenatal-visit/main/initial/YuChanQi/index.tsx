@@ -48,7 +48,7 @@ export default class Home extends React.Component<{},HomeState>{
     const id = getPageQuery().id;
     this.state.formHandler.submit().then(({validCode, res}:any) => {
       if(validCode) {
-        const param = { id };
+        const param = { id, 'highrisk': 1 };
         const resData = {...getFormData(res), ...param }
 
         request('/pregnancies', {

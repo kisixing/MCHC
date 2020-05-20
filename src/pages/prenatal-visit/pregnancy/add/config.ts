@@ -357,6 +357,7 @@ const config: Array<FormConfig> = [
         { name: 'hospital', key: '.hospital', label: "分娩医院", input_type: "input", span: 7, rules: "required", input_props:{} },
         // { name: 'gesweek', key: '.gesweek', label: "分娩孕周", input_type: "input", span: 7, rules: "required", input_props:{} },
         { name: 'fetalcount', key: '.fetalcount', label: "胎数", input_type: "input", span: 7, rules: "required", input_props:{} },
+
         // { name: 'fenm', key: '.fenm', label: "分娩方式", input_type: "input", span: 7, rules: "required", input_props:{} },
         { name: 'puerperalFever', key: '.*', label: "产后持续发热", input_type: "checkbox", span: 7, rules: "required",
           input_props:{
@@ -388,6 +389,15 @@ const config: Array<FormConfig> = [
             ],
           }
         },
+
+        // { name: 'child', key: '.child', label: "胎儿信息", input_type: "array-custom", span: 24, rules: "required",
+        //   input_props:{
+        //     type: "custom",
+        //     config: [
+        //       { name: 'neonateWeight', key: '.neonateWeight', label: "胎数", input_type: "input", span: 7, rules: "required", input_props:{} },
+        //     ]
+        //   }
+        // },
       ]
     }
   }

@@ -3,13 +3,14 @@ import { Tabs } from 'antd';
 import request from '@/utils/request';
 import { getPageQuery } from '@/utils/utils';
 
-import Initial from './components/initial';
-import Return from './components/return';
-import Base from './components/base';
-import BloodSugar from './components/blood-sugar';
-import Curve from './components/curve';
-import ImageReport from './components/image-report';
-import SurveyReport from './components/survey-report';
+import Initial from './initial';
+import Return from './return';
+import Base from './base';
+import BloodSugar from './blood-sugar';
+import Curve from './curve';
+import ImageReport from './image-report';
+import SurveyReport from './survey-report';
+import HighriskFactor from './components/high-risk-factor';
 import styles from './index.less';
 
 interface PrenatalDiagnosisState {
@@ -61,6 +62,12 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
         <div>
           <span>产检编号:</span><strong>{formData.checkupNO}</strong>
         </div>
+        <div>
+          <span>高危等级:</span><strong>{formData.highrisk}</strong>
+        </div>
+        <div>
+          <span>高危因素:</span><strong>{formData.highriskNote}</strong>
+        </div>
       </div>
     }
     return null;
@@ -94,6 +101,7 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
             <Base />
           </Tabs.TabPane>
         </Tabs>
+        <HighriskFactor />
       </div>
     )
   }
