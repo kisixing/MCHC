@@ -45,9 +45,9 @@ export default class List extends BaseList {
   handleQuerySearch = (data: any) => {
     const { outpatientNO, name, idNO } = data;
     const queryData = {
-      'wifeOutpatientNO.equals': outpatientNO,
-      'wifeName.equals': name,
-      'wifeIdNO.equals': idNO,
+      'wifeCriteria.outpatientNO.contains': outpatientNO,
+      'wifeCriteria.name.contains': name,
+      'wifeCriteria.idNO.contains': idNO,
     };
     let newQueryData = {};
     map(queryData, (value, key) => {
