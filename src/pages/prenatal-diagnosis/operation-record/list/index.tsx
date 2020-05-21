@@ -15,8 +15,8 @@ import { getPageQuery } from '@/utils/utils';
 export default class List extends BaseList {
   
   static defaultProps = {
-    baseUrl: "/prenatal-diagnoses",
-    baseTitle: '专科病历',
+    baseUrl: "/pd-operations",
+    baseTitle: '手术病历',
     needPagination: false,
     showQuery: false,
     showAdd: true,
@@ -85,17 +85,17 @@ export default class List extends BaseList {
 
   handleAdd = () => {
     const urlParams = getPageQuery();
-    router.push(`/prenatal-diagnosis/medical-record-form?prenatalPatientId=${urlParams.prenatalPatientId || ""}`);
+    router.push(`/prenatal-diagnosis/operation-record-form?prenatalPatientId=${urlParams.prenatalPatientId || ""}`);
   };
 
-  handleView = (rowData: any) => () => {
-    const { id } = rowData;
-    router.push(`/prenatal-diagnosis/main?id=${id}`);
-  };
+  // handleView = (rowData: any) => () => {
+  //   const { id } = rowData;
+  //   router.push(`/prenatal-diagnosis/main?id=${id}`);
+  // };
 
   handleEdit = (rowData: any) => () => {
     const { id } = rowData;
     const urlParams = getPageQuery();
-    router.push(`/prenatal-diagnosis/medical-record-form?prenatalPatientId=${urlParams.prenatalPatientId || ""}&id=${id}`);
+    router.push(`/prenatal-diagnosis/operation-record-form?prenatalPatientId=${urlParams.prenatalPatientId || ""}&id=${id}`);
   };
 }

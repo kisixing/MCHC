@@ -28,8 +28,8 @@ export interface ComponentOption {
   type?: string | null,
   // select
   options?: Array<{
-    value: string | number,
-    label: string | number
+    value: string | number | boolean,
+    label: string | number | boolean
   }>,
 
   // date
@@ -77,7 +77,8 @@ export interface FormItemProp {
   actions?: {
     setValue?: (val: any) => void
     getValue?: () => any,
-    valid?: () => any
+    valid?: () => any,
+    reset?: () => void
   },
   dispatch: (fieldName: string, eventName: string, args: any) => void,
   subscribe: (fieldName: string, eventName: string, cb: Function) => void

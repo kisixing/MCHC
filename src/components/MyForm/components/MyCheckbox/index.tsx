@@ -3,6 +3,7 @@ import React, { Component, ReactNode } from 'react';
 import { Checkbox } from 'antd';
 import MultipleCheckbox from './MultipleCheckbox';
 import CustomCheckbox from './CustomCheckbox';
+import GroupCheckbox from './GroupCheckbox';
 import { getObjectFormArray, convertExtraEditors, isObj, isArr } from '../../utils/func';
 
 interface MyCheckboxProps {
@@ -27,6 +28,11 @@ interface CheckboxComponentProps {
       editors: Array<any>;
     }>;
   }>;
+  // 用于单选的单字段checkbox
+  options: Array<{
+    label: string | number;
+    value: string | number | boolean;
+  }>
 }
 
 // TODO 这个的结构以及判断过于复杂，需要修改config重构
@@ -37,13 +43,13 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
       return <Checkbox checked={value} onChange={(e: any) => onChange(e.target.checked)} />;
     },
     "multiple": (input_props: CheckboxComponentProps, value: any = {}, onChange: Function): ReactNode => {
-      const editors:Array<any> = [];
-      if(!isObj(value)){
+      const editors: Array<any> = [];
+      if (!isObj(value)) {
         value = {};
       }
-      const r:any = input_props.renderData.map((item: { key: string, label: string, extraEditors:Array<any> }) => {
+      const r: any = input_props.renderData.map((item: { key: string, label: string, extraEditors: Array<any> }) => {
         // 统一输入规范，所以在这个位置提取
-        if(item.extraEditors){
+        if (item.extraEditors) {
           editors.push(item.extraEditors[0]);
         }
         return {
@@ -56,19 +62,19 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
       const handleChange = (val: any, key: string) => {
         // 判断editors的数量决定保存为object还是string
         const index = input_props.renderData.findIndex((item: any) => item.key === key);
-        if(index === -1){
+        if (index === -1) {
           console.error(`在renderData中找不到${key}`);
           return;
         }
-        let newObj:any = {};
-        if(!val.checkboxValue){
-          newObj = {[key]: false, [`${key}Note`]: ""}
-        }else{
-          newObj = {[key]: val.checkboxValue,[`${key}Note`]: ""};
-          if(isArr(input_props.renderData[index].extraEditors)){
-            if(input_props.renderData[index].extraEditors[0].editors.length <= 1){
+        let newObj: any = {};
+        if (!val.checkboxValue) {
+          newObj = { [key]: false, [`${key}Note`]: "" }
+        } else {
+          newObj = { [key]: val.checkboxValue, [`${key}Note`]: "" };
+          if (isArr(input_props.renderData[index].extraEditors)) {
+            if (input_props.renderData[index].extraEditors[0].editors.length <= 1) {
               newObj[`${key}Note`] = val.editorsValue ? val.editorsValue[0] || "" : "";
-            }else{
+            } else {
               newObj[`${key}Note`] = JSON.stringify(getObjectFormArray(val.editorsValue));
             }
           }
@@ -99,24 +105,24 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
         };
       }
       const handleChange = (val: any, key: string) => {
-        if(!isObj(value)){
+        if (!isObj(value)) {
           value = {};
         }
         const index = input_props.renderData.findIndex((item: any) => item.key === key);
-        if(index === -1){
+        if (index === -1) {
           console.error(`在renderData中找不到${key}`);
           return;
         }
-        let newObj:any = {};
-
-        if(!val.checkboxValue){
-          newObj = {[key]: false, [`${key}Note`]: ""}
-        }else{
-          newObj = {[key]: val.checkboxValue,[`${key}Note`]: ""};
-          if(isArr(input_props.renderData[index].extraEditors)){
-            if(input_props.renderData[index].extraEditors[0] && input_props.renderData[index].extraEditors[0].editors.length <= 1){
+        let newObj: any = {};
+        // 这里要靠一个0的情况
+        if (val.checkboxValue === false) {
+          newObj = { [key]: false, [`${key}Note`]: "" }
+        } else {
+          newObj = { [key]: val.checkboxValue, [`${key}Note`]: "" };
+          if (isArr(input_props.renderData[index].extraEditors)) {
+            if (input_props.renderData[index].extraEditors[0] && input_props.renderData[index].extraEditors[0].editors.length <= 1) {
               newObj[`${key}Note`] = val.editorsValue ? val.editorsValue[0] || "" : "";
-            }else{
+            } else {
               newObj[`${key}Note`] = JSON.stringify(getObjectFormArray(val.editorsValue));
             }
           }
@@ -132,15 +138,32 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
           editors={renderData[0].extraEditors}
         />
       );
+    },
+    "group": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
+      const { options = [], radio = true } = input_props;
+      // 现在只做单选的，多选格式确定下来再做
+      const handleChange = (val: Array<any>): void => {
+        if (val.length !== 0) {
+          if (radio) {
+            onChange(val[0]);
+          } else {
+            console.warn("group型checkbox多选尚未处理");
+            // onChange(val[0]);
+          }
+        } else {
+          onChange("");
+        }
+      }
+      return (
+        <GroupCheckbox
+          value={[value]}
+          onChange={(val: any) => handleChange(val)}
+          radio={radio}
+          options={options}
+          editors={[]}
+        />
+      )
     }
-    // "group": (input_props: CheckboxComponentProps, value: any, onChange: Function): ReactNode => {
-    //   return (
-    //     <GroupCheckbox
-    //       onChange={(val:any) => onChange(val)}
-    //       options={input_props.renderData}
-    //     />
-    //   )
-    // }
   };
 
   renderCheckbox = () => {
