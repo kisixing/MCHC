@@ -58,6 +58,10 @@ export function isStringObj(data: any): boolean {
   return Object.prototype.toString.call(resObj) === '[object Object]';
 }
 
+export function isUndefinend(data: any) {
+  return Object.prototype.toString.call(data) === '[object Undefined]';
+} 
+
 /**
  * 用于extraEditors的数据转换方法
  */
