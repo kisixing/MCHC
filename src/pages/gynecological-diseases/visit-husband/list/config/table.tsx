@@ -2,7 +2,7 @@ import { formatTimeToStandard } from '@/utils/format';
 
 export const tableColumns = [
   {
-    title: '女方姓名',
+    title: '男方姓名',
     dataIndex: 'name',
     key: 'name',
     align: 'center',
@@ -14,9 +14,9 @@ export const tableColumns = [
     align: 'center',
   },
   {
-    title: '男方姓名',
-    dataIndex: 'husbandname',
-    key: 'husbandname',
+    title: '女方姓名',
+    dataIndex: 'wifename',
+    key: 'wifename',
     align: 'center',
   },
   {

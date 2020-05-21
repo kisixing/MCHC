@@ -5,14 +5,14 @@ import { tableColumns } from './config/table';
 import BaseList from '@/components/BaseList';
 import WithDynamicExport from '@/components/WithDynamicExport';
 import { processFromApi } from './config/adpater';
-import { get, map, filter, isNil, set, isEmpty, pick } from 'lodash';
 import { router } from 'umi';
+import { get, map, filter, isNil, set, isEmpty, pick } from 'lodash';
 
 @WithDynamicExport
 export default class List extends BaseList {
   static defaultProps = {
     baseUrl: '/premarital-visits',
-    baseTitle: '女性婚检记录',
+    baseTitle: '男性婚检记录',
     needPagination: true,
     showQuery: true,
     showAdd: false,
@@ -28,7 +28,7 @@ export default class List extends BaseList {
     defaultQuery: {
       page: 0,
       size: 20,
-      'visitType.equals': 1,
+      'visitType.equals': 2,
     },
     dataSource: [],
     visible: false,
@@ -38,16 +38,16 @@ export default class List extends BaseList {
   };
 
   handleEdit = (rowData: any) => () => {
-    const id = get(rowData, 'wife.id');
-    router.push(`/premarital-care/wife/wife-exam?id=${id}`);
+    const id = get(rowData, 'husband.id');
+    router.push(`/premarital-care/husband/husband-exam?id=${id}`);
   };
 
   handleQuerySearch = (data: any) => {
     const { outpatientNO, name, idNO } = data;
     const queryData = {
-      'wifeCriteria.outpatientNO.contains': outpatientNO,
-      'wifeCriteria.name.contains': name,
-      'wifeCriteria.idNO.contains': idNO,
+      'husbandCriteria.outpatientNO.contains': outpatientNO,
+      'husbandCriteria.name.contains': name,
+      'husbandCriteria.idNO.contains': idNO,
     };
     let newQueryData = {};
     map(queryData, (value, key) => {
