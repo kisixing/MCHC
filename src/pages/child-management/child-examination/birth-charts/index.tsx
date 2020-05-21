@@ -70,6 +70,7 @@ function Bizcharts() {
             <ModalIframeView file="https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf">
               iframe view
             </ModalIframeView>
+            {'  '}
             <ModalView file="https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf">
               nomal view
             </ModalView>

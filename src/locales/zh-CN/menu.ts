@@ -209,6 +209,10 @@ export default {
   'menu.child-management.child-examination-edit': '查看儿童健康体检档案',
   'menu.child-management.hearing-screening': '儿童听力筛查',
   'menu.child-management.nutritive-disease': '营养性疾病儿童',
+  'menu.child-management.child-death': '儿童死亡报告管理',
+  'menu.child-management.child-death-add': '新增儿童死亡报告',
+  'menu.child-management.child-death-edit': '编辑儿童死亡报告',
+  'menu.child-management.birth-charts': '组件测试',
 
   'menu.child-examination': '儿童健康体检管理',
   'menu.child-examination.archive': '创建儿童档案',

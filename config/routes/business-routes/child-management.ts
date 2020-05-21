@@ -93,5 +93,23 @@ export default {
       path: '/child-management/nutritive-disease/edit',
       component: './child-management/debility-children/edit',
     },
+    {
+      name: 'child-death',
+      icon: 'ordered-list',
+      path: '/child-management/child-death',
+      component: './child-management/child-death/list',
+    },
+    {
+      name: 'child-death-add',
+      icon: 'ordered-list',
+      path: '/child-management/child-death/add',
+      component: './child-management/child-death/edit',
+    },
+    {
+      name: 'child-death-edit',
+      icon: 'ordered-list',
+      path: '/child-management/child-death/edit',
+      component: './child-management/child-death/edit',
+    },
   ],
 };
