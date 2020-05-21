@@ -169,8 +169,6 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
   renderCheckbox = () => {
     const { input_props, value, onChange } = this.props;
     const { type = 'default' } = input_props;
-    
-    console.log(this.props);
     return this.checkbox[type || 'default'](input_props, value, onChange);
   };
 

@@ -13,19 +13,19 @@ interface ArrayCustomProps {
   error: any,
 }
 
-// interface ArrayCustomState {
-//   value: Array<any>,
-//   error: Array<any>
-// }
+interface ArrayCustomState {
+  value: Array<any>,
+  error: Array<any>
+}
 
 export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustomState>{
-  // constructor(props: ArrayCustomProps) {
-  //   super(props);
-  //   this.state = {
-  //     value: [],
-  //     error: []
-  //   }
-  // }
+  constructor(props: ArrayCustomProps) {
+    super(props);
+    this.state = {
+      value: [],
+      error: []
+    }
+  }
 
   componentDidMount() {
     this.mapPropsToState();
@@ -97,6 +97,7 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
     const { value = [] , input_props = {}, onChange } = this.props;
     const { config = [] } = input_props;
     /**
+     * TODO 复合字段是否可以正常赋值
      *  这里config取item中的key，去第一个点后的第一个字段
      *  有可能存在复合的字段
      */
@@ -109,7 +110,7 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
       if(nextSplitKeyIndex !== -1){
         emptyItem[newKey.substring(0, nextSplitKeyIndex)] = "";
       }else{
-        emptyItem[newKey] = "";
+        emptyItem[newKey] = null;
       }
     });
     value.push(emptyItem);

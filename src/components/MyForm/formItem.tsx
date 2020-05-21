@@ -32,9 +32,12 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
         self.setState({ value: val });
       }
       props.actions.reset = function reset() {
-        console.log(props.name);
+        if(props.hidden){
+          return;
+        }
         if(isObj(self.state.value)){
-          self.setState({ value: {} });
+          self.setState({ value: {} },() => {
+          });
         }else if(isArr(self.state.value)){
           self.setState({ value: [] });
         }else{
@@ -78,7 +81,10 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
   }
 
   handleChange = (val: any, error: any = "") => {
-    const { name, dispatch } = this.props;
+    const { name, dispatch, hidden } = this.props;
+    if(hidden){
+      return;
+    }
     this.setState({ value: val }, () => {
       if (name) { dispatch(name, "change", val); }
       const err = validFun(this.state.value, this.props.validate || "");
@@ -105,7 +111,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
 
   render() {
     // console.log(this.state);
-    const { dispatch, subscribe, type, label, input_props, unit, path, header_label } = this.props;
+    const { subscribe, type, label, input_props, unit, header_label } = this.props;
     const { value, error, validate } = this.state;
     const MyComponent = MyComponents[type];
     return (

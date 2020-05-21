@@ -1,6 +1,7 @@
 import { FormConfig } from '@/components/MyForm/interface';
 
 const config: Array<FormConfig> = [
+  { name: "id", key: ".id", label: "id", span: 6, offset: 0, input_type: "date", rules: "required", hidden: true },
   { name: "visitDate", key: ".visitDate", label: "检查时间", span: 6, offset: 0, input_type: "date", rules: "required", },
   {
     name: "chiefComplaint",
@@ -128,8 +129,10 @@ const config: Array<FormConfig> = [
     input_type: "custom",
     input_props: {
       config: [
-        { name: "type", key: ".type", label: "类型", input_type: "input", span: 6, offset: 0,  hidden: true },
+        { name: "type", key: ".type", label: "类型", input_type: "input", span: 6, offset: 0, hidden: true },
+
         { name: "id", key: ".id", input_type: "input", span: 6, offset: 0, hidden: true },
+
         { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 6, offset: 0 },
         { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 6, offset: 0 },
         { name: "trisomy13", key: ".trisomy13", label: "13三体风险", input_type: "input", span: 6, offset: 0 },
@@ -146,7 +149,7 @@ const config: Array<FormConfig> = [
     input_type: "custom",
     input_props: {
       config: [
-        { name: "type", key: ".type", label: "类型", input_type: "input", span: 6, offset: 0,  hidden: true },
+        { name: "type", key: ".type", label: "类型", input_type: "input", span: 6, offset: 0, hidden: true },
         { name: "id", key: ".id", input_type: "input", span: 6, offset: 0, hidden: true },
         { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 6, offset: 0 },
         { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 6, offset: 0 },
@@ -167,7 +170,7 @@ const config: Array<FormConfig> = [
     input_type: "custom",
     input_props: {
       config: [
-        { name: "type", key: ".type", label: "类型", input_type: "input", span: 6, offset: 0,  hidden: true },
+        { name: "type", key: ".type", label: "类型", input_type: "input", span: 6, offset: 0, hidden: true },
         { name: "id", key: ".id", input_type: "input", span: 6, offset: 0, hidden: true },
         { name: "trisomy21", key: ".trisomy21", label: "21三体风险", input_type: "input", span: 6, offset: 0 },
         { name: "trisomy18", key: ".trisomy18", label: "18三体风险", input_type: "input", span: 6, offset: 0 },
@@ -259,7 +262,7 @@ const config: Array<FormConfig> = [
       renderData: [
         {
           key: "hepaticDisease",
-          label: "高血压",
+          label: "肝病",
           options: [
             { label: "有", value: true },
             { label: "无", value: false },
@@ -281,10 +284,6 @@ const config: Array<FormConfig> = [
     key: '.familyHistory',
     label: "癫痫",
     input_type: "checkbox",
-    // rules: {
-    //   epilepsy: "required",
-    //   epilepsyNote: "required"
-    // },
     input_props: {
       type: "custom",
       renderData: [
@@ -308,7 +307,7 @@ const config: Array<FormConfig> = [
     }
   },
   {
-    name: "familyHistory-hypertension",
+    name: "familyHistory-cardiacDisease",
     key: '.familyHistory',
     label: "心脏病",
     input_type: "checkbox",
@@ -573,7 +572,7 @@ const config: Array<FormConfig> = [
     }
   },
 
-  
+
   // {
   //   name: "diseaseHistory-h",
   //   key: ".diseaseHistory",
@@ -627,7 +626,7 @@ const config: Array<FormConfig> = [
   //     ]
   //   }
   // },
- 
+
   {
     name: "fetuses",
     key: ".fetuses",
@@ -675,9 +674,10 @@ const config: Array<FormConfig> = [
         { name: "id", key: ".id", label: "id", input_type: "input", span: 6, offset: 0, hidden: true },
         { name: "fundalHeight", key: ".fundalHeight", label: "宫高", input_type: "input", span: 6, offset: 0 },
         { name: "waistHip", key: ".waistHip", label: "腹围", input_type: "input", span: 6, offset: 0 },
-        { name: "engagement", key: ".engagement", label: "衔接", input_type: "input", span: 6, offset: 0} 
+        { name: "engagement", key: ".engagement", label: "衔接", input_type: "input", span: 6, offset: 0 }
       ]
     }
   }
 ]
+
 export default config;
