@@ -51,11 +51,11 @@ export function renderForm(config: Array<FormConfig>, formHandler: any, gridConf
       <Col
         span={config[i].hidden ? 0 : span}
         offset={offset}
-        // offset={spanArr.length === 0 ? offset - prevOffset : offset} 
         key={`${config[i].name}|row-${row}|span-${count}`}
       >
         <FormItem
-          actions={formHandler[config[i].name].actions}
+        // 更新时的报错问题
+          actions={formHandler[config[i].name] ? formHandler[config[i].name].actions : {}}
           dispatch={formHandler.dispatch}
           subscribe={formHandler.subscribe}
           defaultValue={config[i].value}
@@ -94,14 +94,19 @@ export default class MyForm extends Component<MyFormProp, MyFormState>{
 
   componentDidUpdate(prevProps: any, prevState: any) {
     const { getFormHandler } = this.props;
-    if (JSON.stringify(prevState) !== JSON.stringify(this.state)) {
-      if (getFormHandler) {
-        getFormHandler(this.state.formHandler);
-      }
+    if (JSON.stringify(prevState) !== JSON.stringify(this.state) || JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
+      this.setState({
+        formHandler: createFormHandler(this.props.config, {submitChange: this.props.submitChange})
+      },() => {
+        if (getFormHandler) {
+          getFormHandler(this.state.formHandler);
+        }
+      })
     }
   }
 
   render() {
+    console.log('121');
     return (
       <div className={styles['my-form']}>
         <div>

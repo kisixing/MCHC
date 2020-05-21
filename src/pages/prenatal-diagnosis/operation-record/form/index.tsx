@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, message } from 'antd';
 import MyForm from '@/components/MyForm/index';
-import config from './config';
+import config from './config/index';
 // import data from './data';
 import styles from './index.less';
 import { isNotEmpty, getPageQuery } from '@/utils/utils';
@@ -30,7 +30,7 @@ export default class Home extends React.Component<{},HomeState>{
       data: {
         id: "",
         operationType: 1,
-        operationName: "羊膜腔穿刺"
+        // operationName: "羊膜腔穿刺"
       },
       id: -1,
       prenatalPatientId: -1
@@ -59,9 +59,12 @@ export default class Home extends React.Component<{},HomeState>{
   componentDidUpdate(){
     const { formHandler } = this.state;
     if(isNotEmpty(formHandler)){
-      // formHandler.subscribe("pdProcedure","change",(val:any) => {
-      //   console.log(val);
-      // })
+      formHandler.subscribe("operationType","change",(val:any) => {
+        this.setState({data:{
+          id: "",
+          operationType: val
+        }},() => console.log(this.state))
+      })
     }
   }
 
@@ -77,6 +80,7 @@ export default class Home extends React.Component<{},HomeState>{
     const { data } = this.state;
     
     const myConfig = getRenderData(config[data.operationType], {});
+    console.log(myConfig);
     // 不要再页面render中尝试取formHandler的值，因为这个时候formItem初始化还没有完成
     return(
       <div className={styles.container}>

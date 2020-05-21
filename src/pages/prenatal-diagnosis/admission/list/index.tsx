@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from './components/Table';
 import { tableColumns } from './config/table';
+import Query from './components/Query';
 import BaseList from '@/components/BaseList';
 import WithDynamicExport from '@/components/WithDynamicExport';
 import { router } from 'umi';
@@ -14,13 +15,13 @@ export default class List extends BaseList {
   static defaultProps = {
     baseUrl: '/prenatal-patients',
     baseTitle: '产前病历',
-    needPagination: false,
-    showQuery: false,
+    needPagination: true,
+    showQuery: true,
     showAdd: true,
     tableColumns,
-    needPagination: true,
     rowKey: 'id',
     Table,
+    Query
   };
 
   state = {

@@ -36,8 +36,8 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
 
   componentDidMount() {
     const urlParams = getPageQuery();
-    if ("id" in urlParams) {
-      this.getPatientData(urlParams.id);
+    if (urlParams.prenatalPatientId) {
+      this.getPatientData(urlParams.prenatalPatientId);
     }
   }
 
