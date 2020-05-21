@@ -99,21 +99,6 @@ const pdPostOperation: FormConfig = {
   }
 }
 
-const test: FormConfig = {
-  name: "rePuncture",
-  key: ".rePuncture",
-  input_type: "checkbox",
-  input_props: {
-    type: "group",
-    radio: true,
-    options: [
-      { label: "1", value: "1" },
-      { label: "1", value: "2" },
-      { label: "1", value: "3" },
-    ]
-  }
-}
-
 const config = {
   "1": [
     ...generalConfig,

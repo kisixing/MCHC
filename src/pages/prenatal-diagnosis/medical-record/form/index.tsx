@@ -19,7 +19,7 @@ interface MedicalRecordState {
   prenatalPatientId: number
 }
 
-
+const URL = "/prenatal-diagnoses";
 
 
 export default class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordState>{
@@ -28,13 +28,14 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
     this.state = {
       formHandler: {},
       data: {
+        id: "",
         downsScreens: [
           { type: 0 },
           { type: 1 },
           { type: 2 }
         ],
         fetuses: [
-          { id: 1 }
+          { id: "" }
         ]
       },
       id: -1,               // 病历id
@@ -51,8 +52,7 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
     this.setState({ prenatalPatientId: urlParams.prenatalPatientId, id: urlParams.id || -1 })
     // 修改
     if (urlParams.prenatalPatientId && urlParams.id) {
-
-      request(`/prenatal-diagnoses?prenatalPatientId.equals=${urlParams.prenatalPatientId}&id.equals=${urlParams.id}`, {
+      request(`${URL}?prenatalPatientId.equals=${urlParams.prenatalPatientId}&id.equals=${urlParams.id}`, {
         method: "GET"
       }).then((res: any) => {
         if (res.length !== 0) {
@@ -66,45 +66,28 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
     const { prenatalPatientId, id } = this.state;
     this.state.formHandler.dispatch("_global", "submit", {});
     this.state.formHandler.submit().then(({ validCode, res }: any) => {
-      const formatData = getFormData(res);
-      console.log(res);
-      // type需要固定 之后再改这个位置
-      // formatData.downsScreens[0].type = 0;
-      // formatData.downsScreens[1].type = 1;
-      // formatData.downsScreens[2].type = 2;
-      console.log(formatData);
-      return;
       if (validCode) {
-        if (id === -1) {
-          // 新增
-          request("/prenatal-diagnoses", {
-            method: "POST",
-            data: {
-              ...formatData,
-              prenatalPatient: {
-                id: Number(prenatalPatientId)
-              }
+        const formatData = getFormData(res);
+        // 新建的时候赋值
+        formatData.downsScreens[0].type = 0;
+        formatData.downsScreens[1].type = 1;
+        formatData.downsScreens[2].type = 2;
+        const [method, info] = id !== -1 ? ["PUT", "修改成功"] : ["POST", "成功新增病历"];
+        request(`${URL}`, {
+          method,
+          data: {
+            ...formatData,
+            prenatalPatient:{
+              id: Number(prenatalPatientId)
             }
-          }).then((result: any) => {
-            if (result) {
-              message.success("成功新增病历");
-            }
-          })
-        } else {
-          request("/prenatal-diagnoses", {
-            method: "PUT",
-            data: {
-              ...formatData,
-              id: Number(id)
-            }
-          }).then((result: any) => {
-            if (result) {
-              message.success("成功修改病历");
-            }
-          })
-        }
+          }
+        }).then((r: any) => {
+          if (r) {
+            message.success(info);
+          }
+        })
       } else {
-        console.error('未通过验证');
+        message.warn("请填写所有必填项后再次提交");
       }
     });
   }

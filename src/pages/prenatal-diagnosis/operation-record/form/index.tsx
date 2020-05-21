@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from "dva";
 import { Button, message } from 'antd';
 import MyForm from '@/components/MyForm/index';
 import config from './config/index';
@@ -8,27 +9,29 @@ import { isNotEmpty, getPageQuery } from '@/utils/utils';
 import request from '@/utils/request';
 // import FloatCard from '@/components/FloatCard';
 
-import { getRenderData, getFormData} from '@/components/MyForm/utils';
+import { getRenderData, getFormData } from '@/components/MyForm/utils';
+import { formDescriptionsFromApi } from '@/utils/adapter';
 
-interface HomeState{
-  formHandler:{
-    [key:string]: any
+interface HomeState {
+  formHandler: {
+    [key: string]: any
   },
   data: any,
   id: number,
   prenatalPatientId: number
 }
 
+const URL = "/pd-operations";
 
-export default class Home extends React.Component<{},HomeState>{
-  constructor(props:any){
+class Home extends React.Component<{}, HomeState>{
+  constructor(props: any) {
     super(props);
     this.state = {
       formHandler: {
-        
+
       },
       data: {
-        id: "",
+        id: "", // 病历id
         operationType: 1,
         // operationName: "羊膜腔穿刺"
       },
@@ -37,59 +40,75 @@ export default class Home extends React.Component<{},HomeState>{
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const urlParams = getPageQuery();
     if (!urlParams.prenatalPatientId) {
       message.error('无用户id,请从手术病历列表进入');
       return;
     }
     this.setState({ prenatalPatientId: urlParams.prenatalPatientId, id: urlParams.id || -1 });
-    
     if (urlParams.prenatalPatientId && urlParams.id) {
-      request(`/pd-operations?prenatalPatientId.equals=${urlParams.prenatalPatientId}&id.equals=${urlParams.id}`,{
+      request(`${URL}?prenatalPatientId.equals=${urlParams.prenatalPatientId}&id.equals=${urlParams.id}`, {
         method: "GET"
       }).then(res => {
-        if(res.length !== 0){
-          this.setState({data: res[0]})
+        if (res.length !== 0) {
+          this.setState({ data: res[0] })
         }
       })
     }
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     const { formHandler } = this.state;
-    if(isNotEmpty(formHandler)){
-      formHandler.subscribe("operationType","change",(val:any) => {
-        this.setState({data:{
-          id: "",
-          operationType: val
-        }},() => console.log(this.state))
+    if (isNotEmpty(formHandler)) {
+      formHandler.subscribe("operationType", "change", (val: any) => {
+        this.setState({
+          data: {
+            operationType: val
+          }
+        }, () => console.log(this.state))
       })
     }
   }
 
   handleSubmit = () => {
-    this.state.formHandler.dispatch("_global","submit",{});
-    this.state.formHandler.submit().then(({validCode, res}:any) => {
-      console.log(validCode);
-      console.log(getFormData(res));
+    const { prenatalPatientId, id } = this.state;
+    this.state.formHandler.dispatch("_global", "submit", {});
+    this.state.formHandler.submit().then(({ validCode, res }: any) => {
+      if (validCode) {
+        const formatData = getFormData(res);
+        const [method, info] = id !== -1 ? ["PUT", "修改成功"] : ["POST", "成功新增病历"];
+        request(`${URL}`, {
+          method,
+          data: {
+            ...formatData,
+            prenatalPatient: {
+              id: Number(prenatalPatientId)
+            }
+          }
+        }).then((r: any) => {
+          if (r) {
+            message.success(info);
+          }
+        })
+      } else {
+        message.warn("请填写所有必填项后再次提交");
+      }
     });
   }
 
-  render(){
+  render() {
     const { data } = this.state;
-    
-    const myConfig = getRenderData(config[data.operationType], {});
-    console.log(myConfig);
+    const myConfig = getRenderData(config[data.operationType], data);
     // 不要再页面render中尝试取formHandler的值，因为这个时候formItem初始化还没有完成
-    return(
+    return (
       <div className={styles.container}>
         {/* <FloatCard>
           这个是内容
         </FloatCard> */}
         <MyForm
           config={myConfig}
-          getFormHandler={(formHandler:any) => this.setState({formHandler})}
+          getFormHandler={(formHandler: any) => this.setState({ formHandler })}
           submitChange={false}
         />
         <div className={styles['btn-group']}>
@@ -100,3 +119,11 @@ export default class Home extends React.Component<{},HomeState>{
     )
   }
 }
+
+export default connect((all) => {
+  
+  console.log(all);
+  return {
+
+  }
+})(Home)

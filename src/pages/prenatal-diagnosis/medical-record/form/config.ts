@@ -1,7 +1,8 @@
 import { FormConfig } from '@/components/MyForm/interface';
 
 const config: Array<FormConfig> = [
-  { name: "id", key: ".id", label: "id", span: 6, offset: 0, input_type: "date", rules: "required", hidden: true },
+  { name: "prenatalPatientId", key: ".prenatalPatientId.id", label: "病人id", span: 6, offset: 0, input_type: "input", hidden: true },
+  { name: "id", key: ".id", label: "病历id", span: 6, offset: 0, input_type: "input", hidden: true },
   { name: "visitDate", key: ".visitDate", label: "检查时间", span: 6, offset: 0, input_type: "date", rules: "required", },
   {
     name: "chiefComplaint",
