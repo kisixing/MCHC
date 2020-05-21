@@ -1,5 +1,5 @@
-import { formatTimeToStandard } from '@/utils/format';
-import { statusMapping } from '@/components/selects/NormalSelect';
+import { formatTimeToStandard } from './node_modules/@/utils/format';
+import { statusMapping } from './node_modules/@/components/selects/NormalSelect';
 import { keyBy, get } from 'lodash';
 
 export const tableColumns = [

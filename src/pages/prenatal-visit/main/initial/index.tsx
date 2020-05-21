@@ -1,7 +1,8 @@
 import * as React from 'react';
-import { Tabs, Button } from 'antd';
+import { Tabs, Button, message } from 'antd';
 import request from '@/utils/request';
 import { getPageQuery } from '@/utils/utils';
+import store from 'store';
 
 import YCQ from './YuChanQi';
 import YBBS from './YiBanBingShi';
@@ -19,9 +20,8 @@ interface HomeState{
   formHandler:{
     [key:string]: any
   }
-  formData:{
-    any: any
-  }
+  formData: any,
+  isPost: boolean,
 }
 const tabConetnts = [YCQ, YBBS, QTBS, YCS, TGJC, ZKJC, JYJC, ZDCL];
 
@@ -37,27 +37,34 @@ export default class Home extends React.Component<{},HomeState>{
     this.state = {
       tabs: tabs,
       step: tabs[0].key,
-      formHandler: {
-
-      },
-      formData: {}
+      formHandler: {},
+      formData: {},
+      isPost: false,
     }
   }
 
-  // componentDidMount() {
-  //   const urlParam = getPageQuery();
-  //   console.log(urlParam, '678')
+  componentDidMount() {
+    const urlParam = getPageQuery();
+    request(`/prenatal-visits?visitType.equals=0&id.equals=${urlParam.id}`, {
+      method: 'GET'
+    }).then(res => {
+      if(res.length !== 0){
+        this.setState({formData: res[0]})
+      }
+    });
 
-  //   request(`/prenatal-visits?visitType.equals=0&id.equals=${urlParam.id}`, {
-  //     method: 'GET'
-  //   }).then(res => {
-  //     if(res.length !== 0){
-  //       this.setState({formData: res[0]})
-  //     }
-  //   });
-  // }
+    request(`/prenatal-visits?visitType.equals=0&pregnancyId.equals=${urlParam.id}`,{
+      method: "GET"
+    }).then(res => {
+      if(res && res.length !== 0){
+        this.setState({formData: res[0]})
+      } else {
+        this.setState({isPost: true})
+      }
+    });
+  }
 
-  handleSave(key) {
+  handleTab(key) {
     const { tabs, step } = this.state;
     const tab = tabs.filter(t => t.key === step).pop() || {};
     const next = key || tabs[tabs.indexOf(tab) + 1].key;
@@ -67,17 +74,45 @@ export default class Home extends React.Component<{},HomeState>{
   }
 
 
+  handleSave = (resData) => {
+    const { step, formData, isPost } = this.state;
+    const pregnancyId = getPageQuery().id;
+    const visitId = formData.id;
+    console.log(resData,step, '111')
+
+    if (step === "tab-0" || step === "tab-1" || step === "tab-2" || step === "tab-3") {
+      request('/pregnancies', {
+        method: 'PUT',
+        data: { ...resData, id: pregnancyId }
+      }).then(r => {
+        message.success('信息保存成功！');
+      });
+    } else {
+      const method = isPost ? "POST" : "PUT";
+      if (!isPost) {
+        resData['id'] = visitId;
+      }
+      request('/prenatal-visits', {
+        method,
+        data: resData
+      }).then(r => {
+        this.setState({ isPost: false });
+      });
+    }
+
+
+  }
 
   render(){
     const { tabs, step } = this.state;
     return(
       <div className={style.initiaWrapper}>
-        <Tabs type="card" activeKey={step} onChange={key => this.handleSave(key) }>
+        <Tabs type="card" activeKey={step} onChange={key => this.handleTab(key) }>
           {tabs.map(({ key, title, Content }) => (
             <Tabs.TabPane key={key}
               tab={ <span> {title} </span> }>
               <div>
-                {step === key ? (<Content />) : null}
+                {step === key ? (<Content handleSave={this.handleSave} />) : null}
               </div>
             </Tabs.TabPane>
           ))}
@@ -88,36 +123,6 @@ export default class Home extends React.Component<{},HomeState>{
           : <Button className={style.bottomBtn} type="primary" onClick={() => this.handleSave(step)}>保存</Button>
         } */}
       </div>
-
-
-      // <div>
-      //   <Tabs defaultActiveKey="1" type="card" size="small">
-      //     <Tabs.TabPane tab="预产期" key="Admission">
-      //       <YCQ />
-      //     </Tabs.TabPane>
-      //     <Tabs.TabPane tab="一般病史" key="birth-information">
-      //       <YBBS />
-      //     </Tabs.TabPane>
-      //     <Tabs.TabPane tab="其他病史" key="NursingRecord">
-      //       <QTBS />
-      //     </Tabs.TabPane>
-      //     <Tabs.TabPane tab="孕产史" key="predelivery">
-      //       <YCS />
-      //     </Tabs.TabPane>
-      //     <Tabs.TabPane tab="体格检查" key="CaesareanDelivery">
-      //       <TGJC />
-      //     </Tabs.TabPane>
-      //     <Tabs.TabPane tab="专科检查" key="NeonateRecord">
-      //       <ZKJC />
-      //     </Tabs.TabPane>
-      //     <Tabs.TabPane tab="检验检查" key="PostpartumVisit">
-      //       <JYJC />
-      //     </Tabs.TabPane>
-      //     <Tabs.TabPane tab="诊断处理" key="PostpartumVisit">
-      //       <ZDCL />
-      //     </Tabs.TabPane>
-      //   </Tabs>
-      // </div>
     )
   }
 }

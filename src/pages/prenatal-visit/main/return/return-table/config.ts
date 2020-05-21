@@ -8,10 +8,11 @@ const config: Array<FormConfig> = [
     input_type: "table",
     input_props: {
       editable: true,
+      hiddenBtn: true,
       tableColumns: [
         { key: "visitDate", title: "日期", editor: { name: "", key: "", input_type: "date" } },
-        { key: "gestationalWeek", title: "孕周", editor: { name: "", key: "", input_type: "input" } },
-        { key: "physicalExam.weight", title: "体重", editor: { name: "", key: "", input_type: "input" } },
+        { key: "gestationalWeek", title: "孕周", editor: { name: "gestationalWeek", key: "", input_type: "input" } },
+        { key: ".physicalExam.weight", title: "体重", editor: { name: "", key: "", input_type: "input" } },
         { key: "physicalExam.diastolic", title: "收缩压	", editor: { name: "", key: "", input_type: "input" } },
         { key: "physicalExam.systolic", title: "舒张压	", editor: { name: "", key: "", input_type: "input" } },
         // { key: "ckzijzhz", title: "症状及查体", editor: { name: "", key: "", input_type: "input" } },

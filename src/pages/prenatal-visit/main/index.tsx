@@ -12,11 +12,22 @@ import ImageReport from './image-report';
 import SurveyReport from './survey-report';
 import HighriskFactor from './components/high-risk-factor';
 import styles from './index.less';
+import Item from 'antd/lib/list/Item';
 
 interface PrenatalDiagnosisState {
   currentPageKey: string,
   formData: any
 }
+
+const routers = [
+  { name: "首检信息", component: <Initial />, key: 'Initial'},
+  { name: "复诊记录", component: <Return />, key: 'Return' },
+  { name: "孕期曲线", component: <Curve />, key: 'Curve' },
+  { name: "血糖记录", component: <BloodSugar />, key: 'BloodSugar' },
+  { name: "影像报告", component: <ImageReport />, key: 'ImageReport' },
+  { name: "检验报告", component: <SurveyReport />, key: 'SurveyReport' },
+  { name: "基本信息", component: <Base />, key: 'Base' },
+];
 
 export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisState>{
 
@@ -79,29 +90,13 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
       <div className={styles.container}>
         { this.renderInfo() }
         <Tabs defaultActiveKey="1" type="card" size="small">
-          <Tabs.TabPane tab="首检信息" key="Initial">
-            <Initial />
-          </Tabs.TabPane>
-          <Tabs.TabPane tab="复诊记录" key="Return">
-            <Return />
-          </Tabs.TabPane>
-          <Tabs.TabPane tab="孕期曲线" key="Curve">
-            <Curve />
-          </Tabs.TabPane>
-          <Tabs.TabPane tab="血糖记录" key="BloodSugar">
-            <BloodSugar />
-          </Tabs.TabPane>
-          <Tabs.TabPane tab="影像报告" key="ImageReport">
-            <ImageReport />
-          </Tabs.TabPane>
-          <Tabs.TabPane tab="检验报告" key="SurveyReport">
-            <SurveyReport />
-          </Tabs.TabPane>
-          <Tabs.TabPane tab="基本信息" key="Base">
-            <Base />
-          </Tabs.TabPane>
+          {routers.map((item) => (
+            <Tabs.TabPane tab={item.name} key={item.key}>
+              {item.component}
+            </Tabs.TabPane>
+          ))}
         </Tabs>
-        <HighriskFactor />
+        {/* <HighriskFactor /> */}
       </div>
     )
   }

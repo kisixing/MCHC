@@ -128,7 +128,7 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
     const { input_props } = this.props;
     let { tableColumns } = this.state;
     const { dataSource } = this.state;
-    const { editable } = input_props;
+    const { editable, hiddenBtn } = input_props;
     tableColumns = this.handleTabColumnsFormat(tableColumns);
     const rowSelection = {
       selectedRowKeys: this.state.selectedRowKeys,
@@ -136,7 +136,7 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
     }
     return (
       <div>
-        { editable && (
+        { editable && !hiddenBtn && (
           <div>
           <Button
             onClick={this.handleAdd}
@@ -149,7 +149,7 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
         )}
         <Table
           className={styles['my-table']}
-          rowSelection={editable ? rowSelection : undefined}
+          rowSelection={editable && !hiddenBtn ? rowSelection : undefined}
           columns={tableColumns || []}
           dataSource={dataSource || []}
           rowKey={(record: any) => record._key}
