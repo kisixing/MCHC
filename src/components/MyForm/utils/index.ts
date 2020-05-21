@@ -2,7 +2,7 @@
 /* eslint-disable object-shorthand */
 /* eslint-disable func-names */
 import { FormConfig } from '../interface';
-import { isBase, isArr, isObj, isNumber} from './func';
+import { isBase, isArr, isObj, isNumber, isUndefinend } from './func';
 
 const o: string = ".";
 const a: string = "_";
@@ -212,13 +212,15 @@ function _assign(mainData: any = {}, newData: any = {}): any {
           flag = true;
           // 判别下一层是不是数组，做数组合并
           if (isArr(mainData[mk]) && isArr(newData[nk])) {
-            const len = mainData[mk].length > newData[nk].length ?  mainData[mk].length : newData[nk].length;
+            const len = mainData[mk].length > newData[nk].length ? mainData[mk].length : newData[nk].length;
             for (let k = 0; k < len; k++) {
               mainData[mk][k] = _assign(mainData[mk][k], newData[nk][k])
             }
           } else if (isObj(mainData[mk]) && isObj(newData[mk])) {
             // default object
             mainData[mk] = _assign(mainData[mk], newData[nk]);
+          } else if (isUndefinend(mainData[mk])) {
+            mainData[mk] = newData[mk];
           }
         }
       }
@@ -229,6 +231,8 @@ function _assign(mainData: any = {}, newData: any = {}): any {
         }
       }
     }
+  } else if (isUndefinend(newData)) {
+    // mainData = newData;
   } else {
     console.error("其中一个参数不是对象||二者皆不为对象||两者数据类型不相同，不可以做合并操作");
   }
@@ -244,7 +248,7 @@ function toFormat(data: { [key: string]: any }): object {
   let r = {};
   Object.keys(data).forEach(key => {
     // 合并 * 
-    if(key === `.${ALL}`){
+    if (key === `.${ALL}`) {
       r = _assign(r, data[key]);
       return;
     }

@@ -19,9 +19,8 @@ interface MedicalRecordState {
   prenatalPatientId: number
 }
 
-interface MedicalRecordProps {
-  data: any
-}
+
+
 
 export default class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordState>{
   constructor(props: any) {
@@ -29,8 +28,13 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
     this.state = {
       formHandler: {},
       data: {
+        downsScreens: [
+          {type: 0},
+          {type: 1},
+          {type: 2}
+        ],
         fetuses: [
-          {id: 1}
+          { id: 1 }
         ]
       },
       id: -1,               // 病历id
@@ -42,8 +46,9 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
     const urlParams = getPageQuery();
     if (!urlParams.prenatalPatientId) {
       message.error('无用户id,请从专科病历列表进入');
+      return;
     }
-    this.setState({prenatalPatientId: urlParams.prenatalPatientId, id: urlParams.id || -1 })
+    this.setState({ prenatalPatientId: urlParams.prenatalPatientId, id: urlParams.id || -1 })
     // 修改
     if (urlParams.prenatalPatientId && urlParams.id) {
 
@@ -54,7 +59,6 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
           this.setState({ data: res[0] })
         }
       });
-    
     }
   }
 
@@ -63,13 +67,15 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
     this.state.formHandler.dispatch("_global", "submit", {});
     this.state.formHandler.submit().then(({ validCode, res }: any) => {
       const formatData = getFormData(res);
+      console.log(res);
       // type需要固定 之后再改这个位置
       formatData.downsScreens[0].type = 0;
       formatData.downsScreens[1].type = 1;
       formatData.downsScreens[2].type = 2;
+      // console.log(formatData);
       // return ;
       if (validCode) {
-        if(id === -1){
+        if (id === -1) {
           // 新增
           request("/prenatal-diagnoses", {
             method: "POST",
@@ -80,27 +86,35 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
               }
             }
           }).then((result: any) => {
-            if(result){
+            if (result) {
               message.success("成功新增病历");
             }
           })
-        }else{
-            request("/prenatal-diagnoses", {
-              method: "PUT",
-              data: {
-                ...formatData,
-                id: Number(id)
-              }
-            }).then((result: any) => {
-              if(result){
-                message.success("成功修改病历");
-              }
-            })
+        } else {
+          request("/prenatal-diagnoses", {
+            method: "PUT",
+            data: {
+              ...formatData,
+              id: Number(id)
+            }
+          }).then((result: any) => {
+            if (result) {
+              message.success("成功修改病历");
+            }
+          })
         }
-      }else{
+      } else {
         console.error('未通过验证');
       }
     });
+  }
+
+  reset = () => {
+    const {formHandler} = this.state;
+    if(formHandler){
+      formHandler.dispatch("_global", "reset", {})
+      formHandler.reset();
+    }
   }
 
   render() {
@@ -114,7 +128,7 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
           submitChange={false}
         />
         <div className={styles['btn-group']}>
-          <Button>重置</Button>
+          <Button onClick={this.reset}>重置</Button>
           <Button type="primary" onClick={this.handleSubmit}>提交</Button>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from './components/Table';
 import { tableColumns } from './config/table';
+import Query from './components/Query';
 import BaseList from '@/components/BaseList';
 import WithDynamicExport from '@/components/WithDynamicExport';
 import { router } from 'umi';
@@ -14,12 +15,13 @@ export default class List extends BaseList {
   static defaultProps = {
     baseUrl: '/prenatal-patients',
     baseTitle: '产前病历',
-    needPagination: false,
-    showQuery: false,
+    needPagination: true,
+    showQuery: true,
     showAdd: true,
     tableColumns,
     rowKey: 'id',
     Table,
+    Query
   };
 
   state = {
@@ -85,11 +87,11 @@ export default class List extends BaseList {
 
   handleView = (rowData: any) => () => {
     const { id } = rowData;
-    router.push(`/prenatal-diagnosis/main?id=${id}`);
+    router.push(`/prenatal-diagnosis/main?prenatalPatientId=${id}`);
   };
 
   handleEdit = (rowData: any) => () => {
     const { id } = rowData;
-    router.push(`/prenatal-diagnosis/new-patient?id=${id}`);
+    router.push(`/prenatal-diagnosis/new-patient?prenatalPatientId=${id}`);
   };
 }

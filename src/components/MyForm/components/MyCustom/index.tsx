@@ -46,6 +46,9 @@ export default class MyCustom extends Component<MyCustomProps, MyCustomState>{
               onChange(getFormData(res));
             }
           })
+        });
+        subscribe("_global", "reset", () => {
+          formHandler.reset();
         })
       }
       // change时的校验动作
