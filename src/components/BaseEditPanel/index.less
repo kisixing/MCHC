@@ -12,11 +12,17 @@
 .panelWithChild {
   .panelWithChildHeader {
     display: flex;
-    justify-content: center;
-
+    height: 55px;
+    align-items: center;
+    background: #ffffff;
+    margin-bottom: 8px;
+    padding: 0 8px;
+    
     .panelWithChildHeaderItem {
-      margin: 0 24px;
+      margin-right: 48px;
       font-size: 16px;
+      font-weight: bold;
+      color: #150f55;
       .panelWithChildHeaderItemLabel {
         font-size: 14px;
         display: inline-block;
@@ -24,12 +30,26 @@
       }
       .panelWithChildHeaderItemValue {
         display: inline-block;
-        font-weight: bold;
       }
     }
   }
-  .panelWithChildHeaderDivider {
-    height: 2px;
-    background: #ffffff;
+  // .panelWithChildHeaderDivider {
+  //   height: 2px;
+  //   background: #ffffff;
+  // }
+
+  :global {
+    .ant-tabs-bar {
+      margin: 0;
+      border-bottom: 1px solid #3d8bf7 !important;
+    }
+    .ant-tabs-tab {
+      border-bottom: 1px solid #3d8bf7 !important;
+    }
+    .ant-tabs-tab-active {
+      border: 1px solid #3d8bf7 !important;
+      border-bottom: 1px solid #ffffff !important;
+      border-radius: 4px 4px 0 0 !important;
+    }
   }
 }

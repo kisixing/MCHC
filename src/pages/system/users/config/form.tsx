@@ -74,7 +74,19 @@ export const resetFormDescriptions = {
   },
 };
 
+export const queryFormDescriptions = {
+  login: {
+    key: 'login',
+    label: '账号',
+  },
+  firstName: {
+    key: 'firstName',
+    label: '姓名',
+  },
+};
+
 export default {
   modalFormDescriptions,
   resetFormDescriptions,
+  queryFormDescriptions,
 };

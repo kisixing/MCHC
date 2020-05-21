@@ -27,9 +27,9 @@ const config: Array<FormConfig> = [
           { name: 'maritalStatus', key: '.maritalStatus', label: "婚姻状态", input_type: "select", span: 7, rules: "required", input_props:{options: Options.maritalStatusOptions} },
           // { name: 'add_FIELD_zhunsz', key: '.add_FIELD_zhunsz', label: "准生证号", input_type: "input", span: 7, rules: "required" },
           // { name: 'add_FIELD_ADD_zhunsz_sh', key: '.add_FIELD_ADD_zhunsz_sh', label: "已审核", input_type: "checkbox", span: 7, offset: 1 },
-          { name: 'permanentResidenceAddress', key: '.permanentResidenceAddress', label: "户口地址", input_type: "input", span: 7, rules: "required" },
-          { name: 'residenceAddress', key: '.residenceAddress', label: "居住地地址", input_type: "input", span: 7, rules: "required" },
-          { name: 'postpartumAddress', key: '.postpartumAddress', label: "产休地址", input_type: "input", span: 7, rules: "required" },
+          { name: 'permanentResidenceAddress', key: '.permanentResidenceAddress', label: "户口地址", input_type: "addressCascader", span: 18, rules: "required" },
+          { name: 'residenceAddress', key: '.residenceAddress', label: "居住地地址", input_type: "addressCascader", span: 18, rules: "required" },
+          { name: 'postpartumAddress', key: '.postpartumAddress', label: "产休地址", input_type: "addressCascader", span: 18, rules: "required" },
       ]
     }
   },
@@ -44,7 +44,7 @@ const config: Array<FormConfig> = [
       config: [
         { name: 'partnerName', key: '.partnerName', label: "姓名", input_type: "input", span: 7 },
         { name: 'partnerTelephone', key: '.partnerTelephone', label: "手机号码", input_type: "input", span: 7 },
-        // { name: 'userhmcno', key: '.userhmcno', label: "配偶门诊号", input_type: "input", span: 7 },
+        { name: 'userhmcno', key: '.partnerProfile.outpatientNO', label: "门诊号", input_type: "input", span: 7 },
         { name: 'partnerIdType', key: '.partnerIdType', label: "证件类型", input_type: "select", span: 7, input_props:{options: Options.idTypeOptions} },
         { name: 'partnerIdNO', key: '.partnerIdNO', label: "证件号码", input_type: "input", span: 7 },
         // { name: 'userhage', key: '.userhage', label: "年龄", input_type: "input", span: 7 },
@@ -357,6 +357,7 @@ const config: Array<FormConfig> = [
         { name: 'hospital', key: '.hospital', label: "分娩医院", input_type: "input", span: 7, rules: "required", input_props:{} },
         // { name: 'gesweek', key: '.gesweek', label: "分娩孕周", input_type: "input", span: 7, rules: "required", input_props:{} },
         { name: 'fetalcount', key: '.fetalcount', label: "胎数", input_type: "input", span: 7, rules: "required", input_props:{} },
+
         // { name: 'fenm', key: '.fenm', label: "分娩方式", input_type: "input", span: 7, rules: "required", input_props:{} },
         { name: 'puerperalFever', key: '.*', label: "产后持续发热", input_type: "checkbox", span: 7, rules: "required",
           input_props:{
@@ -388,6 +389,15 @@ const config: Array<FormConfig> = [
             ],
           }
         },
+
+        // { name: 'child', key: '.child', label: "胎儿信息", input_type: "array-custom", span: 24, rules: "required",
+        //   input_props:{
+        //     type: "custom",
+        //     config: [
+        //       { name: 'neonateWeight', key: '.neonateWeight', label: "胎数", input_type: "input", span: 7, rules: "required", input_props:{} },
+        //     ]
+        //   }
+        // },
       ]
     }
   }

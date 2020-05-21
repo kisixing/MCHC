@@ -1,13 +1,12 @@
-import React from 'react';
 import Form from './components/Form';
 import { toApi, fromApi } from './config/adapter';
 import BaseEditPanel from '@/components/BaseEditPanel';
 import WithDynamicExport from '@/components/WithDynamicExport';
 
-export class Panel extends BaseEditPanel {
+export class HighRiskInfantPanel extends BaseEditPanel {
   static defaultProps = {
     baseUrl: 'labour-records',
-    moduleName: 'highRisk',
+    moduleName: 'highRiskInfant',
     title: '高危儿管理',
     toApi,
     fromApi,
@@ -15,4 +14,4 @@ export class Panel extends BaseEditPanel {
   };
 }
 
-export default WithDynamicExport(Panel);
+export default WithDynamicExport(HighRiskInfantPanel);

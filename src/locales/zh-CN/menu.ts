@@ -130,7 +130,7 @@ export default {
 
   'menu.prenatal-visit': '产前检查',
   'menu.prenatal-visit.pregnancy': '孕册管理',
-  'menu.prenatal-visit.main': '首诊/复诊管理',
+  'menu.prenatal-visit.main': '医生工作台',
   // 'menu.prenatal-visit.return': '复诊管理',
   'menu.prenatal-visit.statistics': '统计报表',
 
@@ -208,6 +208,8 @@ export default {
   'menu.child-management.child-examination': '儿童健康体检记录',
   'menu.child-management.child-examination-add': '创建儿童健康体检档案',
   'menu.child-management.child-examination-edit': '查看儿童健康体检档案',
+  'menu.child-management.hearing-screening': '儿童听力筛查',
+  'menu.child-management.nutritive-disease': '营养性疾病儿童',
 
   'menu.child-examination': '儿童健康体检管理',
   'menu.child-examination.archive': '创建儿童档案',

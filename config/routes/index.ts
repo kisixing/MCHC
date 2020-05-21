@@ -165,7 +165,7 @@ export const omitRoutesBackup = [
     isMenu: true,
     active: null,
   },
-  
+
   {
     id: 378,
     type: 'others',
@@ -282,6 +282,22 @@ export const omitRoutesBackup = [
     key: '/child-management/child-examination/deliver-add',
     name: '创建健康体检',
     isMenu: false,
+    active: null,
+  },
+  {
+    id: 347,
+    type: 'others',
+    key: '/child-management/hearing-screening',
+    name: '儿童听力筛查记录',
+    isMenu: true,
+    active: null,
+  },
+  {
+    id: 3410,
+    type: 'others',
+    key: '/child-management/nutritive-disease',
+    name: '营养性疾病儿童',
+    isMenu: true,
     active: null,
   },
 
@@ -738,7 +754,7 @@ export const omitRoutesBackup = [
     id: 157,
     type: 'others',
     key: '/prenatal-visit/main',
-    name: '首诊/复诊管理',
+    name: '医生工作台',
     parentid: 0,
     active: null,
     isMenu: false,

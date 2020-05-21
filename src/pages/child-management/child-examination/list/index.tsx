@@ -5,6 +5,7 @@ import { Button, Popconfirm } from 'antd';
 import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
 
 import Table from './components/Table';
+import Query from './components/Query';
 import { tableColumns } from './config/table';
 import { processFromApi } from './config/adpater';
 import BaseList from '@/components/BaseList';
@@ -15,21 +16,24 @@ import commonStyles from '@/common.less';
 @WithDynamicExport
 export default class List extends BaseList {
   static defaultProps = {
+    rowKey: 'id',
     baseUrl: '/child-exam-visits',
     baseTitle: '儿童健康体检',
     needPagination: true,
-    showQuery: false,
+    showQuery: true,
     showAdd: false,
     tableColumns,
     processFromApi,
-    rowKey: 'id',
     Table,
+    Query,
   };
 
   state = {
     total: 0,
     defaultQuery: {
-      'childArchivesId.equals': get(this.props, 'location.query.childId') ? get(this.props, 'location.query.childId') : undefined,
+      'childArchivesId.equals': get(this.props, 'location.query.childId')
+        ? get(this.props, 'location.query.childId')
+        : undefined,
       page: 0,
       size: 20,
     },
