@@ -13,8 +13,8 @@ import commonStyles from '@/common.less';
 @WithDynamicExport
 export default class List extends BaseList {
   static defaultProps = {
-    baseUrl: '/gynecological-patients',
-    baseTitle: '妇女档案',
+    baseUrl: '/husbands',
+    baseTitle: '男方档案',
     needPagination: true,
     showQuery: true,
     showAdd: true,
@@ -84,16 +84,16 @@ export default class List extends BaseList {
   ];
 
   handleAdd = () => {
-    router.push('/gynecological-diseases/women/add');
+    router.push('/premarital-care/husband/add');
   };
 
   handleView = (rowData: any) => () => {
     const { id } = rowData;
-    router.push(`/gynecological-diseases/women/women-exam-records?id=${id}`);
+    router.push(`/premarital-care/husband/husband-exam?id=${id}`);
   };
 
   handleEdit = (rowData: any) => () => {
     const { id } = rowData;
-    router.push(`/gynecological-diseases/women/edit?id=${id}`);
+    router.push(`/premarital-care/husband/edit?id=${id}`);
   };
 }
