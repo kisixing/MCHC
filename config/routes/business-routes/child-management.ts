@@ -33,12 +33,12 @@ export default {
     //   path: '/child-management/child-archive/birth-information',
     //   component: './child-management/child-archive/birth-information',
     // },
-    // {
-    //   name: 'birth-charts',
-    //   icon: 'edit',
-    //   path: '/child-management/birth-charts',
-    //   // component: './child-management/child-examination/birth-charts',
-    // },
+    {
+      name: 'birth-charts',
+      icon: 'edit',
+      path: '/child-management/birth-charts',
+      component: './child-management/child-examination/birth-charts',
+    },
     {
       name: 'child-examination',
       icon: 'ordered-list',
@@ -64,10 +64,52 @@ export default {
       component: './child-management/hearing-screening/list',
     },
     {
+      name: 'hearing-screening-add',
+      icon: 'ordered-list',
+      path: '/child-management/hearing-screening/add',
+      component: './child-management/hearing-screening/edit',
+    },
+    {
+      name: 'hearing-screening-edit',
+      icon: 'ordered-list',
+      path: '/child-management/hearing-screening/edit',
+      component: './child-management/hearing-screening/edit',
+    },
+    {
       name: 'nutritive-disease',
       icon: 'ordered-list',
       path: '/child-management/nutritive-disease',
       component: './child-management/debility-children/list',
+    },
+    {
+      name: 'nutritive-disease-add',
+      icon: 'ordered-list',
+      path: '/child-management/nutritive-disease/add',
+      component: './child-management/debility-children/edit',
+    },
+    {
+      name: 'nutritive-disease-edit',
+      icon: 'ordered-list',
+      path: '/child-management/nutritive-disease/edit',
+      component: './child-management/debility-children/edit',
+    },
+    {
+      name: 'child-death',
+      icon: 'ordered-list',
+      path: '/child-management/child-death',
+      component: './child-management/child-death/list',
+    },
+    {
+      name: 'child-death-add',
+      icon: 'ordered-list',
+      path: '/child-management/child-death/add',
+      component: './child-management/child-death/edit',
+    },
+    {
+      name: 'child-death-edit',
+      icon: 'ordered-list',
+      path: '/child-management/child-death/edit',
+      component: './child-management/child-death/edit',
     },
   ],
 };

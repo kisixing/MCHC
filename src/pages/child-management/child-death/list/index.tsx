@@ -1,39 +1,30 @@
 import React from 'react';
+import Table from './components/Table';
+import { tableColumns } from './config/table';
+import BaseList from '@/components/BaseList';
+import WithDynamicExport from '@/components/WithDynamicExport';
 import { router } from 'umi';
 import { get } from 'lodash';
 import { Button, Popconfirm } from 'antd';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-
-import Table from './components/Table';
-import Query from './components/Query';
-import { tableColumns } from './config/table';
-import { processFromApi } from './config/adpater';
-import BaseList from '@/components/BaseList';
-import WithDynamicExport from '@/components/WithDynamicExport';
-
+import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
 import commonStyles from '@/common.less';
 
 @WithDynamicExport
 export default class List extends BaseList {
   static defaultProps = {
-    rowKey: 'id',
-    baseUrl: '',
-    baseTitle: '营养性疾病儿童',
-    needPagination: true,
-    showQuery: true,
+    baseUrl: '/child-deaths',
+    baseTitle: '儿童死亡登记',
+    needPagination: false,
+    showQuery: false,
     showAdd: true,
     tableColumns,
-    processFromApi,
+    rowKey: 'id',
     Table,
-    Query,
   };
 
   state = {
     total: 0,
     defaultQuery: {
-      'childArchivesId.equals': get(this.props, 'location.query.childId')
-        ? get(this.props, 'location.query.childId')
-        : undefined,
       page: 0,
       size: 20,
     },
@@ -48,7 +39,6 @@ export default class List extends BaseList {
     ...(this.props.tableColumns as Array<any>),
     {
       title: '操作',
-      align: 'center',
       hiddenSorter: true,
       hiddenFilter: true,
       fixed: 'right',
@@ -73,6 +63,7 @@ export default class List extends BaseList {
             >
               <Button title="删除" className={commonStyles.tableActionBtn} type="danger" size="small">
                 <DeleteOutlined />
+                删除
               </Button>
             </Popconfirm>
           </>
@@ -82,11 +73,11 @@ export default class List extends BaseList {
   ];
 
   handleAdd = () => {
-    router.push('/child-management/nutritive-disease/add');
+    router.push('/child-management/child-death/add');
   };
 
   handleEdit = (rowData: any) => () => {
     const { id } = rowData;
-    router.push(`/child-management/nutritive-disease/edit?id=${id}`);
+    router.push(`/child-management/child-death/edit?id=${id}`);
   };
 }

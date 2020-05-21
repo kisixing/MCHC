@@ -10,6 +10,7 @@ import { tableColumns } from './config/table';
 import { processFromApi } from './config/adpater';
 import BaseList from '@/components/BaseList';
 import WithDynamicExport from '@/components/WithDynamicExport';
+import { ModalIframeView } from '@/components/PDFPreview';
 
 import commonStyles from '@/common.less';
 
@@ -52,6 +53,7 @@ export default class List extends BaseList {
       hiddenSorter: true,
       hiddenFilter: true,
       fixed: 'right',
+      width: '250px',
       render: (value: any, rowData: any, index: number) => {
         return (
           <>
@@ -59,20 +61,16 @@ export default class List extends BaseList {
               className={commonStyles.tableActionBtn}
               type="primary"
               size="small"
-              title="查看"
+              title="编辑"
               onClick={this.handleView(rowData)}
             >
-              <EyeOutlined title="查看" />
-            </Button>
-            {/* <Button
-              title="编辑"
-              className={commonStyles.tableActionBtn}
-              type="primary"
-              size="small"
-              onClick={this.handleEdit(rowData)}
-            >
               <EditOutlined />
-            </Button> */}
+              编辑
+            </Button>
+            <ModalIframeView className={commonStyles.tableActionBtn} size="small" file={rowData.pfdurl}>
+              <EyeOutlined />
+              PDF
+            </ModalIframeView>
             <Popconfirm
               title={`确定要删除这个${get(this.props, 'baseTitle')}吗?`}
               onConfirm={this.handleDelete(rowData)}
@@ -98,8 +96,8 @@ export default class List extends BaseList {
     router.push(`/child-management/child-examination/deliver-edit?id=${id}`);
   };
 
-  // handleEdit = (rowData: any) => () => {
-  //   const { id } = rowData;
-  //   router.push(`/child-examination/examination-edit?id=${id}`);
-  // };
+  handleEdit = (rowData: any) => () => {
+    const { id } = rowData;
+    router.push(`/child-examination/examination-edit?id=${id}`);
+  };
 }
