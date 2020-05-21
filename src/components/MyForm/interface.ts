@@ -1,6 +1,6 @@
 // Checkbox
 interface ExtraEditors {
-  key: any, 
+  key: any,
   editors: Array<FormConfig>,
 }
 
@@ -27,9 +27,9 @@ interface TableColumns {
 export interface ComponentOption {
   type?: string | null,
   // select
-  options?: Array<{ 
-    value: string | number,
-    label: string | number
+  options?: Array<{
+    value: string | number | boolean,
+    label: string | number | boolean
   }>,
 
   // date
@@ -41,6 +41,7 @@ export interface ComponentOption {
   // table
   editable?: boolean,
   tableColumns?: Array<TableColumns>,
+  hiddenBtn?: boolean,
   // SimpleObject
   config?: Array<FormConfig>
 }
@@ -56,7 +57,7 @@ export interface FormConfig {
   offset?: number,
   hidden?: boolean,
   header_label?: boolean,
-  is_new_row?: boolean, 
+  is_new_row?: boolean,
   value?: any,
   rules?: string | object | RegExp | null,
   input_props?: ComponentOption,
@@ -76,7 +77,8 @@ export interface FormItemProp {
   actions?: {
     setValue?: (val: any) => void
     getValue?: () => any,
-    valid?: () => any
+    valid?: () => any,
+    reset?: () => void
   },
   dispatch: (fieldName: string, eventName: string, args: any) => void,
   subscribe: (fieldName: string, eventName: string, cb: Function) => void

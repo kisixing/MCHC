@@ -2,7 +2,7 @@
   position: absolute;
   display: flex;
   flex-direction: row;
-  width: 400px;
+  width: 200px;
   height: auto;
 
   transition:all 1s;
@@ -12,11 +12,22 @@
 
   // 先定死
   .menu {
-    width: 350px;
+    width: 138px;
+    margin-right: 12px;
+    border: 1px solid #000000;
   }
-
+  
   .trigger {
     width: 50px;
     height: 100%;
+    > button {
+      width: 32px;
+      height: 48px;
+      padding: 1px;
+      > span {
+        text-indent: 1px;
+        writing-mode: vertical-rl;
+      }
+    }
   }
 }

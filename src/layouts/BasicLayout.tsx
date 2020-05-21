@@ -27,29 +27,14 @@ const BasicLayout = (props: any) => {
       title: '登录失效',
       content: '登录状态已失效，请重新登录',
       okText: '重新登录',
-      onOk: () => {
-        dispatch({
-          type: 'login/logout',
-        });
-      },
     });
   };
-
-  // 获取初始化数据
-  useEffect(() => {
-    dispatch({
-      type: 'select/getDictionaries',
-      payload: {},
-    });
-  }, []);
 
   // 登录过期与退出登录
   useEffect(() => {
     const { currentUser, allPermissions } = props;
     const username = store.get('username');
     const token = store.get(TOKEN);
-    const loginTime = store.get('loginTime');
-    const expiredTime = store.get('expiredTime');
 
     if (!username || !token) {
       dispatch({
@@ -66,10 +51,6 @@ const BasicLayout = (props: any) => {
       });
       return;
     }
-    if (loginTime + expiredTime < new Date().getTime()) {
-      showOvertime();
-      return;
-    }
     if (!isEmpty(currentUser) && !isNil(allPermissions)) {
       dispatchTabs(currentUser, allPermissions);
     } else {
@@ -80,8 +61,16 @@ const BasicLayout = (props: any) => {
   // 监听 resize 和清除 resize
   useEffect(() => {
     window.addEventListener('resize', handleResize);
+    const expiredTime = store.get('expiredTime');
+    const logoutTimeout = setTimeout(() => {
+      dispatch({
+        type: 'login/logout',
+      });
+      showOvertime();
+    }, expiredTime);
     return () => {
       window.removeEventListener('resize', () => {});
+      clearTimeout(logoutTimeout);
     };
   }, []);
 
@@ -101,6 +90,11 @@ const BasicLayout = (props: any) => {
     await dispatch({
       type: 'user/saveAllPermissions',
       payload: newAllPermissions,
+    });
+
+    dispatch({
+      type: 'select/getDictionaries',
+      payload: {},
     });
 
     dispatchTabs(newCurrentUser, newAllPermissions);

@@ -7,7 +7,7 @@ import styles from './index.less';
 
 export default class FloatCard extends Component<any, any> {
 
-  static menuWidth = 350;
+  static menuWidth = 150;
 
   constructor(props: any){
     super(props);

@@ -22,6 +22,8 @@ interface MultipleSelectProps {
 export default class MultipleSelect extends Component<MultipleSelectProps>{
 
 
+  
+
   handleSelectChange = (val: any): void => {
     const { value, onChange } = this.props;
     onChange(val, value.editorsValue);

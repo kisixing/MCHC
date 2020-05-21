@@ -16,7 +16,7 @@ export default class List extends BaseList {
   
   static defaultProps = {
     baseUrl: "/prenatal-diagnoses",
-    baseTitle: '产前病历',
+    baseTitle: '专科病历',
     needPagination: false,
     showQuery: false,
     showAdd: true,
@@ -28,7 +28,7 @@ export default class List extends BaseList {
   state = {
     total: 0,
     defaultQuery: {
-      "prenatalPatientId.equals": getPageQuery().id || "",
+      "prenatalPatientId.equals": getPageQuery().prenatalPatientId || "",
       page: 0,
       size: 20,
     },
@@ -85,7 +85,7 @@ export default class List extends BaseList {
 
   handleAdd = () => {
     const urlParams = getPageQuery();
-    router.push(`/prenatal-diagnosis/medical-record-form?prenatalPatientId=${urlParams.id || ""}`);
+    router.push(`/prenatal-diagnosis/medical-record-form?prenatalPatientId=${urlParams.prenatalPatientId || ""}`);
   };
 
   handleView = (rowData: any) => () => {
@@ -96,6 +96,6 @@ export default class List extends BaseList {
   handleEdit = (rowData: any) => () => {
     const { id } = rowData;
     const urlParams = getPageQuery();
-    router.push(`/prenatal-diagnosis/medical-record-form?prenatalPatientId=${urlParams.id || ""}&id=${id}`);
+    router.push(`/prenatal-diagnosis/medical-record-form?prenatalPatientId=${urlParams.prenatalPatientId || ""}&id=${id}`);
   };
 }

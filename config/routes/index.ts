@@ -870,7 +870,7 @@ export const omitRoutesBackup = [
   {
     id: 98,
     type: 'others',
-    key: '/prenatal-diagnosis/medical-record',
+    key: '/prenatal-diagnosis/medical-record-list',
     active: null,
     isMenu: false,
   },
@@ -906,6 +906,13 @@ export const omitRoutesBackup = [
     id: 93,
     type: 'others',
     key: '/prenatal-diagnosis/medical-record-form',
+    active: null,
+    isMenu: false,
+  },
+  {
+    id: 93,
+    type: 'others',
+    key: '/prenatal-diagnosis/medical-record-list',
     active: null,
     isMenu: false,
   },
