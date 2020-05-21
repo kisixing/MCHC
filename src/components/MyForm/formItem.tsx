@@ -32,6 +32,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
         self.setState({ value: val });
       }
       props.actions.reset = function reset() {
+        console.log(props.name);
         if(isObj(self.state.value)){
           self.setState({ value: {} });
         }else if(isArr(self.state.value)){

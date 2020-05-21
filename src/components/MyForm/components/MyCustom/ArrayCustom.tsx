@@ -11,7 +11,6 @@ interface ArrayCustomProps {
   value: Array<any>,
   input_props: any,
   error: any,
-  path: string
 }
 
 // interface ArrayCustomState {
@@ -46,7 +45,7 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
   }
 
   renderArrayCustomForm = ():ReactNode => {
-    const { dispatch, error = [], input_props = {} , path, value = []  } = this.props;
+    const { dispatch, error = [], input_props = {} , value = []  } = this.props;
     const { config = [] } = input_props;
     if(!value || config.length === 0 || value.length === 0 ){
       return null;
@@ -72,7 +71,6 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
               onChange={(singleValue:any) => this.handleChange(singleValue, index)}
               dispatch={dispatch}
               input_props={input_props}
-              path={path}
               error={null}
               value={val}
               getValidFun={() => {}}

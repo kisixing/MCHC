@@ -29,9 +29,9 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
       formHandler: {},
       data: {
         downsScreens: [
-          {type: 0},
-          {type: 1},
-          {type: 2}
+          { type: 0 },
+          { type: 1 },
+          { type: 2 }
         ],
         fetuses: [
           { id: 1 }
@@ -69,11 +69,11 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
       const formatData = getFormData(res);
       console.log(res);
       // type需要固定 之后再改这个位置
-      formatData.downsScreens[0].type = 0;
-      formatData.downsScreens[1].type = 1;
-      formatData.downsScreens[2].type = 2;
-      // console.log(formatData);
-      // return ;
+      // formatData.downsScreens[0].type = 0;
+      // formatData.downsScreens[1].type = 1;
+      // formatData.downsScreens[2].type = 2;
+      console.log(formatData);
+      return ;
       if (validCode) {
         if (id === -1) {
           // 新增
@@ -109,9 +109,9 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
     });
   }
 
-  reset = () => {
-    const {formHandler} = this.state;
-    if(formHandler){
+  handleReset = () => {
+    const { formHandler = {} } = this.state;
+    if (formHandler.reset) {
       formHandler.dispatch("_global", "reset", {})
       formHandler.reset();
     }
@@ -128,7 +128,7 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
           submitChange={false}
         />
         <div className={styles['btn-group']}>
-          <Button onClick={this.reset}>重置</Button>
+          <Button onClick={this.handleReset}>重置</Button>
           <Button type="primary" onClick={this.handleSubmit}>提交</Button>
         </div>
       </div>

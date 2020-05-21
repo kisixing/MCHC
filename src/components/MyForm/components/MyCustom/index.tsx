@@ -10,7 +10,6 @@ interface MyCustomProps {
   subscribe: Function
   input_props: any,
   error: any,
-  path: string,
   value: any,
 
   getValidFun: any

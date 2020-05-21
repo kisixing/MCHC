@@ -36,8 +36,8 @@ export default class NewPatient extends Component<{}, NewPatientState>{
   
   componentDidMount () {
     const urlParam = getPageQuery();
-    if("id" in urlParam){
-      request(`/prenatal-patients?id.equals=${urlParam.id}`,{
+    if(urlParam.prenatalPatientId){
+      request(`/prenatal-patients?id.equals=${urlParam.prenatalPatientId}`,{
         method: "GET"
       }).then(res => {
         if(res.length !== 0){
@@ -67,6 +67,13 @@ export default class NewPatient extends Component<{}, NewPatientState>{
     })
   }
 
+  handleReset = () => {
+    const { formHandler = {} } = this.state;
+    if(formHandler.reset){
+      formHandler.reset();
+    }
+  }
+
   render() {
     const { patients } = this.state;
     const myConfig = getRenderData(config, patients);
@@ -78,7 +85,7 @@ export default class NewPatient extends Component<{}, NewPatientState>{
           submitChange={false}
         />
         <div className={styles['btn-group']}>
-          <Button>重置</Button>
+          <Button onClick={this.handleReset}>重置</Button>
           <Button type="primary" onClick={this.handleSubmit}>提交</Button>
         </div>
       </div>
