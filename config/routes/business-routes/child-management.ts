@@ -64,10 +64,34 @@ export default {
       component: './child-management/hearing-screening/list',
     },
     {
+      name: 'hearing-screening-add',
+      icon: 'ordered-list',
+      path: '/child-management/hearing-screening/add',
+      component: './child-management/hearing-screening/edit',
+    },
+    {
+      name: 'hearing-screening-edit',
+      icon: 'ordered-list',
+      path: '/child-management/hearing-screening/edit',
+      component: './child-management/hearing-screening/edit',
+    },
+    {
       name: 'nutritive-disease',
       icon: 'ordered-list',
       path: '/child-management/nutritive-disease',
       component: './child-management/debility-children/list',
+    },
+    {
+      name: 'nutritive-disease-add',
+      icon: 'ordered-list',
+      path: '/child-management/nutritive-disease/add',
+      component: './child-management/debility-children/edit',
+    },
+    {
+      name: 'nutritive-disease-edit',
+      icon: 'ordered-list',
+      path: '/child-management/nutritive-disease/edit',
+      component: './child-management/debility-children/edit',
     },
   ],
 };

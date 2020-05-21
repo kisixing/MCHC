@@ -10,12 +10,14 @@ import IframeView from './IframeView';
 import styles from './View.less';
 
 interface IProps {
-  file?: string
-  width?: string | number
-  children?: React.ReactNode
+  file?: string;
+  width?: string | number;
+  children?: React.ReactNode;
+  className?: any;
+  size?: string;
 }
 
-function ModalIframeView({ file, width = '856px', children = '预览按钮' }: IProps) {
+function ModalIframeView({ file, width = '856px', children = '预览按钮', className, size }: IProps) {
   const [visible, setVisible] = useState(false);
 
   const showModal = () => {
@@ -32,7 +34,7 @@ function ModalIframeView({ file, width = '856px', children = '预览按钮' }: I
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
+      <Button type="primary" size={size} onClick={showModal} className={className}>
         {children}
       </Button>
       <Modal
