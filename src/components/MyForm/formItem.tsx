@@ -85,6 +85,14 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
     });
   }
 
+  /**
+   * 这个dispatch默认会使用本组件渲染的路径
+   */
+  handleDispatch = (eventName: string, args: any) => {
+    const { name, dispatch } = this.props;
+    dispatch(name, eventName, args);
+  }
+
   // 渲染required星号
   renderAsterisk = (validate: string | object | RegExp | null): ReactNode => {
     let isRender = false;
@@ -124,13 +132,12 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
             {MyComponent ? (
               <MyComponent
                 onChange={this.handleChange}
-                dispatch={dispatch}
+                dispatch={this.handleDispatch}
                 // subscribe仅在一些 业务组件/内嵌表单组件 中使用
                 subscribe={subscribe}
                 value={value}
                 input_props={input_props}
                 error={error}
-                path={path}
                 getValidFun={(validFunc: any) => {this.childrenValid = validFunc}}
               />
             ) : (
