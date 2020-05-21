@@ -33,12 +33,12 @@ export default {
     //   path: '/child-management/child-archive/birth-information',
     //   component: './child-management/child-archive/birth-information',
     // },
-    // {
-    //   name: 'birth-charts',
-    //   icon: 'edit',
-    //   path: '/child-management/birth-charts',
-    //   // component: './child-management/child-examination/birth-charts',
-    // },
+    {
+      name: 'birth-charts',
+      icon: 'edit',
+      path: '/child-management/birth-charts',
+      component: './child-management/child-examination/birth-charts',
+    },
     {
       name: 'child-examination',
       icon: 'ordered-list',

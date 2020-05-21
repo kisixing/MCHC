@@ -316,6 +316,30 @@ export const omitRoutesBackup = [
     isMenu: true,
     active: null,
   },
+  {
+    id: 3411,
+    type: 'others',
+    key: '/child-management/nutritive-disease/add',
+    name: '营养性疾病儿童',
+    isMenu: false,
+    active: null,
+  },
+  {
+    id: 3412,
+    type: 'others',
+    key: '/child-management/nutritive-disease/edit',
+    name: '营养性疾病儿童',
+    isMenu: false,
+    active: null,
+  },
+  {
+    id: 3413,
+    type: 'others',
+    key: '/child-management/birth-charts',
+    name: '组件测试',
+    isMenu: true,
+    active: null,
+  },
 
   {
     id: 339,
