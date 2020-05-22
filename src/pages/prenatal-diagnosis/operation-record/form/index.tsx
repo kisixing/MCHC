@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from "dva";
 import { Button, message } from 'antd';
 import MyForm from '@/components/MyForm/index';
 import config from './config/index';
@@ -10,9 +9,8 @@ import request from '@/utils/request';
 // import FloatCard from '@/components/FloatCard';
 
 import { getRenderData, getFormData } from '@/components/MyForm/utils';
-import { formDescriptionsFromApi } from '@/utils/adapter';
 
-interface HomeState {
+interface OperationRecordState {
   formHandler: {
     [key: string]: any
   },
@@ -22,8 +20,21 @@ interface HomeState {
 }
 
 const URL = "/pd-operations";
+const operationNames = {
+  1: "羊膜腔穿刺",
+  2: "绒毛活检术",
+  3: "脐带穿刺术",
+  4: "羊膜腔灌注术",
+  5: "选择性减胎",
+  6: "羊水减量",
+  7: "宫内输血",
+  8: "胎儿胸腔积液",
+  9: "腹水",
+  10: "囊液穿刺",
+}
 
-class Home extends React.Component<{}, HomeState>{
+
+export default class OperationRecord extends React.Component<{}, OperationRecordState>{
   constructor(props: any) {
     super(props);
     this.state = {
@@ -77,11 +88,14 @@ class Home extends React.Component<{}, HomeState>{
     this.state.formHandler.submit().then(({ validCode, res }: any) => {
       if (validCode) {
         const formatData = getFormData(res);
+        console.log(formatData);
+        return;
         const [method, info] = id !== -1 ? ["PUT", "修改成功"] : ["POST", "成功新增病历"];
         request(`${URL}`, {
           method,
           data: {
             ...formatData,
+            operationName: operationNames[formatData.operationType],
             prenatalPatient: {
               id: Number(prenatalPatientId)
             }
@@ -95,6 +109,18 @@ class Home extends React.Component<{}, HomeState>{
         message.warn("请填写所有必填项后再次提交");
       }
     });
+  }
+
+  handleReset = () => {
+    const { data, formHandler } = this.state;
+    formHandler.dispatch("_global", "reset", {});
+    formHandler.reset();
+    this.setState({
+      data: {
+        id: data.id,
+        operationType: 1
+      }
+    })
   }
 
   render() {
@@ -112,18 +138,10 @@ class Home extends React.Component<{}, HomeState>{
           submitChange={false}
         />
         <div className={styles['btn-group']}>
-          <Button onClick={this.handleSubmit}>重置</Button>
+          <Button onClick={this.handleReset}>重置</Button>
           <Button type="primary" onClick={this.handleSubmit}>提交</Button>
         </div>
       </div>
     )
   }
 }
-
-export default connect((all) => {
-  
-  console.log(all);
-  return {
-
-  }
-})(Home)

@@ -6,6 +6,12 @@ import CustomCheckbox from './CustomCheckbox';
 import GroupCheckbox from './GroupCheckbox';
 import { getObjectFormArray, convertExtraEditors, isObj, isArr } from '../../utils/func';
 
+/**
+ * TODO
+ * checkbox整体的逻辑其实比较混乱
+ * 需要重构
+ */
+
 interface MyCheckboxProps {
   onChange: Function;
   dispatch?: Function;
@@ -114,7 +120,7 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
           return;
         }
         let newObj: any = {};
-        // 这里要靠一个0的情况
+        // 这里要考虑一个0的情况
         if (val.checkboxValue === false) {
           newObj = { [key]: false, [`${key}Note`]: "" }
         } else {
@@ -127,7 +133,8 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
             }
           }
         }
-        onChange(Object.assign(value, newObj));
+        // custom 只使用单个 不需要object.assign
+        onChange(newObj);
       };
       return (
         <CustomCheckbox

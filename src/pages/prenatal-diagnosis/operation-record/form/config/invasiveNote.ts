@@ -18,12 +18,12 @@ const invasiseNotes: { [key: string]: FormConfig } = {
                 key: "uterusHemorrhage",
                 label: "",
                 options: [
-                  { value: true, label: "有" },
-                  { value: false, label: "无" },
+                  { value: 1, label: "有" },
+                  { value: 0, label: "无" },
                 ],
                 extraEditors: [
                   {
-                    key: true,
+                    key: 1,
                     editors: [
                       { key: "", name: "", input_type: "input", unit: "s" }
                     ]
@@ -71,12 +71,12 @@ const invasiseNotes: { [key: string]: FormConfig } = {
                 key: "umbilicalHemorrhage",
                 label: "",
                 options: [
-                  { value: true, label: "有" },
-                  { value: false, label: "无" },
+                  { value: 1, label: "有" },
+                  { value: 0, label: "无" },
                 ],
                 extraEditors: [
                   {
-                    key: true,
+                    key: 1,
                     editors: [
                       { key: "", name: "", input_type: "input", unit: "s" }
                     ]
@@ -95,12 +95,12 @@ const invasiseNotes: { [key: string]: FormConfig } = {
                 key: "uterusHemorrhage",
                 label: "",
                 options: [
-                  { value: true, label: "有" },
-                  { value: false, label: "无" },
+                  { value: 1, label: "有" },
+                  { value: 0, label: "无" },
                 ],
                 extraEditors: [
                   {
-                    key: true,
+                    key: 1,
                     editors: [
                       { key: "", name: "", input_type: "input", unit: "s" }
                     ]
@@ -227,12 +227,12 @@ const invasiseNotes: { [key: string]: FormConfig } = {
                 key: "umbilicalHemorrhage",
                 label: "",
                 options: [
-                  { value: true, label: "有" },
-                  { value: false, label: "无" },
+                  { value: 1, label: "有" },
+                  { value: 0, label: "无" },
                 ],
                 extraEditors: [
                   {
-                    key: true,
+                    key: 1,
                     editors: [
                       { key: "", name: "", input_type: "input", unit: "s" }
                     ]
@@ -251,12 +251,12 @@ const invasiseNotes: { [key: string]: FormConfig } = {
                 key: "uterusHemorrhage",
                 label: "",
                 options: [
-                  { value: true, label: "有" },
-                  { value: false, label: "无" },
+                  { value: 1, label: "有" },
+                  { value: 0, label: "无" },
                 ],
                 extraEditors: [
                   {
-                    key: true,
+                    key: 1,
                     editors: [
                       { key: "", name: "", input_type: "input", unit: "s" }
                     ]
