@@ -149,7 +149,7 @@ export default class BaseTable extends Component<IProps, IState> {
     const mergedColumns = this.mergedColumns(columns);
 
     return (
-      <CustomTable {...this.props} title={this.renderTitle} bordered columns={mergedColumns} scroll={{ x: '100vw' }} />
+      <CustomTable bordered scroll={{ x: '100vw' }} {...this.props} columns={mergedColumns} title={this.renderTitle} />
     );
   }
 }

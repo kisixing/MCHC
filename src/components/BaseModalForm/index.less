@@ -1,6 +1,47 @@
 .fixedSearch {
-  position: fixed;
-  top: 50%;
+  .fixedSearchTriger {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    z-index: 999;
+    background-color: #007aff;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .fixedSearchTrigerIcon {
+      font-size: 25px;
+      color: white;
+    }
+  }
+}
+
+.fixedSearchPanel {
+  height: calc(100vh - 107px);
+  top: 85px;
   right: 0;
-  z-index: 999;
+  .fixedSearchPanelAction {
+    padding: 8px;
+    .fixedSearchPanelItemLabel {
+      display: inline-flex;
+    }
+  }
+  .fixedSearchPanelItem {
+    border-bottom: 1px solid #cccccc;
+    padding: 8px 0;
+    .fixedSearchPanelItemLabel {
+      display: inline-block;
+      margin-right: 4px;
+    }
+    .fixedSearchPanelItemValue {
+      display: inline-block;
+    }
+  }
+  :global {
+    .ant-drawer-body {
+      padding: 8px;
+    }
+  }
 }
