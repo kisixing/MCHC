@@ -5,11 +5,11 @@ import BaseEditPanel from '@/components/BaseEditPanel';
 import WithDynamicExport from '@/components/WithDynamicExport';
 
 @WithDynamicExport
-export default class HusbandPanel extends BaseEditPanel {
+export default class Panel extends BaseEditPanel {
   static defaultProps = {
-    baseUrl: 'husbands',
-    moduleName: 'premarital-care-husband',
-    title: '男方档案',
+    baseUrl: 'breast-cancers',
+    moduleName: 'breastCancer',
+    title: '乳腺癌筛查情况',
     toApi,
     fromApi,
     Form,
