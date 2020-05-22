@@ -14,7 +14,7 @@ export default class List extends BaseList {
     baseUrl: '/cervical-cancers',
     baseTitle: '宫颈癌筛查情况',
     needPagination: false,
-    showQuery: false,
+    showQuery: true,
     showAdd: true,
     processFromApi,
     tableColumns,
@@ -37,20 +37,20 @@ export default class List extends BaseList {
   };
 
   handleEdit = (rowData: any) => () => {
-    const id = get(rowData, 'wife.id');
-    router.push(`/premarital-care/wife/wife-exam?id=${id}`);
+    const id = get(rowData, 'id');
+    router.push(`/gynecological-diseases/cervical-cancer-screen/edit?id=${id}`);
   };
 
-  handleAdd = () => () => {
+  handleAdd = () => {
     router.push(`/gynecological-diseases/cervical-cancer-screen/add`);
   };
 
   handleQuerySearch = (data: any) => {
     const { outpatientNO, name, idNO } = data;
     const queryData = {
-      'wifeCriteria.outpatientNO.contains': outpatientNO,
-      'wifeCriteria.name.contains': name,
-      'wifeCriteria.idNO.contains': idNO,
+      'gynecologicalPatientCriteria.outpatientNO.contains': outpatientNO,
+      'gynecologicalPatientCriteria.name.contains': name,
+      'gynecologicalPatientCriteria.idNO.contains': idNO,
     };
     let newQueryData = {};
     map(queryData, (value, key) => {

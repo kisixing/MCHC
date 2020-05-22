@@ -48,7 +48,7 @@ export const tableColumns = [
   },
   {
     title: '医生',
-    dataIndex: 'dcotor',
+    dataIndex: 'doctor',
     align: 'center',
   },
 ];
