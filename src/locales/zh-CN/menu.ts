@@ -132,7 +132,11 @@ export default {
   'menu.gynecological-diseases.women-exam-records-edit': '妇女检查记录修改',
   'menu.gynecological-diseases.examination': '妇女体检记录',
   'menu.gynecological-diseases.breast-cancer-screen': '乳腺癌筛查情况',
+  'menu.gynecological-diseases.breast-cancer-screen-add': '乳腺癌筛查情况添加',
+  'menu.gynecological-diseases.breast-cancer-screen-edit': '乳腺癌筛查情况编辑',
   'menu.gynecological-diseases.cervical-cancer-screen': '宫颈癌筛查情况',
+  'menu.gynecological-diseases.cervical-cancer-screen-add': '宫颈癌筛查情况添加',
+  'menu.gynecological-diseases.cervical-cancer-screen-edit': '宫颈癌筛查情况编辑',
 
   'menu.prenatal-visit': '产前检查',
   'menu.prenatal-visit.pregnancy': '孕册管理',

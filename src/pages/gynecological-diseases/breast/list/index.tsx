@@ -11,9 +11,9 @@ import { router } from 'umi';
 @WithDynamicExport
 export default class List extends BaseList {
   static defaultProps = {
-    baseUrl: '/premarital-visits',
-    baseTitle: '女性婚检记录',
-    needPagination: true,
+    baseUrl: '/breast-cancers',
+    baseTitle: '乳腺癌筛查情况',
+    needPagination: false,
     showQuery: true,
     showAdd: false,
     processFromApi,
@@ -28,7 +28,6 @@ export default class List extends BaseList {
     defaultQuery: {
       page: 0,
       size: 20,
-      'visitType.equals': 1,
     },
     dataSource: [],
     visible: false,
