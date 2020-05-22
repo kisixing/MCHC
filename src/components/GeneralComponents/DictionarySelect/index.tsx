@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { get, map, last, keyBy, indexOf } from 'lodash';
 import { Radio, Select, Checkbox, Row, Col, Input } from 'antd';
+import isEqual from 'lodash.isequal';
 
 interface IProps {
   mode?: 'single' | 'multiple';
@@ -32,12 +33,26 @@ export class DictionarySelect extends React.Component<IProps> {
   componentDidMount() {
     const { dictionaries, uniqueKey, value } = this.props;
     const data = get(dictionaries, uniqueKey as string);
-    console.log(dictionaries, uniqueKey);
     this.setState({
       options: get(data, 'enumerations'),
       selectedData: get(value, 'selectedData'),
       otherNote: get(value, 'otherNote'),
     });
+  }
+
+  static getDerivedStateFromProps(nextProps: any, prevState: any) {
+    const { value } = nextProps;
+    const prevValue = {
+      selectedData: get(prevState, 'selectedData'),
+      otherNote: get(prevState, 'otherNote'),
+    };
+    if (!isEqual(value, prevValue)) {
+      return {
+        selectedData: get(value, 'selectedData'),
+        otherNote: get(value, 'otherNote'),
+      };
+    }
+    return null;
   }
 
   handleSelectedChange = (e: any) => {
@@ -105,10 +120,10 @@ export class DictionarySelect extends React.Component<IProps> {
 
   renderRadios = () => {
     const { boxSpan } = this.props;
-    const { options, showOther, otherNote } = this.state;
+    const { options, showOther, otherNote, selectedData } = this.state;
 
     return (
-      <Radio.Group onChange={this.handleSelectedChange} style={{ width: '100%' }}>
+      <Radio.Group onChange={this.handleSelectedChange} style={{ width: '100%' }} value={selectedData}>
         <Row>
           {map(options, option => {
             if (get(option, 'value') === FIX_OTHER_VALUE && showOther) {
