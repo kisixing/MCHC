@@ -98,11 +98,11 @@ export default class Home extends React.Component<{},HomeState>{
                     <span>{i + 1}、</span>
                     <span>{item.diagnosis}</span>
                   </Popover>
-                  <input className={styles.remarkIpt} placeholder="备注" value={item.remark} onChange={e => setRemark(e.target.value, i)} />
+                  <input className={styles.remarkIpt} placeholder="备注" value={item.note} onChange={e => setRemark(e.target.value, i)} />
                 </div>
               </Col>
               <Col span={5}>
-                {item.visitDate}
+                {item.createDate}
               </Col>
               <Col span={3}>
                 <Button type="dashed" size="small" shape="circle" onClick={() => handleDelete(item)}>X</Button>

@@ -11,6 +11,8 @@ import Curve from './curve';
 import ImageReport from './image-report';
 import SurveyReport from './survey-report';
 import HighriskFactor from './components/high-risk-factor';
+import HeaderInfo from './components/header-info';
+// import ScarredUterus from './components/scarred-uterus';
 import styles from './index.less';
 import Item from 'antd/lib/list/Item';
 
@@ -51,44 +53,11 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
     });
   }
 
-  renderInfo = () => {
-    const { formData } = this.state;
-    if(formData){
-      return <div className={styles['user-info']}>
-        <div>
-          <span>姓名:</span><strong>{formData.name}</strong>
-        </div>
-        <div>
-          <span>年龄:</span><strong>{formData.age}</strong>
-        </div>
-        <div>
-          <span>孕周:</span><strong>{formData.gestationalWeek}</strong>
-        </div>
-        <div>
-          <span>预产期-日期:</span><strong>{formData.edd}</strong>
-        </div>
-        <div>
-          <span>预产期-B超:</span><strong>{formData.sureEdd}</strong>
-        </div>
-        <div>
-          <span>产检编号:</span><strong>{formData.checkupNO}</strong>
-        </div>
-        <div>
-          <span>高危等级:</span><strong>{formData.highrisk}</strong>
-        </div>
-        <div>
-          <span>高危因素:</span><strong>{formData.highriskNote}</strong>
-        </div>
-      </div>
-    }
-    return null;
-  }
-
 
   render() {
     return (
       <div className={styles.container}>
-        { this.renderInfo() }
+        <HeaderInfo />
         <Tabs defaultActiveKey="1" type="card" size="small">
           {routers.map((item) => (
             <Tabs.TabPane tab={item.name} key={item.key}>
@@ -96,7 +65,8 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
             </Tabs.TabPane>
           ))}
         </Tabs>
-        {/* <HighriskFactor /> */}
+        <HighriskFactor />
+        {/* <ScarredUterus /> */}
       </div>
     )
   }

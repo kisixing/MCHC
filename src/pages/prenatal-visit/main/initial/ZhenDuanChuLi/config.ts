@@ -1,14 +1,15 @@
 import { FormConfig } from '@/components/MyForm/interface';
+import * as Options from '@/pages/prenatal-visit/options';
 
 const config: Array<FormConfig> = [
 
-    { name: 'diagnosisHandle', key: '.diagnosis.diagnosisHandle', label: "处理措施", input_type: "input", span: 24, rules: "required", input_props:{type: "textarea",} },
-    { name: 'appointmentType', key: '.appointmentType', label: "下次复诊", input_type: "input", span: 6, rules: "required", input_props:{} },
-    // { name: 'nextRvisitWeek', key: '.diagnosis.nextRvisitWeek', label: "", input_type: "input", span: 6, rules: "required", input_props:{} },
+    { name: 'prescription', key: '.prescription', label: "处理措施", input_type: "input", span: 24, input_props:{type: "textarea",} },
+    { name: 'appointmentType', key: '.appointmentType', label: "下次复诊", input_type: "select", span: 6, input_props:{options: Options.appointmentWeekOptions} },
+    { name: 'appointmentWeek', key: '.appointmentWeek', label: "", input_type: "select", span: 6, input_props:{options: Options.appointmentDateOptions}},
     { name: 'appointmentDate', key: '.appointmentDate', label: "", input_type: "date", span: 6, rules: "required", input_props:{} },
-    { name: 'appointmentPeriod', key: '.appointmentPeriod', label: "", input_type: "input", span: 6, rules: "required", input_props:{} },
-    // { name: 'add_FIELD_first_save_ivisit_time', key: '.diagnosis.add_FIELD_first_save_ivisit_time', label: "初诊日期", input_type: "input", span: 7, rules: "required", input_props:{} },
-    // { name: 'add_FIELD_first_clinical_doctor', key: '.diagnosis.add_FIELD_first_clinical_doctor', label: "初诊医生", input_type: "input", span: 7, rules: "required", input_props:{} },
+    { name: 'appointmentPeriod', key: '.appointmentPeriod', label: "", input_type: "select", span: 6, input_props:{options: Options.appointmentPeriodOptions} },
+    { name: 'visitDate', key: '.visitDate', label: "初诊日期", input_type: "date", span: 7, input_props:{} },
+    { name: 'doctor', key: '.doctor', label: "初诊医生", input_type: "input", span: 7, input_props:{} },
 
 ]
 export default config;
