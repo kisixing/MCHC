@@ -42,7 +42,6 @@ export class DictionarySelect extends React.Component<IProps> {
 
   static getDerivedStateFromProps(nextProps: any, prevState: any) {
     const { value } = nextProps;
-    console.log(value)
     const prevValue = {
       selectedData: get(prevState, 'selectedData'),
       otherNote: get(prevState, 'otherNote'),
@@ -189,7 +188,6 @@ export class DictionarySelect extends React.Component<IProps> {
     if (get(keyBy(options, 'value'), FIX_OTHER_VALUE)) {
       selectSpan = 11;
     }
-    console.log(selectedData)
     return (
       <Row>
         <Col span={selectSpan}>
@@ -223,7 +221,7 @@ export class DictionarySelect extends React.Component<IProps> {
   };
 
   render() {
-    const { type, value } = this.props;
+    const { type } = this.props;
     switch (type) {
       case 'radio':
         return this.renderRadios();
