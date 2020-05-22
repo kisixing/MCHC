@@ -14,10 +14,10 @@ export default class ModelForm extends Extends {
       renderEditItem: null,
       formItemLayout: {
         labelCol: {
-          span: 4,
+          span: 6,
         },
         wrapperCol: {
-          span: 8,
+          span: 16,
         },
       },
       data: {},

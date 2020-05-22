@@ -333,6 +333,14 @@ export const omitRoutesBackup = [
     active: null,
   },
   {
+    id: 3414,
+    type: 'others',
+    key: '/child-management/child-death',
+    name: '儿童死亡报告管理',
+    isMenu: false,
+    active: null,
+  },
+  {
     id: 3413,
     type: 'others',
     key: '/child-management/birth-charts',
