@@ -1,21 +1,26 @@
 import React from 'react';
 import Table from './components/Table';
+import Query from './components/Query';
 import { tableColumns } from './config/table';
 import BaseList from '@/components/BaseList';
 import WithDynamicExport from '@/components/WithDynamicExport';
+import { processFromApi } from './config/adpater';
+import { get, map, filter, isNil, set, isEmpty, pick } from 'lodash';
 import { router } from 'umi';
 
 @WithDynamicExport
 export default class List extends BaseList {
   static defaultProps = {
-    baseUrl: '/admissions',
-    baseTitle: '普查登记',
-    needPagination: false,
-    showQuery: false,
-    showAdd: true,
+    baseUrl: '/premarital-visits',
+    baseTitle: '女性婚检记录',
+    needPagination: true,
+    showQuery: true,
+    showAdd: false,
+    processFromApi,
     tableColumns,
     rowKey: 'id',
     Table,
+    Query,
   };
 
   state = {
@@ -23,6 +28,7 @@ export default class List extends BaseList {
     defaultQuery: {
       page: 0,
       size: 20,
+      'visitType.equals': 1,
     },
     dataSource: [],
     visible: false,
@@ -31,12 +37,27 @@ export default class List extends BaseList {
     loading: true,
   };
 
-  handleAdd = () => {
-    router.push('/deliver-management/admission/add');
+  handleEdit = (rowData: any) => () => {
+    const id = get(rowData, 'wife.id');
+    router.push(`/premarital-care/wife/wife-exam?id=${id}`);
   };
 
-  handleEdit = (rowData: any) => () => {
-    const { id } = rowData;
-    router.push(`/deliver-management/admission/edit?id=${id}`);
+  handleQuerySearch = (data: any) => {
+    const { outpatientNO, name, idNO } = data;
+    const queryData = {
+      'wifeCriteria.outpatientNO.contains': outpatientNO,
+      'wifeCriteria.name.contains': name,
+      'wifeCriteria.idNO.contains': idNO,
+    };
+    let newQueryData = {};
+    map(queryData, (value, key) => {
+      if (!isNil(value) && !isEmpty(value)) {
+        newQueryData = {
+          ...newQueryData,
+          [key]: value,
+        };
+      }
+    });
+    this.handleSearch(newQueryData);
   };
 }

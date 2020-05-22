@@ -82,16 +82,11 @@ export default class List extends BaseList {
   ];
 
   handleAdd = () => {
-    // router.push('/child-examination/archive');
+    router.push('/child-management/nutritive-disease/add');
   };
 
-  handleView = (rowData: any) => () => {
+  handleEdit = (rowData: any) => () => {
     const { id } = rowData;
-    router.push(`/child-management/child-examination/deliver-edit?id=${id}`);
+    router.push(`/child-management/nutritive-disease/edit?id=${id}`);
   };
-
-  // handleEdit = (rowData: any) => () => {
-  //   const { id } = rowData;
-  //   router.push(`/child-examination/examination-edit?id=${id}`);
-  // };
 }
