@@ -22,13 +22,13 @@ export default (props: IProps) => {
     if (!isEmpty(value)) {
       if (mode === 'single') {
         outputData = {
-          key: get(value, 'key'),
-          keyNote: get(value, 'keyNote'),
+          selectedData: get(value, 'key'),
+          otherNote: get(value, 'keyNote'),
         };
       } else if (mode === 'multiple') {
         outputData = {
-          key: JSON.parse(get(value, 'key')),
-          keyNote: get(value, 'keyNote'),
+          selectedData: JSON.parse(get(value, 'key')),
+          otherNote: get(value, 'keyNote'),
         };
       }
       setData(outputData);
