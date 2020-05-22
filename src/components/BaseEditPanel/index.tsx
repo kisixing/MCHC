@@ -4,6 +4,7 @@ import { get } from 'lodash';
 import { formDescriptionsFromApi, formDescriptionsWithoutSectionApi } from '@/utils/adapter';
 import { message } from 'antd';
 import styles from './index.less';
+import observePatientData from '@/utils/observePatientData';
 
 export interface IProps {
   location?: any;
@@ -24,6 +25,17 @@ export default class BaseEditPanel<P extends IProps = {}> extends React.Componen
 
   async componentDidMount() {
     const { location, moduleName, baseUrl, fromApi } = this.props;
+
+    // 订阅从 panel 获取的数据
+    observePatientData.subscribe((data: any) => {
+      const { data: prevData } = this.state;
+      this.setState({
+        data: {
+          ...prevData,
+          ...data,
+        },
+      });
+    });
     // 优先从 props 里面获取id，因为可能作为组件，被其它页面引用使用
     const id = get(this.props, 'id') || get(location, 'query.id');
     // TODO: 上线的时候，考虑把配置文件放在项目中，而不是通过接口获取
@@ -31,6 +43,11 @@ export default class BaseEditPanel<P extends IProps = {}> extends React.Componen
     const formDescriptionsWithoutSection = formDescriptionsWithoutSectionApi(formDescriptions);
     const data = id ? fromApi(await request.get(`/${baseUrl}/${id}`), formDescriptionsWithoutSection) : {};
     this.setState({ formDescriptions, formDescriptionsWithoutSection, data });
+  }
+
+  // 卸载的时候取消订阅
+  componentWillUnmount() {
+    observePatientData.unSubscribe();
   }
 
   handleSubmit = async (values: any) => {

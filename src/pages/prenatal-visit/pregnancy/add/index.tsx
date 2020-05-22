@@ -29,7 +29,6 @@ export default class Home extends React.Component<{},HomeState>{
 
 
   componentDidMount(){
-    const { formHandler } = this.state;
     const urlParam = getPageQuery();
 
     if("id" in urlParam){
@@ -66,6 +65,14 @@ export default class Home extends React.Component<{},HomeState>{
     })
   }
 
+  handleReset = () => {
+    const { formHandler } = this.state;
+    console.log(formHandler, '1223')
+    if (formHandler.reset) {
+      formHandler.reset();
+    }
+  }
+
   render(){
     const { formData } = this.state;
     const myConfig = getRenderData(config, formData);
@@ -77,7 +84,7 @@ export default class Home extends React.Component<{},HomeState>{
           submitChange={false}
         />
         <div className={style.btnGroup}>
-          <Button className={style.resetBtn}>重置</Button>
+          <Button className={style.resetBtn} onClick={this.handleReset}>重置</Button>
           <Button className={style.submitBtn} type="primary" onClick={this.handleSubmit}>提交</Button>
         </div>
       </div>

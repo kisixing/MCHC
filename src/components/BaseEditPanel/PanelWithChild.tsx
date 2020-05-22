@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './index.less';
-import { Divider } from 'antd';
 import { get } from 'lodash';
 
 export default class PanelWithChild extends React.Component {
@@ -42,7 +41,6 @@ export default class PanelWithChild extends React.Component {
             <span className={styles.panelWithChildHeaderItemValue}>{get(data, 'edd')}</span>
           </div>
         </div>
-        {/* <Divider className={styles.panelWithChildHeaderDivider}></Divider> */}
       </>
     );
   };
