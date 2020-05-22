@@ -14,27 +14,47 @@ export default (props: IProps) => {
 
   const config = get(props, 'config');
   const specialConfig = get(config, 'special_config') && JSON.parse(get(config, 'special_config'));
+  const { mode } = specialConfig;
 
   useEffect(() => {
     const { value } = props;
-    // console.log(value);
+    let outputData = {};
     if (!isEmpty(value)) {
-      setData({
-        selectedData: get(value, 'key'),
-        otherNote: get(value, 'keyNote'),
-      });
+      if (mode === 'single') {
+        outputData = {
+          key: get(value, 'key'),
+          keyNote: get(value, 'keyNote'),
+        };
+      } else if (mode === 'multiple') {
+        outputData = {
+          key: JSON.parse(get(value, 'key')),
+          keyNote: get(value, 'keyNote'),
+        };
+      }
+      setData(outputData);
     }
   }, [props.value]);
 
   const handleChange = (callbackData: any) => {
     const { onChange } = props;
-    // console.log(callbackData);
     const newData = {
       key: get(callbackData, 'selectedData'),
       keyNote: get(callbackData, 'otherNote'),
     };
     setData(newData);
-    onChange && onChange(newData);
+    let outputData;
+    if (mode === 'single') {
+      outputData = {
+        key: get(callbackData, 'selectedData'),
+        keyNote: get(callbackData, 'otherNote'),
+      };
+    } else if (mode === 'multiple') {
+      outputData = {
+        key: JSON.stringify(get(callbackData, 'selectedData')),
+        keyNote: get(callbackData, 'otherNote'),
+      };
+    }
+    onChange && onChange(outputData);
   };
 
   return <DictionarySelect onChange={handleChange} value={data} {...specialConfig} />;
