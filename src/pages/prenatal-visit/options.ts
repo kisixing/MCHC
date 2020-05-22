@@ -21,6 +21,64 @@ export const maritalStatusOptions = [
   {label: '离婚', value: 3},
 ]
 
+// 下次复诊  门诊类型
+export const appointmentWeekOptions = [
+	{ label: ' ', value: ' ', describe: '' },
+	{ label: '普通门诊', value: 0, describe: '普' },
+	{ label: '高危门诊', value: 1, describe: '高' },
+	{ label: '教授门诊', value: 10, describe: '教' },
+	{ label: '特需门诊', value: 50, describe: '特' },
+	{ label: '候床入院', value: 60, describe: '候' },
+	{ label: '留观', value: 70, describe: '留' },
+]
+
+
+// 下次复诊 时间间隔
+export const appointmentDateOptions = [
+	{ label: '', value: 0 },
+	{ label: '1周后', value: 7 },
+	{ label: '2周后', value: 14 },
+	{ label: '3周后', value: 21 },
+	{ label: '4周后', value: 28 },
+	{ label: '5周后', value: 35 },
+	{ label: '1天后', value: 1 },
+	{ label: '2天后', value: 2 },
+	{ label: '3天后', value: 3 },
+	{ label: '4天后', value: 4 },
+	{ label: '5天后', value: 5 },
+	{ label: '6天后', value: 6 },
+]
+
+// 下次复诊 时间段
+export const appointmentPeriodOptions = [
+  {label: '上午', value: 0},
+  {label: '下午', value: 1},
+]
+
+// 胎动
+export const fetalMovementOptions = [
+  { label: "无不适", value: "无不适" },
+  { label: "胎动好", value: "胎动好" },
+  { label: "无不适，胎动好", value: "无不适，胎动好" },
+]
+
+// 先露
+export const presentationOptions = [
+  { label: "头", value: "头" },
+  { label: "臀", value: "臀" },
+  { label: "肩", value: "肩" },
+  { label: "-", value: "-" },
+]
+
+// 下肢水肿
+export const edemaOptions = [
+  { label: "-", value: 0 },
+  { label: "+", value: 1 },
+  { label: "++", value: 2 },
+  { label: "+++", value: 3 },
+  { label: "++++", value: 4 },
+]
+
 // 职业
 export const occupationOptions = toOptions('国家公务员,专业技术人员,企业管理人员,自由职业者,工人,现役军人,个体经营者,职员,农民,学生,退（离）休人员,其他');
 

@@ -122,8 +122,8 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
                     ))}
                   </Select>
                 </Col>
-                {/* <Col span={2}>传染病：</Col> */}
-                {/* <Col span={10}>
+                {/* <Col span={2}>传染病：</Col>
+                <Col span={10}>
                   <Select className="highrisk-infec" multiple
                           value={!!formData.infectious ? formData.infectious.split(",") : []}
                           onChange={e => handleChange("infectious", e.join())}>
