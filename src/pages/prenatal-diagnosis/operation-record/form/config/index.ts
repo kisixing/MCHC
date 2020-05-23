@@ -101,13 +101,13 @@ const pdPostOperation: FormConfig = {
 
 const config = {
   "1": [
-    // ...generalConfig,
-    // pdPreOperations["1"],
+    ...generalConfig,
+    pdPreOperations["1"],
     pdProcedures["1"],
-    // invasiveNotes["1"],
-    // pdMedications,
-    // pdAnaesthetic,
-    // pdPostOperation
+    invasiveNotes["1"],
+    pdMedications,
+    pdAnaesthetic,
+    pdPostOperation
   ],
   "2": [
     ...generalConfig,

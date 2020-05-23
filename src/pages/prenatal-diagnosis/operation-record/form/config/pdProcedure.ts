@@ -23,21 +23,21 @@ const instrumentOptions = [
 
 
 const generalPdProcedureConfig = [
-  // {
-  //   name: "startTime", key: ".startTime", input_type: "date", label: "开始时间", span: 6,
-  //   input_props: {
-  //     type: "time",
-  //     format: "HH:mm"
-  //   }
-  // },
-  // {
-  //   name: "endTime", key: ".endTime", input_type: "date", label: "结束时间", span: 6,
-  //   input_props: {
-  //     type: "time",
-  //     format: "HH:mm"
-  //   }
-  // },
-  // { name: "duration", key: ".duration", input_type: "input", label: "持续时间", unit: "min", span: 6 },
+  {
+    name: "startTime", key: ".startTime", input_type: "date", label: "开始时间", span: 6,
+    input_props: {
+      type: "time",
+      format: "HH:mm"
+    }
+  },
+  {
+    name: "endTime", key: ".endTime", input_type: "date", label: "结束时间", span: 6,
+    input_props: {
+      type: "time",
+      format: "HH:mm"
+    }
+  },
+  { name: "duration", key: ".duration", input_type: "input", label: "持续时间", unit: "min", span: 6 },
   {
     name: "processEvaluation", key: ".*", input_type: "checkbox", label: "评估过程", span: 24,
     input_props: {
@@ -63,18 +63,18 @@ const generalPdProcedureConfig = [
       ]
     }
   },
-  // {
-  //   name: "diagnosis", key: ".diagnosis", input_type: "input", label: "诊断", span: 24,
-  //   input_props: {
-  //     type: "textarea"
-  //   }
-  // },
-  // {
-  //   name: "exception", key: ".exception", input_type: "input", label: "特殊记录", span: 24,
-  //   input_props: {
-  //     type: "textarea"
-  //   }
-  // },
+  {
+    name: "diagnosis", key: ".diagnosis", input_type: "input", label: "诊断", span: 24,
+    input_props: {
+      type: "textarea"
+    }
+  },
+  {
+    name: "exception", key: ".exception", input_type: "input", label: "特殊记录", span: 24,
+    input_props: {
+      type: "textarea"
+    }
+  },
 ]
 
 const pdProcedures: { [key: string]: FormConfig } = {
