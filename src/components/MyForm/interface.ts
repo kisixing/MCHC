@@ -82,7 +82,7 @@ export interface FormItemProp {
   },
   dispatch: (fieldName: string, eventName: string, args: any) => void,
   subscribe: (fieldName: string, eventName: string, cb: Function) => void
-  defaultValue?: any,
+  value?: any,
   type: string,
   label: string,
   header_label: boolean
@@ -90,7 +90,9 @@ export interface FormItemProp {
   input_props: ComponentOption | null,
   validate?: string | object | RegExp | null,
   path: string,
-  name: string
+  name: string,
+  // 置为hidden 不可被修改与重置
+  hidden:boolean
 }
 export interface FormItemState {
   value: any,

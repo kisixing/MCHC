@@ -11,7 +11,6 @@ interface MyTableProps {
   dispatch?: Function,
   value: any,
   input_props: any,
-  path: string;
 }
 
 interface MyTableState {

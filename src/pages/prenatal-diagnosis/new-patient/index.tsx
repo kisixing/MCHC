@@ -1,21 +1,23 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import { Button, message } from 'antd';
 import MyForm from '@/components/MyForm';
-import { getRenderData, getFormData} from '@/components/MyForm/utils';
+import { getRenderData, getFormData } from '@/components/MyForm/utils';
 import request from '@/utils/request';
 import config from './config';
 import { getPageQuery } from '@/utils/utils';
 import styles from './index.less';
 
-interface NewPatientState{
-  formHandler:{
-    [key:string]: any
+interface NewPatientState {
+  formHandler: {
+    [key: string]: any
   },
   patients: any
 }
 
+const URL = "/prenatal-patients";
+
 export default class NewPatient extends Component<{}, NewPatientState>{
-  constructor(props:any){
+  constructor(props: any) {
     super(props);
     this.state = {
       formHandler: {
@@ -30,41 +32,50 @@ export default class NewPatient extends Component<{}, NewPatientState>{
         // parity: 1,
         // abortion: 1,
         // exfetation: 1
+        id: ""
       }
     }
   }
-  
-  componentDidMount () {
+
+  componentDidMount() {
     const urlParam = getPageQuery();
-    if("id" in urlParam){
-      request(`/prenatal-patients?id.equals=${urlParam.id}`,{
+    if (urlParam.prenatalPatientId) {
+      request(`${URL}?id.equals=${urlParam.prenatalPatientId}`, {
         method: "GET"
       }).then(res => {
-        if(res.length !== 0){
-          this.setState({patients: res[0]})
+        if (res.length !== 0) {
+          this.setState({ patients: res[0] })
         }
       });
     }
   }
-  
+
   handleSubmit = () => {
-    const { id = ""} = this.state.patients;
-    this.state.formHandler.submit().then(({validCode, res}:any) => {
-      if(validCode){
+    const { id  } = this.state.patients;
+    this.state.formHandler.submit().then(({ validCode, res }: any) => {
+      if (validCode) {
         // 通过id判断 为新建还是修改
-        const method = id ? "PUT" : "POST";
-        const info = id ? "成功修改病人信息" : "新增病人信息成功";
+        const [method, info] = id !== "" ? ["PUT", "成功修改病人信息"] : ["POST", "新增病人信息成功"];
         const resData = getFormData(res)
-        request("/prenatal-patients",{
+        request(`${URL}`, {
           method,
-          data: {...resData, id}
-        }).then((r:any) => {
-          if(r){
+          data: { ...resData, id }
+        }).then((r: any) => {
+          if (r) {
             message.success(info)
           }
         })
+      }else{
+        message.warn("请填写所有必填项后再次提交");
       }
     })
+  }
+
+  handleReset = () => {
+    const { formHandler = {} } = this.state;
+    if (formHandler.reset) {
+      formHandler.reset();
+    }
   }
 
   render() {
@@ -74,11 +85,11 @@ export default class NewPatient extends Component<{}, NewPatientState>{
       <div className={styles.container}>
         <MyForm
           config={myConfig}
-          getFormHandler={(formHandler: any) => this.setState({formHandler})}
+          getFormHandler={(formHandler: any) => this.setState({ formHandler })}
           submitChange={false}
         />
         <div className={styles['btn-group']}>
-          <Button>重置</Button>
+          <Button onClick={this.handleReset}>重置</Button>
           <Button type="primary" onClick={this.handleSubmit}>提交</Button>
         </div>
       </div>

@@ -6,6 +6,12 @@ import CustomCheckbox from './CustomCheckbox';
 import GroupCheckbox from './GroupCheckbox';
 import { getObjectFormArray, convertExtraEditors, isObj, isArr } from '../../utils/func';
 
+/**
+ * TODO
+ * checkbox整体的逻辑其实比较混乱
+ * 需要重构
+ */
+
 interface MyCheckboxProps {
   onChange: Function;
   dispatch?: Function;
@@ -114,20 +120,23 @@ export default class MyCheckbox extends Component<MyCheckboxProps, any> {
           return;
         }
         let newObj: any = {};
-        // 这里要靠一个0的情况
+        // 这里要考虑一个0的情况
         if (val.checkboxValue === false) {
           newObj = { [key]: false, [`${key}Note`]: "" }
         } else {
           newObj = { [key]: val.checkboxValue, [`${key}Note`]: "" };
           if (isArr(input_props.renderData[index].extraEditors)) {
             if (input_props.renderData[index].extraEditors[0] && input_props.renderData[index].extraEditors[0].editors.length <= 1) {
-              newObj[`${key}Note`] = val.editorsValue ? val.editorsValue[0] || "" : "";
+              if(value[`${key}`] === val.checkboxValue){
+                newObj[`${key}Note`] = val.editorsValue ? val.editorsValue[0] || "" : "";
+              }
             } else {
               newObj[`${key}Note`] = JSON.stringify(getObjectFormArray(val.editorsValue));
             }
           }
         }
-        onChange(Object.assign(value, newObj));
+        // custom 只使用单个 不需要object.assign
+        onChange(newObj);
       };
       return (
         <CustomCheckbox

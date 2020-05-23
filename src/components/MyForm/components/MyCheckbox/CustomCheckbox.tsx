@@ -28,12 +28,12 @@ export default class CustomCheckbox extends Component<CustomCheckboxProps>{
   handleChange = (val: any, key: string | number | boolean) => {
     const { onChange } = this.props;
     // 反选问题
-    if(!val.checkboxValue){
+    if (!val.checkboxValue) {
       onChange({
         checkboxValue: null,
         editorsValue: val.editorsValue
-      }, this.props.value.key)  
-    }else{
+      }, this.props.value.key)
+    } else {
       onChange({
         checkboxValue: key,
         editorsValue: val.editorsValue

@@ -23,8 +23,20 @@ const instrumentOptions = [
 
 
 const generalPdProcedureConfig = [
-  { name: "startTime", key: ".startTime", input_type: "date", label: "开始时间", span: 6, input_props: { type: "time" } },
-  { name: "endTime", key: ".endTime", input_type: "date", label: "结束时间", span: 6, input_props: { type: "time" } },
+  {
+    name: "startTime", key: ".startTime", input_type: "date", label: "开始时间", span: 6,
+    input_props: {
+      type: "time",
+      format: "HH:mm"
+    }
+  },
+  {
+    name: "endTime", key: ".endTime", input_type: "date", label: "结束时间", span: 6,
+    input_props: {
+      type: "time",
+      format: "HH:mm"
+    }
+  },
   { name: "duration", key: ".duration", input_type: "input", label: "持续时间", unit: "min", span: 6 },
   {
     name: "processEvaluation", key: ".*", input_type: "checkbox", label: "评估过程", span: 24,
@@ -90,8 +102,8 @@ const pdProcedures: { [key: string]: FormConfig } = {
           name: "placentaEntry", key: ".placentaEntry", input_type: "select", label: "经否胎盘", span: 6,
           input_props: {
             options: [
-              { label: "经", value: true },
-              { label: "否", value: false }
+              { label: "经", value: 1 },
+              { label: "否", value: 0 }
             ]
           }
         },

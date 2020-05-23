@@ -10,7 +10,6 @@ interface MyCustomProps {
   subscribe: Function
   input_props: any,
   error: any,
-  path: string,
   value: any,
 
   getValidFun: any
@@ -37,16 +36,8 @@ export default class MyCustom extends Component<MyCustomProps, MyCustomState>{
     const { formHandler, isSubscribe } = this.state;
     const { onChange, subscribe } = this.props;
     // TODO 暂时先这样去处理subscribe队列的情况，以后再重构
-    if(!isSubscribe){
+    if (!isSubscribe) {
       if (subscribe) {
-        // 父页面 submit 时的动作
-        subscribe("_global", "submit", () => {
-          formHandler.submit().then(({ validCode, res }: any) => {
-            if (validCode) {
-              onChange(getFormData(res));
-            }
-          })
-        });
         subscribe("_global", "reset", () => {
           formHandler.reset();
         })
@@ -54,23 +45,23 @@ export default class MyCustom extends Component<MyCustomProps, MyCustomState>{
       // change时的校验动作
       formHandler.subscribe("_global", "change", () => {
         formHandler.submit().then(({ validCode, res }: any) => {
-          onChange(getFormData(res));
+          if (validCode) {
+            onChange(getFormData(res));
+          }
         })
       });
-      if(subscribe && JSON.stringify(formHandler) !== "{}"){
-        this.setState({isSubscribe: true});
+      if (subscribe && JSON.stringify(formHandler) !== "{}") {
+        this.setState({ isSubscribe: true });
       }
     }
-    // if(JSON.stringify(this.props) !== JSON.stringify(prevProps)){
-    if(this.props.getValidFun){
+    if (this.props.getValidFun) {
       this.props.getValidFun(formHandler.valid);
-    }  
-    // }
+    }
   }
 
   render() {
     const { config = [] } = this.props.input_props;
-    const { value } = this.props;
+    const { value = {} } = this.props;
     let myConfig: Array<any> = [];
     if (config) {
       myConfig = getRenderData(config, value);
