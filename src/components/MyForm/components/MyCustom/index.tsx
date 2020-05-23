@@ -51,9 +51,13 @@ export default class MyCustom extends Component<MyCustomProps, MyCustomState>{
         })
       }
       // change时的校验动作
-      // formHandler.subscribe("_global", "change", () => {
-        // formHandler.valid();
-      // });
+      formHandler.subscribe("_global", "change", () => {
+        formHandler.submit().then(({ validCode, res }: any) => {
+          if (validCode) {
+            onChange(getFormData(res));
+          }
+        })
+      });
       if (subscribe && JSON.stringify(formHandler) !== "{}") {
         this.setState({ isSubscribe: true });
       }
