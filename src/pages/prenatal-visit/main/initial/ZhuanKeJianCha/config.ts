@@ -43,11 +43,25 @@ const config: Array<FormConfig> = [
   //     ],
   //   }
   // },
-  { name:'vulva', key: '.gynecologicalExam.vulva', label: "外阴", input_type: "input", span: 6, rules: "required" },
-  { name:'vagina', key: '.gynecologicalExam.vagina', label: "阴道", input_type: "input", span: 6, rules: "required" },
-  { name:'cervix', key: '.gynecologicalExam.cervix', label: "宫颈", input_type: "input", span: 6, rules: "required" },
-  { name:'uterus', key: '.gynecologicalExam.uterus', label: "子宫", input_type: "input", span: 6, rules: "required" },
-  { name:'adnexa', key: '.gynecologicalExam.adnexa', label: "附件", input_type: "input", span: 6 },
+
+  {
+    name: "gynecologicalExam",
+    key: ".gynecologicalExam",
+    label: "妇科检查",
+    input_type: "custom",
+    header_label: true,
+    input_props: {
+      config: [
+        { name:'fundalHeight', key: '.fundalHeight', label: "宫高", input_type: "input", span: 6, rules: "required" },
+        { name:'vulva', key: '.vulva', label: "外阴", input_type: "input", span: 6, rules: "required" },
+        { name:'vagina', key: '.vagina', label: "阴道", input_type: "input", span: 6, rules: "required" },
+        { name:'cervix', key: '.cervix', label: "宫颈", input_type: "input", span: 6, rules: "required" },
+        { name:'uterus', key: '.uterus', label: "子宫", input_type: "input", span: 6, rules: "required" },
+        { name:'adnexa', key: '.adnexa', label: "附件", input_type: "input", span: 6 },
+      ]
+    }
+  }
+
 ]
 export default config;
 

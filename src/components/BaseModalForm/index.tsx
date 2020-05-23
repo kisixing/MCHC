@@ -15,10 +15,10 @@ export default ({
   fixedFormParams = {},
   formItemLayout = {
     labelCol: {
-      span: 4,
+      span: 6,
     },
     wrapperCol: {
-      span: 8,
+      span: 16,
     },
   },
 }) => {
@@ -75,13 +75,7 @@ export default ({
     };
 
     renderEditContent = () => {
-      return (
-        <FormSection
-          {...this.props}
-          renderEditItem={this.renderEditItem}
-          formDescriptions={formDescriptions}
-        />
-      );
+      return <FormSection {...this.props} renderEditItem={this.renderEditItem} formDescriptions={formDescriptions} />;
     };
 
     render() {

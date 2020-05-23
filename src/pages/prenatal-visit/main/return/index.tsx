@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Tabs, Button, Col } from 'antd';
+import { Tabs, Button, Row, Col } from 'antd';
 
 import ReturnForm from './return-form';
 import ReturnTable from './return-table';
+import ReturnSidebar from './return-sidebar';
 import style from './index.less';
 
 import { getRenderData, toFormat} from '@/components/MyForm/utils';
@@ -42,12 +43,15 @@ export default class Home extends React.Component<{},HomeState>{
   render(){
     const { tabs, step } = this.state;
     return(
-      <div className={style.returnWrapper}>
-        <Col span={24}>
+      <Row className={style.returnWrapper}>
+        <Col span={18}>
           <ReturnTable />
           <ReturnForm />
         </Col>
-      </div>
+        <Col span={6}>
+          <ReturnSidebar />
+        </Col>
+      </Row>
     )
   }
 }

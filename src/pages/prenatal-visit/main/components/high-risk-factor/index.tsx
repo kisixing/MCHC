@@ -39,9 +39,7 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
   renderDanger() {
     const { isShowHighrisk, formData, expandedKeys } = this.state;
 
-    console.log(formData, highRiskData, '455')
     const searchList = formData && highRiskData.filter(i  => !formData.search || i.name.indexOf(formData.search) !== -1);
-    console.log(searchList, '444')
     let allExpandedKeys = [];
     searchList && searchList.map(item => {
       allExpandedKeys.push(item.id.toString())
@@ -49,7 +47,6 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
 
     const handleOk = () => {
       this.setState({ isShowHighrisk: false });
-      console.log(formData, '356')
       const resData = {
         id: formData.id,
         highrisk: formData.highrisk,
@@ -125,8 +122,8 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
                     ))}
                   </Select>
                 </Col>
-                {/* <Col span={2}>传染病：</Col>
-                <Col span={10}>
+                {/* <Col span={2}>传染病：</Col> */}
+                {/* <Col span={10}>
                   <Select className="highrisk-infec" multiple
                           value={!!formData.infectious ? formData.infectious.split(",") : []}
                           onChange={e => handleChange("infectious", e.join())}>

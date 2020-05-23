@@ -157,9 +157,9 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
           {label !== "" && !header_label ? (
             <div className={styles['form-item-inline-label']}>
               <label>{this.renderAsterisk(validate)}{label}:</label>
-            </div>  
+            </div>
           ) : null}
-          {/* 
+          {/*
             * full-main 代表label为header形式出现
             * main      label在同一行
             */}

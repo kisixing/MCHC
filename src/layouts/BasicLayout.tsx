@@ -15,6 +15,7 @@ import zhCN from 'antd/es/locale/zh_CN';
 import RouterTabs from './RouterTabs';
 import { omitRoutes } from '../../config/routes/index';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import FixedSearch from '@/components/BaseModalForm/FixedSearch';
 
 const BasicLayout = (props: any) => {
   const [routerTabWidth, setRouterTabWidth] = useState(
@@ -241,6 +242,7 @@ const BasicLayout = (props: any) => {
         {!!store.get(TOKEN) && (
           <div className={styles.panel}>
             <PageHeaderWrapper className={styles.pageHeader} title={false} />
+            <FixedSearch />
             <RouterTabs style={{ width: routerTabWidth }} />
             <div className={styles.panelChild}>
               <div className={styles.content}>

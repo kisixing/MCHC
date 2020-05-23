@@ -45,17 +45,10 @@ export default class Home extends React.Component<{},HomeState>{
   }
 
   handleSubmit = () => {
-    const id = getPageQuery().id;
+    const { handleSave } = this.props;
     this.state.formHandler.submit().then(({validCode, res}:any) => {
       if(validCode) {
-        const param = { id };
-        const resData = {...getFormData(res), ...param }
-        request('/pregnancies', {
-          method: 'PUT',
-          data: resData
-        }).then(r => {
-          message.success('保存成功！');
-        });
+        handleSave(getFormData(res));
       } else {
         message.error('必填项不能为空！');
       }

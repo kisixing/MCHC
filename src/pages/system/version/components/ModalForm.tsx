@@ -6,11 +6,11 @@ export default generateModalForm({
   url: 'versions',
   title: '版本',
   modalProps: {
-    width: 500,
+    width: 520,
   },
   formItemLayout: {
     labelCol: {
-      span: 4,
+      span: 6,
     },
     wrapperCol: {
       span: 16,

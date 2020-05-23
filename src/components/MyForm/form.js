@@ -31,14 +31,14 @@ export function createFormHandler(config, {submitChange}){
     c.forEach(v => {
       r = Object.assign(r, {
         [v.name]: {
-          actions:{}, 
+          actions:{},
           effects:{}
         }
       })
     });
     return r;
   }
-  
+
   const submit = function() {
     let r = {}
     let validCode = true;
@@ -80,7 +80,7 @@ export function createFormHandler(config, {submitChange}){
           validCode = false;
           break;
         }
-      } 
+      }
     }
     return validCode;
   }
@@ -126,7 +126,7 @@ export function createFormHandler(config, {submitChange}){
     if(!eventQueue || eventQueue.length === 0){
       console.warn(`fieldName ${eventName} not found in ${fieldName} Event Object || eventQueue's length is 0`);
       return;
-    }    
+    }
     eventQueue.forEach(func => {
       func(args);
     })
