@@ -1,13 +1,10 @@
-import React from 'react';
+import React,{ ReactNode } from 'react';
 import { Button, message } from 'antd';
 import MyForm from '@/components/MyForm/index';
 import config from './config/index';
-// import data from './data';
 import styles from './index.less';
 import { isNotEmpty, getPageQuery } from '@/utils/utils';
 import request from '@/utils/request';
-// import FloatCard from '@/components/FloatCard';
-
 import { getRenderData, getFormData } from '@/components/MyForm/utils';
 
 interface OperationRecordState {
@@ -16,7 +13,8 @@ interface OperationRecordState {
   },
   data: any,
   id: number,
-  prenatalPatientId: number
+  prenatalPatientId: number,
+  patients: any
 }
 
 const URL = "/pd-operations";
@@ -47,7 +45,8 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
         // operationName: "羊膜腔穿刺"
       },
       id: -1,
-      prenatalPatientId: -1
+      prenatalPatientId: -1,
+      patients: {}
     }
   }
 
@@ -58,6 +57,15 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
       return;
     }
     this.setState({ prenatalPatientId: urlParams.prenatalPatientId, id: urlParams.id || -1 });
+
+    request(`/prenatal-patients?id.equals=${urlParams.prenatalPatientId}`,{
+      method: "GET"
+    }).then(res => {
+      if(res.length !== 0){
+        this.setState({patients: res[0]})
+      }
+    })
+
     if (urlParams.prenatalPatientId && urlParams.id) {
       request(`${URL}?prenatalPatientId.equals=${urlParams.prenatalPatientId}&id.equals=${urlParams.id}`, {
         method: "GET"
@@ -70,14 +78,16 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
   }
 
   componentDidUpdate() {
-    const { formHandler } = this.state;
+    const { formHandler, data } = this.state;
+    
     if (isNotEmpty(formHandler)) {
       formHandler.subscribe("operationType", "change", (val: any) => {
         this.setState({
           data: {
+            id: data.id,
             operationType: val
           }
-        }, () => console.log(this.state))
+        },() => console.log(this.state))
       })
     }
   }
@@ -88,8 +98,6 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
     this.state.formHandler.submit().then(({ validCode, res }: any) => {
       if (validCode) {
         const formatData = getFormData(res);
-        console.log(formatData);
-        return;
         const [method, info] = id !== -1 ? ["PUT", "修改成功"] : ["POST", "成功新增病历"];
         request(`${URL}`, {
           method,
@@ -123,24 +131,47 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
     })
   }
 
+  renderInfo = (patients: any):ReactNode => {
+    if(patients){
+      return <div className={styles['user-info']}>
+        <div>
+          <span>病人姓名:{patients.name}</span>
+        </div>
+        <div>
+          <span>末次月经:{patients.lmp}</span>
+        </div>
+        <div>
+          <span>预产期-日期:{patients.edd}</span>
+        </div>
+        <div>
+          <span>预产期-B超:{patients.sureEdd}</span>
+        </div>
+      </div>
+    }
+    return <span>无用户信息</span>;
+  }
+
   render() {
-    const { data } = this.state;
+    const { data, patients } = this.state;
     const myConfig = getRenderData(config[data.operationType], data);
     // 不要再页面render中尝试取formHandler的值，因为这个时候formItem初始化还没有完成
     return (
       <div className={styles.container}>
-        {/* <FloatCard>
-          这个是内容
-        </FloatCard> */}
-        <MyForm
-          config={myConfig}
-          getFormHandler={(formHandler: any) => this.setState({ formHandler })}
-          submitChange={false}
-        />
-        <div className={styles['btn-group']}>
-          <Button onClick={this.handleReset}>重置</Button>
-          <Button type="primary" onClick={this.handleSubmit}>提交</Button>
+        <div className={styles['user-info']}>
+          {this.renderInfo(patients)}
         </div>
+        <div className={styles.form}>
+          <MyForm
+            config={myConfig}
+            getFormHandler={(formHandler: any) => this.setState({ formHandler })}
+            submitChange={false}
+          />
+          <div className={styles['btn-group']}>
+            <Button onClick={this.handleReset}>重置</Button>
+            <Button type="primary" onClick={this.handleSubmit}>提交</Button>
+          </div>
+        </div>
+
       </div>
     )
   }

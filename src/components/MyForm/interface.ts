@@ -81,7 +81,7 @@ export interface FormItemProp {
   },
   dispatch: (fieldName: string, eventName: string, args: any) => void,
   subscribe: (fieldName: string, eventName: string, cb: Function) => void
-  defaultValue?: any,
+  value?: any,
   type: string,
   label: string,
   header_label: boolean

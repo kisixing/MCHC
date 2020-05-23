@@ -68,7 +68,7 @@ export function renderForm(config: Array<FormConfig>, formHandler: any, gridConf
           actions={formHandler[config[i].name] ? formHandler[config[i].name].actions : {}}
           dispatch={formHandler.dispatch}
           subscribe={formHandler.subscribe}
-          defaultValue={config[i].value}
+          value={config[i].value}
           type={config[i].input_type}
           label={label}
           header_label={header_label}
@@ -105,7 +105,7 @@ export default class MyForm extends Component<MyFormProp, MyFormState>{
 
   componentDidUpdate(prevProps: any, prevState: any) {
     const { getFormHandler } = this.props;
-    if (JSON.stringify(prevState) !== JSON.stringify(this.state) || JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
+    if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
       this.setState({
         formHandler: createFormHandler(this.props.config, { submitChange: this.props.submitChange })
       }, () => {

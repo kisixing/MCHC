@@ -1,20 +1,20 @@
+@headerTextColor: #161255;
 .container{
-  padding: 1rem 0;
   .user-info {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    height: 32px;
+    justify-content: left;
+    background-color: #ffffff;
+    height: 55px;
     
     > div {
-      height: 32px;
+      color: @headerTextColor;
+      font-weight: bold;
+      height: 55px;
+      line-height: 55px;
       padding: 2px;
       font-size: 14px;
       margin-right: 16px;
-      > strong {
-        font-size: 16px;
-        margin-left: 8px;
-      }
     }
   }
   .button-group{
@@ -25,9 +25,5 @@
     > div {
       margin-left: 5px;
     }
-  }
-
-  .page {
-
   }
 }

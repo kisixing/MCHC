@@ -38,14 +38,6 @@ export default class MyCustom extends Component<MyCustomProps, MyCustomState>{
     // TODO 暂时先这样去处理subscribe队列的情况，以后再重构
     if (!isSubscribe) {
       if (subscribe) {
-        // 父页面 submit 时的动作
-        subscribe("_global", "submit", () => {
-          formHandler.submit().then(({ validCode, res }: any) => {
-            if (validCode) {
-              onChange(getFormData(res));
-            }
-          })
-        });
         subscribe("_global", "reset", () => {
           formHandler.reset();
         })
@@ -62,16 +54,14 @@ export default class MyCustom extends Component<MyCustomProps, MyCustomState>{
         this.setState({ isSubscribe: true });
       }
     }
-    // if(JSON.stringify(this.props) !== JSON.stringify(prevProps)){
     if (this.props.getValidFun) {
       this.props.getValidFun(formHandler.valid);
     }
-    // }
   }
 
   render() {
     const { config = [] } = this.props.input_props;
-    const { value } = this.props;
+    const { value = {} } = this.props;
     let myConfig: Array<any> = [];
     if (config) {
       myConfig = getRenderData(config, value);
