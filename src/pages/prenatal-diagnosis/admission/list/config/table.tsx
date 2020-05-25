@@ -1,15 +1,6 @@
 import { formatTimeToStandard } from '@/utils/format';
 
 export const tableColumns = [
-<<<<<<< HEAD
-=======
-  // {
-  //   title: 'id',
-  //   dataIndex: 'id',
-  //   key: 'id',
-  //   align: 'center',
-  // },
->>>>>>> ededd7f6976fcd69f5026417b3ba45fd9bbe8005
   {
     title: '孕妇姓名',
     dataIndex: 'name',

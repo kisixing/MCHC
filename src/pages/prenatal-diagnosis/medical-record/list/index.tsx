@@ -88,11 +88,6 @@ export default class List extends BaseList {
     router.push(`/prenatal-diagnosis/medical-record-form?prenatalPatientId=${urlParams.prenatalPatientId || ""}`);
   };
 
-  handleView = (rowData: any) => () => {
-    const { id } = rowData;
-    router.push(`/prenatal-diagnosis/main?id=${id}`);
-  };
-
   handleEdit = (rowData: any) => () => {
     const { id } = rowData;
     const urlParams = getPageQuery();
