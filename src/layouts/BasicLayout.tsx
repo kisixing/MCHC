@@ -19,10 +19,9 @@ import FixedSearch from '@/components/BaseModalForm/FixedSearch';
 
 const BasicLayout = (props: any) => {
   const [routerTabWidth, setRouterTabWidth] = useState(
-    document.documentElement.clientWidth - (props.collapsed ? 100 : 256),
+    document.documentElement.clientWidth - (props.collapsed ? 79 : 256),
   );
   const { dispatch, children, settings } = props;
-
   const showOvertime = () => {
     Modal.error({
       title: '登录失效',
@@ -59,9 +58,7 @@ const BasicLayout = (props: any) => {
     }
   }, [props.location.pathname, props.collapsed]);
 
-  // 监听 resize 和清除 resize
   useEffect(() => {
-    window.addEventListener('resize', handleResize);
     const expiredTime = store.get('expiredTime');
     const logoutTimeout = setTimeout(() => {
       dispatch({
@@ -70,7 +67,6 @@ const BasicLayout = (props: any) => {
       showOvertime();
     }, expiredTime);
     return () => {
-      window.removeEventListener('resize', () => {});
       clearTimeout(logoutTimeout);
     };
   }, []);
@@ -135,11 +131,10 @@ const BasicLayout = (props: any) => {
     }
   };
 
-  const handleResize = () => {
-    setRouterTabWidth(document.documentElement.clientWidth - (props.collapsed ? 276 : 100));
-  };
-
   const handleMenuCollapse = (payload: boolean): void => {
+    setRouterTabWidth(document.documentElement.clientWidth - (payload ? 79 : 256));
+    const tabBtnRef = document.getElementById(props.activeKey) as HTMLElement;
+    tabBtnRef.scrollIntoView({ behavior: 'smooth', inline: 'center' });
     if (dispatch) {
       dispatch({
         type: 'global/changeLayoutCollapsed',

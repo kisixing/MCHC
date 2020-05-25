@@ -78,5 +78,20 @@ export default {
         activeKey: get(payload, 'data.activeKey'),
       };
     },
+    deleteAllTabs(state, { payload }) {
+      const tabs = [
+        {
+          title: '首页',
+          key: '/',
+          path: '/',
+          closable: false,
+        },
+      ];
+      return {
+        ...state,
+        tabs,
+        activeKey: '/',
+      };
+    },
   },
 };

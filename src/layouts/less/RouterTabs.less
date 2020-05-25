@@ -3,10 +3,27 @@
   z-index: 9;
   top: 50px;
   padding-top: 5px;
-  overflow-x: auto;
-  white-space: nowrap;
   background-color: #fff;
+  display: flex;
+  justify-content: space-between;
 
+  .customRouterTabsFirst {
+    display: inline-block;
+  }
+  .customRouterTabsLast {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    margin: 0 4px;
+    border-left: 1px solid #f0f2f5;
+    border-right: 1px solid #f0f2f5;
+    cursor: pointer;
+  }
+  .customRouterTabsBtns {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
   &::-webkit-scrollbar {
     height: 3px;
     background-color: white;
@@ -14,4 +31,10 @@
   &::-webkit-scrollbar-thumb {
     background-color: #cccccc;
   }
+}
+
+.customRouterTabsLastDropdown {
+  max-height: 300px;
+  overflow-y: scroll;
+  border: 1px solid #f0f2f5;
 }
