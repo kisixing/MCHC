@@ -19,10 +19,10 @@ export default class Extends extends DynamicForm {
       renderEditItem: null,
       formItemLayout: {
         labelCol: {
-          span: 4,
+          span: 6,
         },
         wrapperCol: {
-          span: 8,
+          span: 16,
         },
       },
       data: {},

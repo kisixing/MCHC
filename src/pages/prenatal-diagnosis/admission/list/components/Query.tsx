@@ -12,7 +12,6 @@ export default class Query extends BaseQuery {
     return (
       <Fragment>
         {this.renderEditItem('name', <Input size="small" placeholder="请输入孕妇姓名" />)}
-        {this.renderEditItem('idNO', <Input size="small" placeholder="请输入证件号码(还没好)" />)}
       </Fragment>
     );
   };

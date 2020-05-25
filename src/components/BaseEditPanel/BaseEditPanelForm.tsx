@@ -40,6 +40,15 @@ export default class BaseEditPanelForm extends DynamicForm<IProps, IState> {
     this.forceUpdate();
   }
 
+  // 可能需要从外部更新获取数据
+  componentWillReceiveProps(nextProps: any) {
+    this.form &&
+      this.form.setFieldsValue({
+        ...this.form.getFieldsValue(),
+        ...get(nextProps, 'data'),
+      });
+  }
+
   handleReset = () => {
     const form = (this.form as unknown) as FormInstance;
     form.resetFields();

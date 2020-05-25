@@ -5,23 +5,26 @@ import { tableColumns } from './config/table';
 import BaseList from '@/components/BaseList';
 import WithDynamicExport from '@/components/WithDynamicExport';
 import { router } from 'umi';
-import { get } from 'lodash';
-import { Button, Popconfirm } from 'antd';
-import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
+import { EyeOutlined, ImportOutlined } from '@ant-design/icons';
 import commonStyles from '@/common.less';
 
 @WithDynamicExport
 export default class List extends BaseList {
   static defaultProps = {
-    baseUrl: '/husbands',
-    baseTitle: '男方档案',
+    // TODO: baseUrl 需要修改
+    baseUrl: '/wives',
+    baseTitle: '档案',
     needPagination: true,
     showQuery: true,
-    showAdd: true,
+    showAdd: false,
     tableColumns,
     rowKey: 'id',
     Table,
     Query,
+    otherTableProps: {
+      scroll: { x: 500 },
+    },
   };
 
   state = {
@@ -44,56 +47,37 @@ export default class List extends BaseList {
       hiddenSorter: true,
       hiddenFilter: true,
       fixed: 'right',
+      width: 100,
       render: (value: any, rowData: any, index: number) => {
         return (
           <>
-            <Button
-              className={commonStyles.tableActionBtn}
-              type="primary"
-              size="small"
-              onClick={this.handleView(rowData)}
-            >
+            <Button className={commonStyles.tableActionBtn} size="small" onClick={this.handleView(rowData)}>
               <EyeOutlined title="查看" />
               查看
             </Button>
             <Button
-              title="编辑"
+              title="导入"
               className={commonStyles.tableActionBtn}
               type="primary"
               size="small"
-              onClick={this.handleEdit(rowData)}
+              onClick={this.handleExport(rowData)}
             >
-              <EditOutlined />
-              编辑
+              <ImportOutlined />
+              导入
             </Button>
-            <Popconfirm
-              title={`确定要删除这个${get(this.props, 'baseTitle')}吗?`}
-              onConfirm={this.handleDelete(rowData)}
-              okText="确定"
-              cancelText="取消"
-            >
-              <Button title="删除" className={commonStyles.tableActionBtn} type="danger" size="small">
-                <DeleteOutlined />
-                删除
-              </Button>
-            </Popconfirm>
           </>
         );
       },
     },
   ];
 
-  handleAdd = () => {
-    router.push('/premarital-care/husband/add');
-  };
-
   handleView = (rowData: any) => () => {
     const { id } = rowData;
-    router.push(`/premarital-care/husband/husband-exam?id=${id}`);
+    router.push(`/premarital-care/wife/edit?id=${id}`);
   };
 
-  handleEdit = (rowData: any) => () => {
-    const { id } = rowData;
-    router.push(`/premarital-care/husband/edit?id=${id}`);
+  handleExport = (rowData: any) => () => {
+    const { onExport } = this.props;
+    onExport && onExport(rowData);
   };
 }

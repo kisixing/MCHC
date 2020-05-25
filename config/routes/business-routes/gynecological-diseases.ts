@@ -40,23 +40,41 @@ export default {
       path: '/gynecological-diseases/women/women-exam-records/edit',
       component: './gynecological-diseases/women/women-exam-records/edit',
     },
-    // {
-    //   name: 'examination',
-    //   icon: 'ordered-list',
-    //   path: '/gynecological-diseases/examination',
-    //   component: './gynecological-diseases/examination/list',
-    // },
-    // {
-    //   name: 'breast-cancer-screen',
-    //   icon: 'ordered-list',
-    //   path: '/gynecological-diseases/breast-cancer-screen',
-    //   component: './gynecological-diseases/breast/list',
-    // },
-    // {
-    //   name: 'cervical-cancer-screen',
-    //   icon: 'ordered-list',
-    //   path: '/gynecological-diseases/cervical-cancer-screen',
-    //   component: './gynecological-diseases/cervical/list',
-    // }
+    {
+      name: 'breast-cancer-screen',
+      icon: 'ordered-list',
+      path: '/gynecological-diseases/breast-cancer-screen',
+      component: './gynecological-diseases/breast/list',
+    },
+    {
+      name: 'breast-cancer-screen-add',
+      icon: 'ordered-list',
+      path: '/gynecological-diseases/breast-cancer-screen/add',
+      component: './gynecological-diseases/breast/edit',
+    },
+    {
+      name: 'breast-cancer-screen-edit',
+      icon: 'ordered-list',
+      path: '/gynecological-diseases/breast-cancer-screen/edit',
+      component: './gynecological-diseases/breast/edit',
+    },
+    {
+      name: 'cervical-cancer-screen',
+      icon: 'ordered-list',
+      path: '/gynecological-diseases/cervical-cancer-screen',
+      component: './gynecological-diseases/cervical/list',
+    },
+    {
+      name: 'cervical-cancer-screen-add',
+      icon: 'ordered-list',
+      path: '/gynecological-diseases/cervical-cancer-screen/add',
+      component: './gynecological-diseases/cervical/edit',
+    },
+    {
+      name: 'cervical-cancer-screen-edit',
+      icon: 'ordered-list',
+      path: '/gynecological-diseases/cervical-cancer-screen/edit',
+      component: './gynecological-diseases/cervical/edit',
+    },
   ],
 };

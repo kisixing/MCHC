@@ -2,6 +2,12 @@ import { FormConfig } from '@/components/MyForm/interface';
 
 // 通用配置
 
+/**
+ * options directions
+ * 是 - 1 否 - 0
+ * 
+ */
+
 const generalConfig: Array<FormConfig> = [
 
   { name: "id", key: ".id", input_type: "input", label: "手术病历id", hidden: true },
@@ -11,6 +17,7 @@ const generalConfig: Array<FormConfig> = [
       name: "operationType",
       key: ".operationType",
       input_type: "select",
+      rules: "required",
       label: "手术名称",
       span: 6,
       offset: 0,
@@ -69,8 +76,8 @@ const generalConfig: Array<FormConfig> = [
           type: "default",
           radio: true,
           options: [
-              { label: "是", value: true },
-              { label: "否", value: false }
+              { label: "是", value: 1 },
+              { label: "否", value: 0 }
           ]
       }
   },

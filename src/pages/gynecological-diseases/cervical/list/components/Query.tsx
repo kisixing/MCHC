@@ -12,7 +12,7 @@ export default class Query extends BaseQuery {
     return (
       <Fragment>
         {this.renderEditItem('outpatientNO', <Input size="small" placeholder="请输入门诊号" />)}
-        {this.renderEditItem('name', <Input size="small" placeholder="请输入姓名" />)}
+        {this.renderEditItem('name', <Input size="small" placeholder="请输入孕妇姓名" />)}
         {this.renderEditItem('idNO', <Input size="small" placeholder="请输入证件号码" />)}
       </Fragment>
     );

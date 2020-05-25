@@ -22,12 +22,22 @@ export function renderForm(config: Array<FormConfig>, formHandler: any, gridConf
   let spanArr = [];
   for (let i = 0; i < config.length; i++) {
     const { span = 24, offset = 0 } = config[i];
-    const { label = "", unit = "", input_props = {}, rules = "", key = "", is_new_row = false, name = "", header_label = false } = config[i];
+    const {
+      label = "",
+      unit = "",
+      input_props = {},
+      rules = "",
+      key = "",
+      is_new_row = false,
+      name = "",
+      header_label = false,
+      hidden = false
+    } = config[i];
     // if(config[i].hidden){
     //   // eslint-disable-next-line no-continue
     //   continue;
     // }
-    if (!config[i].hidden) {
+    if (!hidden) {
       count += span + offset;
     }
     if (count > 24 || is_new_row) {
@@ -49,16 +59,16 @@ export function renderForm(config: Array<FormConfig>, formHandler: any, gridConf
     }
     spanArr.push(
       <Col
-        span={config[i].hidden ? 0 : span}
+        span={hidden ? 0 : span}
         offset={offset}
         key={`${config[i].name}|row-${row}|span-${count}`}
       >
         <FormItem
-        // 更新时的报错问题
+          // 更新时的报错问题
           actions={formHandler[config[i].name] ? formHandler[config[i].name].actions : {}}
           dispatch={formHandler.dispatch}
           subscribe={formHandler.subscribe}
-          defaultValue={config[i].value}
+          value={config[i].value}
           type={config[i].input_type}
           label={label}
           header_label={header_label}
@@ -67,6 +77,7 @@ export function renderForm(config: Array<FormConfig>, formHandler: any, gridConf
           validate={rules}
           path={key}
           name={name}
+          hidden={hidden}
         />
       </Col>
     )
@@ -94,10 +105,10 @@ export default class MyForm extends Component<MyFormProp, MyFormState>{
 
   componentDidUpdate(prevProps: any, prevState: any) {
     const { getFormHandler } = this.props;
-    if (JSON.stringify(prevState) !== JSON.stringify(this.state) || JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
+    if (JSON.stringify(prevProps) !== JSON.stringify(this.props)) {
       this.setState({
-        formHandler: createFormHandler(this.props.config, {submitChange: this.props.submitChange})
-      },() => {
+        formHandler: createFormHandler(this.props.config, { submitChange: this.props.submitChange })
+      }, () => {
         if (getFormHandler) {
           getFormHandler(this.state.formHandler);
         }
@@ -106,7 +117,6 @@ export default class MyForm extends Component<MyFormProp, MyFormState>{
   }
 
   render() {
-    console.log('121');
     return (
       <div className={styles['my-form']}>
         <div>

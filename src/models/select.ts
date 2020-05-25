@@ -19,8 +19,8 @@ export default {
     *getDictionaries(_, { call, put, select }) {
       const dictionaries: any = yield call(getDictionaries);
       map(dictionaries, dictionary => {
-        const { module, key } = dictionary;
-        set(dictionary, 'uniqueKey', `${module}.${key}`);
+        const { module, key, note } = dictionary;
+        set(dictionary, 'uniqueKey', note ? `${module}.${key}.${note}` : `${module}.${key}`);
       });
 
       yield put({
