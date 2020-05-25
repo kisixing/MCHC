@@ -340,6 +340,7 @@ export default class BaseList extends React.Component<IProps, IState> {
       ModalForm,
       needEditInTable,
     } = this.props;
+    console.log(this.props);
     const { dataSource, total, defaultQuery, loading, visible, editable, id } = this.state;
     const mergedColumns = this.getColumns();
     return (
