@@ -33,14 +33,14 @@ export default (props: IProps) => {
     <div
       id={tabKey}
       // eslint-disable-next-line no-return-assign
-      ref={(rcNode: any) => tabRef = rcNode}
+      ref={(rcNode: any) => (tabRef = rcNode)}
       className={classnames({
         [styles.customTabsButton]: true,
         [styles.isActive]: isActive,
       })}
       onClick={handleClickTab}
     >
-      <div className={styles.customTabsButtonIcon} style={iconStyle} />
+      <div className={classnames({ [styles.customTabsButtonIcon]: true, [styles.active]: isActive })} />
       <div className={styles.customTabsButtonTitle}>{title}</div>
       {closable && (
         <div onClick={handleCloseTab} className={styles.customTabsButtonClose}>
