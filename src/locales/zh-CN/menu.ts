@@ -203,6 +203,7 @@ export default {
   'menu.deliver-management.postpartum-visit-edit': '修改产后访视',
 
   'menu.birth-defect': '出生缺陷登记',
+  'menu.birth-defect.birth-defect': '出生缺陷列表',
   'menu.birth-defect.birth-defect-add': '添加出生缺陷登记',
   'menu.birth-defect.birth-defect-edit': '编辑出生缺陷登记',
   'menu.neonatal-screening': '新生儿疾病筛查',
