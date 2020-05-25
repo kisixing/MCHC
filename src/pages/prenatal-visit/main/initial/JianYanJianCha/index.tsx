@@ -12,8 +12,7 @@ interface HomeState{
   formHandler:{
     [key:string]: any
   },
-  formData: any,
-  isPost: boolean
+  formData: any
 }
 
 export default class Home extends React.Component<{},HomeState>{
@@ -23,8 +22,7 @@ export default class Home extends React.Component<{},HomeState>{
     super(props);
     this.state = {
       formHandler: {},
-      formData: {},
-      isPost: false
+      formData: {}
     }
   }
 
@@ -36,8 +34,6 @@ export default class Home extends React.Component<{},HomeState>{
     }).then(res => {
       if(res && res.length !== 0){
         this.setState({formData: res[0]})
-      } else {
-        this.setState({isPost: true})
       }
     });
   }
@@ -49,32 +45,18 @@ export default class Home extends React.Component<{},HomeState>{
 
 
   handleSubmit = () => {
-    const { isPost, formData } = this.state;
+    const { handleSave } = this.props;
     const urlParam = getPageQuery();
-    this.state.formHandler.dispatch("_global","submit",{});
     this.state.formHandler.submit().then(({validCode, res}:any) => {
       if (validCode) {
-        const method = isPost ? "POST" : "PUT";
         let resData = getFormData(res);
-        if (isPost) {
-          resData['pregnancy']['id'] = urlParam.id;
-        } else {
-          resData['id'] = formData.id;
-          resData['pregnancy']['id'] = urlParam.id;
-        }
-
-        request('/prenatal-visits', {
-          method,
-          data: resData
-        }).then(r => {
-
-        });
+        resData['pregnancy']['id'] = urlParam.id;
+        handleSave(resData);
       } else {
         message.error('必填项不能为空！');
       }
     });
   }
-
 
   render(){
     const { formData } = this.state;

@@ -53,16 +53,16 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
     if(patients){
       return <div className={styles['user-info']}>
         <div>
-          <span>病人姓名:</span><strong>{patients.name}</strong>
+          <span>病人姓名:{patients.name}</span>
         </div>
         <div>
-          <span>末次月经:</span><strong>{patients.lmp}</strong>
+          <span>末次月经:{patients.lmp}</span>
         </div>
         <div>
-          <span>预产期-日期:</span><strong>{patients.edd}</strong>
+          <span>预产期-日期:{patients.edd}</span>
         </div>
         <div>
-          <span>预产期-B超:</span><strong>{patients.sureEdd}</strong>
+          <span>预产期-B超:{patients.sureEdd}</span>
         </div>
       </div>
     }
@@ -109,7 +109,6 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
         <div className={styles['user-info']}>
           {this.renderInfo(patients)}
         </div>
-        <hr/>
         <div className={styles['button-group']}>
           {this.renderButton(buttnGroup)}
         </div>

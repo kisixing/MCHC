@@ -1,21 +1,26 @@
 import React from 'react';
 import Table from './components/Table';
+import Query from './components/Query';
 import { tableColumns } from './config/table';
 import BaseList from '@/components/BaseList';
 import WithDynamicExport from '@/components/WithDynamicExport';
+import { processFromApi } from './config/adpater';
+import { get, map, filter, isNil, set, isEmpty, pick } from 'lodash';
 import { router } from 'umi';
 
 @WithDynamicExport
 export default class List extends BaseList {
   static defaultProps = {
-    baseUrl: '/admissions',
-    baseTitle: '普查登记',
+    baseUrl: '/cervical-cancers',
+    baseTitle: '宫颈癌筛查情况',
     needPagination: false,
-    showQuery: false,
+    showQuery: true,
     showAdd: true,
+    processFromApi,
     tableColumns,
     rowKey: 'id',
     Table,
+    Query,
   };
 
   state = {
@@ -31,12 +36,31 @@ export default class List extends BaseList {
     loading: true,
   };
 
-  handleAdd = () => {
-    router.push('/deliver-management/admission/add');
+  handleEdit = (rowData: any) => () => {
+    const id = get(rowData, 'id');
+    router.push(`/gynecological-diseases/cervical-cancer-screen/edit?id=${id}`);
   };
 
-  handleEdit = (rowData: any) => () => {
-    const { id } = rowData;
-    router.push(`/deliver-management/admission/edit?id=${id}`);
+  handleAdd = () => {
+    router.push(`/gynecological-diseases/cervical-cancer-screen/add`);
+  };
+
+  handleQuerySearch = (data: any) => {
+    const { outpatientNO, name, idNO } = data;
+    const queryData = {
+      'gynecologicalPatientCriteria.outpatientNO.contains': outpatientNO,
+      'gynecologicalPatientCriteria.name.contains': name,
+      'gynecologicalPatientCriteria.idNO.contains': idNO,
+    };
+    let newQueryData = {};
+    map(queryData, (value, key) => {
+      if (!isNil(value) && !isEmpty(value)) {
+        newQueryData = {
+          ...newQueryData,
+          [key]: value,
+        };
+      }
+    });
+    this.handleSearch(newQueryData);
   };
 }

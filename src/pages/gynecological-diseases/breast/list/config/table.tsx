@@ -1,63 +1,54 @@
 import { formatTimeToStandard } from '@/utils/format';
+import { get } from 'lodash';
 
 export const tableColumns = [
   {
-    title: '病区号',
-    dataIndex: 'areaNO',
-    key: 'areaNO',
+    title: '门诊号',
+    dataIndex: 'outpatientNO',
     align: 'center',
+    render: (value: string, rowData: any) => get(rowData, 'gynecologicalPatient.outpatientNO'),
   },
   {
-    title: '房号',
-    dataIndex: 'roomNO',
-    key: 'roomNO',
-    align: 'center',
-  },
-  {
-    title: '床号',
-    dataIndex: 'bedNO',
-    key: 'bedNO',
-  },
-  {
-    title: '孕妇姓名',
+    title: '姓名',
     dataIndex: 'name',
-    key: 'name',
     align: 'center',
+    render: (value: string, rowData: any) => get(rowData, 'gynecologicalPatient.name'),
   },
   {
-    title: '孕妇年龄',
-    dataIndex: 'age',
-    key: 'age',
-    align: 'center',
-  },
-  {
-    title: '性别',
-    dataIndex: 'gender',
-    key: 'gender',
-    align: 'center',
-  },
-  {
-    title: '出生日期',
-    dataIndex: 'dob',
-    key: 'dob',
-    align: 'center',
-  },
-  {
-    title: '证件类型',
-    dataIndex: 'idType',
-    key: 'idType',
-    align: 'center',
-  },
-  {
-    title: '证件号码',
+    title: '身份证号',
     dataIndex: 'idNO',
-    key: 'idNO',
+    align: 'center',
+    render: (value: string, rowData: any) => get(rowData, 'gynecologicalPatient.idNO'),
+  },
+  {
+    title: '检查日期',
+    dataIndex: 'visitDate',
+    align: 'center',
+    render: (value: string) => formatTimeToStandard(value),
+  },
+  {
+    title: '检查结果',
+    dataIndex: 'result',
     align: 'center',
   },
   {
-    title: '住院日期',
-    dataIndex: 'adminDate',
-    key: 'adminDate',
+    title: '检查结果备注',
+    dataIndex: 'resultNote',
+    align: 'center',
+  },
+  {
+    title: '处理意见',
+    dataIndex: 'advice',
+    align: 'center',
+  },
+  {
+    title: '诊断',
+    dataIndex: 'diagnosis',
+    align: 'center',
+  },
+  {
+    title: '医生',
+    dataIndex: 'doctor',
     align: 'center',
   },
 ];

@@ -23,6 +23,17 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
     const self = this;
     if (props.actions) {
       props.actions.getValue = function getValue() {
+        // 可以考虑在这个位置做一个拦截提交
+        if(self.state.path === ".*" && props.input_props.type === "custom"){
+          const key = props.input_props.renderData[0].key;
+          return {
+            value: {
+              [key]: self.state.value[key],
+              [`${key}Note`]: self.state.value[`${key}Note`]
+            },
+            path: self.state.path
+          }
+        }
         return {
           value: self.state.value,
           path: self.state.path
@@ -57,27 +68,36 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
     }
   }
 
-  childrenValid = () => {
-    return true;
-  }
-
   componentDidMount() {
     this.setState({
-      value: this.props.defaultValue,
+      value: this.props.value,
       validate: this.props.validate || "",
       path: this.props.path
     });
   }
-
+  
+  // 外部页面更新引发
   componentDidUpdate(prevProps: FormItemProp) {
     if (JSON.stringify(this.props) !== JSON.stringify(prevProps)) {
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
-        value: this.props.defaultValue,
+        value: this.props.value,
         validate: this.props.validate || "",
         path: this.props.path
       });
     }
+  }
+
+  // 获取组件内部的自己的验证方法
+  getChildrenValid = (func: any) => {
+    if(func){
+      this.childrenValid = func;
+    }
+  }
+
+  // 承载组件的验证方法 - 相当于一个别名/引用
+  childrenValid = () => {
+    return true;
   }
 
   handleChange = (val: any, error: any = "") => {
@@ -100,6 +120,8 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
     dispatch(name, eventName, args);
   }
 
+
+
   // 渲染required星号
   renderAsterisk = (validate: string | object | RegExp | null): ReactNode => {
     let isRender = false;
@@ -108,6 +130,12 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
     }
     return isRender ? <span style={{ color: 'red' }}>*</span> : null
   }
+
+  // renderHeader = () => {
+  //   const { header_label, label } = this.props;
+  //   const { validate } = this.state;
+  //   return 
+  // }
 
   render() {
     // console.log(this.state);
@@ -129,9 +157,9 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
           {label !== "" && !header_label ? (
             <div className={styles['form-item-inline-label']}>
               <label>{this.renderAsterisk(validate)}{label}:</label>
-            </div>  
+            </div>
           ) : null}
-          {/* 
+          {/*
             * full-main 代表label为header形式出现
             * main      label在同一行
             */}
@@ -145,7 +173,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
                 value={value}
                 input_props={input_props}
                 error={error}
-                getValidFun={(validFunc: any) => {this.childrenValid = validFunc}}
+                getValidFun={this.getChildrenValid}
               />
             ) : (
                 <strong>

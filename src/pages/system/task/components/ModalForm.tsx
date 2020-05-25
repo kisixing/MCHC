@@ -9,14 +9,14 @@ export default generateModalForm({
   fromApi,
   toApi,
   modalProps: {
-    width: 800,
+    width: 540,
   },
   formItemLayout: {
     labelCol: {
       span: 6,
     },
     wrapperCol: {
-      span: 18,
+      span: 16,
     },
   },
 });

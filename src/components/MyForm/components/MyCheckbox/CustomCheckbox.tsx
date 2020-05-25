@@ -25,13 +25,6 @@ interface CustomCheckboxProps {
 
 export default class CustomCheckbox extends Component<CustomCheckboxProps>{
 
-  componentDidUpdate(prevProps: CustomCheckboxProps) {
-    const { onChange, value } = this.props;
-    if (JSON.stringify(value) !== JSON.stringify(prevProps.value)) {
-      onChange(value, value.key);
-    }
-  }
-
   handleChange = (val: any, key: string | number | boolean) => {
     const { onChange } = this.props;
     // 反选问题

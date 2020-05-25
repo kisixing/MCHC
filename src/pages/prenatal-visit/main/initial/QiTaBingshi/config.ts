@@ -55,214 +55,217 @@ const config: Array<FormConfig> = [
     }
   },
 
-  { name: 'smoke', key: '.partnerProfile', label: "吸烟", input_type: "checkbox", span: 24, rules: "required",
-    input_props:{
-      type: "custom",
-      renderData: [
-        {
-          key: "smoke",
-          label: "吸烟",
-          options: [
-            { label: "无", value: false  },
-            { label: "有", value: true },
-          ],
-          extraEditors: [            {
-            key: true,
-            editors: [
-              { name: "", key: "", label: "", input_type: "input" }
-            ]
-          }]
-        }
-      ],
+  {
+    name: "personalProfile",
+    key: ".personalProfile",
+    label: "个人史",
+    input_type: "custom",
+    header_label: true,
+    input_props: {
+      config: [
+        { name: 'smoke', key: '.*', label: "吸烟", input_type: "checkbox", span: 24, rules: "required",
+          input_props:{
+            type: "custom",
+            renderData: [
+              {
+                key: "smoke",
+                label: "吸烟",
+                options: [
+                  { label: "无", value: false  },
+                  { label: "有", value: true },
+                ],
+                extraEditors: [            {
+                  key: true,
+                  editors: [
+                    { name: "", key: "", label: "", input_type: "input" }
+                  ]
+                }]
+              }
+            ],
+          }
+        },
+        { name: 'alcohol', key: '.*', label: "饮酒", input_type: "checkbox", span: 24, rules: "required",
+          input_props:{
+            type: "custom",
+            renderData: [
+              {
+                key: "alcohol",
+                label: "饮酒",
+                options: [
+                  { label: "无", value: false  },
+                  { label: "有", value: true },
+                ],
+                extraEditors: [            {
+                  key: true,
+                  editors: [
+                    { name: "", key: "", label: "", input_type: "input" }
+                  ]
+                }]
+              }
+            ],
+          }
+        },
+        { name: 'hazardoussubstances', key: '.*', label: "接触有害物质", input_type: "checkbox", span: 24, rules: "required",
+          input_props:{
+            type: "custom",
+            renderData: [
+              {
+                key: "hazardoussubstances",
+                label: "接触有害物质",
+                options: [
+                  { label: "无", value: false  },
+                  { label: "有", value: true },
+                ],
+                extraEditors: [            {
+                  key: true,
+                  editors: [
+                    { name: "", key: "", label: "", input_type: "input" }
+                  ]
+                }]
+              }
+            ],
+          }
+        },
+        { name: 'radioactivity', key: '.*', label: "接触放射线", input_type: "checkbox", span: 24, rules: "required",
+          input_props:{
+            type: "custom",
+            renderData: [
+              {
+                key: "radioactivity",
+                label: "接触放射线",
+                options: [
+                  { label: "无", value: false  },
+                  { label: "有", value: true },
+                ],
+                extraEditors: [            {
+                  key: true,
+                  editors: [
+                    { name: "", key: "", label: "", input_type: "input" }
+                  ]
+                }]
+              }
+            ],
+          }
+        },
+        { name: 'other', key: '.*', label: "其他", input_type: "checkbox", span: 24,
+          input_props:{
+            type: "custom",
+            renderData: [
+              {
+                key: "other",
+                label: "高血压",
+                options: [
+                  { label: "无", value: false  },
+                  { label: "有", value: true },
+                ],
+                extraEditors: [            {
+                  key: true,
+                  editors: [
+                    { name: "", key: "", label: "", input_type: "input" }
+                  ]
+                }]
+              }
+            ],
+          }
+        },
+      ]
     }
   },
-  { name: 'alcohol', key: '.partnerProfile', label: "饮酒", input_type: "checkbox", span: 24, rules: "required",
-    input_props:{
-      type: "custom",
-      renderData: [
-        {
-          key: "alcohol",
-          label: "饮酒",
-          options: [
-            { label: "无", value: false  },
-            { label: "有", value: true },
-          ],
-          extraEditors: [            {
-            key: true,
-            editors: [
-              { name: "", key: "", label: "", input_type: "input" }
-            ]
-          }]
-        }
-      ],
-    }
-  },
-  { name: 'hazardoussubstances', key: '.personalProfile', label: "接触有害物质", input_type: "checkbox", span: 24, rules: "required",
-    input_props:{
-      type: "custom",
-      renderData: [
-        {
-          key: "hazardoussubstances",
-          label: "接触有害物质",
-          options: [
-            { label: "无", value: false  },
-            { label: "有", value: true },
-          ],
-          extraEditors: [            {
-            key: true,
-            editors: [
-              { name: "", key: "", label: "", input_type: "input" }
-            ]
-          }]
-        }
-      ],
-    }
-  },
-  { name: 'radioactivity', key: '.personalProfile', label: "接触放射线", input_type: "checkbox", span: 24, rules: "required",
-    input_props:{
-      type: "custom",
-      renderData: [
-        {
-          key: "radioactivity",
-          label: "接触放射线",
-          options: [
-            { label: "无", value: false  },
-            { label: "有", value: true },
-          ],
-          extraEditors: [            {
-            key: true,
-            editors: [
-              { name: "", key: "", label: "", input_type: "input" }
-            ]
-          }]
-        }
-      ],
-    }
-  },
-  { name: 'other1', key: '.personalProfile', label: "其他", input_type: "checkbox", span: 24,
-    input_props:{
-      type: "custom",
-      renderData: [
-        {
-          key: "other",
-          label: "高血压",
-          options: [
-            { label: "无", value: false  },
-            { label: "有", value: true },
-          ],
-          extraEditors: [            {
-            key: true,
-            editors: [
-              { name: "", key: "", label: "", input_type: "input" }
-            ]
-          }]
-        }
-      ],
-    }
-  },
-  { name: 'hypertension', key: '.familyHistory', label: "高血压", input_type: "checkbox", span: 24, rules: "required",
-    input_props:{
-      type: "custom",
-      renderData: [
-        {
-          key: "hypertension",
-          label: "高血压",
-          options: [
-            { label: "无", value: false  },
-            { label: "有", value: true },
-          ],
-          extraEditors: [{
-            key: true,
-            editors: [
-              { name: "", key: "", label: "", input_type: "input" }
-            ]
-          }]
-        }
-      ],
-    }
-   },
 
-  { name: 'diabetes', key: '.familyHistory', label: "糖尿病", input_type: "checkbox", span: 24, rules: "required",
-    input_props:{
-      type: "custom",
-      renderData: [
-        {
-          key: "diabetes",
-          label: "糖尿病",
-          options: [
-            { label: "无", value: false  },
-            { label: "有", value: true },
-          ],
-          extraEditors: [            {
-            key: true,
-            editors: [
-              { name: "", key: "", label: "", input_type: "input" }
-            ]
-          }]
-        }
-      ],
-    }
-  },
-  { name: 'birthdefects', key: '.familyHistory', label: "先天畸形", input_type: "checkbox", span: 24, rules: "required",
-    input_props:{
-      type: "custom",
-      renderData: [
-        {
-          key: "birthdefects",
-          label: "心脏病",
-          options: [
-            { label: "无", value: false  },
-            { label: "有", value: true },
-          ],
-          extraEditors: [            {
-            key: true,
-            editors: [
-              { name: "", key: "", label: "", input_type: "input" }
-            ]
-          }]
-        }
-      ],
-    }
-   },
-// { name: 'add_FIELD_jzyichuanbing', key: '..familyHistory', label: "遗传病", input_type: "checkbox", span: 24, rules: "required",
-// input_props:{
-//   type: "custom",
-//   renderData: [
-//     {
-//       key: "add_FIELD_jzyichuanbing",
-//       label: "遗传病",
-//       options: [
-//         { label: "无", value: false  },
-//         { label: "有", value: true },
-//       ],
-//       extraEditors: [            {
-//         key: true,
-//         editors: [
-//           { name: "", key: "", label: "", input_type: "input" }
-//         ]
-//       }]
-//     }
-//   ],
-// } },
-  { name: 'other2', key: '.familyHistory', label: "其他", input_type: "checkbox", span: 24,
-    input_props:{
-      type: "custom",
-      renderData: [
-        {
-          key: "other",
-          label: "其他",
-          options: [
-            { label: "无", value: false  },
-            { label: "有", value: true },
-          ],
-          extraEditors: [            {
-            key: true,
-            editors: [
-              { name: "", key: "", label: "", input_type: "input" }
-            ]
-          }]
-        }
-      ],
+  {
+    name: "familyHistory",
+    key: ".familyHistory",
+    label: "家族史",
+    input_type: "custom",
+    header_label: true,
+    input_props: {
+      config: [
+        { name: 'hypertension', key: '.*', label: "高血压", input_type: "checkbox", span: 24, rules: "required",
+          input_props:{
+            type: "custom",
+            renderData: [
+              {
+                key: "hypertension",
+                label: "高血压",
+                options: [
+                  { label: "无", value: false  },
+                  { label: "有", value: true },
+                ],
+                extraEditors: [{
+                  key: true,
+                  editors: [
+                    { name: "", key: "", label: "", input_type: "input" }
+                  ]
+                }]
+              }
+            ],
+          }
+        },
+
+        { name: 'diabetes', key: '.*', label: "糖尿病", input_type: "checkbox", span: 24, rules: "required",
+          input_props:{
+            type: "custom",
+            renderData: [
+              {
+                key: "diabetes",
+                label: "糖尿病",
+                options: [
+                  { label: "无", value: false  },
+                  { label: "有", value: true },
+                ],
+                extraEditors: [            {
+                  key: true,
+                  editors: [
+                    { name: "", key: "", label: "", input_type: "input" }
+                  ]
+                }]
+              }
+            ],
+          }
+        },
+        { name: 'birthdefects', key: '.*', label: "先天畸形", input_type: "checkbox", span: 24, rules: "required",
+          input_props:{
+            type: "custom",
+            renderData: [
+              {
+                key: "birthdefects",
+                label: "心脏病",
+                options: [
+                  { label: "无", value: false  },
+                  { label: "有", value: true },
+                ],
+                extraEditors: [            {
+                  key: true,
+                  editors: [
+                    { name: "", key: "", label: "", input_type: "input" }
+                  ]
+                }]
+              }
+            ],
+          }
+        },
+        { name: 'other', key: '.*', label: "其他", input_type: "checkbox", span: 24,
+          input_props:{
+            type: "custom",
+            renderData: [
+              {
+                key: "other",
+                label: "其他",
+                options: [
+                  { label: "无", value: false  },
+                  { label: "有", value: true },
+                ],
+                extraEditors: [            {
+                  key: true,
+                  editors: [
+                    { name: "", key: "", label: "", input_type: "input" }
+                  ]
+                }]
+              }
+            ],
+          }
+        },
+      ]
     }
   },
 ]

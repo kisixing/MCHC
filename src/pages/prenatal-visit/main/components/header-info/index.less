@@ -1,0 +1,149 @@
+.header-info {
+  position: relative;
+}
+.user-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  height: 32px;
+
+  > div {
+    height: 32px;
+    padding: 2px;
+    font-size: 14px;
+    margin-right: 16px;
+    > strong {
+      font-size: 16px;
+      margin-left: 8px;
+    }
+  }
+}
+.header-btnList {
+  position: absolute;
+  top: 0;
+  right: 12px;
+  display: flex;
+  z-index: 2;
+  .danger-btn-wrapper .btnList-btn-group {
+    display: flex;
+  }
+  .high-risk-wrapper .btnList-btn-group {
+    display: flex;
+  }
+  .level-btn {
+    width: 80px;
+    height: 30px;
+    border-bottom-left-radius: 0;
+  }
+  .high-risk-btn {
+    font-size: 14px;
+    font-weight: 400;
+    padding: 4px 5px;
+    width: 80px;
+    height: 50px;
+    border-top-left-radius: 0;
+  }
+  .high-risk-content {
+    height: 50px;
+    color: #932C3F;
+    max-width: 560px;
+    text-align: left;
+    flex: 1;
+    border-top-right-radius: 0;
+    span {
+      width: 100%;
+      font-size: 16px;
+      line-height: 20px;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      display:-webkit-box;
+      -webkit-box-orient:vertical;
+      -webkit-line-clamp:2;
+      white-space: pre-wrap;
+    }
+  }
+  .danger-btn-1 {
+    color:#fff;
+    background-color: #49C458;
+    &:hover {
+      background-color: #49C458;
+    }
+  }
+  .danger-btn-2 {
+    color:#150F55;
+    background-color: #FFD363;
+    &:hover {
+      background-color:	#FFD363;
+    }
+  }
+  .danger-btn-3 {
+    color:#150F55;
+    background-color:	#FB9824;
+    &:hover {
+      background-color:	#FB9824;
+    }
+  }
+  .danger-btn-4 {
+    color:#150F55;
+    background-color: #FFA8A8;
+    &:hover {
+      background-color: #FFA8A8;
+    }
+  }
+  .danger-btn-5 {
+    color:#fff;
+    background-color: #C43333;
+    &:hover {
+      background-color: #C43333;
+    }
+  }
+  .btnList-right {
+    display: flex;
+    flex-direction: column;
+    margin-left: 12px;
+  }
+  .danger-btn-trial {
+    color:#ffffff;
+    background-color: #4e1303;
+    &:hover {
+      background-color: #4e1303;
+    }
+  }
+  .danger-btn-phar {
+    color:#ffffff;
+    background-color: #4d94ff;
+    &:hover {
+      background-color: #4d94ff;
+    }
+  }
+  .danger-btn-infectin {
+    height: 30px;
+    max-width: 560px;
+    padding-top: 2px;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    text-align: left;
+    flex: 1;
+    border-bottom-right-radius: 0;
+  }
+  .has-infectin {
+    color:#ffffff;
+    background: linear-gradient(275deg,rgba(155,102,255,1) 0%,rgba(98,54,255,1) 100%);
+    &:hover {
+      background-color: #c205e7;
+    }
+  }
+  .no-infectin {
+    color: #150F55;
+    background-color: #F0F3F5;
+    &:hover {
+      background-color: #F0F3F5;
+    }
+  }
+}
+.header-btnList button {
+  font-weight: bold;
+  letter-spacing: 1px;
+  height: 40px;
+}

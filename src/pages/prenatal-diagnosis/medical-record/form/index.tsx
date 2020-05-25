@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ ReactNode } from 'react';
 import { Button, message } from 'antd';
 import MyForm from '@/components/MyForm/index';
 
@@ -9,6 +9,8 @@ import { getPageQuery } from '@/utils/utils';
 
 import request from '@/utils/request';
 import styles from './index.less';
+// import headerStyles from '@/components/BaseEditPanel/index.less';
+
 
 interface MedicalRecordState {
   formHandler: {
@@ -16,13 +18,14 @@ interface MedicalRecordState {
   },
   data: any,
   id: number,
-  prenatalPatientId: number
+  prenatalPatientId: number,
+  patients: any
 }
 
 const URL = "/prenatal-diagnoses";
 
 
-export default class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordState>{
+export default class MedicalRecord extends React.Component<any, MedicalRecordState>{
   constructor(props: any) {
     super(props);
     this.state = {
@@ -39,7 +42,8 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
         ]
       },
       id: -1,               // 病历id
-      prenatalPatientId: -1  // 产期患者id
+      prenatalPatientId: -1,  // 产期患者id
+      patients: {}
     }
   }
 
@@ -50,6 +54,16 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
       return;
     }
     this.setState({ prenatalPatientId: urlParams.prenatalPatientId, id: urlParams.id || -1 })
+    // 获取病人信息
+  
+    request(`/prenatal-patients?id.equals=${urlParams.prenatalPatientId}`,{
+      method: "GET"
+    }).then(res => {
+      if(res.length !== 0){
+        this.setState({patients: res[0]})
+      }
+    })
+  
     // 修改
     if (urlParams.prenatalPatientId && urlParams.id) {
       request(`${URL}?prenatalPatientId.equals=${urlParams.prenatalPatientId}&id.equals=${urlParams.id}`, {
@@ -100,19 +114,46 @@ export default class MedicalRecord extends React.Component<MedicalRecordProps, M
     }
   }
 
+
+  renderInfo = (patients: any):ReactNode => {
+    if(patients){
+      return <div className={styles['user-info']}>
+        <div>
+          <span>病人姓名:{patients.name}</span>
+        </div>
+        <div>
+          <span>末次月经:{patients.lmp}</span>
+        </div>
+        <div>
+          <span>预产期-日期:{patients.edd}</span>
+        </div>
+        <div>
+          <span>预产期-B超:{patients.sureEdd}</span>
+        </div>
+      </div>
+    }
+    return <span>无用户信息</span>;
+  }
+  
+
   render() {
-    const { data } = this.state;
+    const { data, patients } = this.state;
     const myConfig = getRenderData(config, data);
     return (
       <div className={styles.container}>
-        <MyForm
-          config={myConfig}
-          getFormHandler={(formHandler: any) => this.setState({ formHandler })}
-          submitChange={false}
-        />
-        <div className={styles['btn-group']}>
-          <Button onClick={this.handleReset}>重置</Button>
-          <Button type="primary" onClick={this.handleSubmit}>提交</Button>
+        <div className={styles['user-info']}>
+          {this.renderInfo(patients)}
+        </div>
+        <div className={styles.form}>
+          <MyForm
+            config={myConfig}
+            getFormHandler={(formHandler: any) => this.setState({ formHandler })}
+            submitChange={false}
+          />
+          <div className={styles['btn-group']}>
+            <Button onClick={this.handleReset}>重置</Button>
+            <Button type="primary" onClick={this.handleSubmit}>提交</Button>
+          </div>
         </div>
       </div>
     )
