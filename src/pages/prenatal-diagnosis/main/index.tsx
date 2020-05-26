@@ -3,7 +3,6 @@ import { Button } from 'antd';
 import request from '@/utils/request'
 import MedicalRecordList from '../medical-record/list';
 import OperationRecordList from '../operation-record/list';
-// import OperationRecord from '../operation-record/form/index';
 import { getPageQuery } from '@/utils/utils';
 import styles from './index.less';
 

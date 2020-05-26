@@ -39,7 +39,7 @@ const generalPdProcedureConfig = [
   },
   { name: "duration", key: ".duration", input_type: "input", label: "持续时间", unit: "min", span: 6 },
   {
-    name: "processEvaluation", key: ".*", input_type: "checkbox", label: "评估过程", span: 24,
+    name: "processEvaluation", key: ".*", input_type: "checkbox", label: "过程评估", span: 24,
     input_props: {
       type: "custom",
       renderData: [
@@ -53,9 +53,15 @@ const generalPdProcedureConfig = [
           ],
           extraEditors: [
             {
-              key: 0,
+              key: 1,
               editors: [
-                { name: "", key: "", input_type: "input" }
+                { name: "", key: "", label: "备注", input_type: "input" }
+              ]
+            },
+            {
+              key: 2,
+              editors: [
+                { name: "", key: "", label: "备注", input_type: "input" }
               ]
             }
           ]
