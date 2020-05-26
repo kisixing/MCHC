@@ -87,7 +87,7 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
             id: data.id,
             operationType: val
           }
-        },() => console.log(this.state))
+        })
       })
     }
   }

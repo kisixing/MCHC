@@ -11,7 +11,7 @@ const config: Array<FormConfig> = [
     input_type: "custom",
     input_props: {
       config: [
-        { name: 'id', key: '.pregnancy.id', label: "id", input_type: "input", span: 0, rules: "required", hidden: true },
+        // { name: 'id', key: '.pregnancy.id', label: "id", input_type: "input", span: 0, rules: "required", hidden: true },
         { name: 'visitDate', key: '.visitDate', label: "日期", input_type: "date", span: 8, rules: "required" },
         { name: 'gestationalWeek', key: '.gestationalWeek', label: "孕周", input_type: "input", span: 8, rules: "required" },
         { name: 'weight', key: '.physicalExam.weight', label: "体重", input_type: "input", span: 8, rules: "required" },
@@ -52,7 +52,7 @@ const config: Array<FormConfig> = [
         { name: 'amount', key: '.pdMedication.amount', label: "用药方案(剂量)", input_type: "input", span: 6 },
 
         // { name: 'examination', key: '.list.examination', label: "检验检查", input_type: "input", span: 12, input_props:{type: "textarea",} },
-        // { name: 'treatment', key: '.list.treatment', label: "处理措施", input_type: "input", span: 12, input_props:{type: "textarea",} },
+        { name: 'prescription ', key: '.prescription', label: "处理措施", input_type: "input", span: 12, input_props:{type: "textarea",} },
 
         { name: 'appointmentType', key: '.appointmentType', label: "下次复诊", input_type: "select", span: 6, input_props:{options: Options.appointmentWeekOptions} },
         { name: 'appointmentWeek', key: '.appointmentWeek', label: "", input_type: "select", span: 6, input_props:{options: Options.appointmentDateOptions}},

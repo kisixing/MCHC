@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import React,{Component, ReactNode} from 'react';
+import React, { Component, ReactNode } from 'react';
 import { Button, Tooltip } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
 import MyCustom from './index';
@@ -37,17 +37,17 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
     }
   }
 
-  handleChange = (val: any, index:number): void => {
+  handleChange = (val: any, index: number): void => {
     const { value = [], onChange } = this.props;
     const newValue = JSON.parse(JSON.stringify(value));
     newValue[index] = val;
     onChange(newValue);
   }
 
-  renderArrayCustomForm = ():ReactNode => {
-    const { dispatch, error = [], input_props = {} , value = []  } = this.props;
+  renderArrayCustomForm = (): ReactNode => {
+    const { dispatch, error = [], input_props = {}, value = [] } = this.props;
     const { config = [] } = input_props;
-    if(!value || config.length === 0 || value.length === 0 ){
+    if (!value || config.length === 0 || value.length === 0) {
       return null;
     }
     return value.map((val: any, index: number) => (
@@ -55,7 +55,7 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
         <div className={styles.title}>
           <div>
             <span>
-              记录{index+1}
+              记录{index + 1}
             </span>
           </div>
 
@@ -68,13 +68,13 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
         <div className={styles.main}>
           <div className={styles.custom}>
             <MyCustom
-              onChange={(singleValue:any) => this.handleChange(singleValue, index)}
+              onChange={(singleValue: any) => this.handleChange(singleValue, index)}
               dispatch={dispatch}
               input_props={input_props}
               error={null}
               value={val}
-              getValidFun={() => {}}
-              subscribe={() => {}}
+              getValidFun={() => { }}
+              subscribe={() => { }}
             />
           </div>
           <div className={styles['delete-btn']}>
@@ -83,7 +83,7 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
                 shape="circle"
                 danger
                 type="link"
-                icon={<MinusCircleOutlined/>}
+                icon={<MinusCircleOutlined />}
                 onClick={() => this.handleDelete(index)}
               />
             </Tooltip>
@@ -94,7 +94,7 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
   }
 
   handleAdd = () => {
-    const { value = [] , input_props = {}, onChange } = this.props;
+    const { value = [], input_props = {}, onChange } = this.props;
     const { config = [] } = input_props;
     /**
      * TODO 复合字段是否可以正常赋值
@@ -103,13 +103,13 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
      */
     const emptyItem = {};
     config.forEach((item: any) => {
-      const { key }: {key: string} = item;
-      const newKey = key.substring(1,key.length);
+      const { key }: { key: string } = item;
+      const newKey = key.substring(1, key.length);
       // arraySplitKey & objectSplitKey
       const nextSplitKeyIndex = newKey.search(/[\.]|[\_]/);
-      if(nextSplitKeyIndex !== -1){
+      if (nextSplitKeyIndex !== -1) {
         emptyItem[newKey.substring(0, nextSplitKeyIndex)] = "";
-      }else{
+      } else {
         emptyItem[newKey] = null;
       }
     });
@@ -117,7 +117,7 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
     onChange(value)
   }
 
-  handleDelete = (index: number):void => {
+  handleDelete = (index: number): void => {
     const { value, onChange } = this.props;
     value.splice(index, 1);
     onChange(value);
@@ -128,7 +128,7 @@ export default class ArrayCustom extends Component<ArrayCustomProps, ArrayCustom
     this.setState({ value, error });
   }
 
-  render(){
+  render() {
     return (
       <div className={styles['array-custom']}>
         <div className={styles['add-btn']}>

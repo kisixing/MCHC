@@ -11,7 +11,7 @@ const ALL: string = "*";
 const ONLYBASE: boolean = false;
 
 /**
- * 对于还需取下一级的继续向下取 
+ * 对于还需取下一级的继续向下取
  */
 function handleGetData(obj: any, currentKey: string, nextPath: string, history: string) {
   let r = {};
@@ -36,7 +36,7 @@ function handleGetData(obj: any, currentKey: string, nextPath: string, history: 
  * 责任链式判断 拆分if-else
  * @param {number} oi - objectIndex
  * @param {number} ai - arrayIndex
- * 
+ *
  * @return {object} r 返回的结果
  */
 const rules = [
@@ -47,7 +47,7 @@ const rules = [
       // if(isBase(obj) === ONLYBASE) return {};
       const r: { [key: string]: any } = {};
       if (path === ALL) {
-        // 取全部值暂时不处理 
+        // 取全部值暂时不处理
 
         // if (isObj(obj)) {
         //   Object.keys(obj).forEach((key: string) => {
@@ -164,8 +164,8 @@ export function getRenderData(config: Array<FormConfig>, data: any): Array<FormC
 /* ============================== 本地格式转为接口格式 ==================================== */
 /**
  * 默认parentKey为数字是即生成数组
- * @param {string} parentKey 
- * @param {object|Array} data 
+ * @param {string} parentKey
+ * @param {object|Array} data
  */
 function newObj(parentKey: string, currentKey: string, data: any) {
   if (!currentKey) return {};
@@ -247,7 +247,7 @@ function _assign(mainData: any = {}, newData: any = {}): any {
 function toFormat(data: { [key: string]: any }): object {
   let r = {};
   Object.keys(data).forEach(key => {
-    // 合并 * 
+    // 合并 *
     if (key === `.${ALL}`) {
       r = _assign(r, data[key]);
       return;
@@ -288,3 +288,4 @@ export function getFormData(data: Array<{ value: any, path: string }>): object {
   })
   return r;
 }
+

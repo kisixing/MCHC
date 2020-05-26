@@ -79,29 +79,29 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'other', key: '.*', label: "其他", input_type: "checkbox", span: 24, rules: "required",
-          input_props: {
-            type: "custom",
-            renderData: [
-              {
-                key: "other",
-                label: "",
-                options: [
-                  {label: "无", value: false},
-                  {label: "有", value: true},
-                ],
-                extraEditors: [
-                  {
-                    key: true,
-                    editors: [
-                      { name: "", key: "", label: "", input_type: "input" }
-                    ]
-                  }
-                ]
-              },
-            ],
-          }
-        },
+        // { name: 'other', key: '.*', label: "其他", input_type: "checkbox", span: 24, rules: "required",
+        //   input_props: {
+        //     type: "custom",
+        //     renderData: [
+        //       {
+        //         key: "other",
+        //         label: "",
+        //         options: [
+        //           {label: "无", value: false},
+        //           {label: "有", value: true},
+        //         ],
+        //         extraEditors: [
+        //           {
+        //             key: true,
+        //             editors: [
+        //               { name: "", key: "", label: "", input_type: "input" }
+        //             ]
+        //           }
+        //         ]
+        //       },
+        //     ],
+        //   }
+        // },
       ]
     }
   },
@@ -113,30 +113,6 @@ const config: Array<FormConfig> = [
     header_label: true,
     input_props: {
       config: [
-        { name: 'uterus', key: '.*', label: "子宫手术", input_type: "checkbox", span: 24, rules: "required",
-          input_props: {
-            type: "custom",
-            renderData: [
-              {
-                key: "uterus",
-                label: "",
-                options: [
-                  {label: "无", value: false},
-                  {label: "有", value: true},
-                ],
-                extraEditors: [
-                  {
-                    key: true,
-                    editors: [
-                      { name: "", key: "", label: "", input_type: "input" }
-                    ]
-                  }
-                ]
-              },
-            ],
-          }
-        },
-
         { name: 'uterus', key: '.*', label: "子宫手术", input_type: "checkbox", span: 24, rules: "required",
           input_props: {
             type: "custom",

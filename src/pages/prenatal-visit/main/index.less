@@ -1,16 +1,11 @@
-.container{
+.main {
   padding: 1rem 0;
-  .button-group{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    margin: 12px auto;
-    > div {
-      margin-left: 5px;
+  :global {
+    .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
+      background: transparent;
     }
-  }
-
-  .page {
-
+    .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
+      border-bottom: 1px solid #3D8BF7;
+    }
   }
 }

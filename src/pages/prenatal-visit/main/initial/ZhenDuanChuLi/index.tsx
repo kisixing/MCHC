@@ -3,8 +3,6 @@ import { Button, message, Input, Row, Col } from 'antd';
 import MyForm from '@/components/MyForm/index';
 import config from './config';
 import styles from '../index.less';
-import request from '@/utils/request';
-import { getPageQuery } from '@/utils/utils';
 import { getRenderData, getFormData} from '@/components/MyForm/utils';
 
 import Diagnoses from '@/pages/prenatal-visit/main/components/diagnoses';
@@ -12,8 +10,7 @@ import Diagnoses from '@/pages/prenatal-visit/main/components/diagnoses';
 interface HomeState{
   formHandler:{
     [key:string]: any
-  },
-  formData: any,
+  }
 }
 
 export default class Home extends React.Component<{},HomeState>{
@@ -22,20 +19,8 @@ export default class Home extends React.Component<{},HomeState>{
   constructor(props:any){
     super(props);
     this.state = {
-      formHandler: {},
-      formData: {},
+      formHandler: {}
     }
-  }
-
-  componentDidMount() {
-    const urlParam = getPageQuery();
-    request(`/prenatal-visits?visitType.equals=0&pregnancyId.equals=${urlParam.id}`,{
-      method: "GET"
-    }).then(res => {
-      if(res && res.length !== 0){
-        this.setState({formData: res[0]})
-      }
-    });
   }
 
   componentDidUpdate(){
@@ -55,8 +40,8 @@ export default class Home extends React.Component<{},HomeState>{
   }
 
   render(){
-    const { formData } = this.state;
-    const myConfig = getRenderData(config, formData);
+    const { visitData } = this.props;
+    const myConfig = getRenderData(config, visitData);
     return(
       <Row className={styles.initialContent}>
         <Col span="8">

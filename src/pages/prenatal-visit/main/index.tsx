@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tabs } from 'antd';
-import request from '@/utils/request';
 import { getPageQuery } from '@/utils/utils';
+import { connect } from 'dva';
 
 import Initial from './initial';
 import Return from './return';
@@ -14,11 +14,9 @@ import HighriskFactor from './components/high-risk-factor';
 import HeaderInfo from './components/header-info';
 // import ScarredUterus from './components/scarred-uterus';
 import styles from './index.less';
-import Item from 'antd/lib/list/Item';
 
-interface PrenatalDiagnosisState {
-  currentPageKey: string,
-  formData: any
+interface MainState {
+  state: any,
 }
 
 const routers = [
@@ -31,32 +29,28 @@ const routers = [
   { name: "基本信息", component: <Base />, key: 'Base' },
 ];
 
-export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisState>{
+class Main extends Component<{}, MainState>{
 
   constructor(props: any) {
     super(props);
     this.state = {
-      currentPageKey: "medical-record",
-      formData: null
+      state: null
     }
   }
 
   componentDidMount() {
+    const { dispatch } = this.props;
     const urlParam = getPageQuery();
-
-    request(`/pregnancies?id.equals=${urlParam.id}`,{
-      method: "GET"
-    }).then(res => {
-      if(res.length !== 0){
-        this.setState({formData: res[0]})
-      }
-    });
+    dispatch({
+      type: 'pregnancy/getPregnancyData',
+      payload: urlParam.id
+    })
   }
 
-
   render() {
+    const { isShowHighrisk } = this.props;
     return (
-      <div className={styles.container}>
+      <div className={styles.main}>
         <HeaderInfo />
         <Tabs defaultActiveKey="1" type="card" size="small">
           {routers.map((item) => (
@@ -65,9 +59,17 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
             </Tabs.TabPane>
           ))}
         </Tabs>
-        <HighriskFactor />
+        {isShowHighrisk && <HighriskFactor />}
         {/* <ScarredUterus /> */}
       </div>
     )
   }
 }
+
+const mapStateToProps = ({ pregnancy }) => {
+  return { ...pregnancy };
+};
+
+export default connect(
+  mapStateToProps
+)(Main);

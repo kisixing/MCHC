@@ -14,30 +14,6 @@ const config: Array<FormConfig> = [
       type: "textarea",
     }
   },
-
-  // { name: "lmp", key: ".lmp", label: "末次月经", span: 6, offset: 0, input_type: "date", rules: "required", },
-  // { name: "edd", key: ".edd", label: "预产期-日期", span: 6, offset: 0, input_type: "date", rules: "required", },
-  // { name: "sureEdd", key: ".sureEdd", label: "预产期-B超", span: 6, offset: 0, input_type: "date", rules: "required", },
-  // {
-  //   name: "gravidity", key: ".gravidity", label: "G", span: 6, offset: 0, input_type: "select", rules: "required",
-  //   input_props: {
-  //     options: [
-  //       { label: "1", value: 1 },
-  //       { label: "2", value: 2 },
-  //       { label: "3", value: 3 }
-  //     ]
-  //   }
-  // },
-  // {
-  //   name: "parity", key: ".parity", label: "P", span: 6, offset: 0, input_type: "select", rules: "required",
-  //   input_props: {
-  //     options: [
-  //       { label: "1", value: 1 },
-  //       { label: "2", value: 2 },
-  //       { label: "3", value: 3 }
-  //     ]
-  //   }
-  // },
   {
     name: "male-thalassemia",
     key: ".thalassemia_0",
@@ -196,145 +172,301 @@ const config: Array<FormConfig> = [
             {
               key: "hypertension",
               editors: [
-                { name: "", key: "", label: "药物名称", unit: "", input_type: "input", span: 0, offset: 0 }
+                { name: "", key: "", label: "备注", unit: "", input_type: "input" }
               ]
             }
           ]
         },
-        { key: "nephropathy", label: "肾病" },
-        { key: "respiratoryDisease", label: "呼吸道疾病" },
-        { key: "gastroDisease", label: "胃病" },
         {
-          key: "hepaticDisease", label: "肝病",
+          key: "nephropathy",
+          label: "肾病",
+          extraEditors: [
+            {
+              key: "nephropathy",
+              editors: [
+                { name: "", key: "", label: "备注", unit: "", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "respiratoryDisease",
+          label: "呼吸系统疾病",
+          extraEditors: [
+            {
+              key: "respiratoryDisease",
+              editors: [
+                { name: "", key: "", label: "备注", unit: "", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "gastroDisease",
+          label: "胃病",
+          extraEditors: [
+            {
+              key: "gastroDisease",
+              editors: [
+                { name: "", key: "", label: "备注", unit: "", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "hepaticDisease",
+          label: "肝病",
           extraEditors: [
             {
               key: "hepaticDisease",
               editors: [
-                { name: "", key: "", label: "药物名称", input_type: "input", span: 0, offset: 0 }
+                { name: "", key: "", label: "备注", unit: "", input_type: "input" }
               ]
-            },
+            }
           ]
         },
-        { key: "epilepsy", label: "癫痫" },
-        { key: "cardiacDisease", label: "心脏疾病" },
-        { key: "endocrineDisease", label: "内分泌疾病" },
-        { key: "thyroidDisease", label: "甲状腺疾病" },
-        { key: "hematopathy", label: "血液病" },
-        { key: "mentalDisease", label: "精神疾病" },
-        { key: "diabetes", label: "糖尿病" },
-      ],
+        {
+          key: "epilepsy",
+          label: "癫痫",
+          extraEditors: [
+            {
+              key: "epilepsy",
+              editors: [
+                { name: "", key: "", label: "备注", unit: "", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "cardiacDisease",
+          label: "心脏病",
+          extraEditors: [
+            {
+              key: "cardiacDisease",
+              editors: [
+                { name: "", key: "", label: "备注", unit: "", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "endocrineDisease",
+          label: "内分泌病",
+          extraEditors: [
+            {
+              key: "endocrineDisease",
+              editors: [
+                { name: "", key: "", label: "备注", unit: "", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "thyroidDisease",
+          label: "甲状腺",
+          extraEditors: [
+            {
+              key: "thyroidDisease",
+              editors: [
+                { name: "", key: "", label: "备注", unit: "", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "hematopathy",
+          label: "血液病",
+          extraEditors: [
+            {
+              key: "hematopathy",
+              editors: [
+                { name: "", key: "", label: "备注", unit: "", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "mentalDisease",
+          label: "心理疾病",
+          extraEditors: [
+            {
+              key: "mentalDisease",
+              editors: [
+                { name: "", key: "", label: "备注", unit: "", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "diabetes",
+          label: "糖尿病",
+          extraEditors: [
+            {
+              key: "diabetes",
+              editors: [
+                { name: "", key: "", label: "备注", unit: "", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "other",
+          label: "其他",
+          extraEditors: [
+            {
+              key: "other",
+              editors: [
+                { name: "", key: "", label: "备注", unit: "", input_type: "input" }
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   {
-    name: "familyHistory-hypertension",
-    key: '.familyHistory',
-    label: "高血压",
-    input_type: "checkbox",
+    name: "familyHistory", key: '.familyHistory', label: "家族史", input_type: "checkbox",
     input_props: {
-      type: "custom",
+      type: "multiple",
+      radio: false,
       renderData: [
         {
           key: "hypertension",
           label: "高血压",
-          options: [
-            { label: "有", value: true },
-            { label: "无", value: false },
-          ],
           extraEditors: [
             {
-              // 这个key对应的史当前这个checkboxValue的value
-              key: true,
+              key: "hypertension",
               editors: [
-                { name: "", key: "", input_type: "input" }
+                { name: "", key: "", label: "备注", input_type: "input" }
               ]
             }
           ]
         },
-      ],
-    }
-  },
-  {
-    name: "familyHistory-hepaticDisease",
-    key: '.familyHistory',
-    label: "肝病",
-    input_type: "checkbox",
-    input_props: {
-      type: "custom",
-      renderData: [
         {
           key: "hepaticDisease",
           label: "肝病",
-          options: [
-            { label: "有", value: true },
-            { label: "无", value: false },
-          ],
           extraEditors: [
             {
-              key: true,
+              key: "hepaticDisease",
               editors: [
-                { name: "", key: "", input_type: "input" }
+                { name: "", key: "", label: "备注", input_type: "input" }
               ]
             }
           ]
         },
-      ],
-    }
-  },
-  {
-    name: "familyHistory-epilepsy",
-    key: '.familyHistory',
-    label: "癫痫",
-    input_type: "checkbox",
-    input_props: {
-      type: "custom",
-      renderData: [
         {
           key: "epilepsy",
           label: "癫痫",
-          options: [
-            { label: "有", value: true },
-            { label: "无", value: false }
-          ],
           extraEditors: [
             {
-              key: true,
+              key: "epilepsy",
               editors: [
-                { name: "", key: "", input_type: "input" }
+                { name: "", key: "", label: "备注", input_type: "input" }
               ]
-            }
+            },
           ]
         },
-      ],
-    }
-  },
-  {
-    name: "familyHistory-cardiacDisease",
-    key: '.familyHistory',
-    label: "心脏病",
-    input_type: "checkbox",
-    input_props: {
-      type: "custom",
-      renderData: [
         {
           key: "cardiacDisease",
           label: "心脏病",
-          options: [
-            { label: "有", value: true },
-            { label: "无", value: false }
-          ],
           extraEditors: [
             {
-              // 这个key对应的史当前这个checkboxValue的value
-              key: 1,
+              key: "hepaticDisease",
               editors: [
-                { name: "", key: "", label: "药物名称", input_type: "input" }
+                { name: "", key: "", label: "备注", input_type: "input" }
               ]
-            }
+            },
+          ]
+        },
+        {
+          key: "endocrineDisease",
+          label: "内分泌病",
+          extraEditors: [
+            {
+              key: "endocrineDisease",
+              editors: [
+                { name: "", key: "", label: "备注", input_type: "input" }
+              ]
+            },
+          ]
+        },
+        {
+          key: "thyroidDisease",
+          label: "甲状腺",
+          extraEditors: [
+            {
+              key: "thyroidDisease",
+              editors: [
+                { name: "", key: "", label: "备注", input_type: "input" }
+              ]
+            },
+          ]
+        },
+        {
+          key: "hematopathy",
+          label: "血液病",
+          extraEditors: [
+            {
+              key: "hematopathy",
+              editors: [
+                { name: "", key: "", label: "备注", input_type: "input" }
+              ]
+            },
+          ]
+        },
+        {
+          key: "mentalDisease",
+          label: "心理疾病",
+          extraEditors: [
+            {
+              key: "mentalDisease",
+              editors: [
+                { name: "", key: "", label: "备注", input_type: "input" }
+              ]
+            },
+          ]
+        },
+        {
+          key: "diabetes",
+          label: "糖尿病",
+          extraEditors: [
+            {
+              key: "diabetes",
+              editors: [
+                { name: "", key: "", label: "备注", input_type: "input" }
+              ]
+            },
+          ]
+        },
+        {
+          key: "birthdefects",
+          label: "先天畸形",
+          extraEditors: [
+            {
+              key: "birthdefects",
+              editors: [
+                { name: "", key: "", label: "备注", input_type: "input" }
+              ]
+            },
+          ]
+        },
+        {
+          key: "other",
+          label: "其他",
+          extraEditors: [
+            {
+              key: "other",
+              editors: [
+                { name: "", key: "", label: "备注", input_type: "input" }
+              ]
+            },
           ]
         },
       ],
     }
   },
+
+
   {
     name: "allergyHistory",
     key: '.allergyHistory',
@@ -461,26 +593,53 @@ const config: Array<FormConfig> = [
   //   }
   // },
   {
-    name: "procedureHistory-uterus",
-    key: ".procedureHistory",
-    label: "子宫手术",
-    input_type: "checkbox",
+    name: "procedureHistory", key: '.procedureHistory', label: "手术史", input_type: "checkbox",
     input_props: {
-      type: "custom",
+      type: "multiple",
+      radio: false,
       renderData: [
         {
           key: "uterus",
           label: "子宫手术",
-          options: [
-            { label: "有", value: true },
-            { label: "无", value: false },
-          ],
           extraEditors: [
             {
-              // 这个key对应的史当前这个checkboxValue的value
-              key: true,
+              key: "uterus",
               editors: [
-                { name: "", key: "", input_type: "input" }
+                { name: "", key: "", label: "备注", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "ovaries",
+          label: "卵巢手术",
+          extraEditors: [
+            {
+              key: "ovaries",
+              editors: [
+                { name: "", key: "", label: "备注", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "thyroid", label: "甲状腺手术",
+          extraEditors: [
+            {
+              key: "thyroid",
+              editors: [
+                { name: "", key: "", label: "备注", input_type: "input" }
+              ]
+            }
+          ]
+        },
+        {
+          key: "other", label: "其他",
+          extraEditors: [
+            {
+              key: "other",
+              editors: [
+                { name: "", key: "", label: "备注", input_type: "input" }
               ]
             }
           ]
@@ -488,90 +647,7 @@ const config: Array<FormConfig> = [
       ],
     }
   },
-  {
-    name: "procedureHistory-ovaries",
-    key: ".procedureHistory",
-    label: "卵巢手术",
-    input_type: "checkbox",
-    input_props: {
-      type: "custom",
-      renderData: [
-        {
-          key: "ovaries",
-          label: "卵巢手术",
-          options: [
-            { label: "有", value: true },
-            { label: "无", value: false },
-          ],
-          extraEditors: [
-            {
-              // 这个key对应的史当前这个checkboxValue的value
-              key: true,
-              editors: [
-                { name: "", key: "", input_type: "input" }
-              ]
-            }
-          ]
-        },
-      ]
-    }
-  },
-  {
-    name: "procedureHistory-thyroid",
-    key: ".procedureHistory",
-    label: "甲状腺手术",
-    input_type: "checkbox",
-    input_props: {
-      type: "custom",
-      renderData: [
-        {
-          key: "thyroid",
-          label: "甲状腺手术",
-          options: [
-            { label: "有", value: true },
-            { label: "无", value: false },
-          ],
-          extraEditors: [
-            {
-              // 这个key对应的史当前这个checkboxValue的value
-              key: true,
-              editors: [
-                { name: "", key: "", input_type: "input" }
-              ]
-            }
-          ]
-        },
-      ]
-    }
-  },
-  {
-    name: "procedureHistory-other",
-    key: ".procedureHistory",
-    label: "其他",
-    input_type: "checkbox",
-    input_props: {
-      type: "custom",
-      renderData: [
-        {
-          key: "other",
-          label: "其他",
-          options: [
-            { label: "有", value: true },
-            { label: "无", value: false },
-          ],
-          extraEditors: [
-            {
-              // 这个key对应的史当前这个checkboxValue的value
-              key: true,
-              editors: [
-                { name: "", key: "", input_type: "input" }
-              ]
-            }
-          ]
-        },
-      ]
-    }
-  },
+
 
 
   // {
@@ -641,7 +717,7 @@ const config: Array<FormConfig> = [
         { name: "fetalHeartRate", key: ".fetalHeartRate", label: "胎心率", input_type: "input", span: 6, offset: 0 },
         { name: "fetalMovement", key: ".fetalMovement", label: "胎动", input_type: "input", span: 6, offset: 0 },
         { name: "presentation", key: ".presentation", label: "先露", input_type: "input", span: 6, offset: 0 },
-        { name: "weight", key: ".weight", label: "胎重", input_type: "input", span: 6, offset: 0 },
+        { name: "weight", key: ".weight", label: "胎重", unit: "kg", input_type: "input", span: 6, offset: 0 },
         { name: "avf", key: ".avf", label: "avf", input_type: "input", span: 6, offset: 0 },
       ]
     }
@@ -655,12 +731,12 @@ const config: Array<FormConfig> = [
     input_props: {
       config: [
         { name: "id", key: ".id", label: "id", input_type: "input", span: 6, offset: 0, hidden: true },
-        { name: "height", key: ".height", label: "身高", input_type: "input", span: 6, offset: 0 },
-        { name: "weight", key: ".weight", label: "体重", input_type: "input", span: 6, offset: 0 },
-        { name: "systolic", key: ".systolic", label: "收缩压", input_type: "input", span: 6, offset: 0 },
-        { name: "diastolic", key: ".diastolic", label: "舒张压", input_type: "input", span: 6, offset: 0 },
-        { name: "pulse", key: ".pulse", label: "脉率", input_type: "input", span: 6, offset: 0 },
-        { name: "temperature", key: ".temperature", label: "体温", input_type: "input", span: 6, offset: 0 },
+        { name: "height", key: ".height", label: "身高", unit: "cm", input_type: "input", span: 6, offset: 0 },
+        { name: "weight", key: ".weight", label: "体重", unit: "kg", input_type: "input", span: 6, offset: 0 },
+        { name: "systolic", key: ".systolic", label: "收缩压", unit: "mmHg", input_type: "input", span: 6, offset: 0 },
+        { name: "diastolic", key: ".diastolic", label: "舒张压", unit: "mmHg", input_type: "input", span: 6, offset: 0 },
+        { name: "pulse", key: ".pulse", label: "脉率", unit: "次/分", input_type: "input", span: 6, offset: 0 },
+        { name: "temperature", key: ".temperature", label: "体温", unit: "℃", input_type: "input", span: 6, offset: 0 },
       ]
     }
   },
@@ -673,9 +749,9 @@ const config: Array<FormConfig> = [
     input_props: {
       config: [
         { name: "id", key: ".id", label: "id", input_type: "input", span: 6, offset: 0, hidden: true },
-        { name: "fundalHeight", key: ".fundalHeight", label: "宫高", input_type: "input", span: 6, offset: 0 },
-        { name: "waistHip", key: ".waistHip", label: "腹围", input_type: "input", span: 6, offset: 0 },
-        { name: "engagement", key: ".engagement", label: "衔接", input_type: "input", span: 6, offset: 0 }
+        { name: "fundalHeight", key: ".fundalHeight", label: "宫高", unit: "cm", input_type: "input", span: 6, offset: 0 },
+        { name: "waistHip", key: ".waistHip", label: "腹围", unit: "cm", input_type: "input", span: 6, offset: 0 },
+        { name: "engagement", key: ".engagement", label: "衔接", unit: "cm", input_type: "input", span: 6, offset: 0 }
       ]
     }
   }

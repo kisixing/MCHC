@@ -13,7 +13,7 @@ const generalPdPreOperations: FormConfig = {
       { name: "temperature", key: ".temperature", input_type: "input", label: "体温", unit: "℃", span: 6 },
       { name: "pluse", key: ".pluse", input_type: "input", label: "脉率", unit: "次/分", span: 6 },
       { name: "heartrate", key: ".heartrate", input_type: "input", label: "心率", unit: "次/分", span: 6 },
-      { name: "respiratory", key: ".respiratory", input_type: "input", label: "呼吸", span: 6 },
+      { name: "respiratory", key: ".respiratory", input_type: "input", label: "呼吸", unit: "次/分", span: 6 },
       { name: "systolic", key: ".systolic", input_type: "input", label: "收缩压", unit: "mmHg", span: 6 },
       { name: "diastolic", key: ".diastolic", input_type: "input", label: "舒张压", unit: "mmHg", span: 6 },
     ]
@@ -38,7 +38,7 @@ const pdPreOperations: {[key:string]: FormConfig} = {
         { name: "temperature", key: ".temperature", input_type: "input", label: "体温", unit: "℃", span: 6 },
         { name: "pluse", key: ".pluse", input_type: "input", label: "脉率", unit: "次/分", span: 6 },
         { name: "heartrate", key: ".heartrate", input_type: "input", label: "心率", unit: "次/分", span: 6 },
-        { name: "respiratory", key: ".respiratory", input_type: "input", label: "呼吸", span: 6 },
+        { name: "respiratory", key: ".respiratory", input_type: "input", label: "呼吸", unit: "次/分", span: 6 },
         { name: "systolic", key: ".systolic", input_type: "input", label: "收缩压", unit: "mmHg", span: 6 },
         { name: "diastolic", key: ".diastolic", input_type: "input", label: "舒张压", unit: "mmHg", span: 6 },
         // 宫内输血
