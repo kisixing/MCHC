@@ -64,242 +64,203 @@ export class FormSection extends React.Component<IProps> {
 
   renderItem = (formDescription: any) => {
     const { renderEditItem, id, data, products, events, form } = this.props;
+    const {
+      inputType,
+      formItemLayout: customFormItemLayout,
+      styles,
+      key: formDescriptionKey,
+      inputProps: formDescriptionInputProps,
+      special_config: formDescriptionSpecialConfig,
+      path: formDescriptionPath,
+    } = formDescription;
 
-    switch (get(formDescription, 'inputType')) {
+    switch (inputType) {
       case 'id':
         return <span></span>;
-      // return (
-      //   id &&
-      //   renderEditItem(
-      //     get(formDescription, 'key'),
-      //     <Input {...get(formDescription, 'inputProps')} />,
-      //   )
-      // );
       case 'subdevice_id':
-        return (
-          id &&
-          renderEditItem(get(formDescription, 'key'), <Input size="small" {...get(formDescription, 'inputProps')} />)
-        );
+        return id && renderEditItem(formDescriptionKey, <Input size="small" {...formDescriptionInputProps} />);
       case 'radio':
         return renderEditItem(
-          get(formDescription, 'key'),
+          formDescriptionKey,
           <Radio.Group>
             <Radio value={1}>是</Radio>
             <Radio value={0}>否</Radio>
           </Radio.Group>,
           {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
+            customFormItemLayout,
+            styles,
           },
         );
       case 'normal_select':
         return renderEditItem(
-          get(formDescription, 'key'),
+          formDescriptionKey,
           <NormalSelect
-            type={get(JSON.parse(get(formDescription, 'special_config')), 'type')}
-            showSearch={get(JSON.parse(get(formDescription, 'special_config')), 'showSearch')}
+            type={get(JSON.parse(formDescriptionSpecialConfig), 'type')}
+            showSearch={get(JSON.parse(formDescriptionSpecialConfig), 'showSearch')}
             placeholder="请选择证件类型"
           />,
           {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
+            customFormItemLayout,
+            styles,
           },
         );
       case 'dictionary_select':
-        return renderEditItem(get(formDescription, 'key'), <DictionarySelect config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-          styles: get(formDescription, 'styles'),
+        return renderEditItem(formDescriptionKey, <DictionarySelect config={formDescription} />, {
+          customFormItemLayout,
+          styles,
         });
       case 'country_select':
-        return renderEditItem(
-          get(formDescription, 'key'),
-          <CountrySelect language="zh-CN" placeholder="请选择国籍" />,
-          {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
-          },
-        );
+        return renderEditItem(formDescriptionKey, <CountrySelect language="zh-CN" placeholder="请选择国籍" />, {
+          customFormItemLayout,
+          styles,
+        });
       case 'dysmenorrhea_radio':
         return renderEditItem(
-          get(formDescription, 'key'),
+          formDescriptionKey,
           <Radio.Group>
             <Radio value={true}>是</Radio>
             <Radio value={false}>否</Radio>
           </Radio.Group>,
           {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
+            customFormItemLayout,
+            styles,
           },
         );
       case 'pregnant_radio':
         return renderEditItem(
-          get(formDescription, 'key'),
+          formDescriptionKey,
           <Radio.Group>
             <Radio value={false}>否</Radio>
             <Radio value={true}>是</Radio>
           </Radio.Group>,
           {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
+            customFormItemLayout,
+            styles,
           },
         );
       case 'radio_with_input':
-        return renderEditItem(get(formDescription, 'key'), <RadioWithInput config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-          styles: get(formDescription, 'styles'),
+        return renderEditItem(formDescriptionKey, <RadioWithInput config={formDescription} />, {
+          customFormItemLayout,
+          styles,
         });
       case 'checkbox_with_input':
-        return renderEditItem(get(formDescription, 'key'), <CheckboxWithInput config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-          styles: get(formDescription, 'styles'),
+        return renderEditItem(formDescriptionKey, <CheckboxWithInput config={formDescription} />, {
+          customFormItemLayout,
+          styles,
         });
       case 'normal_checkbox_with_input':
-        return renderEditItem(get(formDescription, 'key'), <NormalCheckboxWithInput config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
+        return renderEditItem(formDescriptionKey, <NormalCheckboxWithInput config={formDescription} />, {
+          customFormItemLayout,
         });
       case 'checkbox_group':
-        return renderEditItem(get(formDescription, 'key'), <CheckboxGroup config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-          styles: get(formDescription, 'styles'),
+        return renderEditItem(formDescriptionKey, <CheckboxGroup config={formDescription} />, {
+          customFormItemLayout,
+          styles,
         });
       case 'disease_select':
-        return renderEditItem(get(formDescription, 'key'), <DiseaseSelect config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-          styles: get(formDescription, 'styles'),
+        return renderEditItem(formDescriptionKey, <DiseaseSelect config={formDescription} />, {
+          customFormItemLayout,
+          styles,
         });
       case 'select_with_options':
-        return renderEditItem(get(formDescription, 'key'), <SelectWithOptions config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-          styles: get(formDescription, 'styles'),
+        return renderEditItem(formDescriptionKey, <SelectWithOptions config={formDescription} />, {
+          customFormItemLayout,
+          styles,
         });
       case 'radio_with_input_number':
-        return renderEditItem(get(formDescription, 'key'), <RadioWithInputNumber config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-          styles: get(formDescription, 'styles'),
+        return renderEditItem(formDescriptionKey, <RadioWithInputNumber config={formDescription} />, {
+          customFormItemLayout,
+          styles,
         });
       case 'pregnancy_history':
-        return renderEditItem(get(formDescription, 'key'), <PregnancyHistory config={formDescription} form={form} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-          styles: get(formDescription, 'styles'),
+        return renderEditItem(formDescriptionKey, <PregnancyHistory config={formDescription} form={form} />, {
+          customFormItemLayout,
+          styles,
         });
       case 'input':
-        return renderEditItem(
-          get(formDescription, 'key'),
-          <Input size="small" {...get(formDescription, 'inputProps')} />,
-          {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
-          },
-        );
+        return renderEditItem(formDescriptionKey, <Input size="small" {...formDescriptionInputProps} />, {
+          customFormItemLayout,
+          styles,
+        });
       case 'fetus_appendages':
         return renderEditItem(
-          get(formDescription, 'key'),
-          <FoetalAppendage
-            size="small"
-            {...get(formDescription, 'inputProps')}
-            renderEditItem={renderEditItem}
-            form={form}
-          />,
+          formDescriptionKey,
+          <FoetalAppendage size="small" {...formDescriptionInputProps} renderEditItem={renderEditItem} form={form} />,
           {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
+            customFormItemLayout,
+            styles,
           },
         );
       case 'noenate_record':
         return renderEditItem(
-          get(formDescription, 'key'),
-          <NoenateRecord
-            size="small"
-            {...get(formDescription, 'inputProps')}
-            renderEditItem={renderEditItem}
-            form={form}
-          />,
+          formDescriptionKey,
+          <NoenateRecord size="small" {...formDescriptionInputProps} renderEditItem={renderEditItem} form={form} />,
           {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
+            customFormItemLayout,
+            styles,
           },
         );
       case 'multiple_input_with_label':
-        return renderEditItem(get(formDescription, 'key'), <MultipleInputWithLabel config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-          styles: get(formDescription, 'styles'),
+        return renderEditItem(formDescriptionKey, <MultipleInputWithLabel config={formDescription} />, {
+          customFormItemLayout,
+          styles,
         });
       case 'input_with_label':
-        return renderEditItem(get(formDescription, 'key'), <InputWithLabel config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-          styles: get(formDescription, 'styles'),
+        return renderEditItem(formDescriptionKey, <InputWithLabel config={formDescription} />, {
+          customFormItemLayout,
+          styles,
         });
       case 'id_number_input':
         return renderEditItem(
-          get(formDescription, 'key'),
-          <Input size="small" {...get(formDescription, 'inputProps')} onChange={get(events, 'handleIDNumberChange')} />,
+          formDescriptionKey,
+          <Input size="small" {...formDescriptionInputProps} onChange={get(events, 'handleIDNumberChange')} />,
           {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
+            customFormItemLayout,
+            styles,
           },
         );
       case 'cron':
-        return renderEditItem(get(formDescription, 'key'), <CronSelect {...get(formDescription, 'inputProps')} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-          styles: get(formDescription, 'styles'),
+        return renderEditItem(formDescriptionKey, <CronSelect {...formDescriptionInputProps} />, {
+          customFormItemLayout,
+          styles,
         });
       case 'trigger_type_select':
-        return renderEditItem(
-          get(formDescription, 'key'),
-          <TriggerTypeSelect size="small" {...get(formDescription, 'inputProps')} />,
-          {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
-          },
-        );
+        return renderEditItem(formDescriptionKey, <TriggerTypeSelect size="small" {...formDescriptionInputProps} />, {
+          customFormItemLayout,
+          styles,
+        });
       case 'text_area':
-        return renderEditItem(
-          get(formDescription, 'key'),
-          <Input.TextArea size="small" {...get(formDescription, 'inputProps')} />,
-          {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
-          },
-        );
+        return renderEditItem(formDescriptionKey, <Input.TextArea size="small" {...formDescriptionInputProps} />, {
+          customFormItemLayout,
+          styles,
+        });
       case 'tree_select':
-        return renderEditItem(
-          get(formDescription, 'key'),
-          <PermissionSelect size="small" {...get(formDescription, 'inputProps')} />,
-          {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
-          },
-        );
+        return renderEditItem(formDescriptionKey, <PermissionSelect size="small" {...formDescriptionInputProps} />, {
+          customFormItemLayout,
+          styles,
+        });
       case 'parent_select':
         return renderEditItem(
-          get(formDescription, 'key'),
-          <ParentPermissionSelect size="small" {...get(formDescription, 'inputProps')} />,
+          formDescriptionKey,
+          <ParentPermissionSelect size="small" {...formDescriptionInputProps} />,
           {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
+            customFormItemLayout,
+            styles,
           },
         );
       case 'input_number':
-        return renderEditItem(
-          get(formDescription, 'key'),
-          <InputNumber size="small" min={0} {...get(formDescription, 'inputProps')} />,
-          {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
-          },
-        );
+        return renderEditItem(formDescriptionKey, <InputNumber size="small" min={0} {...formDescriptionInputProps} />, {
+          customFormItemLayout,
+          styles,
+        });
       case 'password':
-        return renderEditItem(
-          get(formDescription, 'key'),
-          <Input.Password size="small" {...get(formDescription, 'inputProps')} />,
-          {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
-          },
-        );
+        return renderEditItem(formDescriptionKey, <Input.Password size="small" {...formDescriptionInputProps} />, {
+          customFormItemLayout,
+          styles,
+        });
       case 'validdate':
         return renderEditItem(
-          get(formDescription, 'key'),
+          formDescriptionKey,
           <DataSelect
             size="small"
             dataSource={[
@@ -312,120 +273,94 @@ export class FormSection extends React.Component<IProps> {
             labelKey="name"
           />,
           {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
+            customFormItemLayout,
+            styles,
           },
         );
       case 'editor':
-        return renderEditItem(
-          get(formDescription, 'key'),
-          <CustomEditor size="small" {...get(formDescription, 'inputProps')} />,
-          {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
-          },
-        );
+        return renderEditItem(formDescriptionKey, <CustomEditor size="small" {...formDescriptionInputProps} />, {
+          customFormItemLayout,
+          styles,
+        });
       case 'product':
         return get(formDescription, 'viewOnly')
           ? renderEditItem(
-              get(formDescription, 'key'),
-              <span>{get(keyBy(products, 'id'), `${get(data, get(formDescription, 'path'))}.name`)}</span>,
+              formDescriptionKey,
+              <span>{get(keyBy(products, 'id'), `${get(data, formDescriptionPath)}.name`)}</span>,
             )
           : renderEditItem(
-              get(formDescription, 'key'),
-              <DataSelect
-                size="small"
-                url="/products"
-                valueKey="id"
-                labelKey="name"
-                {...get(formDescription, 'inputProps')}
-              />,
+              formDescriptionKey,
+              <DataSelect size="small" url="/products" valueKey="id" labelKey="name" {...formDescriptionInputProps} />,
               {
-                customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-                styles: get(formDescription, 'styles'),
+                customFormItemLayout,
+                styles,
               },
             );
       case 'roles':
         return renderEditItem(
-          get(formDescription, 'key'),
+          formDescriptionKey,
           <DataSelect
             size="small"
             url="/groups"
             valueKey="id"
             labelKey="nickname"
             mode="multiple"
-            {...get(formDescription, 'inputProps')}
+            {...formDescriptionInputProps}
           />,
           {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
+            customFormItemLayout,
+            styles,
           },
         );
       case 'device_status':
-        return renderEditItem(
-          get(formDescription, 'key'),
-          <DeviceStatusSelect size="small" {...get(formDescription, 'inputProps')} />,
-          {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
-          },
-        );
+        return renderEditItem(formDescriptionKey, <DeviceStatusSelect size="small" {...formDescriptionInputProps} />, {
+          customFormItemLayout,
+          styles,
+        });
       case 'address':
-        return renderEditItem(
-          get(formDescription, 'key'),
-          <CascaderAddress size="small" {...get(formDescription, 'inputProps')} />,
-          {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
-          },
-        );
+        return renderEditItem(formDescriptionKey, <CascaderAddress size="small" {...formDescriptionInputProps} />, {
+          customFormItemLayout,
+          styles,
+        });
       case 'permission_type':
         return renderEditItem(
-          get(formDescription, 'key'),
-          <PermissionTypeSelect size="small" {...get(formDescription, 'inputProps')} />,
+          formDescriptionKey,
+          <PermissionTypeSelect size="small" {...formDescriptionInputProps} />,
           {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
+            customFormItemLayout,
+            styles,
           },
         );
       case 'upload_img':
         return renderEditItem(
-          get(formDescription, 'key'),
-          <UploadImg size="small" {...get(formDescription, 'inputProps')} allowUploadImages={10} />,
+          formDescriptionKey,
+          <UploadImg size="small" {...formDescriptionInputProps} allowUploadImages={10} />,
           {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
+            customFormItemLayout,
+            styles,
           },
         );
       case 'single_date_picker':
-        return renderEditItem(
-          get(formDescription, 'key'),
-          <DatePicker size="small" {...get(formDescription, 'inputProps')} />,
-          {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
-          },
-        );
+        return renderEditItem(formDescriptionKey, <DatePicker size="small" {...formDescriptionInputProps} />, {
+          customFormItemLayout,
+          styles,
+        });
       case 'apgar_score_input':
         return renderEditItem(
-          get(formDescription, 'key'),
+          formDescriptionKey,
           <ApgarScoreInput size="small" config={formDescription} form={form} />,
           {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
+            customFormItemLayout,
+            styles,
           },
         );
       case 'view_only':
-        return renderEditItem(get(formDescription, 'key'), <span>{get(data, get(formDescription, 'path'))}</span>);
+        return renderEditItem(formDescriptionKey, <span>{get(data, formDescriptionPath)}</span>);
       default:
-        return renderEditItem(
-          get(formDescription, 'key'),
-          <Input size="small" {...get(formDescription, 'inputProps')} />,
-          {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
-          },
-        );
+        return renderEditItem(formDescriptionKey, <Input size="small" {...formDescriptionInputProps} />, {
+          customFormItemLayout,
+          styles,
+        });
     }
   };
 
@@ -471,6 +406,6 @@ export class FormSection extends React.Component<IProps> {
   }
 }
 
-export default connect(({ select }) => ({
+export default connect(({ select }: any) => ({
   products: get(select, 'products'),
 }))(FormSection);
