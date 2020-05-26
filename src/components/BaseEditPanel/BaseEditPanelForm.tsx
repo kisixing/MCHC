@@ -1,9 +1,13 @@
 import React from 'react';
-import DynamicForm from '@/components/BaseModalForm/DynamicForm';
 import { Form, Divider, Button } from 'antd';
+import { FileTextOutlined, RedoOutlined } from '@ant-design/icons';
 import { get, map } from 'lodash';
-import FormSection from '@/components/BaseModalForm/FormSection';
 import { FormInstance } from 'antd/lib/form';
+
+import DynamicForm from '@/components/BaseModalForm/DynamicForm';
+import FormSection from '@/components/BaseModalForm/FormSection';
+
+import styles from './index.less';
 
 const formItemLayout = {
   layout: 'horizontal',
@@ -100,11 +104,11 @@ export default class BaseEditPanelForm extends DynamicForm<IProps, IState> {
     return (
       <Form style={{ minWidth: '90%' }} ref={this.formRef} {...formItemLayout}>
         {this.renderEditContent()}
-        <Form.Item key="action" wrapperCol={{ span: 4 }} style={{ display: 'flex', flexFlow: 'row-reverse' }}>
-          <Button size="middle" htmlType="reset" style={{ marginLeft: 8 }} onClick={this.handleReset}>
+        <Form.Item key="action" wrapperCol={{ span: 21 }} className={styles.buttons}>
+          <Button ghost type="primary" size="large" htmlType="reset" icon={<RedoOutlined />} onClick={this.handleReset}>
             重置
           </Button>
-          <Button size="middle" style={{ marginLeft: 8 }} type="primary" htmlType="submit" onClick={this.handleFinish}>
+          <Button size="large" type="primary" icon={<FileTextOutlined />} htmlType="submit" onClick={this.handleFinish}>
             提交
           </Button>
         </Form.Item>

@@ -1,4 +1,4 @@
-import { keys, get, keyBy, filter, last } from 'lodash';
+import { keys, get, keyBy, filter, last, map, set } from 'lodash';
 import { router } from 'umi';
 
 export default {
@@ -42,12 +42,23 @@ export default {
   reducers: {
     changeTabs(state, { payload }) {
       let tabs = state.tabs;
-      const tabKeys = keys(keyBy(tabs, 'key'));
+      const tabsMapping = keyBy(tabs, 'key');
+      const tabKeys = keys(tabsMapping);
       const key = get(payload, 'data.key');
       let activeKey = get(payload, 'data.key') || '/';
       if (get(payload, 'type') === 'addTab') {
+        // 如果不存在 tabkeys ，直接 push 进去
         if (!(tabKeys.indexOf(key) > -1)) {
           tabs.push(get(payload, 'data'));
+          activeKey = key;
+        } else {
+          // 如果存在的话，修改查询参数
+          tabs = map(tabsMapping, (item: any) => {
+            if (get(item, 'key') === key) {
+              set(item, 'search', get(payload, 'data.search'));
+            }
+            return item;
+          });
           activeKey = key;
         }
       } else if (get(payload, 'type') === 'deleteTab') {
@@ -65,6 +76,21 @@ export default {
       return {
         ...state,
         activeKey: get(payload, 'data.activeKey'),
+      };
+    },
+    deleteAllTabs(state, { payload }) {
+      const tabs = [
+        {
+          title: '首页',
+          key: '/',
+          path: '/',
+          closable: false,
+        },
+      ];
+      return {
+        ...state,
+        tabs,
+        activeKey: '/',
       };
     },
   },

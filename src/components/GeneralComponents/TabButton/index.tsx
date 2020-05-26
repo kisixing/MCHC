@@ -15,11 +15,9 @@ interface IProps {
 
 export default (props: IProps) => {
   const { isActive = false, closable = true, title, onClick, onClose, tabKey } = props;
-  let tabRef = useRef();
 
   const handleClickTab = () => {
     onClick && onClick(tabKey);
-    tabRef.scrollIntoView({ behavior: 'smooth', inline: 'center' });
   };
 
   const handleCloseTab = (e: any) => {
@@ -33,14 +31,13 @@ export default (props: IProps) => {
     <div
       id={tabKey}
       // eslint-disable-next-line no-return-assign
-      ref={(rcNode: any) => tabRef = rcNode}
       className={classnames({
         [styles.customTabsButton]: true,
         [styles.isActive]: isActive,
       })}
       onClick={handleClickTab}
     >
-      <div className={styles.customTabsButtonIcon} style={iconStyle} />
+      <div className={classnames({ [styles.customTabsButtonIcon]: true, [styles.active]: isActive })} />
       <div className={styles.customTabsButtonTitle}>{title}</div>
       {closable && (
         <div onClick={handleCloseTab} className={styles.customTabsButtonClose}>

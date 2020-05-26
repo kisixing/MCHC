@@ -1,4 +1,3 @@
-import React from 'react';
 import BaseEditPanelForm from '@/components/BaseEditPanel/BaseEditPanelForm';
 import WithDynamicExport from '@/components/WithDynamicExport';
 

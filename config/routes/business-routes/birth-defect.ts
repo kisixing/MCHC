@@ -5,10 +5,10 @@ export default {
   path: '/birth-defect',
   routes: [
     {
-      name: 'birth-defect/',
+      name: 'birth-defect',
       icon: 'ordered-list',
-      path: '/birth-defect/',
-      component: './case-management/birth-defect//list',
+      path: '/birth-defect',
+      component: './case-management/birth-defect/list',
     },
     {
       name: 'birth-defect-add',
