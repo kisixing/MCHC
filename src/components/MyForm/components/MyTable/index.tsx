@@ -46,9 +46,10 @@ export default class MyTable extends Component<MyTableProps,MyTableState> {
   }
 
   handleEdit = (val: any, key: string, index: number) => {
-    const { onChange } = this.props;
+    const { onChange, dispatch } = this.props;
     const { dataSource } = this.state;
     set(dataSource[index], key, val);
+    dispatch('tableEdit', dataSource[index]);
 
     /**
      * TODO
