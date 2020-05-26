@@ -46,8 +46,22 @@ export default class panel extends PanelWithChild {
             <span className={headerStyles.panelWithChildHeaderItemValue}>{get(data, 'childArchives.name')}</span>
           </div>
           <div className={headerStyles.panelWithChildHeaderItem}>
+            <span className={headerStyles.panelWithChildHeaderItemLabel}>性别:</span>
+            <span className={headerStyles.panelWithChildHeaderItemValue}>
+              {get(data, 'childArchives.gender') === 0 ? '男' : '女'}
+            </span>
+          </div>
+          <div className={headerStyles.panelWithChildHeaderItem}>
+            <span className={headerStyles.panelWithChildHeaderItemLabel}>出生日期:</span>
+            <span className={headerStyles.panelWithChildHeaderItemValue}>{get(data, 'childArchives.dob')}</span>
+          </div>
+          <div className={headerStyles.panelWithChildHeaderItem}>
             <span className={headerStyles.panelWithChildHeaderItemLabel}>年龄:</span>
             <span className={headerStyles.panelWithChildHeaderItemValue}>{get(data, 'childArchives.age')}</span>
+          </div>
+          <div className={headerStyles.panelWithChildHeaderItem}>
+            <span className={headerStyles.panelWithChildHeaderItemLabel}>母亲:</span>
+            <span className={headerStyles.panelWithChildHeaderItemValue}>{get(data, 'childArchives.mother.name')}</span>
           </div>
         </div>
         {/* <Divider className={headerStyles.panelWithChildHeaderDivider}></Divider> */}
