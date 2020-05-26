@@ -33,7 +33,7 @@ const invasiseNotes: { [key: string]: FormConfig } = {
             ]
           }
         },
-        { name: "amnioticfluidvolume", key: ".amnioticfluidvolume", input_type: "input", label: "羊水量", span: 6 },
+        { name: "amnioticfluidvolume", key: ".amnioticfluidvolume", input_type: "input", label: "羊水量", unit: "ml", span: 6 },
         { name: "amnioticfluidcharacter", key: ".amnioticfluidcharacter", input_type: "input", label: "羊水性状", span: 6 },
       ]
     }

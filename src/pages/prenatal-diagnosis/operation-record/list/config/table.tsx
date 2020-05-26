@@ -8,17 +8,11 @@ export const tableColumns = [
     align: 'center',
   },
   {
-    title: '手术类型代码',
-    dataIndex: 'operationType',
-    key: 'operationType',
+    title: '术者(医生)名称',
+    dataIndex: 'operator',
+    key: 'operator',
     align: 'center',
   },
-  // {
-  //   title: 'G',
-  //   dataIndex: 'gravidity',
-  //   key: 'gravidity',
-  //   align: 'center',
-  // },
   // {
   //   title: 'P',
   //   dataIndex: 'parity',
