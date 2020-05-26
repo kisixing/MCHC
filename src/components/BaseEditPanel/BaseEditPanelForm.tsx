@@ -93,8 +93,8 @@ export default class BaseEditPanelForm extends DynamicForm<IProps, IState> {
     const { formDescriptions } = this.props;
     return (
       <>
-        {map(formDescriptions, section => {
-          return this.renderSection(section);
+        {map(formDescriptions, (section, index) => {
+          return <div key={index}>{this.renderSection(section)}</div>;
         })}
       </>
     );

@@ -13,7 +13,6 @@ export default (props: any) => {
 
   useEffect(() => {
     const { value } = props;
-    console.log(value);
     if (!isEmpty(value)) {
       setData({
         select: get(value, 'key'),
@@ -28,7 +27,6 @@ export default (props: any) => {
       key: get(callbackData, 'select'),
       keyNote: get(callbackData, 'input'),
     };
-    setData(newData);
     onChange && onChange(newData);
   };
 
