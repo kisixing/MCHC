@@ -390,11 +390,33 @@ const config: Array<FormConfig> = [
           }
         },
 
-        // { name: 'child', key: '.child', label: "胎儿信息", input_type: "array-custom", span: 24, rules: "required",
+        // { name: 'fetalcount', key: '.fetalcount', label: "胎儿信息", input_type: "array-custom", span: 24, rules: "required",
         //   input_props:{
-        //     type: "custom",
         //     config: [
+        //       { name: 'childGender', key: '.*', label: "性别", input_type: "checkbox", span: 7, rules: "required",
+        //         input_props:{
+        //           type: "custom",
+        //           renderData: [
+        //             {
+        //               key: "childGender",
+        //               label: "性别",
+        //               options: [
+        //                 { label: "男", value: 1 },
+        //                 { label: "女", value: 2 },
+        //               ]
+        //             }
+        //           ],
+        //         }
+        //       },
         //       { name: 'neonateWeight', key: '.neonateWeight', label: "胎数", input_type: "input", span: 7, rules: "required", input_props:{} },
+        //       { name: 'menarche', key: '.menstrualHistory.menarche', label: "新生儿当前状况", input_type: "select", span: 7, rules: "required",
+        //         input_props:{
+        //           options: [
+        //             { label: "健在", value: 1 },
+        //             { label: "死亡", value: 2 },
+        //           ]
+        //         }
+        //       },
         //     ]
         //   }
         // },

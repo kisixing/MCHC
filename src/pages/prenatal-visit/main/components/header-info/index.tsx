@@ -1,68 +1,61 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
-import request from '@/utils/request';
-import { getPageQuery } from '@/utils/utils';
+import { connect } from 'dva';
 
 import styles from './index.less';
 
-interface PrenatalDiagnosisState {
+interface IndexState {
   currentPageKey: string,
-  formData: any
 }
 
-export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisState>{
+class Index extends Component<{},IndexState>{
 
   constructor(props: any) {
     super(props);
     this.state = {
       currentPageKey: "medical-record",
-      formData: null
     }
   }
 
-  componentDidMount() {
-    const urlParam = getPageQuery();
-
-    request(`/pregnancies?id.equals=${urlParam.id}`,{
-      method: "GET"
-    }).then(res => {
-      if(res.length !== 0){
-        this.setState({formData: res[0]})
-      }
-    });
+  handleHighRisk = () => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'pregnancy/changeHighrisk',
+      payload: true
+    })
   }
 
   renderInfo = () => {
-    const { formData } = this.state;
-    if(formData){
+    const { pregnancyData } = this.props;
+    if(pregnancyData){
       return (
         <div className={styles['header-info']}>
           <div className={styles['user-info']}>
             <div>
-              <span>姓名:</span><strong>{formData.name}</strong>
+              <span>姓名:</span><strong>{pregnancyData.name}</strong>
             </div>
             <div>
-              <span>年龄:</span><strong>{formData.age}</strong>
+              <span>年龄:</span><strong>{pregnancyData.age}</strong>
             </div>
             <div>
-              <span>孕周:</span><strong>{formData.gestationalWeek}</strong>
+              <span>孕周:</span><strong>{pregnancyData.gestationalWeek}</strong>
             </div>
             <div>
-              <span>预产期-日期:</span><strong>{formData.edd}</strong>
+              <span>预产期-日期:</span><strong>{pregnancyData.edd}</strong>
             </div>
             <div>
-              <span>预产期-B超:</span><strong>{formData.sureEdd}</strong>
+              <span>预产期-B超:</span><strong>{pregnancyData.sureEdd}</strong>
             </div>
             <div>
-              <span>产检编号:</span><strong>{formData.checkupNO}</strong>
+              <span>产检编号:</span><strong>{pregnancyData.checkupNO}</strong>
             </div>
           </div>
           <div className={styles['header-btnList']}>
-            <div className={styles["btnList-left"]}>
+            <div className={styles["btnList-left"]} onClick={this.handleHighRisk}>
               <div className={styles["danger-btn-wrapper"]}>
                 <Button.Group className={styles['btnList-btn-group']}>
                   <Button className={styles["level-btn"]}>
-                    {formData.highrisk}
+                    {pregnancyData.highrisk ? pregnancyData.highrisk : 1}
                   </Button>
                   <Button className={styles["danger-btn-infectin"]}>
                     传染病：无
@@ -72,7 +65,7 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
               <div className={styles["high-risk-wrapper"]}>
                 <Button.Group className={styles['btnList-btn-group']}>
                   <Button className={styles["high-risk-btn"]}>高危因素：</Button>
-                  <Button className={styles["high-risk-content"]} title={formData.highriskNote}>{formData.highriskNote ? formData.highriskNote : '无'}</Button>
+                  <Button className={styles["high-risk-content"]} title={pregnancyData.highriskNote}>{pregnancyData.highriskNote ? pregnancyData.highriskNote : '无'}</Button>
                 </Button.Group>
               </div>
             </div>
@@ -95,3 +88,12 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
     )
   }
 }
+
+const mapStateToProps = ({ pregnancy }) => {
+  return { ...pregnancy };
+};
+
+export default connect(
+  mapStateToProps
+)(Index);
+

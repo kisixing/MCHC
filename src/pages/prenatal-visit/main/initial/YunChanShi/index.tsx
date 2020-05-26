@@ -3,8 +3,6 @@ import { Button, message } from 'antd';
 import MyForm from '@/components/MyForm/index';
 import config from './config';
 import style from '../index.less';
-import request from '@/utils/request';
-import { getPageQuery } from '@/utils/utils';
 
 import { getRenderData, getFormData} from '@/components/MyForm/utils';
 
@@ -27,18 +25,6 @@ export default class Home extends React.Component<{},HomeState>{
     }
   }
 
-  componentDidMount() {
-    const urlParam = getPageQuery();
-
-    request(`/pregnancies?id.equals=${urlParam.id}`,{
-      method: "GET"
-    }).then(res => {
-      if(res.length !== 0){
-        this.setState({formData: res[0]})
-      }
-    });
-  }
-
   componentDidUpdate(){
     const { formHandler } = this.state;
     formHandler.subscribe(".lmp", "change", (val: any) => {});
@@ -56,7 +42,7 @@ export default class Home extends React.Component<{},HomeState>{
   }
 
   render(){
-    const { formData } = this.state;
+    const { formData } = this.props;
     const myConfig = getRenderData(config, formData);
     return(
       <div className={style.initialContent}>

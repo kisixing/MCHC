@@ -1,32 +1,37 @@
+import { getPregnancy } from '@/services/pregnancy';
+
 
 export default{
-	//命名空间
-	namespace:'info',
+	namespace:'pregnancy',
 	state:{
-		name:'aaa',
-		age:24,
-		des:"bbb",
-		list:[]
+    pregnancyData: null,
+    isShowHighrisk: false,
 	},
-	//处理state－－同步
 	reducers:{
-		change(state,{payload}){
-			return {...state,...payload}
-		}
+		setPregnancyData(state, { payload }){
+			return {
+        ...state,
+        pregnancyData: payload
+      }
+    },
+
+    changeHighrisk(state, { payload }){
+			return {
+        ...state,
+        isShowHighrisk: payload
+      }
+    }
+
 	},
 	// 异步
 	// yield表示后面的方法执行完以后 call表示调用一个api接口
 	// put表示一个派发
 	effects:{
-		*getData(payload,{call,put}){
-			console.log(payload)
-			const result=yield call(api.getProList,payload.payload)
-			console.log(result)
+		*getPregnancyData({ payload }, { call, put }){
+			const res = yield call(getPregnancy, payload)
 			yield put({
-				type:'change',
-				payload:{
-					list:result.data.data
-				}
+				type: 'setPregnancyData',
+				payload: res[0]
 			})
 		}
   }

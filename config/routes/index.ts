@@ -802,7 +802,7 @@ export const omitRoutesBackup = [
     id: 157,
     type: 'others',
     key: '/prenatal-visit/main',
-    name: '医生工作台',
+    name: '孕册信息',
     parentid: 0,
     active: null,
     isMenu: false,

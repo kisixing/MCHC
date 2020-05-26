@@ -1,74 +1,73 @@
 import React, { Component } from 'react';
 import { Row, Col, Tree, Modal, Select, Input, Button } from 'antd';
 import request from '@/utils/request';
-import { getPageQuery } from '@/utils/utils';
-import { highRiskData } from './data';
+import { connect } from 'dva';
 
+import { highRiskData } from './data';
 import styles from './index.less';
 
-interface PrenatalDiagnosisState {
-  formData: any,
-  isShowHighrisk: any,
+interface IndexState {
   expandedKeys: any,
+  pageData: any
 }
 
-export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisState>{
+class Index extends Component<{},IndexState>{
 
   constructor(props: any) {
     super(props);
     this.state = {
-      formData: null,
-      isShowHighrisk: true,
       expandedKeys: [],
+      pageData: null
     }
   }
 
   componentDidMount() {
-    const urlParam = getPageQuery();
-
-    request(`/pregnancies?id.equals=${urlParam.id}`,{
-      method: "GET"
-    }).then(res => {
-      if(res.length !== 0){
-        this.setState({formData: res[0]})
-      }
-    });
-
+    const { pregnancyData } = this.props;
+    this.setState({
+      pageData: pregnancyData
+    })
   }
 
   renderDanger() {
-    const { isShowHighrisk, formData, expandedKeys } = this.state;
+    const { isShowHighrisk, dispatch, pregnancyData } = this.props;
+    const { pageData, expandedKeys } = this.state;
 
-    const searchList = formData && highRiskData.filter(i  => !formData.search || i.name.indexOf(formData.search) !== -1);
-    let allExpandedKeys = [];
+    const searchList = pageData && highRiskData.filter(i  => !pageData.search || i.name.indexOf(pageData.search) !== -1);
+    const allExpandedKeys = [];
     searchList && searchList.map(item => {
       allExpandedKeys.push(item.id.toString())
     })
 
-    const handleOk = () => {
-      this.setState({ isShowHighrisk: false });
-      const resData = {
-        id: formData.id,
-        highrisk: formData.highrisk,
-        highriskNote: formData.highriskNote,
-      };
-      request('/pregnancies', {
-        method: 'PUT',
-        data: resData
-      }).then(r => {
+    const handleClose = (bool) => {
+      dispatch({
+        type: 'pregnancy/changeHighrisk',
+        payload: false
+      })
+      if (bool) {
+        const resData = {
+          id: pageData.id,
+          highrisk: pageData.highrisk,
+          highriskNote: pageData.highriskNote,
+        };
+        request('/pregnancies', {
+          method: 'PUT',
+          data: resData
+        }).then(r => {
 
-      });
+        });
+      }
+
     };
 
     const handleClear = () => {
-      formData['highrisk'] = '';
-      formData['highriskNote'] = '';
-      this.setState({ formData });
+      pageData.highrisk = '';
+      pageData.highriskNote = '';
+      this.setState({ pageData });
     };
 
     const handleChange = (name, value) => {
-      formData[name] = value;
-      this.setState({ formData });
+      pageData[name] = value;
+      this.setState({ pageData });
     };
 
     const handleCheck = keys => {
@@ -76,8 +75,8 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
     }
 
     const handleSelect = keys => {
-      let initLevel = formData.highrisk;
-      const node = searchList.filter(i => i.id == keys[0]).pop();
+      let initLevel = pageData.highrisk;
+      const node = searchList.filter(i => i.id === keys[0]).pop();
       if(node && node.level && node.level > initLevel) {
         let newLevel = node.level;
         handleChange("highrisk", newLevel)
@@ -91,8 +90,8 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
         return [n.name];
       };
       if ( node && !searchList.filter(i => i.pId === node.id).length &&
-           formData.highriskNote && formData.highriskNote.split("\n").indexOf(node.name) === -1) {
-        handleChange( "highriskNote", (formData.highriskNote || '').replace(/\n+$/, "") + "\n" + gettitle(node).join(":") );
+           pageData.highriskNote && pageData.highriskNote.split("\n").indexOf(node.name) === -1) {
+        handleChange( "highriskNote", (pageData.highriskNote || '').replace(/\n+$/, "") + "\n" + gettitle(node).join(":") );
       } else if (node && !searchList.filter(i => i.pId === node.id).length) {
         handleChange( "highriskNote", gettitle(node).join(":") );
       }
@@ -106,9 +105,9 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
         </Tree.TreeNode>
       ));
 
-    return (formData ?
+    return (pageData ?
       <Modal className="highriskPop" title="高危因素" visible={isShowHighrisk} width={1000} maskClosable={true}
-             onCancel={() => this.setState({ isShowHighrisk: false })} onOk={() => handleOk()}>
+             onCancel={() => handleClose(false)} onOk={() => handleClose(true)}>
         <div>
           <Row>
             <Col span={2}></Col>
@@ -116,7 +115,7 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
               <Row>
                 <Col span={3}>高危等级：</Col>
                 <Col span={7}>
-                  <Select value={formData.highrisk} onChange={e => handleChange("highrisk", e)}>
+                  <Select value={pageData.highrisk} onChange={e => handleChange("highrisk", e)}>
                     {"1,2,3,4,5".split(",").map(i => (
                       <Select.Option key={i} value={i}>{i}</Select.Option>
                     ))}
@@ -125,7 +124,7 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
                 {/* <Col span={2}>传染病：</Col> */}
                 {/* <Col span={10}>
                   <Select className="highrisk-infec" multiple
-                          value={!!formData.infectious ? formData.infectious.split(",") : []}
+                          value={!!pageData.infectious ? pageData.infectious.split(",") : []}
                           onChange={e => handleChange("infectious", e.join())}>
                     {"乙肝大三阳,乙肝小三阳,乙肝表面抗原携带者,梅毒,HIV,结核病,重症感染性肺炎,特殊病毒感染（H1N7、寨卡等）,传染病：其他".split(",").map(i => (
                         <Select.Option key={i} value={i}>{i}</Select.Option>
@@ -137,7 +136,7 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
               <Row>
                 <Col span={3}>高危因素：</Col>
                 <Col span={16}>
-                  <Input.TextArea value={formData.highriskNote} onChange={e => handleChange("highriskNote", e.target.value)}/>
+                  <Input.TextArea value={pageData.highriskNote} onChange={e => handleChange("highriskNote", e.target.value)}/>
                 </Col>
                 <Col span={1}></Col>
                 <Col span={2}>
@@ -147,7 +146,7 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
               <br />
               <Row>
                 <Col span={16}>
-                  <Input value={formData.search} onChange={e => handleChange("search", e.target.value)} placeholder="输入模糊查找"/>
+                  <Input value={pageData.search} onChange={e => handleChange("search", e.target.value)} placeholder="输入模糊查找"/>
                 </Col>
                 <Col span={3}>
                   <Button size="small" onClick={() => this.setState({expandedKeys: []})}>全部收齐</Button>
@@ -176,3 +175,11 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
     )
   }
 }
+
+const mapStateToProps = ({ pregnancy }) => {
+  return { ...pregnancy };
+};
+
+export default connect(
+  mapStateToProps
+)(Index);

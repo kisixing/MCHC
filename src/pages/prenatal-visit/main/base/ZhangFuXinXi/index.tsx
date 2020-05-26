@@ -3,40 +3,23 @@ import { Button, message } from 'antd';
 import MyForm from '@/components/MyForm/index';
 import config from './config';
 import style from '../index.less';
-import request from '@/utils/request';
-import { getPageQuery } from '@/utils/utils';
 
 import { getRenderData, getFormData} from '@/components/MyForm/utils';
 
 interface HomeState{
   formHandler:{
     [key:string]: any
-  },
-  formData: any
+  }
 }
 
-
 export default class Home extends React.Component<{},HomeState>{
-  static Title = '预产期';
+  static Title = '丈夫信息';
 
   constructor(props:any){
     super(props);
     this.state = {
-      formHandler: {},
-      formData: {}
+      formHandler: {}
     }
-  }
-
-  componentDidMount() {
-    const urlParam = getPageQuery();
-
-    request(`/pregnancies?id.equals=${urlParam.id}`,{
-      method: "GET"
-    }).then(res => {
-      if(res.length !== 0){
-        this.setState({formData: res[0]})
-      }
-    });
   }
 
   componentDidUpdate(){
@@ -45,18 +28,10 @@ export default class Home extends React.Component<{},HomeState>{
   }
 
   handleSubmit = () => {
-    const id = getPageQuery().id;
+    const { handleSave } = this.props;
     this.state.formHandler.submit().then(({validCode, res}:any) => {
       if(validCode) {
-        const param = { id };
-        const resData = {...getFormData(res), ...param }
-
-        request('/pregnancies', {
-          method: 'PUT',
-          data: resData
-        }).then(r => {
-          message.success('保存成功！');
-        });
+        handleSave(getFormData(res));
       } else {
         message.error('必填项不能为空！');
       }
@@ -64,7 +39,7 @@ export default class Home extends React.Component<{},HomeState>{
   }
 
   render(){
-    const { formData } = this.state;
+    const { formData } = this.props;
     const myConfig = getRenderData(config, formData);
     return(
       <div className={style.initialContent}>

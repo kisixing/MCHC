@@ -10,29 +10,29 @@ const config: Array<FormConfig> = [
   // { name: 'crl', key: '.ultrasounds.crl', label: "CRL", input_type: "input", span: 7},
   // { name: 'nt', key: '.ultrasounds.nt', label: "NT", input_type: "input", span: 7},
   // { name: 'gestationalWeek', key: '.ultrasounds.gestationalWeek', label: "如孕", input_type: "input", span: 7},
-  // { name: 'pregnantInfo-add_FIELD_shouyun', key: '.pregnantInfo', label: "受孕方式", input_type: "checkbox", span: 10, rules: "required",
-  //   input_props: {
-  //     type: "custom",
-  //     renderData: [
-  //       {
-  //         key: "add_FIELD_shouyun",
-  //         label: "受孕方式",
-  //         options: [
-  //           {label: "IVF", value: 1},
-  //           {label: "自然", value: 2},
-  //         ],
-  //         extraEditors: [
-  //           {
-  //             key: 1,
-  //             editors: [
-  //               { name: "", key: "", label: "", input_type: "input" }
-  //             ]
-  //           }
-  //         ]
-  //       },
-  //     ],
-  //   }
-  // },
+  { name: 'conceiveMode', key: '.personalprofile', label: "受孕方式", input_type: "checkbox", span: 10, rules: "required",
+    input_props: {
+      type: "custom",
+      renderData: [
+        {
+          key: "conceiveMode",
+          label: "受孕方式",
+          options: [
+            {label: "IVF", value: 1},
+            {label: "自然", value: 2},
+          ],
+          extraEditors: [
+            {
+              key: 1,
+              editors: [
+                { name: "", key: "", label: "", input_type: "input" }
+              ]
+            }
+          ]
+        },
+      ],
+    }
+  },
 ]
 export default config;
 
