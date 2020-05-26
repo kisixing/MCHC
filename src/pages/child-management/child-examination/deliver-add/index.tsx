@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import PanelWithChild from '@/components/BaseEditPanel/PanelWithChild';
 import BirthInformation from '../birth-information';
 import InfectedHistory from '../infected-history';
@@ -55,8 +56,22 @@ export default class Addpanel extends PanelWithChild {
             <span className={headerStyles.panelWithChildHeaderItemValue}>{get(data, 'name')}</span>
           </div>
           <div className={headerStyles.panelWithChildHeaderItem}>
+            <span className={headerStyles.panelWithChildHeaderItemLabel}>性别:</span>
+            <span className={headerStyles.panelWithChildHeaderItemValue}>
+              {get(data, 'gender') === 0 ? '男' : '女'}
+            </span>
+          </div>
+          <div className={headerStyles.panelWithChildHeaderItem}>
+            <span className={headerStyles.panelWithChildHeaderItemLabel}>出生日期:</span>
+            <span className={headerStyles.panelWithChildHeaderItemValue}>{get(data, 'dob')}</span>
+          </div>
+          <div className={headerStyles.panelWithChildHeaderItem}>
             <span className={headerStyles.panelWithChildHeaderItemLabel}>年龄:</span>
             <span className={headerStyles.panelWithChildHeaderItemValue}>{get(data, 'age')}</span>
+          </div>
+          <div className={headerStyles.panelWithChildHeaderItem}>
+            <span className={headerStyles.panelWithChildHeaderItemLabel}>母亲:</span>
+            <span className={headerStyles.panelWithChildHeaderItemValue}>{get(data, 'mother.name')}</span>
           </div>
         </div>
         {/* <Divider className={headerStyles.panelWithChildHeaderDivider}></Divider> */}
@@ -73,7 +88,7 @@ export default class Addpanel extends PanelWithChild {
           {activeKey === 'BirthInformation' && <BirthInformation data={data} />}
         </Tabs.TabPane> */}
         <Tabs.TabPane tab="体格检查" key="PhysicalExamination">
-          {activeKey === 'PhysicalExamination' && childArchives.id && (
+          {activeKey === 'PhysicalExamination' && (
             <PhysicalExamination id={id} setID={this.setID} data={data} childArchivesData={childArchives} />
           )}
         </Tabs.TabPane>

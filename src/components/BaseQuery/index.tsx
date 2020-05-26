@@ -1,9 +1,15 @@
 import React from 'react';
 import { Form, Button } from 'antd';
+import { SearchOutlined, RedoOutlined } from '@ant-design/icons';
 import DynamicForm from '@/components/BaseModalForm/DynamicForm';
 import styles from './index.less';
 
-export default class BaseQuery extends DynamicForm {
+interface S {}
+interface P {
+  onSearch?: (value: any) => void;
+}
+
+export default class BaseQuery extends DynamicForm<P, S> {
   formDescriptions = {};
 
   formItemLayout = {
@@ -27,7 +33,7 @@ export default class BaseQuery extends DynamicForm {
 
   renderResetBtn = () => (
     <Form.Item>
-      <Button size="small" onClick={this.handleReset}>
+      <Button size="small" icon={<RedoOutlined />} onClick={this.handleReset}>
         重置
       </Button>
     </Form.Item>
@@ -35,7 +41,7 @@ export default class BaseQuery extends DynamicForm {
 
   renderSearchBtn = () => (
     <Form.Item>
-      <Button size="small" type="primary" htmlType="submit">
+      <Button size="small" type="primary" icon={<SearchOutlined />} htmlType="submit">
         查询
       </Button>
     </Form.Item>

@@ -92,6 +92,15 @@ export class FormSection extends React.Component<IProps> {
             styles: get(formDescription, 'styles'),
           },
         );
+      case 'radio_group':
+        return renderEditItem(
+          get(formDescription, 'key'),
+          <Radio.Group size="small" {...get(formDescription, 'inputProps')} />,
+          {
+            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
+            styles: get(formDescription, 'styles'),
+          },
+        );
       case 'normal_select':
         return renderEditItem(
           get(formDescription, 'key'),
