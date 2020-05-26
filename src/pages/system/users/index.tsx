@@ -10,7 +10,7 @@ import BaseList, { IState as BaseListIState } from '@/components/BaseList';
 import request from '@/utils/request';
 import { EditOutlined, DeleteOutlined, RedoOutlined } from '@ant-design/icons';
 import commonStyles from '@/common.less';
-import CustomSpin from '@/components/GeneralComponents/CustomSpin';
+import ContainerDimensions from 'react-container-dimensions';
 import ResetPasswordModal from './components/ResetPasswordModal';
 import WithDynamicExport from '@/components/WithDynamicExport';
 
@@ -153,26 +153,30 @@ export default class List extends BaseList {
     return (
       <Fragment>
         {showQuery && <Query onSearch={this.handleQuerySearch} />}
-        {loading ? (
-          <CustomSpin />
-        ) : (
-          <Table
-            pagination={
-              needPagination && {
-                total,
-                showTotal: () => `一共${total}条记录`,
-                pageSize: get(defaultQuery, 'size'),
-                defaultCurrent: 1,
-                onChange: this.handlePageChange,
-              }
-            }
-            columns={this.columns}
-            dataSource={dataSource}
-            onAdd={showAdd && this.handleAdd}
-            baseTitle={baseTitle}
-            rowKey={rowKey}
-          />
-        )}
+        <ContainerDimensions>
+          {({ height }) => {
+            console.log(height);
+            return (
+              <Table
+                loading={loading}
+                pagination={
+                  needPagination && {
+                    total,
+                    showTotal: () => `一共${total}条记录`,
+                    pageSize: get(defaultQuery, 'size'),
+                    defaultCurrent: 1,
+                    onChange: this.handlePageChange,
+                  }
+                }
+                columns={this.columns}
+                dataSource={dataSource}
+                onAdd={showAdd && this.handleAdd}
+                baseTitle={baseTitle}
+                rowKey={rowKey}
+              />
+            );
+          }}
+        </ContainerDimensions>
         {visible && (
           <UsersModal
             visible={visible}

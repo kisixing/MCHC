@@ -83,6 +83,7 @@
     "qs": "^6.9.0",
     "query-string": "^6.11.1",
     "react": "^16.8.6",
+    "react-container-dimensions": "^1.4.1",
     "react-copy-to-clipboard": "^5.0.1",
     "react-crons": "^2.2.0",
     "react-dom": "^16.8.6",
