@@ -17,7 +17,7 @@ import commonStyles from '@/common.less';
 export default class List extends BaseList {
   static defaultProps = {
     rowKey: 'id',
-    baseUrl: '',
+    baseUrl: '/nutritionalCase',
     baseTitle: '营养性疾病儿童',
     needPagination: true,
     showQuery: true,

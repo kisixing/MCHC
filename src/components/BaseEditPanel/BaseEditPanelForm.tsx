@@ -105,10 +105,10 @@ export default class BaseEditPanelForm extends DynamicForm<IProps, IState> {
       <Form style={{ minWidth: '90%' }} ref={this.formRef} {...formItemLayout}>
         {this.renderEditContent()}
         <Form.Item key="action" wrapperCol={{ span: 21 }} className={styles.buttons}>
-          <Button ghost type="primary" size="large" htmlType="reset" icon={<RedoOutlined />} onClick={this.handleReset}>
+          <Button ghost type="primary" htmlType="reset" icon={<RedoOutlined />} onClick={this.handleReset}>
             重置
           </Button>
-          <Button size="large" type="primary" icon={<FileTextOutlined />} htmlType="submit" onClick={this.handleFinish}>
+          <Button type="primary" icon={<FileTextOutlined />} htmlType="submit" onClick={this.handleFinish}>
             提交
           </Button>
         </Form.Item>
