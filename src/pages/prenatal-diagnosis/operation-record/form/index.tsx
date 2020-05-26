@@ -2,6 +2,9 @@ import React,{ ReactNode } from 'react';
 import { Button, message } from 'antd';
 import MyForm from '@/components/MyForm/index';
 import config from './config/index';
+
+import FloatTreeMenu from '@/components/FloatTreeMenu';
+
 import styles from './index.less';
 import { isNotEmpty, getPageQuery } from '@/utils/utils';
 import request from '@/utils/request';
@@ -67,13 +70,7 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
     })
 
     if (urlParams.prenatalPatientId && urlParams.id) {
-      request(`${URL}?prenatalPatientId.equals=${urlParams.prenatalPatientId}&id.equals=${urlParams.id}`, {
-        method: "GET"
-      }).then(res => {
-        if (res.length !== 0) {
-          this.setState({ data: res[0] })
-        }
-      })
+      this.getPdOperations(urlParams.prenatalPatientId, urlParams.id);
     }
   }
 
@@ -91,6 +88,18 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
       })
     }
   }
+
+  // 获取病历
+  getPdOperations = (prenatalPatientId: number|string, id: number) => {
+    request(`${URL}?prenatalPatientId.equals=${prenatalPatientId}&id.equals=${id}`, {
+      method: "GET"
+    }).then((res: any) => {
+      if (res.length !== 0) {
+        this.setState({ data: res[0] })
+      }
+    });
+  }
+
 
   handleSubmit = () => {
     const { prenatalPatientId, id } = this.state;
@@ -151,8 +160,13 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
     return <span>无用户信息</span>;
   }
 
+  handleTreeMenuSelect = (id: number) => {
+    const { prenatalPatientId } = this.state;
+    this.getPdOperations(prenatalPatientId, id);
+  }
+
   render() {
-    const { data, patients } = this.state;
+    const { data, patients, prenatalPatientId } = this.state;
     let { operationType } = data;
     if(operationType === null){ operationType = 1; }
     const myConfig = getRenderData(config[operationType], data);
@@ -172,7 +186,18 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
             <Button type="primary" onClick={this.handleSubmit}>提交</Button>
           </div>
         </div>
-
+        <FloatTreeMenu
+          url={`/${URL}?prenatalPatientId.equals=${prenatalPatientId}`}
+          firstLayer={{
+            key: "operationDate",
+            render: (text:any) => text
+          }}
+          secondLayer={{
+            key: "id",
+            render: (text:any, record: any) => record.operationName
+          }}
+          onSelect={this.handleTreeMenuSelect}
+        />
       </div>
     )
   }

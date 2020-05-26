@@ -3,7 +3,9 @@ import { Button, message } from 'antd';
 import MyForm from '@/components/MyForm/index';
 
 import config from './config';
-// import data from './data';
+
+import FloatTreeMenu from '@/components/FloatTreeMenu';
+
 import { getRenderData, getFormData } from '@/components/MyForm/utils'
 import { getPageQuery } from '@/utils/utils';
 
@@ -41,7 +43,7 @@ export default class MedicalRecord extends React.Component<any, MedicalRecordSta
           { id: "" }
         ]
       },
-      id: -1,               // 病历id
+      id: -1,                 // 病历id
       prenatalPatientId: -1,  // 产期患者id
       patients: {}
     }
@@ -64,16 +66,21 @@ export default class MedicalRecord extends React.Component<any, MedicalRecordSta
       }
     })
   
-    // 修改
+    // 获取病历信息
     if (urlParams.prenatalPatientId && urlParams.id) {
-      request(`${URL}?prenatalPatientId.equals=${urlParams.prenatalPatientId}&id.equals=${urlParams.id}`, {
-        method: "GET"
-      }).then((res: any) => {
-        if (res.length !== 0) {
-          this.setState({ data: res[0] })
-        }
-      });
+      this.getPrenatalDiagnosis(urlParams.prenatalPatientId, urlParams.id)
     }
+  }
+
+  // 获取病历
+  getPrenatalDiagnosis = (prenatalPatientId: number|string, id: number) => {
+    request(`${URL}?prenatalPatientId.equals=${prenatalPatientId}&id.equals=${id}`, {
+      method: "GET"
+    }).then((res: any) => {
+      if (res.length !== 0) {
+        this.setState({ data: res[0] })
+      }
+    });
   }
 
   handleSubmit = () => {
@@ -135,9 +142,13 @@ export default class MedicalRecord extends React.Component<any, MedicalRecordSta
     return <span>无用户信息</span>;
   }
   
+  handleTreeMenuSelect = (id: number):void => {
+    const { prenatalPatientId } = this.state;
+    this.getPrenatalDiagnosis(prenatalPatientId, id);
+  }
 
   render() {
-    const { data, patients } = this.state;
+    const { data, patients, prenatalPatientId } = this.state;
     const myConfig = getRenderData(config, data);
     return (
       <div className={styles.container}>
@@ -155,6 +166,18 @@ export default class MedicalRecord extends React.Component<any, MedicalRecordSta
             <Button type="primary" onClick={this.handleSubmit}>提交</Button>
           </div>
         </div>
+        <FloatTreeMenu
+          url={`/${URL}?prenatalPatientId.equals=${prenatalPatientId}`}
+          firstLayer={{
+            key: "visitDate",
+            render: (text:any) => text
+          }}
+          secondLayer={{
+            key: "id",
+            render: (text:any) => "专科病历"
+          }}
+          onSelect={this.handleTreeMenuSelect}
+        />
       </div>
     )
   }
