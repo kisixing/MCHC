@@ -153,8 +153,9 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
 
   render() {
     const { data, patients } = this.state;
-    const myConfig = getRenderData(config[data.operationType], data);
-    // 不要再页面render中尝试取formHandler的值，因为这个时候formItem初始化还没有完成
+    let { operationType } = data;
+    if(operationType === null){ operationType = 1; }
+    const myConfig = getRenderData(config[operationType], data);
     return (
       <div className={styles.container}>
         <div className={styles['user-info']}>

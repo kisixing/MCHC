@@ -6,6 +6,7 @@ import { FormItemProp, FormItemState } from './interface';
 import { validFun } from './utils/valid';
 import { isEmpty, isObj, isArr } from './utils/func';
 import styles from './formItem.less';
+import moment from 'moment';
 
 function isBase(val: any): boolean {
   return val && typeof val !== "object";
@@ -23,17 +24,6 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
     const self = this;
     if (props.actions) {
       props.actions.getValue = function getValue() {
-        // 可以考虑在这个位置做一个拦截提交
-        if(self.state.path === ".*" && props.input_props.type === "custom"){
-          const key = props.input_props.renderData[0].key;
-          return {
-            value: {
-              [key]: self.state.value[key],
-              [`${key}Note`]: self.state.value[`${key}Note`]
-            },
-            path: self.state.path
-          }
-        }
         return {
           value: self.state.value,
           path: self.state.path
