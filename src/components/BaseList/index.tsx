@@ -360,7 +360,8 @@ export default class BaseList extends React.Component<IProps, IState> {
               pagination={
                 needPagination && {
                   total,
-                  showTotal: () => `一共${total}条记录`,
+                  size: 'default',
+                  showTotal: () => `共 ${total} 条`,
                   pageSize: get(defaultQuery, 'size'),
                   defaultCurrent: 1,
                   onChange: this.handlePageChange,

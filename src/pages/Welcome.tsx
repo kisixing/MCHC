@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Typography, Alert } from 'antd';
 
 export default (): React.ReactNode => (
-  <Card>
+  <Card style={{ height: 'calc(100vh - 133px)' }}>
     <Alert
       message="管理平台现已发布，点击左侧菜单体验所有功能吧。"
       type="success"
@@ -13,6 +13,6 @@ export default (): React.ReactNode => (
         marginBottom: 24,
       }}
     />
-    <Typography.Text strong>基于 ant-design pro 开发</Typography.Text>
+    <Typography.Text strong></Typography.Text>
   </Card>
 );
