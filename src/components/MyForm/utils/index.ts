@@ -164,9 +164,10 @@ export function getRenderData(config: Array<FormConfig>, data: any): Array<FormC
   if (!data) {
     return config;
   }
-  const cData: { [key: string]: any } = loopPath(data, config.map(v => v.key));
-  for (let i = 0; i < config.length; i++) {
-    config[i].value = cData[config[i].key];
+  const rConfig = JSON.parse(JSON.stringify(config));
+  const cData: { [key: string]: any } = loopPath(data, rConfig.map(v => v.key));
+  for (let i = 0; i < rConfig.length; i++) {
+    rConfig[i].value = cData[rConfig[i].key];
   }
   return config;
 }

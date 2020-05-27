@@ -25,7 +25,7 @@ export default {
     {
       name: 'medical-record-list',
       icon: 'ordered-list',
-      path: '/prenatal-diagnosis/medical-record-list',
+      path: '/prenatal-diagnosis/medical-record',
       component: './prenatal-diagnosis/medical-record/list'
     },
     {
@@ -37,7 +37,7 @@ export default {
     {
       name: 'operation-record-list',
       icon: 'ordered-list',
-      path: '/prenatal-diagnosis/operation-record-list',
+      path: '/prenatal-diagnosis/operation-record',
       component: './prenatal-diagnosis/operation-record/list'
     },
     {

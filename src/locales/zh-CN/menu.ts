@@ -160,9 +160,9 @@ export default {
   'menu.prenatal-diagnosis.main': '病历管理主页',
   'menu.prenatal-diagnosis.new-patient': '新建病历',
   'menu.prenatal-diagnosis.medical-record-list': '专科病历列表',
-  'menu.prenatal-diagnosis.medical-record-form': '专科病历表单',
+  'menu.prenatal-diagnosis.medical-record-form': '专科病历',
   'menu.prenatal-diagnosis.operation-record-list': '手术病历列表',
-  'menu.prenatal-diagnosis.operation-record-form': '手术病历表单',
+  'menu.prenatal-diagnosis.operation-record-form': '手术病历',
 
   'menu.prenatal-diagnosis.prenatalpatient': '建档管理',
   'menu.prenatal-diagnosis.prenataldiagnosis': '产前诊断病例',

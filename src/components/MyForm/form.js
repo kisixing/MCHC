@@ -1,4 +1,5 @@
 import { isEmpty } from './utils/func';
+import { getFormData } from './utils/index';
 
 function isArr(v){
   return Object.prototype.toString.call(v) === '[object Array]';
@@ -42,6 +43,7 @@ export function createFormHandler(config, {submitChange}){
   const submit = function() {
     let r = {}
     let validCode = true;
+    console.log(formHandler);
     Object.keys(formHandler).forEach(key => {
       if(formHandler[key].actions){
         if(typeof formHandler[key].actions.getValue === "function"){
@@ -55,6 +57,7 @@ export function createFormHandler(config, {submitChange}){
         }
       }
     })
+    
     return new Promise(resolve => {
       resolve({validCode,res: r})
     })
@@ -106,7 +109,6 @@ export function createFormHandler(config, {submitChange}){
       if(flag){
         eventCallBacks[fieldName][eventName].push(cb);
       }
-
     }
   }
 
@@ -115,21 +117,25 @@ export function createFormHandler(config, {submitChange}){
       dispatch("_global", "change");
       // return;
     }
-
+    
     if(!Object.prototype.hasOwnProperty.call(eventCallBacks, fieldName)) {
       console.warn(`fieldName ${fieldName} not found in eventCallBacks Object`);
       return;
     }
     const eventObject = eventCallBacks[fieldName];
-
+    
     const eventQueue = eventObject[eventName];
     if(!eventQueue || eventQueue.length === 0){
       console.warn(`fieldName ${eventName} not found in ${fieldName} Event Object || eventQueue's length is 0`);
       return;
     }
-    eventQueue.forEach(func => {
-      func(args);
-    })
+
+
+    setTimeout(() => {
+      eventQueue.forEach(func => {
+        func(args);
+      })
+    },100)
   }
 
   const formHandler = {...initField(config)}

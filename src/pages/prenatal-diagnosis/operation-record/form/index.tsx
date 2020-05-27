@@ -2,6 +2,11 @@ import React,{ ReactNode } from 'react';
 import { Button, message } from 'antd';
 import MyForm from '@/components/MyForm/index';
 import config from './config/index';
+
+import observePatientData from '@/utils/observePatientData';
+
+import FloatTreeMenu from '@/components/FloatTreeMenu';
+
 import styles from './index.less';
 import { isNotEmpty, getPageQuery } from '@/utils/utils';
 import request from '@/utils/request';
@@ -67,19 +72,12 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
     })
 
     if (urlParams.prenatalPatientId && urlParams.id) {
-      request(`${URL}?prenatalPatientId.equals=${urlParams.prenatalPatientId}&id.equals=${urlParams.id}`, {
-        method: "GET"
-      }).then(res => {
-        if (res.length !== 0) {
-          this.setState({ data: res[0] })
-        }
-      })
+      this.getPdOperations(urlParams.prenatalPatientId, urlParams.id);
     }
   }
 
   componentDidUpdate() {
     const { formHandler, data } = this.state;
-    
     if (isNotEmpty(formHandler)) {
       formHandler.subscribe("operationType", "change", (val: any) => {
         this.setState({
@@ -90,7 +88,23 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
         })
       })
     }
+    // observePatientData.subscribe((data: any) => {
+    //   console.log(data);
+    // })
   }
+
+  // 获取病历
+  getPdOperations = (prenatalPatientId: number|string, id: number) => {
+    request(`${URL}?prenatalPatientId.equals=${prenatalPatientId}&id.equals=${id}`, {
+      method: "GET"
+    }).then((res: any) => {
+      if (res.length !== 0) {
+        this.setState({ data: res[0] })
+      }
+    });
+  }
+
+  
 
   handleSubmit = () => {
     const { prenatalPatientId, id } = this.state;
@@ -151,10 +165,16 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
     return <span>无用户信息</span>;
   }
 
+  handleTreeMenuSelect = (id: number) => {
+    const { prenatalPatientId } = this.state;
+    this.getPdOperations(prenatalPatientId, id);
+  }
+
   render() {
-    const { data, patients } = this.state;
-    const myConfig = getRenderData(config[data.operationType], data);
-    // 不要再页面render中尝试取formHandler的值，因为这个时候formItem初始化还没有完成
+    const { data, patients, prenatalPatientId } = this.state;
+    let { operationType } = data;
+    if(operationType === null){ operationType = 1; }
+    const myConfig = getRenderData(config[operationType], data);
     return (
       <div className={styles.container}>
         <div className={styles['user-info']}>
@@ -162,7 +182,8 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
         </div>
         <div className={styles.form}>
           <MyForm
-            config={myConfig}
+            config={config[operationType]}
+            value={data}
             getFormHandler={(formHandler: any) => this.setState({ formHandler })}
             submitChange={false}
           />
@@ -171,7 +192,18 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
             <Button type="primary" onClick={this.handleSubmit}>提交</Button>
           </div>
         </div>
-
+        {/* <FloatTreeMenu
+          url={`/${URL}?prenatalPatientId.equals=${prenatalPatientId}`}
+          firstLayer={{
+            key: "operationDate",
+            render: (text:any) => text
+          }}
+          secondLayer={{
+            key: "id",
+            render: (text:any, record: any) => record.operationName
+          }}
+          onSelect={this.handleTreeMenuSelect}
+        /> */}
       </div>
     )
   }

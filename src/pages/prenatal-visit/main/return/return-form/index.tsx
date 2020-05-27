@@ -36,6 +36,7 @@ class Index extends React.Component<{},IndexState>{
     const { dispatch } = this.props;
     const { formHandler } = this.state;
     const urlParam = getPageQuery();
+
     formHandler.submit().then(({validCode, res}:any) => {
       if(validCode) {
         console.log(validCode, res, getFormData(res), '000')
