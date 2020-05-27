@@ -29,7 +29,7 @@ interface FloatTreeMenuProps {
 interface FloatTreeMenuState {
   visible: boolean,
   data: Array<any>,
-  selectedKeys: Array<any>
+  activeKey: number|string
 }
 
 interface TreeNodeConstructor {
@@ -49,7 +49,7 @@ export default class FloatTreeMenu extends Component<FloatTreeMenuProps, FloatTr
     this.state = {
       visible: false,
       data: [],
-      selectedKeys: []
+      activeKey: -1
     }
   }
 
@@ -72,62 +72,57 @@ export default class FloatTreeMenu extends Component<FloatTreeMenuProps, FloatTr
     this.setState({ visible: false })
   }
 
-  generateTreeData = (
-    data: Array<any>,
-    firstLayer: {
-      key: string,
-      render: Function
-    },
-    secondLayer: {
-      key: string,
-      render: Function
-    }): Array<TreeNodeConstructor> => {
-    if (data.length === 0 || !firstLayer || !secondLayer) return [];
-    const treeData: Array<TreeNodeConstructor> = [];
-    for (let i = 0; i < data.length; i++) {
-      const firstArgument: any = data[i][firstLayer.key];
-      let isFound = false;
-      for (let j = 0; j < treeData.length; j++) {
-        if (firstArgument === treeData[j][firstLayer.key]) {
-          if (!treeData[j].children) {
-            treeData[j].children = [];
-          }
-          treeData[j].children.push({
-            title: secondLayer.render(data[i][secondLayer.key], data[i]),
-            key: data[i][secondLayer.key],
-          });
-          isFound = true;
-          break;
-        }
-      }
-      if (!isFound) {
-        treeData.push({
-          title: firstLayer.render(data[i][firstLayer.key], data[i]),
-          key: data[i][firstLayer.key],
-          children: [
-            {
-              title: secondLayer.render(data[i][secondLayer.key], data[i]),
-              key: data[i][secondLayer.key],
-            }
-          ]
-        })
-      }
-    }
-    return treeData;
-  }
+  // generateTreeData = (
+  //   data: Array<any>,
+  //   firstLayer: {
+  //     key: string,
+  //     render: Function
+  //   },
+  //   secondLayer: {
+  //     key: string,
+  //     render: Function
+  //   }): Array<TreeNodeConstructor> => {
+  //   if (data.length === 0 || !firstLayer || !secondLayer) return [];
+  //   const treeData: Array<TreeNodeConstructor> = [];
+  //   for (let i = 0; i < data.length; i++) {
+  //     const firstArgument: any = data[i][firstLayer.key];
+  //     let isFound = false;
+  //     for (let j = 0; j < treeData.length; j++) {
+  //       if (firstArgument === treeData[j][firstLayer.key]) {
+  //         if (!treeData[j].children) {
+  //           treeData[j].children = [];
+  //         }
+  //         treeData[j].children.push({
+  //           title: secondLayer.render(data[i][secondLayer.key], data[i]),
+  //           key: data[i][secondLayer.key],
+  //         });
+  //         isFound = true;
+  //         break;
+  //       }
+  //     }
+  //     if (!isFound) {
+  //       treeData.push({
+  //         title: firstLayer.render(data[i][firstLayer.key], data[i]),
+  //         key: data[i][firstLayer.key],
+  //         children: [
+  //           {
+  //             title: secondLayer.render(data[i][secondLayer.key], data[i]),
+  //             key: data[i][secondLayer.key],
+  //           }
+  //         ]
+  //       })
+  //     }
+  //   }
+  //   return treeData;
+  // }
 
-  handleTreeSelect = (selectedKeys: Array<string | number>, { selected, selectedNodes, node, event }: any) => {
+
+  handleSelect = (id: number|string) => {
     const { onSelect } = this.props;
-    if (!node.children && selected) {
-      onSelect(selectedKeys[0])
-    }
-    if (selected) {
-      this.setState({ selectedKeys }, () => {
-        setTimeout(() => {
-          this.closeDrawer();
-        }, 350)
-      });
-    }
+    onSelect(id);
+    setTimeout(() => {
+      this.setState({visible: false})
+    }, 300);
   }
 
   // 渲染菜单
@@ -148,7 +143,7 @@ export default class FloatTreeMenu extends Component<FloatTreeMenuProps, FloatTr
       const firstKey = data[i][firstLayer.key];
       if (firstLayerArr.findIndex(v => v === firstKey) === -1) {
         menuDOM.push(
-          <div className={styles['first-layer']}>
+          <div className={styles['first-layer']} key={data[i][firstLayer.key]}>
             {firstLayer.icon && firstLayer.icon}
             {firstLayer.render(data[i][firstLayer.key], data[i])}
           </div>
@@ -157,8 +152,17 @@ export default class FloatTreeMenu extends Component<FloatTreeMenuProps, FloatTr
         for (let j = i; j < data.length; j++) {
           if (firstKey === data[j][firstLayer.key]) {
             menuDOM.push(
-              <div className={styles['second-layer']}>
-                {secondLayer.render(data[i][secondLayer.key], data[i])}
+              <div 
+                className={styles['second-layer']} 
+                key={data[j][secondLayer.key]}
+                onClick={() => this.handleSelect(data[j][secondLayer.key])}
+              >
+                <div className={styles.icon}>
+                  {secondLayer.icon && secondLayer.icon}
+                </div>
+                <div className={styles.border}>
+                  {secondLayer.render(data[j][secondLayer.key], data[j])}
+                </div>
               </div>
             );
           }
@@ -188,11 +192,6 @@ export default class FloatTreeMenu extends Component<FloatTreeMenuProps, FloatTr
           onClose={this.closeDrawer}
         >
           <div className={styles['drawer-menu']}>
-            {/* <Tree
-              defaultExpandAll
-              treeData={this.generateTreeData(data, firstLayer, secondLayer)}
-              onSelect={this.handleTreeSelect}
-            /> */}
             {this.renderMenu(data, firstLayer, secondLayer)}
           </div>
         </Drawer>
