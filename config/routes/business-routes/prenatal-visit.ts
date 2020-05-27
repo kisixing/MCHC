@@ -28,12 +28,12 @@ export default {
       path: '/prenatal-visit/main',
       component: './prenatal-visit/main',
     },
-    // {
-    //   name: 'return',
-    //   icon: 'ordered-list',
-    //   path: '/prenatal-visit/return',
-    //   component: './prenatal-visit/return',
-    // },
+    {
+      name: 'return',
+      icon: 'ordered-list',
+      path: '/prenatal-visit/main/return',
+      component: './prenatal-visit/main/return',
+    },
     {
       name: 'statistics',
       icon: 'ordered-list',

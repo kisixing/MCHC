@@ -25,8 +25,6 @@ export default (props: IProps) => {
     onClose && onClose(tabKey);
   };
 
-  const iconStyle = isActive ? { backgroundColor: '#1890ff' } : {};
-
   return (
     <div
       id={tabKey}
@@ -37,11 +35,11 @@ export default (props: IProps) => {
       })}
       onClick={handleClickTab}
     >
-      <div className={classnames({ [styles.customTabsButtonIcon]: true, [styles.active]: isActive })} />
+      {/* <div className={classnames({ [styles.customTabsButtonIcon]: true, [styles.active]: isActive })} /> */}
       <div className={styles.customTabsButtonTitle}>{title}</div>
       {closable && (
         <div onClick={handleCloseTab} className={styles.customTabsButtonClose}>
-          <CloseOutlined />
+          <CloseOutlined style={{ fontSize: '12px' }} />
         </div>
       )}
     </div>

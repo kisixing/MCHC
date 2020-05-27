@@ -19,15 +19,21 @@ export class Panel extends BaseEditPanel {
 
   handleSubmit = async (values: any) => {
     const { data, formDescriptionsWithoutSection } = this.state;
-    const { toApi, baseUrl, title, admissionId } = this.props;
+    const { toApi, baseUrl, title } = this.props;
+    const admissionId = Number(get(this.props, 'admissionId')) || Number(get(data, 'admission.id'));
+    const admission = admissionId
+      ? {
+          admission: {
+            id: admissionId,
+            ...get(data, 'admission'),
+          },
+        }
+      : {};
     const params = toApi(
       {
         ...data,
         ...values,
-        admission: {
-          id: Number(admissionId) || Number(get(data, 'admission.id')),
-          ...get(data, 'admission'),
-        },
+        ...admission,
       },
       formDescriptionsWithoutSection,
     );

@@ -138,7 +138,6 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
   // }
 
   render() {
-    // console.log(this.state);
     const { subscribe, type, label, input_props, unit, header_label } = this.props;
     const { value, error, validate } = this.state;
     const MyComponent = MyComponents[type];

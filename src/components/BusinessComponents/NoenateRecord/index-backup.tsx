@@ -11,10 +11,6 @@ import styles from './index.less';
 const TAB_TITLE = '新生儿';
 // 新生儿信息
 export default class NoenateRecord extends DynamicForm {
-  index: number | string;
-
-  nativeFormDescriptions: {};
-
   constructor(props: any) {
     super(props);
     const data: any = [
@@ -23,6 +19,7 @@ export default class NoenateRecord extends DynamicForm {
       },
     ];
     this.state = {
+      form: {},
       data,
     };
     this.index = 0;
@@ -37,21 +34,31 @@ export default class NoenateRecord extends DynamicForm {
     if (!isEmpty(value)) {
       result = fromApi(value, this.nativeFormDescriptions);
     }
-    map(result, (item, index) => {
-      this.index = index;
-      const tempValue = {};
-      map(item, (itemValue, key) => {
-        key !== 'key' && set(tempValue, `${key}_${index}`, itemValue);
-      });
+    map(result, (item, i) => {
+      this.index = i;
       data.push({
-        key: `${index}`,
-        ...tempValue,
+        key: `${i}`,
+        ...item,
       });
     });
+    console.log(value);
+    this.formRef.current && this.formRef.current.setFieldsValue(this.transferDataToForm(data));
+    this.throwDataByOnChange(data);
     this.setState({
+      form: this.formRef.current,
       data,
     });
   }
+
+  transferDataToForm = (data: any) => {
+    const tempData = {};
+    map(data, (item, index) => {
+      map(item, (value, key) => {
+        set(tempData, `${key}_${index}`, value);
+      });
+    });
+    return tempData;
+  };
 
   handleAddFetus = () => {
     const { data } = this.state;
@@ -77,53 +84,32 @@ export default class NoenateRecord extends DynamicForm {
   };
 
   // 获取表单数据
-  handleFieldsChange = (formDescriptionKey: any, callbackData: any) => {
+  handleFieldsChange = (changedFields: any[], allFields: any[]) => {
     const { data } = this.state;
-    const names = split(formDescriptionKey, '_');
-    set(data, `${get(names, '1')}.${formDescriptionKey}`, callbackData);
-    this.throwDataByOnChange(data);
-    this.setState({
-      data,
+    let keys: any = [];
+    map(allFields, (field: any) => {
+      const names = split(get(field, 'name.0'), '_');
+      keys.push(get(names, '1'));
     });
+    keys = Array.from(new Set(keys));
+    map(keys, (key, index) => {
+      set(data, `${index}.key`, key);
+      map(allFields, (field: any) => {
+        const names = split(get(field, 'name.0'), '_');
+        if (get(names, '1') === key) {
+          set(data, `${index}.${get(names, '0')}`, get(field, 'value'));
+        }
+      });
+    });
+    this.throwDataByOnChange(data);
   };
 
   throwDataByOnChange = (data: any) => {
     const { onChange } = this.props;
-    const tempData = map(data, item => {
-      const tempItem = {};
-      map(item, (itemValue, key) => {
-        const names = split(key, '_');
-        set(tempItem, get(names, 0), itemValue);
-      });
-      return tempItem;
-    });
-    onChange && onChange(toApi(tempData, this.nativeFormDescriptions));
-    return data;
-  };
-
-  generateRenderEditItem = (formDescriptions: any, options: any = {}) => {
-    const { formItemLayout } = options;
-
-    return (key: string, ReactNode: React.ReactNode, others: object = {}) => {
-      const config = get(formDescriptions, key) || {};
-      const { label, rules } = config;
-      return (
-        <Form.Item
-          {...formItemLayout}
-          {...get(others, 'customFormItemLayout')}
-          style={{ ...get(others, 'styles') }}
-          key={key}
-          label={label}
-          rules={rules}
-        >
-          {ReactNode}
-        </Form.Item>
-      );
-    };
+    onChange && onChange(toApi(data, this.nativeFormDescriptions));
   };
 
   renderContent = (item: any, index: any) => {
-    const { data } = this.state;
     const newFormDescriptions = {};
     map(cloneDeep(this.nativeFormDescriptions), (formDescription, formDescriptionKey) => {
       set(formDescription, 'key', `${formDescriptionKey}_${item.key}`);
@@ -140,12 +126,7 @@ export default class NoenateRecord extends DynamicForm {
               {index + 1}
             </span>
           </Divider>
-          <NoenateRecordFormSection
-            formDescriptions={newFormDescriptions}
-            renderEditItem={renderEditItem}
-            onChange={this.handleFieldsChange}
-            data={get(data, index)}
-          />
+          <NoenateRecordFormSection formDescriptions={newFormDescriptions} renderEditItem={renderEditItem} />
         </div>
         <div className={styles.foetalPanelDelete} title="删除" onClick={this.handleRemoveFetus(item)}>
           <MinusCircleOutlined />

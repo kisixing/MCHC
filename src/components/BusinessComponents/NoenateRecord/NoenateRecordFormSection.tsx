@@ -1,13 +1,18 @@
 import React, { Fragment } from 'react';
 import { Input, InputNumber, Tabs, Form, Radio, Row, Col, DatePicker } from 'antd';
 import { map, get, keyBy, isNil, indexOf, isUndefined, concat, isEmpty } from 'lodash';
-import RadioWithInput from '@/components/selects/RadioWithInput';
 import SelectWithOptions from '@/components/selects/SelectWithOptions';
-import CheckboxWithInput from '@/components/ConfigComponents/CheckboxWithInput';
 import MultipleInputWithLabel from '@/components/ConfigComponents/MultipleInputWithLabel';
 import NormalSelectWithInput from '@/components/ConfigComponents/NormalSelectWithInput';
 import NormalCheckboxWithInput from '@/components/ConfigComponents/NormalCheckboxWithInput';
 import InputWithLabel from '@/components/ConfigComponents/InputWithLabel';
+
+interface IProps {
+  formDescriptions: any;
+  renderEditItem: any;
+  onChange?: any;
+  data?: any;
+}
 
 export default class FoetalAppendageFormSection extends React.Component<IProps> {
   renderRowAndCol = (formDescriptionArr = []) => {
@@ -25,72 +30,158 @@ export default class FoetalAppendageFormSection extends React.Component<IProps> 
   };
 
   renderItem = (formDescription: any) => {
-    const { renderEditItem, id, data, products, events, formData, form } = this.props;
+    const { renderEditItem, data, onChange } = this.props;
     const formDescriptionKey = get(formDescription, 'key');
     switch (get(formDescription, 'inputType')) {
       case 'input':
-        return renderEditItem(formDescriptionKey, <Input size="small" {...get(formDescription, 'inputProps')} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-        });
+        return renderEditItem(
+          formDescriptionKey,
+          <Input
+            size="small"
+            {...get(formDescription, 'inputProps')}
+            value={get(data, formDescriptionKey)}
+            onChange={(e: any) => {
+              onChange(formDescriptionKey, get(e, 'target.value'));
+            }}
+          />,
+          {
+            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
+          },
+        );
       case 'select_with_options':
-        return renderEditItem(formDescriptionKey, <SelectWithOptions config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-        });
-      case 'single_date_picker':
-        return renderEditItem(formDescriptionKey, <DatePicker size="small" {...get(formDescription, 'inputProps')} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-        });
+        return renderEditItem(
+          formDescriptionKey,
+          <SelectWithOptions
+            config={formDescription}
+            value={get(data, formDescriptionKey)}
+            onChange={(e: any) => {
+              onChange(formDescriptionKey, e);
+            }}
+          />,
+          {
+            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
+          },
+        );
       case 'pregnant_radio':
         return renderEditItem(
-          formDescriptionKey,
-          <Radio.Group {...get(formDescription, 'inputProps')}>
-            <Radio value={true}>是</Radio>
+          get(formDescription, 'key'),
+          <Radio.Group
+            value={get(data, formDescriptionKey)}
+            onChange={(e: any) => {
+              onChange(formDescriptionKey, get(e, 'target.value'));
+            }}
+          >
             <Radio value={false}>否</Radio>
+            <Radio value={true}>是</Radio>
           </Radio.Group>,
-          { customFormItemLayout: get(formDescription, 'formItemLayout') || {} },
+          {
+            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
+            styles: get(formDescription, 'styles'),
+          },
         );
-      case 'has_pregnancy':
+      case 'single_date_picker':
         return renderEditItem(
           formDescriptionKey,
-          <Radio.Group onChange={get(events, 'setFormData')}>
-            <Radio value={true}>是</Radio>
-            <Radio value={false}>否</Radio>
-          </Radio.Group>,
-          { customFormItemLayout: get(formDescription, 'formItemLayout') || {} },
+          <DatePicker
+            size="small"
+            value={get(data, formDescriptionKey)}
+            {...get(formDescription, 'inputProps')}
+            onChange={(e: any) => {
+              onChange(formDescriptionKey, e);
+            }}
+          />,
+          {
+            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
+          },
         );
       case 'select_with_input':
-        return renderEditItem(formDescriptionKey, <NormalSelectWithInput config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-        });
+        return renderEditItem(
+          formDescriptionKey,
+          <NormalSelectWithInput
+            config={formDescription}
+            value={get(data, formDescriptionKey)}
+            onChange={(e: any) => {
+              onChange(formDescriptionKey, e);
+            }}
+          />,
+          {
+            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
+          },
+        );
       case 'input_number':
         return renderEditItem(
           formDescriptionKey,
           <InputNumber
             size="small"
+            value={get(data, formDescriptionKey)}
             min={0}
             {...get(formDescription, 'inputProps')}
-            // onChange={get(events, 'handleFetalcountChange')}
+            onChange={(e: any) => {
+              onChange(formDescriptionKey, e);
+            }}
           />,
           { customFormItemLayout: get(formDescription, 'formItemLayout') || {} },
         );
       case 'normal_checkbox_with_input':
-        return renderEditItem(formDescriptionKey, <NormalCheckboxWithInput config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-        });
+        return renderEditItem(
+          formDescriptionKey,
+          <NormalCheckboxWithInput
+            value={get(data, formDescriptionKey)}
+            config={formDescription}
+            onChange={(e: any) => {
+              onChange(formDescriptionKey, e);
+            }}
+          />,
+          {
+            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
+          },
+        );
       case 'multiple_input_with_label':
-        return renderEditItem(get(formDescription, 'key'), <MultipleInputWithLabel config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-          styles: get(formDescription, 'styles'),
-        });
+        return renderEditItem(
+          get(formDescription, 'key'),
+          <MultipleInputWithLabel
+            config={formDescription}
+            value={get(data, formDescriptionKey)}
+            onChange={(e: any) => {
+              onChange(formDescriptionKey, e);
+            }}
+          />,
+          {
+            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
+            styles: get(formDescription, 'styles'),
+          },
+        );
       case 'input_with_label':
-        return renderEditItem(get(formDescription, 'key'), <InputWithLabel config={formDescription} />, {
-          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-          styles: get(formDescription, 'styles'),
-        });
-      case 'view_only':
-        return renderEditItem(formDescriptionKey, <span>{get(data, get(formDescription, 'path'))}</span>);
+        return renderEditItem(
+          get(formDescription, 'key'),
+          <InputWithLabel
+            config={formDescription}
+            value={get(data, formDescriptionKey)}
+            onChange={(e: any) => {
+              onChange(formDescriptionKey, e);
+            }}
+          />,
+          {
+            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
+            styles: get(formDescription, 'styles'),
+          },
+        );
       default:
-        return renderEditItem(formDescriptionKey, <Input size="small" {...get(formDescription, 'inputProps')} />);
+        return renderEditItem(
+          formDescriptionKey,
+          <Input
+            size="small"
+            value={get(data, formDescriptionKey)}
+            {...get(formDescription, 'inputProps')}
+            onChange={(e: any) => {
+              onChange(formDescriptionKey, get(e, 'target.value'));
+            }}
+          />,
+          {
+            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
+            styles: get(formDescription, 'styles'),
+          },
+        );
     }
   };
 

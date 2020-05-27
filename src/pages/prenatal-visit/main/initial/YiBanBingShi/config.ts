@@ -136,30 +136,6 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-
-        { name: 'uterus', key: '.*', label: "子宫手术", input_type: "checkbox", span: 24, rules: "required",
-          input_props: {
-            type: "custom",
-            renderData: [
-              {
-                key: "uterus",
-                label: "",
-                options: [
-                  {label: "无", value: false},
-                  {label: "有", value: true},
-                ],
-                extraEditors: [
-                  {
-                    key: true,
-                    editors: [
-                      { name: "", key: "", label: "", input_type: "input" }
-                    ]
-                  }
-                ]
-              },
-            ],
-          }
-        },
         { name: 'ovaries', key: '.*', label: "卵巢手术", input_type: "checkbox", span: 24, rules: "required",
           input_props: {
             type: "custom",

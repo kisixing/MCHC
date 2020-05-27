@@ -1,10 +1,10 @@
 import { FormConfig } from '@/components/MyForm/interface';
-import { keyBy, get } from 'lodash';
+import * as Options from '@/pages/prenatal-visit/options';
 
 const config: Array<FormConfig> = [
   {
-    name: "list",
-    key: ".list",
+    name: "visitsList",
+    key: ".*",
     label: "",
     input_type: "table",
     input_props: {
@@ -20,7 +20,7 @@ const config: Array<FormConfig> = [
         { key: "gynecologicalExam.fundalHeight", title: "宫高", editor: { name: "", key: "", input_type: "input" } },
         // { key: "taix", title: "胎心率	", editor: { name: "", key: "", input_type: "input" } },
         // { key: "xianl", title: "先露", editor: { name: "", key: "", input_type: "input" } },
-        { key: "generalExam.edemaNote", title: "下肢水肿", editor: { name: "", key: "", input_type: "input" } },
+        { key: "generalExam.edema", title: "下肢水肿", editor: { name: "", key: "", input_type: "select", input_props:{options: Options.edemaOptions} } },
         // { key: "examination", title: "检验检查", editor: { name: "", key: "", input_type: "input" } },
         // { key: "treatment", title: "处理措施", editor: { name: "", key: "", input_type: "input" } },
         { key: "appointmentDate", title: "下次复诊", editor: { name: "", key: "", input_type: "date" } },

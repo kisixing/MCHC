@@ -16,7 +16,25 @@ const numberSelectOptions = [
 
 const config: Array<FormConfig> = [
   { name: "id", key: ".id", input_type: "input", label: "id", span: 8, offset: 0, hidden: true },
+
+  { name: "outpatientNO", key: ".outpatientNO", input_type: "input", label: "门诊号", rules: "required", span: 8, offset: 0 },
+
+  {
+    name: "idType", key: ".idType", input_type: "select", label: "证件类型", rules: "required", span: 8, offset: 0,
+    input_props: {
+      options: [
+        { label: "身份证", value: 1 },
+        { label: "护照", value: 2 },
+        { label: "回乡证", value: 3 },
+        { label: "台胞证", value: 4 },
+        { label: "港澳台居民居住证", value: 5 },
+        { label: "其他", value: 99 },
+      ]
+    }
+  },
+  { name: "idNO", key: ".idNO", input_type: "input", label: "证件号码", rules: "required", span: 8, offset: 0 },
   { name: "name", key: ".name", input_type: "input", label: "姓名", rules: "required", span: 8, offset: 0 },
+  { name: "age", key: ".age", input_type: "input", label: "年龄", rules: "required", span: 8, offset: 0 },
   { name: "lmp", key: ".lmp", input_type: "date", label: "末次月经", rules: "required", span: 8, offset: 0 },
   { name: "edd", key: ".edd", input_type: "date", label: "预产期-日期", rules: "required", span: 8, offset: 0 },
   { name: "sureEdd", key: ".sureEdd", input_type: "date", label: "预产期-B超", rules: "required", span: 8, offset: 0 },

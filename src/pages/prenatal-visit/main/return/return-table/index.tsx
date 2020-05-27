@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
+import { connect } from 'dva';
 import MyForm from '@/components/MyForm/index';
 import config from './config';
 import request from '@/utils/request';
@@ -8,36 +9,29 @@ import styles from './index.less';
 
 import { getRenderData, getFormData} from '@/components/MyForm/utils';
 
-interface HomeState{
+interface IndexState{
   formHandler:{
     [key:string]: any
-  },
-  tableData: any
+  }
 }
 
-
-export default class Home extends React.Component<{},HomeState>{
+class Index extends React.Component<{},IndexState>{
   static Title = '产检记录';
 
   constructor(props:any){
     super(props);
     this.state = {
       formHandler: {},
-      tableData: null
     }
   }
 
   componentDidMount() {
+    const { dispatch } = this.props;
     const urlParam = getPageQuery();
-    request(`/prenatal-visits?visitType.equals=1&pregnancyId.equals=${urlParam.id}`,{
-      method: 'GET'
-    }).then(res => {
-      const obj = {};
-      obj['list'] = res;
-      this.setState({
-        tableData: obj
-      })
-    });
+    dispatch({
+      type: 'pregnancy/getVisitsData',
+      payload: urlParam.id
+    })
   }
 
   componentDidUpdate(){
@@ -45,32 +39,20 @@ export default class Home extends React.Component<{},HomeState>{
     formHandler.subscribe("gestationalWeek", "dispatch", (val: any) => {
       console.log(val, 33233)
     });
-  }
 
-
-  handleSubmit = () => {
-    console.log(this.state.formHandler, '11')
-    this.state.formHandler.submit().then(({validCode, res}:any) => {
-      console.log(res, '1');
-      console.log(getFormData(res), '2');
-      // if(!validCode){
-      // }
-      // const param = {visitType: 1};
-      const newData = getFormData(res)['list'][2];
-      console.log(newData, '366')
+    formHandler.subscribe("visitsList", "tableEdit", (data: any) => {
       request('/prenatal-visits', {
         method: 'put',
-        data: newData
+        data
       }).then(r => {
 
       });
     });
   }
 
-
   render(){
-    const { tableData } = this.state;
-    const myConfig = getRenderData(config, tableData);
+    const { visitsData } = this.props;
+    const myConfig = getRenderData(config, visitsData);
     return(
       <div>
         <MyForm
@@ -78,11 +60,15 @@ export default class Home extends React.Component<{},HomeState>{
           getFormHandler={(formHandler:any) => this.setState({formHandler})}
           submitChange={false}
         />
-        <div className={styles['btn-group']}>
-          {/* <Button onClick={this.handleSubmit}>重置</Button> */}
-          <Button type="primary" onClick={this.handleSubmit}>提交</Button>
-        </div>
       </div>
     )
   }
 }
+
+const mapStateToProps = ({ pregnancy }) => {
+  return { ...pregnancy };
+};
+
+export default connect(
+  mapStateToProps
+)(Index);
