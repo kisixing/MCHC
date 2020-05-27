@@ -20,6 +20,7 @@ export default class List extends BaseList {
     showAdd: true,
     Table,
     ModalForm,
+    otherTableProps: { scroll: { x: true } },
   };
 
   state = {
