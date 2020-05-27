@@ -24,16 +24,16 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
     if (props.actions) {
       props.actions.getValue = function getValue() {
         // 可以考虑在这个位置做一个拦截提交
-        if(self.state.path === ".*" && props.input_props.type === "custom"){
-          const key = props.input_props.renderData[0].key;
-          return {
-            value: {
-              [key]: self.state.value[key],
-              [`${key}Note`]: self.state.value[`${key}Note`]
-            },
-            path: self.state.path
-          }
-        }
+        // if(self.state.path === ".*" && props.input_props.type === "custom"){
+        //   const key = props.input_props.renderData[0].key;
+        //   return {
+        //     value: {
+        //       [key]: self.state.value[key],
+        //       [`${key}Note`]: self.state.value[`${key}Note`]
+        //     },
+        //     path: self.state.path
+        //   }
+        // }
         return {
           value: self.state.value,
           path: self.state.path
@@ -75,7 +75,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
       path: this.props.path
     });
   }
-  
+
   // 外部页面更新引发
   componentDidUpdate(prevProps: FormItemProp) {
     if (JSON.stringify(this.props) !== JSON.stringify(prevProps)) {
@@ -134,7 +134,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
   // renderHeader = () => {
   //   const { header_label, label } = this.props;
   //   const { validate } = this.state;
-  //   return 
+  //   return
   // }
 
   render() {

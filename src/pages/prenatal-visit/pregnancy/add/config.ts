@@ -55,7 +55,7 @@ const config: Array<FormConfig> = [
         // { name: 'smokeNote', key: '.partnerProfile.smokeNote', label: "烟(支)", input_type: "input", span: 7, rules: "required" },
         // { name: 'alcoholNote', key: '.partnerProfile.alcoholNote', label: "酒(ml)", input_type: "input", span: 7, rules: "required", input_props:{} },
         {
-          name: 'smoke', key: '.partnerProfile', label: "烟(支)", input_type: "checkbox", span: 10, rules: "required",
+          name: 'smoke', key: '.partnerProfile', label: "烟(支)", input_type: "checkbox", span: 7, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -79,7 +79,7 @@ const config: Array<FormConfig> = [
           }
         },
         {
-          name: 'alcohol', key: '.partnerProfile', label: "酒(ml)", input_type: "checkbox", span: 10, rules: "required",
+          name: 'alcohol', key: '.partnerProfile', label: "酒(ml)", input_type: "checkbox", span: 7, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -170,7 +170,7 @@ const config: Array<FormConfig> = [
         },
         { name: 'maritalYears', key: '.maritalYears', label: "结婚年龄", input_type: "input", span: 7, rules: "required" },
         {
-          name: 'smoke', key: '.personalProfile', label: "吸烟", input_type: "checkbox", span: 10, rules: "required",
+          name: 'smoke', key: '.personalProfile', label: "吸烟", input_type: "checkbox", span: 7, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -194,7 +194,7 @@ const config: Array<FormConfig> = [
           }
         },
         {
-          name: 'alcohol', key: '.personalProfile', label: "饮酒", input_type: "checkbox", span: 10, rules: "required",
+          name: 'alcohol', key: '.personalProfile', label: "饮酒", input_type: "checkbox", span: 7, rules: "required",
           input_props: {
             type: "custom",
             renderData: [

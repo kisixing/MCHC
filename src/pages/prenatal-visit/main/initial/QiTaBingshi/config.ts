@@ -20,41 +20,28 @@ const config: Array<FormConfig> = [
       ],
     }
   },
-  { name: 'maritalStatus', key: '.*', label: "婚姻史", input_type: "checkbox", span: 10, rules: "required",
+  { name: 'maritalStatus', key: '.maritalStatus', label: "婚姻史", input_type: "checkbox", span: 10, rules: "required",
     input_props:{
-      type: "custom",
-      renderData: [
-        {
-          key: "maritalStatus",
-          label: "婚姻史",
-          options: [
-            { label: "已婚", value: 0 },
-            { label: "未婚", value: 1 },
-            { label: "离异", value: 2 },
-            { label: "再婚", value: 3 },
-            { label: "丧偶", value: 4 },
-          ],
-        }
+      type: "group",
+      options: [
+        { label: "已婚", value: 0 },
+        { label: "未婚", value: 1 },
+        { label: "离异", value: 2 },
+        { label: "再婚", value: 3 },
+        { label: "丧偶", value: 4 },
       ],
     }
   },
   { name: 'maritalYears', key: '.maritalYears', label: "本次结婚年龄", input_type: "input", span: 7, rules: "required" },
-  { name: 'nearRelation', key: '.*', label: "近亲结婚", input_type: "checkbox", span: 7, rules: "required",
+  { name: 'nearRelation', key: '.nearRelation', label: "近亲结婚", input_type: "checkbox", span: 7, rules: "required",
     input_props:{
-      type: "custom",
-      renderData: [
-        {
-          key: "nearRelation",
-          label: "近亲结婚",
-          options: [
-            { label: "否", value: false },
-            { label: "是", value: true  },
-          ]
-        }
-      ],
+      type: "group",
+      options: [
+        { label: "否", value: false },
+        { label: "是", value: true  },
+      ]
     }
   },
-
   {
     name: "personalProfile",
     key: ".personalProfile",
@@ -63,7 +50,7 @@ const config: Array<FormConfig> = [
     header_label: true,
     input_props: {
       config: [
-        { name: 'smoke', key: '.*', label: "吸烟", input_type: "checkbox", span: 24, rules: "required",
+        { name: 'smoke', key: '.smoke(Note)', label: "吸烟", input_type: "checkbox", span: 24, rules: "required",
           input_props:{
             type: "custom",
             renderData: [
@@ -84,7 +71,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'alcohol', key: '.*', label: "饮酒", input_type: "checkbox", span: 24, rules: "required",
+        { name: 'alcohol', key: '.alcohol(Note)', label: "饮酒", input_type: "checkbox", span: 24, rules: "required",
           input_props:{
             type: "custom",
             renderData: [
@@ -105,7 +92,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'hazardoussubstances', key: '.*', label: "接触有害物质", input_type: "checkbox", span: 24, rules: "required",
+        { name: 'hazardoussubstances', key: '.hazardoussubstances(Note)', label: "接触有害物质", input_type: "checkbox", span: 24, rules: "required",
           input_props:{
             type: "custom",
             renderData: [
@@ -126,7 +113,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'radioactivity', key: '.*', label: "接触放射线", input_type: "checkbox", span: 24, rules: "required",
+        { name: 'radioactivity', key: '.radioactivity(Note)', label: "接触放射线", input_type: "checkbox", span: 24, rules: "required",
           input_props:{
             type: "custom",
             renderData: [
@@ -147,7 +134,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'other', key: '.*', label: "其他", input_type: "checkbox", span: 24,
+        { name: 'other', key: '.other(Note)', label: "其他", input_type: "checkbox", span: 24,
           input_props:{
             type: "custom",
             renderData: [
@@ -180,7 +167,7 @@ const config: Array<FormConfig> = [
     header_label: true,
     input_props: {
       config: [
-        { name: 'hypertension', key: '.*', label: "高血压", input_type: "checkbox", span: 24, rules: "required",
+        { name: 'hypertension', key: '.hypertension(Note)', label: "高血压", input_type: "checkbox", span: 24, rules: "required",
           input_props:{
             type: "custom",
             renderData: [
@@ -202,7 +189,7 @@ const config: Array<FormConfig> = [
           }
         },
 
-        { name: 'diabetes', key: '.*', label: "糖尿病", input_type: "checkbox", span: 24, rules: "required",
+        { name: 'diabetes', key: '.diabetes(Note)', label: "糖尿病", input_type: "checkbox", span: 24, rules: "required",
           input_props:{
             type: "custom",
             renderData: [
@@ -223,7 +210,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'birthdefects', key: '.*', label: "先天畸形", input_type: "checkbox", span: 24, rules: "required",
+        { name: 'birthdefects', key: '.birthdefects(Note)', label: "先天畸形", input_type: "checkbox", span: 24, rules: "required",
           input_props:{
             type: "custom",
             renderData: [
@@ -244,7 +231,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'other', key: '.*', label: "其他", input_type: "checkbox", span: 24,
+        { name: 'other', key: '.other(Note)', label: "其他", input_type: "checkbox", span: 24,
           input_props:{
             type: "custom",
             renderData: [

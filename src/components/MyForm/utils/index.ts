@@ -6,12 +6,15 @@ import { isBase, isArr, isObj, isNumber, isUndefinend } from './func';
 
 const o: string = ".";
 const a: string = "_";
+const extra: RegExp = /\((.*)\)/;  // 用于匹配额外提取的同一层的key
+const origin: RegExp = /(.*)\(/;   // 用于匹配(前的字符
 const ALL: string = "*";
+
 // 只提取基本数据类型
 const ONLYBASE: boolean = false;
 
 /**
- * 对于还需取下一级的继续向下取
+ * 对于还需取下一级的继续向下取 
  */
 function handleGetData(obj: any, currentKey: string, nextPath: string, history: string) {
   let r = {};
@@ -36,7 +39,7 @@ function handleGetData(obj: any, currentKey: string, nextPath: string, history: 
  * 责任链式判断 拆分if-else
  * @param {number} oi - objectIndex
  * @param {number} ai - arrayIndex
- *
+ * 
  * @return {object} r 返回的结果
  */
 const rules = [
@@ -47,7 +50,7 @@ const rules = [
       // if(isBase(obj) === ONLYBASE) return {};
       const r: { [key: string]: any } = {};
       if (path === ALL) {
-        // 取全部值暂时不处理
+        // 取全部值暂时不处理 
 
         // if (isObj(obj)) {
         //   Object.keys(obj).forEach((key: string) => {
@@ -64,7 +67,17 @@ const rules = [
         // }
       } else {
         if (isObj(obj)) {
-          r[`${history}.${path}`] = obj[path];
+          // keyNote转换
+          if (extra.test(path)) {
+            const extraKey = extra.exec(path)[1];
+            const originKey = origin.exec(path)[1];
+            r[`${history}.${path}`] = (extraKey !== null && originKey !== null) ? {
+              [originKey]: obj[originKey],
+              [originKey + extraKey]: obj[originKey + extraKey]
+            } : {}
+          } else {
+            r[`${history}.${path}`] = obj[path];
+          }
         } else if (isArr(obj) && isNumber(path)) {
           r[`${history}_${path}`] = obj[Number(path)];
         }
@@ -144,8 +157,6 @@ export function loopPath(obj: any, pathArr: Array<string>): object {
   return r;
 }
 
-
-
 /**
  * 获取render所需的data结构
  */
@@ -153,19 +164,18 @@ export function getRenderData(config: Array<FormConfig>, data: any): Array<FormC
   if (!data) {
     return config;
   }
-  const rConfig: Array<FormConfig> = config.map(v => v);
   const cData: { [key: string]: any } = loopPath(data, config.map(v => v.key));
-  for (let i = 0; i < rConfig.length; i++) {
-    rConfig[i].value = cData[rConfig[i].key];
+  for (let i = 0; i < config.length; i++) {
+    config[i].value = cData[config[i].key];
   }
-  return rConfig;
+  return config;
 }
 
 /* ============================== 本地格式转为接口格式 ==================================== */
 /**
  * 默认parentKey为数字是即生成数组
- * @param {string} parentKey
- * @param {object|Array} data
+ * @param {string} parentKey 
+ * @param {object|Array} data 
  */
 function newObj(parentKey: string, currentKey: string, data: any) {
   if (!currentKey) return {};
@@ -175,7 +185,16 @@ function newObj(parentKey: string, currentKey: string, data: any) {
       r = [];
       r[Number(currentKey)] = data;
     } else {
-      r[currentKey] = data;
+      if (extra.test(currentKey)) {
+        const originKey = origin.exec(currentKey)[1];
+        const extraKey = extra.exec(currentKey)[1];
+        if (originKey !== null && extraKey !== null) {
+          r[originKey] = data[originKey];
+          r[originKey + extraKey] = data[originKey + extraKey];
+        }
+      } else {
+        r[currentKey] = data;
+      }
     }
   } else {
     if (isNumber(currentKey)) {
@@ -186,8 +205,18 @@ function newObj(parentKey: string, currentKey: string, data: any) {
     } else {
       const g: { [key: string]: any } = {};
       g[parentKey] = {};
-      g[parentKey][currentKey] = data;
-      r = _assign(r, toFormat(g));
+      if (extra.test(currentKey)) {
+        const originKey = origin.exec(currentKey)[1];
+        const extraKey = extra.exec(currentKey)[1];
+        if (originKey !== null && extraKey !== null) {
+          g[parentKey][originKey] = data[originKey];
+          g[parentKey][originKey + extraKey] = data[originKey + extraKey];
+        }
+        r = _assign(r, g);
+      } else {
+        g[parentKey][currentKey] = data;
+        r = _assign(r, toFormat(g));
+      }
     }
   }
   return r;
@@ -247,7 +276,7 @@ function _assign(mainData: any = {}, newData: any = {}): any {
 function toFormat(data: { [key: string]: any }): object {
   let r = {};
   Object.keys(data).forEach(key => {
-    // 合并 *
+    // 合并 * 
     if (key === `.${ALL}`) {
       r = _assign(r, data[key]);
       return;
@@ -288,4 +317,3 @@ export function getFormData(data: Array<{ value: any, path: string }>): object {
   })
   return r;
 }
-
