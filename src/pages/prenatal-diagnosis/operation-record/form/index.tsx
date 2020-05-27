@@ -3,6 +3,8 @@ import { Button, message } from 'antd';
 import MyForm from '@/components/MyForm/index';
 import config from './config/index';
 
+import observePatientData from '@/utils/observePatientData';
+
 import FloatTreeMenu from '@/components/FloatTreeMenu';
 
 import styles from './index.less';
@@ -76,7 +78,6 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
 
   componentDidUpdate() {
     const { formHandler, data } = this.state;
-    
     if (isNotEmpty(formHandler)) {
       formHandler.subscribe("operationType", "change", (val: any) => {
         this.setState({
@@ -87,6 +88,9 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
         })
       })
     }
+    // observePatientData.subscribe((data: any) => {
+    //   console.log(data);
+    // })
   }
 
   // 获取病历
@@ -100,6 +104,7 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
     });
   }
 
+  
 
   handleSubmit = () => {
     const { prenatalPatientId, id } = this.state;
@@ -177,7 +182,8 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
         </div>
         <div className={styles.form}>
           <MyForm
-            config={myConfig}
+            config={config[operationType]}
+            value={data}
             getFormHandler={(formHandler: any) => this.setState({ formHandler })}
             submitChange={false}
           />
@@ -186,7 +192,7 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
             <Button type="primary" onClick={this.handleSubmit}>提交</Button>
           </div>
         </div>
-        <FloatTreeMenu
+        {/* <FloatTreeMenu
           url={`/${URL}?prenatalPatientId.equals=${prenatalPatientId}`}
           firstLayer={{
             key: "operationDate",
@@ -197,7 +203,7 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
             render: (text:any, record: any) => record.operationName
           }}
           onSelect={this.handleTreeMenuSelect}
-        />
+        /> */}
       </div>
     )
   }

@@ -42,9 +42,9 @@ export default class Home extends React.Component<{},HomeState>{
       const param = {visitType: 1};
       const newData = {...getFormData(res), ...param }
       console.log(newData, '111')
-      newData['pregnancy']['id'] = urlParam.id;
+      // newData['pregnancy']['id'] = urlParam.id;
 
-      console.log(newData, '366')
+      // console.log(newData, '366')
       request('/prenatal-visits', {
         method: 'post',
         data: newData

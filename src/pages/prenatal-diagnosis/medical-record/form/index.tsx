@@ -148,7 +148,7 @@ export default class MedicalRecord extends React.Component<any, MedicalRecordSta
   }
 
   render() {
-    const { data, patients, prenatalPatientId } = this.state;
+    const { data, patients } = this.state;
     const myConfig = getRenderData(config, data);
     return (
       <div className={styles.container}>
@@ -167,7 +167,7 @@ export default class MedicalRecord extends React.Component<any, MedicalRecordSta
           </div>
         </div>
         <FloatTreeMenu
-          url={`/${URL}?prenatalPatientId.equals=${prenatalPatientId}`}
+          url={`/${URL}?prenatalPatientId.equals=${getPageQuery().prenatalPatientId}`}
           firstLayer={{
             key: "visitDate",
             render: (text:any) => text

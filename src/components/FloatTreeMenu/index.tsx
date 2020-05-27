@@ -15,11 +15,13 @@ interface FloatTreeMenuProps {
   handlerBeforeGettingData?: (data: any) => any,
   firstLayer: {
     key: string,
-    render: Function
+    render: Function,
+    icon?: any,
   },
   secondLayer: {
     key: string,
-    render: Function
+    render: Function,
+    icon?: any,
   },
   onSelect: Function
 }
@@ -35,6 +37,10 @@ interface TreeNodeConstructor {
   key: string | number,
   icon?: any,
   children?: Array<TreeNodeConstructor>
+}
+
+const drawerBodyStyle = {
+  padding: "0"
 }
 
 export default class FloatTreeMenu extends Component<FloatTreeMenuProps, FloatTreeMenuState>{
@@ -111,18 +117,56 @@ export default class FloatTreeMenu extends Component<FloatTreeMenuProps, FloatTr
   }
 
   handleTreeSelect = (selectedKeys: Array<string | number>, { selected, selectedNodes, node, event }: any) => {
-
     const { onSelect } = this.props;
     if (!node.children && selected) {
       onSelect(selectedKeys[0])
     }
     if (selected) {
-      this.setState({ selectedKeys },() => {
+      this.setState({ selectedKeys }, () => {
         setTimeout(() => {
           this.closeDrawer();
         }, 350)
       });
     }
+  }
+
+  // 渲染菜单
+  renderMenu = (data: Array<any>,
+    firstLayer: {
+      key: string,
+      render: Function,
+      icon?: any
+    },
+    secondLayer: {
+      key: string,
+      render: Function,
+      icon?: any
+    }): Array<ReactNode> => {
+    const menuDOM: Array<ReactNode> = [];
+    const firstLayerArr: Array<any> = [];
+    for (let i = 0; i < data.length; i++) {
+      const firstKey = data[i][firstLayer.key];
+      if (firstLayerArr.findIndex(v => v === firstKey) === -1) {
+        menuDOM.push(
+          <div className={styles['first-layer']}>
+            {firstLayer.icon && firstLayer.icon}
+            {firstLayer.render(data[i][firstLayer.key], data[i])}
+          </div>
+        );
+        firstLayerArr.push(firstKey);
+        for (let j = i; j < data.length; j++) {
+          if (firstKey === data[j][firstLayer.key]) {
+            menuDOM.push(
+              <div className={styles['second-layer']}>
+                {secondLayer.render(data[i][secondLayer.key], data[i])}
+              </div>
+            );
+          }
+        }
+      }
+    }
+
+    return menuDOM;
   }
 
   render() {
@@ -136,15 +180,21 @@ export default class FloatTreeMenu extends Component<FloatTreeMenuProps, FloatTr
           >菜单栏</Button>
         </div>
         <Drawer
+          closable={false}
           placement="right"
+          title="浮动菜单"
+          bodyStyle={drawerBodyStyle}
           visible={visible}
           onClose={this.closeDrawer}
         >
-          <Tree
-            defaultExpandAll
-            treeData={this.generateTreeData(data, firstLayer, secondLayer)}
-            onSelect={this.handleTreeSelect}
-          />
+          <div className={styles['drawer-menu']}>
+            {/* <Tree
+              defaultExpandAll
+              treeData={this.generateTreeData(data, firstLayer, secondLayer)}
+              onSelect={this.handleTreeSelect}
+            /> */}
+            {this.renderMenu(data, firstLayer, secondLayer)}
+          </div>
         </Drawer>
       </div>
     )

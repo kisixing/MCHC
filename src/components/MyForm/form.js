@@ -1,4 +1,5 @@
 import { isEmpty } from './utils/func';
+import { getFormData } from './utils/index';
 
 function isArr(v){
   return Object.prototype.toString.call(v) === '[object Array]';
@@ -42,6 +43,7 @@ export function createFormHandler(config, {submitChange}){
   const submit = function() {
     let r = {}
     let validCode = true;
+    console.log(formHandler);
     Object.keys(formHandler).forEach(key => {
       if(formHandler[key].actions){
         if(typeof formHandler[key].actions.getValue === "function"){
@@ -107,7 +109,6 @@ export function createFormHandler(config, {submitChange}){
       if(flag){
         eventCallBacks[fieldName][eventName].push(cb);
       }
-
     }
   }
 
@@ -128,6 +129,8 @@ export function createFormHandler(config, {submitChange}){
       console.warn(`fieldName ${eventName} not found in ${fieldName} Event Object || eventQueue's length is 0`);
       return;
     }
+
+
     setTimeout(() => {
       eventQueue.forEach(func => {
         func(args);
