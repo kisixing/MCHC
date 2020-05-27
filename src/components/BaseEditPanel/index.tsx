@@ -53,7 +53,7 @@ export default class BaseEditPanel<P extends IProps = {}> extends React.Componen
   handleSubmit = async (values: any) => {
     const { data, formDescriptionsWithoutSection } = this.state;
     const { toApi, baseUrl, title } = this.props;
-    const params = toApi(
+    const params = await toApi(
       {
         ...data,
         ...values,

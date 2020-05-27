@@ -1,62 +1,78 @@
 import React from 'react';
-import { Tabs, Form, Input, Row, Col, Radio, InputNumber, Button, DatePicker, Divider, Select } from 'antd';
-import { map, get, set, keyBy, isEmpty, isNil, filter, isFunction, toArray, cloneDeep, isEqual } from 'lodash';
-import moment, { Moment } from 'moment';
+import { Tabs, Input, Row, Col, Radio, InputNumber, Button, Divider, Select } from 'antd';
+import { map, get, set, isEmpty, isFunction, toArray, cloneDeep, isEqual } from 'lodash';
+import moment from 'moment';
 import { DynamicForm } from '@lianmed/components';
-import request from '@/utils/request';
-import { formDescriptionsFromApi, formDescriptionsWithoutSectionApi } from '@/utils/adapter';
 import PregnancyHistoryFormSection from './PregnancyHistoryFormSection';
-
-export const fixedSelects = {
-  // 分娩方式
-  deliverWays: ['vaginalDelivery', 'cesareanSection', 'forceps', 'vacuumAssisted', 'breechMidwifery'],
-  // 流产方式
-  abortionWays: ['medicalAbortion', 'surgicalAbortion', 'naturalAbortion', 'currettage'],
-  // 不良生育史
-  badPregnancies: ['inducedLabor', 'fetusdeath', 'ectopicPregnancy', 'hydatidMole', 'multiple'],
-};
+import { getPregnancyHistoryFormDescriptions } from '.';
+import NormalSelect from '@/components/selects/NormalSelect';
 
 const TAB_TITLE = '孕次';
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
 
 interface IProps {
   value?: any;
   onChange?: any;
 }
 
-export default class PregnancyHistory extends DynamicForm {
+export default class PregnancyHistoryForm extends DynamicForm {
   constructor(props: IProps) {
     super(props);
     this.newTabIndex = 1;
     this.state = {
       tabPanes: [],
       activeKey: undefined,
-      pregnancyHistories: [],
-      form: null,
       formData: {},
     };
   }
 
   nativeFormDescriptions = {};
 
+  /**
+   * 获取表单配置以及渲染数据
+   */
   async componentDidMount() {
-    const nativeFormDescriptions = formDescriptionsWithoutSectionApi(
-      formDescriptionsFromApi(await request.get('/form-descriptions?moduleName=pregnantHistorySetting')),
-    );
+    const { value: pregnancyHistories, form } = this.props;
+    const nativeFormDescriptions = await getPregnancyHistoryFormDescriptions();
 
     this.nativeFormDescriptions = nativeFormDescriptions;
-    setTimeout(() => {
-      this.setState({
-        form: this.formRef.current,
+
+    // 渲染数据
+    if (!isEmpty(pregnancyHistories)) {
+      const tabPanes: any = [];
+      map(pregnancyHistories, (pregnancyHistory, index) => {
+        const activeKey = `${TAB_TITLE}${this.newTabIndex++}`;
+        tabPanes.push({ title: activeKey, key: activeKey });
+
+        form.setFieldsValue({
+          [`pregnancyEnd_${index}`]: moment(get(pregnancyHistory, 'pregnancyEnd')),
+          [`complicationNote_${index}`]: get(pregnancyHistory, 'complicationNote'),
+          [`hasPregnancy_${index}`]: get(pregnancyHistory, 'hasPregnancy'),
+          [`hospital_${index}`]: get(pregnancyHistory, 'hospital'),
+          [`fetalcount_${index}`]: get(pregnancyHistory, 'fetalcount'),
+          [`gestationalWeek_${index}`]: get(pregnancyHistory, 'gestationalWeek'),
+          [`deliverWay_${index}`]: get(pregnancyHistory, 'deliverWay'),
+          [`puerperalFever_${index}`]: get(pregnancyHistory, 'puerperalFever'),
+          [`hemorrhage_${index}`]: get(pregnancyHistory, 'hemorrhage'),
+          [`abortionWay_${index}`]: get(pregnancyHistory, 'abortionWay'),
+          [`badPregnancy_${index}`]: get(pregnancyHistory, 'badPregnancy'),
+        });
+        map(get(pregnancyHistory, 'children'), (children, i) => {
+          form.setFieldsValue({
+            [`childDeath_${index}_${i}`]: get(children, 'childDeath'),
+            [`childDeathNote_${index}_${i}`]: get(children, 'childDeathNote'),
+            [`childGender_${index}_${i}`]: get(children, 'childGender'),
+            [`sequela_${index}_${i}`]: get(children, 'sequela'),
+            [`childDeformity_${index}_${i}`]: get(children, 'childDeformity'),
+            [`neonateWeight_${index}_${i}`]: get(children, 'neonateWeight'),
+            [`neonateHeight_${index}_${i}`]: get(children, 'neonateHeight'),
+          });
+        });
       });
-    }, 100);
+      this.setState({
+        tabPanes,
+        activeKey: isEmpty(tabPanes) ? undefined : get(tabPanes, '0.key'),
+      });
+    }
   }
 
   /**
@@ -66,7 +82,7 @@ export default class PregnancyHistory extends DynamicForm {
    * form.getFieldsValue() 再赋值一次给 this.state.formData
    */
   componentDidUpdate(prevProps, prevState) {
-    const { form } = this.state;
+    const { form } = this.props;
     const { formData: prevFormData } = prevState;
     if (form) {
       if (!isEqual(prevFormData, form.getFieldsValue())) {
@@ -78,24 +94,27 @@ export default class PregnancyHistory extends DynamicForm {
     }
   }
 
+  // 改变 active Tab
   handleChange = activeKey => {
     this.setState({ activeKey });
   };
 
+  // 更新 tab
   handleEdit = (targetKey, action) => {
     this[action](targetKey);
   };
 
+  // 添加 tab
   add = () => {
-    const { tabPanes, pregnancyHistories } = this.state;
+    const { tabPanes } = this.state;
     const activeKey = `${TAB_TITLE}${this.newTabIndex++}`;
     tabPanes.push({ title: activeKey, key: activeKey });
-    this.setState({ tabPanes, activeKey, pregnancyHistories: [...pregnancyHistories, { key: activeKey }] });
+    this.setState({ tabPanes, activeKey });
   };
 
+  // 删除 tab
   remove = targetKey => {
-    let { activeKey, tabPanes, pregnancyHistories } = this.state;
-    const { onChange } = this.props;
+    let { activeKey, tabPanes } = this.state;
     let lastIndex;
     tabPanes.forEach((pane, i) => {
       if (pane.key === targetKey) {
@@ -110,31 +129,20 @@ export default class PregnancyHistory extends DynamicForm {
         activeKey = panes[0].key;
       }
     }
-    const newPregnancyHistories = filter(
-      pregnancyHistories,
-      pregnancyHistory => get(pregnancyHistory, 'key') !== targetKey,
-    );
-    onChange && onChange(newPregnancyHistories);
-    this.setState({ tabPanes: panes, activeKey, pregnancyHistories: newPregnancyHistories });
-  };
-
-  saveSregnancyHistories = async () => {
-    const { form, formData } = this.state;
-    console.log(form.getFieldsValue());
-
-    await form.validateFields();
+    this.setState({ tabPanes: panes, activeKey });
   };
 
   // 设置表单数据
   setFormData = () => {
-    const { form } = this.state;
+    const { form } = this.props;
     this.setState({
       formData: form.getFieldsValue(),
     });
   };
 
+  // 渲染胎儿信息
   renderChildrens = (index, formDescriptions) => {
-    const { form, formData } = this.state;
+    const { formData } = this.state;
     const childrens = [];
     const fetalcount = get(formData, `fetalcount_${index}`);
     let renderEditItem;
@@ -167,6 +175,7 @@ export default class PregnancyHistory extends DynamicForm {
                   <Radio value={false}>健在</Radio>
                   <Radio value={true}>死亡</Radio>
                 </Radio.Group>,
+                { customFormItemLayout: get(this.nativeFormDescriptions, 'childDeath.formItemLayout') || {} },
               )}
             </Col>
             {get(formData, `childDeath_${index}_${i}`) && (
@@ -177,6 +186,7 @@ export default class PregnancyHistory extends DynamicForm {
                 {renderEditItem(
                   `childDeathNote_${index}_${i}`,
                   <Input size="small" {...get(this.nativeFormDescriptions, 'childDeathNote.inputProps')} />,
+                  { customFormItemLayout: get(this.nativeFormDescriptions, 'childDeathNote.formItemLayout') || {} },
                 )}
               </Col>
             )}
@@ -190,11 +200,11 @@ export default class PregnancyHistory extends DynamicForm {
                 >
                   {renderEditItem(
                     `childGender_${index}_${i}`,
-                    <Select size="small" {...get(this.nativeFormDescriptions, 'childGender.inputProps')}>
-                      <Select.Option value={0}>男</Select.Option>
-                      <Select.Option value={1}>女</Select.Option>
-                      <Select.Option value={2}>未知</Select.Option>
-                    </Select>,
+                    <NormalSelect
+                      type="genderMapping"
+                      {...get(this.nativeFormDescriptions, 'childGender.inputProps')}
+                    />,
+                    { customFormItemLayout: get(this.nativeFormDescriptions, 'childGender.formItemLayout') || {} },
                   )}
                 </Col>
                 <Col
@@ -207,6 +217,7 @@ export default class PregnancyHistory extends DynamicForm {
                       <Radio value={false}>无</Radio>
                       <Radio value={true}>有</Radio>
                     </Radio.Group>,
+                    { customFormItemLayout: get(this.nativeFormDescriptions, 'sequela.formItemLayout') || {} },
                   )}
                 </Col>
                 <Col
@@ -219,6 +230,7 @@ export default class PregnancyHistory extends DynamicForm {
                       <Radio value={false}>无</Radio>
                       <Radio value={true}>有</Radio>
                     </Radio.Group>,
+                    { customFormItemLayout: get(this.nativeFormDescriptions, 'childDeformity.formItemLayout') || {} },
                   )}
                 </Col>
               </Row>
@@ -234,6 +246,7 @@ export default class PregnancyHistory extends DynamicForm {
                       min={0}
                       {...get(this.nativeFormDescriptions, 'neonateWeight.inputProps')}
                     />,
+                    { customFormItemLayout: get(this.nativeFormDescriptions, 'neonateWeight.formItemLayout') || {} },
                   )}
                 </Col>
                 <Col
@@ -247,6 +260,7 @@ export default class PregnancyHistory extends DynamicForm {
                       min={0}
                       {...get(this.nativeFormDescriptions, 'neonateHeight.inputProps')}
                     />,
+                    { customFormItemLayout: get(this.nativeFormDescriptions, 'neonateHeight.formItemLayout') || {} },
                   )}
                 </Col>
               </Row>
@@ -259,8 +273,10 @@ export default class PregnancyHistory extends DynamicForm {
     return childrens;
   };
 
+  // 渲染孕次
   renderTabContent = (key, index) => {
-    const { formData, form } = this.state;
+    const { formData } = this.state;
+    const { form } = this.props;
     const newFormDescriptions = {};
     map(cloneDeep(this.nativeFormDescriptions), (formDescription, formDescriptionKey) => {
       set(formDescription, 'key', `${formDescriptionKey}_${index}`);
@@ -287,16 +303,11 @@ export default class PregnancyHistory extends DynamicForm {
 
   render() {
     const { tabPanes, activeKey } = this.state;
-    // const { form } = this.props;
-    // console.log(form.getFieldsValue());
     return (
-      <Form ref={this.formRef}>
+      <>
         <div style={{ marginTop: 8, marginBottom: 8 }}>
           <Button onClick={this.add} size="small" type="default">
             添加孕产史信息
-          </Button>
-          <Button style={{ marginLeft: 8 }} onClick={this.saveSregnancyHistories} size="small" type="primary">
-            保存孕产史信息
           </Button>
         </div>
         {!isEmpty(tabPanes) && (
@@ -309,14 +320,14 @@ export default class PregnancyHistory extends DynamicForm {
           >
             {map(tabPanes, (pane, index) => {
               return (
-                <Tabs.TabPane key={get(pane, 'key')} tab={get(pane, 'title')}>
+                <Tabs.TabPane forceRender key={get(pane, 'key')} tab={get(pane, 'title')}>
                   {this.renderTabContent(get(pane, 'key'), index)}
                 </Tabs.TabPane>
               );
             })}
           </Tabs>
         )}
-      </Form>
+      </>
     );
   }
 }
