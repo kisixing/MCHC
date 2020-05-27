@@ -6,7 +6,7 @@ import config from './config';
 
 import FloatTreeMenu from '@/components/FloatTreeMenu';
 
-import { getRenderData, getFormData } from '@/components/MyForm/utils'
+import { getFormData } from '@/components/MyForm/utils'
 import { getPageQuery } from '@/utils/utils';
 
 import request from '@/utils/request';
@@ -89,6 +89,7 @@ export default class MedicalRecord extends React.Component<any, MedicalRecordSta
     this.state.formHandler.submit().then(({ validCode, res }: any) => {
       if (validCode) {
         const formatData = getFormData(res);
+        
         // 新建的时候赋值
         formatData.downsScreens[0].type = 0;
         formatData.downsScreens[1].type = 1;
@@ -100,7 +101,8 @@ export default class MedicalRecord extends React.Component<any, MedicalRecordSta
             ...formatData,
             prenatalPatient:{
               id: Number(prenatalPatientId)
-            }
+            },
+            id: Number(id)
           }
         }).then((r: any) => {
           if (r) {
@@ -149,7 +151,6 @@ export default class MedicalRecord extends React.Component<any, MedicalRecordSta
 
   render() {
     const { data, patients } = this.state;
-    const myConfig = getRenderData(config, data);
     return (
       <div className={styles.container}>
         <div className={styles['user-info']}>
@@ -157,7 +158,8 @@ export default class MedicalRecord extends React.Component<any, MedicalRecordSta
         </div>
         <div className={styles.form}>
           <MyForm
-            config={myConfig}
+            config={config}
+            value={data}
             getFormHandler={(formHandler: any) => this.setState({ formHandler })}
             submitChange={false}
           />

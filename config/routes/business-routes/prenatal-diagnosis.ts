@@ -46,5 +46,11 @@ export default {
       path: '/prenatal-diagnosis/operation-record-form',
       component: './prenatal-diagnosis/operation-record/form'
     },
+    {
+      name: 'inspection',
+      icon: 'ordered-list',
+      path: '/prenatal-diagnosis/inspection',
+      component: './prenatal-diagnosis/inspection'
+    }
   ]
 };

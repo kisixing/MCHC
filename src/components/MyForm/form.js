@@ -43,7 +43,6 @@ export function createFormHandler(config, {submitChange}){
   const submit = function() {
     let r = {}
     let validCode = true;
-    console.log(formHandler);
     Object.keys(formHandler).forEach(key => {
       if(formHandler[key].actions){
         if(typeof formHandler[key].actions.getValue === "function"){

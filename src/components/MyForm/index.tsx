@@ -194,6 +194,9 @@ export default class MyForm extends Component<MyFormProp, MyFormState>{
               if (formHandler[config[i].name] && formHandler[config[i].name].actions) {
                 formHandler[config[i].name].actions = functions;
                 this.setState({ formHandler });
+              }else{
+                console.log(config[i].name);
+                console.log(formHandler[config[i].name]);
               }
             }}
           />

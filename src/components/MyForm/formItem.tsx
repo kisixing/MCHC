@@ -116,16 +116,15 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
   }
 
   reset = () => {
-    if(this.props.hidden){
-      return;
-    }
-    if(isObj(this.state.value)){
-      this.setState({ value: {} },() => {
-      });
-    }else if(isArr(this.state.value)){
-      this.setState({ value: [] });
-    }else{
-      this.setState({ value: null });
+    if(!this.props.hidden){
+      if(isObj(this.state.value)){
+        this.setState({ value: {} },() => {
+        });
+      }else if(isArr(this.state.value)){
+        this.setState({ value: [] });
+      }else{
+        this.setState({ value: null });
+      }
     }
   }
 

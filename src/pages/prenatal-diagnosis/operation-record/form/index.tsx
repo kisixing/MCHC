@@ -1,5 +1,6 @@
 import React,{ ReactNode } from 'react';
 import { Button, message } from 'antd';
+import { CalendarOutlined, BookOutlined } from '@ant-design/icons';
 import MyForm from '@/components/MyForm/index';
 import config from './config/index';
 
@@ -10,7 +11,7 @@ import FloatTreeMenu from '@/components/FloatTreeMenu';
 import styles from './index.less';
 import { isNotEmpty, getPageQuery } from '@/utils/utils';
 import request from '@/utils/request';
-import { getRenderData, getFormData } from '@/components/MyForm/utils';
+import { getFormData } from '@/components/MyForm/utils';
 
 interface OperationRecordState {
   formHandler: {
@@ -120,7 +121,8 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
             operationName: operationNames[formatData.operationType],
             prenatalPatient: {
               id: Number(prenatalPatientId)
-            }
+            },
+            id: Number(id)
           }
         }).then((r: any) => {
           if (r) {
@@ -174,7 +176,6 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
     const { data, patients, prenatalPatientId } = this.state;
     let { operationType } = data;
     if(operationType === null){ operationType = 1; }
-    const myConfig = getRenderData(config[operationType], data);
     return (
       <div className={styles.container}>
         <div className={styles['user-info']}>
@@ -192,18 +193,20 @@ export default class OperationRecord extends React.Component<{}, OperationRecord
             <Button type="primary" onClick={this.handleSubmit}>提交</Button>
           </div>
         </div>
-        {/* <FloatTreeMenu
+        <FloatTreeMenu
           url={`/${URL}?prenatalPatientId.equals=${prenatalPatientId}`}
           firstLayer={{
             key: "operationDate",
-            render: (text:any) => text
+            render: (text:any) => text,
+            icon: <CalendarOutlined/>
           }}
           secondLayer={{
             key: "id",
-            render: (text:any, record: any) => record.operationName
+            render: (_text:any, record: any) => record.operationName,
+            icon: <BookOutlined/>
           }}
           onSelect={this.handleTreeMenuSelect}
-        /> */}
+        />
       </div>
     )
   }
