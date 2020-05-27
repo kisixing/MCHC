@@ -5,91 +5,84 @@ import { connect } from 'dva';
 import styles from './index.less';
 
 interface IndexState {
-  currentPageKey: string,
+  currentPageKey: string;
 }
 
-class Index extends Component<{},IndexState>{
-
+class Index extends Component<{}, IndexState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      currentPageKey: "medical-record",
-    }
+      currentPageKey: 'medical-record',
+    };
   }
 
   handleHighRisk = () => {
     const { dispatch } = this.props;
     dispatch({
       type: 'pregnancy/changeHighrisk',
-      payload: true
-    })
-  }
+      payload: true,
+    });
+  };
 
   renderInfo = () => {
     const { pregnancyData } = this.props;
-    if(pregnancyData){
+    if (pregnancyData) {
       return (
-        <div className={styles['header-info']}>
-          <div className={styles['user-info']}>
-            <div>
-              <span>姓名:</span><strong>{pregnancyData.name}</strong>
+        <div className={styles.wrapper}>
+          <div className={styles.left}>
+            <div className={styles.item}>
+              <span className={styles.label}>姓名：</span>
+              <span className={styles.value}>{pregnancyData.name}</span>
             </div>
-            <div>
-              <span>年龄:</span><strong>{pregnancyData.age}</strong>
+            <div className={styles.item}>
+              <span className={styles.label}>年龄：</span>
+              <span className={styles.value}>{pregnancyData.age}</span>
             </div>
-            <div>
-              <span>孕周:</span><strong>{pregnancyData.gestationalWeek}</strong>
+            <div className={styles.item}>
+              <span className={styles.label}>孕周：</span>
+              <span className={styles.value}>{pregnancyData.gestationalWeek || '--'}</span>
             </div>
-            <div>
-              <span>预产期-日期:</span><strong>{pregnancyData.edd}</strong>
+            <div className={styles.item}>
+              <span className={styles.label}>预产期-日期：</span>
+              <span className={styles.value}>{pregnancyData.edd || '-- -- --'}</span>
             </div>
-            <div>
-              <span>预产期-B超:</span><strong>{pregnancyData.sureEdd}</strong>
+            <div className={styles.item}>
+              <span className={styles.label}>预产期-B超：</span>
+              <span className={styles.value}>{pregnancyData.sureEdd || '-- -- --'}</span>
             </div>
-            <div>
-              <span>产检编号:</span><strong>{pregnancyData.checkupNO}</strong>
+            <div className={styles.item}>
+              <span className={styles.label}>产检编号：</span>
+              <span className={styles.value}>{pregnancyData.checkupNO || '--'}</span>
             </div>
           </div>
-          <div className={styles['header-btnList']}>
-            <div className={styles["btnList-left"]} onClick={this.handleHighRisk}>
-              <div className={styles["danger-btn-wrapper"]}>
-                <Button.Group className={styles['btnList-btn-group']}>
-                  <Button className={pregnancyData.highrisk === 5 ? [styles["level-btn"], styles["danger-btn-5"]] :
-                    pregnancyData.highrisk === 4 ? [styles["level-btn"], styles["danger-btn-4"]] :
-                    pregnancyData.highrisk === 3 ? [styles["level-btn"], styles["danger-btn-3"]] :
-                    pregnancyData.highrisk === 2 ? [styles["level-btn"], styles["danger-btn-2"]] : [styles["level-btn"], styles["danger-btn-1"]]
-                  }>
-                    {pregnancyData.highrisk ? pregnancyData.highrisk : 1}
-                  </Button>
-                  <Button className={styles["danger-btn-infectin"]}>
-                    传染病：无
-                  </Button>
-                </Button.Group>
+          <div className={styles.right}>
+            <div className={styles.highrisk} onClick={this.handleHighRisk}>
+              <div className={styles.top}>
+                <span>{pregnancyData.highrisk ? pregnancyData.highrisk : 1}</span>
+                <div>传染病：无</div>
               </div>
-              <div className={styles["high-risk-wrapper"]}>
-                <Button.Group className={styles['btnList-btn-group']}>
-                  <Button className={styles["high-risk-btn"]}>高危因素：</Button>
-                  <Button className={styles["high-risk-content"]} title={pregnancyData.highriskNote}>{pregnancyData.highriskNote ? pregnancyData.highriskNote : '无'}</Button>
-                </Button.Group>
+              <div className={styles.bottom}>
+                <span>高危因素</span>
+                <div>{pregnancyData.highriskNote ? pregnancyData.highriskNote : '无'}</div>
               </div>
             </div>
-            <div className={styles["btnList-right"]}>
-              <Button className={styles["danger-btn-trial"]}>疤</Button>
-              <Button className={styles["danger-btn-phar"]}>栓</Button>
+            <div className={styles.signs}>
+              <div className={styles.top} style={{ background: '#449EC4' }}>
+                疤
+              </div>
+              <div className={styles.bottom} style={{ background: '#AF7D81' }}>
+                栓
+              </div>
             </div>
           </div>
         </div>
-      )
+      );
     }
     return null;
-  }
+  };
 
   render() {
-    return (
-      <div>
-        { this.renderInfo() }
-      </div>
-    )
+    return <div>{this.renderInfo()}</div>;
   }
 }
 
@@ -97,7 +90,4 @@ const mapStateToProps = ({ pregnancy }) => {
   return { ...pregnancy };
 };
 
-export default connect(
-  mapStateToProps
-)(Index);
-
+export default connect(mapStateToProps)(Index);

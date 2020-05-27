@@ -1,20 +1,40 @@
-
-.initiaWrapper {
-  :global {
-    .ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab {
-      background: #fff !important;
-      border-bottom: 1px solid #fff !important;
-    }
-  }
-}
+@import '~antd/dist/antd.less';
 
 .initialContent {
+  padding: 12px;
   background-color: #fff;
-  padding-bottom: 60px;
 }
 
 .bottomBtn {
   text-align: center;
   margin-top: 100px;
   margin-right: 100px;
+}
+
+.tabs {
+  :global {
+
+    .ant-tabs-bar {
+      margin-bottom: 0;
+    }
+
+    .ant-tabs-nav {
+      background-color: #fff !important;
+    }
+
+    .ant-tabs-tab {
+      margin-left: 0px !important;
+      margin-right: 0px !important;
+      border-left-color: #fafafa !important;
+      border-bottom-color: @primary-color !important;
+      background-color: #fff !important;
+
+      &.ant-tabs-tab-active {
+        border-left-color: @primary-color !important;
+        border-top-color: @primary-color !important;
+        border-right-color: @primary-color !important;
+        border-bottom-color: #fff !important;
+      }
+    }
+  }
 }
