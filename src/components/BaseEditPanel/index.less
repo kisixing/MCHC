@@ -2,6 +2,8 @@
   display: flex;
   justify-content: center;
   background: #ffffff;
+  height: 100%;
+  overflow-y: scroll;
   :global {
     .ant-form-item {
       margin-bottom: 12px;
@@ -10,6 +12,11 @@
 }
 
 .panelWithChild {
+  height: 100%;
+  overflow-y: scroll;
+  .baseEditPanel {
+    overflow: hidden;
+  }
   .panelWithChildHeader {
     display: flex;
     height: 55px;
@@ -17,7 +24,7 @@
     background: #ffffff;
     margin-bottom: 8px;
     padding: 0 8px;
-    
+
     .panelWithChildHeaderItem {
       margin-right: 48px;
       font-size: 16px;

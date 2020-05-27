@@ -240,7 +240,7 @@ const BasicLayout = (props: any) => {
             <FixedSearch />
             <RouterTabs style={{ width: routerTabWidth }} />
             <div className={styles.panelChild}>
-              <div className={styles.content}>
+              <div id="panel-child-content" className={styles.content}>
                 <ErrorBoundary>{children}</ErrorBoundary>
               </div>
               <footer className={styles.footer}>Copyright © 莲印医疗科技</footer>
