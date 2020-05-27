@@ -28,7 +28,7 @@ const config: Array<FormConfig> = [
         // { name: 'fetalCondition', key: '.list.fetalCondition', label: "胎心率", input_type: "input", span: 8, rules: "required" },
         // { name: 'fetalCondition', key: '.list.fetalCondition', label: "先露", input_type: "input", span: 8, rules: "required" },
 
-        { name: 'weight', key: '.fetus.weight', label: "胎儿体重", input_type: "input", span: 8 },
+        { name: 'fetusWeight', key: '.fetus.weight', label: "胎儿体重", input_type: "input", span: 8 },
         { name: 'avf', key: '.fetus.avf', label: "AVF", input_type: "input", span: 8 },
         { name: 'umbilicalbloodflow', key: '.fetus.umbilicalbloodflow', label: "脐血流", input_type: "input", span: 8 },
 

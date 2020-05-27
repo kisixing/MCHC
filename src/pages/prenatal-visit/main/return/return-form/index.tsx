@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import { connect } from 'dva';
 import { set } from 'lodash';
 import MyForm from '@/components/MyForm/index';
@@ -37,25 +37,24 @@ class Index extends React.Component<{},IndexState>{
     const { formHandler } = this.state;
     const urlParam = getPageQuery();
     formHandler.submit().then(({validCode, res}:any) => {
-      // if(!validCode){
-      // }
-      console.log(res, getFormData(res), '000')
-      const param = {visitType: 1};
-      const newData = {...getFormData(res), ...param }
-      console.log(newData, '111')
-      set(newData, 'pregnancy.id', urlParam.id);
-      // newData['pregnancy']['id'] = urlParam.id;
-
-      console.log(newData, '222')
-      // request('/prenatal-visits', {
-      //   method: 'post',
-      //   data: newData
-      // }).then(r => {
-      //   dispatch({
-      //     type: 'pregnancy/getVisitsData',
-      //     payload: urlParam.id
-      //   })
-      // });
+      if(validCode) {
+        console.log(validCode, res, getFormData(res), '000')
+        const param = {visitType: 1};
+        const newData = {...getFormData(res), ...param }
+        set(newData, 'pregnancy.id', urlParam.id);
+        console.log(newData, '222')
+        request('/prenatal-visits', {
+          method: 'post',
+          data: newData
+        }).then(r => {
+          dispatch({
+            type: 'pregnancy/getVisitsData',
+            payload: urlParam.id
+          })
+        });
+      } else {
+        message.error('必填项不能为空！')
+      }
     });
   }
 

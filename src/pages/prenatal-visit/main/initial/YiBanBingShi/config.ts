@@ -10,7 +10,7 @@ const config: Array<FormConfig> = [
     header_label: true,
     input_props: {
       config: [
-        { name: 'hypertension', key: '.*', label: "高血压", input_type: "checkbox", span: 24, rules: "required",
+        { name: 'hypertension', key: '.hypertension(Note)', label: "高血压", input_type: "checkbox", span: 24, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -33,7 +33,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'diabetes', key: '.*', label: "糖尿病", input_type: "checkbox", span: 24, rules: "required",
+        { name: 'diabetes', key: '.diabetes(Note)', label: "糖尿病", input_type: "checkbox", span: 24, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -56,7 +56,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'endocrineDisease', key: '.*', label: "心脏病", input_type: "checkbox", span: 24, rules: "required",
+        { name: 'endocrineDisease', key: '.endocrineDisease(Note)', label: "心脏病", input_type: "checkbox", span: 24, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -113,7 +113,7 @@ const config: Array<FormConfig> = [
     header_label: true,
     input_props: {
       config: [
-        { name: 'uterus', key: '.*', label: "子宫手术", input_type: "checkbox", span: 24, rules: "required",
+        { name: 'uterus', key: '.uterus(Note)', label: "子宫手术", input_type: "checkbox", span: 24, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -136,7 +136,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'ovaries', key: '.*', label: "卵巢手术", input_type: "checkbox", span: 24, rules: "required",
+        { name: 'ovaries', key: '.ovaries(Note)', label: "卵巢手术", input_type: "checkbox", span: 24, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -159,7 +159,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'thyroid', key: '.*', label: "甲状腺手术", input_type: "checkbox", span: 24, rules: "required",
+        { name: 'thyroid', key: '.thyroid(Note)', label: "甲状腺手术", input_type: "checkbox", span: 24, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -182,7 +182,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'other', key: '.*', label: "其他", input_type: "checkbox", span: 24, rules: "required",
+        { name: 'other', key: '.other(Note)', label: "其他", input_type: "checkbox", span: 24, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -216,7 +216,7 @@ const config: Array<FormConfig> = [
     header_label: true,
     input_props: {
       config: [
-        { name: 'penicillin', key: '.*', label: "青霉素", input_type: "checkbox", span: 24, rules: "required",
+        { name: 'penicillin', key: '.penicillin(Note)', label: "青霉素", input_type: "checkbox", span: 24, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -239,7 +239,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'cephalosporin', key: '.*', label: "头孢", input_type: "checkbox", span: 24, rules: "required",
+        { name: 'cephalosporin', key: '.cephalosporin(Note)', label: "头孢", input_type: "checkbox", span: 24, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -262,7 +262,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'alcohol', key: '.*', label: "酒精", input_type: "checkbox", span: 24, rules: "required",
+        { name: 'alcohol', key: '.alcohol(Note)', label: "酒精", input_type: "checkbox", span: 24, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -285,7 +285,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'other', key: '.*', label: "其他", input_type: "checkbox", span: 24, rules: "required",
+        { name: 'other', key: '.other(Note)', label: "其他", input_type: "checkbox", span: 24, rules: "required",
           input_props: {
             type: "custom",
             renderData: [

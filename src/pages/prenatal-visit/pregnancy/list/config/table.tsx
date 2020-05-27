@@ -46,7 +46,7 @@ export const tableColumns = [
   {
     title: 'P',
     dataIndex: 'parity',
-    key: 'adminDate',
+    key: 'parity',
     align: 'center',
   },
   {
