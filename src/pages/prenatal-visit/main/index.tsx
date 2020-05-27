@@ -16,26 +16,25 @@ import HeaderInfo from './components/header-info';
 import styles from './index.less';
 
 interface MainState {
-  state: any,
+  state: any;
 }
 
 const routers = [
-  { name: "首检信息", component: <Initial />, key: 'Initial'},
-  { name: "复诊记录", component: <Return />, key: 'Return' },
-  { name: "孕期曲线", component: <Curve />, key: 'Curve' },
-  { name: "血糖记录", component: <BloodSugar />, key: 'BloodSugar' },
-  { name: "影像报告", component: <ImageReport />, key: 'ImageReport' },
-  { name: "检验报告", component: <SurveyReport />, key: 'SurveyReport' },
-  { name: "基本信息", component: <Base />, key: 'Base' },
+  { name: '首检信息', component: <Initial />, key: 'Initial' },
+  { name: '复诊记录', component: <Return />, key: 'Return' },
+  { name: '孕期曲线', component: <Curve />, key: 'Curve' },
+  { name: '血糖记录', component: <BloodSugar />, key: 'BloodSugar' },
+  { name: '影像报告', component: <ImageReport />, key: 'ImageReport' },
+  { name: '检验报告', component: <SurveyReport />, key: 'SurveyReport' },
+  { name: '基本信息', component: <Base />, key: 'Base' },
 ];
 
-class Main extends Component<{}, MainState>{
-
+class Main extends Component<{}, MainState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      state: null
-    }
+      state: null,
+    };
   }
 
   componentDidMount() {
@@ -43,8 +42,8 @@ class Main extends Component<{}, MainState>{
     const urlParam = getPageQuery();
     dispatch({
       type: 'pregnancy/getPregnancyData',
-      payload: urlParam.id
-    })
+      payload: urlParam.id,
+    });
   }
 
   render() {
@@ -52,8 +51,14 @@ class Main extends Component<{}, MainState>{
     return (
       <div className={styles.main}>
         <HeaderInfo />
-        <Tabs defaultActiveKey="1" type="card" size="small">
-          {routers.map((item) => (
+        <Tabs
+          size="small"
+          defaultActiveKey="1"
+          animated={false}
+          className={styles.tabs}
+          tabBarStyle={{ paddingLeft: '46px', borderBottom: 'none' }}
+        >
+          {routers.map(item => (
             <Tabs.TabPane tab={item.name} key={item.key}>
               {item.component}
             </Tabs.TabPane>
@@ -62,7 +67,7 @@ class Main extends Component<{}, MainState>{
         {isShowHighrisk && <HighriskFactor />}
         {/* <ScarredUterus /> */}
       </div>
-    )
+    );
   }
 }
 
@@ -70,6 +75,4 @@ const mapStateToProps = ({ pregnancy }) => {
   return { ...pregnancy };
 };
 
-export default connect(
-  mapStateToProps
-)(Main);
+export default connect(mapStateToProps)(Main);

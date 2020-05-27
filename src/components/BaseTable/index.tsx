@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Button, Input, Space, InputNumber, DatePicker, TimePicker } from 'antd';
+import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import { map, get, set } from 'lodash';
-import CustomTable from '@/layouts/CustomTable';
-import styles from './index.less';
 import { TableProps } from 'antd/lib/table';
-import { SearchOutlined } from '@ant-design/icons';
 import moment, { Moment } from 'moment';
 import { FilterDropdownProps } from 'antd/lib/table/interface';
+
+import CustomTable from '@/layouts/CustomTable';
+import styles from './index.less';
 
 const TABLE_CELL_WIDTH = 200;
 
@@ -136,7 +137,7 @@ export default class BaseTable extends Component<IProps, IState> {
       <div className={styles.title}>
         <span className={styles.titleName}>{baseTitle}列表</span>
         {onAdd && (
-          <Button size="small" type="primary" className={styles.titleAddBtn} onClick={onAdd}>
+          <Button size="small" type="primary" icon={<PlusOutlined />} className={styles.titleAddBtn} onClick={onAdd}>
             添加{baseTitle}
           </Button>
         )}
@@ -148,7 +149,13 @@ export default class BaseTable extends Component<IProps, IState> {
     const { columns } = this.props;
     const mergedColumns = this.mergedColumns(columns);
     return (
-      <CustomTable bordered scroll={{ x: '100vw' }} {...this.props} columns={mergedColumns} title={this.renderTitle} />
+      <CustomTable
+        bordered
+        scroll={{ x: 'calc(100vw - 282px)' }}
+        {...this.props}
+        columns={mergedColumns}
+        title={this.renderTitle}
+      />
     );
   }
 }

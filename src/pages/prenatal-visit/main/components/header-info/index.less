@@ -1,30 +1,109 @@
-.header-info {
-  position: relative;
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background-color: #fff;
 }
-.user-info {
+
+.left {
   display: flex;
   flex-direction: row;
   justify-content: left;
   height: 32px;
 
-  > div {
-    height: 32px;
-    padding: 2px;
-    font-size: 14px;
-    margin-right: 16px;
-    > strong {
-      font-size: 16px;
-      margin-left: 8px;
+  .item {
+    margin-right: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #150F55;
+
+    .label {
+      
+    }
+
+    .value {
+
     }
   }
 }
-.header-btnList {
-  position: absolute;
-  top: 0;
-  right: 12px;
+
+.right {
   display: flex;
-  z-index: 2;
-  .danger-btn-wrapper .btnList-btn-group {
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 99;
+
+  & > div {
+    margin-left: 12px;
+    overflow: hidden;
+    border-radius: 4px;
+    border: 1px solid #D8DCE6;
+
+    .top, .bottom {
+      flex:1;
+      min-width: 32px;
+      height: 32px;
+      line-height: 32px;
+    }
+  }
+
+  .highrisk {
+    .top {
+      display: flex;
+
+      span {
+        width: 62px;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+        background-color: #C43333;
+      }
+
+      div {
+        min-width: 142px;
+        padding: 0 12px;
+        color: #fff;
+        background-color: #9B66FF;
+      }
+    }
+
+    .bottom {
+      display: flex;
+      span {
+        width: 62px;
+        text-align: center;
+        font-size: 12px;
+      }
+
+      div {
+        min-width: 142px;
+        padding: 0 10px;
+        color: #932C3F;
+        font-weight: bold;
+        font-size: 17px;
+      }
+    }
+  }
+
+  .signs {
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+    color: #fff;
+
+    .top {
+      background-color: #449EC4;
+    }
+
+    .bottom {
+      background-color: #AF7D81;
+    }
+  }
+}
+
+
+.danger-btn-wrapper .btnList-btn-group {
     display: flex;
   }
   .high-risk-wrapper .btnList-btn-group {
@@ -73,14 +152,14 @@
     color:#150F55;
     background-color: #FFD363;
     &:hover {
-      background-color:	#FFD363;
+      background-color: #FFD363;
     }
   }
   .danger-btn-3 {
     color:#150F55;
-    background-color:	#FB9824;
+    background-color: #FB9824;
     &:hover {
-      background-color:	#FB9824;
+      background-color: #FB9824;
     }
   }
   .danger-btn-4 {
@@ -141,9 +220,3 @@
       background-color: #F0F3F5;
     }
   }
-}
-.header-btnList button {
-  font-weight: bold;
-  letter-spacing: 1px;
-  height: 40px;
-}
