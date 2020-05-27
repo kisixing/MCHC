@@ -153,6 +153,7 @@ export default class Roles extends BaseList<IProps, IState> {
                   };
                 }}
                 baseTitle={baseTitle}
+                scroll={{}}
               />
             </Col>
             <Col span={4} offset={1}>

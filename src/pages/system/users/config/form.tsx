@@ -16,14 +16,14 @@ export const modalFormDescriptions = {
       placeholder: '请输入登录账号',
     },
   },
-  // password: {
-  //   key: 'password',
-  //   label: '登录密码',
-  //   inputType: 'password',
-  //   inputProps: {
-  //     placeholder: '请输入登录密码',
-  //   },
-  // },
+  password: {
+    key: 'password',
+    label: '登录密码',
+    inputType: 'password',
+    inputProps: {
+      placeholder: '请输入登录密码',
+    },
+  },
   // imageUrl: {
   //   key: 'imageUrl',
   //   label: '头像',

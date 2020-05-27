@@ -111,6 +111,7 @@
 
 .panel {
   height: calc(100% - 12px);
+  overflow: hidden;
   margin: 12px;
 }
 
@@ -143,14 +144,14 @@
 }
 
 .panelChild {
-  height: 100%;
   margin-top: 47px;
+  height: calc(100% - 47px);
   display: flex;
   flex-direction: column;
-
+  // overflow: hidden;
   .content {
     flex: 1;
-    padding-bottom: 22px;
+    height: 100%;
   }
 
   .footer {

@@ -98,18 +98,17 @@ export class RouterTabs extends React.Component<IProps> {
             );
           })}
         </div>
-        <div className={styles.customRouterTabsLast}>
-          <Dropdown
-            overlay={this.renderTabMenu}
-            overlayClassName={styles.customRouterTabsLastDropdown}
-            trigger={['click']}
-          >
-            <span>
-              展开所有
-              <CaretDownOutlined title="展开" />
-            </span>
-          </Dropdown>
-        </div>
+        <Dropdown
+          className={styles.customRouterTabsLast}
+          overlay={this.renderTabMenu}
+          overlayClassName={styles.customRouterTabsLastDropdown}
+          trigger={['click']}
+        >
+          <span>
+            展开所有
+            <CaretDownOutlined title="展开" />
+          </span>
+        </Dropdown>
       </div>
     );
   }

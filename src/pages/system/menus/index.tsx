@@ -23,7 +23,12 @@ export default class List extends BaseList {
     processFromApi,
     Table,
     ModalForm,
-    otherTableProps: { expandRowByClick: true },
+    otherTableProps: {
+      expandRowByClick: true,
+      scroll: {
+        x: true,
+      },
+    },
   };
 
   state = {

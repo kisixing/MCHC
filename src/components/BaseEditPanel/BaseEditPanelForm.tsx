@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Divider, Button } from 'antd';
 import { FileTextOutlined, RedoOutlined } from '@ant-design/icons';
-import { get, map } from 'lodash';
+import { get, map, isFunction } from 'lodash';
 import { FormInstance } from 'antd/lib/form';
 
 import DynamicForm from '@/components/BaseModalForm/DynamicForm';
@@ -69,6 +69,10 @@ export default class BaseEditPanelForm extends DynamicForm<IProps, IState> {
     onFinish && onFinish(params);
   };
 
+  getEvents = (): object => {
+    return {};
+  };
+
   renderSection = (section: any) => {
     const { data } = this.props;
     return (
@@ -83,6 +87,7 @@ export default class BaseEditPanelForm extends DynamicForm<IProps, IState> {
             formDescriptions={get(section, 'fields')}
             renderEditItem={this.renderEditItem as any}
             form={this.form}
+            events={isFunction(this.getEvents) && this.getEvents()}
           />
         )}
       </>
