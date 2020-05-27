@@ -51,8 +51,8 @@ export const appointmentDateOptions = [
 
 // 下次复诊 时间段
 export const appointmentPeriodOptions = [
-  {label: '上午', value: 0},
-  {label: '下午', value: 1},
+  {label: '上午', value: 1},
+  {label: '下午', value: 2},
 ]
 
 // 胎动
@@ -72,11 +72,11 @@ export const presentationOptions = [
 
 // 下肢水肿
 export const edemaOptions = [
-  { label: "-", value: 0 },
-  { label: "+", value: 1 },
-  { label: "++", value: 2 },
-  { label: "+++", value: 3 },
-  { label: "++++", value: 4 },
+  { label: "-", value: 1 },
+  { label: "+", value: 2 },
+  { label: "++", value: 3 },
+  { label: "+++", value: 4 },
+  { label: "++++", value: 5 },
 ]
 
 // 职业

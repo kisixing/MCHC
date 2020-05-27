@@ -179,7 +179,7 @@ const config: Array<FormConfig> = [
     }
   },
 
-  { name: 'hivResult', key: '.prenatalExam', label: "HIV", input_type: "checkbox", span: 24, rules: "required",
+  { name: 'hivResult', key: '.prenatalExam.hivResult(Note)', label: "HIV", input_type: "checkbox", span: 24, rules: "required",
     input_props: {
       type: "custom",
       renderData: [

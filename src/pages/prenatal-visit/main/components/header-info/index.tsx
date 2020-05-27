@@ -54,7 +54,11 @@ class Index extends Component<{},IndexState>{
             <div className={styles["btnList-left"]} onClick={this.handleHighRisk}>
               <div className={styles["danger-btn-wrapper"]}>
                 <Button.Group className={styles['btnList-btn-group']}>
-                  <Button className={styles["level-btn"]}>
+                  <Button className={pregnancyData.highrisk === 5 ? [styles["level-btn"], styles["danger-btn-5"]] :
+                    pregnancyData.highrisk === 4 ? [styles["level-btn"], styles["danger-btn-4"]] :
+                    pregnancyData.highrisk === 3 ? [styles["level-btn"], styles["danger-btn-3"]] :
+                    pregnancyData.highrisk === 2 ? [styles["level-btn"], styles["danger-btn-2"]] : [styles["level-btn"], styles["danger-btn-1"]]
+                  }>
                     {pregnancyData.highrisk ? pregnancyData.highrisk : 1}
                   </Button>
                   <Button className={styles["danger-btn-infectin"]}>

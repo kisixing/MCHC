@@ -55,6 +55,7 @@ export interface IState {
   loading: boolean;
   id: any;
   editKey: any;
+  panelHeight: any;
 }
 
 export default class BaseList extends React.Component<IProps, IState> {
@@ -70,6 +71,7 @@ export default class BaseList extends React.Component<IProps, IState> {
     id: undefined,
     editKey: undefined,
     loading: true,
+    panelHeight: undefined,
   };
 
   columns = [
@@ -127,8 +129,14 @@ export default class BaseList extends React.Component<IProps, IState> {
   form: FormInstance | null = null;
 
   componentDidMount() {
+    this.initData();
     this.handleSearch();
   }
+
+  initData = () => {
+    const panelHeight = document.getElementById('panel-child-content')?.clientHeight;
+    this.setState({ panelHeight });
+  };
 
   isEditing = (rowData: any) => (get(rowData, 'editKey') || get(rowData, 'id')) === this.state.editKey;
 
@@ -259,10 +267,12 @@ export default class BaseList extends React.Component<IProps, IState> {
     this.setState({ dataSource, total, loading: false });
   };
 
-  handlePageChange = (page: number, pageSize: number) => {
+  handlePageChange = (page: any, pageSize: any) => {
+    const { defaultQuery } = this.state;
     this.setState(
       {
         defaultQuery: {
+          ...defaultQuery,
           page: page - 1,
           size: pageSize,
         },
@@ -340,50 +350,53 @@ export default class BaseList extends React.Component<IProps, IState> {
       ModalForm,
       needEditInTable,
     } = this.props;
-    const { dataSource, total, defaultQuery, loading, visible, editable, id } = this.state;
+    const { dataSource, total, defaultQuery, loading, visible, editable, id, panelHeight } = this.state;
     const mergedColumns = this.getColumns();
+
     return (
       <>
-        {showQuery && <Query onSearch={this.handleQuerySearch} />}
-        {loading ? (
-          <CustomSpin />
-        ) : (
-          <Form
-            ref={formRef => {
-              this.form = formRef;
+        {showQuery && <Query id="base-query" onSearch={this.handleQuerySearch} />}
+        <Form
+          ref={formRef => {
+            this.form = formRef;
+          }}
+          component={false}
+        >
+          <Table
+            {...otherTableProps}
+            scroll={{
+              x: get(otherTableProps, 'scroll.x') || '100vw',
+              y:
+                get(otherTableProps, 'scroll.y') ||
+                Number(panelHeight) - 148 - Number(document.getElementById('base-query')?.clientHeight || 0),
             }}
-            component={false}
-          >
-            <Table
-              {...otherTableProps}
-              loading={loading}
-              pagination={
-                needPagination && {
-                  total,
-                  size: 'default',
-                  showTotal: () => `共 ${total} 条`,
-                  pageSize: get(defaultQuery, 'size'),
-                  defaultCurrent: 1,
-                  onChange: this.handlePageChange,
-                }
+            loading={loading}
+            pagination={
+              needPagination && {
+                total,
+                showTotal: () => `一共${total}条记录`,
+                pageSize: get(defaultQuery, 'size'),
+                defaultCurrent: 1,
+                onChange: this.handlePageChange,
+                onShowSizeChange: this.handlePageChange,
               }
-              components={
-                needEditInTable
-                  ? {
-                      body: {
-                        cell: this.renderEditableCell,
-                      },
-                    }
-                  : {}
-              }
-              columns={mergedColumns}
-              dataSource={dataSource}
-              onAdd={showAdd && this.handleAdd}
-              baseTitle={baseTitle}
-              rowKey={rowKey}
-            />
-          </Form>
-        )}
+            }
+            components={
+              needEditInTable
+                ? {
+                    body: {
+                      cell: this.renderEditableCell,
+                    },
+                  }
+                : {}
+            }
+            columns={mergedColumns}
+            dataSource={dataSource}
+            onAdd={showAdd && this.handleAdd}
+            baseTitle={baseTitle}
+            rowKey={rowKey}
+          />
+        </Form>
         {visible && (
           <ModalForm
             visible={visible}

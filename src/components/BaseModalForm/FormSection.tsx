@@ -30,6 +30,8 @@ import InputWithLabel from '../ConfigComponents/InputWithLabel';
 import NormalCheckboxWithInput from '../ConfigComponents/NormalCheckboxWithInput';
 import SelectWithOptions from '../selects/SelectWithOptions';
 import DictionarySelect from '@/components/ConfigComponents/DictionarySelect';
+import PureCheckbox from '../ConfigComponents/PureCheckbox';
+import CheckboxWithSingleInput from '../ConfigComponents/CheckboxWithSingleInput';
 
 export const getFormDescriptionByModuleName = async (moduleName: string) => {
   return formDescriptionsWithoutSectionApi(
@@ -160,6 +162,14 @@ export class FormSection extends React.Component<IProps> {
       case 'normal_checkbox_with_input':
         return renderEditItem(formDescriptionKey, <NormalCheckboxWithInput config={formDescription} />, {
           customFormItemLayout,
+        });
+      case 'checkbox_with_single_input':
+        return renderEditItem(get(formDescription, 'key'), <CheckboxWithSingleInput config={formDescription} />, {
+          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
+        });
+      case 'pure_checkbox':
+        return renderEditItem(get(formDescription, 'key'), <PureCheckbox config={formDescription} />, {
+          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
         });
       case 'checkbox_group':
         return renderEditItem(formDescriptionKey, <CheckboxGroup config={formDescription} />, {

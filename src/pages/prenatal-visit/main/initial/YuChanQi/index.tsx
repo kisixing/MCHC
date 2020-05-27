@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Button, message } from 'antd';
+import { getExpected } from '@/utils/formula';
 import MyForm from '@/components/MyForm/index';
 import config from './config';
 import style from '../index.less';
@@ -24,7 +25,10 @@ export default class Home extends React.Component<{},HomeState>{
 
   componentDidUpdate(){
     const { formHandler } = this.state;
-    formHandler.subscribe(".lmp", "change", (val: any) => {});
+    formHandler.subscribe("lmp", "change", (val: any) => {
+      formHandler.edd.actions.setValue(getExpected(val));
+      formHandler.sureEdd.actions.setValue(getExpected(val));
+    });
   }
 
   handleSubmit = () => {
