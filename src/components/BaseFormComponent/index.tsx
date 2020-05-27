@@ -1,8 +1,10 @@
 import React from 'react';
 import { get } from 'lodash';
-import { Input, DatePicker, Checkbox, InputNumber, TimePicker } from 'antd';
+import { Input, DatePicker, Checkbox, InputNumber, TimePicker, Radio } from 'antd';
 import SelectWithOptions from '@/components/selects/SelectWithOptions';
 import NormalSelect from '@/components/selects/NormalSelect';
+
+const RadioGroup = Radio.Group;
 
 export default (props: any) => {
   const render = () => {
@@ -18,6 +20,8 @@ export default (props: any) => {
         return <TimePicker size="small" {...props} />;
       case 'checkbox':
         return <Checkbox size="small" {...props} />;
+      case 'radio_group':
+        return <RadioGroup size="small" {...props} />;
       case 'select_with_options':
         return <SelectWithOptions size="small" {...props} />;
       case 'normal_select':

@@ -41,7 +41,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
       valid: this.valid
     })
   }
-  
+
   // 外部页面更新引发
   componentDidUpdate(prevProps: FormItemProp) {
     if (JSON.stringify(this.props) !== JSON.stringify(prevProps)) {

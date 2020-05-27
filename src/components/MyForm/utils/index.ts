@@ -169,7 +169,7 @@ export function getRenderData(config: Array<FormConfig>, data: any): Array<FormC
   for (let i = 0; i < rConfig.length; i++) {
     rConfig[i].value = cData[rConfig[i].key];
   }
-  return rConfig;
+  return config;
 }
 
 /* ============================== 本地格式转为接口格式 ==================================== */

@@ -62,7 +62,7 @@ export default (props: any) => {
         closable
         visible={showPanel}
         className={styles.fixedSearchPanel}
-        footer={renderFooter()}
+        // footer={renderFooter()}
       >
         <PatientList onExport={handlePasteData} />
       </Drawer>

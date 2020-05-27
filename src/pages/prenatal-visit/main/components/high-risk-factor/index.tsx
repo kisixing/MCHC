@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Row, Col, Tree, Modal, Select, Input, Button } from 'antd';
 import request from '@/utils/request';
 import { connect } from 'dva';
-
 import { highRiskData } from './data';
 import styles from './index.less';
 
@@ -33,12 +32,12 @@ class Index extends Component<{},IndexState>{
     const { pageData, expandedKeys } = this.state;
 
     const searchList = pageData && highRiskData.filter(i  => !pageData.search || i.name.indexOf(pageData.search) !== -1);
-    const allExpandedKeys = [];
+    const allExpandedKeys: string[] = [];
     searchList && searchList.map(item => {
       allExpandedKeys.push(item.id.toString())
     })
 
-    const handleClose = (bool) => {
+    const handleClose = (bool: boolean) => {
       dispatch({
         type: 'pregnancy/changeHighrisk',
         payload: false
@@ -65,20 +64,20 @@ class Index extends Component<{},IndexState>{
       this.setState({ pageData });
     };
 
-    const handleChange = (name, value) => {
+    const handleChange = (name: string, value: string|number) => {
       pageData[name] = value;
       this.setState({ pageData });
     };
 
-    const handleCheck = keys => {
+    const handleCheck = (keys: string) => {
       this.setState({expandedKeys: keys})
     }
 
-    const handleSelect = keys => {
-      let initLevel = pageData.highrisk;
-      const node = searchList.filter(i => i.id === keys[0]).pop();
+    const handleSelect = (keys: string) => {
+      const initLevel = pageData.highrisk;
+      const node = searchList.filter(i => i.id.toString() === keys[0]).pop();
       if(node && node.level && node.level > initLevel) {
-        let newLevel = node.level;
+        const newLevel = node.level;
         handleChange("highrisk", newLevel)
       }
 
@@ -89,8 +88,7 @@ class Index extends Component<{},IndexState>{
         }
         return [n.name];
       };
-      if ( node && !searchList.filter(i => i.pId === node.id).length &&
-           pageData.highriskNote && pageData.highriskNote.split("\n").indexOf(node.name) === -1) {
+      if ( node && !searchList.filter(i => i.pId === node.id).length && pageData.highriskNote && pageData.highriskNote.split("\n").indexOf(node.name) === -1) {
         handleChange( "highriskNote", (pageData.highriskNote || '').replace(/\n+$/, "") + "\n" + gettitle(node).join(":") );
       } else if (node && !searchList.filter(i => i.pId === node.id).length) {
         handleChange( "highriskNote", gettitle(node).join(":") );
@@ -98,7 +96,7 @@ class Index extends Component<{},IndexState>{
     };
 
 
-    const initTree = (pid, level = 0) =>
+    const initTree = (pid: number, level = 0) =>
       searchList.filter(i => i.pId === pid).map(node => (
         <Tree.TreeNode key={node.id} title={node.name} onClick={() => handleCheck(node)} isLeaf={!searchList.filter(i => i.pId === node.id).length}>
           {level < 10 ? initTree(node.id, level + 1) : null}
@@ -115,7 +113,7 @@ class Index extends Component<{},IndexState>{
               <Row>
                 <Col span={3}>高危等级：</Col>
                 <Col span={7}>
-                  <Select value={pageData.highrisk} onChange={e => handleChange("highrisk", e)}>
+                  <Select size="small" value={pageData.highrisk} onChange={e => handleChange("highrisk", e)}>
                     {"1,2,3,4,5".split(",").map(i => (
                       <Select.Option key={i} value={i}>{i}</Select.Option>
                     ))}
@@ -146,7 +144,7 @@ class Index extends Component<{},IndexState>{
               <br />
               <Row>
                 <Col span={16}>
-                  <Input value={pageData.search} onChange={e => handleChange("search", e.target.value)} placeholder="输入模糊查找"/>
+                  <Input size="small" value={pageData.search} onChange={e => handleChange("search", e.target.value)} placeholder="输入模糊查找"/>
                 </Col>
                 <Col span={3}>
                   <Button size="small" onClick={() => this.setState({expandedKeys: []})}>全部收齐</Button>
@@ -157,7 +155,7 @@ class Index extends Component<{},IndexState>{
               </Row>
             </Col>
           </Row>
-          <div style={{ height: 200, overflow: "auto", padding: "0 16px" }}>
+          <div style={{ height: 300, overflow: "auto", padding: "0 16px" }}>
             <Tree expandedKeys={expandedKeys} onExpand={handleCheck} onSelect={handleSelect} style={{ maxHeight: "90%" }}>
               {initTree(0)}
             </Tree>

@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
+import { connect } from 'dva';
+import { set } from 'lodash';
 import MyForm from '@/components/MyForm/index';
 import config from './config';
 import request from '@/utils/request';
@@ -8,16 +10,14 @@ import style from './index.less';
 
 import { getRenderData, getFormData} from '@/components/MyForm/utils';
 
-interface HomeState{
+interface IndexState{
   formHandler:{
     [key:string]: any
   },
   formData: any
 }
 
-
-export default class Home extends React.Component<{},HomeState>{
-  static Title = '本次产检记录';
+class Index extends React.Component<{},IndexState>{
 
   constructor(props:any){
     super(props);
@@ -27,30 +27,35 @@ export default class Home extends React.Component<{},HomeState>{
     }
   }
 
-
   componentDidUpdate(){
     const { formHandler } = this.state;
     formHandler.subscribe(".lmp", "change", (val: any) => {});
   }
 
-
   handleSubmit = () => {
+    const { dispatch } = this.props;
+    const { formHandler } = this.state;
     const urlParam = getPageQuery();
-    this.state.formHandler.submit().then(({validCode, res}:any) => {
-      // if(!validCode){
-      // }
-      const param = {visitType: 1};
-      const newData = {...getFormData(res), ...param }
-      console.log(newData, '111')
-      // newData['pregnancy']['id'] = urlParam.id;
 
-      // console.log(newData, '366')
-      request('/prenatal-visits', {
-        method: 'post',
-        data: newData
-      }).then(r => {
-
-      });
+    formHandler.submit().then(({validCode, res}:any) => {
+      if(validCode) {
+        console.log(validCode, res, getFormData(res), '000')
+        const param = {visitType: 1};
+        const newData = {...getFormData(res), ...param }
+        set(newData, 'pregnancy.id', urlParam.id);
+        console.log(newData, '222')
+        request('/prenatal-visits', {
+          method: 'post',
+          data: newData
+        }).then(r => {
+          dispatch({
+            type: 'pregnancy/getVisitsData',
+            payload: urlParam.id
+          })
+        });
+      } else {
+        message.error('必填项不能为空！')
+      }
     });
   }
 
@@ -72,3 +77,11 @@ export default class Home extends React.Component<{},HomeState>{
     )
   }
 }
+
+const mapStateToProps = ({ pregnancy }) => {
+  return { ...pregnancy };
+};
+
+export default connect(
+  mapStateToProps
+)(Index);

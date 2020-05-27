@@ -11,7 +11,7 @@ const config: Array<FormConfig> = [
     input_type: "custom",
     input_props: {
       config: [
-        { name: 'id', key: '.pregnancy.id', label: "id", input_type: "input", span: 0, rules: "required", hidden: true },
+        // { name: 'id', key: '.pregnancy.id', label: "id", input_type: "input", span: 0, rules: "required", hidden: true },
         { name: 'visitDate', key: '.visitDate', label: "日期", input_type: "date", span: 8, rules: "required" },
         { name: 'gestationalWeek', key: '.gestationalWeek', label: "孕周", input_type: "input", span: 8, rules: "required" },
         { name: 'weight', key: '.physicalExam.weight', label: "体重", input_type: "input", span: 8, rules: "required" },
@@ -28,7 +28,7 @@ const config: Array<FormConfig> = [
         // { name: 'fetalCondition', key: '.list.fetalCondition', label: "胎心率", input_type: "input", span: 8, rules: "required" },
         // { name: 'fetalCondition', key: '.list.fetalCondition', label: "先露", input_type: "input", span: 8, rules: "required" },
 
-        { name: 'weight', key: '.fetus.weight', label: "胎儿体重", input_type: "input", span: 8 },
+        { name: 'fetusWeight', key: '.fetus.weight', label: "胎儿体重", input_type: "input", span: 8 },
         { name: 'avf', key: '.fetus.avf', label: "AVF", input_type: "input", span: 8 },
         { name: 'umbilicalbloodflow', key: '.fetus.umbilicalbloodflow', label: "脐血流", input_type: "input", span: 8 },
 

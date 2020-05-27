@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { Button, message, Input, Row, Col, Popover } from 'antd';
+import { connect } from 'dva';
 import styles from './index.less';
 import request from '@/utils/request';
 import { getPageQuery } from '@/utils/utils';
 
-interface HomeState{
+interface IndexState{
   diagList: any,
 }
 
-export default class Home extends React.Component<{},HomeState>{
-
+class Index extends React.Component<{},IndexState>{
   constructor(props:any){
     super(props);
     this.state = {
@@ -30,7 +30,7 @@ export default class Home extends React.Component<{},HomeState>{
     });
   }
 
-  postdiagnoses = (diag) => {
+  postdiagnoses = (diag: string) => {
     request(`/prenatal-diagnoses`,{
       method: "POST",
       data: {
@@ -50,7 +50,7 @@ export default class Home extends React.Component<{},HomeState>{
     });
   }
 
-  deleteDiagnoses = (id) => {
+  deleteDiagnoses = (id: number) => {
     request(`/prenatal-diagnoses/${id}`,{
       method: "DELETE",
     }).then(res => {
@@ -60,8 +60,10 @@ export default class Home extends React.Component<{},HomeState>{
 
 
   renderDiagnoses = () => {
+    const { pregnancyData } = this.props;
     const { diagList } = this.state;
-    console.log(diagList, '466')
+
+    console.log(pregnancyData, diagList, '466')
     const handleSearch = (v) => {
       this.postdiagnoses(v);
     }
@@ -89,13 +91,17 @@ export default class Home extends React.Component<{},HomeState>{
           size="small"
           onSearch={value => handleSearch(value)}
         />
+        <div className="first-diag">
+          <span className="zd-num font-12">1、</span>
+          G{pregnancyData.gravidity} P{pregnancyData.parity} 妊娠{pregnancyData.gestationalWeek}周
+        </div>
         {
           diagList && diagList.map((item, i) => (
             <Row>
               <Col span={16}>
                 <div className={styles.singleDiag}>
                   <Popover content={content(item, i)}>
-                    <span>{i + 1}、</span>
+                    <span>{i + 2}、</span>
                     <span>{item.diagnosis}</span>
                   </Popover>
                   <input className={styles.remarkIpt} placeholder="备注" value={item.note} onChange={e => setRemark(e.target.value, i)} />
@@ -122,3 +128,11 @@ export default class Home extends React.Component<{},HomeState>{
     )
   }
 }
+
+const mapStateToProps = ({ pregnancy }) => {
+  return { ...pregnancy };
+};
+
+export default connect(
+  mapStateToProps
+)(Index);

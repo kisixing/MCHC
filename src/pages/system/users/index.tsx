@@ -10,7 +10,6 @@ import BaseList, { IState as BaseListIState } from '@/components/BaseList';
 import request from '@/utils/request';
 import { EditOutlined, DeleteOutlined, RedoOutlined } from '@ant-design/icons';
 import commonStyles from '@/common.less';
-import CustomSpin from '@/components/GeneralComponents/CustomSpin';
 import ResetPasswordModal from './components/ResetPasswordModal';
 import WithDynamicExport from '@/components/WithDynamicExport';
 
@@ -148,31 +147,44 @@ export default class List extends BaseList {
 
   render() {
     const { baseTitle, rowKey, showAdd, needPagination, showQuery, Query } = this.props;
-    const { dataSource, visible, editable, id, total, defaultQuery, loading, paramryKey, resetVisible } = this.state;
+    const {
+      dataSource,
+      visible,
+      editable,
+      id,
+      total,
+      defaultQuery,
+      loading,
+      paramryKey,
+      resetVisible,
+      panelHeight,
+    } = this.state;
 
     return (
       <Fragment>
-        {showQuery && <Query onSearch={this.handleQuerySearch} />}
-        {loading ? (
-          <CustomSpin />
-        ) : (
-          <Table
-            pagination={
-              needPagination && {
-                total,
-                showTotal: () => `一共${total}条记录`,
-                pageSize: get(defaultQuery, 'size'),
-                defaultCurrent: 1,
-                onChange: this.handlePageChange,
-              }
+        {showQuery && <Query id="base-query" onSearch={this.handleQuerySearch} />}
+        <Table
+          loading={loading}
+          pagination={
+            needPagination && {
+              total,
+              showTotal: () => `一共${total}条记录`,
+              pageSize: get(defaultQuery, 'size'),
+              defaultCurrent: 1,
+              onChange: this.handlePageChange,
+              onShowSizeChange: this.handlePageChange,
             }
-            columns={this.columns}
-            dataSource={dataSource}
-            onAdd={showAdd && this.handleAdd}
-            baseTitle={baseTitle}
-            rowKey={rowKey}
-          />
-        )}
+          }
+          columns={this.columns}
+          dataSource={dataSource}
+          onAdd={showAdd && this.handleAdd}
+          baseTitle={baseTitle}
+          rowKey={rowKey}
+          scroll={{
+            x: '100vw',
+            y: Number(panelHeight) - 148 - Number(document.getElementById('base-query')?.clientHeight || 0),
+          }}
+        />
         {visible && (
           <UsersModal
             visible={visible}

@@ -10,12 +10,10 @@ import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
 import commonStyles from '@/common.less';
 import { getPageQuery } from '@/utils/utils';
 
-
 @WithDynamicExport
 export default class List extends BaseList {
-  
   static defaultProps = {
-    baseUrl: "/pd-operations",
+    baseUrl: '/pd-operations',
     baseTitle: '手术病历',
     needPagination: false,
     showQuery: false,
@@ -23,12 +21,15 @@ export default class List extends BaseList {
     tableColumns,
     rowKey: 'id',
     Table,
+    otherTableProps: {
+      scroll: { x: true },
+    },
   };
 
   state = {
     total: 0,
     defaultQuery: {
-      "prenatalPatientId.equals": getPageQuery().prenatalPatientId || "",
+      'prenatalPatientId.equals': getPageQuery().prenatalPatientId || '',
       page: 0,
       size: 20,
     },
@@ -85,7 +86,7 @@ export default class List extends BaseList {
 
   handleAdd = () => {
     const urlParams = getPageQuery();
-    router.push(`/prenatal-diagnosis/operation-record-form?prenatalPatientId=${urlParams.prenatalPatientId || ""}`);
+    router.push(`/prenatal-diagnosis/operation-record-form?prenatalPatientId=${urlParams.prenatalPatientId || ''}`);
   };
 
   // handleView = (rowData: any) => () => {
@@ -96,6 +97,8 @@ export default class List extends BaseList {
   handleEdit = (rowData: any) => () => {
     const { id } = rowData;
     const urlParams = getPageQuery();
-    router.push(`/prenatal-diagnosis/operation-record-form?prenatalPatientId=${urlParams.prenatalPatientId || ""}&id=${id}`);
+    router.push(
+      `/prenatal-diagnosis/operation-record-form?prenatalPatientId=${urlParams.prenatalPatientId || ''}&id=${id}`,
+    );
   };
 }

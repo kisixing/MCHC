@@ -4,7 +4,6 @@ import MyForm from '@/components/MyForm/index';
 import config from './config';
 import { getPageQuery } from '@/utils/utils';
 import request from '@/utils/request';
-
 import { getRenderData, getFormData} from '@/components/MyForm/utils';
 import style from './index.less'
 
@@ -15,18 +14,14 @@ interface HomeState{
   formData: any
 }
 
-
 export default class Home extends React.Component<{},HomeState>{
   constructor(props:any){
     super(props);
     this.state = {
-      formHandler: {
-
-      },
+      formHandler: {},
       formData: {}
     }
   }
-
 
   componentDidMount(){
     const urlParam = getPageQuery();
@@ -42,11 +37,10 @@ export default class Home extends React.Component<{},HomeState>{
     }
   }
 
-
   handleSubmit = () => {
     const { id = ""} = this.state.formData;
     this.state.formHandler.submit().then(({validCode, res}:any) => {
-      // if(validCode) {
+      if(validCode) {
         // 通过id判断 为新建还是修改
         const method = id ? "PUT" : "POST";
         const info = id ? "修改孕册病人信息成功" : "新增孕册信息成功";
@@ -59,15 +53,15 @@ export default class Home extends React.Component<{},HomeState>{
         }).then(r => {
           message.success(info);
         });
-      // } else {
-      //   message.error('必填项不能为空！');
-      // }
+      } else {
+        message.error('必填项不能为空！');
+      }
     })
   }
 
   handleReset = () => {
     const { formHandler } = this.state;
-    console.log(formHandler, '1223')
+    console.log(formHandler, '111')
     if (formHandler.reset) {
       formHandler.reset();
     }

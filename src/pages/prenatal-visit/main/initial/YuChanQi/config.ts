@@ -10,7 +10,7 @@ const config: Array<FormConfig> = [
   // { name: 'crl', key: '.ultrasounds.crl', label: "CRL", input_type: "input", span: 7},
   // { name: 'nt', key: '.ultrasounds.nt', label: "NT", input_type: "input", span: 7},
   // { name: 'gestationalWeek', key: '.ultrasounds.gestationalWeek', label: "如孕", input_type: "input", span: 7},
-  { name: 'conceiveMode', key: '.personalprofile', label: "受孕方式", input_type: "checkbox", span: 10, rules: "required",
+  { name: 'conceiveMode', key: '.personalprofile.conceiveMode(Note)', label: "受孕方式", input_type: "checkbox", span: 10, rules: "required",
     input_props: {
       type: "custom",
       renderData: [
