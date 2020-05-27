@@ -14,7 +14,7 @@ import request from '@/utils/request';
 export default class GeneralExaminationPanel extends BaseEditPanel {
   static defaultProps = {
     baseUrl: '/child-exam-visits',
-    moduleName: 'premaritalCareGeneralExamination',
+    moduleName: 'childGeneralExamination',
     title: '内科检查',
     toApi,
     fromApi,
@@ -26,17 +26,18 @@ export default class GeneralExaminationPanel extends BaseEditPanel {
 
     const formDescriptions = formDescriptionsFromApi(await request.get(`/form-descriptions?moduleName=${moduleName}`));
     const formDescriptionsWithoutSection = formDescriptionsWithoutSectionApi(formDescriptions);
-    this.setState({ formDescriptions, formDescriptionsWithoutSection, data:fromApi(get(data, 'childGeneralExam'), formDescriptionsWithoutSection) });
+    this.setState({
+      formDescriptions,
+      formDescriptionsWithoutSection,
+      data: fromApi(get(data, 'childGeneralExam'), formDescriptionsWithoutSection),
+    });
   }
 
   handleSubmit = async (values: any) => {
     const { data: personData, id } = this.props;
     const { data, formDescriptionsWithoutSection } = this.state;
     const { title, baseUrl } = this.props;
-    const childGeneralExam = toApi(
-      values,
-      formDescriptionsWithoutSection,
-    );
+    const childGeneralExam = toApi(values, formDescriptionsWithoutSection);
 
     if (id) {
       await request.put(`${baseUrl}`, {
@@ -47,5 +48,5 @@ export default class GeneralExaminationPanel extends BaseEditPanel {
       await request.post(`${baseUrl}`, { data: { childGeneralExam } });
       message.success(`新增${title}成功`);
     }
-  }
+  };
 }

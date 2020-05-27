@@ -17,7 +17,7 @@ import request from '@/utils/request';
 export default class PhysicalExaminationPanel extends BaseEditPanel {
   static defaultProps = {
     baseUrl: '/child-exam-visits',
-    moduleName: 'premaritalCarePhysicalExamination',
+    moduleName: 'childPhysicalExamination',
     title: '体格检查',
     toApi,
     fromApi,
@@ -41,10 +41,7 @@ export default class PhysicalExaminationPanel extends BaseEditPanel {
     const { id, setID } = this.props;
     const { data, childArchives, formDescriptionsWithoutSection } = this.state;
     const { title, baseUrl } = this.props;
-    const childPhysicalExam = toApi(
-      values,
-      formDescriptionsWithoutSection,
-    );
+    const childPhysicalExam = toApi(values, formDescriptionsWithoutSection);
 
     if (id) {
       await request.put(`${baseUrl}`, {
@@ -58,10 +55,10 @@ export default class PhysicalExaminationPanel extends BaseEditPanel {
           visitDate: moment().format('YYYY-MM-DD'),
           childArchives,
           childPhysicalExam,
-        }
+        },
       });
-      setID(res.id)
+      setID(res.id);
       message.success(`新增${title}成功`);
     }
-  }
+  };
 }

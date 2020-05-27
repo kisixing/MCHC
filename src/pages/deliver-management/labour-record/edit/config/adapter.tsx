@@ -43,7 +43,7 @@ export const fromApi = (data: any, nativeFormDescriptions: any) => {
         set(result, `${key}.1`, get(data, `${key}m`));
         break;
       case 'apgar':
-        map(get(data, 'noenateRecord'), (record, index) => {
+        map(get(data, 'noenateRecords'), (record, index) => {
           set(result, `${key}.${index}.apgar1`, get(record, 'apgar1'));
           set(result, `${key}.${index}.apgar5`, get(record, 'apgar5'));
           set(result, `${key}.${index}.apgar10`, get(record, 'apgar10'));
@@ -58,7 +58,6 @@ export const fromApi = (data: any, nativeFormDescriptions: any) => {
         break;
     }
   });
-  console.log(result);
   return {
     ...result,
     id: get(data, 'id'),
@@ -81,10 +80,8 @@ export const toApi = (data: any, nativeFormDescriptions: any) => {
   const dataKeys: any[] = [...isObjectKeyArray, ...isNotObjectKeyArray];
 
   // TODO: 特殊情况，是否能自动化？
-  // TODO: 修改的时候，没有携带 noenateRecords ID
   set(result, 'noenateRecords', get(data, 'fetusAppendages'));
 
-  // 如果是对象的情况下
   map(dataKeys, key => {
     const item = get(data, key);
     const tranferRules = get(nativeFormDescriptions, `${key}.tranfer_rules`);
@@ -106,10 +103,10 @@ export const toApi = (data: any, nativeFormDescriptions: any) => {
         set(result, `${key}m`, Number(get(item, '1')));
         break;
       case 'apgar':
-        map(get(data, 'noenateRecord'), (record, index) => {
-          set(result, `${key}.${index}.apgar1`, get(record, 'apgar1'));
-          set(result, `${key}.${index}.apgar5`, get(record, 'apgar5'));
-          set(result, `${key}.${index}.apgar10`, get(record, 'apgar10'));
+        map(get(result, 'noenateRecords'), (record, index) => {
+          set(record, 'apgar1', get(data, `apgar.${index}.apgar1`));
+          set(record, 'apgar5', get(data, `apgar.${index}.apgar5`));
+          set(record, 'apgar10', get(data, `apgar.${index}.apgar10`));
         });
         break;
       case 'moment':

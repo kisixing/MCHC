@@ -14,7 +14,7 @@
     content: '';
     width: 1px;
     height: 16px;
-    background-color: #f0f2f5;
+    background-color:#f0f2f5;
     position: absolute;
     left: 0;
   }
@@ -55,6 +55,7 @@
 .isActive {
   background-color: #f0f2f5;
   color: #000;
+  font-weight: bold;
 }
 
 .customTabsButtonIcon {
@@ -69,18 +70,29 @@
 }
 
 .customTabsButtonTitle {
-  max-width: 100px;
+  width: 100px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   word-break: break-all;
   margin: 0 8px;
+  text-align: center;
 }
 
 .customTabsButtonClose {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
   position: absolute;
   right: 5px;
   cursor: pointer;
   color: #ccc;
   visibility: hidden;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+  }
 }
