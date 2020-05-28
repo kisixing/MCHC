@@ -7,7 +7,7 @@ export default {
   // '@menu-dark-item-active-bg': '#1f2d3d',
   // '@success-color': '#52c41a', // 成功色
   // '@warning-color': '#faad14', // 警告色
-  // '@error-color': '#f5222d', // 错误色
+  '@error-color': '#f5222d', // 错误色
   // '@font-size-base': '14px', // 主字号
   // '@heading-color': 'rgba(0, 0, 0, 0.85)', // 标题色
   '@font-family': "Helvetica, Tahoma, Arial, 'PingFang SC', 'Hiragino Sans GB', 'Heiti SC', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif",
