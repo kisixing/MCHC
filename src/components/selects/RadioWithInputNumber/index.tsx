@@ -58,7 +58,7 @@ export default (props: IProps) => {
               addonBefore={get(config, 'labelBefore')}
               addonAfter={get(config, 'labelAfter')}
               style={{ textAlign: 'right' }}
-              size="small"
+              
               min={0}
             />
           </Col>

@@ -35,7 +35,7 @@ export default class MenuPermissionCard extends React.PureComponent<IProps> {
       <div className={styles.menuPermissionCard}>
         <div className={styles.menuPermissionCardHeader}>
           <div>API权限</div>
-          <Button type="primary" size="small" onClick={this.handleSaveApiPermission} disabled={isEmpty(role)}>
+          <Button type="primary" onClick={this.handleSaveApiPermission} disabled={isEmpty(role)}>
             保存
           </Button>
         </div>

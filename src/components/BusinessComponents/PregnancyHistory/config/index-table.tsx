@@ -179,7 +179,7 @@ export default {
         //   dataIndex: 'fetalcount',
         //   width: 60,
         //   render: (value: any, rowData: any, index: number) => {
-        //     const children = <Input size="small" defaultValue={value} />;
+        //     const children = <Input defaultValue={value} />;
         //     return renderContent(children, {});
         //   },
         // },

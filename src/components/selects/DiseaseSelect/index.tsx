@@ -52,7 +52,7 @@ export default (props: IProps) => {
 
   return (
     <>
-      <Select mode="multiple" size="small" value={data} onChange={handleChange} {...get(props, 'config.inputProps')}>
+      <Select mode="multiple" value={data} onChange={handleChange} {...get(props, 'config.inputProps')}>
         {map(diseases, disease => {
           return (
             <Select.Option key={get(disease, 'value')} value={get(disease, 'value')}>

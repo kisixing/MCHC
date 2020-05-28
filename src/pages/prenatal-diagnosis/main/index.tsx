@@ -93,7 +93,7 @@ class PrenatalDiagnosis extends Component<PrenatalDiagnosisProps,PrenatalDiagnos
       <Tabs
         defaultActiveKey={currentPageKey}
         type="card"
-        size="small"
+        
       >
         {routers.map((item:any) => (
           <TabPane

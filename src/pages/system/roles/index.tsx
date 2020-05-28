@@ -56,7 +56,7 @@ export default class Roles extends BaseList<IProps, IState> {
             <Button
               className={commonStyles.tableActionBtn}
               type="primary"
-              size="small"
+              
               onClick={this.handleEdit(rowData)}
             >
               <EditOutlined />
@@ -67,7 +67,7 @@ export default class Roles extends BaseList<IProps, IState> {
               okText="确定"
               cancelText="取消"
             >
-              <Button className={commonStyles.tableActionBtn} type="danger" size="small">
+              <Button className={commonStyles.tableActionBtn} type="danger" >
                 <DeleteOutlined />
               </Button>
             </Popconfirm>

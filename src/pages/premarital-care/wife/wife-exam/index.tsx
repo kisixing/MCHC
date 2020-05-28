@@ -69,7 +69,7 @@ export default class panel extends PanelWithChild {
     const id = get(this.props, 'location.query.id');
     const { data, activeKey } = this.state;
     return (
-      <Tabs activeKey={activeKey} type="card" size="small" onChange={this.handleChangeTab}>
+      <Tabs activeKey={activeKey} type="card" onChange={this.handleChangeTab}>
         <Tabs.TabPane tab="病史信息" key="DiseaseHistory">
           {activeKey === 'DiseaseHistory' && <DiseaseHistory baseUrl="wives" data={data} />}
         </Tabs.TabPane>

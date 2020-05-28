@@ -70,7 +70,7 @@ export default class ApiPermissionSelect extends React.Component<IProps> {
       <div style={{ background: '#fff' }}>
         <Input
           style={{ background: '#fff', margin: 8, width: '95%' }}
-          size="small"
+          
           placeholder="请输入权限名称"
           onChange={this.handleFilter}
         />

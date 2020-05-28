@@ -71,7 +71,7 @@ export default (props: any) => {
       <Row>
         <Col span={6}>
           <Cascader
-            size="small"
+            
             options={options}
             onChange={handleProvinceChange}
             placeholder="选择省市区"
@@ -81,7 +81,7 @@ export default (props: any) => {
         </Col>
         <Col span={6}>
           <Select
-            size="small"
+            
             disabled={isEmpty(address)}
             placeholder="选择街道、社区"
             onChange={handleStreetChange}
@@ -95,7 +95,7 @@ export default (props: any) => {
         </Col>
         <Col span={12}>
           <Input
-            size="small"
+            
             disabled={isEmpty(address)}
             placeholder="详细地址"
             onChange={handleInputChange}

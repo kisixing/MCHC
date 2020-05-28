@@ -73,7 +73,7 @@ export default class List extends BaseList {
             <Button
               className={commonStyles.tableActionBtn}
               type="primary"
-              size="small"
+              
               onClick={this.handleEdit(rowData)}
             >
               <EditOutlined />
@@ -81,7 +81,7 @@ export default class List extends BaseList {
             <Button
               className={commonStyles.tableActionBtn}
               type="primary"
-              size="small"
+              
               onClick={this.handleResetEdit(rowData)}
             >
               <RedoOutlined />
@@ -92,7 +92,7 @@ export default class List extends BaseList {
               okText="确定"
               cancelText="取消"
             >
-              <Button className={commonStyles.tableActionBtn} type="danger" size="small">
+              <Button className={commonStyles.tableActionBtn} type="danger" >
                 <DeleteOutlined />
               </Button>
             </Popconfirm>

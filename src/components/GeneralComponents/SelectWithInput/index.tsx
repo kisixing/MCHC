@@ -46,7 +46,7 @@ export default (props: IProps) => {
     <div>
       <Row>
         <Col span={11}>
-          <Select size="small" onChange={handleChange('select')} placeholder="请选择..." value={get(data, 'select')}>
+          <Select onChange={handleChange('select')} placeholder="请选择..." value={get(data, 'select')}>
             {map(selectOptions, (option: IOption) => {
               return (
                 <Select.Option key={option.key || option.value} value={option.value}>
@@ -60,14 +60,14 @@ export default (props: IProps) => {
           <Col span={11} offset={1}>
             {inputType === 'string' ? (
               <Input
-                size="small"
+                
                 onChange={handleChange(inputType)}
                 value={get(data, 'input')}
                 placeholder="请输入..."
               />
             ) : (
               <InputNumber
-                size="small"
+                
                 onChange={handleChange(inputType)}
                 placeholder="请输入..."
                 value={get(data, 'input')}

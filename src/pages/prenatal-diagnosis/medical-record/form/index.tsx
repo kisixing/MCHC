@@ -207,7 +207,7 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
           {/* {treeData.length !== 0 ? ( */}
             <div>
               {/* <Button
-                size="small"
+                
                 onClick={this.newRecord}
               >新建病历</Button>
               <br /> */}

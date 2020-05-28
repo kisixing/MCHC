@@ -33,7 +33,7 @@ export default class BaseQuery extends DynamicForm<P, S> {
 
   renderResetBtn = () => (
     <Form.Item>
-      <Button size="small" icon={<RedoOutlined />} onClick={this.handleReset}>
+      <Button icon={<RedoOutlined />} onClick={this.handleReset}>
         重置
       </Button>
     </Form.Item>
@@ -41,7 +41,7 @@ export default class BaseQuery extends DynamicForm<P, S> {
 
   renderSearchBtn = () => (
     <Form.Item>
-      <Button size="small" type="primary" icon={<SearchOutlined />} htmlType="submit">
+      <Button type="primary" icon={<SearchOutlined />} htmlType="submit">
         查询
       </Button>
     </Form.Item>

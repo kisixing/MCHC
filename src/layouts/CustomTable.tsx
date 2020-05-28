@@ -9,6 +9,6 @@ interface IProps extends TableProps<any> {
 
 export default class CustomTable extends React.PureComponent<IProps> {
   render() {
-    return <Table className={stylesCustomTable.table} size="small" {...this.props} />;
+    return <Table className={stylesCustomTable.table} {...this.props} />;
   }
 }
