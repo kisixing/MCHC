@@ -7,3 +7,7 @@ export async function getPregnancy(id: number) {
 export async function getVisits(id: number) {
   return request.get(`/prenatal-visits?visitType.equals=1&pregnancyId.equals=${id}`);
 }
+
+export async function getDiagnoses(id: number) {
+  return request.get(`/diagnoses?pregnancyId.equals=${id}`);
+}

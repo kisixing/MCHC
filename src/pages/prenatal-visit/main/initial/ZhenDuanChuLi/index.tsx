@@ -41,15 +41,15 @@ export default class Home extends React.Component<{},HomeState>{
 
   render(){
     const { visitData } = this.props;
-    const myConfig = getRenderData(config, visitData);
     return(
       <Row className={styles.initialContent}>
-        <Col span="8">
+        <Col span="6">
           <Diagnoses />
         </Col>
-        <Col span="16">
+        <Col span="18">
           <MyForm
-            config={myConfig}
+            config={config}
+            value={visitData}
             getFormHandler={(formHandler:any) => this.setState({formHandler})}
             submitChange={false}
           />

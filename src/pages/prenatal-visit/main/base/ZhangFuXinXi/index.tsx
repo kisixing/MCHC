@@ -40,11 +40,11 @@ export default class Home extends React.Component<{},HomeState>{
 
   render(){
     const { formData } = this.props;
-    const myConfig = getRenderData(config, formData);
     return(
       <div className={style.initialContent}>
         <MyForm
-          config={myConfig}
+          config={config}
+          value={formData}
           getFormHandler={(formHandler:any) => this.setState({formHandler})}
           submitChange={false}
         />
