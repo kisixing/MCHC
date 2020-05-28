@@ -146,7 +146,7 @@ export default (props: any) => {
             <Col span={7}>
               <Form.Item label="一分钟" wrapperCol={{ span: 14 }} labelCol={{ span: 10 }}>
                 <InputNumber
-                  size="small"
+                  
                   value={get(scores, `${index}.apgar1`)}
                   onChange={handleInputChange(index, 'apgar1')}
                 />
@@ -155,7 +155,7 @@ export default (props: any) => {
             <Col span={7}>
               <Form.Item label="五分钟" wrapperCol={{ span: 14 }} labelCol={{ span: 10 }}>
                 <InputNumber
-                  size="small"
+                  
                   value={get(scores, `${index}.apgar5`)}
                   onChange={handleInputChange(index, 'apgar5')}
                 />
@@ -164,7 +164,7 @@ export default (props: any) => {
             <Col span={7}>
               <Form.Item label="十分钟" wrapperCol={{ span: 14 }} labelCol={{ span: 10 }}>
                 <InputNumber
-                  size="small"
+                  
                   value={get(scores, `${index}.apgar10`)}
                   onChange={handleInputChange(index, 'apgar10')}
                 />

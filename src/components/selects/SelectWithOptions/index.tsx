@@ -90,7 +90,7 @@ export default (props: IProps) => {
       <Col span={11}>
         <Select
           mode={get(config, 'mode')}
-          size="small"
+          
           value={data}
           onChange={handleChange}
           {...get(props, 'config.inputProps')}
@@ -106,7 +106,7 @@ export default (props: IProps) => {
       </Col>
       <Col span={11} offset={1}>
         {/* TODO: 目前仅支持其它选项 */}
-        {showOther && <Input size="small" placeholder="其它" value={otherNote} onChange={handleInputChange} />}
+        {showOther && <Input placeholder="其它" value={otherNote} onChange={handleInputChange} />}
       </Col>
     </Row>
   );

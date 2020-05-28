@@ -88,10 +88,10 @@ export default class BaseList extends React.Component<IProps, IState> {
         if (needEditInTable && editable) {
           return (
             <>
-              <Button className={commonStyles.tableActionBtn} size="small" onClick={this.handleItemSave(rowData)}>
+              <Button className={commonStyles.tableActionBtn} onClick={this.handleItemSave(rowData)}>
                 保存
               </Button>
-              <Button className={commonStyles.tableActionBtn} size="small" onClick={this.handleItemCancel(rowData)}>
+              <Button className={commonStyles.tableActionBtn} onClick={this.handleItemCancel(rowData)}>
                 取消
               </Button>
             </>
@@ -103,7 +103,7 @@ export default class BaseList extends React.Component<IProps, IState> {
             <Button
               className={commonStyles.tableActionBtn}
               type="primary"
-              size="small"
+              
               onClick={this.handleEdit(rowData)}
             >
               <EditOutlined />
@@ -115,7 +115,7 @@ export default class BaseList extends React.Component<IProps, IState> {
               okText="确定"
               cancelText="取消"
             >
-              <Button className={commonStyles.tableActionBtn} type="danger" size="small">
+              <Button className={commonStyles.tableActionBtn} type="danger" >
                 <DeleteOutlined />
                 删除
               </Button>

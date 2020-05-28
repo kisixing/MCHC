@@ -56,7 +56,7 @@ export default class List extends BaseList {
             <Button
               className={commonStyles.tableActionBtn}
               type="primary"
-              size="small"
+              
               title="新建体检记录"
               onClick={this.handleAddVisit(rowData)}
             >
@@ -67,7 +67,7 @@ export default class List extends BaseList {
               <Button
                 className={commonStyles.tableActionBtn}
                 type="primary"
-                size="small"
+                
                 title="查看体检记录"
                 onClick={this.handleView(rowData)}
               >
@@ -79,7 +79,7 @@ export default class List extends BaseList {
               title="编辑儿童档案"
               className={commonStyles.tableActionBtn}
               type="primary"
-              size="small"
+              
               onClick={this.handleEdit(rowData)}
             >
               <EditOutlined />
@@ -90,7 +90,7 @@ export default class List extends BaseList {
               okText="确定"
               cancelText="取消"
             >
-              <Button title="删除" className={commonStyles.tableActionBtn} type="danger" size="small">
+              <Button title="删除" className={commonStyles.tableActionBtn} type="danger" >
                 <DeleteOutlined />
               </Button>
             </Popconfirm>

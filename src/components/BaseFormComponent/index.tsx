@@ -11,25 +11,25 @@ export default (props: any) => {
     const inputType = get(props, 'inputType') || get(props, 'config.inputType');
     switch (inputType) {
       case 'input':
-        return <Input size="small" {...props} />;
+        return <Input {...props} />;
       case 'month_picker':
-        return <DatePicker.MonthPicker size="small" {...props} />;
+        return <DatePicker.MonthPicker {...props} />;
       case 'single_date_picker':
-        return <DatePicker size="small" {...props} />;
+        return <DatePicker {...props} />;
       case 'single_time_picker':
-        return <TimePicker size="small" {...props} />;
+        return <TimePicker {...props} />;
       case 'checkbox':
-        return <Checkbox size="small" {...props} />;
+        return <Checkbox {...props} />;
       case 'radio_group':
-        return <RadioGroup size="small" {...props} />;
+        return <RadioGroup {...props} />;
       case 'select_with_options':
-        return <SelectWithOptions size="small" {...props} />;
+        return <SelectWithOptions {...props} />;
       case 'normal_select':
-        return <NormalSelect size="small" {...props} />;
+        return <NormalSelect {...props} />;
       case 'input_number':
-        return <InputNumber size="small" {...props} />;
+        return <InputNumber {...props} />;
       default:
-        return <Input size="small" {...props} />;
+        return <Input {...props} />;
     }
   };
 

@@ -91,7 +91,7 @@ export default (props: IProps) => {
                 {...others}
                 type={enterType}
                 style={get(option, 'exceptionStyle.inputStyle')}
-                size="small"
+                
                 onChange={handleInputChange(inputType, option)}
                 value={inputValue}
               />

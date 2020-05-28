@@ -51,7 +51,7 @@ export default class List extends BaseList {
             <Button
               className={commonStyles.tableActionBtn}
               type="primary"
-              size="small"
+              
               onClick={this.handleView(rowData)}
             >
               <EyeOutlined title="查看" />查看
@@ -60,7 +60,7 @@ export default class List extends BaseList {
               title="编辑"
               className={commonStyles.tableActionBtn}
               type="primary"
-              size="small"
+              
               onClick={this.handleEdit(rowData)}
             >
               <EditOutlined />编辑
@@ -71,7 +71,7 @@ export default class List extends BaseList {
               okText="确定"
               cancelText="取消"
             >
-              <Button title="删除" className={commonStyles.tableActionBtn} type="danger" size="small">
+              <Button title="删除" className={commonStyles.tableActionBtn} type="danger" >
                 <DeleteOutlined />删除
               </Button>
             </Popconfirm>

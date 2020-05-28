@@ -154,7 +154,7 @@ export default class PregnancyHistoryForm extends React.Component {
               {renderEditItem(
                 'childDeath',
                 <Radio.Group
-                  size="small"
+                  
                   value={get(pregnancyHistories, `${index}.children.${i}.childDeath`)}
                   onChange={this.setFormChildrenData(index, i, 'childDeath')}
                 >
@@ -172,7 +172,7 @@ export default class PregnancyHistoryForm extends React.Component {
                 {renderEditItem(
                   'childDeathNote',
                   <Input
-                    size="small"
+                    
                     value={get(pregnancyHistories, `${index}.children.${i}.childDeathNote`)}
                     {...get(this.nativeFormDescriptions, 'childDeathNote.inputProps')}
                     onChange={this.setFormChildrenData(index, i, 'childDeathNote')}
@@ -207,7 +207,7 @@ export default class PregnancyHistoryForm extends React.Component {
                   {renderEditItem(
                     'sequela',
                     <Radio.Group
-                      size="small"
+                      
                       value={get(pregnancyHistories, `${index}.children.${i}.sequela`)}
                       {...get(this.nativeFormDescriptions, 'sequela.inputProps')}
                       onChange={this.setFormChildrenData(index, i, 'sequela')}
@@ -225,7 +225,7 @@ export default class PregnancyHistoryForm extends React.Component {
                   {renderEditItem(
                     'childDeformity',
                     <Radio.Group
-                      size="small"
+                      
                       value={get(pregnancyHistories, `${index}.children.${i}.childDeformity`)}
                       {...get(this.nativeFormDescriptions, 'childDeformity.inputProps')}
                       onChange={this.setFormChildrenData(index, i, 'childDeformity')}
@@ -245,7 +245,7 @@ export default class PregnancyHistoryForm extends React.Component {
                   {renderEditItem(
                     'neonateWeight',
                     <InputNumber
-                      size="small"
+                      
                       min={0}
                       value={get(pregnancyHistories, `${index}.children.${i}.neonateWeight`)}
                       {...get(this.nativeFormDescriptions, 'neonateWeight.inputProps')}
@@ -261,7 +261,7 @@ export default class PregnancyHistoryForm extends React.Component {
                   {renderEditItem(
                     'neonateHeight',
                     <InputNumber
-                      size="small"
+                      
                       min={0}
                       value={get(pregnancyHistories, `${index}.children.${i}.neonateHeight`)}
                       {...get(this.nativeFormDescriptions, 'neonateHeight.inputProps')}
@@ -354,7 +354,7 @@ export default class PregnancyHistoryForm extends React.Component {
           return (
             <div>
               <div style={{ marginTop: 8, marginBottom: 8 }}>
-                <Button onClick={this.handleAddPregnancy(add)} size="small" type="default">
+                <Button onClick={this.handleAddPregnancy(add)} type="default">
                   添加孕产史信息
                 </Button>
               </div>

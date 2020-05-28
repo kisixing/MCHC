@@ -52,7 +52,7 @@ export default (props: IProps) => {
         </Col>
         {radioValue && (
           <Col span={11}>
-            <Input value={inputValue} onChange={handleChangeInput} size="small" />
+            <Input value={inputValue} onChange={handleChangeInput} />
           </Col>
         )}
       </Row>

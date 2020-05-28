@@ -99,12 +99,12 @@ export default class BaseTable extends Component<IProps, IState> {
             type="primary"
             onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
             icon={<SearchOutlined />}
-            size="small"
+            
             style={{ width: 90 }}
           >
             查询
           </Button>
-          <Button onClick={() => this.handleReset(clearFilters)} size="small" style={{ width: 90 }}>
+          <Button onClick={() => this.handleReset(clearFilters)} style={{ width: 90 }}>
             重置
           </Button>
         </Space>
@@ -137,7 +137,7 @@ export default class BaseTable extends Component<IProps, IState> {
       <div className={styles.title}>
         <span className={styles.titleName}>{baseTitle}列表</span>
         {onAdd && (
-          <Button size="small" type="primary" icon={<PlusOutlined />} className={styles.titleAddBtn} onClick={onAdd}>
+          <Button type="primary" icon={<PlusOutlined />} className={styles.titleAddBtn} onClick={onAdd}>
             添加{baseTitle}
           </Button>
         )}

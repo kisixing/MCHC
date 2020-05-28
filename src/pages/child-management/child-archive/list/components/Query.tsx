@@ -11,9 +11,9 @@ export default class Query extends BaseQuery {
   renderContent = () => {
     return (
       <Fragment>
-        {this.renderEditItem('name', <Input size="small" placeholder="请输入儿童姓名" />)}
-        {this.renderEditItem('dob', <Input size="small" placeholder="请输入出生日期" />)}
-        {this.renderEditItem('motherName', <Input size="small" placeholder="请输入母亲姓名" />)}
+        {this.renderEditItem('name', <Input placeholder="请输入儿童姓名" />)}
+        {this.renderEditItem('dob', <Input placeholder="请输入出生日期" />)}
+        {this.renderEditItem('motherName', <Input placeholder="请输入母亲姓名" />)}
       </Fragment>
     );
   };
