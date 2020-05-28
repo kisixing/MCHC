@@ -39,7 +39,7 @@ export default (props: any) => {
   const renderFooter = () => {
     return (
       <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
-        <Button size="small" onClick={handleVisible} style={{ float: 'right', marginLeft: 8 }}>
+        <Button onClick={handleVisible} style={{ float: 'right', marginLeft: 8 }}>
           关闭
         </Button>
       </div>

@@ -974,7 +974,7 @@ export default (props: IProps) => {
   return (
     <Select
       showSearch
-      size="small"
+      
       placeholder="请选择国家"
       allowClear
       filterOption={(inputValue, option) => option.children.toLowerCase().indexOf(inputValue.toLowerCase()) > -1}

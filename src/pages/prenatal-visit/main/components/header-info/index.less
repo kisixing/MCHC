@@ -18,7 +18,7 @@
     color: #150F55;
 
     .label {
-      
+
     }
 
     .value {
@@ -49,22 +49,62 @@
   }
 
   .highrisk {
+    cursor: pointer;
     .top {
       display: flex;
 
-      span {
+      .level5 {
         width: 62px;
         text-align: center;
         color: #fff;
         font-weight: bold;
         background-color: #C43333;
       }
-
-      div {
-        min-width: 142px;
-        padding: 0 12px;
+      .level4 {
+        width: 62px;
+        text-align: center;
         color: #fff;
-        background-color: #9B66FF;
+        font-weight: bold;
+        background-color: #FFA8A8;
+      }
+      .level3 {
+        width: 62px;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+        background-color: #FB9824;
+      }
+      .level2 {
+        width: 62px;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+        background-color: #FFD363;
+      }
+      .level1 {
+        width: 62px;
+        text-align: center;
+        color: #fff;
+        font-weight: bold;
+        background-color: #49C458;
+      }
+
+      .hasInfectin {
+        max-width: 560px;
+        padding: 0 12px;
+        flex: 1;
+        color:#fff;
+        font-weight: bold;
+        background: linear-gradient(275deg,rgba(155,102,255,1) 0%,rgba(98,54,255,1) 100%);
+      }
+
+      .noInfectin {
+        max-width: 560px;
+        padding: 0 12px;
+        flex: 1;
+        color: #150F55;
+        font-weight: bold;
+        background-color: #F0F3F5;
       }
     }
 
@@ -74,14 +114,23 @@
         width: 62px;
         text-align: center;
         font-size: 12px;
+        border-right: 1px solid #D8DCE6;
       }
 
       div {
-        min-width: 142px;
+        max-width: 560px;
+        flex: 1;
         padding: 0 10px;
         color: #932C3F;
         font-weight: bold;
-        font-size: 17px;
+        font-size: 16px;
+
+        // overflow: hidden;
+        // text-overflow:ellipsis;
+        // display:-webkit-box;
+        // -webkit-box-orient:vertical;
+        // -webkit-line-clamp:2;
+        // white-space: pre-wrap;
       }
     }
   }
@@ -91,6 +140,7 @@
     font-size: 17px;
     font-weight: bold;
     color: #fff;
+    cursor: pointer;
 
     .top {
       background-color: #449EC4;
@@ -101,122 +151,3 @@
     }
   }
 }
-
-
-.danger-btn-wrapper .btnList-btn-group {
-    display: flex;
-  }
-  .high-risk-wrapper .btnList-btn-group {
-    display: flex;
-  }
-  .level-btn {
-    width: 80px;
-    height: 30px;
-    border-bottom-left-radius: 0;
-  }
-  .high-risk-btn {
-    font-size: 14px;
-    font-weight: 400;
-    padding: 4px 5px;
-    width: 80px;
-    height: 50px;
-    border-top-left-radius: 0;
-  }
-  .high-risk-content {
-    height: 50px;
-    color: #932C3F;
-    max-width: 560px;
-    text-align: left;
-    flex: 1;
-    border-top-right-radius: 0;
-    span {
-      width: 100%;
-      font-size: 16px;
-      line-height: 20px;
-      overflow: hidden;
-      text-overflow:ellipsis;
-      display:-webkit-box;
-      -webkit-box-orient:vertical;
-      -webkit-line-clamp:2;
-      white-space: pre-wrap;
-    }
-  }
-  .danger-btn-1 {
-    color:#fff;
-    background-color: #49C458;
-    &:hover {
-      background-color: #49C458;
-    }
-  }
-  .danger-btn-2 {
-    color:#150F55;
-    background-color: #FFD363;
-    &:hover {
-      background-color: #FFD363;
-    }
-  }
-  .danger-btn-3 {
-    color:#150F55;
-    background-color: #FB9824;
-    &:hover {
-      background-color: #FB9824;
-    }
-  }
-  .danger-btn-4 {
-    color:#150F55;
-    background-color: #FFA8A8;
-    &:hover {
-      background-color: #FFA8A8;
-    }
-  }
-  .danger-btn-5 {
-    color:#fff;
-    background-color: #C43333;
-    &:hover {
-      background-color: #C43333;
-    }
-  }
-  .btnList-right {
-    display: flex;
-    flex-direction: column;
-    margin-left: 12px;
-  }
-  .danger-btn-trial {
-    color:#ffffff;
-    background-color: #4e1303;
-    &:hover {
-      background-color: #4e1303;
-    }
-  }
-  .danger-btn-phar {
-    color:#ffffff;
-    background-color: #4d94ff;
-    &:hover {
-      background-color: #4d94ff;
-    }
-  }
-  .danger-btn-infectin {
-    height: 30px;
-    max-width: 560px;
-    padding-top: 2px;
-    overflow: hidden;
-    text-overflow:ellipsis;
-    white-space: nowrap;
-    text-align: left;
-    flex: 1;
-    border-bottom-right-radius: 0;
-  }
-  .has-infectin {
-    color:#ffffff;
-    background: linear-gradient(275deg,rgba(155,102,255,1) 0%,rgba(98,54,255,1) 100%);
-    &:hover {
-      background-color: #c205e7;
-    }
-  }
-  .no-infectin {
-    color: #150F55;
-    background-color: #F0F3F5;
-    &:hover {
-      background-color: #F0F3F5;
-    }
-  }

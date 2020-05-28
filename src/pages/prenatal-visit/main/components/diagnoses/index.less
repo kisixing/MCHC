@@ -1,14 +1,95 @@
 .diagWrapper {
-  padding: 16px;
+  padding: 8px;
+  max-height: 620px;
+  overflow-y: auto;
   border: 1px solid #D7DCE7;
 }
 
 .diagIpt {
+  padding-bottom: 5px;
+}
+
+.firstDiag {
+  font-size: 16px;
+  font-weight: 500;
+  color: #150F55;
+  line-height: 32px;
+  margin-bottom: 16px;
+  padding-left: 6px;
 }
 
 .singleDiag {
-
+  line-height: 32px;
+  margin-bottom: 16px;
 }
-.remarkIpt {
 
+.diagHandle {
+  color: #150F55;
+  cursor: pointer;
+}
+
+.diagNum {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: center;
+  color: #150F55;
+  margin-right: 6px;
+  border: 2px solid #150F55;
+  border-radius: 12px;
+}
+
+.diagGP {
+  display: inline-block;
+  width: 12px;
+  text-decoration: underline;
+}
+
+.diagWeek {
+  display: inline-block;
+  width: 34px;
+  text-decoration: underline;
+}
+
+.diagWord {
+  display: flex;
+  padding: 0 6px;
+  border-radius: 4px;
+  color: #150F55;
+  font-size: 14px;
+  background-color: #fce6ea;
+}
+
+.diagHighrisk {
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #fcb9c5;
+}
+
+.diagNote {
+  min-width: 60px;
+  height: 32px;
+  flex: 1;
+  border: 0 none;
+  outline: none;
+  box-shadow: none;
+  background-color: transparent;
+  border-bottom: 1px #FE708B solid;
+  &::-ms-input-placeholder {
+    text-align: center;
+  }
+  &::-webkit-input-placeholder {
+    text-align: center;
+  }
+}
+
+.delBtn {
+  width: 24px;
+  height: 24px;
+  color: #fff;
+  background-color: #ccc;
+  display: inline-block;
 }

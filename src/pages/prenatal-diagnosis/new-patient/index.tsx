@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, message } from 'antd';
 import MyForm from '@/components/MyForm';
+import observePatientData from '@/utils/observePatientData';
 import { getRenderData, getFormData } from '@/components/MyForm/utils';
 import request from '@/utils/request';
 import config from './config';
@@ -50,6 +51,20 @@ export default class NewPatient extends Component<{}, NewPatientState>{
     }
   }
 
+  componentDidUpdate(){
+    observePatientData.subscribe((data: any) => {
+      this.setState({
+        patients: {
+          idType: data.idType,
+          idNO: data.idNO,
+          age: data.age,
+          outpatientNO: data.outpatientNO,
+          name: data.name
+        }
+      })
+    })
+  }
+
   handleSubmit = () => {
     const { id  } = this.state.patients;
     this.state.formHandler.submit().then(({ validCode, res }: any) => {
@@ -80,11 +95,11 @@ export default class NewPatient extends Component<{}, NewPatientState>{
 
   render() {
     const { patients } = this.state;
-    const myConfig = getRenderData(config, patients);
     return (
       <div className={styles.container}>
         <MyForm
-          config={myConfig}
+          config={config}
+          value={patients}
           getFormHandler={(formHandler: any) => this.setState({ formHandler })}
           submitChange={false}
         />

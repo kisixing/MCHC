@@ -1,32 +1,39 @@
 import React, { Component, ReactNode } from 'react';
-import { Button } from 'antd';
+import { Tabs, message } from 'antd';
+import  { Dispatch } from 'redux';
+import { connect } from 'dva';
 import request from '@/utils/request'
-import MedicalRecordList from '../medical-record/list';
-import OperationRecordList from '../operation-record/list';
+import MedicalRecordForm from '../medical-record/form';
+import OperationRecordForm from '../operation-record/form';
+import Inspection from '../inspection/index';
+import { PrenatalDiagnosisModelState } from './model';
 import { getPageQuery } from '@/utils/utils';
 import styles from './index.less';
 
-const componentList = {
-  "medical-record": MedicalRecordList,
-  "operation-record": OperationRecordList
-}
 
-const buttnGroup = [
-  { key: "medical-record", title: "专科病历" },
-  { key: "operation-record", title: "手术病历" },
+const routers = [
+  { name: "专科病历", component: <MedicalRecordForm/>, key: "MedicalRecord"},
+  { name: "手术病历", component: <OperationRecordForm/>, key: "OperationRecord"},
+  { name: "检验检查", component: <Inspection/>, key: "Inspection"},
 ]
+
+const { TabPane } = Tabs; 
+interface PrenatalDiagnosisProps {
+  patients: any,
+  dispatch: Dispatch
+}
 
 interface PrenatalDiagnosisState {
   currentPageKey: string,
   patients: any
 }
 
-export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisState>{
+class PrenatalDiagnosis extends Component<PrenatalDiagnosisProps,PrenatalDiagnosisState>{
 
   constructor(props: any) {
     super(props);
     this.state = {
-      currentPageKey: "medical-record",
+      currentPageKey: "MedicalRecord",
       patients: {
 
       }
@@ -37,15 +44,27 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
     const urlParams = getPageQuery();
     if (urlParams.prenatalPatientId) {
       this.getPatientData(urlParams.prenatalPatientId);
+    }else {
+      message.error("无用户信息，请从产前病历用户列表进入");
     }
   }
-
-  componentDidUpdate(_prevProps: {}, prevState: PrenatalDiagnosisState) {
-    const { id = ""} = this.state.patients; 
-    const prevId = prevState.patients.id; 
-    if(prevId !== id){
-      this.getPatientData(id);
-    }
+  
+  // 获取病人信息
+  getPatientData = (id: string|number = "") => {
+    const { dispatch } = this.props;
+    request(`/prenatal-patients?id.equals=${id}`,{
+      method: "GET"
+    }).then(res => {
+      if(res.length !== 0){
+        this.setState({patients: res[0]}, () => {
+          // 保存至store
+          dispatch({
+            type: "prenatalDiagnosis/changePatient",
+            payload: this.state.patients
+          })
+        })
+      }
+    })
   }
 
   renderInfo = (patients: any):ReactNode => {
@@ -68,53 +87,41 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
     return <span>无用户信息</span>;
   }
 
-  renderButton = (buttonGroup: Array<{ key: string, title: string }>): ReactNode => {
+  renderTab = () => {
     const { currentPageKey } = this.state;
-    return buttnGroup.map((v: { key: string, title: string }) => {
-      return <div key={v.key}>
-        <Button
-          onClick={() => this.setState({currentPageKey: v.key})}
-          type={currentPageKey === v.key ? "primary" : "default"}
-        >
-          {v.title}
-        </Button>
-      </div>
-    })
-  }
-
-  renderPage = (key: string):ReactNode => {
-    if(key){
-      const RenderComponent = componentList[key];
-      return <RenderComponent/>
-    }
-    return null;
-  }
-
-  // 获取病人信息
-  getPatientData = (id: string|number = "") => {
-    request(`/prenatal-patients?id.equals=${id}`,{
-      method: "GET"
-    }).then(res => {
-      if(res.length !== 0){
-        this.setState({patients: res[0]})
-      }
-    })
+    return (
+      <Tabs
+        defaultActiveKey={currentPageKey}
+        type="card"
+        
+      >
+        {routers.map((item:any) => (
+          <TabPane
+            tab={item.name}
+            key={item.key}
+          >
+            {item.component}
+          </TabPane>
+        ))}
+      </Tabs>
+    )
   }
 
   render() {
-    const { currentPageKey, patients = {} } = this.state;
+    const { patients = {} } = this.state;
     return (
-      <div className={styles.container}>
-        <div className={styles['user-info']}>
-          {this.renderInfo(patients)}
-        </div>
-        <div className={styles['button-group']}>
-          {this.renderButton(buttnGroup)}
-        </div>
-        <div className={styles.page}>
-          {this.renderPage(currentPageKey)}
+      <div className={styles.container} id="prenatal-diagnosis">
+        {this.renderInfo(patients)}
+        <div>
+          {this.renderTab()}
         </div>
       </div>
     )
   }
 }
+
+export default connect(({prenatalDiagnosis} : {prenatalDiagnosis: PrenatalDiagnosisModelState}) => {
+  return {
+    patient: prenatalDiagnosis.patient
+  }
+})(PrenatalDiagnosis)

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import MyForm from '@/components/MyForm/index';
 
-import { getRenderData, getFormData } from '@/components/MyForm/utils';
+import { getFormData } from '@/components/MyForm/utils';
 
 interface MyCustomProps {
   onChange: Function,
@@ -43,13 +43,15 @@ export default class MyCustom extends Component<MyCustomProps, MyCustomState>{
         })
       }
       // change时的校验动作
-      formHandler.subscribe("_global", "change", () => {
-        formHandler.submit().then(({ validCode, res }: any) => {
-          if (validCode) {
-            onChange(getFormData(res));
-          }
-        })
-      });
+      if(formHandler.subscribe){
+        formHandler.subscribe("_global", "change", () => {
+          formHandler.submit().then(({ validCode, res }: any) => {
+            // if (validCode) {
+              onChange(getFormData(res));
+            // }
+          })
+        });
+      }
       if (subscribe && JSON.stringify(formHandler) !== "{}") {
         this.setState({ isSubscribe: true });
       }
@@ -62,14 +64,11 @@ export default class MyCustom extends Component<MyCustomProps, MyCustomState>{
   render() {
     const { config = [] } = this.props.input_props;
     const { value = {} } = this.props;
-    let myConfig: Array<any> = [];
-    if (config) {
-      myConfig = getRenderData(config, value);
-    }
     return (
       <div style={{ marginTop: "16px" }}>
         <MyForm
-          config={myConfig}
+          config={config}
+          value={value}
           getFormHandler={(formHandler: any) => this.setState({ formHandler })}
           submitChange
         />

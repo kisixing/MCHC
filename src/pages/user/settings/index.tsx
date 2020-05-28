@@ -99,7 +99,7 @@ export const AccountSetting = (props: any) => {
           <Col span={4} offset={7}>
             <Button
               type="primary"
-              size="small"
+              
               onClick={() => {
                 setShowPasswordModal(true);
               }}
@@ -112,7 +112,7 @@ export const AccountSetting = (props: any) => {
           <Col span={4} offset={7}>
             <Button
               type="primary"
-              size="small"
+              
               onClick={() => {
                 setShowPhoneModal(true);
               }}

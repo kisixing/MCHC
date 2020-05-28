@@ -14,90 +14,90 @@ const config: Array<FormConfig> = [
       type: "textarea",
     }
   },
-  {
-    name: "male-thalassemia",
-    key: ".thalassemia_0",
-    label: "男方地贫检查",
-    header_label: true,
-    input_type: "custom",
-    input_props: {
-      config: [
-        { name: "type", key: ".type", label: "类型", unit: "g/L", input_type: "input", span: 6, offset: 0, hidden: true },
-        { name: "Hb", key: ".Hb", label: "Hb", unit: "g/L", input_type: "input", span: 6, offset: 0 },
-        { name: "MCV", key: ".MCV", label: "MCV", unit: "fL", input_type: "input", span: 6, offset: 0 },
-        { name: "MCH", key: ".MCH", label: "MCH", input_type: "input", span: 6, offset: 0 },
-        { name: "HbA2", key: ".HbA2", label: "HbA2", input_type: "input", span: 6, offset: 0 },
-        // { name: "", key: "trisomy18z", label: "血型", input_type: "input" },
-        {
-          name: "rh",
-          key: ".rh",
-          label: "RH血型",
-          input_type: "select",
-          span: 6, offset: 0,
-          input_props: {
-            type: "default",
-            options: [
-              { label: "RH(+)", value: "RH(+)" },
-              { label: "RH(-)", value: "RH(-)" },
-            ]
-          }
-        },
-        {
-          name: "genotype", key: ".genotype", label: "地贫基因型", input_type: "select", span: 6, offset: 0,
-          input_props: {
-            type: "default",
-            radio: false,
-            options: [
-              { label: "β地中海贫血基因CD14-15突变", value: "β地中海贫血基因CD14-15突变" },
-              { label: "β地中海贫血基因CD17突变", value: "β地中海贫血基因CD17突变" }
-            ]
-          }
-        },
-        { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 6, offset: 0, },
-      ]
-    }
-  },
-  {
-    name: "female-thalassemia",
-    key: ".thalassemia_1",
-    label: "女方地贫检查",
-    header_label: true,
-    input_type: "custom",
-    input_props: {
-      config: [
-        { name: "type", key: ".type", label: "类型", unit: "g/L", input_type: "input", span: 6, offset: 0, hidden: true },
-        { name: "Hb", key: ".Hb", label: "Hb", unit: "g/L", input_type: "input", span: 6, offset: 0 },
-        { name: "MCV", key: ".MCV", label: "MCV", unit: "fL", input_type: "input", span: 6, offset: 0 },
-        { name: "MCH", key: ".MCH", label: "MCH", input_type: "input", span: 6, offset: 0 },
-        { name: "HBA2", key: ".HbA2", label: "HbA2", input_type: "input", span: 6, offset: 0 },
-        // { name: "", key: "trisomy18z", label: "血型", input_type: "input" },
-        {
-          name: "rh",
-          key: ".rh",
-          label: "RH血型",
-          input_type: "select", span: 6, offset: 0,
-          input_props: {
-            options: [
-              { label: "RH(+)", value: "RH(+)" },
-              { label: "RH(-)", value: "RH(-)" },
-            ]
-          }
-        },
-        {
-          name: "genotype", key: ".genotype", label: "地贫基因型", input_type: "select", span: 6, offset: 0,
-          input_props: {
-            type: "default",
-            radio: false,
-            options: [
-              { label: "β地中海贫血基因CD14-15突变", value: "β地中海贫血基因CD14-15突变" },
-              { label: "β地中海贫血基因CD17突变", value: "β地中海贫血基因CD17突变" }
-            ]
-          }
-        },
-        { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 6, offset: 0, },
-      ]
-    }
-  },
+  // {
+  //   name: "male-thalassemia",
+  //   key: ".thalassemia_0",
+  //   label: "男方地贫检查",
+  //   header_label: true,
+  //   input_type: "custom",
+  //   input_props: {
+  //     config: [
+  //       { name: "type", key: ".type", label: "类型", unit: "g/L", input_type: "input", span: 6, offset: 0, hidden: true },
+  //       { name: "Hb", key: ".Hb", label: "Hb", unit: "g/L", input_type: "input", span: 6, offset: 0 },
+  //       { name: "MCV", key: ".MCV", label: "MCV", unit: "fL", input_type: "input", span: 6, offset: 0 },
+  //       { name: "MCH", key: ".MCH", label: "MCH", input_type: "input", span: 6, offset: 0 },
+  //       { name: "HbA2", key: ".HbA2", label: "HbA2", input_type: "input", span: 6, offset: 0 },
+  //       // { name: "", key: "trisomy18z", label: "血型", input_type: "input" },
+  //       {
+  //         name: "rh",
+  //         key: ".rh",
+  //         label: "RH血型",
+  //         input_type: "select",
+  //         span: 6, offset: 0,
+  //         input_props: {
+  //           type: "default",
+  //           options: [
+  //             { label: "RH(+)", value: "RH(+)" },
+  //             { label: "RH(-)", value: "RH(-)" },
+  //           ]
+  //         }
+  //       },
+  //       {
+  //         name: "genotype", key: ".genotype", label: "地贫基因型", input_type: "select", span: 6, offset: 0,
+  //         input_props: {
+  //           type: "default",
+  //           radio: false,
+  //           options: [
+  //             { label: "β地中海贫血基因CD14-15突变", value: "β地中海贫血基因CD14-15突变" },
+  //             { label: "β地中海贫血基因CD17突变", value: "β地中海贫血基因CD17突变" }
+  //           ]
+  //         }
+  //       },
+  //       { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 6, offset: 0, },
+  //     ]
+  //   }
+  // },
+  // {
+  //   name: "female-thalassemia",
+  //   key: ".thalassemia_1",
+  //   label: "女方地贫检查",
+  //   header_label: true,
+  //   input_type: "custom",
+  //   input_props: {
+  //     config: [
+  //       { name: "type", key: ".type", label: "类型", unit: "g/L", input_type: "input", span: 6, offset: 0, hidden: true },
+  //       { name: "Hb", key: ".Hb", label: "Hb", unit: "g/L", input_type: "input", span: 6, offset: 0 },
+  //       { name: "MCV", key: ".MCV", label: "MCV", unit: "fL", input_type: "input", span: 6, offset: 0 },
+  //       { name: "MCH", key: ".MCH", label: "MCH", input_type: "input", span: 6, offset: 0 },
+  //       { name: "HBA2", key: ".HbA2", label: "HbA2", input_type: "input", span: 6, offset: 0 },
+  //       // { name: "", key: "trisomy18z", label: "血型", input_type: "input" },
+  //       {
+  //         name: "rh",
+  //         key: ".rh",
+  //         label: "RH血型",
+  //         input_type: "select", span: 6, offset: 0,
+  //         input_props: {
+  //           options: [
+  //             { label: "RH(+)", value: "RH(+)" },
+  //             { label: "RH(-)", value: "RH(-)" },
+  //           ]
+  //         }
+  //       },
+  //       {
+  //         name: "genotype", key: ".genotype", label: "地贫基因型", input_type: "select", span: 6, offset: 0,
+  //         input_props: {
+  //           type: "default",
+  //           radio: false,
+  //           options: [
+  //             { label: "β地中海贫血基因CD14-15突变", value: "β地中海贫血基因CD14-15突变" },
+  //             { label: "β地中海贫血基因CD17突变", value: "β地中海贫血基因CD17突变" }
+  //           ]
+  //         }
+  //       },
+  //       { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 6, offset: 0, },
+  //     ]
+  //   }
+  // },
   {
     name: "early-downsScreens",
     key: ".downsScreens_0",

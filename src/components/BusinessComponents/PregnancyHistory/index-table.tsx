@@ -414,12 +414,12 @@ export default class PregnancyHistoryTable extends React.Component {
     return (
       <>
         <div style={{ marginBottom: 8 }}>
-          <Button size="small" type="primary" onClick={this.handleAddPregnancy}>
+          <Button type="primary" onClick={this.handleAddPregnancy}>
             添加孕次
           </Button>
           <Button
             disabled={isEmpty(selectedRowKeys)}
-            size="small"
+            
             type="danger"
             style={{ marginLeft: 8 }}
             onClick={this.removePregnancy}
@@ -438,7 +438,7 @@ export default class PregnancyHistoryTable extends React.Component {
           dataSource={data}
           bordered
           pagination={false}
-          size="small"
+          
         />
       </>
     );

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Button } from 'antd';
 import { connect } from 'dva';
 
 import styles from './index.less';
@@ -58,11 +57,17 @@ class Index extends Component<{}, IndexState> {
           <div className={styles.right}>
             <div className={styles.highrisk} onClick={this.handleHighRisk}>
               <div className={styles.top}>
-                <span>{pregnancyData.highrisk ? pregnancyData.highrisk : 1}</span>
-                <div>传染病：无</div>
+                <span className={pregnancyData.highrisk === 5 ? styles.level5 :
+                  pregnancyData.highrisk === 4 ? styles.level4 :
+                  pregnancyData.highrisk === 3 ? styles.level3 :
+                  pregnancyData.highrisk === 2 ? styles.level2 : styles.level1
+                }>
+                  {pregnancyData.highrisk ? pregnancyData.highrisk : 1}
+                </span>
+                <div className={pregnancyData.highrisk ? styles.hasInfectin : styles.noInfectin}>传染病：无</div>
               </div>
               <div className={styles.bottom}>
-                <span>高危因素</span>
+                <span>高危因素：</span>
                 <div>{pregnancyData.highriskNote ? pregnancyData.highriskNote : '无'}</div>
               </div>
             </div>

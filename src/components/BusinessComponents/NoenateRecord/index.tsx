@@ -159,7 +159,7 @@ export default class NoenateRecord extends DynamicForm {
     return (
       <Form ref={this.formRef} onFieldsChange={this.handleFieldsChange}>
         <div style={{ display: 'flex', flexDirection: 'row-reverse' }}>
-          <Button size="small" type="primary" onClick={this.handleAddFetus}>
+          <Button type="primary" onClick={this.handleAddFetus}>
             添加{TAB_TITLE}
           </Button>
         </div>

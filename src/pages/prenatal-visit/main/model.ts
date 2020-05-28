@@ -1,4 +1,4 @@
-import { getPregnancy, getVisits } from '@/services/pregnancy';
+import { getPregnancy, getVisits, getDiagnoses } from '@/services/pregnancy';
 
 export default{
 	namespace:'pregnancy',
@@ -6,6 +6,7 @@ export default{
     pregnancyData: null,
     visitsData: null,
     isShowHighrisk: false,
+    diagnosesList: [],
 	},
 	reducers:{
 		setPregnancyData(state, { payload }){
@@ -19,6 +20,13 @@ export default{
 			return {
         ...state,
         visitsData: payload
+      }
+    },
+
+    setDiagnosesList(state, { payload }){
+			return {
+        ...state,
+        diagnosesList: payload
       }
     },
 
@@ -46,6 +54,14 @@ export default{
 			const res = yield call(getVisits, payload)
 			yield put({
 				type: 'setVisitsData',
+				payload: res
+			})
+    },
+
+    *getDiagnosesList({ payload }, { call, put }){
+			const res = yield call(getDiagnoses, payload)
+			yield put({
+				type: 'setDiagnosesList',
 				payload: res
 			})
 		}

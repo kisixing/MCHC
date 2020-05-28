@@ -83,7 +83,7 @@ export default class Addpanel extends PanelWithChild {
     const { id, data, activeKey, childArchives } = this.state;
 
     return (
-      <Tabs defaultActiveKey={activeKey} type="card" size="small" onChange={this.handleChangeTab}>
+      <Tabs defaultActiveKey={activeKey} type="card" onChange={this.handleChangeTab}>
         {/* <Tabs.TabPane tab="出生信息登记" key="BirthInformation">
           {activeKey === 'BirthInformation' && <BirthInformation data={data} />}
         </Tabs.TabPane> */}

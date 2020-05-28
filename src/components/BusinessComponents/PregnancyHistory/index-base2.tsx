@@ -159,7 +159,7 @@ export default class PregnancyHistory extends DynamicForm {
               {renderEditItem(
                 `childDeath_${index}_${i}`,
                 <Radio.Group
-                  size="small"
+                  
                   onChange={e => {
                     this.setFormData();
                   }}
@@ -176,7 +176,7 @@ export default class PregnancyHistory extends DynamicForm {
               >
                 {renderEditItem(
                   `childDeathNote_${index}_${i}`,
-                  <Input size="small" {...get(this.nativeFormDescriptions, 'childDeathNote.inputProps')} />,
+                  <Input {...get(this.nativeFormDescriptions, 'childDeathNote.inputProps')} />,
                 )}
               </Col>
             )}
@@ -190,7 +190,7 @@ export default class PregnancyHistory extends DynamicForm {
                 >
                   {renderEditItem(
                     `childGender_${index}_${i}`,
-                    <Select size="small" {...get(this.nativeFormDescriptions, 'childGender.inputProps')}>
+                    <Select {...get(this.nativeFormDescriptions, 'childGender.inputProps')}>
                       <Select.Option value={0}>男</Select.Option>
                       <Select.Option value={1}>女</Select.Option>
                       <Select.Option value={2}>未知</Select.Option>
@@ -203,7 +203,7 @@ export default class PregnancyHistory extends DynamicForm {
                 >
                   {renderEditItem(
                     `sequela_${index}_${i}`,
-                    <Radio.Group size="small" {...get(this.nativeFormDescriptions, 'sequela.inputProps')}>
+                    <Radio.Group {...get(this.nativeFormDescriptions, 'sequela.inputProps')}>
                       <Radio value={false}>无</Radio>
                       <Radio value={true}>有</Radio>
                     </Radio.Group>,
@@ -215,7 +215,7 @@ export default class PregnancyHistory extends DynamicForm {
                 >
                   {renderEditItem(
                     `childDeformity_${index}_${i}`,
-                    <Radio.Group size="small" {...get(this.nativeFormDescriptions, 'childDeformity.inputProps')}>
+                    <Radio.Group {...get(this.nativeFormDescriptions, 'childDeformity.inputProps')}>
                       <Radio value={false}>无</Radio>
                       <Radio value={true}>有</Radio>
                     </Radio.Group>,
@@ -230,7 +230,7 @@ export default class PregnancyHistory extends DynamicForm {
                   {renderEditItem(
                     `neonateWeight_${index}_${i}`,
                     <InputNumber
-                      size="small"
+                      
                       min={0}
                       {...get(this.nativeFormDescriptions, 'neonateWeight.inputProps')}
                     />,
@@ -243,7 +243,7 @@ export default class PregnancyHistory extends DynamicForm {
                   {renderEditItem(
                     `neonateHeight_${index}_${i}`,
                     <InputNumber
-                      size="small"
+                      
                       min={0}
                       {...get(this.nativeFormDescriptions, 'neonateHeight.inputProps')}
                     />,
@@ -292,10 +292,10 @@ export default class PregnancyHistory extends DynamicForm {
     return (
       <Form ref={this.formRef}>
         <div style={{ marginTop: 8, marginBottom: 8 }}>
-          <Button onClick={this.add} size="small" type="default">
+          <Button onClick={this.add} type="default">
             添加孕产史信息
           </Button>
-          <Button style={{ marginLeft: 8 }} onClick={this.saveSregnancyHistories} size="small" type="primary">
+          <Button style={{ marginLeft: 8 }} onClick={this.saveSregnancyHistories} type="primary">
             保存孕产史信息
           </Button>
         </div>

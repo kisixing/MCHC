@@ -113,7 +113,7 @@ class Index extends Component<{},IndexState>{
               <Row>
                 <Col span={3}>高危等级：</Col>
                 <Col span={7}>
-                  <Select size="small" value={pageData.highrisk} onChange={e => handleChange("highrisk", e)}>
+                  <Select value={pageData.highrisk} onChange={e => handleChange("highrisk", e)}>
                     {"1,2,3,4,5".split(",").map(i => (
                       <Select.Option key={i} value={i}>{i}</Select.Option>
                     ))}
@@ -138,19 +138,19 @@ class Index extends Component<{},IndexState>{
                 </Col>
                 <Col span={1}></Col>
                 <Col span={2}>
-                  <Button size="small" onClick={() => handleClear()}>重置</Button>
+                  <Button onClick={() => handleClear()}>重置</Button>
                 </Col>
               </Row>
               <br />
               <Row>
                 <Col span={16}>
-                  <Input size="small" value={pageData.search} onChange={e => handleChange("search", e.target.value)} placeholder="输入模糊查找"/>
+                  <Input value={pageData.search} onChange={e => handleChange("search", e.target.value)} placeholder="输入模糊查找"/>
                 </Col>
                 <Col span={3}>
-                  <Button size="small" onClick={() => this.setState({expandedKeys: []})}>全部收齐</Button>
+                  <Button onClick={() => this.setState({expandedKeys: []})}>全部收齐</Button>
                 </Col>
                 <Col span={3}>
-                  <Button size="small" onClick={() => this.setState({expandedKeys: allExpandedKeys})}>全部展开</Button>
+                  <Button onClick={() => this.setState({expandedKeys: allExpandedKeys})}>全部展开</Button>
                 </Col>
               </Row>
             </Col>

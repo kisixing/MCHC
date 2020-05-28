@@ -43,7 +43,7 @@ export default class DefaultSelect extends Component<DefaultSelectProps>{
     }
     return (
       <Select
-        size="small"
+        
         style={{width: "100%"}}
         value={value}
         allowClear

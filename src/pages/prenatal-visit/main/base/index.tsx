@@ -61,7 +61,13 @@ class Index extends Component<{},IndexState>{
     const { pregnancyData } = this.props;
     return (
       <div className={styles.initiaWrapper}>
-        <Tabs type="card" activeKey={step} onChange={key => this.handleTab(key) }>
+        <Tabs
+          type="card"
+          className={styles.tabs}
+          tabBarStyle={{ background: '#f0f2f5', borderBottom: '1px solid #1959FF' }}
+          activeKey={step}
+          onChange={key => this.handleTab(key)}
+        >
           {tabs.map(({ key, title, Content }) => (
             <Tabs.TabPane key={key}
               tab={ <span> {title} </span> }>

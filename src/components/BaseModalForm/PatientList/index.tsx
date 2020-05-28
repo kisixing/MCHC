@@ -51,7 +51,7 @@ export default class List extends BaseList {
       render: (value: any, rowData: any, index: number) => {
         return (
           <>
-            <Button className={commonStyles.tableActionBtn} size="small" onClick={this.handleView(rowData)}>
+            <Button className={commonStyles.tableActionBtn} onClick={this.handleView(rowData)}>
               <EyeOutlined title="查看" />
               查看
             </Button>
@@ -59,7 +59,7 @@ export default class List extends BaseList {
               title="导入"
               className={commonStyles.tableActionBtn}
               type="primary"
-              size="small"
+              
               onClick={this.handleExport(rowData)}
             >
               <ImportOutlined />
