@@ -32,12 +32,12 @@ interface FloatTreeMenuState {
   activeKey: number|string
 }
 
-interface TreeNodeConstructor {
-  title: string | ReactNode,
-  key: string | number,
-  icon?: any,
-  children?: Array<TreeNodeConstructor>
-}
+// interface TreeNodeConstructor {
+//   title: string | ReactNode,
+//   key: string | number,
+//   icon?: any,
+//   children?: Array<TreeNodeConstructor>
+// }
 
 const drawerBodyStyle = {
   padding: "0"
