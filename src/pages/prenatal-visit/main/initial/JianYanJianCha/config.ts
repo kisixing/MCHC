@@ -2,7 +2,7 @@ import { FormConfig } from '@/components/MyForm/interface';
 
 const config: Array<FormConfig> = [
   { name: 'id', key: '.pregnancy.id', label: "id", input_type: "input", span: 0, input_props:{} },
-  { name: 'aBO', key: '.partnerProfile.aBO', label: "男方血型", input_type: "select", span: 5,
+  { name: 'aBO', key: '.partnerProfile.aBO', label: "男方血型", input_type: "select", span: 3,
     input_props:{
       options: [
         { label: 'O', value: 0 },
@@ -12,7 +12,7 @@ const config: Array<FormConfig> = [
       ]
     }
   },
-  { name: 'rH', key: '.partnerProfile.rH', label: "", input_type: "select", span: 5,
+  { name: 'rH', key: '.partnerProfile.rH', label: "", input_type: "select", span: 2,
     input_props:{
       options: [
         { label: 'RH(-)', value: 0 },
@@ -20,7 +20,7 @@ const config: Array<FormConfig> = [
       ]
     }
   },
-  // { name: 'husbandThalassemia', key: '.lis', label: "男方地贫", input_type: "checkbox", span: 14, rules: "required",
+  // { name: 'husbandThalassemia', key: '.prenatalExam', label: "男方地贫", input_type: "checkbox", span: 14, rules: "required",
   //   input_props: {
   //     type: "custom",
   //     renderData: [
@@ -32,15 +32,12 @@ const config: Array<FormConfig> = [
   //           {label: "异常", value: 2},
   //           {label: "未查", value: 3},
   //           {label: "其他", value: 4},
-  //         ],
-  //         extraEditors: [
-  //           { key: 2, editors: [ { name: "", key: "", label: "", input_type: "input" } ] },
-  //           { key: 4, editors: [ { name: "", key: "", label: "", input_type: "input" } ] },
   //         ]
   //       },
   //     ],
-  //   } },
-  { name: 'aBO2', key: '.personalProfile.aBO', label: "女方血型", input_type: "select", span: 5,
+  //   }
+  // },
+  { name: 'aBO2', key: '.personalProfile.aBO', label: "女方血型", input_type: "select", span: 3,
     input_props:{
       options: [
         { label: 'O', value: 0 },
@@ -50,7 +47,7 @@ const config: Array<FormConfig> = [
       ]
     }
   },
-  { name: 'rH2', key: '.personalProfile.rH', label: "", input_type: "select", span: 5,
+  { name: 'rH2', key: '.personalProfile.rH', label: "", input_type: "select", span: 2,
     input_props:{
       options: [
         { label: 'RH(-)', value: 0 },
