@@ -1,6 +1,7 @@
 .title {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .titleName {
@@ -8,4 +9,20 @@
   font-weight: 800;
   font-size: 14px;
   color: #000;
+}
+
+.table {
+  .ant-table-title {
+    padding: 12px !important;
+  }
+
+  .ant-table-cell {
+    padding: 4px 8px !important;
+
+    &:empty:after {
+      content: '--';
+      position: inherit;
+      box-shadow: none !important;
+    }
+  }
 }

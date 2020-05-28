@@ -53,7 +53,7 @@ export default class List extends BaseList {
       hiddenSorter: true,
       hiddenFilter: true,
       fixed: 'right',
-      width: '250px',
+      width: 240,
       render: (value: any, rowData: any, index: number) => {
         return (
           <>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Select, Cascader, Row, Col, Input } from 'antd';
+import { Select, Cascader, Input } from 'antd';
 import { map, get, isEmpty, split } from 'lodash';
 import options, { getStreets } from './cascader-address-options';
 
@@ -67,43 +67,35 @@ export default (props: any) => {
   };
 
   return (
-    <>
-      <Row>
-        <Col span={6}>
-          <Cascader
-            size="small"
-            options={options}
-            onChange={handleProvinceChange}
-            placeholder="选择省市区"
-            allowClear
-            value={[get(address, 'province'), get(address, 'city'), get(address, 'area')]}
-          />
-        </Col>
-        <Col span={6}>
-          <Select
-            size="small"
-            disabled={isEmpty(address)}
-            placeholder="选择街道、社区"
-            onChange={handleStreetChange}
-            allowClear
-            value={get(address, 'street')}
-          >
-            {map(streets, street => (
-              <Select.Option value={get(street, 'value')}>{get(street, 'label')}</Select.Option>
-            ))}
-          </Select>
-        </Col>
-        <Col span={12}>
-          <Input
-            size="small"
-            disabled={isEmpty(address)}
-            placeholder="详细地址"
-            onChange={handleInputChange}
-            allowClear
-            value={get(address, 'detail')}
-          />
-        </Col>
-      </Row>
-    </>
+    <Input.Group compact>
+      <Cascader
+        options={options}
+        onChange={handleProvinceChange}
+        placeholder="选择省市区"
+        allowClear
+        value={[get(address, 'province'), get(address, 'city'), get(address, 'area')]}
+        style={{ width: '25%' }}
+      />
+      <Select
+        disabled={isEmpty(address)}
+        placeholder="选择街道、社区"
+        onChange={handleStreetChange}
+        allowClear
+        value={get(address, 'street')}
+        style={{ width: '25%' }}
+      >
+        {map(streets, street => (
+          <Select.Option value={get(street, 'value')}>{get(street, 'label')}</Select.Option>
+        ))}
+      </Select>
+      <Input
+        disabled={isEmpty(address)}
+        placeholder="详细地址"
+        onChange={handleInputChange}
+        allowClear
+        value={get(address, 'detail')}
+        style={{ width: '50%' }}
+      />
+    </Input.Group>
   );
 };
