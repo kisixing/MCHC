@@ -3,7 +3,6 @@ import { Button, message, Tree } from 'antd';
 import FloatDragableCard from '@/components/FloatDragableCard';
 import MyForm from '@/components/MyForm/index';
 
-import observePatientData from '@/utils/observePatientData';
 import { Dispatch } from 'redux';
 import { PrenatalDiagnosisModelState } from '../../main/model';
 
@@ -49,9 +48,7 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
   constructor(props: any) {
     super(props);
     this.state = {
-      formHandler: {
-
-      },
+      formHandler: {},
       data: {
         id: "", // 病历id
         operationType: 1,
@@ -96,7 +93,9 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
     }).then((res: any) => {
       if (res.length !== 0) {
         if(id){
-          this.setState({ data: res[0] })
+          this.setState({ data: {}}, () => {
+            this.setState({ data: res[0] })
+          })
         }else{
           this.setState({operationRecordList: res})
         }
@@ -156,6 +155,7 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
   render() {
     const { data, treeData, currentTreeKeys } = this.state;
     let { operationType } = data;
+    console.log(this.state.formHandler);
     if (operationType === null) { operationType = 1; }
     return (
       <div className={styles.container}>

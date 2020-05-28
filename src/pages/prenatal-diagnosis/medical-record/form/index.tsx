@@ -93,7 +93,9 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
     }).then((res: any) => {
       if (res.length !== 0) {
         if (id) {
-          this.setState({ data: res[0] })
+          this.setState({data: {}} , () => {
+            this.setState({ data: res[0] })
+          })
         } else {
           // 默认加载第一份病历
           this.setState({medicalRecordList: res})

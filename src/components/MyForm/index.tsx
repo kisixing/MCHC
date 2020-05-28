@@ -114,13 +114,13 @@ export default class MyForm extends Component<MyFormProp, MyFormState>{
   }
 
   componentDidUpdate(prevProps: MyFormProp) {
-    const { getFormHandler, config, value, submitChange } = this.props;
+    const { getFormHandler, config, value } = this.props;
     if (JSON.stringify(this.props.config) !== JSON.stringify(prevProps.config)
       || JSON.stringify(this.props.value) !== JSON.stringify(prevProps.value)
     ) {
       this.setState({
         myConfig: getRenderData(config, value),
-        formHandler: createFormHandler(getRenderData(config, value), { submitChange })
+        // formHandler: createFormHandler(getRenderData(config, value), { submitChange })
       }, () => {
         if(getFormHandler){
           getFormHandler(this.state.formHandler);
