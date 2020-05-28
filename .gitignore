@@ -44,3 +44,4 @@ build
 **/Thumbs.db:encryptable
 
 .env
+/src/assets/font
