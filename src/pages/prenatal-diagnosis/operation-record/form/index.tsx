@@ -1,12 +1,11 @@
 import React from 'react';
 import { Button, message, Tree } from 'antd';
-import FloatDragableCard from '@/components/FloatDragableCard';
 import MyForm from '@/components/MyForm/index';
 
-import observePatientData from '@/utils/observePatientData';
 import { Dispatch } from 'redux';
 import { PrenatalDiagnosisModelState } from '../../main/model';
 
+import moment from 'moment';
 import { connect } from 'dva';
 import { getFormData } from '@/components/MyForm/utils';
 import { generateTreeData } from '../../utils';
@@ -28,7 +27,8 @@ interface OperationRecordState {
   patient: any,
   operationRecordList: Array<any>,
   treeData: Array<any>,
-  currentTreeKeys: Array<string | number>
+  currentTreeKeys: Array<string | number>,
+  showMenu: boolean
 }
 
 const URL = "/pd-operations";
@@ -49,9 +49,7 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
   constructor(props: any) {
     super(props);
     this.state = {
-      formHandler: {
-
-      },
+      formHandler: {},
       data: {
         id: "", // 病历id
         operationType: 1,
@@ -60,7 +58,8 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
       patient: {},
       operationRecordList: [],
       treeData: [],
-      currentTreeKeys: []
+      currentTreeKeys: [],
+      showMenu: true
     }
   }
 
@@ -91,12 +90,21 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
 
   // 获取病历
   getPdOperations = (prenatalPatientId: number | string, id: number|string) => {
+    if(Number(id) < 0){
+      this.setState({data: {
+        id,
+        operationType: 1
+      }});
+      return;
+    }
     request(`${URL}?prenatalPatientId.equals=${prenatalPatientId}&id.equals=${id}`, {
       method: "GET"
     }).then((res: any) => {
       if (res.length !== 0) {
         if(id){
-          this.setState({ data: res[0] })
+          this.setState({ data: {}}, () => {
+            this.setState({ data: res[0] })
+          })
         }else{
           this.setState({operationRecordList: res})
         }
@@ -108,6 +116,34 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
     if(selected && !node.children){
       this.setState({ currentTreeKeys: key});
     }
+  }
+
+  newRecord = () => {
+    const todayStr = moment().format("YYYY-MM-DD");
+    const newId = - Math.random();
+    const { treeData } = this.state;
+    const newTreeData = JSON.parse(JSON.stringify(treeData));
+    if (newTreeData[0].title === todayStr) {
+      newTreeData[0].children.splice(0, 0, {
+        title: "新建病历",
+        key: newId
+      })
+    } else {
+      newTreeData.splice(0, 0, {
+        title: todayStr,
+        key: todayStr,
+        children: [
+          {
+            title: "新建病历",
+            key: newId
+          }
+        ]
+      })
+    }
+    this.setState({
+      treeData: newTreeData,
+      currentTreeKeys: [newId]
+    });
   }
 
   handleSubmit = () => {
@@ -154,12 +190,49 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
 
 
   render() {
-    const { data, treeData, currentTreeKeys } = this.state;
+    const { data, treeData, currentTreeKeys,showMenu } = this.state;
     let { operationType } = data;
     if (operationType === null) { operationType = 1; }
     return (
       <div className={styles.container}>
-        <div className={styles.form}>
+        <div
+          className={styles['menu-block']}
+          style={{
+            left: showMenu ? "256px" : "16px"
+          }}
+        >
+          <div 
+            className={styles.menu}
+            style={{width: ""}}
+          >
+            <div>
+             <Button
+                size="small"
+                onClick={this.newRecord}
+              >新建病历</Button>
+            </div>
+            <Tree
+              treeData={treeData}
+              defaultExpandAll
+              onSelect={this.handleTreeSelect}
+              selectedKeys={currentTreeKeys}
+            />
+          </div>
+          <div className={styles.btn}>
+            <Button
+              onClick={() => this.setState({showMenu: !showMenu})}
+            >
+              {showMenu ? "收起菜单" : "展开菜单"}
+            </Button>
+          </div>
+        </div>
+        <div 
+          className={styles.form}
+          style={{
+            width: showMenu ? "85%" : "100%",
+            marginLeft: showMenu ? "15%" : 0
+          }}    
+        >
           <MyForm
             config={config[operationType]}
             value={data}
@@ -176,15 +249,7 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
               onClick={this.handleSubmit}>提交</Button>
           </div>
         </div>
-        <FloatDragableCard
-          title="手术病历列表"
-        >
-          <Tree
-            treeData={treeData}
-            onSelect={this.handleTreeSelect}
-            selectedKeys={currentTreeKeys}
-          />
-        </FloatDragableCard>
+        
       </div>
     )
   }

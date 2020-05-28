@@ -42,6 +42,7 @@ const generalConfig: Array<FormConfig> = [
       key: ".grade",
       input_type: "select",
       label: "手术级别",
+      rules: "required",
       span: 6,
       offset: 0,
       input_props: {
@@ -54,9 +55,9 @@ const generalConfig: Array<FormConfig> = [
           ]
       }
   },
-  { name: "operationDate", key: ".operationDate", input_type: "date", label: "手术日期", span: 6 },
+  { name: "operationDate", key: ".operationDate", input_type: "date", rules: "required", label: "手术日期", span: 6 },
   {
-      name: "incisionType", key: ".incisionType", input_type: "select", label: "切口类型", span: 6,
+      name: "incisionType", key: ".incisionType", input_type: "select", rules: "required", label: "切口类型", span: 6,
       input_props: {
           type: "default",
           options: [
@@ -71,7 +72,7 @@ const generalConfig: Array<FormConfig> = [
       }
   },
   {
-      name: "rePuncture", key: ".rePuncture", input_type: "select", label: "是否再次穿刺", span: 6,
+      name: "rePuncture", key: ".rePuncture", input_type: "select", rules: "required", label: "是否再次穿刺", span: 6,
       input_props: {
           type: "default",
           radio: true,
