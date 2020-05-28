@@ -1,12 +1,15 @@
 import React from 'react';
-import Table from './components/Table';
-import { tableColumns } from './config/table';
-import BaseList from '@/components/BaseList';
-import WithDynamicExport from '@/components/WithDynamicExport';
 import { router } from 'umi';
 import { get } from 'lodash';
 import { Button, Popconfirm } from 'antd';
 import { EditOutlined, DeleteOutlined, EyeOutlined } from '@ant-design/icons';
+
+import Table from './components/Table';
+import Query from './components/Query';
+import { tableColumns } from './config/table';
+import BaseList from '@/components/BaseList';
+import WithDynamicExport from '@/components/WithDynamicExport';
+
 import commonStyles from '@/common.less';
 
 @WithDynamicExport
@@ -15,11 +18,12 @@ export default class List extends BaseList {
     baseUrl: '/child-deaths',
     baseTitle: '儿童死亡登记',
     needPagination: false,
-    showQuery: false,
+    showQuery: true,
     showAdd: true,
     tableColumns,
     rowKey: 'id',
     Table,
+    Query,
   };
 
   state = {

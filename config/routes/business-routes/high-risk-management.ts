@@ -1,7 +1,7 @@
 // 高危孕产妇管理路由
 export default {
   name: 'high-risk-management',
-  icon: 'ordered-list',
+  icon: 'alert',
   path: '/high-risk-management',
   routes: [
     {
@@ -12,13 +12,13 @@ export default {
     },
     {
       name: 'followup',
-      icon: 'ordered-list',
+      icon: 'file',
       path: '/high-risk-management/followup',
       component: './deliver-form/edit',
     },
     {
       name: 'statistics',
-      icon: 'ordered-list',
+      icon: 'edit',
       path: '/high-risk-management/statistics',
       component: './deliver-form/edit',
     },

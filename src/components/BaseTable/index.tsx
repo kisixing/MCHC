@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Button, Input, Space, InputNumber, DatePicker, TimePicker } from 'antd';
+import { Button, Input, Space, InputNumber, Table } from 'antd';
 import { PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import { map, get, set } from 'lodash';
 import { TableProps } from 'antd/lib/table';
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 import { FilterDropdownProps } from 'antd/lib/table/interface';
 
-import CustomTable from '@/layouts/CustomTable';
 import styles from './index.less';
 
 const TABLE_CELL_WIDTH = 200;
@@ -113,7 +112,7 @@ export default class BaseTable extends Component<IProps, IState> {
   };
 
   mergedColumns = (columns: any) => {
-    return map(columns, (column, index) => {
+    return map(columns, (column: any) => {
       const { width, hiddenSorter, hiddenFilter } = column;
       const cellHeaderAction = {};
       if (!hiddenSorter) {
@@ -146,15 +145,18 @@ export default class BaseTable extends Component<IProps, IState> {
   };
 
   render() {
-    const { columns } = this.props;
+    const { columns, ...rest } = this.props;
+
     const mergedColumns = this.mergedColumns(columns);
     return (
-      <CustomTable
+      <Table
         bordered
-        scroll={{ x: 'calc(100vw - 282px)' }}
-        {...this.props}
+        size="small"
+        {...rest}
+        scroll={{ x: '~calc(100vw - 282px)' }}
         columns={mergedColumns}
         title={this.renderTitle}
+        className={styles.table}
       />
     );
   }

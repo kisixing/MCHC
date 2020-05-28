@@ -49,7 +49,13 @@ export default class BaseQuery extends DynamicForm<P, S> {
 
   render() {
     return (
-      <Form className={styles.baseQuery} ref={this.formRef} layout="inline" onFinish={this.handleSearch} {...this.props}>
+      <Form
+        className={styles.baseQuery}
+        ref={this.formRef}
+        layout="inline"
+        onFinish={this.handleSearch}
+        {...this.props}
+      >
         {this.renderContent()}
         {this.renderResetBtn()}
         {this.renderSearchBtn()}

@@ -25,7 +25,7 @@ export default class List extends BaseList {
     processFromApi,
     rowKey: 'id',
     Table,
-    Query
+    Query,
   };
 
   state = {
@@ -49,15 +49,15 @@ export default class List extends BaseList {
       hiddenSorter: true,
       hiddenFilter: true,
       fixed: 'right',
-      width: '150px',
+      width: 256,
       render: (value: any, rowData: any, index: number) => {
         return (
           <>
             <Button
-              className={commonStyles.tableActionBtn}
               type="primary"
-              
+              size="small"
               title="新建体检记录"
+              className={commonStyles.tableActionBtn}
               onClick={this.handleAddVisit(rowData)}
             >
               <PlusOutlined />
@@ -65,10 +65,10 @@ export default class List extends BaseList {
             </Button>
             {rowData.childExamVisits && rowData.childExamVisits.length ? (
               <Button
-                className={commonStyles.tableActionBtn}
                 type="primary"
-                
+                size="small"
                 title="查看体检记录"
+                className={commonStyles.tableActionBtn}
                 onClick={this.handleView(rowData)}
               >
                 <EyeOutlined title="查看" />
@@ -77,9 +77,9 @@ export default class List extends BaseList {
             ) : null}
             <Button
               title="编辑儿童档案"
-              className={commonStyles.tableActionBtn}
               type="primary"
-              
+              size="small"
+              className={commonStyles.tableActionBtn}
               onClick={this.handleEdit(rowData)}
             >
               <EditOutlined />
@@ -90,7 +90,7 @@ export default class List extends BaseList {
               okText="确定"
               cancelText="取消"
             >
-              <Button title="删除" className={commonStyles.tableActionBtn} type="danger" >
+              <Button danger title="删除" className={commonStyles.tableActionBtn} size="small">
                 <DeleteOutlined />
               </Button>
             </Popconfirm>
@@ -123,5 +123,5 @@ export default class List extends BaseList {
   handleAddVisit = (rowData: any) => () => {
     const { id } = rowData;
     router.push(`/child-management/child-examination/deliver-add?childId=${id}`);
-  }
+  };
 }

@@ -100,12 +100,7 @@ export default class BaseList extends React.Component<IProps, IState> {
 
         return (
           <>
-            <Button
-              className={commonStyles.tableActionBtn}
-              type="primary"
-              
-              onClick={this.handleEdit(rowData)}
-            >
+            <Button type="primary" onClick={this.handleEdit(rowData)} className={commonStyles.tableActionBtn}>
               <EditOutlined />
               编辑
             </Button>
@@ -115,7 +110,7 @@ export default class BaseList extends React.Component<IProps, IState> {
               okText="确定"
               cancelText="取消"
             >
-              <Button className={commonStyles.tableActionBtn} type="danger" >
+              <Button danger className={commonStyles.tableActionBtn}>
                 <DeleteOutlined />
                 删除
               </Button>
