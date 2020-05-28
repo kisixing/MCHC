@@ -1,21 +1,22 @@
-import ProLayout, { MenuDataItem, PageHeaderWrapper } from '@ant-design/pro-layout';
-import { formatMessage } from 'umi-plugin-react/locale';
 import React, { useEffect, useState } from 'react';
 import { Link, router } from 'umi';
 import { connect } from 'dva';
 import { Modal, ConfigProvider } from 'antd';
+import ProLayout, { MenuDataItem, PageHeaderWrapper } from '@ant-design/pro-layout';
+import { formatMessage } from 'umi-plugin-react/locale';
+import { keyBy, keys, get, isEmpty, reduce, concat, isNil, filter } from 'lodash';
+import zhCN from 'antd/es/locale/zh_CN';
+import store from 'store';
+
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState } from '@/models/connect';
-import logo from '../assets/logo.png';
-import { keyBy, keys, get, map, isEmpty, reduce, concat, isNil, filter } from 'lodash';
-import store from 'store';
 import request, { TOKEN } from '@/utils/request';
-import styles from './less/Layout.less';
-import zhCN from 'antd/es/locale/zh_CN';
 import RouterTabs from './RouterTabs';
-import { omitRoutes } from '../../config/routes/index';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import FixedSearch from '@/components/BaseModalForm/FixedSearch';
+import { omitRoutes } from '../../config/routes';
+import styles from './less/Layout.less';
+import logo from '../assets/logo.png';
 
 const BasicLayout = (props: any) => {
   const [routerTabWidth, setRouterTabWidth] = useState(

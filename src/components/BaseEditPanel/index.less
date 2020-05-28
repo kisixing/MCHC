@@ -1,19 +1,43 @@
+// 覆盖定义表单样式
+.input-cover {
+  // font-size: 15px;
+  font-weight: 600;
+  color: #150F55;
+}
+
 .baseEditPanel {
   display: flex;
   justify-content: center;
-  background: #ffffff;
+  background: #fff;
   height: 100%;
-  overflow-y: scroll;
+
   :global {
     .ant-form-item {
       margin-bottom: 12px;
+
+      .ant-form-item-label {
+        label {
+          .input-cover;
+        }
+      }
+
+      .ant-form-item-control {
+        input,
+        textarea,
+        .ant-select-selection-item,
+        .ant-cascader-picker-label,
+        .ant-radio-wrapper,
+        .ant-checkbox-wrapper {
+          .input-cover;
+        }
+      }
     }
   }
 }
 
 .panelWithChild {
   height: 100%;
-  overflow-y: scroll;
+
   .baseEditPanel {
     overflow: hidden;
   }
@@ -21,17 +45,17 @@
   .panelWithChildHeader {
     display: flex;
     align-items: center;
-    background: #fff;// #EAF4FD;
+    background: #fff;
     padding: 18px 24px;
     margin-bottom: 12px;
 
     .panelWithChildHeaderItem {
       margin-right: 48px;
+      font-size: 16px;
       font-weight: bold;
       color: #150f55;
 
       .panelWithChildHeaderItemLabel {
-        font-size: 14px;
         display: inline-block;
         margin-right: 8px;
       }
