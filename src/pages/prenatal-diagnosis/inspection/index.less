@@ -1,43 +1,70 @@
 @backgroundColor: #D7DCE7;
 
 .inspection {
-  background-color: #ffffff;
+  display: flex;
   padding: 12px;
-  border: 1px solid @backgroundColor; 
-  .header {
-    .title {
-      font-size: 16px;
-      font-weight: Semibold;
-      color: #150F55;
-      background-color: @backgroundColor;
-      text-align: center;
-    }
-    .doctor {
-      border: 1px solid @backgroundColor;
-      border-bottom: 0px;
-      text-align: right;
-    }
-    .patient {
-      padding: 4px;
-      border: 1px solid @backgroundColor;
-      border-bottom: 0px;
-      font-size: 16px;
-      font-weight: Semibold;
-      color: #383F4A;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-  }
-
-  .inspection-table {
-    .ant-table-content{
-      thead {
-        > tr{
-  
-          background-color: @backgroundColor !important;
-        }
+  // border: 1px solid @backgroundColor; 
+  .form {
+    background-color: #ffffff;
+    transition: width .3s;
+    .header {
+      .title {
+        font-size: 16px;
+        font-weight: Semibold;
+        color: #150F55;
+        background-color: @backgroundColor;
+        text-align: center;
+      }
+      .doctor {
+        border: 1px solid @backgroundColor;
+        border-bottom: 0px;
+        text-align: right;
+      }
+      .patient {
+        padding: 4px;
+        border: 1px solid @backgroundColor;
+        border-bottom: 0px;
+        font-size: 16px;
+        font-weight: Semibold;
+        color: #383F4A;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
       }
     }
   }
+  
+  .menu-block {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    width: 15%;
+    left: -250px;
+    transition: left .5s;
+    z-index: 999;
+    .btn {
+      button {
+        width: 40px;
+        height: 85px;
+        padding: 0;
+        padding-top: 2px;
+        border-bottom-right-radius: 14px;
+        border-top-right-radius: 14px;
+        > span {
+          font-size: 14px;
+          text-align: justify;
+          writing-mode: vertical-rl;
+          letter-spacing: 4px;
+        }
+      }
+    }
+    .menu {
+      background-color: #ffffff;
+      width: 250px;
+      height: 400px;
+      user-select: none;
+    }
+  }
+
 }
+

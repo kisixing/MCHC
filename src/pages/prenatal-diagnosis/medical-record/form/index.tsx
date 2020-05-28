@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, message, Tree } from 'antd';
-import FloatDragableCard from '@/components/FloatDragableCard';
 import MyForm from '@/components/MyForm/index';
 import moment from 'moment';
 
@@ -24,7 +23,9 @@ interface MedicalRecordState {
   patient: any,
   medicalRecordList: Array<any>,
   treeData: Array<any>,
-  currentTreeKeys: Array<string | number>
+  currentTreeKeys: Array<string | number>,
+
+  showMenu: boolean
 }
 
 interface MedicalRecordProps {
@@ -54,7 +55,9 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
       patient: {},
       medicalRecordList: [],
       treeData: [],
-      currentTreeKeys: []
+      currentTreeKeys: [],
+
+      showMenu: true
     }
   }
 
@@ -85,18 +88,31 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
 
   // 获取病历
   getPrenatalDiagnosis = (prenatalPatientId: number | string, id: number | string) => {
-    if(Number(id) < 0){
-      return ;
+    if (Number(id) < 0) {
+      this.setState({ data: {
+        id,
+        downsScreens: [
+          { type: 0 },
+          { type: 1 },
+          { type: 2 }
+        ],
+        fetuses: [
+          {id: ""}
+        ]
+      }})
+      return;
     }
     request(`${URL}?prenatalPatientId.equals=${prenatalPatientId}&id.equals=${id}&sort=visitDate,desc`, {
       method: "GET"
     }).then((res: any) => {
       if (res.length !== 0) {
         if (id) {
-          this.setState({ data: res[0] })
+          this.setState({ data: {} }, () => {
+            this.setState({ data: res[0] })
+          })
         } else {
           // 默认加载第一份病历
-          this.setState({medicalRecordList: res})
+          this.setState({ medicalRecordList: res })
         }
       }
     });
@@ -106,13 +122,14 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
     const todayStr = moment().format("YYYY-MM-DD");
     const newId = - Math.random();
     const { treeData } = this.state;
-    if (treeData[0].title === todayStr) {
-      treeData[0].children.splice(0, 0, {
+    const newTreeData = JSON.parse(JSON.stringify(treeData));
+    if (newTreeData[0].title === todayStr) {
+      newTreeData[0].children.splice(0, 0, {
         title: "新建病历",
         key: newId
       })
     } else {
-      treeData.splice(0, 0, {
+      newTreeData.splice(0, 0, {
         title: todayStr,
         key: todayStr,
         children: [
@@ -124,7 +141,7 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
       })
     }
     this.setState({
-      treeData,
+      treeData: newTreeData,
       currentTreeKeys: [newId]
     });
   }
@@ -140,7 +157,7 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
         formatData.downsScreens[1].type = 1;
         formatData.downsScreens[2].type = 2;
         const [method, info] = formatData.id > 0 ? ["PUT", "修改成功"] : ["POST", "成功新增病历"];
-        if(formatData.id < 0){
+        if (formatData.id < 0) {
           formatData.id = "";
         }
         request(`${URL}`, {
@@ -176,12 +193,50 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
     }
   }
 
+  // 暂时使用行内样式
   render() {
-    const { data, treeData, currentTreeKeys } = this.state;
+    const { data, treeData, currentTreeKeys, showMenu } = this.state;
     return (
       <div className={styles.container}>
-        {/* {currentTreeKeys.length !== 0 ? ( */}
-        <div className={styles.form}>
+        <div
+          className={styles['menu-block']}
+          style={{
+            left: showMenu ? "256px" : "16px"
+          }}
+        >
+          <div
+            className={styles.menu}
+            style={{ width: "" }}
+          >
+            <div>
+              <Button
+                size="small"
+                onClick={this.newRecord}
+              >新建病历</Button>
+              <br />
+            </div>
+            <Tree
+              treeData={treeData}
+              // defaultExpandAll
+              onSelect={this.handleTreeSelect}
+              selectedKeys={currentTreeKeys}
+            />
+          </div>
+          <div className={styles.btn}>
+            <Button
+              onClick={() => this.setState({ showMenu: !showMenu })}
+            >
+              {showMenu ? "收起菜单" : "展开菜单"}
+            </Button>
+          </div>
+        </div>
+        <div
+          className={styles.form}
+          style={{
+            width: showMenu ? "85%" : "100%",
+            marginLeft: showMenu ? "15%" : 0
+          }}
+        >
           <MyForm
             config={config}
             value={data}
@@ -200,26 +255,6 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
             >提交</Button>
           </div>
         </div>
-        {/* ) : null} */}
-        <FloatDragableCard
-          title="专科病历列表"
-        >
-          {/* {treeData.length !== 0 ? ( */}
-            <div>
-              {/* <Button
-                size="small"
-                onClick={this.newRecord}
-              >新建病历</Button>
-              <br /> */}
-              <Tree
-                treeData={treeData}
-                // defaultExpandAll
-                onSelect={this.handleTreeSelect}
-                selectedKeys={currentTreeKeys}
-              />
-            </div>
-          {/* ) : <Spin />} */}
-        </FloatDragableCard>
       </div>
     )
   }

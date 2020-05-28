@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import MyForm from '@/components/MyForm/index';
 
-import { getRenderData, getFormData } from '@/components/MyForm/utils';
+import { getFormData } from '@/components/MyForm/utils';
 
 interface MyCustomProps {
   onChange: Function,
@@ -64,14 +64,11 @@ export default class MyCustom extends Component<MyCustomProps, MyCustomState>{
   render() {
     const { config = [] } = this.props.input_props;
     const { value = {} } = this.props;
-    let myConfig: Array<any> = [];
-    if (config) {
-      myConfig = getRenderData(config, value);
-    }
     return (
       <div style={{ marginTop: "16px" }}>
         <MyForm
-          config={myConfig}
+          config={config}
+          value={value}
           getFormHandler={(formHandler: any) => this.setState({ formHandler })}
           submitChange
         />
