@@ -52,7 +52,7 @@ export class FormSection extends React.Component<IProps> {
     const formDescriptionKey = get(formDescription, 'key');
     switch (get(formDescription, 'inputType')) {
       case 'input':
-        return renderEditItem(formDescriptionKey, <Input size="small" {...get(formDescription, 'inputProps')} />, {
+        return renderEditItem(formDescriptionKey, <Input {...get(formDescription, 'inputProps')} />, {
           customFormItemLayout: get(formDescription, 'formItemLayout') || {},
         });
       case 'select_with_options':
@@ -60,7 +60,7 @@ export class FormSection extends React.Component<IProps> {
           customFormItemLayout: get(formDescription, 'formItemLayout') || {},
         });
       case 'single_date_picker':
-        return renderEditItem(formDescriptionKey, <DatePicker size="small" {...get(formDescription, 'inputProps')} />, {
+        return renderEditItem(formDescriptionKey, <DatePicker {...get(formDescription, 'inputProps')} />, {
           customFormItemLayout: get(formDescription, 'formItemLayout') || {},
         });
       case 'pregnant_radio':
@@ -89,7 +89,7 @@ export class FormSection extends React.Component<IProps> {
         return renderEditItem(
           formDescriptionKey,
           <InputNumber
-            size="small"
+            
             min={0}
             {...get(formDescription, 'inputProps')}
             // onChange={get(events, 'handleFetalcountChange')}
@@ -100,7 +100,7 @@ export class FormSection extends React.Component<IProps> {
         return renderEditItem(
           formDescriptionKey,
           <InputNumber
-            size="small"
+            
             min={0}
             {...get(formDescription, 'inputProps')}
             onChange={get(events, 'setFormData')}
@@ -114,7 +114,7 @@ export class FormSection extends React.Component<IProps> {
       case 'view_only':
         return renderEditItem(formDescriptionKey, <span>{get(data, get(formDescription, 'path'))}</span>);
       default:
-        return renderEditItem(formDescriptionKey, <Input size="small" {...get(formDescription, 'inputProps')} />);
+        return renderEditItem(formDescriptionKey, <Input {...get(formDescription, 'inputProps')} />);
     }
   };
 

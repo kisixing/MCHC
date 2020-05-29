@@ -133,7 +133,7 @@ export class DictionarySelect extends React.Component<IProps> {
                     <Radio value={get(option, 'value')}>{get(option, 'label')}</Radio>
                   </Col>
                   <Col span={boxSpan}>
-                    <Input size="small" placeholder="请输入其它" onChange={this.handleInputChange} value={otherNote} />
+                    <Input placeholder="请输入其它" onChange={this.handleInputChange} value={otherNote} />
                   </Col>
                 </>
               );
@@ -165,7 +165,7 @@ export class DictionarySelect extends React.Component<IProps> {
                     <Checkbox value={get(option, 'value')}>{get(option, 'label')}</Checkbox>
                   </Col>
                   <Col span={boxSpan}>
-                    <Input size="small" placeholder="请输入其它" onChange={this.handleInputChange} value={otherNote} />
+                    <Input placeholder="请输入其它" onChange={this.handleInputChange} value={otherNote} />
                   </Col>
                 </>
               );
@@ -194,7 +194,7 @@ export class DictionarySelect extends React.Component<IProps> {
           <Select
             dropdownMatchSelectWidth
             mode={mode}
-            size="small"
+            
             allowClear
             showSearch
             filterOption={(inputValue, option: any) =>
@@ -213,7 +213,7 @@ export class DictionarySelect extends React.Component<IProps> {
         </Col>
         {showOther && (
           <Col span={11} offset={1}>
-            <Input size="small" placeholder="请输入其它" onChange={this.handleInputChange} value={otherNote} />
+            <Input placeholder="请输入其它" onChange={this.handleInputChange} value={otherNote} />
           </Col>
         )}
       </Row>

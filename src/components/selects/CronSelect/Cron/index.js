@@ -849,50 +849,50 @@ class CRON extends React.Component {
                   {i18n.EverySecond}
                 </Radio>
                 <Radio style={radioStyle} value={2}>
-                  {i18n.from}{' '}
+                  {i18n.from}
                   <InputNumber
                     disabled={SecondRadiochecked !== 2}
                     min={0}
                     max={59}
                     value={secondCycleStart}
-                    size="small"
+                    
                     onChange={this.secondCycleStart}
                     style={{ width: 100 }}
                   />
-                  &nbsp;-{' '}
+                  &nbsp;-
                   <InputNumber
                     disabled={SecondRadiochecked !== 2}
                     min={0}
                     max={59}
                     value={secondCycleEnd}
-                    size="small"
+                    
                     onChange={this.secondCycleEnd}
                     style={{ width: 100 }}
-                  />{' '}
+                  />
                   {i18n.second1}
                 </Radio>
                 <Radio style={radioStyle} value={3}>
-                  {i18n.from}{' '}
+                  {i18n.from}
                   <InputNumber
                     disabled={SecondRadiochecked !== 3}
                     min={0}
                     max={59}
                     value={secondStart}
-                    size="small"
+                    
                     onChange={this.secondStart}
                     style={{ width: 100 }}
-                  />{' '}
+                  />
                   {i18n.secondstart}
-                  {i18n.Every}{' '}
+                  {i18n.Every}
                   <InputNumber
                     disabled={SecondRadiochecked !== 3}
                     min={0}
                     max={59}
                     value={secondEvery}
-                    size="small"
+                    
                     onChange={this.secondEvery}
                     style={{ width: 100 }}
-                  />{' '}
+                  />
                   {i18n.second1}
                   {i18n.doOne}
                 </Radio>
@@ -917,50 +917,50 @@ class CRON extends React.Component {
                   {i18n.Everyminute}
                 </Radio>
                 <Radio style={radioStyle} value={2}>
-                  {i18n.from}{' '}
+                  {i18n.from}
                   <InputNumber
                     disabled={minuteRadiochecked !== 2}
                     min={0}
                     max={59}
                     value={minuteCycleStart}
-                    size="small"
+                    
                     onChange={this.minuteCycleStart}
                     style={{ width: 100 }}
                   />
-                  &nbsp;-{' '}
+                  &nbsp;-
                   <InputNumber
                     disabled={minuteRadiochecked !== 2}
                     min={0}
                     max={59}
                     value={minuteCycleEnd}
-                    size="small"
+                    
                     onChange={this.minuteCycleEnd}
                     style={{ width: 100 }}
-                  />{' '}
+                  />
                   {i18n.minute1}
                 </Radio>
                 <Radio style={radioStyle} value={3}>
-                  {i18n.from}{' '}
+                  {i18n.from}
                   <InputNumber
                     disabled={minuteRadiochecked !== 3}
                     min={0}
                     max={59}
                     value={minuteStart}
-                    size="small"
+                    
                     onChange={this.minuteStart}
                     style={{ width: 100 }}
-                  />{' '}
+                  />
                   {i18n.minutestart}
-                  {i18n.Every}{' '}
+                  {i18n.Every}
                   <InputNumber
                     disabled={minuteRadiochecked !== 3}
                     min={0}
                     max={59}
                     value={minuteEvery}
-                    size="small"
+                    
                     onChange={this.minuteEvery}
                     style={{ width: 100 }}
-                  />{' '}
+                  />
                   {i18n.minute1}
                   {i18n.doOne}
                 </Radio>
@@ -985,50 +985,50 @@ class CRON extends React.Component {
                   {i18n.Everyhour}
                 </Radio>
                 <Radio style={radioStyle} value={2}>
-                  {i18n.from}{' '}
+                  {i18n.from}
                   <InputNumber
                     disabled={hourRadiochecked !== 2}
                     min={0}
                     max={23}
                     value={hourCycleStart}
-                    size="small"
+                    
                     onChange={this.hourCycleStart}
                     style={{ width: 100 }}
                   />
-                  &nbsp;-{' '}
+                  &nbsp;-
                   <InputNumber
                     disabled={hourRadiochecked !== 2}
                     min={0}
                     max={23}
                     value={hourCycleEnd}
-                    size="small"
+                    
                     onChange={this.hourCycleEnd}
                     style={{ width: 100 }}
-                  />{' '}
+                  />
                   {i18n.hour1}
                 </Radio>
                 <Radio style={radioStyle} value={3}>
-                  {i18n.from}{' '}
+                  {i18n.from}
                   <InputNumber
                     disabled={hourRadiochecked !== 3}
                     min={0}
                     max={23}
                     value={hourStart}
-                    size="small"
+                    
                     onChange={this.hourStart}
                     style={{ width: 100 }}
-                  />{' '}
+                  />
                   {i18n.hourstart}
-                  {i18n.Every}{' '}
+                  {i18n.Every}
                   <InputNumber
                     disabled={hourRadiochecked !== 3}
                     min={0}
                     max={23}
                     value={hourEvery}
-                    size="small"
+                    
                     onChange={this.hourEvery}
                     style={{ width: 100 }}
-                  />{' '}
+                  />
                   {i18n.hour1}
                   {i18n.doOne}
                 </Radio>
@@ -1056,55 +1056,55 @@ class CRON extends React.Component {
                   {i18n.noappoint}
                 </Radio>
                 <Radio style={radioStyle} value={3}>
-                  {i18n.from}{' '}
+                  {i18n.from}
                   <InputNumber
                     disabled={daysRadiochecked !== 3}
                     min={1}
                     max={31}
                     value={daysCycleStart}
-                    size="small"
+                    
                     onChange={this.daysCycleStart}
                     style={{ width: 100 }}
                   />
-                  &nbsp;-{' '}
+                  &nbsp;-
                   <InputNumber
                     disabled={daysRadiochecked !== 3}
                     min={1}
                     max={31}
                     value={daysCycleEnd}
-                    size="small"
+                    
                     onChange={this.daysCycleEnd}
                     style={{ width: 100 }}
-                  />{' '}
+                  />
                   {i18n.day1}
                 </Radio>
                 <Radio style={radioStyle} value={4}>
-                  {i18n.from}{' '}
+                  {i18n.from}
                   <InputNumber
                     disabled={daysRadiochecked !== 4}
                     min={1}
                     max={31}
                     value={daysStart}
-                    size="small"
+                    
                     onChange={this.daysStart}
                     style={{ width: 100 }}
-                  />{' '}
+                  />
                   {i18n.daystart}
-                  {i18n.Every}{' '}
+                  {i18n.Every}
                   <InputNumber
                     disabled={daysRadiochecked !== 4}
                     min={1}
                     max={31}
                     value={daysEvery}
-                    size="small"
+                    
                     onChange={this.daysEvery}
                     style={{ width: 100 }}
-                  />{' '}
+                  />
                   {i18n.day1}
                   {i18n.doOne}
                 </Radio>
                 {/* <Radio style={radioStyle} value={5}>
-                  {i18n.Everymonth1} <InputNumber disabled={daysRadiochecked !== 5} min={1} max={31} value={daysForWorking} size="small" onChange={this.daysForWorking} style={{ width: 100 }} /> {i18n.latestDays}
+                  {i18n.Everymonth1} <InputNumber disabled={daysRadiochecked !== 5} min={1} max={31} value={daysForWorking} onChange={this.daysForWorking} style={{ width: 100 }} /> {i18n.latestDays}
                 </Radio>
                 <Radio style={radioStyle} value={6}>{i18n.monthend}</Radio> */}
                 <Radio style={radioStyle} value={7}>
@@ -1129,50 +1129,50 @@ class CRON extends React.Component {
                 </Radio>
                 {/* <Radio style={radioStyle} value={2}>不指定</Radio> */}
                 <Radio style={radioStyle} value={3}>
-                  {i18n.from}{' '}
+                  {i18n.from}
                   <InputNumber
                     disabled={monthRadiochecked !== 3}
                     min={1}
                     max={12}
                     value={monthCycleStart}
-                    size="small"
+                    
                     onChange={this.monthCycleStart}
                     style={{ width: 100 }}
                   />
-                  &nbsp;-{' '}
+                  &nbsp;-
                   <InputNumber
                     disabled={monthRadiochecked !== 3}
                     min={1}
                     max={12}
                     value={monthCycleEnd}
-                    size="small"
+                    
                     onChange={this.monthCycleEnd}
                     style={{ width: 100 }}
-                  />{' '}
+                  />
                   {i18n.month1}
                 </Radio>
                 <Radio style={radioStyle} value={4}>
-                  {i18n.from}{' '}
+                  {i18n.from}
                   <InputNumber
                     disabled={monthRadiochecked !== 4}
                     min={1}
                     max={12}
                     value={monthStart}
-                    size="small"
+                    
                     onChange={this.monthStart}
                     style={{ width: 100 }}
-                  />{' '}
+                  />
                   {i18n.monthstart}
-                  {i18n.Every}{' '}
+                  {i18n.Every}
                   <InputNumber
                     disabled={monthRadiochecked !== 4}
                     min={1}
                     max={12}
                     value={monthEvery}
-                    size="small"
+                    
                     onChange={this.monthEvery}
                     style={{ width: 100 }}
-                  />{' '}
+                  />
                   {i18n.month1}
                   {i18n.doOne}
                 </Radio>
@@ -1201,21 +1201,21 @@ class CRON extends React.Component {
                 </Radio>
                 <Radio style={radioStyle} value={3}>
                   {i18n.from}
-                  {i18n.week1}{' '}
+                  {i18n.week1}
                   <Select
                     disabled={weekRadiochecked !== 3}
                     value={weekCycleStart}
-                    size="small"
+                    
                     onChange={this.weekCycleStart}
                     style={{ width: 100 }}
                   >
                     {children}
                   </Select>
-                  &nbsp;-{' '}
+                  &nbsp;-
                   <Select
                     disabled={weekRadiochecked !== 3}
                     value={weekCycleEnd}
-                    size="small"
+                    
                     onChange={this.weekCycleEnd}
                     style={{ width: 100 }}
                   >
@@ -1223,22 +1223,22 @@ class CRON extends React.Component {
                   </Select>
                 </Radio>
                 <Radio style={radioStyle} value={4}>
-                  {i18n.monthweek}{' '}
+                  {i18n.monthweek}
                   <InputNumber
                     disabled={weekRadiochecked !== 4}
                     min={1}
                     max={5}
                     value={weekStart}
-                    size="small"
+                    
                     onChange={this.weekStart}
                     style={{ width: 100 }}
-                  />{' '}
+                  />
                   {i18n.week3}
-                  {i18n.week2}{' '}
+                  {i18n.week2}
                   <Select
                     disabled={weekRadiochecked !== 4}
                     value={weekEvery}
-                    size="small"
+                    
                     onChange={this.weekEvery}
                     style={{ width: 100 }}
                   >
@@ -1246,11 +1246,11 @@ class CRON extends React.Component {
                   </Select>
                 </Radio>
                 <Radio style={radioStyle} value={5}>
-                  {i18n.weekend}{' '}
+                  {i18n.weekend}
                   <Select
                     disabled={weekRadiochecked !== 5}
                     value={weekEnd}
-                    size="small"
+                    
                     onChange={this.changeweekEnd}
                     style={{ width: 100 }}
                   >
@@ -1276,8 +1276,8 @@ class CRON extends React.Component {
               <Radio style={radioStyle} value={1}>不指定 允许的通配符[, - * /] 非必填 </Radio>
               <Radio style={radioStyle} value={2}>每年 </Radio>
               <Radio style={radioStyle} value={3}>
-                  {i18n.from} <InputNumber type="number" size="small" onChange={this.yearCycleStart} style={{ width: 100 }} />
-                  - <InputNumber size="small" type="number" onChange={this.yearCycleEnd} style={{ width: 100 }} />
+                  {i18n.from} <InputNumber type="number" onChange={this.yearCycleStart} style={{ width: 100 }} />
+                  - <InputNumber type="number" onChange={this.yearCycleEnd} style={{ width: 100 }} />
               </Radio>
             </RadioGroup>
           </TabPane> */}

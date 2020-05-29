@@ -53,14 +53,14 @@ export default (props: IProps) => {
       {get(props, 'type') === 'number' ? (
         <InputNumber
           className={styles.inputWidth}
-          size="small"
+          
           min={0}
           {...props}
           value={Number(data)}
           onChange={handleChange('number')}
         />
       ) : (
-        <Input className={styles.inputWidth} size="small" {...props} value={data} onChange={handleChange('string')} />
+        <Input className={styles.inputWidth} {...props} value={data} onChange={handleChange('string')} />
       )}
       {get(props, 'labelAfter') && (
         <span

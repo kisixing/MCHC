@@ -1,15 +1,14 @@
-import React,{ Component, ReactNode } from 'react';
-import { Table } from 'antd';
-import FloatTreeMenu from '@/components/FloatTreeMenu';
+import React, { Component, ReactNode } from 'react';
+import { Table, Button } from 'antd';
 import data from './data';
 
 import styles from './index.less'
 
-interface InspectionProp{
+interface InspectionProp {
 
 }
 
-interface InspectionState{
+interface InspectionState {
 
 }
 
@@ -48,8 +47,11 @@ const columns = [
 
 export default class Inspection extends Component<InspectionProp, InspectionState>{
 
+  state = {
+    showMenu: true
+  }
 
-  renderHeader = (data: any):ReactNode => {
+  renderHeader = (data: any): ReactNode => {
     return (
       <div className={styles.header}>
         <div className={styles.title}>
@@ -71,27 +73,46 @@ export default class Inspection extends Component<InspectionProp, InspectionStat
   }
 
   render() {
+    const { showMenu } = this.state;
     return (
       <div className={styles.inspection}>
-        {this.renderHeader(data)}
-        <Table
-          bordered
-          className={styles['inspection-table']}
-          columns={columns}
-          dataSource={data.inspections}
-        />
-        <FloatTreeMenu
-          url=""
-          firstLayer={{
-            key: "operationDate",
-            render: (text:any) => text,
+        <div
+          className={styles['menu-block']}
+          style={{
+            left: showMenu ? "256px" : "16px"
           }}
-          secondLayer={{
-            key: "id",
-            render: (_text:any, record: any) => record.operationName,
+        >
+          <div
+            className={styles.menu}
+            style={{ width: "" }}
+          >
+            <div>
+              <span>暂无信息</span>
+            </div>
+          </div>
+          <div className={styles.btn}>
+              <Button
+                onClick={() => this.setState({ showMenu: !showMenu })}
+              >
+                {showMenu ? "收起菜单" : "展开菜单"}
+              </Button>
+            </div>
+        </div>
+        <div 
+          className={styles.form}
+          style={{
+            width: showMenu ? "85%" : "100%",
+            marginLeft: showMenu ? "15%" : 0
           }}
-          onSelect={() => console.log('1')}
-        />
+        >
+          {this.renderHeader(data)}
+          <Table
+            bordered
+            className={styles['inspection-table']}
+            columns={columns}
+            dataSource={data.inspections}
+          />
+        </div>
       </div>
     )
   }

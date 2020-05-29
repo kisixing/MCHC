@@ -11,10 +11,10 @@ export default class Query extends BaseQuery {
   renderContent = () => {
     return (
       <Fragment>
-        {this.renderEditItem('id', <Input size="small" placeholder="请输入ID" />)}
-        {this.renderEditItem('section_id', <Input size="small" placeholder="请输入所属模块ID" />)}
-        {this.renderEditItem('key', <Input size="small" placeholder="请输入key" />)}
-        {this.renderEditItem('label', <Input size="small" placeholder="请输入标签名称" />)}
+        {this.renderEditItem('id', <Input placeholder="请输入ID" />)}
+        {this.renderEditItem('section_id', <Input placeholder="请输入所属模块ID" />)}
+        {this.renderEditItem('key', <Input placeholder="请输入key" />)}
+        {this.renderEditItem('label', <Input placeholder="请输入标签名称" />)}
       </Fragment>
     );
   };

@@ -141,7 +141,7 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
                 </Col>
                 <Col span={1}></Col>
                 <Col span={2}>
-                  <Button size="small" onClick={() => handleClear()}>重置</Button>
+                  <Button onClick={() => handleClear()}>重置</Button>
                 </Col>
               </Row>
               <br />
@@ -150,10 +150,10 @@ export default class PrenatalDiagnosis extends Component<{},PrenatalDiagnosisSta
                   <Input value={formData.search} onChange={e => handleChange("search", e.target.value)} placeholder="输入模糊查找"/>
                 </Col>
                 <Col span={3}>
-                  <Button size="small" onClick={() => this.setState({expandedKeys: []})}>全部收齐</Button>
+                  <Button onClick={() => this.setState({expandedKeys: []})}>全部收齐</Button>
                 </Col>
                 <Col span={3}>
-                  <Button size="small" onClick={() => this.setState({expandedKeys: allExpandedKeys})}>全部展开</Button>
+                  <Button onClick={() => this.setState({expandedKeys: allExpandedKeys})}>全部展开</Button>
                 </Col>
               </Row>
             </Col>

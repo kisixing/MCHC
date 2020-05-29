@@ -65,10 +65,10 @@ class InputCron extends PureComponent {
             onVisibleChange={visible => this.setState({ dateVisible: visible })}
             overlay={<Cron onChange={this.handleChange} value={value} style={style} lang={lang} type={type} />}
           >
-            <Input size="small" readOnly value={value} style={{ width }} />
+            <Input readOnly value={value} style={{ width }} />
           </Dropdown>
         ) : (
-          <Input size="small" value={value} style={{ width }} onChange={this.handleInputChange} />
+          <Input value={value} style={{ width }} onChange={this.handleInputChange} />
         )}
       </>
     );

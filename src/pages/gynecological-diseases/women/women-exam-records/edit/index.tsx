@@ -65,7 +65,7 @@ export default class panel extends PanelWithChild {
   renderContent = () => {
     const { data, activeKey } = this.state;
     return (
-      <Tabs activeKey={activeKey} type="card" size="small" onChange={this.handleChangeTab}>
+      <Tabs activeKey={activeKey} type="card" onChange={this.handleChangeTab}>
         <Tabs.TabPane tab="基本信息" key="BasicInfo">
           {activeKey === 'BasicInfo' && <BasicInfo data={data} />}
         </Tabs.TabPane>

@@ -37,7 +37,7 @@ export default class FoetalAppendageFormSection extends React.Component<IProps> 
         return renderEditItem(
           formDescriptionKey,
           <Input
-            size="small"
+            
             {...get(formDescription, 'inputProps')}
             value={get(data, formDescriptionKey)}
             onChange={(e: any) => {
@@ -83,7 +83,7 @@ export default class FoetalAppendageFormSection extends React.Component<IProps> 
         return renderEditItem(
           formDescriptionKey,
           <DatePicker
-            size="small"
+            
             value={get(data, formDescriptionKey)}
             {...get(formDescription, 'inputProps')}
             onChange={(e: any) => {
@@ -112,7 +112,7 @@ export default class FoetalAppendageFormSection extends React.Component<IProps> 
         return renderEditItem(
           formDescriptionKey,
           <InputNumber
-            size="small"
+            
             value={get(data, formDescriptionKey)}
             min={0}
             {...get(formDescription, 'inputProps')}
@@ -170,7 +170,7 @@ export default class FoetalAppendageFormSection extends React.Component<IProps> 
         return renderEditItem(
           formDescriptionKey,
           <Input
-            size="small"
+            
             value={get(data, formDescriptionKey)}
             {...get(formDescription, 'inputProps')}
             onChange={(e: any) => {

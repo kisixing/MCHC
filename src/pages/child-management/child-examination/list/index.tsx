@@ -53,21 +53,21 @@ export default class List extends BaseList {
       hiddenSorter: true,
       hiddenFilter: true,
       fixed: 'right',
-      width: '250px',
+      width: 240,
       render: (value: any, rowData: any, index: number) => {
         return (
           <>
             <Button
               className={commonStyles.tableActionBtn}
               type="primary"
-              size="small"
+              
               title="编辑"
               onClick={this.handleView(rowData)}
             >
               <EditOutlined />
               编辑
             </Button>
-            <ModalIframeView className={commonStyles.tableActionBtn} size="small" file={rowData.pfdurl}>
+            <ModalIframeView className={commonStyles.tableActionBtn} file={rowData.pfdurl}>
               <EyeOutlined />
               PDF
             </ModalIframeView>
@@ -77,7 +77,7 @@ export default class List extends BaseList {
               okText="确定"
               cancelText="取消"
             >
-              <Button title="删除" className={commonStyles.tableActionBtn} type="danger" size="small">
+              <Button title="删除" className={commonStyles.tableActionBtn} type="danger" >
                 <DeleteOutlined />
               </Button>
             </Popconfirm>

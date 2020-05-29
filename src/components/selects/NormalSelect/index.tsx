@@ -649,7 +649,7 @@ export default (props: IProps = { type: 'IDCardMapping', showSearch: false }) =>
   return (
     <Select
       showSearch={props.showSearch}
-      size="small"
+      
       placeholder="请选择"
       allowClear
       filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}

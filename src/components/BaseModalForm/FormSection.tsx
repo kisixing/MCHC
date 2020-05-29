@@ -80,7 +80,7 @@ export class FormSection extends React.Component<IProps> {
       case 'id':
         return <span></span>;
       case 'subdevice_id':
-        return id && renderEditItem(formDescriptionKey, <Input size="small" {...formDescriptionInputProps} />);
+        return id && renderEditItem(formDescriptionKey, <Input {...formDescriptionInputProps} />);
       case 'radio':
         return renderEditItem(
           formDescriptionKey,
@@ -96,7 +96,7 @@ export class FormSection extends React.Component<IProps> {
       case 'radio_group':
         return renderEditItem(
           get(formDescription, 'key'),
-          <Radio.Group size="small" {...get(formDescription, 'inputProps')} />,
+          <Radio.Group {...get(formDescription, 'inputProps')} />,
           {
             customFormItemLayout: get(formDescription, 'formItemLayout') || {},
             styles: get(formDescription, 'styles'),
@@ -197,14 +197,14 @@ export class FormSection extends React.Component<IProps> {
           styles,
         });
       case 'input':
-        return renderEditItem(formDescriptionKey, <Input size="small" {...formDescriptionInputProps} />, {
+        return renderEditItem(formDescriptionKey, <Input {...formDescriptionInputProps} />, {
           customFormItemLayout,
           styles,
         });
       case 'fetus_appendages':
         return renderEditItem(
           formDescriptionKey,
-          <FoetalAppendage size="small" {...formDescriptionInputProps} renderEditItem={renderEditItem} form={form} />,
+          <FoetalAppendage {...formDescriptionInputProps} renderEditItem={renderEditItem} form={form} />,
           {
             customFormItemLayout,
             styles,
@@ -213,7 +213,7 @@ export class FormSection extends React.Component<IProps> {
       case 'noenate_record':
         return renderEditItem(
           formDescriptionKey,
-          <NoenateRecord size="small" {...formDescriptionInputProps} renderEditItem={renderEditItem} form={form} />,
+          <NoenateRecord {...formDescriptionInputProps} renderEditItem={renderEditItem} form={form} />,
           {
             customFormItemLayout,
             styles,
@@ -232,7 +232,7 @@ export class FormSection extends React.Component<IProps> {
       case 'id_number_input':
         return renderEditItem(
           formDescriptionKey,
-          <Input size="small" {...formDescriptionInputProps} onChange={get(events, 'handleIDNumberChange')} />,
+          <Input {...formDescriptionInputProps} onChange={get(events, 'handleIDNumberChange')} />,
           {
             customFormItemLayout,
             styles,
@@ -244,36 +244,36 @@ export class FormSection extends React.Component<IProps> {
           styles,
         });
       case 'trigger_type_select':
-        return renderEditItem(formDescriptionKey, <TriggerTypeSelect size="small" {...formDescriptionInputProps} />, {
+        return renderEditItem(formDescriptionKey, <TriggerTypeSelect {...formDescriptionInputProps} />, {
           customFormItemLayout,
           styles,
         });
       case 'text_area':
-        return renderEditItem(formDescriptionKey, <Input.TextArea size="small" {...formDescriptionInputProps} />, {
+        return renderEditItem(formDescriptionKey, <Input.TextArea {...formDescriptionInputProps} />, {
           customFormItemLayout,
           styles,
         });
       case 'tree_select':
-        return renderEditItem(formDescriptionKey, <PermissionSelect size="small" {...formDescriptionInputProps} />, {
+        return renderEditItem(formDescriptionKey, <PermissionSelect {...formDescriptionInputProps} />, {
           customFormItemLayout,
           styles,
         });
       case 'parent_select':
         return renderEditItem(
           formDescriptionKey,
-          <ParentPermissionSelect size="small" {...formDescriptionInputProps} />,
+          <ParentPermissionSelect {...formDescriptionInputProps} />,
           {
             customFormItemLayout,
             styles,
           },
         );
       case 'input_number':
-        return renderEditItem(formDescriptionKey, <InputNumber size="small" min={0} {...formDescriptionInputProps} />, {
+        return renderEditItem(formDescriptionKey, <InputNumber min={0} {...formDescriptionInputProps} />, {
           customFormItemLayout,
           styles,
         });
       case 'password':
-        return renderEditItem(formDescriptionKey, <Input.Password size="small" {...formDescriptionInputProps} />, {
+        return renderEditItem(formDescriptionKey, <Input.Password {...formDescriptionInputProps} />, {
           customFormItemLayout,
           styles,
         });
@@ -281,7 +281,7 @@ export class FormSection extends React.Component<IProps> {
         return renderEditItem(
           formDescriptionKey,
           <DataSelect
-            size="small"
+            
             dataSource={[
               { id: 30, name: '30天' },
               { id: 60, name: '60天' },
@@ -297,7 +297,7 @@ export class FormSection extends React.Component<IProps> {
           },
         );
       case 'editor':
-        return renderEditItem(formDescriptionKey, <CustomEditor size="small" {...formDescriptionInputProps} />, {
+        return renderEditItem(formDescriptionKey, <CustomEditor {...formDescriptionInputProps} />, {
           customFormItemLayout,
           styles,
         });
@@ -309,7 +309,7 @@ export class FormSection extends React.Component<IProps> {
             )
           : renderEditItem(
               formDescriptionKey,
-              <DataSelect size="small" url="/products" valueKey="id" labelKey="name" {...formDescriptionInputProps} />,
+              <DataSelect url="/products" valueKey="id" labelKey="name" {...formDescriptionInputProps} />,
               {
                 customFormItemLayout,
                 styles,
@@ -319,7 +319,7 @@ export class FormSection extends React.Component<IProps> {
         return renderEditItem(
           formDescriptionKey,
           <DataSelect
-            size="small"
+            
             url="/groups"
             valueKey="id"
             labelKey="nickname"
@@ -332,19 +332,19 @@ export class FormSection extends React.Component<IProps> {
           },
         );
       case 'device_status':
-        return renderEditItem(formDescriptionKey, <DeviceStatusSelect size="small" {...formDescriptionInputProps} />, {
+        return renderEditItem(formDescriptionKey, <DeviceStatusSelect {...formDescriptionInputProps} />, {
           customFormItemLayout,
           styles,
         });
       case 'address':
-        return renderEditItem(formDescriptionKey, <CascaderAddress size="small" {...formDescriptionInputProps} />, {
+        return renderEditItem(formDescriptionKey, <CascaderAddress {...formDescriptionInputProps} />, {
           customFormItemLayout,
           styles,
         });
       case 'permission_type':
         return renderEditItem(
           formDescriptionKey,
-          <PermissionTypeSelect size="small" {...formDescriptionInputProps} />,
+          <PermissionTypeSelect {...formDescriptionInputProps} />,
           {
             customFormItemLayout,
             styles,
@@ -353,21 +353,21 @@ export class FormSection extends React.Component<IProps> {
       case 'upload_img':
         return renderEditItem(
           formDescriptionKey,
-          <UploadImg size="small" {...formDescriptionInputProps} allowUploadImages={10} />,
+          <UploadImg {...formDescriptionInputProps} allowUploadImages={10} />,
           {
             customFormItemLayout,
             styles,
           },
         );
       case 'single_date_picker':
-        return renderEditItem(formDescriptionKey, <DatePicker size="small" {...formDescriptionInputProps} />, {
+        return renderEditItem(formDescriptionKey, <DatePicker {...formDescriptionInputProps} />, {
           customFormItemLayout,
           styles,
         });
       case 'apgar_score_input':
         return renderEditItem(
           formDescriptionKey,
-          <ApgarScoreInput size="small" config={formDescription} form={form} />,
+          <ApgarScoreInput config={formDescription} form={form} />,
           {
             customFormItemLayout,
             styles,
@@ -376,7 +376,7 @@ export class FormSection extends React.Component<IProps> {
       case 'view_only':
         return renderEditItem(formDescriptionKey, <span>{get(data, formDescriptionPath)}</span>);
       default:
-        return renderEditItem(formDescriptionKey, <Input size="small" {...formDescriptionInputProps} />, {
+        return renderEditItem(formDescriptionKey, <Input {...formDescriptionInputProps} />, {
           customFormItemLayout,
           styles,
         });
