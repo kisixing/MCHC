@@ -152,8 +152,8 @@ export default class BaseTable extends Component<IProps, IState> {
       <Table
         bordered
         size="small"
-        {...rest}
         scroll={{ x: '~calc(100vw - 282px)' }}
+        {...rest}
         columns={mergedColumns}
         title={this.renderTitle}
         className={styles.table}

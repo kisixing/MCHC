@@ -11,13 +11,13 @@ export default {
       component: './prenatal-visit/pregnancy/list',
     },
     {
-      name: 'pregnancy',
+      name: 'pregnancy-add',
       icon: 'ordered-list',
       path: '/prenatal-visit/pregnancy/add',
       component: './prenatal-visit/pregnancy/edit',
     },
     {
-      name: 'pregnancy',
+      name: 'pregnancy-edit',
       icon: 'ordered-list',
       path: '/prenatal-visit/pregnancy/edit',
       component: './prenatal-visit/pregnancy/edit',

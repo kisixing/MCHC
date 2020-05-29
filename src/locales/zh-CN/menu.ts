@@ -144,6 +144,11 @@ export default {
   'menu.prenatal-visit.return': '复诊管理',
   'menu.prenatal-visit.statistics': '统计报表',
 
+  'menu.puerperal-check': '产后42天检查',
+  'menu.puerperal-check.puerperal-check-list': '产后42天检查列表',
+  'menu.puerperal-check.puerperal-check-edit': '编辑产后42天检查',
+  'menu.puerperal-check.puerperal-check-add': '添加产后42天检查',
+
   'menu.high-risk-management': '高危孕产妇管理',
   'menu.high-risk-management.highrisk': '高危登记',
   'menu.high-risk-management.followup': '高危随访',
@@ -170,11 +175,10 @@ export default {
   'menu.prenatal-diagnosis.report': '诊断报告',
   'menu.prenatal-diagnosis.statistics': '统计报表',
 
-  'menu.maternal-death': '孕产妇死亡报告',
-  'menu.maternal-death-edit': '孕产妇死亡报告编辑',
-  'menu.maternal-death-add': '孕产妇死亡报告添加',
-  'menu.maternal-death.maternal-death-edit': '孕产妇死亡报告添加',
-  'menu.maternal-death.maternal-death-add': '孕产妇死亡报告添加',
+  'menu.maternal-death': '孕产妇死亡登记',
+  'menu.maternal-death.maternal-death-list': '孕产妇死亡档案',
+  'menu.maternal-death.maternal-death-edit': '编辑死亡专案',
+  'menu.maternal-death.maternal-death-add': '添加死亡专案',
 
   'menu.pmtct': '艾梅乙专案上报管理',
 

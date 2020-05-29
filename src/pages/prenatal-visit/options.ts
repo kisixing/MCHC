@@ -35,7 +35,7 @@ export const appointmentWeekOptions = [
 
 // 下次复诊 时间间隔
 export const appointmentDateOptions = [
-	{ label: '', value: 0 },
+	{ label: ' ', value: 0 },
 	{ label: '1周后', value: 7 },
 	{ label: '2周后', value: 14 },
 	{ label: '3周后', value: 21 },

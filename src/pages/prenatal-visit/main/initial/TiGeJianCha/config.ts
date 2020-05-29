@@ -30,8 +30,8 @@ const config: Array<FormConfig> = [
     header_label: true,
     input_props: {
       config: [
-        { name: 'heartrate', key: '.heartrate', label: "心率", input_type: "input", span: 7, rules: "required", },
-        { name: 'skin', key: '.skin(Note)', label: "皮肤黏膜", input_type: "checkbox", span: 12, rules: "required",
+        { name: 'heartrate', key: '.heartrate', label: "心率", input_type: "input", span: 8, rules: "required", },
+        { name: 'skin', key: '.skin(Note)', label: "皮肤黏膜", input_type: "checkbox", span: 8, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -54,7 +54,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'thyroid', key: '.thyroid(Note)', label: "甲状腺", input_type: "checkbox", span: 12, rules: "required",
+        { name: 'thyroid', key: '.thyroid(Note)', label: "甲状腺", input_type: "checkbox", span: 8, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -77,7 +77,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'nipple', key: '.nipple(Note)', label: "乳房乳腺", input_type: "checkbox", span: 12, rules: "required",
+        { name: 'nipple', key: '.nipple(Note)', label: "乳房乳腺", input_type: "checkbox", span: 8, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -100,7 +100,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'respiratory', key: '.respiratory(Note)', label: "呼吸音", input_type: "checkbox", span: 12, rules: "required",
+        { name: 'respiratory', key: '.respiratory(Note)', label: "呼吸音", input_type: "checkbox", span: 8, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -123,7 +123,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'rales', key: '.rales(Note)', label: "啰音", input_type: "checkbox", span: 12, rules: "required",
+        { name: 'rales', key: '.rales(Note)', label: "啰音", input_type: "checkbox", span: 8, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -146,7 +146,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'heartrhythm', key: '.heartrhythm(Note)', label: "心律", input_type: "checkbox", span: 12, rules: "required",
+        { name: 'heartrhythm', key: '.heartrhythm(Note)', label: "心律", input_type: "checkbox", span: 8, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -169,7 +169,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'murmurs', key: '.murmurs(Note)', label: "杂音", input_type: "checkbox", span: 12, rules: "required",
+        { name: 'murmurs', key: '.murmurs(Note)', label: "杂音", input_type: "checkbox", span: 8, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -192,7 +192,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'liver', key: '.liver(Note)', label: "肝脏", input_type: "checkbox", span: 12, rules: "required",
+        { name: 'liver', key: '.liver(Note)', label: "肝脏", input_type: "checkbox", span: 8, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -215,7 +215,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'spleen', key: '.spleen(Note)', label: "脾脏", input_type: "checkbox", span: 12, rules: "required",
+        { name: 'spleen', key: '.spleen(Note)', label: "脾脏", input_type: "checkbox", span: 8, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -238,7 +238,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'ckshenz', key: '.ckshenz(Note)', label: "肾区叩痛", input_type: "checkbox", span: 12, rules: "required",
+        { name: 'ckshenz', key: '.ckshenz(Note)', label: "肾区叩痛", input_type: "checkbox", span: 8, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -261,7 +261,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'spine', key: '.spine(Note)', label: "脊柱", input_type: "checkbox", span: 12, rules: "required",
+        { name: 'spine', key: '.spine(Note)', label: "脊柱", input_type: "checkbox", span: 8, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -284,7 +284,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'physiologicalreflection', key: '.physiologicalreflection(Note)', label: "生理反射", input_type: "checkbox", span: 12, rules: "required",
+        { name: 'physiologicalreflection', key: '.physiologicalreflection(Note)', label: "生理反射", input_type: "checkbox", span: 8, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -307,7 +307,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'pathologicalreflection', key: '.pathologicalreflection(Note)', label: "病理反射", input_type: "checkbox", span: 12, rules: "required",
+        { name: 'pathologicalreflection', key: '.pathologicalreflection(Note)', label: "病理反射", input_type: "checkbox", span: 8, rules: "required",
           input_props: {
             type: "custom",
             renderData: [
@@ -330,7 +330,7 @@ const config: Array<FormConfig> = [
             ],
           }
         },
-        { name: 'edema', key: '.edema(Note)', label: "下肢水肿", input_type: "checkbox", span: 12, rules: "required",
+        { name: 'edema', key: '.edema(Note)', label: "下肢水肿", input_type: "checkbox", span: 8, rules: "required",
           input_props: {
             type: "custom",
             renderData: [

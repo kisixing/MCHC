@@ -14,7 +14,7 @@ import commonStyles from '@/common.less';
 export default class List extends BaseList {
   static defaultProps = {
     baseUrl: '/maternal-deaths',
-    baseTitle: '孕产妇死亡档案',
+    baseTitle: '产后42天检查',
     needPagination: true,
     showQuery: true,
     showAdd: true,
@@ -75,11 +75,11 @@ export default class List extends BaseList {
   ];
 
   handleAdd = () => {
-    router.push('/maternal-death/add');
+    router.push('/puerperal-check/add');
   };
 
   handleEdit = (rowData: any) => () => {
     const { id } = rowData;
-    router.push(`/maternal-death/edit?id=${id}`);
+    router.push(`/puerperal-check/edit?id=${id}`);
   };
 }

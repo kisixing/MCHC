@@ -2,10 +2,10 @@ import { FormConfig } from '@/components/MyForm/interface';
 
 const config: Array<FormConfig> = [
 
-  { name: 'menarche', key: '.menstrualHistory.menarche', label: "初潮", input_type: "input", span: 6, rules: "required" },
-  { name: 'menstrualCycle', key: '.menstrualHistory.menstrualCycle', label: "周期", input_type: "input", span: 6, rules: "required" },
-  { name: 'menstrualPeriod', key: '.menstrualHistory.menstrualPeriod', label: "持续天数", input_type: "input", span: 6, rules: "required" },
-  { name: 'dysmenorrhea', key: '.menstrualHistory', label: "痛经", input_type: "checkbox", span: 6, rules: "required",
+  { name: 'menarche', key: '.menstrualHistory.menarche', label: "初潮", input_type: "input", span: 5, rules: "required" },
+  { name: 'menstrualCycle', key: '.menstrualHistory.menstrualCycle', label: "周期", input_type: "input", span: 5, rules: "required" },
+  { name: 'menstrualPeriod', key: '.menstrualHistory.menstrualPeriod', label: "持续天数", input_type: "input", span: 5, rules: "required" },
+  { name: 'dysmenorrhea', key: '.menstrualHistory', label: "痛经", input_type: "checkbox", span: 5, rules: "required",
     input_props:{
       type: "custom",
       renderData: [
@@ -32,7 +32,7 @@ const config: Array<FormConfig> = [
       ],
     }
   },
-  { name: 'maritalYears', key: '.maritalYears', label: "本次结婚年龄", input_type: "input", span: 7, rules: "required" },
+  { name: 'maritalYears', key: '.maritalYears', label: "本次结婚年龄", input_type: "input", span: 5, rules: "required" },
   { name: 'nearRelation', key: '.nearRelation', label: "近亲结婚", input_type: "checkbox", span: 7, rules: "required",
     input_props:{
       type: "group",
