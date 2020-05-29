@@ -3,8 +3,13 @@ export default {
   name: 'maternal-death',
   icon: 'ordered-list',
   path: '/maternal-death',
-  component: './case-management/maternal-death/list',
   routes: [
+    {
+      name: 'maternal-death-list',
+      icon: 'ordered-list',
+      path: '/maternal-death',
+      component: './case-management/maternal-death/list',
+    },
     {
       name: 'maternal-death-add',
       icon: 'ordered-list',

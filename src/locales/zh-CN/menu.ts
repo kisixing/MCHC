@@ -170,11 +170,10 @@ export default {
   'menu.prenatal-diagnosis.report': '诊断报告',
   'menu.prenatal-diagnosis.statistics': '统计报表',
 
-  'menu.maternal-death': '孕产妇死亡报告',
-  'menu.maternal-death-edit': '孕产妇死亡报告编辑',
-  'menu.maternal-death-add': '孕产妇死亡报告添加',
-  'menu.maternal-death.maternal-death-edit': '孕产妇死亡报告添加',
-  'menu.maternal-death.maternal-death-add': '孕产妇死亡报告添加',
+  'menu.maternal-death': '孕产妇死亡登记',
+  'menu.maternal-death.maternal-death-list': '孕产妇死亡档案',
+  'menu.maternal-death.maternal-death-edit': '编辑死亡专案',
+  'menu.maternal-death.maternal-death-add': '添加死亡专案',
 
   'menu.pmtct': '艾梅乙专案上报管理',
 

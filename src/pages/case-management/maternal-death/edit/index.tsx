@@ -8,7 +8,7 @@ import WithDynamicExport from '@/components/WithDynamicExport';
 export default class WifePanel extends BaseEditPanel {
   static defaultProps = {
     baseUrl: 'maternal-deaths',
-    moduleName: 'maternal-death',
+    moduleName: 'maternalDeath',
     title: '孕产妇死亡登记',
     toApi,
     fromApi,
