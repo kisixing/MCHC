@@ -2,11 +2,11 @@
 @normalInputHeight: 32px;
 
 .container {
-  display: flex;
   flex-direction: row;
   .form {
     background-color: #ffffff;
     transition: width .3s;
+    width: 100%;
     .btn-group {
       width: 10%;
       padding: 1rem 0;
@@ -16,37 +16,6 @@
       > * {
         margin-left: @normalInputHeight / 4;
       }
-    }
-  }
-
-  .menu-block {
-    position: fixed;
-    display: flex;
-    flex-direction: row;
-    width: 15%;
-    left: -250px;
-    transition: left .5s;
-    .btn {
-      button {
-        width: 40px;
-        height: 85px;
-        padding: 0;
-        padding-top: 2px;
-        border-bottom-right-radius: 14px;
-        border-top-right-radius: 14px;
-        > span {
-          font-size: 14px;
-          text-align: justify;
-          writing-mode: vertical-rl;
-          letter-spacing: 4px;
-        }
-      }
-    }
-    .menu {
-      background-color: #ffffff;
-      width: 250px;
-      height: 400px;
-      user-select: none;
     }
   }
 }

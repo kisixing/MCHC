@@ -33,7 +33,7 @@ class PrenatalDiagnosis extends Component<PrenatalDiagnosisProps,PrenatalDiagnos
   constructor(props: any) {
     super(props);
     this.state = {
-      currentPageKey: "MedicalRecord",
+      currentPageKey: "OperationRecord",
       patients: {
 
       }

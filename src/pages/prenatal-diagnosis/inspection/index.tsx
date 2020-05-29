@@ -1,5 +1,6 @@
 import React, { Component, ReactNode } from 'react';
 import { Table, Button } from 'antd';
+import SiderMenu from '../components/menu/index';
 import data from './data';
 
 import styles from './index.less'
@@ -47,11 +48,8 @@ const columns = [
 
 export default class Inspection extends Component<InspectionProp, InspectionState>{
 
-  state = {
-    showMenu: true
-  }
 
-  renderHeader = (data: any): ReactNode => {
+  renderHeader = (): ReactNode => {
     return (
       <div className={styles.header}>
         <div className={styles.title}>
@@ -73,39 +71,15 @@ export default class Inspection extends Component<InspectionProp, InspectionStat
   }
 
   render() {
-    const { showMenu } = this.state;
     return (
       <div className={styles.inspection}>
-        <div
-          className={styles['menu-block']}
-          style={{
-            left: showMenu ? "256px" : "16px"
-          }}
-        >
-          <div
-            className={styles.menu}
-            style={{ width: "" }}
-          >
-            <div>
-              <span>暂无信息</span>
-            </div>
+        <SiderMenu>
+          <div>
+            <span>暂无信息</span>
           </div>
-          <div className={styles.btn}>
-              <Button
-                onClick={() => this.setState({ showMenu: !showMenu })}
-              >
-                {showMenu ? "收起菜单" : "展开菜单"}
-              </Button>
-            </div>
-        </div>
-        <div 
-          className={styles.form}
-          style={{
-            width: showMenu ? "85%" : "100%",
-            marginLeft: showMenu ? "15%" : 0
-          }}
-        >
-          {this.renderHeader(data)}
+        </SiderMenu>
+        <div className={styles.form}>
+          {this.renderHeader()}
           <Table
             bordered
             className={styles['inspection-table']}

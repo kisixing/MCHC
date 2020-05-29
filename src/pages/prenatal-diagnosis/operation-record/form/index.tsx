@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, message, Tree } from 'antd';
 import MyForm from '@/components/MyForm/index';
+import SiderMenu from '../../components/menu/index';
 
 import { Dispatch } from 'redux';
 import { PrenatalDiagnosisModelState } from '../../main/model';
@@ -27,8 +28,7 @@ interface OperationRecordState {
   patient: any,
   operationRecordList: Array<any>,
   treeData: Array<any>,
-  currentTreeKeys: Array<string | number>,
-  showMenu: boolean
+  currentTreeKeys: Array<string | number>
 }
 
 const URL = "/pd-operations";
@@ -58,9 +58,17 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
       patient: {},
       operationRecordList: [],
       treeData: [],
-      currentTreeKeys: [],
-      showMenu: true
+      currentTreeKeys: []
     }
+  }
+
+  componentDidMount() {
+    const { patient } = this.props;
+    this.setState({ patient }, () => {
+      const prenatalPatientId = this.state.patient.id;
+      // 获取所有的专科病历
+      this.getPdOperations(prenatalPatientId, "");
+    })
   }
 
   componentDidUpdate(_prevProps: OperationRecordProp, prevState: OperationRecordState) {
@@ -75,46 +83,62 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
     }
     // 生成树形结构数据
     const { operationRecordList, treeData } = this.state;
-    if (operationRecordList.length !== 0 && treeData.length === 0) {
+    if ((operationRecordList.length !== 0 && treeData.length === 0) 
+    || this.state.patient.id !== this.props.patient.id 
+    || this.state.operationRecordList !== prevState.operationRecordList
+    ) {
       const newTreeData = generateTreeData(
         operationRecordList,
         { key: "operationDate", render: (text: string, _record: any) => text },
-        { key: "id", render: (_text: string, record: any) =>  record.operationName},
+        { key: "id", render: (_text: string, record: any) => record.operationName },
       )
       this.setState({ treeData: newTreeData });
     }
     if (prevState.currentTreeKeys !== this.state.currentTreeKeys) {
       this.getPdOperations(this.state.patient.id, this.state.currentTreeKeys[0]);
     }
+    // 表单监听
+    const { formHandler = {} } = this.state;
+    if(formHandler.subscribe){
+      formHandler.subscribe("operationType", "change", (val: any) => {
+        const { id = ""} = this.state.data;
+        this.setState({data: {id, operationType: val}});
+      })
+    }
   }
 
   // 获取病历
-  getPdOperations = (prenatalPatientId: number | string, id: number|string) => {
-    if(Number(id) < 0){
-      this.setState({data: {
-        id,
-        operationType: 1
-      }});
+  getPdOperations = (prenatalPatientId: number | string, id: number | string) => {
+    if (Number(id) < 0) {
+      this.setState({
+        data: {
+          id,
+          operationType: 1
+        }
+      });
+      return;
+    }
+    if(!prenatalPatientId){
       return;
     }
     request(`${URL}?prenatalPatientId.equals=${prenatalPatientId}&id.equals=${id}`, {
       method: "GET"
     }).then((res: any) => {
       if (res.length !== 0) {
-        if(id){
-          this.setState({ data: {}}, () => {
+        if (id) {
+          this.setState({ data: {} }, () => {
             this.setState({ data: res[0] })
           })
-        }else{
-          this.setState({operationRecordList: res})
+        } else {
+          this.setState({ operationRecordList: res })
         }
       }
     });
   }
 
   handleTreeSelect = (key: Array<number | string>, { selected, node }: any) => {
-    if(selected && !node.children){
-      this.setState({ currentTreeKeys: key});
+    if (selected && !node.children) {
+      this.setState({ currentTreeKeys: key });
     }
   }
 
@@ -153,7 +177,7 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
       if (validCode) {
         const formatData = getFormData(res);
         const [method, info] = formatData.id > 0 ? ["PUT", "修改成功"] : ["POST", "成功新增病历"];
-        if(formatData.id < 0){
+        if (formatData.id < 0) {
           formatData.id = "";
         }
         request(`${URL}`, {
@@ -168,6 +192,7 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
         }).then((r: any) => {
           if (r) {
             message.success(info);
+            this.getPdOperations(prenatalPatientId,"");
           }
         })
       } else {
@@ -188,68 +213,44 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
     })
   }
 
-
   render() {
-    const { data, treeData, currentTreeKeys,showMenu } = this.state;
+    const { data, treeData, currentTreeKeys } = this.state;
     let { operationType } = data;
     if (operationType === null) { operationType = 1; }
     return (
       <div className={styles.container}>
-        <div
-          className={styles['menu-block']}
-          style={{
-            left: showMenu ? "256px" : "16px"
-          }}
-        >
-          <div 
-            className={styles.menu}
-            style={{width: ""}}
-          >
-            <div>
-             <Button
-                size="small"
-                onClick={this.newRecord}
-              >新建病历</Button>
-            </div>
-            <Tree
-              treeData={treeData}
-              defaultExpandAll
-              onSelect={this.handleTreeSelect}
-              selectedKeys={currentTreeKeys}
-            />
-          </div>
-          <div className={styles.btn}>
+        <SiderMenu>
+          <div>
             <Button
-              onClick={() => this.setState({showMenu: !showMenu})}
-            >
-              {showMenu ? "收起菜单" : "展开菜单"}
-            </Button>
+              size="small"
+              onClick={this.newRecord}
+            >新建病历</Button>
           </div>
-        </div>
-        <div 
-          className={styles.form}
-          style={{
-            width: showMenu ? "85%" : "100%",
-            marginLeft: showMenu ? "15%" : 0
-          }}    
-        >
-          <MyForm
-            config={config[operationType]}
-            value={data}
-            getFormHandler={(formHandler: any) => this.setState({ formHandler })}
-            submitChange={false}
+          <Tree
+            treeData={treeData}
+            onSelect={this.handleTreeSelect}
+            selectedKeys={currentTreeKeys}
           />
-          <div className={styles['btn-group']}>
-            <Button
-              disabled={currentTreeKeys.length === 0}
-              onClick={this.handleReset}>重置</Button>
-            <Button 
-              disabled={currentTreeKeys.length === 0}
-              type="primary" 
-              onClick={this.handleSubmit}>提交</Button>
+        </SiderMenu>
+        {data.id ? (
+          <div className={styles.form}>
+            <MyForm
+              config={config[operationType]}
+              value={data}
+              getFormHandler={(formHandler: any) => this.setState({ formHandler })}
+              submitChange={false}
+            />
+            <div className={styles['btn-group']}>
+              <Button
+                disabled={currentTreeKeys.length === 0}
+                onClick={this.handleReset}>重置</Button>
+              <Button
+                disabled={currentTreeKeys.length === 0}
+                type="primary"
+                onClick={this.handleSubmit}>提交</Button>
+            </div>
           </div>
-        </div>
-        
+        ) : null}
       </div>
     )
   }

@@ -1,23 +1,23 @@
 import { FormConfig } from '@/components/MyForm/interface';
 
 const punctureTargetOptions = [
-  { label: "经胎盘", value: 0 },
-  { label: "经羊膜", value: 1 },
-  { label: "经宫颈", value: 2 },
-  { label: "经腹部", value: 3 },
-  { label: "经脐静脉", value: 4 },
-  { label: "经脐静脉游离段", value: 5 },
-  { label: "胸腔", value: 6 },
-  { label: "腹腔膜", value: 7 },
+  { label: "经胎盘", value: 1 },
+  { label: "经羊膜", value: 0 },
+  { label: "经宫颈", value: 1 },
+  { label: "经腹部", value: 2 },
+  { label: "经脐静脉", value: 1 },
+  { label: "经脐静脉游离段", value: 2 },
+  { label: "胸腔", value: 1 },
+  { label: "腹腔膜", value: 2 },
 ];
 
 
 const instrumentOptions = [
-  { label: "穿刺针16/18G", value: 0 },
-  { label: "穿刺针17/19G", value: 1 },
-  { label: "穿刺针20G", value: 2 },
-  { label: "穿刺针21G", value: 3 },
-  { label: "活检钳", value: 4 }
+  { label: "穿刺针16/18G", value: 1 },
+  { label: "穿刺针17/19G", value: 2 },
+  { label: "穿刺针20G", value: 3 },
+  { label: "穿刺针21G", value: 4 },
+  { label: "活检钳", value: 5 }
 ]
 
 
@@ -39,7 +39,7 @@ const generalPdProcedureConfig = [
   },
   { name: "duration", key: ".duration", input_type: "input", label: "持续时间", unit: "min", span: 6 },
   {
-    name: "processEvaluation", key: ".*", input_type: "checkbox", label: "过程评估", span: 24,
+    name: "processEvaluation", key: ".processEvaluation(Note)", input_type: "checkbox", label: "过程评估", span: 24,
     input_props: {
       type: "custom",
       renderData: [
@@ -103,7 +103,12 @@ const pdProcedures: { [key: string]: FormConfig } = {
             ]
           }
         },
-        { name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6 },
+        {
+          name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6,
+          input_props: {
+            type: "number"
+          }
+        },
         {
           name: "placentaEntry", key: ".placentaEntry", input_type: "select", label: "经否胎盘", span: 6,
           input_props: {
@@ -114,7 +119,7 @@ const pdProcedures: { [key: string]: FormConfig } = {
           }
         },
         {
-          name: "placentaHemorrhage", key: ".*", input_type: "checkbox", label: "胎盘出血", span: 12,
+          name: "placentaHemorrhage", key: ".placentaHemorrhage(Note)", input_type: "checkbox", label: "胎盘出血", span: 12,
           input_props: {
             type: "custom",
             renderData: [
@@ -172,9 +177,14 @@ const pdProcedures: { [key: string]: FormConfig } = {
             ]
           }
         },
-        { name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6 },
         {
-          name: "placentaHemorrhage", key: ".*", input_type: "checkbox", label: "胎盘出血", span: 12,
+          name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6,
+          input_props: {
+            type: "number"
+          }
+        },
+        {
+          name: "placentaHemorrhage", key: ".placentaHemorrhage(Note)", input_type: "checkbox", label: "胎盘出血", span: 12,
           input_props: {
             type: "custom",
             renderData: [
@@ -220,18 +230,24 @@ const pdProcedures: { [key: string]: FormConfig } = {
             ]
           }
         },
-        { name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6 },
+        {
+          name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6,
+          input_props: {
+            type: "number"
+          }
+        },
+        { name: "hitAmount", key: ".hitAmount", input_type: "input", label: "穿中次数", span: 6 },
         {
           name: "placentaEntry", key: ".placentaEntry", input_type: "select", label: "经否胎盘", span: 6,
           input_props: {
             options: [
-              { label: "经", value: true },
-              { label: "否", value: false }
+              { label: "经", value: 1 },
+              { label: "否", value: 0 }
             ]
           }
         },
         {
-          name: "placentaHemorrhage", key: ".*", input_type: "checkbox", label: "胎盘出血", span: 12,
+          name: "placentaHemorrhage", key: ".placentaHemorrhage(Note)", input_type: "checkbox", label: "胎盘出血", span: 12,
           input_props: {
             type: "custom",
             renderData: [
@@ -277,18 +293,23 @@ const pdProcedures: { [key: string]: FormConfig } = {
             ]
           }
         },
-        { name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6 },
+        {
+          name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6,
+          input_props: {
+            type: "number"
+          }
+        },
         {
           name: "placentaEntry", key: ".placentaEntry", input_type: "select", label: "经否胎盘", span: 6,
           input_props: {
             options: [
-              { label: "经", value: true },
-              { label: "否", value: false }
+              { label: "经", value: 1 },
+              { label: "否", value: 0 }
             ]
           }
         },
         {
-          name: "placentaHemorrhage", key: ".*", input_type: "checkbox", label: "胎盘出血", span: 12,
+          name: "placentaHemorrhage", key: ".placentaHemorrhage(Note)", input_type: "checkbox", label: "胎盘出血", span: 12,
           input_props: {
             type: "custom",
             renderData: [
@@ -324,7 +345,13 @@ const pdProcedures: { [key: string]: FormConfig } = {
     input_props: {
       config: [
         ...generalPdProcedureConfig,
-        { name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6 },
+        {
+          name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6,
+          input_props: {
+            type: "number"
+          }
+        },
+        { name: "disappearfhr", key: ".disappearfhr", input_type: "input", label: "胎心消失时间", unit: "min", span: 6 },
       ]
     }
   },
@@ -338,13 +365,18 @@ const pdProcedures: { [key: string]: FormConfig } = {
     input_props: {
       config: [
         ...generalPdProcedureConfig,
-        { name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6 },
+        {
+          name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6,
+          input_props: {
+            type: "number"
+          }
+        },
         {
           name: "placentaEntry", key: ".placentaEntry", input_type: "select", label: "经否胎盘", span: 6,
           input_props: {
             options: [
-              { label: "经", value: true },
-              { label: "否", value: false }
+              { label: "经", value: 1 },
+              { label: "否", value: 0 }
             ]
           }
         },
@@ -360,7 +392,7 @@ const pdProcedures: { [key: string]: FormConfig } = {
           }
         },
         {
-          name: "placentaHemorrhage", key: ".*", input_type: "checkbox", label: "胎盘出血", span: 12,
+          name: "placentaHemorrhage", key: ".placentaHemorrhage(Note)", input_type: "checkbox", label: "胎盘出血", span: 12,
           input_props: {
             type: "custom",
             renderData: [
@@ -405,14 +437,25 @@ const pdProcedures: { [key: string]: FormConfig } = {
             ]
           }
         },
-        { name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6 },
+        {
+          name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6,
+          input_props: {
+            type: "number"
+          }
+        },
+        {
+          name: "hitAmount", key: ".hitAmount", input_type: "input", label: "刺中次数", span: 6,
+          input_props: {
+            type: "number"
+          }
+        },
         // 缺 刺中次数
         {
           name: "placentaEntry", key: ".placentaEntry", input_type: "select", label: "经否胎盘", span: 6,
           input_props: {
             options: [
-              { label: "经", value: true },
-              { label: "否", value: false }
+              { label: "经", value: 1 },
+              { label: "否", value: 0 }
             ]
           }
         },
@@ -424,7 +467,7 @@ const pdProcedures: { [key: string]: FormConfig } = {
         },
 
         {
-          name: "placentaHemorrhage", key: ".*", input_type: "checkbox", label: "胎盘出血", span: 12,
+          name: "placentaHemorrhage", key: ".placentaHemorrhage(Note)", input_type: "checkbox", label: "胎盘出血", span: 12,
           input_props: {
             type: "custom",
             renderData: [
@@ -471,21 +514,25 @@ const pdProcedures: { [key: string]: FormConfig } = {
             ]
           }
         },
-        { name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6 },
-        // 缺 刺中次数
+        {
+          name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6,
+          input_props: {
+            type: "number"
+          }
+        },
         {
           name: "placentaEntry", key: ".placentaEntry", input_type: "select", label: "经否胎盘", span: 6,
           input_props: {
             options: [
-              { label: "经", value: true },
-              { label: "否", value: false }
+              { label: "经", value: 1 },
+              { label: "否", value: 0 }
             ]
           }
         },
         // { name: "instrument", key: ".instrument", input_type: "input", label: "器械", span: 6 },
 
         {
-          name: "placentaHemorrhage", key: ".*", input_type: "checkbox", label: "胎盘出血", span: 12,
+          name: "placentaHemorrhage", key: ".placentaHemorrhage(Note)", input_type: "checkbox", label: "胎盘出血", span: 12,
           input_props: {
             type: "custom",
             renderData: [
@@ -530,21 +577,25 @@ const pdProcedures: { [key: string]: FormConfig } = {
             ]
           }
         },
-        { name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6 },
-        // 缺 刺中次数
+        {
+          name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6,
+          input_props: {
+            type: "number"
+          }
+        },
         {
           name: "placentaEntry", key: ".placentaEntry", input_type: "select", label: "经否胎盘", span: 6,
           input_props: {
             options: [
-              { label: "经", value: true },
-              { label: "否", value: false }
+              { label: "经", value: 1 },
+              { label: "否", value: 0 }
             ]
           }
         },
         // { name: "instrument", key: ".instrument", input_type: "input", label: "器械", span: 6 },
 
         {
-          name: "placentaHemorrhage", key: ".*", input_type: "checkbox", label: "胎盘出血", span: 12,
+          name: "placentaHemorrhage", key: ".placentaHemorrhage(Note)", input_type: "checkbox", label: "胎盘出血", span: 12,
           input_props: {
             type: "custom",
             renderData: [
@@ -589,21 +640,24 @@ const pdProcedures: { [key: string]: FormConfig } = {
             ]
           }
         },
-        { name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6 },
-        // 缺 刺中次数
+        {
+          name: "punctureAmount", key: ".punctureAmount", input_type: "input", label: "穿刺次数", span: 6, input_props: {
+            type: "number"
+          }
+        },
         {
           name: "placentaEntry", key: ".placentaEntry", input_type: "select", label: "经否胎盘", span: 6,
           input_props: {
             options: [
-              { label: "经", value: true },
-              { label: "否", value: false }
+              { label: "经", value: 1 },
+              { label: "否", value: 0 }
             ]
           }
         },
         // { name: "instrument", key: ".instrument", input_type: "input", label: "器械", span: 6 },
 
         {
-          name: "placentaHemorrhage", key: ".*", input_type: "checkbox", label: "胎盘出血", span: 12,
+          name: "placentaHemorrhage", key: ".placentaHemorrhage(Note)", input_type: "checkbox", label: "胎盘出血", span: 12,
           input_props: {
             type: "custom",
             renderData: [
