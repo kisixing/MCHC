@@ -144,6 +144,11 @@ export default {
   'menu.prenatal-visit.return': '复诊管理',
   'menu.prenatal-visit.statistics': '统计报表',
 
+  'menu.puerperal-check': '产后42天检查',
+  'menu.puerperal-check.puerperal-check-list': '产后42天检查列表',
+  'menu.puerperal-check.puerperal-check-edit': '编辑产后42天检查',
+  'menu.puerperal-check.puerperal-check-add': '添加产后42天检查',
+
   'menu.high-risk-management': '高危孕产妇管理',
   'menu.high-risk-management.highrisk': '高危登记',
   'menu.high-risk-management.followup': '高危随访',

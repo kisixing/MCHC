@@ -7,6 +7,7 @@ import postpartumVisit from './postpartum-visit';
 import premaritalCare from './premarital-care';
 import highriskManagement from './high-risk-management';
 import prenatalVisit from './prenatal-visit';
+import puerperalCheck from './puerperal-check';
 import prenatalScreening from './prenatal-screening';
 import prenatalDiagnosis from './prenatal-diagnosis';
 import statistics from './statistics';
@@ -24,6 +25,7 @@ export default [
   premaritalCare,
   gynecologicalDiseases,
   prenatalVisit,
+  puerperalCheck,
   highriskManagement,
   prenatalScreening,
   prenatalDiagnosis,

@@ -3,12 +3,8 @@ export const queryFormDescriptions = {
     key: 'name',
     label: '孕妇姓名',
   },
-  outpatientNO: {
-    key: 'outpatientNO',
-    label: '门诊号',
-  },
-  checkupNO: {
-    key: 'checkupNO',
+  caseNO: {
+    key: 'caseNO',
     label: '产检编号',
   },
 };

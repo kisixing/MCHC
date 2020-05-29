@@ -13,8 +13,8 @@ import commonStyles from '@/common.less';
 @WithDynamicExport
 export default class List extends BaseList {
   static defaultProps = {
-    baseUrl: '/pregnancies',
-    baseTitle: '高危记录',
+    baseUrl: '/maternal-deaths',
+    baseTitle: '产后42天检查',
     needPagination: true,
     showQuery: true,
     showAdd: true,
@@ -29,7 +29,6 @@ export default class List extends BaseList {
     defaultQuery: {
       page: 0,
       size: 20,
-      'riskRecordId.specified':true
     },
     dataSource: [],
     visible: false,
@@ -49,14 +48,14 @@ export default class List extends BaseList {
         return (
           <>
             <Button
-              title="详情"
+              title="编辑"
               className={commonStyles.tableActionBtn}
               type="primary"
 
               onClick={this.handleEdit(rowData)}
             >
               <EditOutlined />
-              详情
+              编辑
             </Button>
             <Popconfirm
               title={`确定要删除这个${get(this.props, 'baseTitle')}吗?`}
@@ -75,8 +74,12 @@ export default class List extends BaseList {
     },
   ];
 
+  handleAdd = () => {
+    router.push('/puerperal-check/add');
+  };
+
   handleEdit = (rowData: any) => () => {
     const { id } = rowData;
-    router.push(`/prenatal-visit/pregnancy/edit?id=${id}`);
+    router.push(`/puerperal-check/edit?id=${id}`);
   };
 }
