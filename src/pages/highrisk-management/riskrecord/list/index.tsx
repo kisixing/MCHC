@@ -75,6 +75,10 @@ export default class List extends BaseList {
     },
   ];
 
+  handleAdd = () => {
+    router.push('/prenatal-visit/pregnancy/add');
+  };
+
   handleEdit = (rowData: any) => () => {
     const { id } = rowData;
     router.push(`/prenatal-visit/pregnancy/edit?id=${id}`);

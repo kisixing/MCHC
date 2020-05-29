@@ -52,11 +52,11 @@ class Index extends React.Component<{},IndexState>{
 
   render(){
     const { visitsData } = this.props;
-    const myConfig = getRenderData(config, visitsData);
     return(
       <div>
         <MyForm
-          config={myConfig}
+          config={config}
+          value={visitsData}
           getFormHandler={(formHandler:any) => this.setState({formHandler})}
           submitChange={false}
         />

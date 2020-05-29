@@ -169,7 +169,7 @@ class Index extends React.Component<{},IndexState>{
           className={styles.diagIpt}
           placeholder="请输入诊断信息"
           enterButton="添加诊断"
-          
+
           onSearch={value => handleSearch(value)}
         />
         <div className={styles.firstDiag}>
@@ -203,7 +203,7 @@ class Index extends React.Component<{},IndexState>{
                 {item.createDate}
               </Col>
               <Col span={1}>
-                <Button className={styles.delBtn} type="dashed" shape="circle" onClick={() => handleDelete(item)}>X</Button>
+                <span className={styles.delBtn} onClick={() => handleDelete(item)}>X</span>
               </Col>
             </Row>
           ))

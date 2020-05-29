@@ -10,6 +10,7 @@ const config: Array<FormConfig> = [
     input_props: {
       editable: true,
       hiddenBtn: true,
+      pagination: { pageSize: 4, showQuickJumper: true },
       tableColumns: [
         { key: "visitDate", title: "日期", editor: { name: "", key: "", input_type: "date" } },
         { key: "gestationalWeek", title: "孕周", editor: { name: "gestationalWeek", key: "", input_type: "input" } },

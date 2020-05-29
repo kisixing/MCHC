@@ -66,9 +66,10 @@ export default class AddressCascader extends Component<AddressCascaderProps> {
     return (
       <div>
         <div style={{display: "flex", flexDirection: "row"}}>
-        <Row>
+        <Row style={{width: '100%'}}>
           <Col span={6}>
             <Cascader
+              style={{width: '100%'}}
               options={options}
               onChange={(val: Array<string>) => this.handleChange(val, 0)}
               value={data.cascaderData}
@@ -77,7 +78,6 @@ export default class AddressCascader extends Component<AddressCascaderProps> {
           <Col span={6}>
             <Select
               style={{width: '100%'}}
-              
               options={data.streetOptions}
               onChange={(val: Array<string>, option) => this.handleChange(option, 1)}
               value={data.streetData}
