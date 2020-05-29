@@ -12,14 +12,15 @@ import styles from './index.less';
 const formItemLayout = {
   layout: 'horizontal',
   labelCol: {
-    span: 10,
+    span: 6,
   },
   wrapperCol: {
-    span: 14,
+    span: 18,
   },
 };
 
 interface IProps {
+  hideTitle?: boolean;
   data: any;
   formDescriptionsWithoutSection: any;
   formDescriptions: any;
@@ -74,12 +75,14 @@ export default class BaseEditPanelForm extends DynamicForm<IProps, IState> {
   };
 
   renderSection = (section: any) => {
-    const { data } = this.props;
+    const { data, hideTitle } = this.props;
     return (
       <>
-        <Divider key={`${get(section, 'flag')}-divider`} orientation="left">
-          {get(section, 'name')}
-        </Divider>
+        {!hideTitle && (
+          <Divider key={`${get(section, 'flag')}-divider`} orientation="left">
+            {get(section, 'name')}
+          </Divider>
+        )}
         {this.form && (
           <FormSection
             key={`${get(section, 'flag')}-section`}
@@ -107,7 +110,11 @@ export default class BaseEditPanelForm extends DynamicForm<IProps, IState> {
 
   render() {
     return (
-      <Form style={{ minWidth: '90%' }} ref={this.formRef} {...formItemLayout}>
+      <Form
+        style={{ width: '90%', paddingTop: this.props.hideTitle ? '24px' : 0 }}
+        ref={this.formRef}
+        {...formItemLayout}
+      >
         {this.renderEditContent()}
         <Form.Item key="action" wrapperCol={{ span: 21 }} className={styles.buttons}>
           <Button ghost type="primary" htmlType="reset" icon={<RedoOutlined />} onClick={this.handleReset}>

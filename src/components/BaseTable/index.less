@@ -12,17 +12,19 @@
 }
 
 .table {
-  .ant-table-title {
-    padding: 12px !important;
-  }
+  :global {
+    .ant-table-title {
+      // padding: 12px !important;
+    }
 
-  .ant-table-cell {
-    padding: 4px 8px !important;
+    .ant-table-cell {
+      padding: 4px 8px !important;
 
-    &:empty:after {
-      content: '--';
-      position: inherit;
-      box-shadow: none !important;
+      &:empty:after {
+        content: '--';
+        position: inherit;
+        box-shadow: none !important;
+      }
     }
   }
 }
