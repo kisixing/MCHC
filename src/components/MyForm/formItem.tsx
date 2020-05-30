@@ -20,7 +20,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
       path: "",
       validate: [],
     }
-    props.getActions({
+    this.props.getActions({
       getValue: this.getValue,
       setValue: this.setValue,
       reset: this.reset,
@@ -91,8 +91,6 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
     const { name, dispatch } = this.props;
     dispatch(name, eventName, args);
   }
-
-
 
   // 渲染required星号
   renderAsterisk = (validate: string | object | RegExp | null): ReactNode => {
