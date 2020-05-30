@@ -23,7 +23,7 @@ const pdPostOperation: FormConfig = {
               ],
               extraEditors: [
                 {
-                  key: 1,
+                  key: true,
                   editors: [
                     { name: "", key: "", input_type: "input" }
                   ]

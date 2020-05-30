@@ -119,8 +119,6 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
       this.props.dispatch(closeSpin);
       if (res.length !== 0) {
         if (id) {
-          // this.setState({ data: {} }, () => {
-          // })
           this.setState({ data: res[0] })
         } else {
           this.setState({ medicalRecordList: res })
