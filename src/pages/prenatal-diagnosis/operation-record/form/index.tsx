@@ -28,7 +28,9 @@ interface OperationRecordState {
   patient: any,
   operationRecordList: Array<any>,
   treeData: Array<any>,
-  currentTreeKeys: Array<string | number>
+  currentTreeKeys: Array<string | number>,
+
+  menuWidth: number
 }
 
 const URL = "/pd-operations";
@@ -45,20 +47,23 @@ const operationNames = {
   10: "囊液穿刺",
 }
 
+const emptyData = {
+  id: "",
+  operationType: 1
+}
+
 class OperationRecord extends React.Component<OperationRecordProp, OperationRecordState>{
   constructor(props: any) {
     super(props);
     this.state = {
       formHandler: {},
-      data: {
-        id: "", // 病历id
-        operationType: 1,
-        // operationName: "羊膜腔穿刺"
-      },
+      data: emptyData,
       patient: {},
       operationRecordList: [],
       treeData: [],
-      currentTreeKeys: []
+      currentTreeKeys: [],
+
+      menuWidth: 0
     }
   }
 
@@ -142,6 +147,7 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
     }
   }
 
+  // 考虑以后这里的优化
   newRecord = () => {
     const todayStr = moment().format("YYYY-MM-DD");
     const newId = - Math.random();
@@ -213,13 +219,19 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
     })
   }
 
+  setMenuWidth = (menuWidth: number) => {
+    this.setState({menuWidth});
+  }
+
   render() {
-    const { data, treeData, currentTreeKeys } = this.state;
+    const { data, treeData, menuWidth, currentTreeKeys } = this.state;
     let { operationType } = data;
     if (operationType === null) { operationType = 1; }
     return (
       <div className={styles.container}>
-        <SiderMenu>
+        <SiderMenu 
+          getSiderMenuWidth={this.setMenuWidth}
+        >
           <div>
             <Button
               size="small"
@@ -233,7 +245,10 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
           />
         </SiderMenu>
         {data.id ? (
-          <div className={styles.form}>
+          <div 
+            className={styles.form}
+            style={{marginLeft: menuWidth}}  
+          >
             <MyForm
               config={config[operationType]}
               value={data}

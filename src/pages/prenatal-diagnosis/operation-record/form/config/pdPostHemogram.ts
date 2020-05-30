@@ -1,11 +1,11 @@
 import { FormConfig } from '@/components/MyForm/interface';
 
-const pdPreHemogram: FormConfig = {
-  name: "pdPreHemogram",
-  key: ".pdPreHemogram",
+const pdPostHemogram: FormConfig = {
+  name: "pdPostHemogram",
+  key: ".pdPostHemogram",
   input_type: "custom",
   span: 24,
-  label: "术前血象检查",
+  label: "术后血象检查",
   header_label: true,
   input_props: {
     config: [
@@ -21,4 +21,4 @@ const pdPreHemogram: FormConfig = {
   }
 }
 
-export default pdPreHemogram;
+export default pdPostHemogram;

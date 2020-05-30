@@ -6,6 +6,7 @@ import request from '@/utils/request'
 import MedicalRecordForm from '../medical-record/form';
 import OperationRecordForm from '../operation-record/form';
 import Inspection from '../inspection/index';
+import Image from '../image/index';
 import { PrenatalDiagnosisModelState } from './model';
 import { getPageQuery } from '@/utils/utils';
 import styles from './index.less';
@@ -15,6 +16,7 @@ const routers = [
   { name: "专科病历", component: <MedicalRecordForm/>, key: "MedicalRecord"},
   { name: "手术病历", component: <OperationRecordForm/>, key: "OperationRecord"},
   { name: "检验检查", component: <Inspection/>, key: "Inspection"},
+  { name: "影像报告", component: <Image/>, key: "Image"},
 ]
 
 const { TabPane } = Tabs; 

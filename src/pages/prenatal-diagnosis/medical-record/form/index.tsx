@@ -24,7 +24,9 @@ interface MedicalRecordState {
   patient: any,
   medicalRecordList: Array<any>,
   treeData: Array<any>,
-  currentTreeKeys: Array<string | number>
+  currentTreeKeys: Array<string | number>,
+
+  menuWidth: number
 }
 
 interface MedicalRecordProps {
@@ -38,6 +40,10 @@ const emptyData = {
     { type: 0 },
     { type: 1 },
     { type: 2 }
+  ],
+  thalassemiaExams: [
+    { target: 0 },
+    { target: 1 },
   ],
   fetuses: [
     { id: "" }
@@ -54,7 +60,8 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
       patient: {},
       medicalRecordList: [],
       treeData: [],
-      currentTreeKeys: []
+      currentTreeKeys: [],
+      menuWidth: 0
     }
   }
 
@@ -147,6 +154,9 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
         formatData.downsScreens[0].type = 0;
         formatData.downsScreens[1].type = 1;
         formatData.downsScreens[2].type = 2;
+        formatData.thalassemiaExams[0].target = 0;
+        formatData.thalassemiaExams[1].target = 1;
+
         const [method, info] = formatData.id > 0 ? ["PUT", "修改成功"] : ["POST", "成功新增病历"];
         if (formatData.id < 0) {
           formatData.id = "";
@@ -184,11 +194,17 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
     }
   }
 
+  setMenuWidth = (menuWidth: number) => {
+    this.setState({menuWidth});
+  }
+
   render() {
-    const { data, treeData, currentTreeKeys } = this.state;
+    const { data, treeData, currentTreeKeys, menuWidth } = this.state;
     return (
       <div className={styles.container}>
-        <SiderMenu>
+        <SiderMenu
+          getSiderMenuWidth={this.setMenuWidth}
+        >
           <div>
             <Button
               size="small"
@@ -203,7 +219,10 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
           />
         </SiderMenu>
         {data.id ? (
-          <div className={styles.form}>
+          <div 
+            className={styles.form}
+            style={{marginLeft: menuWidth }}  
+          >
             <MyForm
               config={config}
               value={data}
