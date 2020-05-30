@@ -1,16 +1,20 @@
 import React, { Component, ReactNode } from 'react';
-import { Table, Button } from 'antd';
+import { Table } from 'antd';
+
+import { Dispatch } from 'redux';
 import { PrenatalDiagnosisModelState } from '../main/model';
 
 import { ModalIframeView } from '@/components/PDFPreview';
 
+import { openSpin, closeSpin } from '../utils/index';
 import request from '@/utils/request';
 import { connect } from 'dva';
 
 import styles from './index.less'
 
 interface ImageRecordProps {
-  patient: any
+  patient: any,
+  dispatch: Dispatch
 }
 
 interface ImageRecordState {
@@ -51,9 +55,11 @@ class ImageRecord extends Component<ImageRecordProps, ImageRecordState>{
   }
 
   getImageRecord = (outpatientNO: string = "8000683303", id: number | string) => {
+    this.props.dispatch(openSpin);
     request(`${URL}?outpatientNO.equals=${outpatientNO}&id=${id}`, {
       method: "GET"
     }).then(res => {
+      this.props.dispatch(closeSpin);
       if (id) {
         this.setState({ data: res[0] });
       } else {

@@ -34,3 +34,7 @@ export const generateTreeData = (
   }
   return treeData;
 }
+
+export const openSpin = {type: "prenatalDiagnosis/setIsRequesting", payload: true};
+
+export const closeSpin = {type: "prenatalDiagnosis/setIsRequesting", payload: false};
