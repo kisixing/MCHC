@@ -2,7 +2,8 @@ import { Reducer } from 'redux';
 import { Subscription, Effect } from 'dva';
 
 export interface PrenatalDiagnosisModelState {
-  patient: any
+  patient: any,
+  isRequesting: boolean
 }
 
 interface PrenatalDiagnosisModelType {
@@ -12,14 +13,16 @@ interface PrenatalDiagnosisModelType {
 
   },
   reducers: {
-    changePatient: Reducer
+    changePatient: Reducer,
+    setIsRequesting: Reducer,
   }
 }
 
 const prenatalDiagnosis: PrenatalDiagnosisModelType = {
   namespace: "prenatalDiagnosis",
   state: {
-    patient: {}
+    patient: {},
+    isRequesting: false
   },
   effects: {
 
@@ -29,6 +32,12 @@ const prenatalDiagnosis: PrenatalDiagnosisModelType = {
       return {
         ...state,
         patient: payload
+      }
+    },
+    setIsRequesting(state, {payload}): PrenatalDiagnosisModelState {
+      return {
+        ...state,
+        isRequesting: payload
       }
     }
   }

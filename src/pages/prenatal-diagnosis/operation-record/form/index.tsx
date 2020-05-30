@@ -1,3 +1,4 @@
+/* eslint-disable react/no-did-update-set-state */
 import React from 'react';
 import { Button, message, Tree } from 'antd';
 import MyForm from '@/components/MyForm/index';
@@ -9,7 +10,7 @@ import { PrenatalDiagnosisModelState } from '../../main/model';
 import moment from 'moment';
 import { connect } from 'dva';
 import { getFormData } from '@/components/MyForm/utils';
-import { generateTreeData } from '../../utils';
+import { generateTreeData, openSpin, closeSpin } from '../../utils';
 
 import request from '@/utils/request';
 import config from './config/index';
@@ -48,8 +49,9 @@ const operationNames = {
 }
 
 const emptyData = {
-  id: "",
-  operationType: 1
+  id: null,
+  operationType: 1,
+  operationDate: ""
 }
 
 class OperationRecord extends React.Component<OperationRecordProp, OperationRecordState>{
@@ -88,15 +90,24 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
     }
     // 生成树形结构数据
     const { operationRecordList, treeData } = this.state;
-    if ((operationRecordList.length !== 0 && treeData.length === 0) 
-    || this.state.patient.id !== this.props.patient.id 
-    || this.state.operationRecordList !== prevState.operationRecordList
+    if ((operationRecordList.length !== 0 && treeData.length === 0)
+      || this.state.patient.id !== this.props.patient.id
+      || this.state.operationRecordList.length !== prevState.operationRecordList.length
     ) {
       const newTreeData = generateTreeData(
         operationRecordList,
         { key: "operationDate", render: (text: string, _record: any) => text },
-        { key: "id", render: (_text: string, record: any) => record.operationName },
-      )
+        {
+          key: "id",
+          render: (_text: string, record: any) => {
+            if (Number(record.id) < 0) {
+              return "新建病历";
+            }
+            return record.operationName
+          }
+        },
+        )
+      console.log(newTreeData);
       this.setState({ treeData: newTreeData });
     }
     if (prevState.currentTreeKeys !== this.state.currentTreeKeys) {
@@ -104,10 +115,10 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
     }
     // 表单监听
     const { formHandler = {} } = this.state;
-    if(formHandler.subscribe){
+    if (formHandler.subscribe) {
       formHandler.subscribe("operationType", "change", (val: any) => {
-        const { id = ""} = this.state.data;
-        this.setState({data: {id, operationType: val}});
+        const { id = "" } = this.state.data;
+        this.setState({ data: { id, operationType: val } });
       })
     }
   }
@@ -123,12 +134,14 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
       });
       return;
     }
-    if(!prenatalPatientId){
+    if (!prenatalPatientId) {
       return;
     }
-    request(`${URL}?prenatalPatientId.equals=${prenatalPatientId}&id.equals=${id}`, {
+    this.props.dispatch(openSpin);
+    request(`${URL}?prenatalPatientId.equals=${prenatalPatientId}&id.equals=${id}&sort=operationDate,desc`, {
       method: "GET"
     }).then((res: any) => {
+      this.props.dispatch(closeSpin);
       if (res.length !== 0) {
         if (id) {
           this.setState({ data: {} }, () => {
@@ -150,30 +163,16 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
   // 考虑以后这里的优化
   newRecord = () => {
     const todayStr = moment().format("YYYY-MM-DD");
+    const newOperationRecordList = JSON.parse(JSON.stringify(this.state.operationRecordList));
+    const newData = emptyData;
     const newId = - Math.random();
-    const { treeData } = this.state;
-    const newTreeData = JSON.parse(JSON.stringify(treeData));
-    if (newTreeData[0].title === todayStr) {
-      newTreeData[0].children.splice(0, 0, {
-        title: "新建病历",
-        key: newId
-      })
-    } else {
-      newTreeData.splice(0, 0, {
-        title: todayStr,
-        key: todayStr,
-        children: [
-          {
-            title: "新建病历",
-            key: newId
-          }
-        ]
-      })
-    }
+    newData.operationDate = todayStr;
+    newData.id  = newId;
+    newOperationRecordList.push(newData);
     this.setState({
-      treeData: newTreeData,
+      operationRecordList: newOperationRecordList,
       currentTreeKeys: [newId]
-    });
+    })
   }
 
   handleSubmit = () => {
@@ -186,6 +185,7 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
         if (formatData.id < 0) {
           formatData.id = "";
         }
+        this.props.dispatch(openSpin);
         request(`${URL}`, {
           method,
           data: {
@@ -196,9 +196,10 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
             }
           }
         }).then((r: any) => {
+          this.props.dispatch(closeSpin);
           if (r) {
             message.success(info);
-            this.getPdOperations(prenatalPatientId,"");
+            this.getPdOperations(prenatalPatientId, "");
           }
         })
       } else {
@@ -220,7 +221,7 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
   }
 
   setMenuWidth = (menuWidth: number) => {
-    this.setState({menuWidth});
+    this.setState({ menuWidth });
   }
 
   render() {
@@ -229,7 +230,7 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
     if (operationType === null) { operationType = 1; }
     return (
       <div className={styles.container}>
-        <SiderMenu 
+        <SiderMenu
           getSiderMenuWidth={this.setMenuWidth}
         >
           <div>
@@ -245,9 +246,9 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
           />
         </SiderMenu>
         {data.id ? (
-          <div 
+          <div
             className={styles.form}
-            style={{marginLeft: menuWidth}}  
+            style={{ marginLeft: menuWidth }}
           >
             <MyForm
               config={config[operationType]}

@@ -1,17 +1,20 @@
+/* eslint-disable react/no-did-update-set-state */
 import React, { Component, ReactNode } from 'react';
 import { Table, Tree } from 'antd';
 import SiderMenu from '../components/menu/index';
 import request from '@/utils/request';
 
+import { Dispatch } from 'redux';
 import { PrenatalDiagnosisModelState } from '../main/model';
 
 import { connect } from 'dva';
-import { generateTreeData } from '../utils';
+import { generateTreeData, openSpin, closeSpin } from '../utils';
 
 import styles from './index.less'
 
 interface InspectionProp {
-  patient: any
+  patient: any,
+  dispatch: Dispatch
 }
 
 interface InspectionState {
@@ -107,9 +110,11 @@ class Inspection extends Component<InspectionProp, InspectionState>{
   }
 
   getLabExam = (outpatientNO: string = "8000683303", id: number | string) => {
+    this.props.dispatch(openSpin);
     request(`${URL}?outpatientNO.equals=${outpatientNO}&id=${id}`, {
       method: "GET"
     }).then(res => {
+      this.props.dispatch(closeSpin);
       if (id) {
         this.setState({ data: res[0] });
       } else {
