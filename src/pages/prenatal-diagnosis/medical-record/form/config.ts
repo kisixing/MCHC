@@ -24,6 +24,7 @@ const config: Array<FormConfig> = [
       config: [
         { name: "id", key: ".id", label: "id",  input_type: "input",  hidden: true },
         { name: "type", key: ".type", label: "类型",  input_type: "input", hidden: true },
+        // { name: "hB", key: ".hB", label: "Hb", unit: "g/L", input_type: "input", span: 6, offset: 0, rules: "range(0,10)" },
         { name: "hB", key: ".hB", label: "Hb", unit: "g/L", input_type: "input", span: 6, offset: 0 },
         { name: "mCV", key: ".mCV", label: "MCV", unit: "fL", input_type: "input", span: 6, offset: 0 },
         { name: "mCH", key: ".mCH", label: "MCH", input_type: "input", span: 6, offset: 0 },

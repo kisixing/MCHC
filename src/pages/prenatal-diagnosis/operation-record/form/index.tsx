@@ -2,7 +2,8 @@
 import React from 'react';
 import { Button, message, Tree } from 'antd';
 import MyForm from '@/components/MyForm/index';
-import SiderMenu from '../../components/menu/index';
+import NoDataTip from '../../components/NoDataTip';
+import SiderMenu from '../../components/Menu/index';
 
 import { Dispatch } from 'redux';
 import { PrenatalDiagnosisModelState } from '../../main/model';
@@ -244,7 +245,9 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
             onSelect={this.handleTreeSelect}
             selectedKeys={currentTreeKeys}
           />
+          {treeData.length === 0 && <NoDataTip/>}
         </SiderMenu>
+        {treeData.length === 0 && <NoDataTip/>}
         {data.id ? (
           <div
             className={styles.form}

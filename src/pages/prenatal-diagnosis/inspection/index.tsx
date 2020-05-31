@@ -1,7 +1,8 @@
 /* eslint-disable react/no-did-update-set-state */
 import React, { Component, ReactNode } from 'react';
 import { Table, Tree } from 'antd';
-import SiderMenu from '../components/menu/index';
+import SiderMenu from '../components/Menu/index';
+import NoDataTip from '../components/NoDataTip';
 import request from '@/utils/request';
 
 import { Dispatch } from 'redux';
@@ -159,6 +160,7 @@ class Inspection extends Component<InspectionProp, InspectionState>{
     const { treeData, currentTreeKeys, data } = this.state;
     return (
       <div className={styles.inspection}>
+        {treeData.length === 0 && <NoDataTip/>}
         <SiderMenu
           getSiderMenuWidth={this.setMenuWidth}
         >
@@ -167,6 +169,7 @@ class Inspection extends Component<InspectionProp, InspectionState>{
             onSelect={this.handleTreeSelect}
             selectedKeys={currentTreeKeys}
           />
+          {treeData.length === 0 && <NoDataTip/>}
         </SiderMenu>
         {currentTreeKeys.length !== 0 ? (
           <div
@@ -182,7 +185,7 @@ class Inspection extends Component<InspectionProp, InspectionState>{
               rowKey={(record: any) => record.id}
             />
           </div>
-        ) : null}
+        ) : null }
       </div>
     )
   }
