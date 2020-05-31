@@ -2,7 +2,8 @@
 import React from 'react';
 import { Button, message, Tree } from 'antd';
 import MyForm from '@/components/MyForm/index';
-import SiderMenu from '../../components/menu/index';
+import SiderMenu from '../../components/Menu/index';
+import NoDataTip from '../../components/NoDataTip';
 import moment from 'moment';
 
 import { Dispatch } from 'redux';
@@ -218,7 +219,9 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
             onSelect={this.handleTreeSelect}
             selectedKeys={currentTreeKeys}
           />
+          {treeData.length === 0 && <NoDataTip/>}
         </SiderMenu>
+        {treeData.length === 0 && <NoDataTip/>}
         {data.id ? (
           <div
             className={styles.form}
