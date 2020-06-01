@@ -26,6 +26,21 @@ const deletionsOptions = [
   { label: "a地中海贫血基因CS突变", value: "a地中海贫血基因CS突变" },
 ]
 
+const deliveryOptions = [
+  {label: "分娩", value: 1},
+  {label: "自然引流", value: 2},
+  {label: "人工引流", value: 3},
+  {label: "引产", value: 4},
+];
+
+const deliveryType = [
+  {label: "顺产", value: 1},
+  {label: "剖宫产", value: 2},
+  {label: "吸引", value: 3},
+  {label: "钳产", value: 4},
+  {label: "臀助产", value: 5}
+];
+
 const config: Array<FormConfig> = [
   { name: "prenatalPatientId", key: ".prenatalPatientId.id", label: "病人id", span: 6, offset: 0, input_type: "input", hidden: true },
   { name: "id", key: ".id", label: "病历id", span: 6, offset: 0, input_type: "input", hidden: true },
@@ -38,6 +53,147 @@ const config: Array<FormConfig> = [
     rules: "required",
     input_props: {
       type: "textarea",
+    }
+  },
+  // 预产期
+  {
+    name: ".yunchanqi",
+    key: ".yunchanqi",
+    input_type: "table",
+    label: "预产期",
+    input_props: {
+      editable: true,
+      tableColumns: [
+        { 
+          key: "fetus", 
+          title: "胎儿",
+          editor: {
+            key: "", name: "", input_type: "input"
+          }
+        },
+        { 
+          key: "pre", 
+          title: "孕次",
+          editor: {
+            key: "", name: "", input_type: "input"
+          }
+        },
+        { 
+          key: "delivery", 
+          title: "分娩",
+          editor: {
+            key: "", 
+            name: "", 
+            input_type: "select",
+            input_props: {
+              options: deliveryOptions
+            }
+          }
+        },
+        { 
+          key: "enoughmonth", 
+          title: "足月",
+          editor: {
+            key: "", 
+            name: "", 
+            input_type: "select",
+            input_props: {
+              options: [
+                { label: "足月", value: 1},
+                { label: "早产", value: 2},
+              ]
+            }
+          }
+        },
+        { 
+          key: "deliveryType", 
+          title: "分娩方式",
+          editor: {
+            key: "", 
+            name: "", 
+            input_type: "select",
+            input_props: {
+              options: deliveryType
+            }
+          }
+        },
+        { 
+          key: "badpregnancy", 
+          title: "不良孕产史",
+          editor: {
+            key: "", 
+            name: "", 
+            input_type: "input"
+          }
+        },
+        { 
+          key: "sex", 
+          title: "新生儿性别",
+          editor: {
+            key: "", 
+            name: "", 
+            input_type: "select",
+            input_props: {
+              options: [
+                {label: "男", value: 1},
+                {label: "女", value: 2},
+              ]
+            }
+          }
+        },
+        { 
+          key: "health", 
+          title: "孩子体健康",
+          editor: {
+            key: "", 
+            name: "", 
+            input_type: "select",
+            input_props: {
+              options: [
+                {label: "是", value: 1},
+                {label: "否", value: 2},
+              ]
+            }
+          }
+        },
+        { 
+          key: "note", 
+          title: "备注",
+          editor: {
+            key: "", 
+            name: "", 
+            input_type: "input",
+          }
+        },
+      ]
+    }
+  },
+  {
+    name: "sasacov2",
+    key: ".presentDiseaseHistory.sasacov2(Note)",
+    input_type: "checkbox",
+    span: 24,
+    label: "新冠检查",
+    input_props: {
+      type: "custom",
+      renderData: [
+        {
+          key: "sasacov2",
+          label: "",
+          options: [
+            {label: "有", value: true},
+            {label: "无", value: false},
+          ],
+          extraEditors: [
+            {
+              key: true,
+              editors:[ 
+                {name: "", key: "", input_type: "input"}
+              ]
+            }
+          ]
+        }
+      ]
     }
   },
   {
@@ -97,6 +253,74 @@ const config: Array<FormConfig> = [
         { name: "trisomy18z", key: ".trisomy18z", label: "18三体风险Z值", input_type: "input", span: 6, offset: 0 },
         { name: "trisomy13z", key: ".trisomy13z", label: "13三体风险Z值", input_type: "input", span: 6, offset: 0 },
         { name: "note", key: ".note", label: "其他异常", input_type: "input", span: 6, offset: 0 },
+      ]
+    }
+  },
+  {
+    name: "male-bloodGroup",
+    key: ".bloodGroups_0",
+    label: "男方血型检查",
+    header_label: true,
+    input_type: "custom",
+    span: 24,
+    input_props: {
+      config: [
+        { name: "id", key: ".id", label: "id", input_type: "input", hidden: true },
+        { name: "target", key: ".target", label: "id", input_type: "input", hidden: true },
+        { 
+          name: "bg", key: ".bg", label: "血型", input_type: "select", span: 6,
+          input_props: {
+            options: [
+              {label: "O", value: 1},
+              {label: "A", value: 2},
+              {label: "B", value: 3},
+              {label: "AB", value: 4}
+            ]
+          }
+        },
+        { 
+          name: "rh", key: ".rh", label: "RH血型", input_type: "select", span: 6,
+          input_props: {
+            options: [
+              {label: "RH(+)", value: 1},
+              {label: "RH(-)", value: 2},
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    name: "female-bloodGroup",
+    key: ".bloodGroups_1",
+    label: "女方血型检查",
+    header_label: true,
+    input_type: "custom",
+    span: 24,
+    input_props: {
+      config: [
+        { name: "id", key: ".id", label: "id", input_type: "input", hidden: true },
+        { name: "target", key: ".target", label: "id", input_type: "input", hidden: true },
+        { 
+          name: "bg", key: ".bg", label: "血型", input_type: "select", span: 6,
+          input_props: {
+            options: [
+              {label: "O", value: 1},
+              {label: "A", value: 2},
+              {label: "B", value: 3},
+              {label: "AB", value: 4}
+            ]
+          }
+        },
+        { 
+          name: "rh", key: ".rh", label: "RH血型", input_type: "select", span: 6,
+          input_props: {
+            options: [
+              {label: "RH(+)", value: 1},
+              {label: "RH(-)", value: 2},
+            ]
+          }
+        }
       ]
     }
   },
@@ -525,13 +749,10 @@ const config: Array<FormConfig> = [
       ]
     }
   },
-
-
-
   {
     name: "familyHistory",
     key: '.familyHistory',
-    label: "疾病史",
+    label: "家族史",
     header_label: true,
     span: 24,
     input_type: "custom",
@@ -680,28 +901,6 @@ const config: Array<FormConfig> = [
       ]
     }
   },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // 接口暂无
   // {
   //   name: "transfusionHistory",
@@ -815,6 +1014,8 @@ const config: Array<FormConfig> = [
         { name: "id", key: ".id", label: "id", input_type: "input", span: 6, offset: 0, hidden: true },
         { name: "height", key: ".height", label: "身高", unit: "cm", input_type: "input", span: 6, offset: 0 },
         { name: "weight", key: ".weight", label: "体重", unit: "kg", input_type: "input", span: 6, offset: 0 },
+        { name: "preweight", key: ".preweight", label: "孕前体重", unit: "kg", input_type: "input", span: 6, offset: 0 },
+        { name: "weightgain", key: ".weightgain", label: "体重增长", unit: "kg", input_type: "input", span: 6, offset: 0 },
         { name: "systolic", key: ".systolic", label: "收缩压", unit: "mmHg", input_type: "input", span: 6, offset: 0 },
         { name: "diastolic", key: ".diastolic", label: "舒张压", unit: "mmHg", input_type: "input", span: 6, offset: 0 },
         { name: "pulse", key: ".pulse", label: "脉率", unit: "次/分", input_type: "input", span: 6, offset: 0 },

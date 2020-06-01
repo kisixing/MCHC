@@ -48,6 +48,10 @@ const emptyData = {
     { target: 0 },
     { target: 1 },
   ],
+  bloodGroups: [
+    { target: 0},
+    { target: 1},
+  ],
   fetuses: [
     { id: "" }
   ]
@@ -157,6 +161,15 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
         formatData.downsScreens[2].type = 2;
         formatData.thalassemiaExams[0].target = 0;
         formatData.thalassemiaExams[1].target = 1;
+        if(!formatData.bloodGroups){
+          formatData.bloodGroups = [
+            {target : 0},
+            {target : 1},
+          ];
+        }else {
+          formatData.bloodGroups[0].target = 0;
+          formatData.bloodGroups[1].target = 1;
+        }
         const [method, info] = data.id > 0 ? ["PUT", "修改成功"] : ["POST", "成功新增病历"];
         if (data.id < 0) {
           formatData.id = "";

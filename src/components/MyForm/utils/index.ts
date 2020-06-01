@@ -213,7 +213,7 @@ function newObj(parentKey: string, currentKey: string, data: any) {
           g[parentKey][originKey] = data[originKey];
           g[parentKey][originKey + extraKey] = data[originKey + extraKey];
         }
-        r = _assign(r, g);
+        r = _assign(r, toFormat(g));
       } else {
         g[parentKey][currentKey] = data;
         r = _assign(r, toFormat(g));
