@@ -240,7 +240,7 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
             <Button
               size="small"
               onClick={this.newRecord}
-            >新建病历</Button>
+            >新增病历</Button>
           </div>
           <Tree
             treeData={treeData}

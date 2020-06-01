@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from 'react';
-import { Tabs, message, Spin } from 'antd';
+import { message, Spin, Button } from 'antd';
 import { Dispatch } from 'redux';
 import { connect } from 'dva';
 import request from '@/utils/request'
@@ -19,7 +19,6 @@ const routers = [
   { name: "影像报告", component: <Image />, key: "Image" },
 ]
 
-const { TabPane } = Tabs;
 interface PrenatalDiagnosisProps {
   patients: any,
   isRequesting: boolean,
@@ -45,8 +44,13 @@ class PrenatalDiagnosis extends Component<PrenatalDiagnosisProps, PrenatalDiagno
 
   componentDidMount() {
     const urlParams = getPageQuery();
+    const { dispatch } = this.props;
     if (urlParams.prenatalPatientId) {
       this.getPatientData(urlParams.prenatalPatientId);
+      dispatch({
+        type: "prenatalDiagnosis/changePatient",
+        payload: urlParams.prenatalPatientId
+      })
     } else {
       message.error("无用户信息，请从产前病历用户列表进入");
     }
@@ -90,37 +94,35 @@ class PrenatalDiagnosis extends Component<PrenatalDiagnosisProps, PrenatalDiagno
     return <span>无用户信息</span>;
   }
 
+
+
   renderTab = () => {
     const { currentPageKey } = this.state;
-    return (
-      <Tabs
-        defaultActiveKey={currentPageKey}
-        type="card"
-
-      >
-        {routers.map((item: any) => (
-          <TabPane
-            tab={item.name}
-            key={item.key}
-          >
-            {item.component}
-          </TabPane>
-        ))}
-      </Tabs>
-    )
+    return routers.map((v: any) => (
+      <Button
+        onClick={() => this.setState({ currentPageKey: v.key })}
+        type={currentPageKey === v.key ? "primary" : "default"}
+      >{v.name}</Button>
+    ))
   }
 
   render() {
-    const { patients = {} } = this.state;
+    const { patients = {}, currentPageKey } = this.state;
     const { isRequesting } = this.props;
+    const index = routers.findIndex((v: any) => v.key === currentPageKey);
     return (
-      <div className={styles.container} id="prenatal-diagnosis">
+      <div className={styles.container}>
         <Spin
           spinning={isRequesting}
         >
-          {this.renderInfo(patients)}
-          <div>
-            {this.renderTab()}
+          <div className={styles.header}>
+            {this.renderInfo(patients)}
+            <div className={styles['btn-group']}>
+              {this.renderTab()}
+            </div>
+          </div>
+          <div className={styles.content}>
+            {index !== -1 && routers[index].component}
           </div>
         </Spin>
       </div>

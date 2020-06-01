@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button, message, Tree } from 'antd';
 import MyForm from '@/components/MyForm/index';
-import SiderMenu from '../../components/Menu/index';
+import SiderMenu from '../../components/Menu';
 import NoDataTip from '../../components/NoDataTip';
 import moment from 'moment';
 
@@ -124,16 +124,15 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
         } else {
           this.setState({ medicalRecordList: res })
         }
-      } else {
-        message.info("无数据");
       }
     });
   }
 
   newRecord = () => {
+    const { medicalRecordList } = this.state;
     const todayStr = moment().format("YYYY-MM-DD");
     const newId = - Math.random();
-    const newMedicalRecordList = JSON.parse(JSON.stringify(this.state.medicalRecordList));
+    const newMedicalRecordList = JSON.parse(JSON.stringify(medicalRecordList));
     const newData = emptyData;
     emptyData.id = newId;
     emptyData.visitDate = todayStr;
@@ -177,6 +176,7 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
           this.props.dispatch(closeSpin);
           if (r) {
             message.success(info);
+            this.getPrenatalDiagnosis(prenatalPatientId,"");
           }
         })
       } else {
@@ -214,7 +214,7 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
             <Button
               size="small"
               onClick={this.newRecord}
-            >新建病历</Button>
+            >新增病历</Button>
             <br />
           </div>
           <Tree
