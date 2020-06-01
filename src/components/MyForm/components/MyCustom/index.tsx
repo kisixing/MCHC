@@ -46,9 +46,7 @@ export default class MyCustom extends Component<MyCustomProps, MyCustomState>{
       if(formHandler.subscribe){
         formHandler.subscribe("_global", "change", () => {
           formHandler.submit().then(({ validCode, res }: any) => {
-            // if (validCode) {
-              onChange(getFormData(res));
-            // }
+            onChange(getFormData(res));
           })
         });
       }
@@ -70,7 +68,7 @@ export default class MyCustom extends Component<MyCustomProps, MyCustomState>{
           config={config}
           value={value}
           getFormHandler={(formHandler: any) => this.setState({ formHandler })}
-          submitChange
+          submitChange={true}
         />
       </div>
     )

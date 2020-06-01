@@ -179,7 +179,7 @@ export function getRenderData(config: Array<FormConfig>, data: any): Array<FormC
  * @param {object|Array} data 
  */
 function newObj(parentKey: string, currentKey: string, data: any) {
-  if (!currentKey) return {};
+  if (!currentKey || !data) return {};
   let r: { [key: string]: any } = {};
   if (parentKey === "") {
     if (isNumber(currentKey)) {

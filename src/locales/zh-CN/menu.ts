@@ -151,6 +151,8 @@ export default {
 
   'menu.high-risk-management': '高危孕产妇管理',
   'menu.high-risk-management.highrisk': '高危登记',
+  // 'menu.high-risk-management.highrisk-add': '添加高危登记',
+  // 'menu.high-risk-management.highrisk-edit': '编辑高危登记',
   'menu.high-risk-management.followup': '高危随访',
   'menu.high-risk-management.statistics': '高危统计',
 

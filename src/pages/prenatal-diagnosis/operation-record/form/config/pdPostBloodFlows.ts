@@ -1,19 +1,11 @@
 import { FormConfig } from '@/components/MyForm/interface';
 
-/**
- * key?: string,
-  title: string,
-  children?: Array<TableColumns>,
-  width?: number,
-  editor?: FormConfig
- */
-
-const pdPreBloodFlows: FormConfig = {
-  name: "pdPreBloodFlows",
-  key: ".pdPreBloodFlows",
+const pdPostBloodFlows: FormConfig = {
+  name: "pdPostBloodFlows",
+  key: ".pdPostBloodFlows",
   input_type: "table",
   span: 24,
-  label: "术前血流指标",
+  label: "术后血流指标",
   input_props: {
     editable: true,
     tableColumns: [
@@ -53,4 +45,4 @@ const pdPreBloodFlows: FormConfig = {
   }
 }
 
-export default pdPreBloodFlows;
+export default pdPostBloodFlows;

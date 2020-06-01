@@ -7,7 +7,7 @@ import BaseEditPanel from '@/components/BaseEditPanel';
 export class Pregnancies extends BaseEditPanel {
   static defaultProps = {
     baseUrl: 'pregnancies',
-    moduleName: 'pregnant',
+    moduleName: 'pregnancy',
     title: '孕册',
     toApi,
     fromApi,

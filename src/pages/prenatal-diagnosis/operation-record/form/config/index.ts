@@ -17,6 +17,8 @@ import pdAnaesthetic from './pdAnaesthetic';
 import pdMedication from './pdMedication';
 // 术后情况
 import pdPostOperation from './pdPostOperation';
+import pdPostBloodFlows from './pdPostBloodFlows';
+import pdPostHemogram from './pdPostHemogram';
 
 /**
  * "羊膜腔穿刺" - 1
@@ -111,6 +113,8 @@ const config = {
     invasiveNotes["7"],
     pdMedication,
     pdAnaesthetic,
+    pdPostBloodFlows,
+    pdPostHemogram,
     pdPostOperation
   ],
   "8": [

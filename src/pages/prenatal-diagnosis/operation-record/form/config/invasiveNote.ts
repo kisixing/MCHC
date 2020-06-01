@@ -1,5 +1,25 @@
 import { FormConfig } from '@/components/MyForm/interface';
 
+const cordbloodcharacter = [
+  { label: "鲜红", value: 1 },
+  { label: "混入羊水", value: 2 },
+  { label: "混入母血", value: 3 },
+]
+
+const villuscharacter = [
+  { label: "鲜红", value: 1 },
+  { label: "混入羊水", value: 2 },
+  { label: "混入母血", value: 3 },
+]
+
+const amnioticfluidcharacter = [
+  { label: "淡黄色", value: 1 },
+  { label: "水样", value: 2 },
+  { label: "血染", value: 3 },
+  { label: "新鲜血性", value: 4 },
+  { label: "陈旧血性", value: 5 },
+]
+
 const invasiseNotes: { [key: string]: FormConfig } = {
   "1": {
     name: "invasiveNote",
@@ -10,7 +30,7 @@ const invasiseNotes: { [key: string]: FormConfig } = {
     input_props: {
       config: [
         {
-          name: "uterusHemorrhage", key: ".*", input_type: "checkbox", label: "宫璧出血", span: 24,
+          name: "uterusHemorrhage", key: ".uterusHemorrhage(Note)", input_type: "checkbox", label: "宫璧出血", span: 24,
           input_props: {
             type: "custom",
             renderData: [
@@ -34,7 +54,12 @@ const invasiseNotes: { [key: string]: FormConfig } = {
           }
         },
         { name: "amnioticfluidvolume", key: ".amnioticfluidvolume", input_type: "input", label: "羊水量", unit: "ml", span: 6 },
-        { name: "amnioticfluidcharacter", key: ".amnioticfluidcharacter", input_type: "input", label: "羊水性状", span: 6 },
+        {
+          name: "amnioticfluidcharacter", key: ".amnioticfluidcharacter", input_type: "select", label: "羊水性状", span: 6,
+          input_props: {
+            options: amnioticfluidcharacter
+          }
+        },
       ]
     }
   },
@@ -47,9 +72,33 @@ const invasiseNotes: { [key: string]: FormConfig } = {
     input_props: {
       config: [
         { name: "villusvolume", key: ".villusvolume", input_type: "input", label: "绒毛量", span: 6 },
-        { name: "villuscharacter", key: ".villuscharacter", input_type: "input", label: "绒毛性状", span: 6 },
-        { name: "catheteramount", key: ".catheteramount", input_type: "input", label: "插管次数", span: 6 },
-        { name: "suctionamount", key: ".suctionamount", input_type: "input", label: "抽吸次数", span: 6 },
+        {
+          name: "villuscharacter", key: ".villuscharacter", input_type: "select", label: "绒毛性状", span: 6,
+          input_props: {
+            options: villuscharacter
+          }
+        },
+        {
+          name: "catheteramount", key: ".catheteramount", input_type: "input", label: "插管次数", span: 6,
+          input_props: {
+            type: "number"
+          }
+        },
+        {
+          name: "suctionamount", key: ".suctionamount", input_type: "input", label: "抽吸次数", span: 6,
+          input_props: {
+            type: "number"
+          }
+        },
+        {
+          name: "hemorrhage", key: ".hemorrhage", input_type: "select", label: "是否出血", span: 6,
+          input_props: {
+            options: [
+              { label: "是", value: 1 },
+              { label: "否", value: 0 },
+            ]
+          }
+        },
         { name: "negativepressure", key: ".negativepressure", input_type: "input", label: "负压", span: 6 },
       ]
     }
@@ -63,7 +112,7 @@ const invasiseNotes: { [key: string]: FormConfig } = {
     input_props: {
       config: [
         {
-          name: "umbilicalHemorrhage", key: ".*", input_type: "checkbox", label: "脐带出血", span: 24,
+          name: "umbilicalHemorrhage", key: ".umbilicalHemorrhage(Note)", input_type: "checkbox", label: "脐带出血", span: 24,
           input_props: {
             type: "custom",
             renderData: [
@@ -87,7 +136,7 @@ const invasiseNotes: { [key: string]: FormConfig } = {
           }
         },
         {
-          name: "uterusHemorrhage", key: ".*", input_type: "checkbox", label: "宫璧出血", span: 24,
+          name: "uterusHemorrhage", key: ".uterusHemorrhage(Note)", input_type: "checkbox", label: "宫璧出血", span: 24,
           input_props: {
             type: "custom",
             renderData: [
@@ -111,7 +160,12 @@ const invasiseNotes: { [key: string]: FormConfig } = {
           }
         },
         { name: "cordbloodvolume", key: ".cordbloodvolume", input_type: "input", label: "脐血量", span: 6 },
-        { name: "cordbloodcharacter", key: ".cordbloodcharacter", input_type: "input", label: "脐血性状", span: 6 },
+        {
+          name: "cordbloodcharacter", key: ".cordbloodcharacter", input_type: "select", label: "脐血性状", span: 6,
+          input_props: {
+            options: cordbloodcharacter
+          }
+        },
       ]
     }
   },
@@ -123,7 +177,12 @@ const invasiseNotes: { [key: string]: FormConfig } = {
     header_label: true,
     input_props: {
       config: [
-        { name: "amnioticfluidcharacter", key: ".amnioticfluidcharacter", input_type: "input", label: "羊水性状", span: 6 },
+        {
+          name: "amnioticfluidcharacter", key: ".amnioticfluidcharacter", input_type: "select", label: "羊水性状", span: 6,
+          input_props: {
+            options: amnioticfluidcharacter
+          }
+        },
         { name: "perfusionvolum", key: ".perfusionvolum", input_type: "input", label: "灌注液量", span: 6 },
       ]
     }
@@ -205,7 +264,16 @@ const invasiseNotes: { [key: string]: FormConfig } = {
     header_label: true,
     input_props: {
       config: [
-        { name: "amnioticfluidcharacter", key: ".amnioticfluidcharacter", input_type: "input", label: "羊水性状", span: 6 },
+        {
+          name: "amnioticfluidcharacter", key: ".amnioticfluidcharacter", input_type: "select", label: "羊水性状", span: 6, input_props: {
+            options: amnioticfluidcharacter
+          }
+        },
+        {
+          name: "suctionvolum", key: ".suctionvolum", input_type: "input", label: "回抽羊水量", span: 6, input_props: {
+            type: "number"
+          }
+        },
         { name: "negativepressure", key: ".negativepressure", input_type: "input", label: "负压", span: 6 },
       ]
     }
@@ -219,7 +287,7 @@ const invasiseNotes: { [key: string]: FormConfig } = {
     input_props: {
       config: [
         {
-          name: "umbilicalHemorrhage", key: ".*", input_type: "checkbox", label: "脐带出血", span: 24,
+          name: "umbilicalHemorrhage", key: ".umbilicalHemorrhage(Note)", input_type: "checkbox", label: "脐带出血", span: 24,
           input_props: {
             type: "custom",
             renderData: [
@@ -243,7 +311,7 @@ const invasiseNotes: { [key: string]: FormConfig } = {
           }
         },
         {
-          name: "uterusHemorrhage", key: ".*", input_type: "checkbox", label: "宫璧出血", span: 24,
+          name: "uterusHemorrhage", key: ".uterusHemorrhage(Note)", input_type: "checkbox", label: "宫璧出血", span: 24,
           input_props: {
             type: "custom",
             renderData: [
@@ -287,6 +355,12 @@ const invasiseNotes: { [key: string]: FormConfig } = {
     header_label: true,
     input_props: {
       config: [
+        {
+          name: "liquidvolume", key: ".liquidvolume", input_type: "input", label: "液量", span: 6,
+          input_props: {
+            type: "number"
+          }
+        }
       ]
     }
   },
@@ -298,6 +372,12 @@ const invasiseNotes: { [key: string]: FormConfig } = {
     header_label: true,
     input_props: {
       config: [
+        {
+          name: "liquidvolume", key: ".liquidvolume", input_type: "input", label: "液量", span: 6,
+          input_props: {
+            type: "number"
+          }
+        }
       ]
     }
   },
@@ -309,6 +389,12 @@ const invasiseNotes: { [key: string]: FormConfig } = {
     header_label: true,
     input_props: {
       config: [
+        {
+          name: "liquidvolume", key: ".liquidvolume", input_type: "input", label: "液量", span: 6,
+          input_props: {
+            type: "number"
+          }
+        }
       ]
     }
   },
