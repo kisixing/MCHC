@@ -3,8 +3,6 @@ interface ValidateRule {
 }
 
 const SPLIT_KEY = "|";
-const PARAMS_PARENTHESES = /\((.*)\)/;
-const PARAMS_POINT = ",";
 function isBase(data: any): boolean {
   return typeof data !== "object";
 }
@@ -34,11 +32,6 @@ const validateRules: ValidateRule = {
   },
   "number": function (val: any): boolean {
     return /^[0-9]+$/.test(val);
-  },
-  "range": function (val: number|string, args: any) {
-    console.log(arguments);
-    return true;
-    // return val >= nMin && val <= nMax;
   }
 }
 
@@ -62,18 +55,7 @@ export const validFun = function validFun(data: any, rules: any): any {
     const ruleArr = rules.split(SPLIT_KEY);
     let isValid = true;
     for (let i = 0; i < ruleArr.length; i++) {
-      // 完全相等 直接调用方法
       isValid = validateRules[ruleArr[i]](data);
-      // if(validateRules[ruleArr[i]]){
-      // }else {
-      //   const validateRulesKeyArr = Object.keys(validateRules);
-      //   const index = validateRulesKeyArr.findIndex((key: string) => ruleArr[i].indexOf(key) !== -1);
-      //   if(index !== -1){
-      //     const params = PARAMS_PARENTHESES.test(ruleArr[i]) && PARAMS_PARENTHESES.exec(ruleArr[i])[1].split(PARAMS_POINT);
-      //     isValid = validateRules[validateRulesKeyArr[index]](data, params);
-
-      //   }
-      // }
       if (!isValid) {
         errorTip = errorText[ruleArr[i]];
         break;

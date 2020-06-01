@@ -93,7 +93,7 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
     const { operationRecordList, treeData } = this.state;
     if ((operationRecordList.length !== 0 && treeData.length === 0)
       || this.state.patient.id !== this.props.patient.id
-      || this.state.operationRecordList.length !== prevState.operationRecordList.length
+      || JSON.stringify(this.state.operationRecordList) !== JSON.stringify(prevState.operationRecordList)
     ) {
       const newTreeData = generateTreeData(
         operationRecordList,
@@ -107,8 +107,7 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
             return record.operationName
           }
         },
-        )
-      console.log(newTreeData);
+      )
       this.setState({ treeData: newTreeData });
     }
     if (prevState.currentTreeKeys !== this.state.currentTreeKeys) {
@@ -168,7 +167,7 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
     const newData = emptyData;
     const newId = - Math.random();
     newData.operationDate = todayStr;
-    newData.id  = newId;
+    newData.id = newId;
     newOperationRecordList.push(newData);
     this.setState({
       operationRecordList: newOperationRecordList,
@@ -178,13 +177,16 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
 
   handleSubmit = () => {
     const prenatalPatientId = this.props.patient.id;
+    const { data } = this.state;
     this.state.formHandler.dispatch("_global", "submit", {});
     this.state.formHandler.submit().then(({ validCode, res }: any) => {
       if (validCode) {
         const formatData = getFormData(res);
-        const [method, info] = formatData.id > 0 ? ["PUT", "修改成功"] : ["POST", "成功新增病历"];
-        if (formatData.id < 0) {
+        const [method, info] = data.id > 0 ? ["PUT", "修改成功"] : ["POST", "成功新增病历"];
+        if (data.id < 0) {
           formatData.id = "";
+        } else {
+          formatData.id = data.id;
         }
         this.props.dispatch(openSpin);
         request(`${URL}`, {
@@ -245,9 +247,9 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
             onSelect={this.handleTreeSelect}
             selectedKeys={currentTreeKeys}
           />
-          {treeData.length === 0 && <NoDataTip/>}
+          {treeData.length === 0 && <NoDataTip />}
         </SiderMenu>
-        {treeData.length === 0 && <NoDataTip/>}
+        {treeData.length === 0 && <NoDataTip />}
         {data.id ? (
           <div
             className={styles.form}
