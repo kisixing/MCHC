@@ -44,7 +44,6 @@ export interface ComponentOption {
   hiddenBtn?: boolean,
   // SimpleObject
   config?: Array<FormConfig>
-  pagination?: any
 }
 
 export interface FormConfig {

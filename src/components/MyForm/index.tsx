@@ -48,22 +48,26 @@ export default class MyForm extends Component<MyFormProp, MyFormState>{
   // }
 
   // 没有新建formHandler 只是增加了其中的键值
-  componentDidUpdate(prevProps: MyFormProp) {
-    const { getFormHandler, config, value } = this.props;
+  componentDidUpdate(prevProps: MyFormProp, prevState: MyFormState) {
+    const { getFormHandler, config, value, submitChange } = this.props;
     if (!this.props.config || !this.props.value) {
       return;
     }
-    if (JSON.stringify(this.props.config) !== JSON.stringify(prevProps.config)
-      || JSON.stringify(this.props.value) !== JSON.stringify(prevProps.value)
-    ) {
+    // 数据不同
+    if (JSON.stringify(this.props.value) !== JSON.stringify(prevProps.value)) {
+      this.setState({ myConfig: getRenderData(config, value) })
+    }
+    // 配置不同
+    if (JSON.stringify(this.props.config) !== JSON.stringify(prevProps.config)) {
       this.setState({
         myConfig: getRenderData(config, value),
-        // formHandler: createFormHandler(getRenderData(config, value), { submitChange })
-      },() => {
-        if (getFormHandler) {
-          getFormHandler(this.state.formHandler); 
-        }
+        formHandler: createFormHandler(getRenderData(config, value), { submitChange })
       })
+    }
+    if (JSON.stringify(prevState.formHandler.uuid) !== JSON.stringify(this.state.formHandler.uuid)) {
+      if (getFormHandler) {
+        getFormHandler(this.state.formHandler);
+      }
     }
   }
 
@@ -140,7 +144,7 @@ export default class MyForm extends Component<MyFormProp, MyFormState>{
 
   handlerGetActions = (name: string, actions: any) => {
     const { formHandler } = this.state;
-    if(!formHandler[name] || !formHandler[name].actions){
+    if (!formHandler[name] || !formHandler[name].actions) {
       formHandler[name] = {};
       formHandler[name].actions = {};
     }

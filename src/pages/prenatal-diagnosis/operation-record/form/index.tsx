@@ -183,9 +183,7 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
       if (validCode) {
         const formatData = getFormData(res);
         const [method, info] = formatData.id > 0 ? ["PUT", "修改成功"] : ["POST", "成功新增病历"];
-        if (formatData.id < 0) {
-          formatData.id = "";
-        }
+        if (formatData.id < 0) {formatData.id = "";}
         this.props.dispatch(openSpin);
         request(`${URL}`, {
           method,
@@ -194,7 +192,8 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
             operationName: operationNames[formatData.operationType],
             prenatalPatient: {
               id: Number(prenatalPatientId)
-            }
+            },
+            id: Number(this.state.data.id) || ""
           }
         }).then((r: any) => {
           this.props.dispatch(closeSpin);
