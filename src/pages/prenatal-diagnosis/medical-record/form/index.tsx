@@ -1,13 +1,16 @@
+/* eslint-disable react/no-did-update-set-state */
 import React from 'react';
 import { Button, message, Tree } from 'antd';
 import MyForm from '@/components/MyForm/index';
+import SiderMenu from '../../components/Menu/index';
+import NoDataTip from '../../components/NoDataTip';
 import moment from 'moment';
 
 import { Dispatch } from 'redux';
 import { PrenatalDiagnosisModelState } from '../../main/model';
 
 import { connect } from 'dva';
-import { generateTreeData } from '../../utils';
+import { generateTreeData, openSpin, closeSpin } from '../../utils';
 import { getFormData } from '@/components/MyForm/utils'
 import request from '@/utils/request';
 
@@ -25,7 +28,7 @@ interface MedicalRecordState {
   treeData: Array<any>,
   currentTreeKeys: Array<string | number>,
 
-  showMenu: boolean
+  menuWidth: number
 }
 
 interface MedicalRecordProps {
@@ -33,51 +36,71 @@ interface MedicalRecordProps {
   dispatch: Dispatch
 }
 
+const emptyData = {
+  id: "",
+  visitDate: "",
+  downsScreens: [
+    { type: 0 },
+    { type: 1 },
+    { type: 2 }
+  ],
+  thalassemiaExams: [
+    { target: 0 },
+    { target: 1 },
+  ],
+  fetuses: [
+    { id: "" }
+  ]
+}
 const URL = "/prenatal-diagnoses";
-
 
 class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordState>{
   constructor(props: any) {
     super(props);
     this.state = {
       formHandler: {},
-      data: {
-        id: "",
-        downsScreens: [
-          { type: 0 },
-          { type: 1 },
-          { type: 2 }
-        ],
-        fetuses: [
-          { id: "" }
-        ]
-      },
+      data: emptyData,
       patient: {},
       medicalRecordList: [],
       treeData: [],
       currentTreeKeys: [],
-
-      showMenu: true
+      menuWidth: 0
     }
   }
 
+  componentDidMount() {
+    const { patient = {} } = this.props;
+    this.setState({ patient }, () => {
+      const prenatalPatientId = this.state.patient.id;
+      this.getPrenatalDiagnosis(prenatalPatientId, "");
+    })
+  }
+
   componentDidUpdate(_prevProps: MedicalRecordProps, prevState: MedicalRecordState) {
-    // 获取所有的病历
     if (this.state.patient.id !== this.props.patient.id) {
       const { patient = {} } = this.props;
       this.setState({ patient }, () => {
         const prenatalPatientId = this.state.patient.id;
-        // 获取所有的专科病历
         this.getPrenatalDiagnosis(prenatalPatientId, "");
       })
     }
     // 生成树形结构的数据
     const { medicalRecordList, treeData } = this.state;
-    if (medicalRecordList.length !== 0 && treeData.length === 0) {
+    if ((medicalRecordList.length !== 0 && treeData.length === 0) 
+    || this.state.patient.id !== this.props.patient.id
+    || this.state.medicalRecordList.length !== prevState.medicalRecordList.length
+    ) {
       const newTreeData = generateTreeData(
         medicalRecordList,
         { key: "visitDate", render: (text: string, _record: any) => text },
-        { key: "id", render: (_text: string, _record: any) => "专科病历" },
+        {
+          key: "id", render: (_text: string, record: any) => {
+            if (Number(record.id) < 0) {
+              return "新建病历";
+            }
+            return "专科病历"
+          }
+        },
       )
       this.setState({ treeData: newTreeData });
     }
@@ -88,32 +111,21 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
 
   // 获取病历
   getPrenatalDiagnosis = (prenatalPatientId: number | string, id: number | string) => {
-    if (Number(id) < 0) {
-      this.setState({ data: {
-        id,
-        downsScreens: [
-          { type: 0 },
-          { type: 1 },
-          { type: 2 }
-        ],
-        fetuses: [
-          {id: ""}
-        ]
-      }})
-      return;
-    }
+    if (Number(id) < 0) { this.setState({ data: emptyData }); return; }
+    if (!prenatalPatientId) { return; }
+    this.props.dispatch(openSpin);
     request(`${URL}?prenatalPatientId.equals=${prenatalPatientId}&id.equals=${id}&sort=visitDate,desc`, {
       method: "GET"
     }).then((res: any) => {
+      this.props.dispatch(closeSpin);
       if (res.length !== 0) {
         if (id) {
-          this.setState({ data: {} }, () => {
-            this.setState({ data: res[0] })
-          })
+          this.setState({ data: res[0] })
         } else {
-          // 默认加载第一份病历
           this.setState({ medicalRecordList: res })
         }
+      } else {
+        message.info("无数据");
       }
     });
   }
@@ -121,29 +133,15 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
   newRecord = () => {
     const todayStr = moment().format("YYYY-MM-DD");
     const newId = - Math.random();
-    const { treeData } = this.state;
-    const newTreeData = JSON.parse(JSON.stringify(treeData));
-    if (newTreeData[0].title === todayStr) {
-      newTreeData[0].children.splice(0, 0, {
-        title: "新建病历",
-        key: newId
-      })
-    } else {
-      newTreeData.splice(0, 0, {
-        title: todayStr,
-        key: todayStr,
-        children: [
-          {
-            title: "新建病历",
-            key: newId
-          }
-        ]
-      })
-    }
+    const newMedicalRecordList = JSON.parse(JSON.stringify(this.state.medicalRecordList));
+    const newData = emptyData;
+    emptyData.id = newId;
+    emptyData.visitDate = todayStr;
+    newMedicalRecordList.push(newData);
     this.setState({
-      treeData: newTreeData,
+      medicalRecordList: newMedicalRecordList,
       currentTreeKeys: [newId]
-    });
+    })
   }
 
   handleSubmit = () => {
@@ -152,14 +150,18 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
     this.state.formHandler.submit().then(({ validCode, res }: any) => {
       if (validCode) {
         const formatData = getFormData(res);
+        // 这里的手动操作逻辑待定一下
         // 新建的时候赋值
         formatData.downsScreens[0].type = 0;
         formatData.downsScreens[1].type = 1;
         formatData.downsScreens[2].type = 2;
+        formatData.thalassemiaExams[0].target = 0;
+        formatData.thalassemiaExams[1].target = 1;
         const [method, info] = formatData.id > 0 ? ["PUT", "修改成功"] : ["POST", "成功新增病历"];
         if (formatData.id < 0) {
           formatData.id = "";
         }
+        this.props.dispatch(openSpin);
         request(`${URL}`, {
           method,
           data: {
@@ -169,6 +171,7 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
             }
           }
         }).then((r: any) => {
+          this.props.dispatch(closeSpin);
           if (r) {
             message.success(info);
           }
@@ -193,68 +196,56 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
     }
   }
 
-  // 暂时使用行内样式
+  setMenuWidth = (menuWidth: number) => {
+    this.setState({ menuWidth });
+  }
+
   render() {
-    const { data, treeData, currentTreeKeys, showMenu } = this.state;
+    const { data, treeData, currentTreeKeys, menuWidth } = this.state;
     return (
       <div className={styles.container}>
-        <div
-          className={styles['menu-block']}
-          style={{
-            left: showMenu ? "256px" : "16px"
-          }}
+        <SiderMenu
+          getSiderMenuWidth={this.setMenuWidth}
         >
-          <div
-            className={styles.menu}
-            style={{ width: "" }}
-          >
-            <div>
-              <Button
-                size="small"
-                onClick={this.newRecord}
-              >新建病历</Button>
-              <br />
-            </div>
-            <Tree
-              treeData={treeData}
-              // defaultExpandAll
-              onSelect={this.handleTreeSelect}
-              selectedKeys={currentTreeKeys}
-            />
-          </div>
-          <div className={styles.btn}>
+          <div>
             <Button
-              onClick={() => this.setState({ showMenu: !showMenu })}
-            >
-              {showMenu ? "收起菜单" : "展开菜单"}
-            </Button>
+              size="small"
+              onClick={this.newRecord}
+            >新建病历</Button>
+            <br />
           </div>
-        </div>
-        <div
-          className={styles.form}
-          style={{
-            width: showMenu ? "85%" : "100%",
-            marginLeft: showMenu ? "15%" : 0
-          }}
-        >
-          <MyForm
-            config={config}
-            value={data}
-            getFormHandler={(formHandler: any) => this.setState({ formHandler })}
-            submitChange={false}
+          <Tree
+            treeData={treeData}
+            onSelect={this.handleTreeSelect}
+            selectedKeys={currentTreeKeys}
           />
-          <div className={styles['btn-group']}>
-            <Button
-              disabled={currentTreeKeys.length === 0}
-              onClick={this.handleReset}
-            >重置</Button>
-            <Button
-              disabled={currentTreeKeys.length === 0}
-              type="primary"
-              onClick={this.handleSubmit}
-            >提交</Button>
+          {treeData.length === 0 && <NoDataTip/>}
+        </SiderMenu>
+        {treeData.length === 0 && <NoDataTip/>}
+        {data.id ? (
+          <div
+            className={styles.form}
+            style={{ marginLeft: menuWidth }}
+          >
+            <MyForm
+              config={config}
+              value={data}
+              getFormHandler={(formHandler: any) => this.setState({ formHandler })}
+              submitChange={false}
+            />
+            <div className={styles['btn-group']}>
+              <Button
+                disabled={currentTreeKeys.length === 0}
+                onClick={this.handleReset}
+              >重置</Button>
+              <Button
+                disabled={currentTreeKeys.length === 0}
+                type="primary"
+                onClick={this.handleSubmit}
+              >提交</Button>
+            </div>
           </div>
-        </div>
+        ) : null}
       </div>
     )
   }

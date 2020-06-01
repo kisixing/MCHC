@@ -10,7 +10,7 @@ const pdPostOperation: FormConfig = {
     config: [
       { name: "postFhr", key: ".postFhr", input_type: "input", label: "术后胎心率", span: 6 },
       {
-        name: "complication", key: ".*", input_type: "checkbox", label: "并发症", span: 24,
+        name: "complication", key: ".complication(Note)", input_type: "checkbox", label: "并发症", span: 24,
         input_props: {
           type: "custom",
           renderData: [
@@ -18,12 +18,12 @@ const pdPostOperation: FormConfig = {
               key: "complication",
               label: "",
               options: [
-                { label: "有", value: 1 },
-                { label: "无", value: 0 }
+                { label: "有", value: true },
+                { label: "无", value: false }
               ],
               extraEditors: [
                 {
-                  key: 1,
+                  key: true,
                   editors: [
                     { name: "", key: "", input_type: "input" }
                   ]
