@@ -88,7 +88,7 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
     const { medicalRecordList, treeData } = this.state;
     if ((medicalRecordList.length !== 0 && treeData.length === 0) 
     || this.state.patient.id !== this.props.patient.id
-    || this.state.medicalRecordList.length !== prevState.medicalRecordList.length
+    || JSON.stringify(this.state.medicalRecordList) !== JSON.stringify(prevState.medicalRecordList)
     ) {
       const newTreeData = generateTreeData(
         medicalRecordList,
@@ -146,6 +146,7 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
 
   handleSubmit = () => {
     const prenatalPatientId = this.props.patient.id;
+    const { data } = this.state;
     this.state.formHandler.dispatch("_global", "submit", {});
     this.state.formHandler.submit().then(({ validCode, res }: any) => {
       if (validCode) {
@@ -157,9 +158,11 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
         formatData.downsScreens[2].type = 2;
         formatData.thalassemiaExams[0].target = 0;
         formatData.thalassemiaExams[1].target = 1;
-        const [method, info] = formatData.id > 0 ? ["PUT", "修改成功"] : ["POST", "成功新增病历"];
-        if (formatData.id < 0) {
+        const [method, info] = data.id > 0 ? ["PUT", "修改成功"] : ["POST", "成功新增病历"];
+        if (data.id < 0) {
           formatData.id = "";
+        }else{
+          formatData.id = data.id;
         }
         this.props.dispatch(openSpin);
         request(`${URL}`, {
