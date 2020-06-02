@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import { Button, message } from 'antd';
 import MyForm from '@/components/MyForm';
 import observePatientData from '@/utils/observePatientData';
-import { getRenderData, getFormData } from '@/components/MyForm/utils';
+import { getFormData } from '@/components/MyForm/utils';
 import request from '@/utils/request';
 import config from './config';
+import { getExpected } from '@/utils/formula';
 import { getPageQuery } from '@/utils/utils';
 import styles from './index.less';
+import moment from 'moment';
+
+const idNOReg = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
 
 interface NewPatientState {
   formHandler: {
@@ -51,7 +55,7 @@ export default class NewPatient extends Component<{}, NewPatientState>{
     }
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     observePatientData.subscribe((data: any) => {
       this.setState({
         patients: {
@@ -62,11 +66,29 @@ export default class NewPatient extends Component<{}, NewPatientState>{
           name: data.name
         }
       })
-    })
+    });
+    const { formHandler } = this.state;
+    if (formHandler.subscribe) {
+      formHandler.subscribe("idNO", "change", (val: string) => {
+        const idType = formHandler.idType.actions.getValue();
+        if (idType.value === 1) {
+          const year = Number(val.slice(6, 10));
+          const now = moment().year();
+          formHandler.age.actions.setValue(now - year);
+        }
+      });
+      formHandler.subscribe("idType", "change", (val: string) => {
+        formHandler.idNO.actions.setValue("");
+      });
+      formHandler.subscribe("lmp", "change", (val: string) => {
+        formHandler.edd.actions.setValue(getExpected(val));
+        formHandler.sureEdd.actions.setValue(getExpected(val));
+      })
+    }
   }
 
   handleSubmit = () => {
-    const { id  } = this.state.patients;
+    const { id } = this.state.patients;
     this.state.formHandler.submit().then(({ validCode, res }: any) => {
       if (validCode) {
         // 通过id判断 为新建还是修改
@@ -80,7 +102,7 @@ export default class NewPatient extends Component<{}, NewPatientState>{
             message.success(info)
           }
         })
-      }else{
+      } else {
         message.warn("请填写所有必填项后再次提交");
       }
     })

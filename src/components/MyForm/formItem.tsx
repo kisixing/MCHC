@@ -63,7 +63,7 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
 
   // 获取组件内部的自己的验证方法
   getChildrenValid = (func: any) => {
-    if(func){
+    if (func) {
       this.childrenValid = func;
     }
   }
@@ -75,13 +75,13 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
 
   handleChange = (val: any, error: any = "") => {
     const { name, dispatch, hidden } = this.props;
-    if(hidden){
+    if (hidden) {
       return;
     }
     this.setState({ value: val }, () => {
       if (name) { dispatch(name, "change", val); }
       const err = validFun(this.state.value, this.props.validate || "");
-      this.setState({error: err || error});
+      this.setState({ error: err || error });
     });
   }
 
@@ -108,34 +108,42 @@ export default class FormItem extends Component<FormItemProp, FormItemState>{
       value: this.state.value,
       path: this.state.path
     }
-  }  
-  
+  }
+
   setValue = (val: any) => {
     this.setState({ value: val });
   }
 
   reset = () => {
-    if(!this.props.hidden){
-      if(isObj(this.state.value)){
-        this.setState({ value: {} },() => {
+    if (!this.props.hidden) {
+      if (isObj(this.state.value)) {
+        this.setState({ value: {} }, () => {
         });
-      }else if(isArr(this.state.value)){
+      } else if (isArr(this.state.value)) {
         this.setState({ value: [] });
-      }else{
+      } else {
         this.setState({ value: null });
       }
     }
   }
 
+  // 增加可以输入参数
+  // valid = (validObject: { regExp: RegExp, errorText: string } | undefined) => {
   valid = () => {
+    const { value } = this.state;
+    // 手动传入正则验证 优先级第一
+    // if (validObject) {
+    //   if (!validObject.regExp.test(value)) {
+    //     this.setState({ error: validObject.errorText });
+    //     return false;
+    //   }
+    // }
+
     // 原本的验证
-    const error = validFun(this.state.value, this.props.validate || "");
-    // childrenError boolean
-    let childrenError: any = true;
-    if(this.props.type.indexOf("custom") !== -1){
-      // 从组件中传出
-      childrenError = this.childrenValid();
-    }
+    const error = validFun(value, this.props.validate || "");
+    // 组件中抛出验证
+    const childrenError: any = this.childrenValid();
+
     this.setState({ error });
     return isEmpty(error) && childrenError;
   }

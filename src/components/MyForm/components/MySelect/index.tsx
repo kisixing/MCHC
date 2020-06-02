@@ -3,6 +3,7 @@
 import React, { ReactNode } from 'react';
 import DefaultSelect from './DefaultSelect';
 import MultipleSelect from './MultipleSelect';
+import { ConsoleSqlOutlined } from '@ant-design/icons';
 
 interface MySelectProps {
   onChange: Function,
@@ -17,8 +18,9 @@ export default function MySelect(props: MySelectProps) {
 
   const renderSelect = {
     "default": (input_props: any, value: any, onChange: Function): ReactNode => {
-      const { options = [], radio = true } = input_props;
+      const { options = [], radio = true, tags = false } = input_props;
       return (<DefaultSelect
+        tags={tags}
         onChange={onChange}
         value={value}
         options={options}
@@ -27,7 +29,7 @@ export default function MySelect(props: MySelectProps) {
     },
     "multiple": (input_props: any, value: any, onChange: Function): ReactNode => {
       // 这一类的组件目前只支持单选
-      const { options = [], extraEditors = [], radio = true, renderData = [] } = input_props;
+      const { options = [], extraEditors = [], radio = true } = input_props;
       // 构建value
       const val: any = {
         selectValue: [],

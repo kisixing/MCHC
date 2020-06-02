@@ -50,7 +50,7 @@ export default class MyForm extends Component<MyFormProp, MyFormState>{
   // 没有新建formHandler 只是增加了其中的键值
   componentDidUpdate(prevProps: MyFormProp, prevState: MyFormState) {
     const { getFormHandler, config, value, submitChange } = this.props;
-    if (!this.props.config || !this.props.value) {
+    if (!this.props.config) {
       return;
     }
     // 数据不同

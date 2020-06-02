@@ -7,7 +7,6 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    background-color: #ffffff;
     height: 55px;
     padding: 18px 24px;
     margin-bottom: 12px;
@@ -17,5 +16,27 @@
       font-weight: bold;
       margin-right: 48px;
     }
+  }
+  .header {
+    position: fixed;
+    height: 120px;
+    width: 100%;
+    padding: 8px;
+    z-index: 2;
+    background-color: #ffffff;
+    border-bottom: 0.5px solid #000000;
+    
+    .btn-group{
+      padding: 0 0 0 24px;
+      display: flex;
+      > button {
+        margin-right: 6px;
+      }
+    }
+
+  }
+  // fixed 默认会贴到临近元素，所有不能用margin
+  .content {
+    padding: 130px 0 0 0;
   }
 }

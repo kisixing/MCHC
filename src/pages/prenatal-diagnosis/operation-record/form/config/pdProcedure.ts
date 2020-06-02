@@ -236,7 +236,7 @@ const pdProcedures: { [key: string]: FormConfig } = {
             type: "number"
           }
         },
-        { name: "hitAmount", key: ".hitAmount", input_type: "input", label: "穿中次数", span: 6 },
+        { name: "hitAmount", key: ".hitAmount", input_type: "input", label: "刺中次数", span: 6 },
         {
           name: "placentaEntry", key: ".placentaEntry", input_type: "select", label: "经否胎盘", span: 6,
           input_props: {
@@ -381,7 +381,7 @@ const pdProcedures: { [key: string]: FormConfig } = {
           }
         },
         {
-          name: "instrument", key: ".instrument", input_type: "select", label: "器械", span: 6,
+          name: "instrument", key: ".instrument", input_type: "select", label: "穿刺针", span: 6,
           input_props: {
             options: [
               instrumentOptions[0],
@@ -428,6 +428,10 @@ const pdProcedures: { [key: string]: FormConfig } = {
     input_props: {
       config: [
         ...generalPdProcedureConfig,
+        { name: "hct", key: ".hct", input_type: "input", label: "目标HCT", span: 6},
+        { name: "analysisbtvolume", key: ".analysisbtvolume", input_type: "input", label: "计算输血量", span: 6},
+        { name: "actualbtvolume", key: ".actualbtvolume", input_type: "input", label: "实际输血量", span: 6},
+        { name: "btspeed", key: ".btspeed", input_type: "input", label: "输血速度", span: 6},
         {
           name: "punctureTarget", key: ".punctureTarget", input_type: "select", label: "穿刺部位", span: 6, is_new_row: true,
           input_props: {
@@ -449,7 +453,6 @@ const pdProcedures: { [key: string]: FormConfig } = {
             type: "number"
           }
         },
-        // 缺 刺中次数
         {
           name: "placentaEntry", key: ".placentaEntry", input_type: "select", label: "经否胎盘", span: 6,
           input_props: {
@@ -465,7 +468,6 @@ const pdProcedures: { [key: string]: FormConfig } = {
             options: instrumentOptions
           }
         },
-
         {
           name: "placentaHemorrhage", key: ".placentaHemorrhage(Note)", input_type: "checkbox", label: "胎盘出血", span: 12,
           input_props: {
@@ -490,8 +492,9 @@ const pdProcedures: { [key: string]: FormConfig } = {
             ]
           }
         },
-        // { name: "sampleSite", key: ".sampleSite", input_type: "select", label: "取样部位", span: 6 },
         { name: "sampleInspection", key: ".sampleInspection", input_type: "input", label: "送检项目", span: 6 },
+        { name: "cordbloodvolume", key: ".cordbloodvolume", input_type: "select", label: "脐血量", span: 6},
+        { name: "cordbloodcharacter", key: ".cordbloodcharacter", input_type: "select", label: "脐血性状", span: 6},
       ]
     }
   },
@@ -529,8 +532,6 @@ const pdProcedures: { [key: string]: FormConfig } = {
             ]
           }
         },
-        // { name: "instrument", key: ".instrument", input_type: "input", label: "器械", span: 6 },
-
         {
           name: "placentaHemorrhage", key: ".placentaHemorrhage(Note)", input_type: "checkbox", label: "胎盘出血", span: 12,
           input_props: {
