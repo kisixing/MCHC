@@ -44,14 +44,16 @@ export default class List extends BaseList {
       hiddenSorter: true,
       hiddenFilter: true,
       fixed: 'right',
+      width: 120,
+      align: 'center',
       render: (value: any, rowData: any, index: number) => {
         return (
           <>
             <Button
+              type="primary"
+              size="small"
               title="编辑"
               className={commonStyles.tableActionBtn}
-              type="primary"
-
               onClick={this.handleEdit(rowData)}
             >
               <EditOutlined />
@@ -63,7 +65,7 @@ export default class List extends BaseList {
               okText="确定"
               cancelText="取消"
             >
-              <Button title="删除" className={commonStyles.tableActionBtn} type="danger" >
+              <Button danger size="small" title="删除" className={commonStyles.tableActionBtn}>
                 <DeleteOutlined />
                 删除
               </Button>
