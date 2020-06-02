@@ -124,6 +124,12 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
       this.props.dispatch(closeSpin);
       if (res.length !== 0) {
         if (id) {
+          if(res[0].thalassemiaExams[0].deletions){
+            res[0].thalassemiaExams[0].deletions = JSON.parse(res[0].thalassemiaExams[0].deletions);
+          }
+          if(res[0].thalassemiaExams[1].deletions){
+            res[0].thalassemiaExams[1].deletions = JSON.parse(res[0].thalassemiaExams[1].deletions);
+          }
           this.setState({ data: res[0] })
         } else {
           this.setState({ medicalRecordList: res })
@@ -154,8 +160,7 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
     this.state.formHandler.submit().then(({ validCode, res }: any) => {
       if (validCode) {
         const formatData = getFormData(res);
-        // 这里的手动操作逻辑待定一下
-        // 新建的时候赋值
+        // 所有含id与类型的数组中对象需要手动赋值
         formatData.downsScreens[0].type = 0;
         formatData.downsScreens[1].type = 1;
         formatData.downsScreens[2].type = 2;
@@ -170,6 +175,10 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
           formatData.bloodGroups[0].target = 0;
           formatData.bloodGroups[1].target = 1;
         }
+        // deletions 转格式
+        formatData.thalassemiaExams[0].deletions = JSON.stringify(formatData.thalassemiaExams[0].deletions);
+        formatData.thalassemiaExams[1].deletions = JSON.stringify(formatData.thalassemiaExams[1].deletions);
+        formatData.transfusionHistory = {};  
         const [method, info] = data.id > 0 ? ["PUT", "修改成功"] : ["POST", "成功新增病历"];
         if (data.id < 0) {
           formatData.id = "";

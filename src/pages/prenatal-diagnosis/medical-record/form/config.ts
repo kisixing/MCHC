@@ -257,6 +257,53 @@ const config: Array<FormConfig> = [
     }
   },
   {
+    name: "ultrasounds",
+    key: ".ultrasounds",
+    span: 24,
+    label: "早孕超声",
+    input_type: "table",
+    input_props: {
+      editable: true,
+      tableColumns: [
+        { 
+          key: "checkdate", 
+          title: "检查日期",
+          editor: {
+            key: "", name: "", input_type: "date"
+          }
+        },
+        { 
+          key: "menopause", 
+          title: "停经",
+          editor: {
+            key: "", name: "", input_type: "input"
+          }
+        },
+        { 
+          key: "gestationalWeek", 
+          title: "孕周",
+          editor: {
+            key: "", name: "", input_type: "input"
+          }
+        },
+        { 
+          key: "crl", 
+          title: "CRL(mm)",
+          editor: {
+            key: "", name: "", input_type: "input"
+          }
+        },
+        { 
+          key: "nt", 
+          title: "NT(mm)",
+          editor: {
+            key: "", name: "", input_type: "input"
+          }
+        }
+      ]
+    }
+  },
+  {
     name: "male-bloodGroup",
     key: ".bloodGroups_0",
     label: "男方血型检查",
@@ -334,34 +381,20 @@ const config: Array<FormConfig> = [
       config: [
         { name: "id", key: ".id", label: "id", input_type: "input", hidden: true },
         { name: "type", key: ".type", label: "类型", input_type: "input", hidden: true },
-        // { name: "hB", key: ".hB", label: "Hb", unit: "g/L", input_type: "input", span: 6, offset: 0, rules: "range(0,10)" },
         { name: "hB", key: ".hB", label: "Hb", unit: "g/L", input_type: "input", span: 6, offset: 0 },
         { name: "mCV", key: ".mCV", label: "MCV", unit: "fL", input_type: "input", span: 6, offset: 0 },
         { name: "mCH", key: ".mCH", label: "MCH", input_type: "input", span: 6, offset: 0 },
         { name: "hbA2", key: ".hbA2", label: "HbA2", input_type: "input", span: 6, offset: 0 },
-        // {
-        //   name: "rh",
-        //   key: ".rh",
-        //   label: "RH血型",
-        //   input_type: "select",
-        //   span: 6, offset: 0,
-        //   input_props: {
-        //     type: "default",
-        //     options: [
-        //       { label: "RH(+)", value: "RH(+)" },
-        //       { label: "RH(-)", value: "RH(-)" },
-        //     ]
-        //   }
-        // },
         {
           name: "deletions", key: ".deletions", label: "地贫基因型", input_type: "select", span: 24, offset: 0,
           input_props: {
             type: "default",
             radio: false,
+            tags: true,
             options: deletionsOptions
           }
         },
-        { name: "otherNote", key: ".note", label: "其他异常", input_type: "input", span: 24, offset: 0, },
+        { name: "otherNote", key: ".otherNote", label: "其他异常", input_type: "input", span: 24, offset: 0, },
       ]
     }
   },
@@ -379,28 +412,16 @@ const config: Array<FormConfig> = [
         { name: "mCV", key: ".mCV", label: "MCV", unit: "fL", input_type: "input", span: 6, offset: 0 },
         { name: "mCH", key: ".mCH", label: "MCH", input_type: "input", span: 6, offset: 0 },
         { name: "hBA2", key: ".hbA2", label: "HbA2", input_type: "input", span: 6, offset: 0 },
-        // {
-        //   name: "rh",
-        //   key: ".rh",
-        //   label: "RH血型",
-        //   input_type: "select", span: 6, offset: 0,
-        //   input_props: {
-        //     options: [
-        //       { label: "RH(+)", value: "RH(+)" },
-        //       { label: "RH(-)", value: "RH(-)" },
-        //     ]
-        //   }
-        // },
-        // {
         {
           name: "deletions", key: ".deletions", label: "地贫基因型", input_type: "select", span: 24, offset: 0,
           input_props: {
             type: "default",
             radio: false,
+            tags: true,  // tag为true支持自定义输入
             options: deletionsOptions
           }
         },
-        { name: "otherNote", key: ".note", label: "其他异常", input_type: "input", span: 24, offset: 0, },
+        { name: "otherNote", key: ".otherNote", label: "其他异常", input_type: "input", span: 24, offset: 0, },
       ]
     }
   },
@@ -624,7 +645,6 @@ const config: Array<FormConfig> = [
       ]
     }
   },
-
   {
     name: "procedureHistory",
     key: '.procedureHistory',
@@ -749,6 +769,13 @@ const config: Array<FormConfig> = [
       ]
     }
   },
+  // {
+  //   name: "transfusionHistory",
+  //   key: ".transfusionHistory",
+  //   label: "输血史",
+  //   span: 24,
+  //   input_type: "input"
+  // },
   {
     name: "familyHistory",
     key: '.familyHistory',
