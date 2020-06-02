@@ -14,6 +14,8 @@
     // display: flex;
     // flex-direction: row-reverse;
     width: @formItemLabelWidth;
+    .input-cover;
+
     > label {
       padding-right: @labelPaddingRight;
       height: @normalInputHeight;
@@ -34,6 +36,21 @@
 
     input:not(textarea) {
       height: @normalInputHeight;
+    }
+
+    // 覆盖原有样式
+    input,
+    textear {
+      .input-cover;
+    }
+
+    :global {
+      .ant-select-selection-item,
+      .ant-cascader-picker-label,
+      .ant-radio-wrapper,
+      .ant-checkbox-wrapper {
+        .input-cover;
+      }
     }
   }
 

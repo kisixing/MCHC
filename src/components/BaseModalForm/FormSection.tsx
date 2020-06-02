@@ -94,21 +94,17 @@ export class FormSection extends React.Component<IProps> {
           },
         );
       case 'radio_group':
-        return renderEditItem(
-          get(formDescription, 'key'),
-          <Radio.Group {...get(formDescription, 'inputProps')} />,
-          {
-            customFormItemLayout: get(formDescription, 'formItemLayout') || {},
-            styles: get(formDescription, 'styles'),
-          },
-        );
+        return renderEditItem(get(formDescription, 'key'), <Radio.Group {...get(formDescription, 'inputProps')} />, {
+          customFormItemLayout: get(formDescription, 'formItemLayout') || {},
+          styles: get(formDescription, 'styles'),
+        });
       case 'normal_select':
         return renderEditItem(
           formDescriptionKey,
           <NormalSelect
             type={get(JSON.parse(formDescriptionSpecialConfig), 'type')}
             showSearch={get(JSON.parse(formDescriptionSpecialConfig), 'showSearch')}
-            placeholder="请选择证件类型"
+            placeholder={get(formDescriptionInputProps, 'placeholder')}
           />,
           {
             customFormItemLayout,
@@ -259,14 +255,10 @@ export class FormSection extends React.Component<IProps> {
           styles,
         });
       case 'parent_select':
-        return renderEditItem(
-          formDescriptionKey,
-          <ParentPermissionSelect {...formDescriptionInputProps} />,
-          {
-            customFormItemLayout,
-            styles,
-          },
-        );
+        return renderEditItem(formDescriptionKey, <ParentPermissionSelect {...formDescriptionInputProps} />, {
+          customFormItemLayout,
+          styles,
+        });
       case 'input_number':
         return renderEditItem(formDescriptionKey, <InputNumber min={0} {...formDescriptionInputProps} />, {
           customFormItemLayout,
@@ -281,7 +273,6 @@ export class FormSection extends React.Component<IProps> {
         return renderEditItem(
           formDescriptionKey,
           <DataSelect
-            
             dataSource={[
               { id: 30, name: '30天' },
               { id: 60, name: '60天' },
@@ -318,14 +309,7 @@ export class FormSection extends React.Component<IProps> {
       case 'roles':
         return renderEditItem(
           formDescriptionKey,
-          <DataSelect
-            
-            url="/groups"
-            valueKey="id"
-            labelKey="nickname"
-            mode="multiple"
-            {...formDescriptionInputProps}
-          />,
+          <DataSelect url="/groups" valueKey="id" labelKey="nickname" mode="multiple" {...formDescriptionInputProps} />,
           {
             customFormItemLayout,
             styles,
@@ -342,37 +326,25 @@ export class FormSection extends React.Component<IProps> {
           styles,
         });
       case 'permission_type':
-        return renderEditItem(
-          formDescriptionKey,
-          <PermissionTypeSelect {...formDescriptionInputProps} />,
-          {
-            customFormItemLayout,
-            styles,
-          },
-        );
+        return renderEditItem(formDescriptionKey, <PermissionTypeSelect {...formDescriptionInputProps} />, {
+          customFormItemLayout,
+          styles,
+        });
       case 'upload_img':
-        return renderEditItem(
-          formDescriptionKey,
-          <UploadImg {...formDescriptionInputProps} allowUploadImages={10} />,
-          {
-            customFormItemLayout,
-            styles,
-          },
-        );
+        return renderEditItem(formDescriptionKey, <UploadImg {...formDescriptionInputProps} allowUploadImages={10} />, {
+          customFormItemLayout,
+          styles,
+        });
       case 'single_date_picker':
         return renderEditItem(formDescriptionKey, <DatePicker {...formDescriptionInputProps} />, {
           customFormItemLayout,
           styles,
         });
       case 'apgar_score_input':
-        return renderEditItem(
-          formDescriptionKey,
-          <ApgarScoreInput config={formDescription} form={form} />,
-          {
-            customFormItemLayout,
-            styles,
-          },
-        );
+        return renderEditItem(formDescriptionKey, <ApgarScoreInput config={formDescription} form={form} />, {
+          customFormItemLayout,
+          styles,
+        });
       case 'view_only':
         return renderEditItem(formDescriptionKey, <span>{get(data, formDescriptionPath)}</span>);
       default:

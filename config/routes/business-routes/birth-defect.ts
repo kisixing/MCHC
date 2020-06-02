@@ -7,7 +7,7 @@ export default {
     {
       name: 'birth-defect',
       icon: 'ordered-list',
-      path: '/birth-defect',
+      path: '/birth-defect/list',
       component: './case-management/birth-defect/list',
     },
     {

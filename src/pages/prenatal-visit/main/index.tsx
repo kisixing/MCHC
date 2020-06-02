@@ -52,7 +52,7 @@ class Main extends Component<{}, MainState> {
       <div className={styles.main}>
         <HeaderInfo />
         <Tabs
-          
+          size="small"
           defaultActiveKey="1"
           animated={false}
           className={styles.tabs}

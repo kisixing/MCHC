@@ -2,6 +2,33 @@ import React from 'react';
 import { Select } from 'antd';
 import { map, get, keyBy } from 'lodash';
 
+export const educationMapping = [
+  {
+    value: 0,
+    title: '小学',
+  },
+  {
+    value: 1,
+    title: '初中',
+  },
+  {
+    value: 2,
+    title: '高中、中专',
+  },
+  {
+    value: 3,
+    title: '大学本科、专科',
+  },
+  {
+    value: 4,
+    title: '硕士研究生',
+  },
+  {
+    value: 5,
+    title: '博士研究生',
+  },
+];
+
 export const orderStatusMapping = [
   {
     value: 0,
@@ -554,6 +581,16 @@ export const provinceMapping = [
     title: '台湾省',
     value: '台湾省',
   },
+  {
+    code: '90',
+    title: '海外',
+    value: '海外',
+  },
+  {
+    code: '91',
+    title: '其他',
+    value: '其他',
+  },
 ];
 export const fetalpositionMapping = [
   {
@@ -627,6 +664,7 @@ export const statusMapping = {
   provinceMapping,
   fetalpositionMapping,
   hasOrNoMapping,
+  educationMapping,
 };
 
 interface IProps {
@@ -639,6 +677,7 @@ interface IProps {
     | 'provinceMapping'
     | 'genderMapping'
     | 'fetalpositionMapping'
+    | 'educationMapping'
     | 'hasOrNoMapping';
 
   showSearch: true | false;
@@ -646,10 +685,10 @@ interface IProps {
 }
 
 export default (props: IProps = { type: 'IDCardMapping', showSearch: false }) => {
+  console.log('78787878', props);
   return (
     <Select
       showSearch={props.showSearch}
-      
       placeholder="请选择"
       allowClear
       filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}

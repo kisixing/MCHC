@@ -6,23 +6,32 @@
 
 .titleName {
   display: block;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 14px;
   color: #000;
 }
 
 .table {
-  .ant-table-title {
-    padding: 12px !important;
-  }
+  :global {
+    .ant-table-title {
+      // padding: 12px !important;
+    }
 
-  .ant-table-cell {
-    padding: 4px 8px !important;
+    .ant-table-thead {
+      .ant-table-cell {
+        font-weight: bold;
+        color: #150F55;
+      }
+    }
 
-    &:empty:after {
-      content: '--';
-      position: inherit;
-      box-shadow: none !important;
+    .ant-table-cell {
+      padding: 4px 8px !important;
+
+      &:empty:after {
+        content: '--';
+        position: inherit;
+        box-shadow: none !important;
+      }
     }
   }
 }
