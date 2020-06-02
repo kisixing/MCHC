@@ -36,7 +36,7 @@ export default (props: IProps) => {
   };
 
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: 'flex', alignItems: 'center' }}>
       {get(props, 'labelBefore') && (
         <span
           style={{
@@ -53,7 +53,6 @@ export default (props: IProps) => {
       {get(props, 'type') === 'number' ? (
         <InputNumber
           className={styles.inputWidth}
-          
           min={0}
           {...props}
           value={Number(data)}
