@@ -37,8 +37,8 @@ const config: Array<FormConfig> = [
   { name: "age", key: ".age", input_type: "input", label: "年龄", rules: "required", span: 8, offset: 0 },
   { name: "residenceAddress", key: ".residenceAddress", input_type: "addressCascader", label: "居住地址", rules: "required", span: 24},
   { name: "permanentResidenceAddress", key: ".permanentResidenceAddress", input_type: "addressCascader", label: "户口地址", rules: "required", span: 24},
-  { name: "telephone", key: ".telephone", input_type: "input", label: "孕妇联系号码", rules: "required|telephone", span: 8},
-  { name: "partnerTelephone", key: ".partnerTelephone", input_type: "input", label: "家属联系号码", rules: "required|telephone", span: 8},
+  { name: "telephone", key: ".telephone", input_type: "input", label: "孕妇手机", rules: "required|telephone", span: 8},
+  { name: "partnerTelephone", key: ".partnerTelephone", input_type: "input", label: "家属手机", rules: "required|telephone", span: 8},
   
   { name: "lmp", key: ".lmp", input_type: "date", label: "末次月经", rules: "required", span: 8, offset: 0, is_new_row: true },
   { name: "edd", key: ".edd", input_type: "date", label: "预产期-日期", rules: "required", span: 8, offset: 0 },

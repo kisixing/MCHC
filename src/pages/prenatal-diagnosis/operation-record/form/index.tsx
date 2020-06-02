@@ -85,7 +85,6 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
       const { patient = {} } = this.props;
       this.setState({ patient }, () => {
         const prenatalPatientId = this.state.patient.id;
-        // 获取所有的专科病历
         this.getPdOperations(prenatalPatientId, "");
       })
     }

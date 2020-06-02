@@ -40,12 +40,16 @@ export default class CheckboxWithExtra extends Component<CheckboxWithExtraProps>
           {editor.label ? (
             <span className={styles['extra-editors-label']}>{editor.label}</span>
           ) : null}
-          <RenderComponent
-            value={editorsValue === null ? null : editorsValue[index]}
-            {...editor}
-            onChange={(value: any) => this.handleChange(value, "editorValue", index)}
-          />
-          <span>{editor.unit}</span>
+          <div className={styles.editor}>
+            <RenderComponent
+              value={editorsValue === null ? null : editorsValue[index]}
+              {...editor}
+              onChange={(value: any) => this.handleChange(value, "editorValue", index)}
+            />
+          </div>
+          <div className={styles.unit}>
+            <span>{editor.unit}</span>
+          </div>
         </div>
       )
     })
