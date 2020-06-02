@@ -123,8 +123,12 @@ class Index extends React.Component<{},IndexState>{
 
       const handleSortChange = (n: number) => {
         const newList =  cloneDeep(diagnosesList);
-        newList[i].sort = newList[i + n].sort ;
-        newList[i + n].sort  = item.sort ;
+        newList[i] = newList[i + n];
+        newList[i + n] = item;
+        // 对诊断进行排序，sort赋值
+        newList.forEach((subItem: any, subI: number) => {
+          subItem.sort = subI + 1;
+        })
 
         const urlParam = getPageQuery();
         const resData = {
