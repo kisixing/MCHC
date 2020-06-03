@@ -12,7 +12,7 @@ import styles from './View.less';
 interface IProps {
   file?: string;
   width?: string | number;
-  children?: React.ReactNode
+  children?: React.ReactNode;
 }
 
 function ModalView({ file, width = '210mm', children = '预览按钮' }: IProps) {

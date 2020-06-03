@@ -98,7 +98,6 @@ export default class BaseTable extends Component<IProps, IState> {
             type="primary"
             onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
             icon={<SearchOutlined />}
-            
             style={{ width: 90 }}
           >
             查询
@@ -146,8 +145,8 @@ export default class BaseTable extends Component<IProps, IState> {
 
   render() {
     const { columns, ...rest } = this.props;
-
     const mergedColumns = this.mergedColumns(columns);
+
     return (
       <Table
         bordered

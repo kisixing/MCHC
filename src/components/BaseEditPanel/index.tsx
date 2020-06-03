@@ -1,10 +1,11 @@
 import React from 'react';
-import request from '@/utils/request';
-import { get } from 'lodash';
-import { formDescriptionsFromApi, formDescriptionsWithoutSectionApi } from '@/utils/adapter';
 import { message } from 'antd';
-import styles from './index.less';
+import { get } from 'lodash';
+
+import request from '@/utils/request';
+import { formDescriptionsFromApi, formDescriptionsWithoutSectionApi } from '@/utils/adapter';
 import observePatientData from '@/utils/observePatientData';
+import styles from './index.less';
 
 export interface IProps {
   location?: any;

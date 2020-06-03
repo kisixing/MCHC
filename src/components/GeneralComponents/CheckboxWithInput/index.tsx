@@ -85,13 +85,12 @@ export default (props: IProps) => {
         const inputValue = get(withInputValues, `${option.value}.value.0`);
         return (
           <Col span={inputSpan}>
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
               <span style={{ display: 'inline-block', marginRight: 4 }}>( </span>
               <InputWithLabel
                 {...others}
                 type={enterType}
                 style={get(option, 'exceptionStyle.inputStyle')}
-                
                 onChange={handleInputChange(inputType, option)}
                 value={inputValue}
               />
@@ -141,7 +140,7 @@ export default (props: IProps) => {
 
   return (
     <Checkbox.Group value={get(data, 'checkedValues')} onChange={handleBoxGroupChange} style={{ width: '100%' }}>
-      <Row>
+      <Row style={{ alignItems: 'center' }}>
         {map(options, (option, index) => {
           const { span = 3, offset = 0 } = option;
           if (option.withInput) {
