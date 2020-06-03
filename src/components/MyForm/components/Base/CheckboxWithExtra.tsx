@@ -59,11 +59,12 @@ export default class CheckboxWithExtra extends Component<CheckboxWithExtraProps>
     const { checkboxValue, editorsValue } = this.props;
     return (
       <div className={styles['checkox-with-extra']}>
-        <Checkbox
-          className={styles.checkbox}
-          checked={checkboxValue}
-          onChange={(e:any) => this.handleChange(e.target.checked, "checkboxValue", -1)}
-        >{this.props.children}</Checkbox>
+        <div className={styles.checkbox}>
+          <Checkbox
+            checked={checkboxValue}
+            onChange={(e:any) => this.handleChange(e.target.checked, "checkboxValue", -1)}
+          >{this.props.children}</Checkbox>
+        </div>
         {checkboxValue ? this.renderExtra(editorsValue) : null}
       </div>
     )

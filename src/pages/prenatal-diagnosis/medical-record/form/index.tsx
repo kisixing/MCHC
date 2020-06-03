@@ -17,6 +17,20 @@ import request from '@/utils/request';
 import config from './config';
 import styles from './index.less';
 
+/**
+ * downsScreens
+ *  type 0 - 早期
+ *  type 1 - 中期
+ *  type 2 - NIPT期
+ *  
+ * ultrasounds
+ *  type 0 - 早孕
+ *  type 1 - 中孕
+ * 
+ * thalassmiaExams/bloodGroup
+ *  target 0 - 男
+ *  target 1 - 女
+ */
 
 interface MedicalRecordState {
   formHandler: {
@@ -49,8 +63,8 @@ const emptyData = {
     { target: 1 },
   ],
   bloodGroups: [
-    { target: 0},
-    { target: 1},
+    { target: 0 },
+    { target: 1 },
   ],
   fetuses: [
     { id: "" }
@@ -90,9 +104,9 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
     }
     // 生成树形结构的数据
     const { medicalRecordList, treeData } = this.state;
-    if ((medicalRecordList.length !== 0 && treeData.length === 0) 
-    || this.state.patient.id !== this.props.patient.id
-    || JSON.stringify(this.state.medicalRecordList) !== JSON.stringify(prevState.medicalRecordList)
+    if ((medicalRecordList.length !== 0 && treeData.length === 0)
+      || this.state.patient.id !== this.props.patient.id
+      || JSON.stringify(this.state.medicalRecordList) !== JSON.stringify(prevState.medicalRecordList)
     ) {
       const newTreeData = generateTreeData(
         medicalRecordList,
@@ -124,11 +138,17 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
       this.props.dispatch(closeSpin);
       if (res.length !== 0) {
         if (id) {
-          if(res[0].thalassemiaExams[0].deletions){
+          // 数据处理
+          if (res[0].thalassemiaExams[0].deletions) {
             res[0].thalassemiaExams[0].deletions = JSON.parse(res[0].thalassemiaExams[0].deletions);
           }
-          if(res[0].thalassemiaExams[1].deletions){
+          if (res[0].thalassemiaExams[1].deletions) {
             res[0].thalassemiaExams[1].deletions = JSON.parse(res[0].thalassemiaExams[1].deletions);
+          }
+          if(res[0].ultrasounds){
+            // type好像是字符串
+            res[0].earlyUltrasounds = res[0].ultrasounds.filter((v:any) => v.type == 0);
+            res[0].middleUltrasounds = res[0].ultrasounds.filter((v:any) => v.type == 1);
           }
           this.setState({ data: res[0] })
         } else {
@@ -160,29 +180,39 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
     this.state.formHandler.submit().then(({ validCode, res }: any) => {
       if (validCode) {
         const formatData = getFormData(res);
-        // 所有含id与类型的数组中对象需要手动赋值
-        formatData.downsScreens[0].type = 0;
-        formatData.downsScreens[1].type = 1;
-        formatData.downsScreens[2].type = 2;
-        formatData.thalassemiaExams[0].target = 0;
-        formatData.thalassemiaExams[1].target = 1;
-        if(!formatData.bloodGroups){
-          formatData.bloodGroups = [
-            {target : 0},
-            {target : 1},
-          ];
-        }else {
-          formatData.bloodGroups[0].target = 0;
-          formatData.bloodGroups[1].target = 1;
-        }
         // deletions 转格式
         formatData.thalassemiaExams[0].deletions = JSON.stringify(formatData.thalassemiaExams[0].deletions);
         formatData.thalassemiaExams[1].deletions = JSON.stringify(formatData.thalassemiaExams[1].deletions);
-        formatData.transfusionHistory = {};  
+        formatData.ultrasounds = [
+          ...formatData.earlyUltrasounds.map((v:any) => {
+            v.type= 0;
+            return v;
+          }),
+          ...formatData.middleUltrasounds.map((v:any) => {
+            v.type= 1;
+            return v;
+          })
+        ]
+        // formatData.transfusionHistory = {};  
         const [method, info] = data.id > 0 ? ["PUT", "修改成功"] : ["POST", "成功新增病历"];
         if (data.id < 0) {
           formatData.id = "";
-        }else{
+          // 新建时对类型手动赋值
+          formatData.downsScreens[0].type = 0;
+          formatData.downsScreens[1].type = 1;
+          formatData.downsScreens[2].type = 2;
+          formatData.thalassemiaExams[0].target = 0;
+          formatData.thalassemiaExams[1].target = 1;
+          if (!formatData.bloodGroups) {
+            formatData.bloodGroups = [
+              { target: 0 },
+              { target: 1 },
+            ];
+          } else {
+            formatData.bloodGroups[0].target = 0;
+            formatData.bloodGroups[1].target = 1;
+          }
+        } else {
           formatData.id = data.id;
         }
         this.props.dispatch(openSpin);
@@ -198,7 +228,7 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
           this.props.dispatch(closeSpin);
           if (r) {
             message.success(info);
-            this.getPrenatalDiagnosis(prenatalPatientId,"");
+            this.getPrenatalDiagnosis(prenatalPatientId, "");
           }
         })
       } else {
@@ -236,7 +266,7 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
             <Button
               size="small"
               onClick={this.newRecord}
-            >新增病历</Button>
+            >新键病历</Button>
             <br />
           </div>
           <Tree
@@ -244,9 +274,9 @@ class MedicalRecord extends React.Component<MedicalRecordProps, MedicalRecordSta
             onSelect={this.handleTreeSelect}
             selectedKeys={currentTreeKeys}
           />
-          {treeData.length === 0 && <NoDataTip/>}
+          {treeData.length === 0 && <NoDataTip />}
         </SiderMenu>
-        {treeData.length === 0 && <NoDataTip/>}
+        {treeData.length === 0 && <NoDataTip />}
         {data.id ? (
           <div
             className={styles.form}

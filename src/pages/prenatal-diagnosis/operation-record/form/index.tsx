@@ -128,7 +128,8 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
       this.setState({
         data: {
           id,
-          operationType: 1
+          operationType: 1,
+          operationDate: moment().format('YYYY-MM-DD')
         }
       });
       return;
@@ -161,8 +162,9 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
 
   // 考虑以后这里的优化
   newRecord = () => {
+    const { operationRecordList } = this.state;
     const todayStr = moment().format("YYYY-MM-DD");
-    const newOperationRecordList = JSON.parse(JSON.stringify(this.state.operationRecordList));
+    const newOperationRecordList = JSON.parse(JSON.stringify(operationRecordList));
     const newData = emptyData;
     const newId = - Math.random();
     newData.operationDate = todayStr;
@@ -239,7 +241,7 @@ class OperationRecord extends React.Component<OperationRecordProp, OperationReco
             <Button
               size="small"
               onClick={this.newRecord}
-            >新增病历</Button>
+            >新建记录</Button>
           </div>
           <Tree
             treeData={treeData}

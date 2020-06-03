@@ -27,18 +27,18 @@ const deletionsOptions = [
 ]
 
 const deliveryOptions = [
-  {label: "分娩", value: 1},
-  {label: "自然引流", value: 2},
-  {label: "人工引流", value: 3},
-  {label: "引产", value: 4},
+  { label: "分娩", value: 1 },
+  { label: "自然引流", value: 2 },
+  { label: "人工引流", value: 3 },
+  { label: "引产", value: 4 },
 ];
 
 const deliveryType = [
-  {label: "顺产", value: 1},
-  {label: "剖宫产", value: 2},
-  {label: "吸引", value: 3},
-  {label: "钳产", value: 4},
-  {label: "臀助产", value: 5}
+  { label: "顺产", value: 1 },
+  { label: "剖宫产", value: 2 },
+  { label: "吸引", value: 3 },
+  { label: "钳产", value: 4 },
+  { label: "臀助产", value: 5 }
 ];
 
 const config: Array<FormConfig> = [
@@ -64,104 +64,105 @@ const config: Array<FormConfig> = [
     input_props: {
       editable: true,
       tableColumns: [
-        { 
-          key: "fetus", 
+        {
+          key: "fetus",
           title: "胎儿",
           editor: {
             key: "", name: "", input_type: "input"
           }
         },
-        { 
-          key: "pre", 
+        {
+          key: "pre",
           title: "孕次",
           editor: {
             key: "", name: "", input_type: "input"
           }
         },
-        { 
-          key: "delivery", 
+        {
+          key: "delivery",
           title: "分娩",
           editor: {
-            key: "", 
-            name: "", 
+            key: "",
+            name: "",
             input_type: "select",
             input_props: {
               options: deliveryOptions
             }
-          }
+          },
+          width: 120
         },
-        { 
-          key: "enoughmonth", 
+        {
+          key: "enoughmonth",
           title: "足月",
           editor: {
-            key: "", 
-            name: "", 
+            key: "",
+            name: "",
             input_type: "select",
             input_props: {
               options: [
-                { label: "足月", value: 1},
-                { label: "早产", value: 2},
+                { label: "足月", value: 1 },
+                { label: "早产", value: 2 },
               ]
             }
           }
         },
-        { 
-          key: "deliveryType", 
+        {
+          key: "deliveryType",
           title: "分娩方式",
           editor: {
-            key: "", 
-            name: "", 
+            key: "",
+            name: "",
             input_type: "select",
             input_props: {
               options: deliveryType
             }
           }
         },
-        { 
-          key: "badpregnancy", 
+        {
+          key: "badpregnancy",
           title: "不良孕产史",
           editor: {
-            key: "", 
-            name: "", 
+            key: "",
+            name: "",
             input_type: "input"
           }
         },
-        { 
-          key: "sex", 
+        {
+          key: "sex",
           title: "新生儿性别",
           editor: {
-            key: "", 
-            name: "", 
+            key: "",
+            name: "",
             input_type: "select",
             input_props: {
               options: [
-                {label: "男", value: 1},
-                {label: "女", value: 2},
+                { label: "男", value: 1 },
+                { label: "女", value: 2 },
               ]
             }
           }
         },
-        { 
-          key: "health", 
+        {
+          key: "health",
           title: "孩子体健康",
           editor: {
-            key: "", 
-            name: "", 
+            key: "",
+            name: "",
             input_type: "select",
             input_props: {
               options: [
-                {label: "是", value: 1},
-                {label: "否", value: 2},
+                { label: "是", value: 1 },
+                { label: "否", value: 2 },
               ]
             }
           }
         },
-        { 
-          key: "note", 
+        {
+          key: "note",
           title: "备注",
           editor: {
-            key: "", 
-            name: "", 
+            key: "",
+            name: "",
             input_type: "input",
           }
         },
@@ -181,15 +182,15 @@ const config: Array<FormConfig> = [
           key: "sasacov2",
           label: "",
           options: [
-            {label: "阴性", value: 1},
-            {label: "阳性", value: 2},
-            {label: "未查", value: 3},
+            { label: "阴性", value: 1 },
+            { label: "阳性", value: 2 },
+            { label: "未查", value: 3 },
           ],
           extraEditors: [
             {
               key: true,
-              editors:[ 
-                {name: "", key: "", input_type: "input"}
+              editors: [
+                { name: "", key: "", input_type: "input" }
               ]
             }
           ]
@@ -257,45 +258,46 @@ const config: Array<FormConfig> = [
       ]
     }
   },
+  
   {
-    name: "ultrasounds",
-    key: ".ultrasounds",
+    name: "early-ultrasounds",
+    key: ".earlyUltrasounds",
     span: 24,
     label: "早孕超声",
     input_type: "table",
     input_props: {
       editable: true,
       tableColumns: [
-        { 
-          key: "checkdate", 
+        {
+          key: "checkdate",
           title: "检查日期",
           editor: {
             key: "", name: "", input_type: "date"
           }
         },
-        { 
-          key: "menopause", 
+        {
+          key: "menopause",
           title: "停经",
           editor: {
             key: "", name: "", input_type: "input"
           }
         },
-        { 
-          key: "gestationalWeek", 
+        {
+          key: "gestationalWeek",
           title: "孕周",
           editor: {
             key: "", name: "", input_type: "input"
           }
         },
-        { 
-          key: "crl", 
+        {
+          key: "crl",
           title: "CRL(mm)",
           editor: {
             key: "", name: "", input_type: "input"
           }
         },
-        { 
-          key: "nt", 
+        {
+          key: "nt",
           title: "NT(mm)",
           editor: {
             key: "", name: "", input_type: "input"
@@ -304,6 +306,55 @@ const config: Array<FormConfig> = [
       ]
     }
   },
+
+  {
+    name: "middle-ultrasounds",
+    key: ".middleUltrasounds",
+    span: 24,
+    label: "中孕超声",
+    input_type: "table",
+    input_props: {
+      editable: true,
+      tableColumns: [
+        {
+          key: "checkdate",
+          title: "检查日期",
+          editor: {
+            key: "", name: "", input_type: "date"
+          }
+        },
+        {
+          key: "menopause",
+          title: "停经",
+          editor: {
+            key: "", name: "", input_type: "input"
+          }
+        },
+        {
+          key: "gestationalWeek",
+          title: "孕周",
+          editor: {
+            key: "", name: "", input_type: "input"
+          }
+        },
+        {
+          key: "crl",
+          title: "CRL(mm)",
+          editor: {
+            key: "", name: "", input_type: "input"
+          }
+        },
+        {
+          key: "nt",
+          title: "NT(mm)",
+          editor: {
+            key: "", name: "", input_type: "input"
+          }
+        }
+      ]
+    }
+  },
+
   {
     name: "male-bloodGroup",
     key: ".bloodGroups_0",
@@ -315,23 +366,23 @@ const config: Array<FormConfig> = [
       config: [
         { name: "id", key: ".id", label: "id", input_type: "input", hidden: true },
         { name: "target", key: ".target", label: "id", input_type: "input", hidden: true },
-        { 
+        {
           name: "bg", key: ".bg", label: "血型", input_type: "select", span: 8,
           input_props: {
             options: [
-              {label: "O", value: 1},
-              {label: "A", value: 2},
-              {label: "B", value: 3},
-              {label: "AB", value: 4}
+              { label: "O", value: 1 },
+              { label: "A", value: 2 },
+              { label: "B", value: 3 },
+              { label: "AB", value: 4 }
             ]
           }
         },
-        { 
+        {
           name: "rh", key: ".rh", label: "RH血型", input_type: "select", span: 8,
           input_props: {
             options: [
-              {label: "RH(+)", value: 1},
-              {label: "RH(-)", value: 2},
+              { label: "RH(+)", value: 1 },
+              { label: "RH(-)", value: 2 },
             ]
           }
         }
@@ -349,23 +400,23 @@ const config: Array<FormConfig> = [
       config: [
         { name: "id", key: ".id", label: "id", input_type: "input", hidden: true },
         { name: "target", key: ".target", label: "id", input_type: "input", hidden: true },
-        { 
+        {
           name: "bg", key: ".bg", label: "血型", input_type: "select", span: 8,
           input_props: {
             options: [
-              {label: "O", value: 1},
-              {label: "A", value: 2},
-              {label: "B", value: 3},
-              {label: "AB", value: 4}
+              { label: "O", value: 1 },
+              { label: "A", value: 2 },
+              { label: "B", value: 3 },
+              { label: "AB", value: 4 }
             ]
           }
         },
-        { 
+        {
           name: "rh", key: ".rh", label: "RH血型", input_type: "select", span: 8,
           input_props: {
             options: [
-              {label: "RH(+)", value: 1},
-              {label: "RH(-)", value: 2},
+              { label: "RH(+)", value: 1 },
+              { label: "RH(-)", value: 2 },
             ]
           }
         }
@@ -381,7 +432,7 @@ const config: Array<FormConfig> = [
     input_props: {
       config: [
         { name: "id", key: ".id", label: "id", input_type: "input", hidden: true },
-        { name: "type", key: ".type", label: "类型", input_type: "input", hidden: true },
+        { name: "target", key: ".target", label: "类型", input_type: "input", hidden: true },
         { name: "hB", key: ".hB", label: "Hb", unit: "g/L", input_type: "input", span: 8, offset: 0 },
         { name: "mCV", key: ".mCV", label: "MCV", unit: "fL", input_type: "input", span: 8, offset: 0 },
         { name: "mCH", key: ".mCH", label: "MCH", input_type: "input", span: 8, offset: 0 },
@@ -408,7 +459,7 @@ const config: Array<FormConfig> = [
     input_props: {
       config: [
         { name: "id", key: ".id", label: "id", input_type: "input", hidden: true },
-        { name: "type", key: ".type", label: "类型", input_type: "input", hidden: true },
+        { name: "target", key: ".target", label: "类型", input_type: "input", hidden: true },
         { name: "hB", key: ".hB", label: "Hb", unit: "g/L", input_type: "input", span: 8, offset: 0 },
         { name: "mCV", key: ".mCV", label: "MCV", unit: "fL", input_type: "input", span: 8, offset: 0 },
         { name: "mCH", key: ".mCH", label: "MCH", input_type: "input", span: 8, offset: 0 },
@@ -564,9 +615,9 @@ const config: Array<FormConfig> = [
           label: "药物",
           extraEditors: [
             {
-              key: "drug", 
+              key: "drug",
               editors: [
-                {name:"", key: "", input_type: "input"}
+                { name: "", key: "", input_type: "input" }
               ]
             }
           ]
@@ -576,9 +627,9 @@ const config: Array<FormConfig> = [
           label: "食物",
           extraEditors: [
             {
-              key: "food", 
+              key: "food",
               editors: [
-                {name:"", key: "", input_type: "input"}
+                { name: "", key: "", input_type: "input" }
               ]
             }
           ]
@@ -588,9 +639,9 @@ const config: Array<FormConfig> = [
           label: "其他",
           extraEditors: [
             {
-              key: "other", 
+              key: "other",
               editors: [
-                {name:"", key: "", input_type: "input"}
+                { name: "", key: "", input_type: "input" }
               ]
             }
           ]
@@ -910,7 +961,7 @@ const config: Array<FormConfig> = [
   //     ]
   //   }
   // },
-  
+
   // {
   //   name: "diseaseHistory-h",
   //   key: ".diseaseHistory",
@@ -977,7 +1028,17 @@ const config: Array<FormConfig> = [
         { name: "fetalPosition", key: ".fetalPosition", label: "胎儿位置", input_type: "input", span: 8, offset: 0 },
         { name: "fetalHeartRate", key: ".fetalHeartRate", label: "胎心率", input_type: "input", span: 8, offset: 0 },
         { name: "fetalMovement", key: ".fetalMovement", label: "胎动", input_type: "input", span: 8, offset: 0 },
-        { name: "presentation", key: ".presentation", label: "先露", input_type: "input", span: 8, offset: 0 },
+        {
+          name: "presentation", key: ".presentation", label: "先露", input_type: "select", span: 8, offset: 0,
+          input_props: {
+            options: [
+              { label: "头", value: 1 },
+              { label: "臀", value: 2 },
+              { label: "肩", value: 3 },
+              { label: "-", value: 4 },
+            ]
+          }
+        },
         { name: "weight", key: ".weight", label: "胎重", unit: "kg", input_type: "input", span: 8, offset: 0 },
         { name: "avf", key: ".avf", label: "avf", input_type: "input", span: 8, offset: 0 },
       ]
@@ -1006,17 +1067,36 @@ const config: Array<FormConfig> = [
   {
     name: "gynecologicalExam",
     key: ".gynecologicalExam",
-    label: "妇科检查",
+    label: "专科检查",
     header_label: true,
     input_type: "custom",
     input_props: {
       config: [
         { name: "id", key: ".id", label: "id", input_type: "input", span: 8, offset: 0, hidden: true },
-        { name: "fundalHeight", key: ".fundalHeight", label: "宫高", unit: "cm", input_type: "input", span: 8, offset: 0 },
-        { name: "engagement", key: ".engagement", label: "衔接", unit: "cm", input_type: "input", span: 8, offset: 0 }
+        { name: "fundalHeight", key: ".fundalHeight", label: "宫高", unit: "cm", input_type: "input", span: 8, offset: 0 }
       ]
     }
+  },
+  {
+    name: "diagnosis",
+    key: ".diagnosis",
+    label: "诊断",
+    input_type: "input",
+    span: 24,
+    input_props: {
+      type: "textarea"
+    }
   }
+  // {
+  //   name: "advice",
+  //   key: ".advice",
+  //   label: "处理措施",
+  //   input_type: "input",
+  //   span: 24,
+  //   input_props: {
+  //     type: "textarea"
+  //   }
+  // }
 ]
 
 export default config;
