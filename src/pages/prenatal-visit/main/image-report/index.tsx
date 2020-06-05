@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Button, Table, Modal } from "antd";
 import request from '@/utils/request';
+import { connect } from 'dva';
 import { getPageQuery } from '@/utils/utils';
 
 import styles from './index.less';
@@ -11,7 +12,7 @@ interface IndexState {
   pdfPath: string
 }
 
-export default class Index extends Component<{}, IndexState> {
+class Index extends Component<{}, IndexState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,18 +22,22 @@ export default class Index extends Component<{}, IndexState> {
     }
   }
 
-  // componentDidMount() {
-  //   service.yingxiang.getPacsData().then(res => {
-  //     this.setState({tableData: res.object})
-  //   })
-  // }
+  componentDidMount() {
+    const { pregnancyData } = this.props;
+    request(`/image-exams?outpatientNO.equals=${pregnancyData.outpatientNO}&id=${pregnancyData.id}`, {
+      method: "GET"
+    }).then(res => {
+      this.setState({
+        tableData: res
+      })
+    });
+  }
 
   renderTable() {
     const {tableData} = this.state;
     const title = () => '影像检查报告';
     const handleBtnClick = (text, record) => {
-      const pdfPath = service.getUrl(record.pdfPath)
-      // const pdfPath = `https://10.168.199.138:1808/HBackend/getReportPdf.go?docUniqueid=${record.docUniqueid}&docType=XDS.UR2.USBG`;
+      const pdfPath = '';
       this.setState({pdfPath}, () => {
         this.setState({isShowModal: true})
       })
@@ -40,8 +45,8 @@ export default class Index extends Component<{}, IndexState> {
 
     const columns = [
       { title: '标题', dataIndex: 'title', key: 'title' },
-      { title: '检查日期', dataIndex: 'sendDate', key: 'sendDate',  render: (text, record) => text.substr(0, 10)},
-      { title: '报告医生', dataIndex: 'reportDoctor', key: 'reportDoctor', width: 120 },
+      { title: '检查日期', dataIndex: 'reportDate', key: 'reportDate',  render: (text, record) => text.substr(0, 10)},
+      { title: '报告医生', dataIndex: 'reportDoctorName', key: 'reportDoctorName', width: 120 },
       { title: '诊断', dataIndex: 'diagnosis', key: 'diagnosis', width: 350 },
       { title: '结论', dataIndex: 'result', key: 'result', width: 400 },
       { title: '查看报告', key: 'operation', width: 120, render: (text, record) => <Button type="primary" onClick={() => handleBtnClick(text, record)}>查看</Button> },
@@ -61,8 +66,7 @@ export default class Index extends Component<{}, IndexState> {
       })
     }
     return (
-      <Modal width="60%" footer={null} visible={isShowModal} title="影像检查报告"
-             onOk={() => handleClick()} onCancel={() => handleClick()}>
+      <Modal width="60%" footer={null} visible={isShowModal} title="影像检查报告" onCancel={() => handleClick()}>
         <embed src={pdfPath} width="100%" height="1200" />
       </Modal>
     )
@@ -81,3 +85,9 @@ export default class Index extends Component<{}, IndexState> {
     )
   }
 }
+
+const mapStateToProps = ({ pregnancy }) => {
+  return { ...pregnancy };
+};
+
+export default connect(mapStateToProps)(Index);

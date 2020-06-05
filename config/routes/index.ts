@@ -777,7 +777,7 @@ export const omitRoutesBackup = [
   {
     id: 158,
     type: 'others',
-    key: '/prenatal-visit/pregnancy/list',
+    key: '/prenatal-visit/pregnancy',
     name: '孕册管理',
     parentid: 0,
     active: null,

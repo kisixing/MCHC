@@ -76,7 +76,7 @@ class Index extends Component<{}, IndexState> {
                 <div className={pregnancyData.highrisk ? styles.hasInfectin : styles.noInfectin}>传染病：无</div>
               </div>
               <div className={styles.bottom}>
-                <span>高危因素:</span>
+                <span>高危诊断:</span>
                 <div>{pregnancyData.highriskNote ? pregnancyData.highriskNote : '无'}</div>
               </div>
             </div>

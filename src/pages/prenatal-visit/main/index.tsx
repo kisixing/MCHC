@@ -23,7 +23,7 @@ const routers = [
   { name: '首检信息', component: <Initial />, key: 'Initial' },
   { name: '复诊记录', component: <Return />, key: 'Return' },
   { name: '孕期曲线', component: <Curve />, key: 'Curve' },
-  { name: '血糖记录', component: <BloodSugar />, key: 'BloodSugar' },
+  // { name: '血糖记录', component: <BloodSugar />, key: 'BloodSugar' },
   { name: '影像报告', component: <ImageReport />, key: 'ImageReport' },
   { name: '检验报告', component: <SurveyReport />, key: 'SurveyReport' },
   { name: '基本信息', component: <Base />, key: 'Base' },

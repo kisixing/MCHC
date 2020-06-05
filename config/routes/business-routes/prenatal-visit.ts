@@ -7,7 +7,7 @@ export default {
     {
       name: 'pregnancy',
       icon: 'ordered-list',
-      path: '/prenatal-visit/pregnancy/list',
+      path: '/prenatal-visit/pregnancy',
       component: './prenatal-visit/pregnancy/list',
     },
     {
